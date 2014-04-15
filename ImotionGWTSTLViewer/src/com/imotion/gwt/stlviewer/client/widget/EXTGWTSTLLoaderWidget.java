@@ -16,10 +16,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.imotion.gwt.stlviewer.client.threejs.STLLoader;
-import com.imotion.gwt.stlviewer.client.threejs.THREEEXT;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLLoader;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTTHREE;
 
-public class STLLoaderWidget extends Composite implements AnimationCallback {
+public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallback {
 
 	private 	WebGLRenderer 	renderer;
 	private 	Scene 			scene;
@@ -28,7 +28,7 @@ public class STLLoaderWidget extends Composite implements AnimationCallback {
 	private 	AbsolutePanel 	abs;
 	private 	Vector3 		cameraTarget;
 
-	public STLLoaderWidget() {
+	public EXTGWTSTLLoaderWidget() {
 		// IHM
 		AbsolutePanel root = new AbsolutePanel(); 
 		initWidget(root);
@@ -52,11 +52,11 @@ public class STLLoaderWidget extends Composite implements AnimationCallback {
 		plane.setReceiveShadow(true);
 
 		// ASCII file
-		STLLoader.load("models/thingiverse/Doll_Multiscan.stl", new AsyncCallback<Geometry>() {
+		EXTGWTSTLLoader.load("models/thingiverse/Doll_Multiscan.stl", new AsyncCallback<Geometry>() {
 
 			@Override
 			public void onSuccess(Geometry geometry) {
-				Material material = THREEEXT.MeshBasicMaterial().color(0x0743AE).build();
+				Material material = EXTGWTTHREE.MeshBasicMaterial().color(0x0743AE).build();
 				mesh = THREE.Mesh(geometry, material);
 
 				mesh.setPosition( 0, 0, 0.3 );

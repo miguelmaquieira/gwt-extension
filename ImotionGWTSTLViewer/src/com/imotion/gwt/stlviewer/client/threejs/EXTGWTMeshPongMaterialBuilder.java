@@ -41,37 +41,37 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.google.gwt.core.client.JavaScriptObject;
 
 
-public class MeshPongMaterialBuilder extends JavaScriptObject{
-	protected MeshPongMaterialBuilder(){}
-	public final static MeshPongMaterialBuilder create(){
-		return (MeshPongMaterialBuilder) MeshPongMaterialBuilder.createObject();
+public class EXTGWTMeshPongMaterialBuilder extends JavaScriptObject{
+	protected EXTGWTMeshPongMaterialBuilder(){}
+	public final static EXTGWTMeshPongMaterialBuilder create(){
+		return (EXTGWTMeshPongMaterialBuilder) EXTGWTMeshPongMaterialBuilder.createObject();
 	}
 	
-	public final static MeshPongMaterialBuilder create(int color){
-		MeshPongMaterialBuilder builder= (MeshPongMaterialBuilder) MeshPongMaterialBuilder.createObject();
+	public final static EXTGWTMeshPongMaterialBuilder create(int color){
+		EXTGWTMeshPongMaterialBuilder builder= (EXTGWTMeshPongMaterialBuilder) EXTGWTMeshPongMaterialBuilder.createObject();
 		return builder.color(color);
 	}
 	
-	public final MeshPongMaterialBuilder color(int r,int g,int b){
+	public final EXTGWTMeshPongMaterialBuilder color(int r,int g,int b){
 		int c=(0xff & r)<<16| (0xff & g)<<8|(0xff & b);
 		return color(c);
 	}
 	
-	public final  MeshPongMaterialBuilder color(double c){
+	public final  EXTGWTMeshPongMaterialBuilder color(double c){
 		return color((int)c);
 	}
 	
-	public final native MeshPongMaterialBuilder specular(int s)/*-{
+	public final native EXTGWTMeshPongMaterialBuilder specular(int s)/*-{
 	this["specular"]=s;
 	return this;
 	}-*/;
 	
-	public final native MeshPongMaterialBuilder ambient(int a)/*-{
+	public final native EXTGWTMeshPongMaterialBuilder ambient(int a)/*-{
 	this["ambient"]=a;
 	return this;
 	}-*/;
 	
-	public final native MeshPongMaterialBuilder shininess(int s)/*-{
+	public final native EXTGWTMeshPongMaterialBuilder shininess(int s)/*-{
 	this["shininess"]=s;
 	return this;
 	}-*/;
