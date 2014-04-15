@@ -57,19 +57,19 @@ public class Chat implements EntryPoint {
 		sendRPC = new Button("Enviar");
 		buttons.add(sendRPC);
 
-		desconectRPC = new Button("Desconectar");
-		buttons.add(desconectRPC);
+//		desconectRPC = new Button("Desconectar");
+//		buttons.add(desconectRPC);
+//
+//		desconectRPC.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				atmosphere.unsubscribe();
+//			}
+//		});
+//
 
-		desconectRPC.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				atmosphere.unsubscribe();
-			}
-		});
-
-
-		RootPanel.get("buttonbar").add(buttons);
+		RootPanel.get().add(buttons);
 
 
 		HTMLPanel logPanel = new HTMLPanel("") {
@@ -79,7 +79,7 @@ public class Chat implements EntryPoint {
 				widget.getElement().scrollIntoView();
 			}
 		};
-		RootPanel.get("logger").add(logPanel);
+		RootPanel.get().add(logPanel);
 		Logger.getLogger("").addHandler(new HasWidgetsLogHandler(logPanel));
 
 
@@ -89,12 +89,11 @@ public class Chat implements EntryPoint {
 		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?broadcastId=chatId");			
 		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
 		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
-		rpcRequestConfig.setReconnectInterval(3000);
-		rpcRequestConfig.setConnectTimeout(100000);
+//		rpcRequestConfig.setReconnectInterval(3000);
+//		rpcRequestConfig.setConnectTimeout(100000);
 
 
 		rpcRequestConfig.setErrorHandler(new AtmosphereErrorHandler() {
-
 			@Override
 			public void onError(AtmosphereResponse response) {
 				logger.info("RPC transport failure");
@@ -103,7 +102,6 @@ public class Chat implements EntryPoint {
 
 
 		rpcRequestConfig.setTransportFailureHandler(new AtmosphereTransportFailureHandler() {
-
 			@Override
 			public void onTransportFailure(String errorMsg, AtmosphereRequest request) {
 				logger.info("RPC transport failure");
