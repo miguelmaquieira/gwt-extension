@@ -13,8 +13,8 @@ import com.google.gwt.animation.client.AnimationScheduler;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTTHREE;
@@ -25,17 +25,11 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 	private 	Scene 			scene;
 	private 	Camera 			camera;
 	private 	Mesh 			mesh;
-	private 	AbsolutePanel 	abs;
 	private 	Vector3 		cameraTarget;
 
 	public EXTGWTSTLLoaderWidget() {
-		// IHM
-		AbsolutePanel root = new AbsolutePanel(); 
+		FlowPanel root = new FlowPanel(); 
 		initWidget(root);
-		abs = new AbsolutePanel();
-		abs.setSize("800px", "600px");
-		root.add(abs);
-		// fin IHM
 
 		camera = THREE.PerspectiveCamera(35, 800.0 / 600.0, 1f, 15f);
 		camera.getPosition().set(3, 0.75, 3);
@@ -87,7 +81,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 		renderer.setSize(800, 600);
 		HTMLPanel div = new HTMLPanel("");
 		div.getElement().appendChild(renderer.getDomElement());
-		root.add(div, 0, 0);
+		root.add(div);
 
 		renderer.setSize(800, 600);
 		renderer.setClearColorHex(0x000000, 1.0f);
@@ -109,7 +103,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 	@Override
 	public void execute(double timestamp) {
 		if (mesh != null) {
-			mesh.getRotation().setZ(mesh.getRotation().getZ() + 0.01);
+			mesh.getRotation().setZ(mesh.getRotation().getZ() + 0.2);
 		}
 
 		renderer.render(scene, camera);
