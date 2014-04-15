@@ -67,7 +67,7 @@ public class Chat implements EntryPoint {
 //				atmosphere.unsubscribe();
 //			}
 //		});
-
+//
 
 		RootPanel.get().add(buttons);
 
