@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="test-classes" path="test"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-client-2.0.0.jar" sourcepath="/home/diego/.m2/repository/org/atmosphere/extensions/atmosphere-gwt20-client/2.0.0/atmosphere-gwt20-client-2.0.0-sources.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-common-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-server-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.0.1.jar" sourcepath="/home/diego/.m2/repository/org/atmosphere/atmosphere-runtime/2.0.1/atmosphere-runtime-2.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/gwt-servlet-2.5.0.jar"/>
+	<classpathentry kind="lib" path="lib/javascript-2.0.3.war"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.1.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
