@@ -7,6 +7,9 @@
 	<classpathentry kind="lib" path="lib/atmosphere-gwt20-client-2.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/atmosphere-gwt20-common-2.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/atmosphere-gwt20-server-2.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.0.1.jar" sourcepath="/home/diego/.m2/repository/org/atmosphere/atmosphere-runtime/2.0.1/atmosphere-runtime-2.0.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/javascript-2.0.3.war"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
