@@ -20,21 +20,21 @@ import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
 import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerCommCSAtmosphere;
 
 public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMessengerHasCommHandler {
-	
+
 	private final static TestExtGwtWebMessengerTexts TEXTS = GWT.create(TestExtGwtWebMessengerTexts.class);
-	
+
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
 	private ExtGWTWebMessengerCommCS messengerHandler;
-	
+
 	public TestExtGWTWebMessengerChat() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		contentPanel.addStyleName("extgwt-webMessengerChatContainer");
-		
+
 		// Title
 		SimplePanel titlePanel = new SimplePanel();
 		titlePanel.addStyleName("extgwt-webMessengerChatTitle");
@@ -42,12 +42,12 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		Label title = new Label();
 		titlePanel.setWidget(title);
 		title.setText(TEXTS.chat_messenger_title_text());
-		
+
 		// North zone
 		HorizontalPanel northZone = new HorizontalPanel();
 		northZone.addStyleName("extgwt-webMessengerChatNorthZone");
 		contentPanel.add(northZone);
-		
+
 		// Message panel
 		SimplePanel messagePanel = new SimplePanel();
 		messagePanel.addStyleName("extgwt-webMessegerChatMessagePanel");
@@ -56,7 +56,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		areaMessage = new TextArea();
 		areaMessage.setReadOnly(true);
 		messagePanel.setWidget(areaMessage);
-		
+
 		// Conections panel
 		SimplePanel conectionsPanel = new SimplePanel();
 		conectionsPanel.addStyleName("extgwt-webMessegerChatConnectionsPanel");
@@ -67,36 +67,36 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 			connectionsList.addItem("Item: " + i);
 		}
 		conectionsPanel.setWidget(connectionsList);
-		
+
 		/// South zone
 		HorizontalPanel southZone = new HorizontalPanel();
 		southZone.addStyleName("extgwt-webMessengerChatSouthZone");
 		southZone.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 		contentPanel.add(southZone);
-		
+
 		//// Nick name panel
 		FlowPanel nickNamePanel = new FlowPanel();
 		nickNamePanel.addStyleName("extgwt-webMessengerChatNickNamePanel");
 		southZone.add(nickNamePanel);
-		
+
 		///// Label nick name
 		Label lblNickName = new Label(TEXTS.nick_name_label_text());
 		nickNamePanel.add(lblNickName);
-		
+
 		///// Text nick name
 		textNickName = new TextBox();
 		textNickName.setText(TEXTS.nick_name_default_value_text());
 		nickNamePanel.add(textNickName);
-		
+
 		//// Room name panel
 		FlowPanel roomNamePanel = new FlowPanel();
 		roomNamePanel.addStyleName("extgwt-webMessengerChatRoomNamePanel");
 		southZone.add(roomNamePanel);
-		
+
 		///// Label room name
 		Label lblRoomName = new Label(TEXTS.room_name_label_text());
 		roomNamePanel.add(lblRoomName);
-		
+
 		///// Text room name
 		textRoomName = new TextBox();
 		textRoomName.setText(TEXTS.room_name_default_value_text());
@@ -107,71 +107,75 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		southZone.add(buttonChangeNickName);
 		southZone.setCellHorizontalAlignment(buttonChangeNickName, HasHorizontalAlignment.ALIGN_RIGHT);
 		buttonChangeNickName.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
 				Window.alert("Change nickname: " + textNickName.getText());
-//				getMessengerHandler().reconnect(textNickName.getText(), textRoomName.getText());
+				//				getMessengerHandler().reconnect(textNickName.getText(), textRoomName.getText());
 			}
 		});
-		
+
 		//// Button connect
 		Button buttonConnect = new Button(TEXTS.button_conect_text());
 		southZone.add(buttonConnect);
 		southZone.setCellHorizontalAlignment(buttonConnect, HasHorizontalAlignment.ALIGN_RIGHT);
 		buttonConnect.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
-				
+
 				String senderId = textNickName.getText();
 				String chatId = textRoomName.getText();
-			
+
 				ExtGWTWebMessengerCommCS handler = getMessengerHandler();	
-				
-				if(getMessengerHandler() == null) {
+
+				if(handler == null) {
 					handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
 					setMessengerHandler(handler);									
 				} 
-				
+
 				handler.initConnection(senderId, chatId);
 			}
 		});
-		
+
 		//// Button Disconnect
 		Button buttonDisconnect = new Button(TEXTS.button_disconect_text());
 		southZone.add(buttonDisconnect);
 		southZone.setCellHorizontalAlignment(buttonDisconnect, HasHorizontalAlignment.ALIGN_RIGHT);
 		buttonDisconnect.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
-				getMessengerHandler().disconnect();
+				
+				ExtGWTWebMessengerCommCS handler = getMessengerHandler();	
+				if(handler != null) {
+					handler.disconnect();
+				}
 			}
 		});
-		
-		
+
+
 		/// Send Message
 		HorizontalPanel sendMessagePanel = new HorizontalPanel();
 		sendMessagePanel.addStyleName("extgwt-webMessengerChatSendMessagePanel");
 		contentPanel.add(sendMessagePanel);
-		
+
 		//// Message text
 		textMessage = new TextBox();
 		sendMessagePanel.add(textMessage);
 		sendMessagePanel.setCellWidth(textMessage, "80%");
 		textMessage.setEnabled(false);
-		
+
 		//// Button send
 		Button buttonSend = new Button(TEXTS.button_send_text());
 		sendMessagePanel.add(buttonSend);
 		sendMessagePanel.setCellWidth(buttonSend, "20%");
 		sendMessagePanel.setCellHorizontalAlignment(buttonSend, HasHorizontalAlignment.ALIGN_RIGHT);
 		buttonSend.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
@@ -181,12 +185,12 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		});
 	}
 
-	
-	
+
+
 	/**********************************************************************
 	 *                   IExtGWTWebMessengerWidgetDisplay				  *
 	 **********************************************************************/
-	
+
 	@Override
 	public void handleReceivedMessage(String text, long date, String sender) {
 		String newMessage = sender	+ ": " + text;
@@ -206,12 +210,12 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		textMessage.setEnabled(false);
 	}
 
-		
-	
+
+
 	/**********************************************************************
 	 *               		   PUBLIC FUNCTIONS							  *
 	 **********************************************************************/
-	
+
 	public ExtGWTWebMessengerCommCS getMessengerHandler() {
 		return messengerHandler;
 	}
@@ -220,11 +224,11 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		this.messengerHandler = messengerHandler;
 	}
 
-	
+
 	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
-	
+
 	private void writeMessage(String text) {
 		String finalText = new StringBuilder()
 		.append(areaMessage.getText())
@@ -234,5 +238,5 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 
 		areaMessage.setText(finalText);
 	}
-	
+
 }
