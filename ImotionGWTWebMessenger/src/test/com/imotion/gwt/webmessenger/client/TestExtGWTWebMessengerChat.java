@@ -15,8 +15,11 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerHandlerAtmosphere;
+import com.imotion.gwt.webmessenger.client.atmosphere.IExtGWTWebMessengerHandlerDisplay;
+import com.imotion.gwt.webmessenger.client.atmosphere.IExtGWTWebMessengerWidgetDisplay;
 
-public class TestExtGWTWebMessengerChat extends Composite {
+public class TestExtGWTWebMessengerChat extends Composite implements IExtGWTWebMessengerWidgetDisplay {
 	
 	private final static TestExtGwtWebMessengerTexts TEXTS = GWT.create(TestExtGwtWebMessengerTexts.class);
 	
@@ -25,6 +28,7 @@ public class TestExtGWTWebMessengerChat extends Composite {
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
+	private IExtGWTWebMessengerHandlerDisplay messengerHandler;
 	
 	public TestExtGWTWebMessengerChat() {
 		FlowPanel contentPanel = new FlowPanel();
@@ -120,11 +124,17 @@ public class TestExtGWTWebMessengerChat extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
-				Window.alert("Connect. Nick name: " + textNickName.getText());
+				
+				String senderId = textNickName.getText();
+				String chatId = textRoomName.getText();
+				
+				ExtGWTWebMessengerHandlerAtmosphere handler = new ExtGWTWebMessengerHandlerAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
+				setMessengerHandler(handler);
+								
 			}
 		});
 		
-		//// Button connect
+		//// Button Disconnect
 		Button buttonDisconnect = new Button(TEXTS.button_disconect_text());
 		southZone.add(buttonDisconnect);
 		southZone.setCellHorizontalAlignment(buttonDisconnect, HasHorizontalAlignment.ALIGN_RIGHT);
@@ -133,7 +143,7 @@ public class TestExtGWTWebMessengerChat extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
-				Window.alert("Disconnect. Nick name: " + textNickName.getText());
+				getMessengerHandler().disconnect();
 			}
 		});
 		
@@ -147,6 +157,7 @@ public class TestExtGWTWebMessengerChat extends Composite {
 		textMessage = new TextBox();
 		sendMessagePanel.add(textMessage);
 		sendMessagePanel.setCellWidth(textMessage, "80%");
+		textMessage.setEnabled(false);
 		
 		//// Button send
 		Button buttonSend = new Button(TEXTS.button_send_text());
@@ -158,8 +169,64 @@ public class TestExtGWTWebMessengerChat extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
-				Window.alert("Sending: " + textMessage.getText());
+				getMessengerHandler().sendMessage(textMessage.getText());
+				textMessage.setText("");
 			}
 		});
 	}
+
+	
+	
+	/**********************************************************************
+	 *                   IExtGWTWebMessengerWidgetDisplay				  *
+	 **********************************************************************/
+	
+	@Override
+	public void handleReceivedMessage(String text, long date, String sender) {
+		String newMessage = sender	+ ": " + text;
+		writeMessage(newMessage);	
+	}
+
+	@Override
+	public void handleConnectionOpened() {		
+		writeMessage(TEXTS.connection_opened_text());
+		textMessage.setEnabled(true);
+	}
+
+	@Override
+	public void handleConnectionClosed() {		
+		writeMessage(TEXTS.connection_closed_text());
+		textMessage.setText("");
+		textMessage.setEnabled(false);
+	}
+
+		
+	
+	/**********************************************************************
+	 *               		   PUBLIC FUNCTIONS							  *
+	 **********************************************************************/
+	
+	public IExtGWTWebMessengerHandlerDisplay getMessengerHandler() {
+		return messengerHandler;
+	}
+
+	public void setMessengerHandler(IExtGWTWebMessengerHandlerDisplay messengerHandler) {
+		this.messengerHandler = messengerHandler;
+	}
+
+
+	/**********************************************************************
+	 *                		   PRIVATE FUNCTIONS						  *
+	 **********************************************************************/
+	
+	private void writeMessage(String text) {
+		String finalText = new StringBuilder()
+		.append(areaMessage.getText())
+		.append(text)
+		.append("\n")
+		.toString();
+
+		areaMessage.setText(finalText);
+	}
+	
 }

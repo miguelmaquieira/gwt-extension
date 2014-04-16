@@ -31,4 +31,11 @@ public interface TestExtGwtWebMessengerTexts extends Constants {
 	@DefaultStringValue("Disconect")
 	String button_disconect_text();
 
+	
+	@DefaultStringValue("Connection opened")
+	String connection_opened_text();
+	
+	@DefaultStringValue("Connection closed")
+	String connection_closed_text();
+	
 }
