@@ -54,7 +54,7 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 
 		rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
 		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?broadcastId="+ roomId);			
-		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
+		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
 		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
 //		rpcRequestConfig.setReconnectInterval(3000);
 //		rpcRequestConfig.setConnectTimeout(100000);
