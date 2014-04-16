@@ -7,6 +7,5 @@ public class ImotionGWTWebMessenger implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 
-
 	}
 }
