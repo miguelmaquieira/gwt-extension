@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS;
+import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerFactory;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
 import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerCommCSAtmosphere;
 

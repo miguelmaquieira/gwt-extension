@@ -7,6 +7,6 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 
 
 @GwtRpcSerialTypes(ExtGWTWebMessengerRPCEvent.class)
-abstract public class ExtGWTWebMessengerRPCSerializer extends GwtRpcClientSerializer{
+abstract public class ExtGWTWebMessengerRPCSerializer extends GwtRpcClientSerializer {
 
 }
