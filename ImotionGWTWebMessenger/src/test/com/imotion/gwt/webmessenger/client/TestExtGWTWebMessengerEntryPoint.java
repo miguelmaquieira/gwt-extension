@@ -1,4 +1,4 @@
-package test.com.imotion.webmessenger.client;
+package test.com.imotion.gwt.webmessenger.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;

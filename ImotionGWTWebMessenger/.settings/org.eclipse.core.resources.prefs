@@ -1,6 +1,5 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/Issue_0100
 eclipse.preferences.version=1
-<<<<<<< HEAD
-encoding//src/test/com/imotion/gwt/webmessenger/client/ExtGWTWebMessengerChat.java=UTF-8
-=======
-encoding//src/test/com/imotion/webmessenger/client/TestExtGWTWebMessengerChat.java=UTF-8
->>>>>>> refs/remotes/origin/Issue_0100
+encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWebMessengerChat.java=UTF-8

@@ -16,9 +16,9 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class ExtGWTWebMessengerChat extends Composite {
+public class TestExtGWTWebMessengerChat extends Composite {
 	
-	private final static ExtGwtWebMessengerTexts TEXTS = GWT.create(ExtGwtWebMessengerTexts.class);
+	private final static TestExtGwtWebMessengerTexts TEXTS = GWT.create(TestExtGwtWebMessengerTexts.class);
 	
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;
@@ -26,7 +26,7 @@ public class ExtGWTWebMessengerChat extends Composite {
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
 	
-	public ExtGWTWebMessengerChat() {
+	public TestExtGWTWebMessengerChat() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		contentPanel.addStyleName("extgwt-webMessengerChatContainer");

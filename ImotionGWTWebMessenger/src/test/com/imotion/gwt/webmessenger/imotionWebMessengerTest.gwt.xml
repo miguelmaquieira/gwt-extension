@@ -18,7 +18,7 @@
 	
 	
 	<!-- Specify the app entry point class. -->
-	<entry-point class='test.com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerEntryPoint' />
+	<entry-point class='test.com.imotion.gwt.webmessenger.client.TestExtGWTWebMessengerEntryPoint' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />
