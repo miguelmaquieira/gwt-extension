@@ -24,6 +24,7 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCommCS {
 
 	private boolean CONNECTION_CLOSED;
+//	private boolean RECONNECTION;
 	private String userId;
 	private String roomId;
 	private ExtGWTWebMessengerHasCommHandler messengerWidget;
@@ -34,15 +35,16 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 
 	public ExtGWTWebMessengerCommCSAtmosphere() {
 		CONNECTION_CLOSED = true;
+//		RECONNECTION = false;
 	}
 	
 	public ExtGWTWebMessengerCommCSAtmosphere(ExtGWTWebMessengerHasCommHandler messengerWidget,String senderId, String chatId) {
 		CONNECTION_CLOSED = true;
+//		RECONNECTION = false;
 		this.userId = senderId;
 		this.messengerWidget = messengerWidget;
 		this.roomId = chatId;
 
-		launchAtmosphere();
 	}
 
 	/**********************************************************************
@@ -76,9 +78,15 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 		rpcRequestConfig.setCloseHandler(new AtmosphereCloseHandler() {
 			@Override
 			public void onClose(AtmosphereResponse response) {
-				//RPC Connection closed
+				//RPC Connection closed				
 				CONNECTION_CLOSED = true;
-				messengerWidget.handleConnectionClosed();
+				
+//				if(RECONNECTION){
+//					launchAtmosphere();
+//				} else {
+					messengerWidget.handleConnectionClosed();
+//				}
+			
 			}
 		});
 
@@ -164,16 +172,32 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 
 	@Override
 	public void initConnection(String nickname, String roomname) {
-		// TODO Auto-generated method stub
+		if(CONNECTION_CLOSED) {
+			launchAtmosphere();		
+		}	
 	}
 
 	@Override
 	public void reconnect(String nickname, String roomname) {
-		// TODO Auto-generated method stub
+//		if (CONNECTION_CLOSED) {
+//			userId = nickname;
+//			roomId = roomname;
+//			launchAtmosphere();
+//		} else {
+//			userId = nickname;
+//			roomId = roomname;
+//			RECONNECTION = true;
+//			atmosphere.unsubscribe();			
+//		}
 	}
 
 	@Override
 	public void reconnect(String nickname) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean isConnectionClosed() {
+		return CONNECTION_CLOSED;
 	}
 }

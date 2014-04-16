@@ -112,6 +112,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 			public void onClick(ClickEvent event) {
 				// TODO be sure if we have to enconding the message
 				Window.alert("Change nickname: " + textNickName.getText());
+//				getMessengerHandler().reconnect(textNickName.getText(), textRoomName.getText());
 			}
 		});
 		
@@ -127,10 +128,18 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 				
 				String senderId = textNickName.getText();
 				String chatId = textRoomName.getText();
+			
+				ExtGWTWebMessengerCommCS handler = getMessengerHandler();	
 				
-				ExtGWTWebMessengerCommCSAtmosphere handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
-				setMessengerHandler(handler);
-								
+				if(getMessengerHandler() == null) {
+					handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
+					setMessengerHandler(handler);					
+					handler.initConnection(senderId, chatId);
+				
+				} else {
+					handler.initConnection(senderId, chatId);					
+				}
+						
 			}
 		});
 		
@@ -214,7 +223,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		this.messengerHandler = messengerHandler;
 	}
 
-
+	
 	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
