@@ -2,7 +2,7 @@ package test.com.imotion.webmessenger.client;
 
 import com.google.gwt.i18n.client.Constants;
 
-public interface ExtGwtWebMessengerTexts extends Constants {
+public interface TestExtGwtWebMessengerTexts extends Constants {
 	
 	@DefaultStringValue("Cliente messenger")
 	String chat_messenger_title_text();
