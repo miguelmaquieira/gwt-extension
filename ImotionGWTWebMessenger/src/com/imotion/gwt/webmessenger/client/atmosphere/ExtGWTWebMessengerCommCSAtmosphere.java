@@ -179,8 +179,4 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public boolean isConnectionClosed() {
-		return CONNECTION_CLOSED;
-	}
 }
