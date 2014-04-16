@@ -1,0 +1,87 @@
+.extgwt-webMessengerChatContainer {
+	margin: 0px auto;
+	width: 620px;
+	height: 400px;
+	margin-top: 50px;
+	border: 2px solid #DEDEDE;
+	padding: 10px;
+	border-radius: 5px;
+	background: #FCFCFC;
+}
+
+.extgwt-webMessengerChatTitle {
+	font-size: 20px;
+	padding: 5px 0px 5px 10px;
+}
+
+.extgwt-webMessengerChatNorthZone {
+	width: 100%;
+	margin-bottom: 10px;
+}
+	
+.extgwt-webMessegerChatMessagePanel {
+	width: 95%;
+	margin: 0 auto;
+	border: 1px solid #DEDEDE;
+}
+
+.extgwt-webMessegerChatMessagePanel .gwt-TextArea {
+	height: 250px;
+	width: 100%;
+	resize: none;
+	border: none;
+}
+
+
+.extgwt-webMessegerChatConnectionsPanel {
+	width: 95%;
+	margin: 0 auto;
+	border: 1px solid #DEDEDE;
+}
+
+.extgwt-webMessegerChatConnectionsPanel .gwt-ListBox {
+	height: 250px;
+	width: 100%;
+	border: none;
+}
+
+.extgwt-webMessengerChatSouthZone {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.extgwt-webMessengerChatNickNamePanel {
+	padding-left: 10px;
+}
+
+.extgwt-webMessengerChatRoomNamePanel {
+	padding-left: 10px;
+}
+
+.extgwt-webMessengerChatSouthZone .gwt-TextBox {
+	height: 25px;
+	font-size: 12px;
+	width: 95%;
+}
+
+.extgwt-webMessengerChatSouthZone .gwt-Button {
+	height: 35px;
+	width: 90px;
+	margin-left: 5px;
+}
+
+.extgwt-webMessengerChatSendMessagePanel {
+	width: 100%;
+}
+
+.extgwt-webMessengerChatSendMessagePanel .gwt-TextBox {
+	height: 30px;
+	font-size: 20px;
+	width: 95%;
+	margin-left: 10px;
+}
+
+.extgwt-webMessengerChatSendMessagePanel .gwt-Button {
+	height: 35px;
+	width: 100px;
+}

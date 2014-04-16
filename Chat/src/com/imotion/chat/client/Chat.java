@@ -38,7 +38,6 @@ public class Chat implements EntryPoint {
 	Button sendRPC;
 	Button desconectRPC;
 
-
 	@Override
 	public void onModuleLoad() {
 
