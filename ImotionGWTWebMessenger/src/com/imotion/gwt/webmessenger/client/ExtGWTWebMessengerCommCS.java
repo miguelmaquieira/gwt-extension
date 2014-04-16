@@ -8,5 +8,4 @@ public interface ExtGWTWebMessengerCommCS {
 	public void initConnection(String nickname, String roomname);
 	public void reconnect(String nickname, String roomname);
 	public void reconnect(String nickname);
-	public boolean isConnectionClosed();
 }
