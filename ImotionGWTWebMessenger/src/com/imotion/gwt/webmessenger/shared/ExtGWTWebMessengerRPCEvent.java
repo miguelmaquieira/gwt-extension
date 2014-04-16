@@ -1,4 +1,4 @@
-package com.imotion.gwt.webmessenger.client.atmosphere;
+package com.imotion.gwt.webmessenger.shared;
 
 import java.io.Serializable;
 

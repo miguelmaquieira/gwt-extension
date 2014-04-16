@@ -27,8 +27,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
-import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerRPCEvent;
 import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerRPCSerializer;
+import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 
 
 

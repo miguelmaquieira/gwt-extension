@@ -1,7 +1,6 @@
 package com.imotion.gwt.webmessenger.server;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.Broadcaster;
@@ -9,13 +8,11 @@ import org.atmosphere.cpr.DefaultBroadcasterFactory;
 import org.atmosphere.gwt20.shared.Constants;
 import org.atmosphere.handler.AbstractReflectorAtmosphereHandler;
 
-import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerRPCEvent;
-
+import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 
 
 public class ExtGWTWebMessengerServer extends AbstractReflectorAtmosphereHandler {
 
-	private static final Logger logger = Logger.getLogger("ExtGWTWebMessengerServerAtmosphere");
 	
 	@Override
 	public void onRequest(AtmosphereResource ar) throws IOException {
