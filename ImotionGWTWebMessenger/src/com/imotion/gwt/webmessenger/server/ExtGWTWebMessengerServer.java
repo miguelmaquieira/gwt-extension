@@ -42,7 +42,7 @@ public class ExtGWTWebMessengerServer extends AbstractReflectorAtmosphereHandler
 
 		Object msg = ar.getRequest().getAttribute(Constants.MESSAGE_OBJECT);
 		ExtGWTWebMessengerRPCEvent myEvent= (ExtGWTWebMessengerRPCEvent) msg;    	 
-		String broadcastId = myEvent.getBroadcastId();
+		String broadcastId = myEvent.getRoomId();
 
 		if (msg != null) {
 			DefaultBroadcasterFactory.getDefault().lookup(broadcastId).broadcast(msg);  

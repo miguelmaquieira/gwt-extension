@@ -1,6 +1,6 @@
-package com.imotion.gwt.webmessenger.client.atmosphere;
+package com.imotion.gwt.webmessenger.client;
 
-public interface IExtGWTWebMessengerWidgetDisplay {
+public interface ExtGWTWebMessengerHasCommHandler {
 
 	public void handleReceivedMessage(String text, long date, String sender);
 	public void handleConnectionOpened();

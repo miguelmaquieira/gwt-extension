@@ -15,11 +15,11 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerHandlerAtmosphere;
-import com.imotion.gwt.webmessenger.client.atmosphere.IExtGWTWebMessengerHandlerDisplay;
-import com.imotion.gwt.webmessenger.client.atmosphere.IExtGWTWebMessengerWidgetDisplay;
+import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS;
+import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
+import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerCommCSAtmosphere;
 
-public class TestExtGWTWebMessengerChat extends Composite implements IExtGWTWebMessengerWidgetDisplay {
+public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMessengerHasCommHandler {
 	
 	private final static TestExtGwtWebMessengerTexts TEXTS = GWT.create(TestExtGwtWebMessengerTexts.class);
 	
@@ -28,7 +28,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements IExtGWTWebM
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
-	private IExtGWTWebMessengerHandlerDisplay messengerHandler;
+	private ExtGWTWebMessengerCommCS messengerHandler;
 	
 	public TestExtGWTWebMessengerChat() {
 		FlowPanel contentPanel = new FlowPanel();
@@ -128,7 +128,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements IExtGWTWebM
 				String senderId = textNickName.getText();
 				String chatId = textRoomName.getText();
 				
-				ExtGWTWebMessengerHandlerAtmosphere handler = new ExtGWTWebMessengerHandlerAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
+				ExtGWTWebMessengerCommCSAtmosphere handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
 				setMessengerHandler(handler);
 								
 			}
@@ -206,11 +206,11 @@ public class TestExtGWTWebMessengerChat extends Composite implements IExtGWTWebM
 	 *               		   PUBLIC FUNCTIONS							  *
 	 **********************************************************************/
 	
-	public IExtGWTWebMessengerHandlerDisplay getMessengerHandler() {
+	public ExtGWTWebMessengerCommCS getMessengerHandler() {
 		return messengerHandler;
 	}
 
-	public void setMessengerHandler(IExtGWTWebMessengerHandlerDisplay messengerHandler) {
+	public void setMessengerHandler(ExtGWTWebMessengerCommCS messengerHandler) {
 		this.messengerHandler = messengerHandler;
 	}
 
