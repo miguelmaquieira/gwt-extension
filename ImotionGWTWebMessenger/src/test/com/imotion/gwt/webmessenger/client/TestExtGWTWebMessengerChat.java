@@ -133,13 +133,10 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 				
 				if(getMessengerHandler() == null) {
 					handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this, senderId,chatId);				
-					setMessengerHandler(handler);					
-					handler.initConnection(senderId, chatId);
+					setMessengerHandler(handler);									
+				} 
 				
-				} else {
-					handler.initConnection(senderId, chatId);					
-				}
-						
+				handler.initConnection(senderId, chatId);
 			}
 		});
 		
