@@ -14,7 +14,9 @@ public class ImotionGWTSTLViewer implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
-		EXTGWTSTLLoaderWidget stlWidget = new EXTGWTSTLLoaderWidget();
+		EXTGWTSTLLoaderWidget stlWidget = new EXTGWTSTLLoaderWidget("models/thingiverse/Doll_Multiscan.stl", 0x0743AE, 0xFFFFFF, 0xe0e0e0, 0.5f, 640, 480);
 		rootPanel.add(stlWidget);
+//		CubeExampleWidget cubeWidget = new CubeExampleWidget(Window.getClientWidth(), Window.getClientHeight());
+//		rootPanel.add(cubeWidget);
 	}
 }

@@ -3,7 +3,7 @@ package com.imotion.gwt.stlviewer.client.widget;
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
 import com.akjava.gwt.three.client.core.Geometry;
-import com.akjava.gwt.three.client.core.Vector3;
+import com.akjava.gwt.three.client.core.Object3D;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
@@ -14,7 +14,6 @@ import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTTHREE;
@@ -24,43 +23,61 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 	private 	WebGLRenderer 	renderer;
 	private 	Scene 			scene;
 	private 	Camera 			camera;
-	private 	Mesh 			mesh;
-	private 	Vector3 		cameraTarget;
+	private 	Mesh 			objectMesh;
+	private 	Mesh 			planeMesh;
+	private 	Mesh 			wallMesh;
+	private Object3D wallDeepMesh;
 
-	public EXTGWTSTLLoaderWidget() {
-		FlowPanel root = new FlowPanel(); 
+	public EXTGWTSTLLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, float backgroundTransparency, final int width, final int height) {
+		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
 
-		camera = THREE.PerspectiveCamera(35, 800.0 / 600.0, 1f, 15f);
-		camera.getPosition().set(3, 0.75, 3);
+		int maxObjectSize = 80; 
+		
+		//Camera
+		float ratio = width / height;
+		camera = EXTGWTTHREE.PerspectiveCamera(60, ratio, 1f, 1000f);
+		camera.getPosition().set(-250, 200, -250);
 
-		cameraTarget = THREE.Vector3(0, 0.45, 0);
-
+		//Scene
 		scene = THREE.Scene();
 
-		// Ground
-		Mesh plane = THREE.Mesh( THREE.PlaneGeometry( 4, 4 ), THREE.MeshBasicMaterial().color(0xFFFFFF).build() );
-		plane.setRotation(-Math.PI/2, 0, 0);
-		plane.setPosition(0f, 0f, 0f);
-		scene.add(plane);
-		plane.setReceiveShadow(true);
+		//WALL LEFT
+//		Geometry wallGeometry = THREE.PlaneGeometry( 200, 600);
+//		Material wallMaterial = THREE.MeshBasicMaterial().color(0xbb88ff).overdraw(true).build();
+//		wallMesh = EXTGWTTHREE.Mesh(wallGeometry, wallMaterial);
+//		scene.add(wallMesh);
+//		wallMesh.setPosition(-50, 200, -50);
+//		wallMesh.setRotation(0, Math.PI / 2, 0);
+//		wallMesh.setReceiveShadow(true);
+//		wallMesh.setCastShadow(true);
 
-		// ASCII file
-		EXTGWTSTLLoader.load("models/thingiverse/Doll_Multiscan.stl", new AsyncCallback<Geometry>() {
+		//Floor
+		Geometry floorGeometry = THREE.PlaneGeometry( 10000, 10000);
+		Material floorMaterial = THREE.MeshBasicMaterial().color(floorColorAsHex).overdraw(true).build();
+		planeMesh = EXTGWTTHREE.Mesh(floorGeometry, floorMaterial);
+		scene.add(planeMesh);
+		planeMesh.setRotation(- Math.PI / 2, 0, 0 );
+		planeMesh.setPosition(0, 0, 0);
+		planeMesh.setReceiveShadow(true);
+		planeMesh.setCastShadow(true);
+		
+
+		EXTGWTSTLLoader.load(url, new AsyncCallback<Geometry>() {
 
 			@Override
 			public void onSuccess(Geometry geometry) {
-				Material material = EXTGWTTHREE.MeshBasicMaterial().color(0x0743AE).build();
-				mesh = THREE.Mesh(geometry, material);
-
-				mesh.setPosition( 0, 0, 0.3 );
-				mesh.setRotation( - Math.PI / 2, 0, 0 );
-				mesh.setScale( 0.007, 0.007, 0.007);
-
-				mesh.setCastShadow(true);
-				mesh.setReceiveShadow(true);
-
-				scene.add(mesh);
+				//Setup object texture, color, zoom etc
+				Material material = EXTGWTTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
+				objectMesh = THREE.MorphAnimMesh(geometry, material);
+				objectMesh.setPosition(0, 0, 0);
+				objectMesh.setRotation(- Math.PI / 2, 0, 0 );
+				objectMesh.setReceiveShadow(true);
+				objectMesh.setCastShadow(true);
+				//Add object to scene
+				scene.add(objectMesh);
+				camera.lookAt(scene.getPosition().getX(), scene.getPosition().getY() + 30, scene.getPosition().getZ());
+				AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLLoaderWidget.this);
 			}
 
 			@Override
@@ -69,45 +86,26 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 			}
 		});
 
-		// Lights
-
-		scene.add(THREE.AmbientLight( 0x777777 ) );
-
-		addShadowedLight( 1d, 1d, 1d, 0xffffff, 1 );
-
-		// renderer
-		renderer = THREE.CanvasRenderer();
+		DirectionalLight dirLight = THREE.DirectionalLight( 0xffffff, 1000 );
+		dirLight.getColor().setHex(0xF07746);
+		dirLight.getPosition().set(0, 10,-70);
+//		dirLight.getPosition().multiplyScalar(50 );
+		dirLight.setCastShadow(true);
+		scene.add(dirLight);
+		
+		//Renderer
+		renderer = EXTGWTTHREE.EXTGWTWebGLRenderer();
+		renderer.setSize(width, height);
+		renderer.setClearColorHex(backgroundColorAsHex, backgroundTransparency);
 		renderer.setShadowMapEnabled(true);
-		renderer.setSize(800, 600);
-		HTMLPanel div = new HTMLPanel("");
-		div.getElement().appendChild(renderer.getDomElement());
-		root.add(div);
 
-		renderer.setSize(800, 600);
-		renderer.setClearColorHex(0x000000, 1.0f);
-
-		camera.lookAt(cameraTarget.getX(), cameraTarget.getY(), cameraTarget.getZ());
-
-		AnimationScheduler.get().requestAnimationFrame(this);
+		root.getElement().appendChild(renderer.getDomElement());
 	}
 	
-	private void  addShadowedLight( double x, double y, double z, int color, int intensity ) {
-
-		DirectionalLight directionalLight = THREE.DirectionalLight(color, intensity);
-		directionalLight.setPosition( x, y, z );
-		scene.add( directionalLight );
-
-		directionalLight.setCastShadow(true);
-	}
-
 	@Override
 	public void execute(double timestamp) {
-		if (mesh != null) {
-			mesh.getRotation().setZ(mesh.getRotation().getZ() + 0.2);
-		}
-
+		objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + 0.2);
 		renderer.render(scene, camera);
-
 		AnimationScheduler.get().requestAnimationFrame(this);
 	}
 

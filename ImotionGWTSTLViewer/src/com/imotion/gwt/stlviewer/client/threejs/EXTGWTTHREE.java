@@ -7,5 +7,9 @@ public class EXTGWTTHREE extends THREE {
 	public static  final EXTGWTMeshPongMaterialBuilder MeshPongMaterial(){
 		return EXTGWTMeshPongMaterialBuilder.create();
 	}
+	
+	public static native final EXTGWTWebGLRenderer EXTGWTWebGLRenderer()/*-{
+	return new $wnd.THREE.WebGLRenderer();
+	}-*/;
 
 }
