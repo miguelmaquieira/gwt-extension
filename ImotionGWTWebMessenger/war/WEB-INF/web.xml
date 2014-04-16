@@ -37,7 +37,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>ImotionGWTWebMessenger.html</welcome-file>
+    <welcome-file>imotionGWTWebMessenger.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

@@ -1,6 +1,8 @@
 package com.imotion.gwt.webmessenger.client;
 
-public interface ExtGWTWebMessengerCommCS {
+import com.imotion.gwt.webmessenger.client.session.ExtGWTWebMessengerSession;
+
+public interface ExtGWTWebMessengerCommCS extends ExtGWTWebMessengerCommHandlerManager {
 
 	public void sendMessage(String message);
 	public void disconnect();
@@ -8,4 +10,7 @@ public interface ExtGWTWebMessengerCommCS {
 	public void initConnection(String nickname, String roomname);
 	public void reconnect(String nickname, String roomname);
 	public void reconnect(String nickname);
+	
+	public ExtGWTWebMessengerSession getSessionData();
+	
 }

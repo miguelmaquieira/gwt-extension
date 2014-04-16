@@ -2,4 +2,5 @@
 <<<<<<<=HEAD
 >>>>>>>=refs/remotes/origin/Issue_0100
 eclipse.preferences.version=1
+encoding//src/com/imotion/gwt/webmessenger/client/atmosphere/ExtGWTWebMessengerCommCSAtmosphere.java=UTF-8
 encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWebMessengerChat.java=UTF-8

@@ -3,6 +3,9 @@ package test.com.imotion.gwt.webmessenger.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -16,9 +19,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS;
-import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerFactory;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
-import com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerCommCSAtmosphere;
 
 public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMessengerHasCommHandler {
 
@@ -29,7 +30,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
-	private ExtGWTWebMessengerCommCS messengerHandler;
+	private ExtGWTWebMessengerCommCS commCS;
 
 	public TestExtGWTWebMessengerChat() {
 		FlowPanel contentPanel = new FlowPanel();
@@ -103,31 +104,24 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		textRoomName.setText(TEXTS.room_name_default_value_text());
 		roomNamePanel.add(textRoomName);
 
-		//// Change nick name button
-		Button buttonChangeNickName = new Button(TEXTS.button_reconect_text());
-		southZone.add(buttonChangeNickName);
-		southZone.setCellHorizontalAlignment(buttonChangeNickName, HasHorizontalAlignment.ALIGN_RIGHT);
-		buttonChangeNickName.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO be sure if we have to enconding the message
-//				Window.alert("Change nickname: " + textNickName.getText());
-				
-				String senderId = textNickName.getText();
-				String chatId = textRoomName.getText();
-
-				ExtGWTWebMessengerCommCS handler = getMessengerHandler();
-				if(handler == null) {
-					handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this);				
-					setMessengerHandler(handler);									
-				} 
-
-				handler.reconnect(senderId, chatId);
-				
-				
-			}
-		});
+//		//// Change nick name button
+//		Button buttonChangeNickName = new Button(TEXTS.button_reconect_text());
+//		southZone.add(buttonChangeNickName);
+//		southZone.setCellHorizontalAlignment(buttonChangeNickName, HasHorizontalAlignment.ALIGN_RIGHT);
+//		buttonChangeNickName.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				String userId = textNickName.getText();
+//				String roomId = textRoomName.getText();
+//				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+//				if (commCS != null) {
+//					comm.reconnect(userId, roomId);
+//				} else {
+//					Window.alert("No se ha podido obtener comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
+//				}
+//			}
+//		});
 
 		//// Button connect
 		Button buttonConnect = new Button(TEXTS.button_conect_text());
@@ -137,19 +131,14 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO be sure if we have to enconding the message
-
-				String senderId = textNickName.getText();
-				String chatId = textRoomName.getText();
-
-				ExtGWTWebMessengerCommCS handler = getMessengerHandler();	
-
-				if(handler == null) {
-					handler = new ExtGWTWebMessengerCommCSAtmosphere(TestExtGWTWebMessengerChat.this);				
-					setMessengerHandler(handler);									
-				} 
-
-				handler.initConnection(senderId, chatId);
+				String userId = textNickName.getText();
+				String roomId = textRoomName.getText();
+				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+				if (comm != null) {
+					textMessage.setEnabled(true);
+				} else {
+					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
+				}
 			}
 		});
 
@@ -161,11 +150,10 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO be sure if we have to enconding the message
-				
-				ExtGWTWebMessengerCommCS handler = getMessengerHandler();	
-				if(handler != null) {
-					handler.disconnect();
+				if (commCS != null) {
+					commCS.disconnect();
+					commCS = null;
+					textMessage.setEnabled(false);
 				}
 			}
 		});
@@ -181,6 +169,23 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		sendMessagePanel.add(textMessage);
 		sendMessagePanel.setCellWidth(textMessage, "80%");
 		textMessage.setEnabled(false);
+		textMessage.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
+					String userId = textNickName.getText();
+					String roomId = textRoomName.getText();
+					ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+					if (comm != null) {
+						comm.sendMessage(textMessage.getText());
+						textMessage.setText("");
+					} else {
+						Window.alert("No se ha podido enviar el mensaje. Parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
+					}
+				}
+			}
+		});
 
 		//// Button send
 		Button buttonSend = new Button(TEXTS.button_send_text());
@@ -191,14 +196,18 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 
 			@Override
 			public void onClick(ClickEvent event) {
-				// TODO be sure if we have to enconding the message
-				getMessengerHandler().sendMessage(textMessage.getText());
-				textMessage.setText("");
+				String userId = textNickName.getText();
+				String roomId = textRoomName.getText();
+				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+				if (comm != null) {
+					comm.sendMessage(textMessage.getText());
+					textMessage.setText("");
+				} else {
+					Window.alert("No se ha podido enviar el mensaje. Parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
+				}
 			}
 		});
 	}
-
-
 
 	/**********************************************************************
 	 *                   IExtGWTWebMessengerWidgetDisplay				  *
@@ -226,30 +235,35 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 
 
 	/**********************************************************************
-	 *               		   PUBLIC FUNCTIONS							  *
-	 **********************************************************************/
-
-	public ExtGWTWebMessengerCommCS getMessengerHandler() {
-		return messengerHandler;
-	}
-
-	public void setMessengerHandler(ExtGWTWebMessengerCommCS messengerHandler) {
-		this.messengerHandler = messengerHandler;
-	}
-
-
-	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
-
+		
+	private ExtGWTWebMessengerCommCS getCommCS(String nickname, String roomname) {
+		if (nickname == null || nickname.length() == 0 || roomname == null || roomname.length() == 0) {
+			Window.alert("Debes informar: 'nickname' y 'roomname'");
+			return null;
+		} else  {
+			if (commCS == null) {
+				commCS = GWT.create(ExtGWTWebMessengerCommCS.class);
+				commCS.initConnection(nickname, roomname);
+				commCS.addCommHandler(this);
+			} else {
+				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
+					commCS.disconnect();
+					commCS.initConnection(nickname, roomname);
+					commCS.addCommHandler(this);
+				}
+			}
+			return commCS;
+		}
+	}
+	
 	private void writeMessage(String text) {
 		String finalText = new StringBuilder()
-		.append(areaMessage.getText())
-		.append(text)
-		.append("\n")
-		.toString();
-
+			.append(areaMessage.getText())
+			.append(text)
+			.append("\n")
+			.toString();
 		areaMessage.setText(finalText);
 	}
-
 }

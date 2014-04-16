@@ -19,63 +19,122 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS;
 import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
+import com.imotion.gwt.webmessenger.client.session.ExtGWTWebMessengerSession;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 
 public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCommCS {
 
-	private boolean CONNECTION_CLOSED;
-	private String userId;
-	private String roomId;
-	private ExtGWTWebMessengerHasCommHandler messengerWidget;
+	private ExtGWTWebMessengerSession 			sessionData;
+	private ExtGWTWebMessengerHasCommHandler 	messengerWidget;
 
-	Atmosphere atmosphere ;
-	AtmosphereRequest rpcRequest;
-	AtmosphereRequestConfig rpcRequestConfig;
+	private Atmosphere 				atmosphere ;
+	private AtmosphereRequest 		rpcRequest;
+	private AtmosphereRequestConfig rpcRequestConfig;
 
 	public ExtGWTWebMessengerCommCSAtmosphere() {
-		CONNECTION_CLOSED = true;
+		
 	}
 	
 	public ExtGWTWebMessengerCommCSAtmosphere(ExtGWTWebMessengerHasCommHandler messengerWidget) {
-		CONNECTION_CLOSED = true;
 		this.messengerWidget = messengerWidget;
-		
+	}
+	
+	/**********************************************************************
+	 *                   	ExtGWTWebMessengerCommCS	    			  *
+	 **********************************************************************/
+	@Override
+	public ExtGWTWebMessengerSession getSessionData() {
+		return sessionData;
+	}
+	
+	@Override
+	public void sendMessage(String message) {
+		try {
+			if (message.length() > 0) {
+				ExtGWTWebMessengerRPCEvent myevent = new ExtGWTWebMessengerRPCEvent();
+				myevent.setMessage(message);
+				myevent.setSenderId(sessionData.getUserId());
+				myevent.setRoomId(sessionData.getRoomId());
+				rpcRequest.push(myevent);
+			}
+		} catch (SerializationException ex) {	
+			Window.alert("Serialization Exception: \n" +  getStacktrace(ex));
+		}
+	}
+
+	@Override
+	public void disconnect() {
+		atmosphere.unsubscribe();
+		atmosphere = null;
+	}
+
+	@Override
+	public void autoReconnection(long timeframe) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void initConnection(String nickname, String roomname) {
+		this.sessionData = new ExtGWTWebMessengerSession(nickname, roomname);
+		initAtmosphere();	
+	}
+
+	@Override
+	public void reconnect(String nickname, String roomname) {
 
 	}
 
+	@Override
+	public void reconnect(String nickname) {
+		// TODO Auto-generated method stub
+	}
+	
+	/**********************************************************************
+	 *                   ExtGWTWebMessengerCommHandlerManager			  *
+	 **********************************************************************/
+	@Override
+	public void addCommHandler(ExtGWTWebMessengerHasCommHandler handler) {
+		this.messengerWidget = handler;
+	}
+
+	@Override
+	public void addCommHandler(String roomId, ExtGWTWebMessengerHasCommHandler handler) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeCommHandler(ExtGWTWebMessengerHasCommHandler handler) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeCommHandler(String roomId, ExtGWTWebMessengerHasCommHandler handler) {
+		// TODO Auto-generated method stub
+	}
+	
 	/**********************************************************************
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 
-	private void launchAtmosphere() {
-
+	private void initAtmosphere() {
 
 		ExtGWTWebMessengerRPCSerializer rpc_serializer = GWT.create(ExtGWTWebMessengerRPCSerializer.class);
 
 		rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
-		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?broadcastId="+ roomId);			
+		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?broadcastId="+ sessionData.getRoomId());			
 		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
-		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
-//		rpcRequestConfig.setReconnectInterval(3000);
-//		rpcRequestConfig.setConnectTimeout(100000);
-
+		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
 
 		rpcRequestConfig.setOpenHandler(new AtmosphereOpenHandler() {
 			@Override
 			public void onOpen(AtmosphereResponse response) {
-				//RPC Connection opened
-				CONNECTION_CLOSED = false;
 				messengerWidget.handleConnectionOpened();
-
 			}
 		});
-
 
 		rpcRequestConfig.setCloseHandler(new AtmosphereCloseHandler() {
 			@Override
 			public void onClose(AtmosphereResponse response) {
-				//RPC Connection closed				
-				CONNECTION_CLOSED = true;
 				messengerWidget.handleConnectionClosed();		
 			}
 		});
@@ -127,56 +186,16 @@ public class ExtGWTWebMessengerCommCSAtmosphere implements ExtGWTWebMessengerCom
 		atmosphere = Atmosphere.create();
 		rpcRequest = atmosphere.subscribe(rpcRequestConfig);
 	}
-
-
-	/**********************************************************************
-	 *                   IExtGWTWebMessengerHandlerDisplay				  *
-	 **********************************************************************/
 	
-
-	@Override
-	public void sendMessage(String message) {
-		try {
-			if (message.length() > 0) {
-				ExtGWTWebMessengerRPCEvent myevent = new ExtGWTWebMessengerRPCEvent();
-				myevent.setMessage(message);
-				myevent.setSenderId(userId);
-				myevent.setRoomId(roomId);
-				rpcRequest.push(myevent);
+	private String getStacktrace(Exception ex) {
+		StackTraceElement[] traces = ex.getStackTrace();
+		String trace = "no trace";
+		if (traces != null) {
+			for (int i = 0; i < traces.length || i < 10; i++) {
+				trace = trace.concat(traces[i].toString());
 			}
-		} catch (SerializationException ex) {	
-			String error = ex.getMessage();
-			Window.alert(error);
+			trace.concat("\n...");
 		}
+		return trace;
 	}
-
-	@Override
-	public void disconnect() {
-		atmosphere.unsubscribe();
-	}
-
-	@Override
-	public void autoReconnection(long timeframe) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void initConnection(String nickname, String roomname) {
-		if(CONNECTION_CLOSED) {
-			this.userId = nickname;
-			this.roomId = roomname;
-			launchAtmosphere();		
-		}	
-	}
-
-	@Override
-	public void reconnect(String nickname, String roomname) {
-
-	}
-
-	@Override
-	public void reconnect(String nickname) {
-		// TODO Auto-generated method stub
-	}
-
 }
