@@ -212,7 +212,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 		// comm params
 		ExtGWTWMCommRPCSerializer rpc_serializer = GWT.create(ExtGWTWMCommRPCSerializer.class);
 		rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
-		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?broadcastId="+ sessionData.getRoomId());			
+		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?roomId="+ sessionData.getRoomId());			
 		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
 		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
 		
