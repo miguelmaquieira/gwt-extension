@@ -12,14 +12,14 @@
 	
 	<inherits name="org.atmosphere.gwt20.AtmosphereGwt20" />
 
-	<replace-with class="com.imotion.gwt.webmessenger.client.atmosphere.ExtGWTWebMessengerCommCSAtmosphere">
-	  <when-type-is class="com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS" />
+	<replace-with class="com.imotion.gwt.webmessenger.client.comm.atmosphere.ExtGWTWMCommCSAtmosphere">
+	  <when-type-is class="com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS" />
 	</replace-with>
     <set-property name="locale" value="default"/>
 	
 	
 	<!-- Specify the app entry point class. -->
-	<entry-point class='test.com.imotion.gwt.webmessenger.client.TestExtGWTWebMessengerEntryPoint' />
+	<entry-point class='test.com.imotion.gwt.webmessenger.client.TestExtGWTWMEntryPoint' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

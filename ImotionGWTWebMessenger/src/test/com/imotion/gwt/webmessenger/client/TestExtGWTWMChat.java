@@ -1,11 +1,15 @@
 package test.com.imotion.gwt.webmessenger.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -18,21 +22,22 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerCommCS;
-import com.imotion.gwt.webmessenger.client.ExtGWTWebMessengerHasCommHandler;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
 
-public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMessengerHasCommHandler {
+public class TestExtGWTWMChat extends Composite implements ExtGWTWMCommHandler {
 
-	private final static TestExtGwtWebMessengerTexts TEXTS = GWT.create(TestExtGwtWebMessengerTexts.class);
-
+	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
+	private final DateTimeFormat 				format 	= DateTimeFormat.getFormat(PredefinedFormat.DATE_MEDIUM);
+	
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
-	private ExtGWTWebMessengerCommCS commCS;
+	private ExtGWTWMCommCS commCS;
 
-	public TestExtGWTWebMessengerChat() {
+	public TestExtGWTWMChat() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		contentPanel.addStyleName("extgwt-webMessengerChatContainer");
@@ -104,25 +109,6 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		textRoomName.setText(TEXTS.room_name_default_value_text());
 		roomNamePanel.add(textRoomName);
 
-//		//// Change nick name button
-//		Button buttonChangeNickName = new Button(TEXTS.button_reconect_text());
-//		southZone.add(buttonChangeNickName);
-//		southZone.setCellHorizontalAlignment(buttonChangeNickName, HasHorizontalAlignment.ALIGN_RIGHT);
-//		buttonChangeNickName.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				String userId = textNickName.getText();
-//				String roomId = textRoomName.getText();
-//				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
-//				if (commCS != null) {
-//					comm.reconnect(userId, roomId);
-//				} else {
-//					Window.alert("No se ha podido obtener comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
-//				}
-//			}
-//		});
-
 		//// Button connect
 		Button buttonConnect = new Button(TEXTS.button_conect_text());
 		southZone.add(buttonConnect);
@@ -133,8 +119,9 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
 				String roomId = textRoomName.getText();
-				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+				ExtGWTWMCommCS comm = getCommCS(userId, roomId);
 				if (comm != null) {
+					comm.connect();
 					textMessage.setEnabled(true);
 				} else {
 					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
@@ -176,7 +163,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					String userId = textNickName.getText();
 					String roomId = textRoomName.getText();
-					ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+					ExtGWTWMCommCS comm = getCommCS(userId, roomId);
 					if (comm != null) {
 						comm.sendMessage(textMessage.getText());
 						textMessage.setText("");
@@ -198,7 +185,7 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
 				String roomId = textRoomName.getText();
-				ExtGWTWebMessengerCommCS comm = getCommCS(userId, roomId);
+				ExtGWTWMCommCS comm = getCommCS(userId, roomId);
 				if (comm != null) {
 					comm.sendMessage(textMessage.getText());
 					textMessage.setText("");
@@ -214,8 +201,15 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 	 **********************************************************************/
 
 	@Override
-	public void handleReceivedMessage(String text, long date, String sender) {
-		String newMessage = sender	+ ": " + text;
+	public void handleSendMessage(String message, long timestamp, String sender) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void handleReceivedMessage(String message, long timestamp, String sender) {
+		String time = format.format(new Date(timestamp));
+		String newMessage = sender	+ " (" + time + ")" + ": " + message;
 		writeMessage(newMessage);	
 	}
 
@@ -232,26 +226,24 @@ public class TestExtGWTWebMessengerChat extends Composite implements ExtGWTWebMe
 		textMessage.setEnabled(false);
 	}
 
-
-
 	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 		
-	private ExtGWTWebMessengerCommCS getCommCS(String nickname, String roomname) {
+	private ExtGWTWMCommCS getCommCS(String nickname, String roomname) {
 		if (nickname == null || nickname.length() == 0 || roomname == null || roomname.length() == 0) {
 			Window.alert("Debes informar: 'nickname' y 'roomname'");
 			return null;
 		} else  {
 			if (commCS == null) {
-				commCS = GWT.create(ExtGWTWebMessengerCommCS.class);
-				commCS.initConnection(nickname, roomname);
-				commCS.addCommHandler(this);
+				commCS = GWT.create(ExtGWTWMCommCS.class);
+				commCS.init(nickname, roomname);
+				commCS.addCommHandler(roomname, this);
 			} else {
 				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
 					commCS.disconnect();
-					commCS.initConnection(nickname, roomname);
-					commCS.addCommHandler(this);
+					commCS.init(nickname, roomname);
+					commCS.addCommHandler(roomname, this);
 				}
 			}
 			return commCS;

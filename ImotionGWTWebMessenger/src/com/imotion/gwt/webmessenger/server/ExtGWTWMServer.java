@@ -9,15 +9,17 @@ import org.atmosphere.cpr.DefaultBroadcasterFactory;
 import org.atmosphere.gwt20.shared.Constants;
 import org.atmosphere.handler.AbstractReflectorAtmosphereHandler;
 
-import com.imotion.gwt.webmessenger.shared.ExtGWTWebMessengerRPCEvent;
 
-
-public class ExtGWTWebMessengerServer extends AbstractReflectorAtmosphereHandler {
+public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 
 	@Override
 	public void onRequest(AtmosphereResource atResource) throws IOException {
-		if (!atResource.isSuspended()) {
-			broadcast(atResource);
+		if (atResource.isSuspended()) {
+			
+		} else if (atResource.isResumed()) {
+	
+		} else if (atResource.isCancelled())  {
+			
 		} else {
 			onReceiveMessage(atResource);
 		}
@@ -37,23 +39,28 @@ public class ExtGWTWebMessengerServer extends AbstractReflectorAtmosphereHandler
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 	
-	private void broadcast(AtmosphereResource atResource) {
-		String broadcastId = atResource.getRequest().getParameter("broadcastId");
-		Broadcaster broadCaster = DefaultBroadcasterFactory.getDefault().lookup(broadcastId);
+	private Broadcaster getBroadcaster(String broadcasterId) {
+		Broadcaster broadCaster = DefaultBroadcasterFactory.getDefault().lookup(broadcasterId);
 		if (broadCaster == null) {
 			// lookup the broadcaster, if not found create it. Name is arbitrary
-			broadCaster = DefaultBroadcasterFactory.getDefault().lookup(broadcastId, true);
+			broadCaster = DefaultBroadcasterFactory.getDefault().lookup(broadcasterId, true);
 		}
-		atResource.setBroadcaster(broadCaster);   
-		atResource.suspend();
+		return broadCaster;
 	}
 	
 	private void onReceiveMessage(AtmosphereResource atResource) {
-		Object msg = atResource.getRequest().getAttribute(Constants.MESSAGE_OBJECT);
-		ExtGWTWebMessengerRPCEvent myEvent= (ExtGWTWebMessengerRPCEvent) msg;    	 
-		String broadcastId = myEvent.getRoomId();
-		if (msg != null) {
-			DefaultBroadcasterFactory.getDefault().lookup(broadcastId).broadcast(msg);  
+		String broadcastId = atResource.getRequest().getParameter("broadcastId");
+		Broadcaster broadcaster = getBroadcaster(broadcastId);
+		if (broadcaster != null) {
+			Object msg = atResource.getRequest().getAttribute(Constants.MESSAGE_OBJECT);
+			if (msg != null) {    	 
+				broadcaster.broadcast(msg);  
+			} else {
+				atResource.setBroadcaster(broadcaster);
+				atResource.suspend();
+			}
+		} else {
+			// TODO trace 
 		}
 	}
 }

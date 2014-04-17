@@ -2,7 +2,7 @@ package com.imotion.gwt.webmessenger.shared;
 
 import java.io.Serializable;
 
-public class ExtGWTWebMessengerRPCEvent implements Serializable{
+public class ExtGWTWMRPCEvent implements Serializable{
 
 	
 	private static final long serialVersionUID = 5168205444928677997L;

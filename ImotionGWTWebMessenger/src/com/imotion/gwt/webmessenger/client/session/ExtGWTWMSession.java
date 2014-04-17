@@ -2,17 +2,17 @@ package com.imotion.gwt.webmessenger.client.session;
 
 import java.util.Date;
 
-public class ExtGWTWebMessengerSession {
+public class ExtGWTWMSession {
 	
 	private String 	userId;
 	private String 	roomId;
 	private long 	creationTimestamp;
 	
-	public ExtGWTWebMessengerSession() {
+	public ExtGWTWMSession() {
 		this.creationTimestamp = new Date().getTime();
 	}
 	
-	public ExtGWTWebMessengerSession(String userId, String roomId) {
+	public ExtGWTWMSession(String userId, String roomId) {
 		this.userId = userId;
 		this.roomId = roomId;
 		this.creationTimestamp = new Date().getTime();
@@ -42,7 +42,7 @@ public class ExtGWTWebMessengerSession {
 		this.creationTimestamp = creationTimestamp;
 	}
 	
-	public boolean equals(ExtGWTWebMessengerSession obj) {
+	public boolean equals(ExtGWTWMSession obj) {
 		return obj != null &&
 				obj.getRoomId() == getRoomId() &&
 				obj.getUserId() == getUserId();
