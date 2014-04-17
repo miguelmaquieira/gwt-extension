@@ -23,7 +23,6 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandlerManager;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasSendCommHandler;
@@ -35,7 +34,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 
 	private ExtGWTWMSession 			sessionData;
 	
-	private ExtGWTWMCommHandlerManagerImpl<ExtGWTWMHasCommHandler> handlerManager;
+	private ExtGWTWMCommHandlerManagerImpl handlerManager;
 
 	private Atmosphere 				atmosphere ;
 	private AtmosphereRequest 		rpcRequest;
@@ -221,15 +220,9 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 			
 			@Override
 			public void onOpen(AtmosphereResponse response) {
-				List<ExtGWTWMHasOpenCommHandler> 	handlersOpen 	= getHandlerManager().getHandlers(ExtGWTWMHasOpenCommHandler.class, getSessionData().getRoomId());
-				List<ExtGWTWMCommHandler> 			handlersAll		= getHandlerManager().getHandlers(ExtGWTWMCommHandler.class, getSessionData().getRoomId());
-		
+				List<ExtGWTWMHasOpenCommHandler> handlersOpen = getHandlerManager().getCommOpenHandlers(getSessionData().getRoomId());
 				for (int index = 0; index < handlersOpen.size(); index++) {
 					handlersOpen.get(index).handleConnectionOpened();
-				}
-				
-				for (int index = 0; index < handlersAll.size(); index++) {
-					handlersAll.get(index).handleConnectionOpened();
 				}
 			}
 		});
@@ -238,7 +231,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 			
 			@Override
 			public void onClose(AtmosphereResponse response) {
-				List<ExtGWTWMHasCloseCommHandler> handlers = getHandlerManager().getHandlers(ExtGWTWMHasCloseCommHandler.class, getSessionData().getRoomId());
+				List<ExtGWTWMHasCloseCommHandler> handlers = getHandlerManager().getCommCloseHandlers(getSessionData().getRoomId());
 				for (int index = 0; index < handlers.size(); index++) {
 					handlers.get(index).handleConnectionClosed();
 				}
@@ -249,7 +242,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 			
 			@Override
 			public void onMessage(AtmosphereResponse response) {
-				List<ExtGWTWMHasReceiveCommHandler> handlers = getHandlerManager().getHandlers(ExtGWTWMHasReceiveCommHandler.class, getSessionData().getRoomId());
+				List<ExtGWTWMHasReceiveCommHandler> handlers = getHandlerManager().getCommReceiveHandlers(getSessionData().getRoomId());
 				for (int index = 0; index < handlers.size(); index++) {
 					List<ExtGWTWMRPCEvent> messages = response.getMessages();
 					for (ExtGWTWMRPCEvent rpcEvent : messages) {
@@ -266,7 +259,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 			
 			@Override
 			public void onMessagePublished(AtmosphereRequestConfig request, AtmosphereResponse response) {
-				List<ExtGWTWMHasSendCommHandler> handlers = getHandlerManager().getHandlers(ExtGWTWMHasSendCommHandler.class, getSessionData().getRoomId());
+				List<ExtGWTWMHasSendCommHandler> handlers = getHandlerManager().getCommSendHandlers(getSessionData().getRoomId());
 				for (int index = 0; index < handlers.size(); index++) {
 					List<ExtGWTWMRPCEvent> messages = response.getMessages();
 					for (ExtGWTWMRPCEvent rpcEvent : messages) {
@@ -322,9 +315,9 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 		return trace;
 	}
 	
-	private ExtGWTWMCommHandlerManager<ExtGWTWMHasCommHandler> getHandlerManager() {
+	private ExtGWTWMCommHandlerManager getHandlerManager() {
 		if (handlerManager == null) {
-			handlerManager = new ExtGWTWMCommHandlerManagerImpl<>();
+			handlerManager = new ExtGWTWMCommHandlerManagerImpl();
 		}
 		return handlerManager;
 	}

@@ -54,7 +54,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 		if (broadcaster != null) {
 			Object msg = atResource.getRequest().getAttribute(Constants.MESSAGE_OBJECT);
 			if (msg != null) {    	 
-				broadcaster.broadcast(msg);  
+				broadcaster.broadcast(msg);
 			} else {
 				atResource.setBroadcaster(broadcaster);
 				atResource.suspend();
