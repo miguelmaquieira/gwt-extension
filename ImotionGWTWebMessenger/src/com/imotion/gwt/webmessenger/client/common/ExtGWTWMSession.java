@@ -1,4 +1,4 @@
-package com.imotion.gwt.webmessenger.client.session;
+package com.imotion.gwt.webmessenger.client.common;
 
 import java.util.Date;
 

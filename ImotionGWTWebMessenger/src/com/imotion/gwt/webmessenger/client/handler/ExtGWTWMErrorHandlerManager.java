@@ -11,5 +11,4 @@ public interface ExtGWTWMErrorHandlerManager {
 	public void removeErrorHandler(String roomId, ExtGWTWMHasErrorHandler handler);
 	
 	public List<ExtGWTWMHasErrorHandler> getErrorHandlers(String roomId);
-
 }
