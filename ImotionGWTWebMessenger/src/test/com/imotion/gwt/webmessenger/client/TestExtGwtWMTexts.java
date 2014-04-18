@@ -30,8 +30,22 @@ public interface TestExtGwtWMTexts extends Constants {
 	
 	@DefaultStringValue("Disconect")
 	String button_disconect_text();
-
 	
+	@DefaultStringValue("Connection status:")
+	String status_label_text();
+	
+	@DefaultStringValue("Waiting connection...")
+	String status_message_label_waiting_connection_text();
+	
+	@DefaultStringValue("Waiting messages...")
+	String status_message_label_waiting_messages_text();
+	
+	@DefaultStringValue("Connection closed...")
+	String status_message_label_connection_closed_text();
+	
+	@DefaultStringValue("Connection open...")
+	String status_message_label_connection_open_text();
+
 	@DefaultStringValue("Connection opened")
 	String connection_opened_text();
 	

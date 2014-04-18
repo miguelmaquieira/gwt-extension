@@ -8,6 +8,6 @@ public class TestExtGWTWMEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
-		rootPanel.add(new TestExtGWTWMChat());
+		rootPanel.add(new TestExtGWTWMChatRoom());
 	}
 }
