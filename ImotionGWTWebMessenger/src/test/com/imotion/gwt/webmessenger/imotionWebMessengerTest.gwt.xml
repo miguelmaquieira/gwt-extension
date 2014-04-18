@@ -12,7 +12,7 @@
 	
 	<inherits name="org.atmosphere.gwt20.AtmosphereGwt20" />
 
-	<replace-with class="com.imotion.gwt.webmessenger.client.comm.atmosphere.ExtGWTWMCommCSAtmosphere">
+	<replace-with class="com.imotion.gwt.webmessenger.client.comm.cs.atmosphere.ExtGWTWMCSAtmosphere">
 	  <when-type-is class="com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS" />
 	</replace-with>
     <set-property name="locale" value="default"/>

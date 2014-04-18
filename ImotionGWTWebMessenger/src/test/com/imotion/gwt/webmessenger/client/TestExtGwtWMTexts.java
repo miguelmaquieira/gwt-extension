@@ -55,7 +55,7 @@ public interface TestExtGwtWMTexts extends Constants {
 	@DefaultStringValue("Connection closed")
 	String connection_closed_text();
 	
-	@DefaultStringValue("Waiting instructions...")
+	@DefaultStringValue("Waiting orders...")
 	String chat_message_panel_waiting_label_text();
 	
 	@DefaultStringValue("Listening activated. Waiting new messages...")

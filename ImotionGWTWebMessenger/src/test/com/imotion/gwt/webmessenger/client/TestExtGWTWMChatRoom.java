@@ -64,9 +64,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				if (commCS != null) {
 					if (chatMessagePanel.isListeningCommEvents()) {
 						chatMessagePanel.setMessage(TEXTS.chat_message_panel_not_listening_label_text());
-						commCS.removeCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+						commCS.getCommHandlerWrapper().removeCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
 					} else {
-						commCS.addCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+						commCS.getCommHandlerWrapper().addCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
 						chatMessagePanel.setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
 					}
 				}
@@ -245,14 +245,14 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			if (commCS == null) {
 				commCS = GWT.create(ExtGWTWMCommCS.class);
 				commCS.init(nickname, roomname);
-				commCS.addCommReceiveHandler(roomname, this);
-				commCS.addCommHandler(roomname, statusPanel);
+				commCS.getCommHandlerWrapper().addCommReceiveHandler(roomname, this);
+				commCS.getCommHandlerWrapper().addCommHandler(roomname, statusPanel);
 			} else {
 				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
 					commCS.disconnect();
 					commCS.init(nickname, roomname);
-					commCS.addCommReceiveHandler(roomname, this);
-					commCS.addCommHandler(roomname, statusPanel);
+					commCS.getCommHandlerWrapper().addCommReceiveHandler(roomname, this);
+					commCS.getCommHandlerWrapper().addCommHandler(roomname, statusPanel);
 				}
 			}
 			return commCS;

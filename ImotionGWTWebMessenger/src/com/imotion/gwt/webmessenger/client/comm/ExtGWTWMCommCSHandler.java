@@ -4,7 +4,6 @@ import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.session.ExtGWTWMSession;
 
 public interface ExtGWTWMCommCSHandler {
 
@@ -27,6 +26,4 @@ public interface ExtGWTWMCommCSHandler {
 	public void addCommCloseHandler(ExtGWTWMHasCloseCommHandler handler);
 	public void removeCommCloseHandler(String roomId, ExtGWTWMHasCloseCommHandler handler);
 	public void removeCommCloseHandler(ExtGWTWMHasCloseCommHandler handler);
-	
-	public ExtGWTWMSession getSessionData();
 }
