@@ -6,7 +6,6 @@ import org.atmosphere.gwt20.client.Atmosphere;
 import org.atmosphere.gwt20.client.AtmosphereCloseHandler;
 import org.atmosphere.gwt20.client.AtmosphereErrorHandler;
 import org.atmosphere.gwt20.client.AtmosphereMessageHandler;
-import org.atmosphere.gwt20.client.AtmosphereMessagePublishedHandler;
 import org.atmosphere.gwt20.client.AtmosphereOpenHandler;
 import org.atmosphere.gwt20.client.AtmosphereReconnectHandler;
 import org.atmosphere.gwt20.client.AtmosphereReopenHandler;
@@ -255,10 +254,10 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 			}
 		});
 		
-		rpcRequestConfig.setMessagePublishedHandler(new AtmosphereMessagePublishedHandler() {
+		rpcRequestConfig.setLocalMessageHandler(new AtmosphereMessageHandler() {
 			
 			@Override
-			public void onMessagePublished(AtmosphereRequestConfig request, AtmosphereResponse response) {
+			public void onMessage(AtmosphereResponse response) {
 				List<ExtGWTWMHasSendCommHandler> handlers = getHandlerManager().getCommSendHandlers(getSessionData().getRoomId());
 				for (int index = 0; index < handlers.size(); index++) {
 					List<ExtGWTWMRPCEvent> messages = response.getMessages();

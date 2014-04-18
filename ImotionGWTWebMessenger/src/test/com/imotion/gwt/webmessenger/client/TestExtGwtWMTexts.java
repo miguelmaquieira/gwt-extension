@@ -43,6 +43,9 @@ public interface TestExtGwtWMTexts extends Constants {
 	@DefaultStringValue("Connection closed...")
 	String status_message_label_connection_closed_text();
 	
+	@DefaultStringValue("Message send: ")
+	String status_message_label_message_sent_text();
+	
 	@DefaultStringValue("Connection open...")
 	String status_message_label_connection_open_text();
 

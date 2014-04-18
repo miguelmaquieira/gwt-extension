@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -29,7 +28,7 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasSendCommHandler;
 public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler, ExtGWTWMHasSendCommHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
-	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat(PredefinedFormat.TIME_LONG);
+	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss");
 	
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;
@@ -232,16 +231,14 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				commCS.init(nickname, roomname);
 				commCS.addCommSendHandler(roomname, this);
 				commCS.addCommReceiveHandler(roomname, this);
-				commCS.addCommOpenHandler(roomname, statusPanel);
-				commCS.addCommCloseHandler(roomname, statusPanel);
+				commCS.addCommHandler(roomname, statusPanel);
 			} else {
 				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
 					commCS.disconnect();
 					commCS.init(nickname, roomname);
 					commCS.addCommSendHandler(roomname, this);
 					commCS.addCommReceiveHandler(roomname, this);
-					commCS.addCommOpenHandler(roomname, statusPanel);
-					commCS.addCommCloseHandler(roomname, statusPanel);
+					commCS.addCommHandler(roomname, statusPanel);
 				}
 			}
 			return commCS;

@@ -8,10 +8,9 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
 
-public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHasCloseCommHandler, ExtGWTWMHasOpenCommHandler {
+public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMCommHandler {
 	
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	
@@ -53,16 +52,51 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 	public void handleConnectionOpened() {
 		connectionLed.setUrl("images/connection_on.png");
 		statusMessageLabel.setText(TEXTS.status_message_label_connection_open_text());
-		Timer timer = new Timer() {
+		Timer timerText = new Timer() {
 			public void run() {
 				statusMessageLabel.setText(TEXTS.status_message_label_waiting_messages_text());
+				statusMessageLabel.removeStyleName("extgwt-textTransicion");
 			}
 		};
-		timer.schedule(5000);
+		timerText.schedule(5000);
+		
+		Timer timerTransition = new Timer() {
+			public void run() {
+				statusMessageLabel.addStyleName("extgwt-textTransicion");
+			}
+		};
+		timerTransition.schedule(2000);
 	}
 
 	@Override
 	public void handleConnectionClosed() {
 		connectionLed.setUrl("images/connection_off.png");
+		statusMessageLabel.setText(TEXTS.status_message_label_connection_closed_text());
+		Timer timerText = new Timer() {
+			public void run() {
+				statusMessageLabel.setText(TEXTS.status_message_label_waiting_connection_text());
+				statusMessageLabel.removeStyleName("extgwt-textTransicion");
+			}
+		};
+		timerText.schedule(5000);
+		
+		Timer timerTransition = new Timer() {
+			public void run() {
+				statusMessageLabel.addStyleName("extgwt-textTransicion");
+			}
+		};
+		timerTransition.schedule(2000);
+	}
+
+	@Override
+	public void handleSendMessage(String message, long timestamp, String sender) {
+		connectionLed.setUrl("images/ajax-loader.gif");
+		statusMessageLabel.setText(TEXTS.status_message_label_message_sent_text() + message);
+	}
+
+	@Override
+	public void handleReceivedMessage(String message, long timstamp, String sender) {
+		connectionLed.setUrl("images/connection_on.png");
+		statusMessageLabel.setText(TEXTS.status_message_label_waiting_messages_text());
 	}
 }
