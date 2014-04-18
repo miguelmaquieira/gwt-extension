@@ -13,7 +13,6 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasSendCommHandler;
 
 public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManager {
 	
@@ -76,24 +75,6 @@ public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManage
 					ExtGWTWMHasCommHandler handler = iter.next();
 					if (handler instanceof ExtGWTWMHasCloseCommHandler || handler instanceof ExtGWTWMCommHandler) {
 						handlerList.add((ExtGWTWMHasCloseCommHandler)handler);
-					}
-				}
-			}
-		}
-		return handlerList;
-	}
-
-	@Override
-	public List<ExtGWTWMHasSendCommHandler> getCommSendHandlers(String roomId) {
-		List<ExtGWTWMHasSendCommHandler> handlerList = new ArrayList<>();
-		if (roomId != null) {
-			Stack<ExtGWTWMHasCommHandler> stack = getStack(roomId);
-			if (stack != null) {
-				Iterator<ExtGWTWMHasCommHandler> iter = stack.iterator();
-				while (iter.hasNext()) {
-					ExtGWTWMHasCommHandler handler = iter.next();
-					if (handler instanceof ExtGWTWMHasSendCommHandler || handler instanceof ExtGWTWMCommHandler) {
-						handlerList.add((ExtGWTWMHasSendCommHandler)handler);
 					}
 				}
 			}

@@ -19,11 +19,6 @@ public interface ExtGWTWMCommCSHandler {
 	public void removeCommReceiveHandler(String roomId, ExtGWTWMHasReceiveCommHandler handler);
 	public void removeCommReceiveHandler(ExtGWTWMHasReceiveCommHandler handler);
 	
-	public void addCommSendHandler(String roomId, ExtGWTWMHasSendCommHandler handler);
-	public void addCommSendHandler(ExtGWTWMHasSendCommHandler handler);
-	public void removeCommSendHandler(String roomId, ExtGWTWMHasSendCommHandler handler);
-	public void removeCommSendHandler(ExtGWTWMHasSendCommHandler handler);
-	
 	public void addCommCloseHandler(String roomId, ExtGWTWMHasCloseCommHandler handler);
 	public void addCommCloseHandler(ExtGWTWMHasCloseCommHandler handler);
 	public void removeCommCloseHandler(String roomId, ExtGWTWMHasCloseCommHandler handler);

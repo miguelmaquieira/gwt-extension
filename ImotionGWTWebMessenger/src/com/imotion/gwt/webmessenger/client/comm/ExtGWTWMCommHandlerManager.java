@@ -12,6 +12,5 @@ public interface ExtGWTWMCommHandlerManager {
 	
 	public List<ExtGWTWMHasOpenCommHandler> getCommOpenHandlers(String roomId);
 	public List<ExtGWTWMHasCloseCommHandler> getCommCloseHandlers(String roomId);
-	public List<ExtGWTWMHasSendCommHandler> getCommSendHandlers(String roomId);
 	public List<ExtGWTWMHasReceiveCommHandler> getCommReceiveHandlers(String roomId);
 }

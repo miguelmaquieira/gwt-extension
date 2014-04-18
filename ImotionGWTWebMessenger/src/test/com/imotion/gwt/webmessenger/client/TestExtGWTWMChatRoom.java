@@ -23,9 +23,8 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasSendCommHandler;
 
-public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler, ExtGWTWMHasSendCommHandler {
+public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss");
@@ -205,12 +204,6 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	 **********************************************************************/
 
 	@Override
-	public void handleSendMessage(String message, long timestamp, String sender) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void handleReceivedMessage(String message, long timestamp, String sender) {
 		String time = format.format(new Date(timestamp));
 		String newMessage = sender	+ " (" + time + ")" + ": " + message;
@@ -229,14 +222,12 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			if (commCS == null) {
 				commCS = GWT.create(ExtGWTWMCommCS.class);
 				commCS.init(nickname, roomname);
-				commCS.addCommSendHandler(roomname, this);
 				commCS.addCommReceiveHandler(roomname, this);
 				commCS.addCommHandler(roomname, statusPanel);
 			} else {
 				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
 					commCS.disconnect();
 					commCS.init(nickname, roomname);
-					commCS.addCommSendHandler(roomname, this);
 					commCS.addCommReceiveHandler(roomname, this);
 					commCS.addCommHandler(roomname, statusPanel);
 				}

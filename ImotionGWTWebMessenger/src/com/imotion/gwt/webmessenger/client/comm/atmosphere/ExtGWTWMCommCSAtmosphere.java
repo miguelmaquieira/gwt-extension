@@ -24,7 +24,6 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandlerManager;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasSendCommHandler;
 import com.imotion.gwt.webmessenger.client.comm.impl.ExtGWTWMCommHandlerManagerImpl;
 import com.imotion.gwt.webmessenger.client.session.ExtGWTWMSession;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
@@ -153,26 +152,6 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 	}
 
 	@Override
-	public void addCommSendHandler(String roomId, ExtGWTWMHasSendCommHandler handler) {
-		getHandlerManager().addCommHandler(roomId, handler);
-	}
-
-	@Override
-	public void addCommSendHandler(ExtGWTWMHasSendCommHandler handler) {
-		getHandlerManager().addCommHandler(handler);
-	}
-
-	@Override
-	public void removeCommSendHandler(String roomId, ExtGWTWMHasSendCommHandler handler) {
-		getHandlerManager().removeCommHandler(roomId, handler);
-	}
-
-	@Override
-	public void removeCommSendHandler(ExtGWTWMHasSendCommHandler handler) {
-		getHandlerManager().removeCommHandler(handler);
-	}
-
-	@Override
 	public void addCommCloseHandler(String roomId, ExtGWTWMHasCloseCommHandler handler) {
 		getHandlerManager().addCommHandler(roomId, handler);
 	}
@@ -249,23 +228,6 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 						long timestamp 	= rpcEvent.getTimestamp();
 						String sender 	= rpcEvent.getSenderId();
 						handlers.get(index).handleReceivedMessage(message, timestamp, sender);
-					}
-				}
-			}
-		});
-		
-		rpcRequestConfig.setLocalMessageHandler(new AtmosphereMessageHandler() {
-			
-			@Override
-			public void onMessage(AtmosphereResponse response) {
-				List<ExtGWTWMHasSendCommHandler> handlers = getHandlerManager().getCommSendHandlers(getSessionData().getRoomId());
-				for (int index = 0; index < handlers.size(); index++) {
-					List<ExtGWTWMRPCEvent> messages = response.getMessages();
-					for (ExtGWTWMRPCEvent rpcEvent : messages) {
-						String message 	= rpcEvent.getMessage();
-						long timestamp 	= rpcEvent.getTimestamp();
-						String sender 	= rpcEvent.getSenderId();
-						handlers.get(index).handleSendMessage(message, timestamp, sender);
 					}
 				}
 			}

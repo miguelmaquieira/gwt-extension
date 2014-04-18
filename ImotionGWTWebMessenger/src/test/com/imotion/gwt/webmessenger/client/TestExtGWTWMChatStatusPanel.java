@@ -89,12 +89,6 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMCo
 	}
 
 	@Override
-	public void handleSendMessage(String message, long timestamp, String sender) {
-		connectionLed.setUrl("images/ajax-loader.gif");
-		statusMessageLabel.setText(TEXTS.status_message_label_message_sent_text() + message);
-	}
-
-	@Override
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		connectionLed.setUrl("images/connection_on.png");
 		statusMessageLabel.setText(TEXTS.status_message_label_waiting_messages_text());
