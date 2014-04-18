@@ -1,4 +1,4 @@
-package com.imotion.gwt.webmessenger.client.comm.impl;
+package com.imotion.gwt.webmessenger.client.handler.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandlerManager;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHandlerManager;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManager {
+public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	
 	private Map<String, Stack<ExtGWTWMHasCommHandler>> mapHandlers;
 	
@@ -55,7 +55,7 @@ public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManage
 				Iterator<ExtGWTWMHasCommHandler> iter = stack.iterator();
 				while (iter.hasNext()) {
 					ExtGWTWMHasCommHandler handler = iter.next();
-					if (handler instanceof ExtGWTWMHasOpenCommHandler || handler instanceof ExtGWTWMCommHandler) {
+					if (handler instanceof ExtGWTWMHasOpenCommHandler || handler instanceof ExtGWTWMHasAllCommHandler) {
 						handlerList.add((ExtGWTWMHasOpenCommHandler)handler);
 					}
 				}
@@ -73,7 +73,7 @@ public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManage
 				Iterator<ExtGWTWMHasCommHandler> iter = stack.iterator();
 				while (iter.hasNext()) {
 					ExtGWTWMHasCommHandler handler = iter.next();
-					if (handler instanceof ExtGWTWMHasCloseCommHandler || handler instanceof ExtGWTWMCommHandler) {
+					if (handler instanceof ExtGWTWMHasCloseCommHandler || handler instanceof ExtGWTWMHasAllCommHandler) {
 						handlerList.add((ExtGWTWMHasCloseCommHandler)handler);
 					}
 				}
@@ -91,7 +91,7 @@ public class ExtGWTWMCommHandlerManagerImpl implements ExtGWTWMCommHandlerManage
 				Iterator<ExtGWTWMHasCommHandler> iter = stack.iterator();
 				while (iter.hasNext()) {
 					ExtGWTWMHasCommHandler handler = iter.next();
-					if (handler instanceof ExtGWTWMHasReceiveCommHandler || handler instanceof ExtGWTWMCommHandler) {
+					if (handler instanceof ExtGWTWMHasReceiveCommHandler || handler instanceof ExtGWTWMHasAllCommHandler) {
 						handlerList.add((ExtGWTWMHasReceiveCommHandler)handler);
 					}
 				}

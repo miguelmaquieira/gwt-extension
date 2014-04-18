@@ -3,6 +3,7 @@ package test.com.imotion.gwt.webmessenger.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -10,7 +11,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ToggleButton;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
 public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMHasReceiveCommHandler {
 	
@@ -39,6 +40,14 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	@Override
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		setMessage(sender + ": " + message);
+		messageLabel.addStyleName("extgwt-textTransicion");
+		Timer timerText = new Timer() {
+			public void run() {
+				setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
+				messageLabel.removeStyleName("extgwt-textTransicion");
+			}
+		};
+		timerText.schedule(4000);
 	}
 	
 	public void setMessage(String message) {

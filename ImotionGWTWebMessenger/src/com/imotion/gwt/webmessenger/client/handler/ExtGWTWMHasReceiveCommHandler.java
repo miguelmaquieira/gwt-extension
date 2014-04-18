@@ -1,4 +1,4 @@
-package com.imotion.gwt.webmessenger.client.comm;
+package com.imotion.gwt.webmessenger.client.handler;
 
 
 public interface ExtGWTWMHasReceiveCommHandler extends ExtGWTWMHasCommHandler {

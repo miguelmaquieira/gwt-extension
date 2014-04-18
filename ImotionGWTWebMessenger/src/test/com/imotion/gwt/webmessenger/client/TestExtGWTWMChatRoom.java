@@ -22,12 +22,12 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
 public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
-	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("yyyy-MM-dd HH:mm:ss");
+	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
 	
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;

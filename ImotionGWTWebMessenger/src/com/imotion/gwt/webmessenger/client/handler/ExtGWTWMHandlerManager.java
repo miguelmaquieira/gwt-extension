@@ -1,8 +1,8 @@
-package com.imotion.gwt.webmessenger.client.comm;
+package com.imotion.gwt.webmessenger.client.handler;
 
 import java.util.List;
 
-public interface ExtGWTWMCommHandlerManager {
+public interface ExtGWTWMHandlerManager {
 	
 	public void addCommHandler(ExtGWTWMHasCommHandler handler);
 	public void addCommHandler(String roomId, ExtGWTWMHasCommHandler handler);

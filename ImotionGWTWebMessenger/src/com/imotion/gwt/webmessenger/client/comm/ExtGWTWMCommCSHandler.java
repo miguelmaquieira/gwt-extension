@@ -1,13 +1,17 @@
 package com.imotion.gwt.webmessenger.client.comm;
 
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 import com.imotion.gwt.webmessenger.client.session.ExtGWTWMSession;
 
 public interface ExtGWTWMCommCSHandler {
 
-	public void addCommHandler(String roomId, ExtGWTWMCommHandler handler);
-	public void addCommHandler(ExtGWTWMCommHandler handler);
-	public void removeCommHandler(String roomId, ExtGWTWMCommHandler handler);
-	public void removeCommHandler(ExtGWTWMCommHandler handler);
+	public void addCommHandler(String roomId, ExtGWTWMHasAllCommHandler handler);
+	public void addCommHandler(ExtGWTWMHasAllCommHandler handler);
+	public void removeCommHandler(String roomId, ExtGWTWMHasAllCommHandler handler);
+	public void removeCommHandler(ExtGWTWMHasAllCommHandler handler);
 	
 	public void addCommOpenHandler(String roomId, ExtGWTWMHasOpenCommHandler handler);
 	public void addCommOpenHandler(ExtGWTWMHasOpenCommHandler handler);

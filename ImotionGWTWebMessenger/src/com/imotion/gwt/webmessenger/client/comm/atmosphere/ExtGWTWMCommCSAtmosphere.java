@@ -19,12 +19,12 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandlerManager;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasCloseCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasOpenCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.comm.impl.ExtGWTWMCommHandlerManagerImpl;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHandlerManager;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerImpl;
 import com.imotion.gwt.webmessenger.client.session.ExtGWTWMSession;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
@@ -32,7 +32,7 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 
 	private ExtGWTWMSession 			sessionData;
 	
-	private ExtGWTWMCommHandlerManagerImpl handlerManager;
+	private ExtGWTWMHandlerManagerImpl handlerManager;
 
 	private Atmosphere 				atmosphere ;
 	private AtmosphereRequest 		rpcRequest;
@@ -72,11 +72,6 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 	}
 
 	@Override
-	public void autoReconnection(long timeframe) {
-		// TODO Auto-generated method stub
-	}
-	
-	@Override
 	public void connect() {
 		rpcRequest = atmosphere.subscribe(rpcRequestConfig);
 	}
@@ -102,12 +97,12 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 	 **********************************************************************/
 	
 	@Override
-	public void removeCommHandler(String roomId, ExtGWTWMCommHandler handler) {
+	public void removeCommHandler(String roomId, ExtGWTWMHasAllCommHandler handler) {
 		getHandlerManager().removeCommHandler(roomId, handler);		
 	}
 
 	@Override
-	public void removeCommHandler(ExtGWTWMCommHandler handler) {
+	public void removeCommHandler(ExtGWTWMHasAllCommHandler handler) {
 		getHandlerManager().removeCommHandler(handler);
 	}
 
@@ -172,12 +167,12 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 	}
 	
 	@Override
-	public void addCommHandler(String roomId, ExtGWTWMCommHandler handler) {
+	public void addCommHandler(String roomId, ExtGWTWMHasAllCommHandler handler) {
 		getHandlerManager().addCommHandler(roomId, handler);
 	}
 
 	@Override
-	public void addCommHandler(ExtGWTWMCommHandler handler) {
+	public void addCommHandler(ExtGWTWMHasAllCommHandler handler) {
 		getHandlerManager().addCommHandler(handler);
 	}
 	
@@ -276,9 +271,9 @@ public class ExtGWTWMCommCSAtmosphere implements ExtGWTWMCommCS, ExtGWTWMCommCSH
 		return trace;
 	}
 	
-	private ExtGWTWMCommHandlerManager getHandlerManager() {
+	private ExtGWTWMHandlerManager getHandlerManager() {
 		if (handlerManager == null) {
-			handlerManager = new ExtGWTWMCommHandlerManagerImpl();
+			handlerManager = new ExtGWTWMHandlerManagerImpl();
 		}
 		return handlerManager;
 	}

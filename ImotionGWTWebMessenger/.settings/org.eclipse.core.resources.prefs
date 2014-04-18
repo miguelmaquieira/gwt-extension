@@ -3,5 +3,5 @@
 >>>>>>>=refs/remotes/origin/Issue_0100
 eclipse.preferences.version=1
 encoding//src/com/imotion/gwt/webmessenger/client/comm/atmosphere/ExtGWTWMCommCSAtmosphere.java=UTF-8
-encoding//src/com/imotion/gwt/webmessenger/client/comm/impl/ExtGWTWMCommHandlerManagerImpl.java=UTF-8
+encoding//src/com/imotion/gwt/webmessenger/client/handler/impl/ExtGWTWMHandlerManagerImpl.java=UTF-8
 encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWMChatRoom.java=UTF-8

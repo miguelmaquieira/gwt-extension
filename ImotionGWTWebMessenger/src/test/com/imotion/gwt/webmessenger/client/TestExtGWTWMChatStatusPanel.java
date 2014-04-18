@@ -8,9 +8,9 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
 
-public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMCommHandler {
+public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHasAllCommHandler {
 	
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	
