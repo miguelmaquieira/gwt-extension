@@ -1,7 +1,7 @@
 .extgwt-webMessengerChatContainer {
 	margin: 0px auto;
 	width: 620px;
-	height: 460px;
+	height: 520px;
 	margin-top: 50px;
 	border: 2px solid #DEDEDE;
 	padding: 10px;
@@ -12,6 +12,24 @@
 .extgwt-webMessengerChatTitle {
 	font-size: 20px;
 	padding: 5px 0px 5px 10px;
+	border-bottom: 1px solid #CECECE;
+}
+
+
+.extgwt-webMessengerChatMessagePanel {
+	width: 100%;
+	margin-top: 10px;
+	padding-left: 10px;
+	font-size: 14px;
+	color: #ABABAB;
+}
+
+.extgwt-webMessengerChatMessagePanel .gwt-label {
+	
+}
+
+.extgwt-webMessengerChatMessagePanel .gwt-ToggleButton {
+	cursor: pointer;
 }
 
 .extgwt-webMessengerChatNorthZone {

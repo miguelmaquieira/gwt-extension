@@ -35,7 +35,8 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
 	
-	private TestExtGWTWMChatStatusPanel statusPanel;
+	private TestExtGWTWMChatStatusPanel 	statusPanel;
+	private TestExtGWTWMChatMessagePanel	chatMessagePanel;
 	
 	private ExtGWTWMCommCS commCS;
 
@@ -51,6 +52,26 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		Label title = new Label();
 		titlePanel.setWidget(title);
 		title.setText(TEXTS.chat_messenger_title_text());
+		
+		/// Message panel
+		chatMessagePanel = new TestExtGWTWMChatMessagePanel();
+		contentPanel.add(chatMessagePanel);
+		chatMessagePanel.setEnabledButton(false);
+		chatMessagePanel.addButtonClickhandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				if (commCS != null) {
+					if (chatMessagePanel.isListeningCommEvents()) {
+						chatMessagePanel.setMessage(TEXTS.chat_message_panel_not_listening_label_text());
+						commCS.removeCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+					} else {
+						commCS.addCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+						chatMessagePanel.setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
+					}
+				}
+			}
+		});
 
 		// North zone
 		HorizontalPanel northZone = new HorizontalPanel();
@@ -122,6 +143,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				if (comm != null) {
 					comm.connect();
 					textMessage.setEnabled(true);
+					chatMessagePanel.setEnabledButton(true);
 				} else {
 					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
 				}
@@ -140,6 +162,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 					commCS.disconnect();
 					commCS = null;
 					textMessage.setEnabled(false);
+					chatMessagePanel.setEnabledButton(false);
 				}
 			}
 		});
@@ -194,7 +217,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			}
 		});
 		
-		/// Dashboard panel
+		/// status panel
 		statusPanel = new TestExtGWTWMChatStatusPanel();
 		contentPanel.add(statusPanel);
 	}
