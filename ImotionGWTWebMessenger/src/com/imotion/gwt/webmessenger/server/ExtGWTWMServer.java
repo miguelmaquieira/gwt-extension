@@ -2,8 +2,6 @@ package com.imotion.gwt.webmessenger.server;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpSession;
-
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.AtmosphereResourceEvent;
@@ -54,7 +52,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 	private void broadcast(AtmosphereResource atResource) throws IOException {
 		// query params
 		String roomId 	= atResource.getRequest().getParameter("roomId");
-		String userId 		= atResource.getRequest().getParameter("userId");
+		//String userId 		= atResource.getRequest().getParameter("userId");
 		
 		// get the broadcaster
 		Broadcaster broadCaster = DefaultBroadcasterFactory.getDefault().lookup(roomId);

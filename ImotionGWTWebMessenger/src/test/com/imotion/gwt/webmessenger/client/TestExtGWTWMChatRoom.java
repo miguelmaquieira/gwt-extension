@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
 public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
@@ -39,7 +39,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	private TestExtGWTWMChatStatusPanel 	statusPanel;
 	private TestExtGWTWMChatMessagePanel	chatMessagePanel;
 	
-	private ExtGWTWMCommCS commCS;
+	private ExtGWTWMCommCSConnection connectionCS;
 
 	public TestExtGWTWMChatRoom() {
 		FlowPanel contentPanel = new FlowPanel();
@@ -62,12 +62,12 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				if (commCS != null) {
+				if (connectionCS != null) {
 					if (chatMessagePanel.isListeningCommEvents()) {
 						chatMessagePanel.setMessage(TEXTS.chat_message_panel_not_listening_label_text());
-						commCS.getCommHandlerWrapper().removeCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+						connectionCS.getCommHandlerWrapper().removeCommReceiveHandler(chatMessagePanel);
 					} else {
-						commCS.getCommHandlerWrapper().addCommReceiveHandler(commCS.getSessionData().getRoomId(), chatMessagePanel);
+						connectionCS.getCommHandlerWrapper().addCommReceiveHandler(chatMessagePanel);
 						chatMessagePanel.setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
 					}
 				}
@@ -140,9 +140,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
 				String roomId = textRoomName.getText();
-				ExtGWTWMCommCS comm = getCommCS(userId, roomId);
-				if (comm != null) {
-					comm.connect();
+				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+				if (connection != null) {
+					connection.connect();
 					textMessage.setEnabled(true);
 					chatMessagePanel.setEnabledButton(true);
 				} else {
@@ -159,9 +159,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if (commCS != null) {
-					commCS.disconnect();
-					commCS = null;
+				if (connectionCS != null) {
+					connectionCS.disconnect();
+					connectionCS = null;
 					textMessage.setEnabled(false);
 					chatMessagePanel.setEnabledButton(false);
 				}
@@ -186,9 +186,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
 					String userId = textNickName.getText();
 					String roomId = textRoomName.getText();
-					ExtGWTWMCommCS comm = getCommCS(userId, roomId);
-					if (comm != null) {
-						comm.sendMessage(textMessage.getText());
+					ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+					if (connection != null) {
+						connection.sendMessage(textMessage.getText());
 						textMessage.setText("");
 					} else {
 						Window.alert("No se ha podido enviar el mensaje. Parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
@@ -208,9 +208,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
 				String roomId = textRoomName.getText();
-				ExtGWTWMCommCS comm = getCommCS(userId, roomId);
-				if (comm != null) {
-					comm.sendMessage(textMessage.getText());
+				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+				if (connection != null) {
+					connection.sendMessage(textMessage.getText());
 					textMessage.setText("");
 				} else {
 					Window.alert("No se ha podido enviar el mensaje. Parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
@@ -238,25 +238,17 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 		
-	private ExtGWTWMCommCS getCommCS(String nickname, String roomname) {
+	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
 		if (nickname == null || nickname.length() == 0 || roomname == null || roomname.length() == 0) {
 			Window.alert("Debes informar: 'nickname' y 'roomname'");
 			return null;
 		} else  {
-			if (commCS == null) {
-				commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
-				commCS.init(nickname, roomname);
-				commCS.getCommHandlerWrapper().addCommReceiveHandler(roomname, this);
-				commCS.getCommHandlerWrapper().addCommHandler(roomname, statusPanel);
-			} else {
-				if (!nickname.equals(commCS.getSessionData().getUserId()) || !roomname.equals(commCS.getSessionData().getRoomId())) {
-					commCS.disconnect();
-					commCS.init(nickname, roomname);
-					commCS.getCommHandlerWrapper().addCommReceiveHandler(roomname, this);
-					commCS.getCommHandlerWrapper().addCommHandler(roomname, statusPanel);
-				}
+			if (connectionCS == null) {
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
+				connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 			}
-			return commCS;
+			return connectionCS;
 		}
 	}
 	

@@ -21,10 +21,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMMessageTexts;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandlerNew;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMErrorCSHandlerNew;
-import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMCommCSHandlerWrapperNew;
-import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMErrorCSHandlerWrapperNew;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandler;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMErrorCSHandler;
+import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMCommCSHandlerWrapper;
+import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMErrorCSHandlerWrapper;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMSession;
@@ -34,7 +34,6 @@ import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
-import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerImpl;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
 public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection {
@@ -43,10 +42,8 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 	private ExtGWTWMSession 			sessionData;
 	
-	private ExtGWTWMHandlerManager 		handlerManager;
-	
-	private ExtGWTWMCommCSHandlerNew		commHandler;
-	private ExtGWTWMErrorCSHandlerNew		errorHandler;
+	private ExtGWTWMCommCSHandler		commHandler;
+	private ExtGWTWMErrorCSHandler		errorHandler;
 
 	private Atmosphere 				atmosphere ;
 	private AtmosphereRequest 		rpcRequest;
@@ -59,9 +56,8 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	}
 	
 	public ExtGWTWMCSConnectionAtmosphere(ExtGWTWMHandlerManager handlerManager, String roomId, String userId) {
-		this.handlerManager = handlerManager;
 		this.sessionData = new ExtGWTWMSession(roomId, userId);
-		initAtmosphere();
+		initConnection(handlerManager, roomId);
 	}
 	
 	/**********************************************************************
@@ -113,29 +109,21 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	}
 	
 	@Override
-	public ExtGWTWMCommCSHandlerNew getCommHandlerWrapper() {
-		if (commHandler == null) {
-			commHandler = new ExtGWTWMCommCSHandlerWrapperNew(getHandlerManager());
-		}
+	public ExtGWTWMCommCSHandler getCommHandlerWrapper() {
 		return commHandler;
 	}
 
 	@Override
-	public ExtGWTWMErrorCSHandlerNew getErrorHandlerWrapper() {
-		if (errorHandler == null) {
-			errorHandler = new ExtGWTWMErrorCSHandlerWrapperNew(getHandlerManager());
-		}
+	public ExtGWTWMErrorCSHandler getErrorHandlerWrapper() {
 		return errorHandler;
 	}
 	
 	@Override
-	public void renameUser(String userId) {
-		getSessionData().setUserId(userId);
-	}
-	
-	@Override
 	public void release() {
-		// TODO Auto-generated method stub	
+		errorHandler = null;
+		commHandler = null;
+		disconnect();
+		atmosphere = null;
 	}
 	
 	/**********************************************************************
@@ -144,7 +132,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	
 	private void handlerError(ExtGWTWMError error) {
 		if (error != null) {
-			List<ExtGWTWMHasErrorHandler> errorHandlers = getHandlerManager().getErrorHandlers(getSessionData().getRoomId());
+			List<ExtGWTWMHasErrorHandler> errorHandlers = getErrorHandlerWrapper().getErrorHandlers();
 			for (ExtGWTWMHasErrorHandler errorHandler: errorHandlers) {
 				if (errorHandler.getErrorType() == null) {
 					errorHandler.onError(error);
@@ -165,6 +153,12 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 																		ExtGWTWMUtils.getStacktrace(exception));	
 		handlerError(new ExtGWTWMError(TYPE.EXCEPTION, message, exception));
 	}
+	
+	private void initConnection(ExtGWTWMHandlerManager handlerManager, String roomId){
+		errorHandler = new ExtGWTWMErrorCSHandlerWrapper(handlerManager, roomId);
+		commHandler = new ExtGWTWMCommCSHandlerWrapper(handlerManager, roomId);
+		initAtmosphere();
+	}
 
 	private void initAtmosphere() {
 
@@ -182,7 +176,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			
 			@Override
 			public void onOpen(AtmosphereResponse response) {
-				List<ExtGWTWMHasOpenCommHandler> handlersOpen = getHandlerManager().getCommOpenHandlers(getSessionData().getRoomId());
+				List<ExtGWTWMHasOpenCommHandler> handlersOpen = getCommHandlerWrapper().getCommOpenHandlers();
 				for (int index = 0; index < handlersOpen.size(); index++) {
 					handlersOpen.get(index).handleConnectionOpened();
 				}
@@ -193,7 +187,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			
 			@Override
 			public void onClose(AtmosphereResponse response) {
-				List<ExtGWTWMHasCloseCommHandler> handlers = getHandlerManager().getCommCloseHandlers(getSessionData().getRoomId());
+				List<ExtGWTWMHasCloseCommHandler> handlers = getCommHandlerWrapper().getCommCloseHandlers();
 				for (int index = 0; index < handlers.size(); index++) {
 					handlers.get(index).handleConnectionClosed();
 				}
@@ -204,7 +198,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			
 			@Override
 			public void onMessage(AtmosphereResponse response) {
-				List<ExtGWTWMHasReceiveCommHandler> handlers = getHandlerManager().getCommReceiveHandlers(getSessionData().getRoomId());
+				List<ExtGWTWMHasReceiveCommHandler> handlers = getCommHandlerWrapper().getCommReceiveHandlers();
 				for (int index = 0; index < handlers.size(); index++) {
 					List<ExtGWTWMRPCEvent> messages = response.getMessages();
 					for (ExtGWTWMRPCEvent rpcEvent : messages) {
@@ -244,12 +238,5 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 				Window.alert("ReConnect");
 			}
 		});
-	}
-	
-	private ExtGWTWMHandlerManager getHandlerManager() {
-		if (handlerManager == null) {
-			handlerManager = new ExtGWTWMHandlerManagerImpl();
-		}
-		return handlerManager;
 	}
 }

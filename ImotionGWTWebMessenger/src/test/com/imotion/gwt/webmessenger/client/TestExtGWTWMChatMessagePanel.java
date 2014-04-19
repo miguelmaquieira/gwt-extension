@@ -18,6 +18,7 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	private final TestExtGwtWMTexts TEXTS = GWT.create(TestExtGwtWMTexts.class);
 	private ToggleButton 	activateButton;
 	private Label 			messageLabel;
+	private Timer 			timerText;
 	
 	public TestExtGWTWMChatMessagePanel() {
 		HorizontalPanel contentPanel = new HorizontalPanel();
@@ -41,7 +42,10 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		setMessage(sender + ": " + message);
 		messageLabel.addStyleName("extgwt-textTransicion");
-		Timer timerText = new Timer() {
+		if (timerText != null && timerText.isRunning()) {
+			timerText.cancel();
+		}
+		timerText = new Timer() {
 			public void run() {
 				setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
 				messageLabel.removeStyleName("extgwt-textTransicion");

@@ -20,19 +20,10 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	private Map<String, Stack<ExtGWTWMHasCommHandler>> mapCommHandlers;
 	private Map<String, Stack<ExtGWTWMHasErrorHandler>> mapErrorHandlers;
 	
-	private final static String DEFAULT_STACK = "DEFAULT_STACK";
-	
 	/**********************************************************************
 	 *                    ExtGWTWMCommHandlerManager					  *
 	 **********************************************************************/
 
-	@Override
-	public void addCommHandler(ExtGWTWMHasCommHandler handler) {
-		Stack<ExtGWTWMHasCommHandler> stack = getCommStack(DEFAULT_STACK);
-		if (!stack.contains(handler)) {
-			stack.add(handler);
-		}
-	}
 
 	@Override
 	public void addCommHandler(String roomId, ExtGWTWMHasCommHandler handler) {
@@ -40,11 +31,6 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 		if (!stack.contains(handler)) {
 			stack.add(handler);
 		}
-	}
-
-	@Override
-	public void removeCommHandler(ExtGWTWMHasCommHandler handler) {
-		getCommStack(DEFAULT_STACK).remove(handler);
 	}
 
 	@Override
@@ -106,17 +92,14 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 		return handlerList;
 	}
 	
+	@Override
+	public void releaseComm(String roomId) {
+		removeCommStack(roomId);
+	}
+	
 	/**********************************************************************
 	 *                    ExtGWTWMCErrorHandlerManager					  *
 	 **********************************************************************/
-	
-	@Override
-	public void addErrorHandler(ExtGWTWMHasErrorHandler handler) {
-		Stack<ExtGWTWMHasErrorHandler> stack = getErrorStack(DEFAULT_STACK);
-		if (!stack.contains(handler)) {
-			stack.add(handler);
-		}
-	}
 
 	@Override
 	public void addErrorHandler(String roomId, ExtGWTWMHasErrorHandler handler) {
@@ -124,11 +107,6 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 		if (!stack.contains(handler)) {
 			stack.add(handler);
 		}
-	}
-
-	@Override
-	public void removeErrorHandler(ExtGWTWMHasErrorHandler handler) {
-		getErrorStack(DEFAULT_STACK).remove(handler);
 	}
 
 	@Override
@@ -141,6 +119,11 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 		Stack<ExtGWTWMHasErrorHandler> stack = getErrorStack(roomId);
 		return new ArrayList<>(stack);
 		
+	}
+	
+	@Override
+	public void releaseError(String roomId) {
+		removeErrorStack(roomId);
 	}
 	
 	/**********************************************************************
@@ -156,11 +139,31 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 		return stack;
 	}
 	
+	private Stack<ExtGWTWMHasCommHandler> removeCommStack(String stackName) {
+		Stack<ExtGWTWMHasCommHandler> stack = getStacksCommMap().get(stackName);
+		if (stack != null) {
+			getStacksCommMap().remove(stack);
+			stack.clear();
+			stack = null;
+		}
+		return stack;
+	}
+	
 	private Stack<ExtGWTWMHasErrorHandler> getErrorStack(String stackName) {
 		Stack<ExtGWTWMHasErrorHandler> stack = getStacksErrorMap().get(stackName);
 		if (stack == null) {
 			stack = new Stack<ExtGWTWMHasErrorHandler>();
 			getStacksErrorMap().put(stackName, stack);
+		}
+		return stack;
+	}
+	
+	private Stack<ExtGWTWMHasErrorHandler> removeErrorStack(String stackName) {
+		Stack<ExtGWTWMHasErrorHandler> stack = getStacksErrorMap().get(stackName);
+		if (stack != null) {
+			getStacksErrorMap().remove(stack);
+			stack.clear();
+			stack = null;
 		}
 		return stack;
 	}
