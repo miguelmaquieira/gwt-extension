@@ -142,7 +142,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 					errorHandler.onError(error);
 				} else {
 					List<TYPE> errorTypeList = Arrays.asList(errorHandler.getErrorType());
-					if (errorTypeList.contains(error.getErrorType()) || error.getErrorType() == TYPE.ALL) {
+					if (errorTypeList.contains(error.getErrorType()) || errorTypeList.contains(TYPE.ALL)) {
 						errorHandler.onError(error);
 					}
 				}
@@ -218,8 +218,8 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		rpcRequestConfig.setErrorHandler(new AtmosphereErrorHandler() {
 			@Override
 			public void onError(AtmosphereResponse response) {
-				// TODO set message
-				String state = response.getState().toString();
+				Window.alert("Error. Response: " + response.toString());
+				String state = response.toString();
 				ExtGWTWMError error = new ExtGWTWMError(TYPE.UNDEFINED, state);
 				handlerError(error);
 			}
@@ -228,7 +228,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		rpcRequestConfig.setTransportFailureHandler(new AtmosphereTransportFailureHandler() {
 			@Override
 			public void onTransportFailure(String errorMsg, AtmosphereRequest request) {
-				Window.alert("Transport failure: " + errorMsg);
 				handlerError(new ExtGWTWMError(TYPE.TRANSPORT, errorMsg));
 			}
 		});

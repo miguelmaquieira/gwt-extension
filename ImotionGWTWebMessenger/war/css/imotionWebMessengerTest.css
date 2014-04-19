@@ -137,6 +137,10 @@
 .extgwt-webMessengerChatStatusPanel #messageStatus  {
 	font-size: 14px;
 	padding-right: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 450px;
 }
 
 .extgwt-textTransition {
@@ -147,6 +151,5 @@
 
 .extgwt-textError {
 	color: #FF0000;
-	font-weight: bold;
-	
+	font-size: 15px !impportant;
 }

@@ -51,12 +51,6 @@ public interface TestExtGwtWMTexts extends Constants {
 	
 	@DefaultStringValue("Transportation failure: ")
 	String status_message_label_connection_transportation_error_text();
-
-	@DefaultStringValue("Connection opened")
-	String connection_opened_text();
-	
-	@DefaultStringValue("Connection closed")
-	String connection_closed_text();
 	
 	@DefaultStringValue("Waiting orders...")
 	String chat_message_panel_waiting_label_text();

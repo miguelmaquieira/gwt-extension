@@ -1,6 +1,7 @@
 package com.imotion.gwt.webmessenger.client.common;
 
 
+
 public class ExtGWTWMError {
 	
 	public enum TYPE {
@@ -63,5 +64,14 @@ public class ExtGWTWMError {
 	}
 	public void setException(Exception exception) {
 		this.exception = exception;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sbError = new StringBuilder();
+			sbError.append("errorType: ").append(getErrorType().toString()).append("\n")
+					.append("message: ").append(getMessage()).append("\n")
+					.append("exception: ").append(exception);
+		return sbError.toString();
 	}
 }
