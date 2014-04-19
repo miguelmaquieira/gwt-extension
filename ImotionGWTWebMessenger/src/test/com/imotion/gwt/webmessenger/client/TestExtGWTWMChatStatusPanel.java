@@ -8,9 +8,12 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasAllCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
 
-public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHasAllCommHandler {
+public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHasAllCommHandler, ExtGWTWMHasErrorHandler {
 	
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	
@@ -52,45 +55,49 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 	public void handleConnectionOpened() {
 		connectionLed.setUrl("images/connection_on.png");
 		statusMessageLabel.setText(TEXTS.status_message_label_connection_open_text());
+		statusMessageLabel.addStyleName("extgwt-textTransition");
+		statusMessageLabel.removeStyleName("extgwt-textError");
 		Timer timerText = new Timer() {
 			public void run() {
 				statusMessageLabel.setText(TEXTS.status_message_label_waiting_messages_text());
-				statusMessageLabel.removeStyleName("extgwt-textTransicion");
+				statusMessageLabel.removeStyleName("extgwt-textTransition");
 			}
 		};
-		timerText.schedule(5000);
-		
-		Timer timerTransition = new Timer() {
-			public void run() {
-				statusMessageLabel.addStyleName("extgwt-textTransicion");
-			}
-		};
-		timerTransition.schedule(2000);
+		timerText.schedule(3000);
 	}
 
 	@Override
 	public void handleConnectionClosed() {
 		connectionLed.setUrl("images/connection_off.png");
 		statusMessageLabel.setText(TEXTS.status_message_label_connection_closed_text());
+		statusMessageLabel.removeStyleName("extgwt-textError");
+		statusMessageLabel.addStyleName("extgwt-textTransition");
 		Timer timerText = new Timer() {
 			public void run() {
 				statusMessageLabel.setText(TEXTS.status_message_label_waiting_connection_text());
-				statusMessageLabel.removeStyleName("extgwt-textTransicion");
+				statusMessageLabel.removeStyleName("extgwt-textTransition");
 			}
 		};
-		timerText.schedule(5000);
-		
-		Timer timerTransition = new Timer() {
-			public void run() {
-				statusMessageLabel.addStyleName("extgwt-textTransicion");
-			}
-		};
-		timerTransition.schedule(2000);
+		timerText.schedule(3000);
 	}
 
 	@Override
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		connectionLed.setUrl("images/connection_on.png");
 		statusMessageLabel.setText(TEXTS.status_message_label_waiting_messages_text());
+	}
+
+	@Override
+	public void onError(ExtGWTWMError error) {
+		if (error.getErrorType() == TYPE.TRANSPORT) {
+			statusMessageLabel.addStyleName("extgwt-textError");
+			String message = TEXTS.status_message_label_connection_transportation_error_text() + error.getMessage();
+			statusMessageLabel.setText(message);
+		}
+	}
+
+	@Override
+	public TYPE[] getErrorType() {
+		return new TYPE[]{ TYPE.ALL };
 	}
 }

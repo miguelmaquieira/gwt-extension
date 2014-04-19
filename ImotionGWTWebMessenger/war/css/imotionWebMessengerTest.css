@@ -139,8 +139,14 @@
 	padding-right: 10px;
 }
 
-.extgwt-textTransicion {
+.extgwt-textTransition {
 	opacity: 0;
 	-webkit-transition: opacity 3s linear;
 	transition: opacity 3s linear;
+}
+
+.extgwt-textError {
+	color: #FF0000;
+	font-weight: bold;
+	
 }

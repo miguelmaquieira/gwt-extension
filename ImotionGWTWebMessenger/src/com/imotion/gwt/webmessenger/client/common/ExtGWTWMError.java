@@ -4,6 +4,7 @@ package com.imotion.gwt.webmessenger.client.common;
 public class ExtGWTWMError {
 	
 	public enum TYPE {
+		ALL,
 		EXCEPTION,
 		COMMAND,
 		TRANSPORT,

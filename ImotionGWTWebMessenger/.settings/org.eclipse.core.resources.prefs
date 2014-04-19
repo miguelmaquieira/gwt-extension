@@ -5,4 +5,5 @@ eclipse.preferences.version=1
 encoding//src/com/imotion/gwt/webmessenger/client/comm/cs/atmosphere/ExtGWTWMCSAtmosphere.java=UTF-8
 encoding//src/com/imotion/gwt/webmessenger/client/comm/cs/atmosphere/ExtGWTWMCSConnectionAtmosphere.java=UTF-8
 encoding//src/com/imotion/gwt/webmessenger/client/handler/impl/ExtGWTWMHandlerManagerImpl.java=UTF-8
+encoding//src/com/imotion/gwt/webmessenger/server/ExtGWTWMServer.java=UTF-8
 encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWMChatRoom.java=UTF-8

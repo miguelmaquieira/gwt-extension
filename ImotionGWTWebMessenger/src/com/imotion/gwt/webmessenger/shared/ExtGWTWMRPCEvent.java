@@ -43,4 +43,20 @@ public class ExtGWTWMRPCEvent implements Serializable {
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
+	
+	public String toString() {
+		StringBuilder sbBuilder = new StringBuilder();
+		sbBuilder.append("roomId: ")
+					.append(getRoomId())
+					.append("\n\t")
+					.append("userId: ")
+					.append(getSenderId())
+					.append("\n\t")
+					.append("timestamp: ")
+					.append(getTimestamp())
+					.append("\n\t")
+					.append("message: ")
+					.append(getMessage());
+		return sbBuilder.toString();
+	}
 }

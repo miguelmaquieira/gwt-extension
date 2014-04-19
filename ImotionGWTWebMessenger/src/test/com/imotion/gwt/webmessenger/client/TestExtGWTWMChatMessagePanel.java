@@ -33,6 +33,7 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 		// Button
 		activateButton = new ToggleButton(new Image("images/switch-off.png"), 
 											new Image("images/switch-on.png"));
+		activateButton.setValue(true);
 		contentPanel.add(activateButton);
 		contentPanel.setCellHorizontalAlignment(activateButton, HasHorizontalAlignment.ALIGN_RIGHT);
 		contentPanel.setCellWidth(activateButton, "32px");
@@ -41,17 +42,17 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	@Override
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		setMessage(sender + ": " + message);
-		messageLabel.addStyleName("extgwt-textTransicion");
+		messageLabel.addStyleName("extgwt-textTransition");
 		if (timerText != null && timerText.isRunning()) {
 			timerText.cancel();
 		}
 		timerText = new Timer() {
 			public void run() {
 				setMessage(TEXTS.chat_message_panel_listening_new_messages_label_text());
-				messageLabel.removeStyleName("extgwt-textTransicion");
+				messageLabel.removeStyleName("extgwt-textTransition");
 			}
 		};
-		timerText.schedule(4000);
+		timerText.schedule(3000);
 	}
 	
 	public void setMessage(String message) {

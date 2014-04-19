@@ -120,10 +120,14 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	
 	@Override
 	public void release() {
+		errorHandler.release();
+		commHandler.release();
 		errorHandler = null;
 		commHandler = null;
 		disconnect();
 		atmosphere = null;
+		rpcRequest = null;
+		rpcRequestConfig = null;
 	}
 	
 	/**********************************************************************
@@ -138,7 +142,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 					errorHandler.onError(error);
 				} else {
 					List<TYPE> errorTypeList = Arrays.asList(errorHandler.getErrorType());
-					if (errorTypeList.contains(error.getErrorType())) {
+					if (errorTypeList.contains(error.getErrorType()) || error.getErrorType() == TYPE.ALL) {
 						errorHandler.onError(error);
 					}
 				}
@@ -168,7 +172,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?" + "roomId="		+ getSessionData().getRoomId()
 																			+ "&userId=" 	+ getSessionData().getUserId());			
 		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
-		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
+		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
 		
 		rpcRequestConfig.setFlags(Flags.enableProtocol);
 		
@@ -214,14 +218,18 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		rpcRequestConfig.setErrorHandler(new AtmosphereErrorHandler() {
 			@Override
 			public void onError(AtmosphereResponse response) {
-				Window.alert("Error");
+				// TODO set message
+				String state = response.getState().toString();
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.UNDEFINED, state);
+				handlerError(error);
 			}
 		});
 
 		rpcRequestConfig.setTransportFailureHandler(new AtmosphereTransportFailureHandler() {
 			@Override
 			public void onTransportFailure(String errorMsg, AtmosphereRequest request) {
-				Window.alert("Transport Failure");
+				Window.alert("Transport failure: " + errorMsg);
+				handlerError(new ExtGWTWMError(TYPE.TRANSPORT, errorMsg));
 			}
 		});
 

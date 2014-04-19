@@ -247,6 +247,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
 				connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
+				connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
 			}
 			return connectionCS;
 		}
