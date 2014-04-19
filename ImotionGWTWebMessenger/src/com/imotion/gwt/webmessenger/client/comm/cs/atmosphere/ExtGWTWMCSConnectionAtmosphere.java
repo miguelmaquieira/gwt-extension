@@ -20,15 +20,15 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.SerializationException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMMessageTexts;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandler;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMErrorCSHandler;
-import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMCommCSHandlerWrapper;
-import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMErrorCSHandlerWrapper;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandlerNew;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMErrorCSHandlerNew;
+import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMCommCSHandlerWrapperNew;
+import com.imotion.gwt.webmessenger.client.comm.cs.ExtGWTWMErrorCSHandlerWrapperNew;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
-import com.imotion.gwt.webmessenger.client.common.ExtGWTWMUtils;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMSession;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMUtils;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHandlerManager;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
@@ -37,26 +37,35 @@ import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler
 import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerImpl;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
-public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
+public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection {
 	
 	private final ExtGWTWMMessageTexts MESSAGES = GWT.create(ExtGWTWMMessageTexts.class); 
 
 	private ExtGWTWMSession 			sessionData;
 	
-	private ExtGWTWMHandlerManagerImpl 	handlerManager;
-	private ExtGWTWMCommCSHandler		commHandler;
-	private ExtGWTWMErrorCSHandler		errorHandler;
+	private ExtGWTWMHandlerManager 		handlerManager;
+	
+	private ExtGWTWMCommCSHandlerNew		commHandler;
+	private ExtGWTWMErrorCSHandlerNew		errorHandler;
 
 	private Atmosphere 				atmosphere ;
 	private AtmosphereRequest 		rpcRequest;
 	private AtmosphereRequestConfig rpcRequestConfig;
 
-	public ExtGWTWMCSAtmosphere() {
-		
+	
+	@SuppressWarnings("unused")
+	private ExtGWTWMCSConnectionAtmosphere() {
+		// not allowed
+	}
+	
+	public ExtGWTWMCSConnectionAtmosphere(ExtGWTWMHandlerManager handlerManager, String roomId, String userId) {
+		this.handlerManager = handlerManager;
+		this.sessionData = new ExtGWTWMSession(roomId, userId);
+		initAtmosphere();
 	}
 	
 	/**********************************************************************
-	 *                   	ExtGWTWebMessengerCommCS	    			  *
+	 *               ExtGWTWebMessengerCommCSConnection	    			  *
 	 **********************************************************************/
 	@Override
 	public ExtGWTWMSession getSessionData() {
@@ -102,43 +111,31 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 			manageException(exception, "connect");
 		}
 	}
-
-	@Override
-	public void init(String userId, String roomId) {
-		getSessionData().setRoomId(roomId);
-		getSessionData().setUserId(userId);
-		initAtmosphere();
-	}
-
-	@Override
-	public void connect(String userId, String roomId) {
-		getSessionData().setRoomId(roomId);
-		getSessionData().setUserId(userId);
-		initAtmosphere();
-		connect();
-	}
-
-	@Override
-	public void connect(String userId) {
-		getSessionData().setUserId(userId);
-		initAtmosphere();
-		connect();
-	}
 	
 	@Override
-	public ExtGWTWMCommCSHandler getCommHandlerWrapper() {
+	public ExtGWTWMCommCSHandlerNew getCommHandlerWrapper() {
 		if (commHandler == null) {
-			commHandler = new ExtGWTWMCommCSHandlerWrapper(getHandlerManager());
+			commHandler = new ExtGWTWMCommCSHandlerWrapperNew(getHandlerManager());
 		}
 		return commHandler;
 	}
 
 	@Override
-	public ExtGWTWMErrorCSHandler getErrorHandlerWrapper() {
+	public ExtGWTWMErrorCSHandlerNew getErrorHandlerWrapper() {
 		if (errorHandler == null) {
-			errorHandler = new ExtGWTWMErrorCSHandlerWrapper(getHandlerManager());
+			errorHandler = new ExtGWTWMErrorCSHandlerWrapperNew(getHandlerManager());
 		}
 		return errorHandler;
+	}
+	
+	@Override
+	public void renameUser(String userId) {
+		getSessionData().setUserId(userId);
+	}
+	
+	@Override
+	public void release() {
+		// TODO Auto-generated method stub	
 	}
 	
 	/**********************************************************************

@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
@@ -243,7 +244,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			return null;
 		} else  {
 			if (commCS == null) {
-				commCS = GWT.create(ExtGWTWMCommCS.class);
+				commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
 				commCS.init(nickname, roomname);
 				commCS.getCommHandlerWrapper().addCommReceiveHandler(roomname, this);
 				commCS.getCommHandlerWrapper().addCommHandler(roomname, statusPanel);

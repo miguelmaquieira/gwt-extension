@@ -12,7 +12,7 @@ public class ExtGWTWMSession {
 		this.creationTimestamp = new Date().getTime();
 	}
 	
-	public ExtGWTWMSession(String userId, String roomId) {
+	public ExtGWTWMSession(String roomId, String userId) {
 		this.userId = userId;
 		this.roomId = roomId;
 		this.creationTimestamp = new Date().getTime();
