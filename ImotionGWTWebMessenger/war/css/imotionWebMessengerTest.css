@@ -1,4 +1,4 @@
-.extgwt-webMessengerChatContainer {
+.extgwt-webMessengerChatRoomContainer {
 	margin: 0px auto;
 	width: 620px;
 	height: 520px;
@@ -9,14 +9,14 @@
 	background: #FCFCFC;
 }
 
-.extgwt-webMessengerChatTitle {
+.extgwt-webMessengerChatRoomTitle {
 	font-size: 20px;
 	padding: 5px 0px 5px 10px;
 	border-bottom: 1px solid #CECECE;
 }
 
 
-.extgwt-webMessengerChatMessagePanel {
+.extgwt-webMessengerChatRoomMessagePanel {
 	width: 100%;
 	margin-top: 10px;
 	padding-left: 10px;
@@ -24,27 +24,27 @@
 	color: #ABABAB;
 }
 
-.extgwt-webMessengerChatMessagePanel .gwt-label {
+.extgwt-webMessengerChatRoomMessagePanel .gwt-label {
 	
 }
 
-.extgwt-webMessengerChatMessagePanel .gwt-ToggleButton {
+.extgwt-webMessengerChatRoomMessagePanel .gwt-ToggleButton {
 	cursor: pointer;
 }
 
-.extgwt-webMessengerChatNorthZone {
+.extgwt-webMessengerChatRoomNorthZone {
 	width: 100%;
 	margin-bottom: 10px;
 }
 	
-.extgwt-webMessegerChatMessagePanel {
+.extgwt-webMessegerChatRoomMessagePanel {
 	width: 95%;
 	margin: 0 auto;
 	border: 1px solid #DEDEDE;
 	padding: 5px;
 }
 
-.extgwt-webMessegerChatMessagePanel .gwt-TextArea {
+.extgwt-webMessegerChatRoomMessagePanel .gwt-TextArea {
 	height: 250px;
 	width: 100%;
 	resize: none;
@@ -53,62 +53,62 @@
 }
 
 
-.extgwt-webMessegerChatConnectionsPanel {
+.extgwt-webMessegerChatRoomConnectionsPanel {
 	width: 95%;
 	margin: 0 auto;
 	border: 1px solid #DEDEDE;
 	padding: 5px;
 }
 
-.extgwt-webMessegerChatConnectionsPanel .gwt-ListBox {
+.extgwt-webMessegerChatRoomConnectionsPanel .gwt-ListBox {
 	height: 250px;
 	width: 100%;
 	border: none;
 }
 
-.extgwt-webMessengerChatSouthZone {
+.extgwt-webMessengerChatRoomSouthZone {
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-.extgwt-webMessengerChatNickNamePanel {
+.extgwt-webMessengerChatRoomNickNamePanel {
 	padding-left: 10px;
 }
 
-.extgwt-webMessengerChatRoomNamePanel {
+.extgwt-webMessengerChatRoomRoomNamePanel {
 	padding-left: 10px;
 }
 
-.extgwt-webMessengerChatSouthZone .gwt-TextBox {
+.extgwt-webMessengerChatRoomSouthZone .gwt-TextBox {
 	height: 25px;
 	font-size: 12px;
 	width: 95%;
 }
 
-.extgwt-webMessengerChatSouthZone .gwt-Button {
+.extgwt-webMessengerChatRoomSouthZone .gwt-Button {
 	height: 35px;
 	width: 100px;
 	cursor: pointer;
 }
 
-.extgwt-webMessengerChatSendMessagePanel {
+.extgwt-webMessengerChatRoomSendMessagePanel {
 	width: 100%;
 }
 
-.extgwt-webMessengerChatSendMessagePanel .gwt-TextBox {
+.extgwt-webMessengerChatRoomSendMessagePanel .gwt-TextBox {
 	height: 30px;
 	font-size: 20px;
 	width: 95%;
 	margin-left: 10px;
 }
 
-.extgwt-webMessengerChatSendMessagePanel .gwt-Button {
+.extgwt-webMessengerChatRoomSendMessagePanel .gwt-Button {
 	height: 35px;
 	width: 120px;
 	cursor: pointer;
 }
 
-.extgwt-webMessengerChatStatusPanel {
+.extgwt-webMessengerChatRoomStatusPanel {
 	width: 100%;
 	height: 40px;
 	margin-top: 15px;
@@ -118,23 +118,23 @@
 	color: #F6F6F6;
 }
 
-.extgwt-webMessengerChatStatusPanel #labelStatus {
+.extgwt-webMessengerChatRoomStatusPanel #labelStatus {
 	padding-left: 15px;
 	font-size: 14px;
 }
 
-.extgwt-webMessengerChatStatusPanel #connectionLed {
+.extgwt-webMessengerChatRoomStatusPanel #connectionLed {
 	width: 16px;
 	padding-left: 5px;
 	margin-top: 2px;
 }
 
-.extgwt-webMessengerChatStatusPanel #messageStatus {
+.extgwt-webMessengerChatRoomStatusPanel #messageStatus {
 	font-size: 14px;
 	padding-right: 10px;
 }
 
-.extgwt-webMessengerChatStatusPanel #messageStatus  {
+.extgwt-webMessengerChatRoomStatusPanel #messageStatus  {
 	font-size: 14px;
 	padding-right: 10px;
 	text-overflow: ellipsis;

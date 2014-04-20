@@ -23,7 +23,7 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	public TestExtGWTWMChatMessagePanel() {
 		HorizontalPanel contentPanel = new HorizontalPanel();
 		initWidget(contentPanel);
-		contentPanel.addStyleName("extgwt-webMessengerChatMessagePanel");
+		contentPanel.addStyleName("extgwt-webMessengerChatRoomMessagePanel");
 		contentPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
 		// Message label

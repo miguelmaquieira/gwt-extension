@@ -23,7 +23,7 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 	public TestExtGWTWMChatStatusPanel() {
 		HorizontalPanel contentPanel = new HorizontalPanel();
 		initWidget(contentPanel);
-		contentPanel.addStyleName("extgwt-webMessengerChatStatusPanel");
+		contentPanel.addStyleName("extgwt-webMessengerChatRoomStatusPanel");
 		contentPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		contentPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		

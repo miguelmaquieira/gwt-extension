@@ -44,11 +44,11 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	public TestExtGWTWMChatRoom() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
-		contentPanel.addStyleName("extgwt-webMessengerChatContainer");
+		contentPanel.addStyleName("extgwt-webMessengerChatRoomContainer");
 
 		// Title
 		SimplePanel titlePanel = new SimplePanel();
-		titlePanel.addStyleName("extgwt-webMessengerChatTitle");
+		titlePanel.addStyleName("extgwt-webMessengerChatRoomTitle");
 		contentPanel.add(titlePanel);
 		Label title = new Label();
 		titlePanel.setWidget(title);
@@ -76,12 +76,12 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 		// North zone
 		HorizontalPanel northZone = new HorizontalPanel();
-		northZone.addStyleName("extgwt-webMessengerChatNorthZone");
+		northZone.addStyleName("extgwt-webMessengerChatRoomNorthZone");
 		contentPanel.add(northZone);
 
 		// Message panel
 		SimplePanel messagePanel = new SimplePanel();
-		messagePanel.addStyleName("extgwt-webMessegerChatMessagePanel");
+		messagePanel.addStyleName("extgwt-webMessegerChatRoomMessagePanel");
 		northZone.add(messagePanel);
 		northZone.setCellWidth(messagePanel, "70%");
 		areaMessage = new TextArea();
@@ -90,7 +90,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 		// Conections panel
 		SimplePanel conectionsPanel = new SimplePanel();
-		conectionsPanel.addStyleName("extgwt-webMessegerChatConnectionsPanel");
+		conectionsPanel.addStyleName("extgwt-webMessegerChatRoomConnectionsPanel");
 		northZone.add(conectionsPanel);
 		northZone.setCellWidth(conectionsPanel, "30%");
 		connectionsList = new ListBox(true);
@@ -98,13 +98,13 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 		/// South zone
 		HorizontalPanel southZone = new HorizontalPanel();
-		southZone.addStyleName("extgwt-webMessengerChatSouthZone");
+		southZone.addStyleName("extgwt-webMessengerChatRoomSouthZone");
 		southZone.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
 		contentPanel.add(southZone);
 
 		//// Nick name panel
 		FlowPanel nickNamePanel = new FlowPanel();
-		nickNamePanel.addStyleName("extgwt-webMessengerChatNickNamePanel");
+		nickNamePanel.addStyleName("extgwt-webMessengerChatRoomNickNamePanel");
 		southZone.add(nickNamePanel);
 
 		///// Label nick name
@@ -118,7 +118,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 		//// Room name panel
 		FlowPanel roomNamePanel = new FlowPanel();
-		roomNamePanel.addStyleName("extgwt-webMessengerChatRoomNamePanel");
+		roomNamePanel.addStyleName("extgwt-webMessengerChatRoomRoomNamePanel");
 		southZone.add(roomNamePanel);
 
 		///// Label room name
@@ -171,7 +171,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 
 		/// Send Message panel
 		HorizontalPanel sendMessagePanel = new HorizontalPanel();
-		sendMessagePanel.addStyleName("extgwt-webMessengerChatSendMessagePanel");
+		sendMessagePanel.addStyleName("extgwt-webMessengerChatRoomSendMessagePanel");
 		contentPanel.add(sendMessagePanel);
 
 		//// Message text
