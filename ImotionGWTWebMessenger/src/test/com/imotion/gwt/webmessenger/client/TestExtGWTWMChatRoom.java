@@ -30,6 +30,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
 	
+	private Label 		titleRoom;
 	private TextArea 	areaMessage;
 	private ListBox 	connectionsList;
 	private TextBox		textMessage;
@@ -50,9 +51,9 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		SimplePanel titlePanel = new SimplePanel();
 		titlePanel.addStyleName("extgwt-webMessengerChatRoomTitle");
 		contentPanel.add(titlePanel);
-		Label title = new Label();
-		titlePanel.setWidget(title);
-		title.setText(TEXTS.chat_messenger_title_text());
+		titleRoom = new Label();
+		titlePanel.setWidget(titleRoom);
+		titleRoom.setText(TEXTS.chat_messenger_title_text());
 		
 		/// Message panel
 		chatMessagePanel = new TestExtGWTWMChatMessagePanel();
@@ -231,7 +232,31 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	public void handleReceivedMessage(String message, long timestamp, String sender) {
 		String time = format.format(new Date(timestamp));
 		String newMessage = sender	+ " (" + time + ")" + ": " + message;
-		writeMessage(newMessage);	
+		writeMessage(newMessage);
+		String me = connectionCS.getSessionData().getUserId();
+		if (!me.equals(sender)) {
+			int elementCount = connectionsList.getItemCount();
+			boolean contains = false;
+			for (int index = 0; index < elementCount; index++) {
+				String item = connectionsList.getItemText(index);
+				if (item.equals(sender)) {
+					contains = true;
+					break;
+				}
+			}
+			if (!contains) {
+				connectionsList.addItem(sender);
+			}
+		}
+	}
+	
+	/**********************************************************************
+	 *                		   PUBLIC FUNCTIONS						      *
+	 **********************************************************************/
+	
+	public void setChatRoomId(String roomId) {
+		textRoomName.setText(roomId);
+		titleRoom.setText(TEXTS.chat_messenger_title_text() + ": " + roomId);
 	}
 
 	/**********************************************************************

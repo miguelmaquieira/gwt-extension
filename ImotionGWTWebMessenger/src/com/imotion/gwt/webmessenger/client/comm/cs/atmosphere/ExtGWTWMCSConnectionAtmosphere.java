@@ -208,15 +208,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			}
 		});
 		
-		rpcRequestConfig.setLocalMessageHandler(new AtmosphereMessageHandler() {
-			
-			@Override
-			public void onMessage(AtmosphereResponse response) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
 		rpcRequestConfig.setMessageHandler(new AtmosphereMessageHandler() {
 			
 			@Override
