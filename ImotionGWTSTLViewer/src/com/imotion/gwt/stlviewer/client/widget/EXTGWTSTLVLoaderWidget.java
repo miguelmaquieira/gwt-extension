@@ -15,10 +15,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLLoader;
-import com.imotion.gwt.stlviewer.client.threejs.EXTGWTTHREE;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 
-public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallback {
+public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
 
 	private 	WebGLRenderer 	renderer;
 	private 	Scene 			scene;
@@ -26,9 +26,9 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 	private 	Mesh 			objectMesh;
 	private 	Mesh 			planeMesh;
 	private 	Mesh 			wallMesh;
-	private Object3D wallDeepMesh;
+	private 	Object3D 		wallDeepMesh;
 
-	public EXTGWTSTLLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, float backgroundTransparency, final int width, final int height) {
+	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, float backgroundTransparency, final int width, final int height) {
 		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
 
@@ -36,7 +36,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 		
 		//Camera
 		float ratio = width / height;
-		camera = EXTGWTTHREE.PerspectiveCamera(60, ratio, 1f, 1000f);
+		camera = EXTGWTSTLVTHREE.PerspectiveCamera(60, ratio, 1f, 1000f);
 		camera.getPosition().set(-250, 200, -250);
 
 		//Scene
@@ -55,7 +55,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 		//Floor
 		Geometry floorGeometry = THREE.PlaneGeometry( 10000, 10000);
 		Material floorMaterial = THREE.MeshBasicMaterial().color(floorColorAsHex).overdraw(true).build();
-		planeMesh = EXTGWTTHREE.Mesh(floorGeometry, floorMaterial);
+		planeMesh = EXTGWTSTLVTHREE.Mesh(floorGeometry, floorMaterial);
 		scene.add(planeMesh);
 		planeMesh.setRotation(- Math.PI / 2, 0, 0 );
 		planeMesh.setPosition(0, 0, 0);
@@ -63,12 +63,12 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 		planeMesh.setCastShadow(true);
 		
 
-		EXTGWTSTLLoader.load(url, new AsyncCallback<Geometry>() {
+		EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
 
 			@Override
 			public void onSuccess(Geometry geometry) {
 				//Setup object texture, color, zoom etc
-				Material material = EXTGWTTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
+				Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
 				objectMesh = THREE.MorphAnimMesh(geometry, material);
 				objectMesh.setPosition(0, 0, 0);
 				objectMesh.setRotation(- Math.PI / 2, 0, 0 );
@@ -77,7 +77,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 				//Add object to scene
 				scene.add(objectMesh);
 				camera.lookAt(scene.getPosition().getX(), scene.getPosition().getY() + 30, scene.getPosition().getZ());
-				AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLLoaderWidget.this);
+				AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
 			}
 
 			@Override
@@ -94,7 +94,7 @@ public class EXTGWTSTLLoaderWidget extends Composite implements AnimationCallbac
 		scene.add(dirLight);
 		
 		//Renderer
-		renderer = EXTGWTTHREE.EXTGWTWebGLRenderer();
+		renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
 		renderer.setSize(width, height);
 		renderer.setClearColorHex(backgroundColorAsHex, backgroundTransparency);
 		renderer.setShadowMapEnabled(true);

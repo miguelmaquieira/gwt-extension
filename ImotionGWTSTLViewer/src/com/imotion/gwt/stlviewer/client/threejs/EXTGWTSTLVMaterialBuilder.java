@@ -41,42 +41,46 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.google.gwt.core.client.JavaScriptObject;
 
 
-public class EXTGWTMeshPongMaterialBuilder extends JavaScriptObject{
-	protected EXTGWTMeshPongMaterialBuilder(){}
-	public final static EXTGWTMeshPongMaterialBuilder create(){
-		return (EXTGWTMeshPongMaterialBuilder) EXTGWTMeshPongMaterialBuilder.createObject();
+public class EXTGWTSTLVMaterialBuilder extends JavaScriptObject {
+	
+	protected EXTGWTSTLVMaterialBuilder() {
+		
 	}
 	
-	public final static EXTGWTMeshPongMaterialBuilder create(int color){
-		EXTGWTMeshPongMaterialBuilder builder= (EXTGWTMeshPongMaterialBuilder) EXTGWTMeshPongMaterialBuilder.createObject();
+	public final static EXTGWTSTLVMaterialBuilder create() {
+		return (EXTGWTSTLVMaterialBuilder) EXTGWTSTLVMaterialBuilder.createObject();
+	}
+	
+	public final static EXTGWTSTLVMaterialBuilder create(int color) {
+		EXTGWTSTLVMaterialBuilder builder= (EXTGWTSTLVMaterialBuilder) EXTGWTSTLVMaterialBuilder.createObject();
 		return builder.color(color);
 	}
 	
-	public final EXTGWTMeshPongMaterialBuilder color(int r,int g,int b){
-		int c=(0xff & r)<<16| (0xff & g)<<8|(0xff & b);
+	public final EXTGWTSTLVMaterialBuilder color(int r,int g,int b) {
+		int c = (0xff & r)<<16 | (0xff & g)<<8 | (0xff & b);
 		return color(c);
 	}
 	
-	public final  EXTGWTMeshPongMaterialBuilder color(double c){
-		return color((int)c);
+	public final  EXTGWTSTLVMaterialBuilder color(double c) {
+		return color((int) c);
 	}
 	
-	public final native EXTGWTMeshPongMaterialBuilder specular(int s)/*-{
-	this["specular"]=s;
-	return this;
+	public final native EXTGWTSTLVMaterialBuilder specular(int s)/*-{
+		this["specular"] = s;
+		return this;
 	}-*/;
 	
-	public final native EXTGWTMeshPongMaterialBuilder ambient(int a)/*-{
-	this["ambient"]=a;
-	return this;
+	public final native EXTGWTSTLVMaterialBuilder ambient(int a)/*-{
+		this["ambient"] = a;
+		return this;
 	}-*/;
 	
-	public final native EXTGWTMeshPongMaterialBuilder shininess(int s)/*-{
-	this["shininess"]=s;
-	return this;
+	public final native EXTGWTSTLVMaterialBuilder shininess(int s)/*-{
+		this["shininess"] = s;
+		return this;
 	}-*/;
 	
-	public final Material build(){
+	public final Material build() {
 		return build(this);
 	}
 	

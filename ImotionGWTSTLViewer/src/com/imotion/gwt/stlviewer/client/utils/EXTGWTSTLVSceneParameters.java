@@ -1,6 +1,6 @@
 package com.imotion.gwt.stlviewer.client.utils;
 
-public class EXTGWSceneParameters {
+public class EXTGWTSTLVSceneParameters {
 
 	private int	 cameraTargetSize;
 	private double cameraVisionAngle;
@@ -12,11 +12,11 @@ public class EXTGWSceneParameters {
 	private int	 lightPositionY;
 	private int	 lightPositionZ;
 	
-	public EXTGWSceneParameters(int objectHeight, int objectWidth) {
+	public EXTGWTSTLVSceneParameters(int objectHeight, int objectWidth) {
 		int maxSize = Math.max(objectHeight, objectWidth);
 		this.cameraTargetSize 		= 2 * maxSize;
-		this.cameraVisionAngle		= 0.610865238; //35º
-		this.cameraPositionAngle	= Math.PI / 6; //30º
+		this.cameraVisionAngle		= 0.610865238; //35??
+		this.cameraPositionAngle	= Math.PI / 6; //30??
 		
 		//SOLVE cameraPositionX  cameraPositionY  cameraPositionZ
 		

@@ -9,7 +9,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>ImotionGWTSTLViewer.html</welcome-file>
+    <welcome-file>imotionGWTSTLViewer.jsp</welcome-file>
   </welcome-file-list>
 
 </web-app>

@@ -11,7 +11,7 @@
     <!--                                                               -->
     <!-- Consider inlining CSS to reduce the number of requested files -->
     <!--                                                               -->
-    <link type="text/css" rel="stylesheet" href="ImotionGWTSTLViewer.css">
+    <link type="text/css" rel="stylesheet" href="css/imotionGWTSTLViewer.css">
 
     <!--                                           -->
     <!-- Any title is fine                         -->
@@ -25,8 +25,8 @@
     <!-- This script loads your compiled module.   -->
     <!-- If you add any GWT meta tags, they must   -->
     <!-- be added before this line.                -->
-    <!--                                           -->
-    <script type="text/javascript" language="javascript" src="imotiongwtstlviewer/imotiongwtstlviewer.nocache.js"></script>
+    <!--                                           -->         
+    <script type="text/javascript" language="javascript" src="imotiongwtstlviewertest/imotiongwtstlviewertest.nocache.js"></script>
   </head>
 
   <!--                                           -->

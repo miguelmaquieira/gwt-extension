@@ -1,4 +1,4 @@
-package com.imotion.gwt.stlviewer.client.widget;
+package test.com.imotion.gwt.stlviewer.client;
 
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
@@ -13,9 +13,9 @@ import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.imotion.gwt.stlviewer.client.threejs.EXTGWTTHREE;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 
-public class CubeExampleWidget extends Composite implements AnimationCallback {
+public class TestExtGWTSTLVCubeExampleWidget extends Composite implements AnimationCallback {
 
 	private 	WebGLRenderer 	renderer;
 	private 	Scene 			scene;
@@ -23,7 +23,7 @@ public class CubeExampleWidget extends Composite implements AnimationCallback {
 	private 	Mesh 			cubeMesh;
 	private 	Mesh 			planeMesh;
 
-	public CubeExampleWidget(final int width, final int height) {
+	public TestExtGWTSTLVCubeExampleWidget(final int width, final int height) {
 		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
 
@@ -51,7 +51,7 @@ public class CubeExampleWidget extends Composite implements AnimationCallback {
 			faces.get(i + 1).getColor().setHex(hex);
 		}
 		
-		Material material = EXTGWTTHREE.MeshBasicMaterial().vertexColors(THREE.Colors.FaceColors()).overdraw(true).build();
+		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().vertexColors(THREE.Colors.FaceColors()).overdraw(true).build();
 		cubeMesh = THREE.Mesh(cubeGeometry, material);
 		cubeMesh.setPosition(0, 150, 0);
 		scene.add(cubeMesh);

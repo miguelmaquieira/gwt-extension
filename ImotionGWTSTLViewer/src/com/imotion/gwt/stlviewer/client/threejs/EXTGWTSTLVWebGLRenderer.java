@@ -2,9 +2,9 @@ package com.imotion.gwt.stlviewer.client.threejs;
 
 import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 
-public class EXTGWTWebGLRenderer extends WebGLRenderer {
+public class EXTGWTSTLVWebGLRenderer extends WebGLRenderer {
 
-	protected EXTGWTWebGLRenderer() {
+	protected EXTGWTSTLVWebGLRenderer() {
 		super();
 	}
 
