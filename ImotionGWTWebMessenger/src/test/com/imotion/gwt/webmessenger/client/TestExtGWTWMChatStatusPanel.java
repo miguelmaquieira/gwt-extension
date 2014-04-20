@@ -89,10 +89,23 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 
 	@Override
 	public void onError(ExtGWTWMError error) {
+		statusMessageLabel.addStyleName("extgwt-textError");
 		if (error.getErrorType() == TYPE.TRANSPORT) {
-			statusMessageLabel.addStyleName("extgwt-textError");
 			String message = TEXTS.status_message_label_connection_transportation_error_text() + error.getMessage();
 			statusMessageLabel.setText(message);
+		} else if (error.getErrorType() == TYPE.COMMAND) {
+			final String oldText = statusMessageLabel.getText();
+			statusMessageLabel.addStyleName("extgwt-errorTextTransition");
+			statusMessageLabel.setText(error.getMessage());
+			Timer timerText = new Timer() {
+				public void run() {
+					statusMessageLabel.setText(oldText);
+					statusMessageLabel.removeStyleName("extgwt-errorTextTransition");
+					statusMessageLabel.removeStyleName("extgwt-textError");
+				}
+			};
+			timerText.schedule(5000);
+			
 		}
 	}
 

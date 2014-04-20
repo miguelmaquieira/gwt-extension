@@ -18,6 +18,7 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 	
 	private final static Logger logger = Logger.getLogger("ExtGWTWMServer");
+	
 	@Override
 	public void onRequest(AtmosphereResource atResource) throws IOException {
 		AtmosphereRequest request = atResource.getRequest();
@@ -43,6 +44,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 		paramsLog = new String[] { methodLog, event.toString() };
 		logger.log(Level.INFO, messageLog, paramsLog);
 		// Log end
+		
 		super.onStateChange(event);
 	}
 

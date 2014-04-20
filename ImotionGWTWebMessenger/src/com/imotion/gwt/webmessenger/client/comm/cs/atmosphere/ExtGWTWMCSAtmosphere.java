@@ -10,6 +10,8 @@ import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerIm
 
 public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	
+	private static final int DEFAULT_CLIENT_TIMEOUT = 300000;
+	
 	private ExtGWTWMHandlerManager 					handlerManager;
 	private Map<String, ExtGWTWMCommCSConnection> 	connectionsMap;
 
@@ -22,10 +24,16 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	 **********************************************************************/
 	@Override
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId) {
+		return getConnection(roomId, userId, DEFAULT_CLIENT_TIMEOUT);
+	}
+	
+	@Override
+	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) {
 		String connectionKey = roomId + "_" + userId;
 		ExtGWTWMCommCSConnection connection = getConnectionsMap().get(connectionKey);
 		if (connection == null) {
-			connection = new ExtGWTWMCSConnectionAtmosphere(getHandlerManager(), roomId, userId);
+			connection = new ExtGWTWMCSConnectionAtmosphere(getHandlerManager(), roomId, userId, timeout);
+			getConnectionsMap().put(connectionKey, connection);
 		}
 		return connection;
 	}

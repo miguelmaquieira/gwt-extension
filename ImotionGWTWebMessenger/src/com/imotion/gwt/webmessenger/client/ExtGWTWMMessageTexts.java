@@ -4,7 +4,10 @@ import com.google.gwt.i18n.client.Messages;
 
 public interface ExtGWTWMMessageTexts extends Messages {
 
-	@DefaultMessage("Exception error: \nAction: {0} \nUserId: {1} \nroomId: {2} \nException stacktrace: {3}")
-	public String error_common_exception_message_text(String action, String userId, String roomId, String messageException);
+	@DefaultMessage("Exception error: \nAction: {0} \nroomId: {1} \nuserId: {2} \nException stacktrace: {3}")
+	public String error_common_exception_message_text(String action, String roomId, String userId, String messageException);
+	
+	@DefaultMessage("Connection already opened with params: roomId: {0} userId: {1}")
+	public String error_open_connection_message_text(String roomId, String userId);
 	
 }
