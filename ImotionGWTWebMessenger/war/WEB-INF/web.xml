@@ -37,9 +37,9 @@
 	</servlet-mapping>
   
   
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>imotionGWTWebMessenger.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>imotionGWTWebMessenger.jsp</welcome-file>
+	</welcome-file-list>
 
 </web-app>
