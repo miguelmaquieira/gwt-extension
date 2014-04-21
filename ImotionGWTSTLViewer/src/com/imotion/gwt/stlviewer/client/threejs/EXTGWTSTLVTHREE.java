@@ -6,8 +6,8 @@ import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
 public class EXTGWTSTLVTHREE extends THREE {
 
-	public static final EXTGWTSTLVMaterialBuilder MeshPongMaterial() {
-		return EXTGWTSTLVMaterialBuilder.create();
+	public static final EXTGWTSTLVMeshPhongMaterialBuilder MeshPhongMaterial() {
+		return EXTGWTSTLVMeshPhongMaterialBuilder.create();
 	}
 	
 	public static native final EXTGWTSTLVWebGLRenderer EXTGWTWebGLRenderer()/*-{
