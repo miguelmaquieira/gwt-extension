@@ -6,7 +6,7 @@ public interface ExtGWTWMCommHandlerManager {
 	
 	public void addCommHandler(String roomId, ExtGWTWMHasCommHandler handler);
 	public void removeCommHandler(String roomId, ExtGWTWMHasCommHandler handler);
-	public void releaseComm(String roomId);
+	public void releaseCommHandlers(String roomId);
 	
 	public List<ExtGWTWMHasOpenCommHandler> getCommOpenHandlers(String roomId);
 	public List<ExtGWTWMHasCloseCommHandler> getCommCloseHandlers(String roomId);
