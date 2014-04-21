@@ -29,10 +29,12 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 	private 	Mesh 			planeMesh;
 	private		int				sceneWidth;
 	private		int				sceneHeight;
+	private		boolean			scale;
 
-	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, float backgroundTransparency, final int width, final int height) {
+	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, int width, int height, boolean scale) {
 		this.sceneHeight 	= height;
 		this.sceneWidth		= width;
+		this.scale			= scale;
 
 		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
@@ -46,7 +48,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		planeMesh = EXTGWTSTLVTHREE.Mesh(floorGeometry, floorMaterial);
 		scene.add(planeMesh);
 		planeMesh.setRotation(- Math.PI / 2, 0, 0 );
-		planeMesh.setPosition(0, 0, 0);
+		planeMesh.setPosition(-100, 0, -100);
 		planeMesh.setReceiveShadow(true);
 		planeMesh.setCastShadow(true);
 
@@ -67,7 +69,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		//Renderer
 		renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
 		renderer.setSize(width, height);
-		renderer.setClearColorHex(backgroundColorAsHex, backgroundTransparency);
+		renderer.setClearColorHex(backgroundColorAsHex, 1d);
 		renderer.setShadowMapEnabled(true);
 
 		root.getElement().appendChild(renderer.getDomElement());
@@ -82,7 +84,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 
 		double height 		= Math.abs(maxVector3.getY() - minVector3.getY());
 		double width		= Math.abs(maxVector3.getZ() - minVector3.getZ());
-		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width);
+		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
 
 		//Build mesh
 		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
@@ -98,8 +100,8 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 
 		//Camera
 		float ratio = this.sceneWidth / this.sceneHeight;
-		double cameraLookAtY = objectMesh.getPosition().getY() + ( (3 / 4) * sceneParameters.getHeightScaled() );
-		camera = EXTGWTSTLVTHREE.PerspectiveCamera(35, ratio, 1f, 1000f);
+		double cameraLookAtY = objectMesh.getPosition().getY() + sceneParameters.getCameraLookAtYAddition();
+		camera = EXTGWTSTLVTHREE.PerspectiveCamera(ratio, 1f, 1000f);
 		camera.getPosition().set(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
 		

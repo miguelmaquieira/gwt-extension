@@ -21,9 +21,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 //		String modelPath = "models/thingiverse/COLONEL_72k_v2.stl";
 //		String modelPath = "models/thingiverse/doublesized_s1_body_with_details.stl";
 //		String modelPath = "models/thingiverse/CreativeTools.se_-_ZPrinter-model_-_Xmas_Utah-teapot.stl";
-		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, 0x0743AE, 0xFFFFFF, 0x000, 1f, 640, 480);
+		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, 0x0743AE, 0xFFFFFF, 0x000, 640, 480, false);
 		rootPanel.add(stlWidget);
-//		CubeExampleWidget cubeWidget = new CubeExampleWidget(Window.getClientWidth(), Window.getClientHeight());
-//		rootPanel.add(cubeWidget);
 	}
 }
