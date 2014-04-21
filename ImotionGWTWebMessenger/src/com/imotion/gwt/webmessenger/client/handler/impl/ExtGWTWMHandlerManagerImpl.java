@@ -93,7 +93,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	}
 	
 	@Override
-	public void releaseCommHandlers(String roomId) {
+	public void releaseComm(String roomId) {
 		removeCommStack(roomId);
 	}
 	
@@ -122,7 +122,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	}
 	
 	@Override
-	public void releaseErrorHandlers(String roomId) {
+	public void releaseError(String roomId) {
 		removeErrorStack(roomId);
 	}
 	

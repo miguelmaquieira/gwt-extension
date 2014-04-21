@@ -38,7 +38,7 @@ public class ExtGWTWMErrorCSHandlerWrapper implements ExtGWTWMErrorCSHandler {
 
 	@Override
 	public void release() {
-		handlerManager.releaseErrorHandlers(roomId);
+		handlerManager.releaseError(roomId);
 		handlerManager = null;
 		roomId = null;
 	}

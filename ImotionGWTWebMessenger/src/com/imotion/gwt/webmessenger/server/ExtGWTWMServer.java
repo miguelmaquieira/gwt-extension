@@ -44,6 +44,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 		paramsLog = new String[] { methodLog, event.toString() };
 		logger.log(Level.INFO, messageLog, paramsLog);
 		// Log end
+		
 		super.onStateChange(event);
 	}
 
@@ -65,7 +66,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 	
-	private void broadcast(final AtmosphereResource atResource) throws IOException {
+	private void broadcast(AtmosphereResource atResource) throws IOException {
 		
 		// Log params
 		String methodLog = "broadcast(AtmosphereResource)";
@@ -104,11 +105,10 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 			logger.log(Level.INFO, messageLog, paramsLog);
 			// Log end
 		} 
-		
+	
 		// set waiting message
 		atResource.setBroadcaster(broadCaster);
 		atResource.suspend();
-		
 	}
 
 	private void onMessageRequest(AtmosphereResource atResource) {

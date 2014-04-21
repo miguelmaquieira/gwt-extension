@@ -39,7 +39,7 @@
   
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>imotionWebMessengerTest.jsp</welcome-file>
+		<welcome-file>imotionWebMessenger.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

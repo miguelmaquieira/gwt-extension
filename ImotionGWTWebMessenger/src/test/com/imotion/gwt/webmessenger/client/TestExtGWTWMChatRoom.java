@@ -22,12 +22,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
-import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
-import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
-import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
-import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
 public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
@@ -274,8 +269,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			return null;
 		} else  {
 			if (connectionCS == null) {
-				ExtGWTWMCommCS commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
-				connectionCS = commCS.getConnection(roomname, nickname);
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
 				connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 				connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
@@ -292,92 +286,5 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			.toString();
 		areaMessage.setText(finalText);
 		areaMessage.setCursorPos(finalText.length());
-	}
-	
-	private void testCase1() {
-		
-		// Instanciones el gestor de conexiones
-		ExtGWTWMCommCS commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
-		
-		// Pedimos una conexión para un determinado roomId y userId
-		ExtGWTWMCommCSConnection connection = commCS.getConnection("roomId", "userId");
-		
-		// Añadimos un handler de errores
-		connection.getErrorHandlerWrapper().addErrorHandler(new ExtGWTWMHasErrorHandler() {
-			
-			@Override
-			public void onError(ExtGWTWMError error) {
-				// tratar error
-			}
-			
-			@Override
-			public TYPE[] getErrorType() {
-				return new TYPE[] { TYPE.EXCEPTION };
-			}
-		});
-		
-		// Añadimos un handler de eventos de apertura de la conexión
-		connection.getCommHandlerWrapper().addCommReceiveHandler(this);
-		
-		// Abrimos la conexión
-		connection.connect();		
-	}
-	
-	private void testCase2() {
-		
-		// Instanciones el gestor de conexiones
-		ExtGWTWMCommCS commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
-		
-		// Pedimos una conexión para un determinado roomId y userId
-		final ExtGWTWMCommCSConnection connection = commCS.getConnection("roomId", "userId");
-		
-		// Añadimos el handler de apertura de la conexión
-		connection.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {
-			
-			@Override
-			public void handleConnectionOpened() {
-				connection.sendMessage("message");
-			}
-		});
-		
-		// Añadimos un handler de eventos de apertura de la conexión
-		connection.getCommHandlerWrapper().addCommReceiveHandler(this);
-		
-		// Abrimos la conexión
-		connection.connect();	
-		
-		
-	}
-	
-	private void testCase3() {
-		
-		// Instanciones el gestor de conexiones
-		final ExtGWTWMCommCS commCS = ExtGWTWMFactory.getDefaultStandaloneCommCS();
-		
-		// Pedimos una conexión para un determinado roomId y userId
-		final ExtGWTWMCommCSConnection connection = commCS.getConnection("roomId", "userId");
-		
-		// Añadimos el handler de apertura de la conexión
-		connection.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {
-			
-			@Override
-			public void handleConnectionOpened() {
-				connection.sendMessage("message");
-			}
-		});
-		
-		// Añadimos un handler de eventos de apertura de la conexión
-		connection.getCommHandlerWrapper().addCommReceiveHandler(new ExtGWTWMHasReceiveCommHandler() {
-			
-			@Override
-			public void handleReceivedMessage(String message, long timstamp, String sender) {
-				commCS.releaseConnection(connection);
-			}
-		});
-		
-		// Abrimos la conexión
-		connection.connect();	
-		
-		
 	}
 }
