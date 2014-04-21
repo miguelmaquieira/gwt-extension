@@ -1,12 +1,14 @@
 package com.imotion.gwt.webmessenger.server;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.AtmosphereResourceEvent;
+import org.atmosphere.cpr.AtmosphereResourceEventListenerAdapter;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 import org.atmosphere.gwt20.shared.Constants;
@@ -66,7 +68,7 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 	
-	private void broadcast(AtmosphereResource atResource) throws IOException {
+	private void broadcast(final AtmosphereResource atResource) throws IOException {
 		
 		// Log params
 		String methodLog = "broadcast(AtmosphereResource)";
@@ -105,10 +107,11 @@ public class ExtGWTWMServer extends AbstractReflectorAtmosphereHandler {
 			logger.log(Level.INFO, messageLog, paramsLog);
 			// Log end
 		} 
-	
+		
 		// set waiting message
 		atResource.setBroadcaster(broadCaster);
 		atResource.suspend();
+		
 	}
 
 	private void onMessageRequest(AtmosphereResource atResource) {

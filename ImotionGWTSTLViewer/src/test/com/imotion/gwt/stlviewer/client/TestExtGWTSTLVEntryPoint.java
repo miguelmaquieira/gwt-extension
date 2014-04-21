@@ -14,7 +14,14 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
-		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget("models/thingiverse/Doll_Multiscan.stl", 0x0743AE, 0xFFFFFF, 0xe0e0e0, 0.5f, 640, 480);
+//		String modelPath = "models/thingiverse/Angel_Candle_Holder_Multiscan.stl";
+//		String modelPath = "models/thingiverse/Doll_Multiscan.stl";
+//		String modelPath = "models/thingiverse/knight_bookend_multiscan_flatbottom.stl";
+		String modelPath = "models/thingiverse/Smokin_Gnome_on_Mushroom_Multi.stl";
+//		String modelPath = "models/thingiverse/COLONEL_72k_v2.stl";
+//		String modelPath = "models/thingiverse/doublesized_s1_body_with_details.stl";
+//		String modelPath = "models/thingiverse/CreativeTools.se_-_ZPrinter-model_-_Xmas_Utah-teapot.stl";
+		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, 0x0743AE, 0xFFFFFF, 0x000, 1f, 640, 480);
 		rootPanel.add(stlWidget);
 //		CubeExampleWidget cubeWidget = new CubeExampleWidget(Window.getClientWidth(), Window.getClientHeight());
 //		rootPanel.add(cubeWidget);
