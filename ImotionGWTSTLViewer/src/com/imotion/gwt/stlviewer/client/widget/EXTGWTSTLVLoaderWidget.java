@@ -3,7 +3,8 @@ package com.imotion.gwt.stlviewer.client.widget;
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
 import com.akjava.gwt.three.client.core.Geometry;
-import com.akjava.gwt.three.client.core.Object3D;
+import com.akjava.gwt.three.client.core.Vector3;
+import com.akjava.gwt.three.client.gwt.core.BoundingBox;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
@@ -17,6 +18,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
+import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
 public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
 
@@ -25,32 +27,18 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 	private 	Camera 			camera;
 	private 	Mesh 			objectMesh;
 	private 	Mesh 			planeMesh;
-	private 	Mesh 			wallMesh;
-	private 	Object3D 		wallDeepMesh;
+	private		int				sceneWidth;
+	private		int				sceneHeight;
 
 	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, float backgroundTransparency, final int width, final int height) {
+		this.sceneHeight 	= height;
+		this.sceneWidth		= width;
+
 		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
 
-		int maxObjectSize = 80; 
-		
-		//Camera
-		float ratio = width / height;
-		camera = EXTGWTSTLVTHREE.PerspectiveCamera(60, ratio, 1f, 1000f);
-		camera.getPosition().set(-250, 200, -250);
-
 		//Scene
 		scene = THREE.Scene();
-
-		//WALL LEFT
-//		Geometry wallGeometry = THREE.PlaneGeometry( 200, 600);
-//		Material wallMaterial = THREE.MeshBasicMaterial().color(0xbb88ff).overdraw(true).build();
-//		wallMesh = EXTGWTTHREE.Mesh(wallGeometry, wallMaterial);
-//		scene.add(wallMesh);
-//		wallMesh.setPosition(-50, 200, -50);
-//		wallMesh.setRotation(0, Math.PI / 2, 0);
-//		wallMesh.setReceiveShadow(true);
-//		wallMesh.setCastShadow(true);
 
 		//Floor
 		Geometry floorGeometry = THREE.PlaneGeometry( 10000, 10000);
@@ -61,23 +49,13 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		planeMesh.setPosition(0, 0, 0);
 		planeMesh.setReceiveShadow(true);
 		planeMesh.setCastShadow(true);
-		
+
 
 		EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
 
 			@Override
 			public void onSuccess(Geometry geometry) {
-				//Setup object texture, color, zoom etc
-				Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
-				objectMesh = THREE.MorphAnimMesh(geometry, material);
-				objectMesh.setPosition(0, 0, 0);
-				objectMesh.setRotation(- Math.PI / 2, 0, 0 );
-				objectMesh.setReceiveShadow(true);
-				objectMesh.setCastShadow(true);
-				//Add object to scene
-				scene.add(objectMesh);
-				camera.lookAt(scene.getPosition().getX(), scene.getPosition().getY() + 30, scene.getPosition().getZ());
-				AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
+				setupSTLObject(geometry, objectColorAsHex);
 			}
 
 			@Override
@@ -86,13 +64,6 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 			}
 		});
 
-		DirectionalLight dirLight = THREE.DirectionalLight( 0xffffff, 1000 );
-		dirLight.getColor().setHex(0xF07746);
-		dirLight.getPosition().set(0, 10,-70);
-//		dirLight.getPosition().multiplyScalar(50 );
-		dirLight.setCastShadow(true);
-		scene.add(dirLight);
-		
 		//Renderer
 		renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
 		renderer.setSize(width, height);
@@ -101,10 +72,51 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 
 		root.getElement().appendChild(renderer.getDomElement());
 	}
-	
+
+	private void setupSTLObject(Geometry geometry, int objectColorAsHex) {
+		//Solve scene parameters
+		geometry.computeBoundingBox();
+		BoundingBox boundingBox = geometry.getBoundingBox();
+		Vector3 maxVector3 = boundingBox.getMax();
+		Vector3 minVector3 = boundingBox.getMin();
+
+		double height 		= Math.abs(maxVector3.getY() - minVector3.getY());
+		double width		= Math.abs(maxVector3.getZ() - minVector3.getZ());
+		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width);
+
+		//Build mesh
+		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
+		objectMesh = THREE.MorphAnimMesh(geometry, material);
+		objectMesh.setPosition(0, 0, 0);
+		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
+		objectMesh.setReceiveShadow(true);
+		objectMesh.setCastShadow(true);
+		objectMesh.setScale(sceneParameters.getScale(), sceneParameters.getScale(), sceneParameters.getScale());
+
+		//Add object to scene
+		scene.add(objectMesh);
+
+		//Camera
+		float ratio = this.sceneWidth / this.sceneHeight;
+		double cameraLookAtY = objectMesh.getPosition().getY() + ( (3 / 4) * sceneParameters.getHeightScaled() );
+		camera = EXTGWTSTLVTHREE.PerspectiveCamera(35, ratio, 1f, 1000f);
+		camera.getPosition().set(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
+		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
+		
+		//Light
+		DirectionalLight dirLight = THREE.DirectionalLight( 0xff6600, 1000 );
+		//dirLight.getColor().setHex(0xF07746);
+		dirLight.getPosition().set(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+		//		dirLight.getPosition().multiplyScalar(50 );
+		dirLight.setCastShadow(true);
+		scene.add(dirLight);
+
+		AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
+	}
+
 	@Override
 	public void execute(double timestamp) {
-		objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + 0.2);
+		objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + 0.1);
 		renderer.render(scene, camera);
 		AnimationScheduler.get().requestAnimationFrame(this);
 	}
