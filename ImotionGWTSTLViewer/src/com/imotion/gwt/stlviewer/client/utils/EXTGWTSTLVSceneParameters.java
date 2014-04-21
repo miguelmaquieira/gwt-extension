@@ -2,10 +2,10 @@ package com.imotion.gwt.stlviewer.client.utils;
 
 public class EXTGWTSTLVSceneParameters {
 	
-	private static final double DESIRED_SIZE					= 200d;
-	private static final double CAMERA_VISION_ANGLE			= 0.610865238; //35 º
-	private static final double CAMERA_POSITION_ANGLE		= Math.PI / 6; //30 º
-	private static final double CAMERA_LOOK_AT_Y_PROPORTION	= 3/4;
+	private 	static final double 	DESIRED_SIZE					= 200d;
+	public		static final int 		CAMERA_VISION_ANGLE_DEGREES		= 35;
+	private 	static final int 		CAMERA_POSITION_ANGLE_DEGREES	= 33;
+	private 	static final double 	CAMERA_MIN_HEIGHT_PROPORTION	= 1d/2d;
 
 	private double	 cameraPositionX;
 	private double	 cameraPositionY;
@@ -13,36 +13,31 @@ public class EXTGWTSTLVSceneParameters {
 	private double	 lightPositionX;
 	private double	 lightPositionY;
 	private double	 lightPositionZ;
-	private double	 scale;
-	private double heightScaled;
-	private double widthScaled;
+	private double	 scaleValue;
+	private double height;
+	private double width;
 	private double cameraLookAtYAddition;
 	
-	public EXTGWTSTLVSceneParameters(double objectHeight, double objectWidth) {
+	public EXTGWTSTLVSceneParameters(double objectHeight, double objectWidth, boolean scale) {
 		double maxSize 		= Math.max(objectHeight, objectWidth);
 		
-		scale =  1 / (DESIRED_SIZE / maxSize);
+		scaleValue = 1;
+		if (scale) {
+			scaleValue =  scaleValue / (DESIRED_SIZE / maxSize);
+		}
 		
-		heightScaled = objectHeight / scale;
-		widthScaled	 = objectWidth / scale;
+		height = objectHeight /	scaleValue;
+		width	 = objectWidth / 	scaleValue;
 		
-		cameraLookAtYAddition = CAMERA_LOOK_AT_Y_PROPORTION * heightScaled;
+		cameraLookAtYAddition = CAMERA_MIN_HEIGHT_PROPORTION * height;
 		
-		cameraPositionX = ((DESIRED_SIZE / Math.tan(CAMERA_VISION_ANGLE / 2)) / Math.sqrt(2));
+		cameraPositionX = ((DESIRED_SIZE / Math.tan(getCameraVisionAngleInRadians() / 2)) / Math.sqrt(2));
 		cameraPositionZ = cameraPositionX;
-		cameraPositionY = (( (DESIRED_SIZE / Math.tan(CAMERA_VISION_ANGLE / 2)) *   Math.tan(CAMERA_POSITION_ANGLE) ) + heightScaled / 2 );
+		cameraPositionY = (( (DESIRED_SIZE / Math.tan(getCameraVisionAngleInRadians() / 2)) *   Math.tan(getCameraPositionAngleInRadians()) ) + height / 2 );
 		
 		lightPositionX = 0;
 		lightPositionY = cameraPositionY;
 		lightPositionZ = cameraPositionZ;
-	}
-
-	public double getCameraVisionAngle() {
-		return CAMERA_VISION_ANGLE;
-	}
-
-	public double getCameraPositionAngle() {
-		return CAMERA_POSITION_ANGLE;
 	}
 
 	public double getCameraPositionX() {
@@ -70,19 +65,31 @@ public class EXTGWTSTLVSceneParameters {
 	}
 
 	public double getScale() {
-		return scale;
+		return scaleValue;
 	}
 
-	public double getHeightScaled() {
-		return heightScaled;
+	public double getHeight() {
+		return height;
 	}
 
-	public double getWidthScaled() {
-		return widthScaled;
+	public double getWidth() {
+		return width;
 	}
 
 	public double getCameraLookAtYAddition() {
 		return cameraLookAtYAddition;
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private double getCameraVisionAngleInRadians() {
+		return Math.toRadians(CAMERA_VISION_ANGLE_DEGREES);
+	}
+
+	private double getCameraPositionAngleInRadians() {
+		return Math.toRadians(CAMERA_POSITION_ANGLE_DEGREES);
 	}
 
 }

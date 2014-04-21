@@ -7,5 +7,9 @@ public class EXTGWTSTLVWebGLRenderer extends WebGLRenderer {
 	protected EXTGWTSTLVWebGLRenderer() {
 		super();
 	}
+	
+	public final native void setPhysicallyBasedShading (boolean bool)/*-{
+	this.physicallyBasedShading =bool;
+	}-*/;
 
 }
