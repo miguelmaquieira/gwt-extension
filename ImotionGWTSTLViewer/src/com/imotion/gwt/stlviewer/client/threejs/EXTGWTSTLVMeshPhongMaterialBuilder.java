@@ -41,41 +41,49 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.google.gwt.core.client.JavaScriptObject;
 
 
-public class EXTGWTSTLVMaterialBuilder extends JavaScriptObject {
+public class EXTGWTSTLVMeshPhongMaterialBuilder extends JavaScriptObject {
 	
-	protected EXTGWTSTLVMaterialBuilder() {
-		
+	protected EXTGWTSTLVMeshPhongMaterialBuilder() {}
+	
+	public final static EXTGWTSTLVMeshPhongMaterialBuilder create() {
+		return (EXTGWTSTLVMeshPhongMaterialBuilder) EXTGWTSTLVMeshPhongMaterialBuilder.createObject();
 	}
 	
-	public final static EXTGWTSTLVMaterialBuilder create() {
-		return (EXTGWTSTLVMaterialBuilder) EXTGWTSTLVMaterialBuilder.createObject();
-	}
-	
-	public final static EXTGWTSTLVMaterialBuilder create(int color) {
-		EXTGWTSTLVMaterialBuilder builder= (EXTGWTSTLVMaterialBuilder) EXTGWTSTLVMaterialBuilder.createObject();
+	public final static EXTGWTSTLVMeshPhongMaterialBuilder create(int color) {
+		EXTGWTSTLVMeshPhongMaterialBuilder builder= (EXTGWTSTLVMeshPhongMaterialBuilder) EXTGWTSTLVMeshPhongMaterialBuilder.createObject();
 		return builder.color(color);
 	}
 	
-	public final EXTGWTSTLVMaterialBuilder color(int r,int g,int b) {
+	public final EXTGWTSTLVMeshPhongMaterialBuilder color(int r,int g,int b) {
 		int c = (0xff & r)<<16 | (0xff & g)<<8 | (0xff & b);
 		return color(c);
 	}
 	
-	public final  EXTGWTSTLVMaterialBuilder color(double c) {
+	public final  EXTGWTSTLVMeshPhongMaterialBuilder color(double c) {
 		return color((int) c);
 	}
 	
-	public final native EXTGWTSTLVMaterialBuilder specular(int s)/*-{
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder color(int c)/*-{
+	this["color"]=c;
+	return this;
+	}-*/;
+	
+//	color: 0x996633, 
+//    ambient: 0x996633, // should generally match color
+//    specular: 0x050505,
+//    shininess: 100
+	
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder specular(double s)/*-{
 		this["specular"] = s;
 		return this;
 	}-*/;
 	
-	public final native EXTGWTSTLVMaterialBuilder ambient(int a)/*-{
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder ambient(double a)/*-{
 		this["ambient"] = a;
 		return this;
 	}-*/;
 	
-	public final native EXTGWTSTLVMaterialBuilder shininess(int s)/*-{
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder shininess(int s)/*-{
 		this["shininess"] = s;
 		return this;
 	}-*/;

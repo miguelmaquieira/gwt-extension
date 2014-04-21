@@ -8,7 +8,6 @@ import com.akjava.gwt.three.client.gwt.core.BoundingBox;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
-import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 import com.akjava.gwt.three.client.scenes.Scene;
 import com.google.gwt.animation.client.AnimationScheduler;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
@@ -18,18 +17,19 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVWebGLRenderer;
 import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
 public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
 
-	private 	WebGLRenderer 	renderer;
-	private 	Scene 			scene;
-	private 	Camera 			camera;
-	private 	Mesh 			objectMesh;
-	private 	Mesh 			planeMesh;
-	private		int				sceneWidth;
-	private		int				sceneHeight;
-	private		boolean			scale;
+	private 	EXTGWTSTLVWebGLRenderer 	renderer;
+	private 	Scene 						scene;
+	private 	Camera 						camera;
+	private 	Mesh 						objectMesh;
+	private 	Mesh 						planeMesh;
+	private		int							sceneWidth;
+	private		int							sceneHeight;
+	private		boolean						scale;
 
 	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, int width, int height, boolean scale) {
 		this.sceneHeight 	= height;
@@ -71,6 +71,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		renderer.setSize(width, height);
 		renderer.setClearColorHex(backgroundColorAsHex, 1d);
 		renderer.setShadowMapEnabled(true);
+		renderer.setPhysicallyBasedShading(true);
 
 		root.getElement().appendChild(renderer.getDomElement());
 	}
@@ -79,16 +80,17 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		//Solve scene parameters
 		geometry.computeBoundingBox();
 		BoundingBox boundingBox = geometry.getBoundingBox();
-		Vector3 maxVector3 = boundingBox.getMax();
-		Vector3 minVector3 = boundingBox.getMin();
+		Vector3 	maxVector3 	= boundingBox.getMax();
+		Vector3 	minVector3 	= boundingBox.getMin();
 
 		double height 		= Math.abs(maxVector3.getY() - minVector3.getY());
 		double width		= Math.abs(maxVector3.getZ() - minVector3.getZ());
 		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
 
 		//Build mesh
-		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).overdraw(true).opacity(0.7).build();
-		objectMesh = THREE.MorphAnimMesh(geometry, material);
+		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).reflectivity(true).opacity(0.7).build();
+//		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).build();
+		objectMesh = THREE.Mesh(geometry, material);
 		objectMesh.setPosition(0, 0, 0);
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
 		objectMesh.setReceiveShadow(true);
@@ -102,17 +104,22 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		float ratio = this.sceneWidth / this.sceneHeight;
 		double cameraLookAtY = objectMesh.getPosition().getY() + sceneParameters.getCameraLookAtYAddition();
 		camera = EXTGWTSTLVTHREE.PerspectiveCamera(ratio, 1f, 1000f);
-		camera.getPosition().set(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
+		camera.setPosition(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
 		
 		//Light
 		DirectionalLight dirLight = THREE.DirectionalLight( 0xff6600, 1000 );
-		//dirLight.getColor().setHex(0xF07746);
-		dirLight.getPosition().set(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
-		//		dirLight.getPosition().multiplyScalar(50 );
+		dirLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
 		dirLight.setCastShadow(true);
+		dirLight.setVisible(true);
 		scene.add(dirLight);
-
+		
+//		AmbientLight ambientLight = THREE.AmbientLight(0xff6600);
+//		ambientLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+//		ambientLight.setCastShadow(true);
+//		ambientLight.setVisible(true);
+//		scene.add(ambientLight);
+		
 		AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
 	}
 
