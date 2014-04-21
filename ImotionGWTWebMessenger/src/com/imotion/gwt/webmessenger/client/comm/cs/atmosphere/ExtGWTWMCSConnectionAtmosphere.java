@@ -51,9 +51,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	private AtmosphereRequest 		rpcRequest;
 	private AtmosphereRequestConfig rpcRequestConfig;
 
-	private boolean RECONNECT_FLAG 	  = true;
-	private boolean DISCONNECTED_FLAG = true;
-
 	@SuppressWarnings("unused")
 	private ExtGWTWMCSConnectionAtmosphere() {
 		// not allowed
@@ -95,8 +92,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	@Override
 	public void disconnect() {
 		try {
-			RECONNECT_FLAG = false;
-			DISCONNECTED_FLAG = false;
 			atmosphere.unsubscribe();
 			atmosphere = null;
 			rpcRequest = null;
@@ -107,11 +102,9 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 	@Override
 	public void connect() {
-		RECONNECT_FLAG = true;
 		if (atmosphere != null || rpcRequest != null) {
 
-			String message = MESSAGES.error_open_connection_message_text(getSessionData().getRoomId(),
-					getSessionData().getUserId());
+			String message = MESSAGES.error_open_connection_message_text(getSessionData().getRoomId(), getSessionData().getUserId());
 			ExtGWTWMError error = new ExtGWTWMError(TYPE.COMMAND, message);
 			handlerError(error);
 		} else {
@@ -191,7 +184,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
 		rpcRequestConfig.setFlags(Flags.enableProtocol);
 		rpcRequestConfig.setTimeout(timeout);
-		rpcRequestConfig.setReconnectInterval(300000);
 
 		rpcRequestConfig.setOpenHandler(new AtmosphereOpenHandler() {
 
@@ -208,18 +200,15 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 			@Override
 			public void onClose(AtmosphereResponse response) {
-
-				List<ExtGWTWMHasCloseCommHandler> handlers = getCommHandlerWrapper().getCommCloseHandlers();
-				for (int index = 0; index < handlers.size(); index++) {
-					handlers.get(index).handleConnectionClosed();
+				if (atmosphere != null) {
+					// uncontrolled situation. Activate Connection curator
+					// TODO activate connection curttor
+				} else {
+					List<ExtGWTWMHasCloseCommHandler> handlers = getCommHandlerWrapper().getCommCloseHandlers();
+					for (int index = 0; index < handlers.size(); index++) {
+						handlers.get(index).handleConnectionClosed();
+					}
 				}
-
-				if (RECONNECT_FLAG) {
-					atmosphere = null;
-					rpcRequest = null;
-					connect();
-				} 
-
 			}
 
 		});
