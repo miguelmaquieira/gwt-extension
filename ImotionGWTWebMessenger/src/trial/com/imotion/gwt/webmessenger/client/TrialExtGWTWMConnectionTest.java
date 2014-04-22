@@ -13,7 +13,7 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TrialExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
+public class TrialExtGWTWMConnectionTest extends Composite {
 
 	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
 	
@@ -66,25 +66,7 @@ public class TrialExtGWTWMConnectionTest extends Composite implements  ExtGWTWMH
 		
 	}
 	
-	
-	
-	
-	/**********************************************************************
-	 *                   IExtGWTWebMessengerWidgetDisplay				  *
-	 **********************************************************************/
 
-	@Override
-	public void handleConnectionOpened() {
-		statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);							
-	}
-
-
-	@Override
-	public void handleConnectionClosed() {
-		statusLabel.setText(TEXTS.status_label_text() + " Closed");			
-	}
-	
-	
 	/**********************************************************************
 	 *                       PRIVATE FUNCTIONS 							*
 	 **********************************************************************/
@@ -96,8 +78,22 @@ public class TrialExtGWTWMConnectionTest extends Composite implements  ExtGWTWMH
 		} else  {
 			if (connectionCS == null) {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
-				connectionCS.getCommHandlerWrapper().addCommOpenHandler(this);
-				connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
+				
+				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
+					@Override
+					public void handleConnectionOpened() {
+						statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);							
+						
+					}
+				});
+				
+				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {
+					
+					@Override
+					public void handleConnectionClosed() {
+						statusLabel.setText(TEXTS.status_label_text() + " Closed");							
+					}
+				});
 			}
 			return connectionCS;
 		}
