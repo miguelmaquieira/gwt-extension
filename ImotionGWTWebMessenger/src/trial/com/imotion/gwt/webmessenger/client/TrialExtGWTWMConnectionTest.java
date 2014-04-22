@@ -31,8 +31,7 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 		Button open = new Button(TEXTS.button_conect_text());
 		contentPanel.add(open);
 		
-		open.addClickHandler(new ClickHandler() {
-			
+		open.addClickHandler(new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
 				
@@ -42,16 +41,14 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 				} else {
 					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userNickName': " + DEFAULT_USER_ID + " ' roomId: '" + DEFAULT_ROOM_ID);
 				}
-			}
-							
+			}							
 		});
 		
 	
 		Button close = new Button(TEXTS.button_disconect_text());
 		contentPanel.add(close);
 		
-		close.addClickHandler(new ClickHandler() {
-			
+		close.addClickHandler(new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
 				if (connectionCS != null) {
@@ -82,13 +79,11 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
 					@Override
 					public void handleConnectionOpened() {
-						statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);							
-						
+						statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);													
 					}
 				});
 				
-				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {
-					
+				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {					
 					@Override
 					public void handleConnectionClosed() {
 						statusLabel.setText(TEXTS.status_label_text() + " Closed");							
