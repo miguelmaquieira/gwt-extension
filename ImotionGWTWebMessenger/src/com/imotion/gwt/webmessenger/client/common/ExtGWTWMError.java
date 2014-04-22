@@ -1,9 +1,14 @@
 package com.imotion.gwt.webmessenger.client.common;
 
+import java.io.Serializable;
 
 
-public class ExtGWTWMError {
+
+public class ExtGWTWMError implements Serializable {
 	
+	// serial UID
+	private static final long serialVersionUID = -6706544960221285813L;
+
 	public enum TYPE {
 		ALL,
 		EXCEPTION,
@@ -17,6 +22,10 @@ public class ExtGWTWMError {
 	@SuppressWarnings("unused")
 	private ExtGWTWMError() {
 		// not allowed
+	}
+	
+	public ExtGWTWMError(TYPE type) {
+		this.errorType = type;
 	}
 	
 	public  ExtGWTWMError(String message) {

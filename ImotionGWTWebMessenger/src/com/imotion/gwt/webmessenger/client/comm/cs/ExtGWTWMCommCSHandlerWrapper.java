@@ -82,7 +82,7 @@ public class ExtGWTWMCommCSHandlerWrapper implements ExtGWTWMCommCSHandler {
 
 	@Override
 	public void release() {
-		handlerManager.releaseCommHandlers(roomId);
+		handlerManager.releaseComm(roomId);
 		handlerManager = null;
 		roomId = null;
 	}
