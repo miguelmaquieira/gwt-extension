@@ -5,35 +5,37 @@ import com.akjava.gwt.three.client.cameras.Camera;
 import com.akjava.gwt.three.client.core.Geometry;
 import com.akjava.gwt.three.client.core.Vector3;
 import com.akjava.gwt.three.client.gwt.core.BoundingBox;
+import com.akjava.gwt.three.client.lights.AmbientLight;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
+import com.akjava.gwt.three.client.lights.Light;
 import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
 import com.akjava.gwt.three.client.renderers.WebGLRenderer;
-import com.akjava.gwt.three.client.scenes.Scene;
 import com.google.gwt.animation.client.AnimationScheduler;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLIRenderer;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVFog;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVScene;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVWebGLRenderer;
 import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
 public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
 
-	private 	EXTGWTSTLIRenderer 			renderer;
-	private 	Scene 						scene;
+	private 	WebGLRenderer	 			renderer;
+	private 	EXTGWTSTLVScene 			scene;
 	private 	Camera 						camera;
 	private 	Mesh 						objectMesh;
-	private 	Mesh 						planeMesh;
+	private 	Mesh 						groundMesh;
 	private		int							sceneWidth;
 	private		int							sceneHeight;
 	private		boolean						scale;
 
-	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, int width, int height) {
+	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  final int objectColorAsHex, final int groundColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this.sceneHeight 	= height;
 		this.sceneWidth		= width;
 		this.scale			= scale;
@@ -42,18 +44,19 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		initWidget(root);
 
 		//Scene
-		scene = THREE.Scene();
+		scene = EXTGWTSTLVTHREE.EXTGWTSTLVScene();
+		EXTGWTSTLVFog fog = EXTGWTSTLVTHREE.Fog(0xffffff, 1000, 10000);
+		scene.setFog(fog);
 
-		//Floor
-		Geometry floorGeometry = THREE.PlaneGeometry( 10000, 10000);
-		Material floorMaterial = THREE.MeshBasicMaterial().color(floorColorAsHex).overdraw(true).build();
-		planeMesh = EXTGWTSTLVTHREE.Mesh(floorGeometry, floorMaterial);
-		scene.add(planeMesh);
-		planeMesh.setRotation(- Math.PI / 2, 0, 0 );
-		planeMesh.setPosition(-100, 0, -100);
-		planeMesh.setReceiveShadow(true);
-		planeMesh.setCastShadow(true);
-
+		//GROUND
+		Geometry 		groundGeometry 	= THREE.PlaneGeometry( 10000, 10000);
+		Material 		groundMaterial 	= EXTGWTSTLVTHREE.MeshBasicMaterial().color(groundColorAsHex).build();
+		groundMesh = EXTGWTSTLVTHREE.Mesh(groundGeometry, groundMaterial);
+		scene.add(groundMesh);
+		groundMesh.setRotation(- Math.PI / 2, 0, 0 );
+		groundMesh.setPosition(0, 0, 0);
+		groundMesh.setReceiveShadow(true);
+		groundMesh.setCastShadow(true);
 
 		EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
 
@@ -74,6 +77,9 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		} else {
 			renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
 			( (EXTGWTSTLVWebGLRenderer) renderer).setPhysicallyBasedShading(true);
+			( (EXTGWTSTLVWebGLRenderer) renderer).setAntialias(true);
+			( (EXTGWTSTLVWebGLRenderer) renderer).setGammaInput(true);
+			( (EXTGWTSTLVWebGLRenderer) renderer).setGammaOutput(true);
 		}
 		WebGLRenderer webGLRenderer = (WebGLRenderer) renderer;
 		webGLRenderer.setSize(width, height);
@@ -94,8 +100,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
 
 		//Build mesh
-//		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).reflectivity(true).opacity(0.7).build();
-		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0x009900).shininess(30).build();
+		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0xFFFFFF).shininess(10).build();
 		objectMesh = THREE.Mesh(geometry, material);
 		objectMesh.setPosition(0, 0, 0);
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
@@ -112,20 +117,24 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		camera = EXTGWTSTLVTHREE.PerspectiveCamera(ratio, 1f, 1000f);
 		camera.setPosition(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
-		
+
 		//Light
-		DirectionalLight dirLight = THREE.DirectionalLight( 0xfff, 10 );
+		DirectionalLight dirLight = THREE.DirectionalLight( 0xffffff, 1 );
 		dirLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
 		dirLight.setCastShadow(true);
-		dirLight.setVisible(true);
 		scene.add(dirLight);
-		
-//		AmbientLight ambientLight = THREE.AmbientLight(0xff6600);
-//		ambientLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
-//		ambientLight.setCastShadow(true);
-//		ambientLight.setVisible(true);
-//		scene.add(ambientLight);
-		
+
+		AmbientLight ambientLight = THREE.AmbientLight(0xffffff);
+		ambientLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+		ambientLight.setCastShadow(true);
+		ambientLight.setVisible(true);
+		scene.add(ambientLight);
+
+		Light hemisphereLight = EXTGWTSTLVTHREE.HemisphereLight(0xffffff, 0xffffff, 0.2f);
+		hemisphereLight.setCastShadow(true);
+		scene.add(hemisphereLight);
+		hemisphereLight.setVisible(true);
+
 		AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
 	}
 

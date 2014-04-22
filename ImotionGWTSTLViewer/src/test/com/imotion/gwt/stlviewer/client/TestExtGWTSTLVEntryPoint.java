@@ -14,9 +14,9 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 	 */
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
-//		String modelPath = "models/thingiverse/Doll_Multiscan.stl";
-		String modelPath = "models/thingiverse/Owl_Facing_Left_fixed_sc.stl";
-		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, true, false, 0xFFFFFF, 0xFFFFFF, 0x000, 640, 480);
+		String modelPath = "models/thingiverse/Doll_Multiscan.stl";
+//		String modelPath = "models/thingiverse/Owl_Facing_Left_fixed_sc.stl";
+		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, false, false, 0xA09595, 0xFFFFFF, 0xffffff, 640, 480);
 		rootPanel.add(stlWidget);
 	}
 }
