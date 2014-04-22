@@ -13,18 +13,22 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
+public class TestExtGWTWMConnectionExceptionTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	
 	private final static String DEFAULT_USER_ID = "defaultUserId";
 	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
-		
+	private boolean exceptionFlag;
+	
 	private ExtGWTWMCommCSConnection connectionCS;
 	private Label statusLabel;
 	
+	
+	public TestExtGWTWMConnectionExceptionTest() {
 		
-	public TestExtGWTWMConnectionTest() {
+		exceptionFlag = true;
+		
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		
@@ -46,7 +50,6 @@ public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHa
 							
 		});
 		
-	
 		Button close = new Button(TEXTS.button_disconect_text());
 		contentPanel.add(close);
 		
@@ -54,6 +57,7 @@ public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHa
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				exceptionFlag = false;
 				if (connectionCS != null) {
 					connectionCS.disconnect();
 					connectionCS = null;
@@ -63,30 +67,29 @@ public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHa
 		
 		statusLabel = new Label(TEXTS.status_label_text() + " Closed");
 		contentPanel.add(statusLabel);
-		
 	}
-	
-	
-	
-	
+
 	/**********************************************************************
 	 *                   IExtGWTWebMessengerWidgetDisplay				  *
 	 **********************************************************************/
-
 	@Override
 	public void handleConnectionOpened() {
-		statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);							
-	}
-
-
+		statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);								
+	}	
+	
 	@Override
 	public void handleConnectionClosed() {
-		statusLabel.setText(TEXTS.status_label_text() + " Closed");			
+		if(exceptionFlag) {
+			statusLabel.setText("Connection failure...");
+		} else {
+			exceptionFlag = true;
+			statusLabel.setText(TEXTS.status_label_text() + " Closed");	
+		}
+		
 	}
 	
-	
 	/**********************************************************************
-	 *                       PRIVATE FUNCTIONS 							*
+	 *                       PRIVATE FUNCTIONS 							  *
 	 **********************************************************************/
 	
 	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
@@ -96,8 +99,8 @@ public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHa
 		} else  {
 			if (connectionCS == null) {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
-				connectionCS.getCommHandlerWrapper().addCommOpenHandler(this);
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
+				connectionCS.getCommHandlerWrapper().addCommOpenHandler(this);
 			}
 			return connectionCS;
 		}

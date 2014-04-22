@@ -20,7 +20,7 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasReceiveCommHandler{
+public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasReceiveCommHandler{
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
@@ -31,11 +31,11 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 	private TextBox		textMessage;
 	private TextArea 	areaMessage;
 	private Button 		buttonSend;
-	
+
 	private boolean connectedFlag;
 
 	public TestExtGWTWMMessagingTest() {
-		
+
 		connectedFlag = false;
 
 		FlowPanel contentPanel = new FlowPanel();
@@ -81,10 +81,10 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 		buttonSend = new Button(TEXTS.button_conect_text());
 		sendMessagePanel.add(buttonSend);
 		sendMessagePanel.setCellWidth(buttonSend, "20%");
-		
+
 
 		buttonSend.addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
@@ -101,8 +101,8 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 				}
 			}
 		});
-		
-		
+
+
 		// Message panel
 		SimplePanel messagePanel = new SimplePanel();
 		messagePanel.addStyleName("extgwt-webMessegerMessagingTestMessagePanel");
@@ -110,6 +110,22 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 		areaMessage = new TextArea();
 		areaMessage.setReadOnly(true);
 		messagePanel.setWidget(areaMessage);
+
+	}
+
+
+	/**********************************************************************
+	 *                   IExtGWTWebMessengerWidgetDisplay				  *
+	 **********************************************************************/
+
+	@Override
+	public void handleConnectionOpened() {
+
+		connectedFlag = true;		
+		String text ="Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
+		writeMessage(text);		
+		textMessage.setEnabled(true);
+		buttonSend.setText(TEXTS.button_send_text());	
 
 	}
 
@@ -123,7 +139,7 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
-		
+
 	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
 		if (nickname == null || nickname.length() == 0 || roomname == null || roomname.length() == 0) {
 			Window.alert("Debes informar: 'nickname' y 'roomname'");
@@ -132,18 +148,7 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 			if (connectionCS == null) {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
-				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {			
-					@Override
-					public void handleConnectionOpened() {
-						connectedFlag = true;
-						
-						String text ="Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
-						writeMessage(text);		
-						textMessage.setEnabled(true);
-						buttonSend.setText(TEXTS.button_send_text());					
-					}
-				});				
-			
+				connectionCS.getCommHandlerWrapper().addCommOpenHandler(this);		
 			}
 			return connectionCS;
 		}
@@ -151,11 +156,13 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasR
 
 	private void writeMessage(String text) {
 		String finalText = new StringBuilder()
-			.append(areaMessage.getText())
-			.append(text)
-			.append("\n")
-			.toString();
+		.append(areaMessage.getText())
+		.append(text)
+		.append("\n")
+		.toString();
 		areaMessage.setText(finalText);
 		areaMessage.setCursorPos(finalText.length());
 	}
+
+
 }
