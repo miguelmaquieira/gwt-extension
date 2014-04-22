@@ -35,11 +35,16 @@
 		<servlet-name>AtmosphereServlet</servlet-name>
 		<url-pattern>/imotionWebMessengerTest/atmosphere/*</url-pattern>
 	</servlet-mapping>
-  
+  	<servlet-mapping>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<url-pattern>/imotionWebMessengerTrial/atmosphere/*</url-pattern>
+	</servlet-mapping>
+	
+	
   
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>imotionWebMessengerTest.jsp</welcome-file>
+		<welcome-file>imotionWebMessengerTrial.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

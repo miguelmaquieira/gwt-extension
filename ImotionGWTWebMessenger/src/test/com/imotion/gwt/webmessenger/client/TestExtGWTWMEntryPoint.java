@@ -7,8 +7,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 			 
 public class TestExtGWTWMEntryPoint implements EntryPoint {
 	
-	private static final String TOKEN_CHAT 		= "chat";
-	private static final String TOKEN_MULTICHAT = "multichat";
+	private static final String TOKEN_CHAT 			= "chat";
+	private static final String TOKEN_MULTICHAT 	= "multichat";
 
 	@Override
 	public void onModuleLoad() {
