@@ -1,4 +1,4 @@
-package test.com.imotion.gwt.webmessenger.client;
+package trial.com.imotion.gwt.webmessenger.client;
 
 import java.util.Date;
 
@@ -20,9 +20,9 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasReceiveCommHandler{
+public class TrialExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasReceiveCommHandler{
 
-	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
+	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
 
 	private ExtGWTWMCommCSConnection connectionCS;
@@ -34,7 +34,7 @@ public class TestExtGWTWMMessagingTest extends Composite implements ExtGWTWMHasO
 
 	private boolean connectedFlag;
 
-	public TestExtGWTWMMessagingTest() {
+	public TrialExtGWTWMMessagingTest() {
 
 		connectedFlag = false;
 
