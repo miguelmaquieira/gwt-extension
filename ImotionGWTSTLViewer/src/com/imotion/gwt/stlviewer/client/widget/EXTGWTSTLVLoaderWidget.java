@@ -8,6 +8,7 @@ import com.akjava.gwt.three.client.gwt.core.BoundingBox;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
+import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 import com.akjava.gwt.three.client.scenes.Scene;
 import com.google.gwt.animation.client.AnimationScheduler;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
@@ -15,6 +16,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLIRenderer;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVWebGLRenderer;
@@ -22,7 +24,7 @@ import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
 public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
 
-	private 	EXTGWTSTLVWebGLRenderer 	renderer;
+	private 	EXTGWTSTLIRenderer 			renderer;
 	private 	Scene 						scene;
 	private 	Camera 						camera;
 	private 	Mesh 						objectMesh;
@@ -31,7 +33,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 	private		int							sceneHeight;
 	private		boolean						scale;
 
-	public EXTGWTSTLVLoaderWidget(String url, final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, int width, int height, boolean scale) {
+	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  final int objectColorAsHex, int floorColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this.sceneHeight 	= height;
 		this.sceneWidth		= width;
 		this.scale			= scale;
@@ -67,13 +69,17 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		});
 
 		//Renderer
-		renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
-		renderer.setSize(width, height);
-		renderer.setClearColorHex(backgroundColorAsHex, 1d);
-		renderer.setShadowMapEnabled(true);
-		renderer.setPhysicallyBasedShading(true);
-
-		root.getElement().appendChild(renderer.getDomElement());
+		if (canvas) {
+			renderer = EXTGWTSTLVTHREE.EXTGWTCanvasRenderer();
+		} else {
+			renderer = EXTGWTSTLVTHREE.EXTGWTWebGLRenderer();
+			( (EXTGWTSTLVWebGLRenderer) renderer).setPhysicallyBasedShading(true);
+		}
+		WebGLRenderer webGLRenderer = (WebGLRenderer) renderer;
+		webGLRenderer.setSize(width, height);
+		webGLRenderer.setClearColorHex(backgroundColorAsHex, 1d);
+		webGLRenderer.setShadowMapEnabled(true);
+		root.getElement().appendChild(webGLRenderer.getDomElement());
 	}
 
 	private void setupSTLObject(Geometry geometry, int objectColorAsHex) {
@@ -88,7 +94,8 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
 
 		//Build mesh
-		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x000).specular(0x009900).shininess(30).build();
+//		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).reflectivity(true).opacity(0.7).build();
+		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0x009900).shininess(30).build();
 		objectMesh = THREE.Mesh(geometry, material);
 		objectMesh.setPosition(0, 0, 0);
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );

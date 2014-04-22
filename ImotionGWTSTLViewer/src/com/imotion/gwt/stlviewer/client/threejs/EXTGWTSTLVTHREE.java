@@ -14,6 +14,10 @@ public class EXTGWTSTLVTHREE extends THREE {
 		return new $wnd.THREE.WebGLRenderer();
 	}-*/;
 	
+	public static native final EXTGWTSTLVCanvasRenderer EXTGWTCanvasRenderer()/*-{
+		return new $wnd.THREE.CanvasRenderer();
+	}-*/;
+	
 	public static Camera PerspectiveCamera(double ratio,double near,double far) {
 		return THREE.PerspectiveCamera(EXTGWTSTLVSceneParameters.CAMERA_VISION_ANGLE_DEGREES, ratio, near, far);
 	}
