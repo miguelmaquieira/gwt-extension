@@ -14,6 +14,7 @@ public class ExtGWTWMError implements Serializable {
 		EXCEPTION,
 		COMMAND,
 		TRANSPORT,
+		CONNECTION_ERROR,
 		WRAPPER_CS,
 		UNDEFINED
 	}
