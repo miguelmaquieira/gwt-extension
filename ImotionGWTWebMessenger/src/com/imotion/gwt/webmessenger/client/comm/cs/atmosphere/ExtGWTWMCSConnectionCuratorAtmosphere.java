@@ -13,6 +13,8 @@ import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWmCommCSConnectionCurator;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMCommand;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMCommand.COMMAND_TYPE;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
 public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConnectionCurator {
@@ -118,7 +120,8 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			
 			@Override
 			public void execute() {
-				conn.handleCloseEvent(null);
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.EXCEPTION.CONNECTION_ERROR);
+				conn.handlerError(error);
 			}
 		}, delay, attemps);
 	}
