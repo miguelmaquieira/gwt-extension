@@ -1,4 +1,4 @@
-package test.com.imotion.gwt.webmessenger.client;
+package trial.com.imotion.gwt.webmessenger.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,9 +13,9 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
+public class TrialExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
 
-	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
+	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
 	
 	private final static String DEFAULT_USER_ID = "defaultUserId";
 	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
@@ -24,7 +24,7 @@ public class TestExtGWTWMConnectionTest extends Composite implements  ExtGWTWMHa
 	private Label statusLabel;
 	
 		
-	public TestExtGWTWMConnectionTest() {
+	public TrialExtGWTWMConnectionTest() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		

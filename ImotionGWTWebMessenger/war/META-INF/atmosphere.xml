@@ -4,4 +4,7 @@
 	<atmosphere-handler context-root="/imotionWebMessengerTest/atmosphere/rpc" class-name="com.imotion.gwt.webmessenger.server.ExtGWTWMServer">
 		<property name="heartbeat" value="20000"/>
 	</atmosphere-handler>
+	<atmosphere-handler context-root="/imotionWebMessengerTrial/atmosphere/rpc" class-name="com.imotion.gwt.webmessenger.server.ExtGWTWMServer">
+		<property name="heartbeat" value="20000"/>
+	</atmosphere-handler>
 </atmosphere-handlers>

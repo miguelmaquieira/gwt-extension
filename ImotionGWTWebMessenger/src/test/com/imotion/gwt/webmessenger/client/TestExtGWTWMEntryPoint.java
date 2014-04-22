@@ -9,9 +9,6 @@ public class TestExtGWTWMEntryPoint implements EntryPoint {
 	
 	private static final String TOKEN_CHAT 			= "chat";
 	private static final String TOKEN_MULTICHAT 	= "multichat";
-	private static final String TOKEN_CONNECTION 	= "connectionTest";
-	private static final String TOKEN_MESSAGE 		= "messagingTest";
-	private static final String TOKEN_EXCEPTION 	= "exceptionTest";
 
 	@Override
 	public void onModuleLoad() {
@@ -23,12 +20,6 @@ public class TestExtGWTWMEntryPoint implements EntryPoint {
 				container = new TestExtGWTWMChatRoom();
 			} else if (token.equals(TOKEN_MULTICHAT)) {
 				container = new TestExtGWTWMMultiChatRoom();
-			} else if (token.equals(TOKEN_CONNECTION)) {
-				container = new TestExtGWTWMConnectionTest();
-			} else if (token.equals(TOKEN_MESSAGE)) {
-				container = new TestExtGWTWMMessagingTest();
-			} else if (token.equals(TOKEN_EXCEPTION)) {
-				container = new TestExtGWTWMConnectionExceptionTest();
 			} else {
 				container = new TestExtGWTWMChatRoom();
 			}

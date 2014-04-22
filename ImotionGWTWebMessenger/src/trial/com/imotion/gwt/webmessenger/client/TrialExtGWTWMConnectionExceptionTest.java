@@ -1,4 +1,4 @@
-package test.com.imotion.gwt.webmessenger.client;
+package trial.com.imotion.gwt.webmessenger.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,9 +17,9 @@ import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TestExtGWTWMConnectionExceptionTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler, ExtGWTWMHasErrorHandler {
+public class TrialExtGWTWMConnectionExceptionTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler, ExtGWTWMHasErrorHandler {
 
-	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
+	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
 	
 	private final static String DEFAULT_USER_ID = "defaultUserId";
 	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
@@ -30,7 +30,7 @@ public class TestExtGWTWMConnectionExceptionTest extends Composite implements Ex
 	private Label errorLabel;
 	
 	
-	public TestExtGWTWMConnectionExceptionTest() {
+	public TrialExtGWTWMConnectionExceptionTest() {
 		
 		exceptionFlag = true;
 		
