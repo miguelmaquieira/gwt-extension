@@ -88,8 +88,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
 
 		//Build mesh
-		Material material = EXTGWTSTLVTHREE.MeshBasicMaterial().color(objectColorAsHex).reflectivity(true).opacity(0.7).build();
-//		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).build();
+		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x000).specular(0x009900).shininess(30).build();
 		objectMesh = THREE.Mesh(geometry, material);
 		objectMesh.setPosition(0, 0, 0);
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
@@ -108,7 +107,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
 		
 		//Light
-		DirectionalLight dirLight = THREE.DirectionalLight( 0xff6600, 1000 );
+		DirectionalLight dirLight = THREE.DirectionalLight( 0xfff, 10 );
 		dirLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
 		dirLight.setCastShadow(true);
 		dirLight.setVisible(true);

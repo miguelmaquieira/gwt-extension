@@ -68,17 +68,12 @@ public class EXTGWTSTLVMeshPhongMaterialBuilder extends JavaScriptObject {
 	return this;
 	}-*/;
 	
-//	color: 0x996633, 
-//    ambient: 0x996633, // should generally match color
-//    specular: 0x050505,
-//    shininess: 100
-	
-	public final native EXTGWTSTLVMeshPhongMaterialBuilder specular(double s)/*-{
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder specular(int s)/*-{
 		this["specular"] = s;
 		return this;
 	}-*/;
 	
-	public final native EXTGWTSTLVMeshPhongMaterialBuilder ambient(double a)/*-{
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder ambient(int a)/*-{
 		this["ambient"] = a;
 		return this;
 	}-*/;
@@ -88,12 +83,17 @@ public class EXTGWTSTLVMeshPhongMaterialBuilder extends JavaScriptObject {
 		return this;
 	}-*/;
 	
+	public final native EXTGWTSTLVMeshPhongMaterialBuilder reflectivity(double r)/*-{
+		this["reflectivity"] = r;
+		return this;
+	}-*/;
+	
 	public final Material build() {
 		return build(this);
 	}
 	
 	private final native Material build(JavaScriptObject object)/*-{
-	return new $wnd.THREE.MeshPongMaterial(object);
+		return new $wnd.THREE.MeshPhongMaterial(object);
 	}-*/;
 	
 	

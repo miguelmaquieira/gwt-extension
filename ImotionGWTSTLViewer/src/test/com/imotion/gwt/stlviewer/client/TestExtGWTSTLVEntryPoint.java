@@ -15,7 +15,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 	public void onModuleLoad() {
 		RootPanel rootPanel = RootPanel.get();
 		String modelPath = "models/thingiverse/Doll_Multiscan.stl";
-		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, 0x0743AE, 0xFFFFFF, 0x000, 640, 480, false);
+		EXTGWTSTLVLoaderWidget stlWidget = new EXTGWTSTLVLoaderWidget(modelPath, 0x959A9D, 0xFFFFFF, 0x000, 640, 480, false);
 		rootPanel.add(stlWidget);
 	}
 }
