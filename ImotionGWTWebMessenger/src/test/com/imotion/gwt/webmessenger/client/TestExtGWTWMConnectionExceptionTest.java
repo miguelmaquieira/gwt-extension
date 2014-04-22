@@ -3,6 +3,7 @@ package test.com.imotion.gwt.webmessenger.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -10,10 +11,13 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TestExtGWTWMConnectionExceptionTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler {
+public class TestExtGWTWMConnectionExceptionTest extends Composite implements ExtGWTWMHasOpenCommHandler, ExtGWTWMHasCloseCommHandler, ExtGWTWMHasErrorHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	
@@ -23,6 +27,7 @@ public class TestExtGWTWMConnectionExceptionTest extends Composite implements Ex
 	
 	private ExtGWTWMCommCSConnection connectionCS;
 	private Label statusLabel;
+	private Label errorLabel;
 	
 	
 	public TestExtGWTWMConnectionExceptionTest() {
@@ -67,6 +72,11 @@ public class TestExtGWTWMConnectionExceptionTest extends Composite implements Ex
 		
 		statusLabel = new Label(TEXTS.status_label_text() + " Closed");
 		contentPanel.add(statusLabel);
+		
+		errorLabel = new Label();
+		errorLabel.addStyleName("extgwt-textError");
+		contentPanel.add(errorLabel);
+		
 	}
 
 	/**********************************************************************
@@ -88,6 +98,22 @@ public class TestExtGWTWMConnectionExceptionTest extends Composite implements Ex
 		
 	}
 	
+	@Override
+	public void onError(ExtGWTWMError error) {	
+		errorLabel.setText(error.getMessage());
+		Timer timerText = new Timer() {
+			public void run() {
+				errorLabel.setText("");
+			}
+		};
+		timerText.schedule(5000);
+	}
+
+	@Override
+	public TYPE[] getErrorType() {
+		return new TYPE[]{ TYPE.ALL };
+	}
+	
 	/**********************************************************************
 	 *                       PRIVATE FUNCTIONS 							  *
 	 **********************************************************************/
@@ -101,10 +127,10 @@ public class TestExtGWTWMConnectionExceptionTest extends Composite implements Ex
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(this);
+				connectionCS.getErrorHandlerWrapper().addErrorHandler(this);
 			}
 			return connectionCS;
 		}
 	}
-
 
 }
