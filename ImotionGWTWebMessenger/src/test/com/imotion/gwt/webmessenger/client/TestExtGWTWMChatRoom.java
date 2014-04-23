@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
@@ -268,11 +269,15 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			Window.alert("Debes informar: 'nickname' y 'roomname'");
 			return null;
 		} else  {
-			if (connectionCS == null) {
-				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
-				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
-				connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
-				connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
+			try {
+				if (connectionCS == null) {
+					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+					connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
+					connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
+					connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
+				}
+			} catch (ExtGWTWMException exception) {
+				Window.alert("Exception: " + exception.getMessage());
 			}
 			return connectionCS;
 		}

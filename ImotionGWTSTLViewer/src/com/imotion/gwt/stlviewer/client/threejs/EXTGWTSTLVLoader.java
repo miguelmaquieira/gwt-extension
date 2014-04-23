@@ -16,7 +16,8 @@ public class EXTGWTSTLVLoader {
 		} );
 		
 		loader.addEventListener( 'error', function ( event ) {
-			@com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader::callbackError(Lcom/google/gwt/user/client/rpc/AsyncCallback;)(callback);
+			var message = event.message;
+			@com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader::callbackError(Lcom/google/gwt/user/client/rpc/AsyncCallback;Ljava/lang/String;)(callback, message);
 		} );
 		
 		loader.load(url);
@@ -26,8 +27,9 @@ public class EXTGWTSTLVLoader {
 		callback.onSuccess (geometry);
 	}
 	
-	public static void callbackError(AsyncCallback<Geometry> callback) {
-		callback.onFailure(null);
+	public static void callbackError(AsyncCallback<Geometry> callback, String message) {
+		Exception exception = new Exception(message);
+		callback.onFailure(exception);
 	}
 
 }
