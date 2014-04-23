@@ -12,7 +12,6 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
 import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 import com.google.gwt.animation.client.AnimationScheduler;
-import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -23,7 +22,7 @@ import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVWebGLRenderer;
 import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
 
-public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallback {
+public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoaderDisplay {
 
 	private 	WebGLRenderer	 			renderer;
 	private 	EXTGWTSTLVScene 			scene;
@@ -36,19 +35,33 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 	private		int							sceneWidth;
 	private		int							sceneHeight;
 	private		boolean						scale;
-	private 	float 						gyreSpeed;
+	private 	double 						gyreSpeed;
+	private 	double 						zoomPercentage;
 	private 	int 						objectColorAsHex;
 
-	public EXTGWTSTLVLoaderWidget(boolean canvas, boolean scale,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, float gyreSpeed) {
-		this(null, canvas, scale, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed);
+	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+		this(null, false, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
-	
-	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, float gyreSpeed) {
+
+	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+		this(null, false, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+	}
+
+	public EXTGWTSTLVLoaderWidget(boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+		this(null, canvas, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+	}
+
+	public EXTGWTSTLVLoaderWidget(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+		this(url, canvas, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+	}
+
+	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
 		this.sceneHeight 			= height;
 		this.sceneWidth				= width;
 		this.scale					= scale;
-		this.gyreSpeed				= gyreSpeed;
 		this.objectColorAsHex		= objectColorAsHex;
+		setGyreSpeed(gyreSpeed);
+		setZoomPercentage(zoomPercentage);
 
 		HTMLPanel root = new HTMLPanel(""); 
 		initWidget(root);
@@ -86,6 +99,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		root.getElement().appendChild(webGLRenderer.getDomElement());
 	}
 
+	@Override
 	public void loadModel(String url) {
 		if (url != null && url.length() > 0) {
 			EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
@@ -97,27 +111,73 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Error cargando stl");
+					Window.alert("Error cargando modelo stl");
 				}
 			});
 		}
 	}
 
+	@Override
+	public double increaseGyreSpeed(double radiansPerIteration) {
+		if (radiansPerIteration > 0) {
+			gyreSpeed += radiansPerIteration;
+		}
+		return gyreSpeed;
+	}
+
+	@Override
+	public double decreaseGyreSpeed(double radiansPerIteration) {
+		if (gyreSpeed >= Math.abs(radiansPerIteration) && radiansPerIteration > 0 ) {
+			gyreSpeed -= radiansPerIteration;
+		}
+		return gyreSpeed;
+	}
+
+	@Override
+	public void zoomIn() {
+		double scaleVariation 	= getScaleVariation();
+		double scale			= getScale();
+		if (objectMesh != null && scale > scaleVariation) {
+			scale -= scaleVariation;
+			objectMesh.setScale(scale, scale, scale);
+		}
+	}
+
+	@Override
+	public void zoomOut() {
+		double scaleVariation 	= getScaleVariation();
+		double scale			= getScale();
+		if (objectMesh != null) {
+			scale += scaleVariation;
+			objectMesh.setScale(scale, scale, scale);
+		}
+	}
+	
+	@Override
+	public void setZoomPercentage(double zoomPercentage) {
+		this.zoomPercentage = zoomPercentage;
+	}
+	
+	@Override
+	public void setGyreSpeed(double radiansPerIteration) {
+		this.gyreSpeed = radiansPerIteration;
+	}
+
 	/**
 	 * AnimationCallback 
 	 */
-	
+
 	@Override
 	public void execute(double timestamp) {
 		objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + gyreSpeed);
 		renderer.render(scene, camera);
 		AnimationScheduler.get().requestAnimationFrame(this);
 	}
-	
+
 	/***
 	 * PRIVATE
 	 */
-	
+
 	private void setupSTLObject(Geometry geometry, int objectColorAsHex) {
 		//Solve scene parameters
 		geometry.computeBoundingBox();
@@ -163,7 +223,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		objectMesh.setCastShadow(true);
 		objectMesh.setScale(sceneParameters.getScale(), sceneParameters.getScale(), sceneParameters.getScale());
 		scene.add(objectMesh);
-		
+
 		//Camera
 		float ratio = this.sceneWidth / this.sceneHeight;
 		double cameraLookAtY = objectMesh.getPosition().getY() + sceneParameters.getCameraLookAtYAddition();
@@ -174,6 +234,23 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements AnimationCallba
 		if (firstTime) {
 			AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
 		}
+	}
+	
+	private double getScaleVariation() {
+		double scaleVariation 	= 0d;
+		double scale			= getScale();
+		if (scale > 0) {
+			scaleVariation 	= scale * (zoomPercentage / 100);
+		}
+		return scaleVariation;
+	}
+
+	private double getScale() {
+		double scale = 0d;
+		if (objectMesh != null) {
+			scale 	= objectMesh.getScale().getX();
+		}
+		return scale;
 	}
 
 }
