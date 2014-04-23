@@ -137,9 +137,9 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 	public void zoomIn() {
 		double scaleVariation 	= getScaleVariation();
 		double scale			= getScale();
-		if (camera != null && scale > scaleVariation) {
+		if (objectMesh != null && scale > scaleVariation) {
 			scale -= scaleVariation;
-			camera.setScale(scale, scale, scale);
+			objectMesh.setScale(scale, scale, scale);
 		}
 	}
 
@@ -147,9 +147,9 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 	public void zoomOut() {
 		double scaleVariation 	= getScaleVariation();
 		double scale			= getScale();
-		if (camera != null) {
+		if (objectMesh != null) {
 			scale += scaleVariation;
-			camera.setScale(scale, scale, scale);
+			objectMesh.setScale(scale, scale, scale);
 		}
 	}
 	
@@ -247,8 +247,8 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 
 	private double getScale() {
 		double scale = 0d;
-		if (camera != null) {
-			scale 	= camera.getScale().getX();
+		if (objectMesh != null) {
+			scale 	= objectMesh.getScale().getX();
 		}
 		return scale;
 	}
