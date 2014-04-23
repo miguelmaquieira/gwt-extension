@@ -29,6 +29,7 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 
 	public TestExtGWTWMTestCaseConnectionError() {
 		FlowPanel contentPanel = new FlowPanel();
+		contentPanel.addStyleName("extgwt-testCaseConnectionErrorContentPanel");
 		initWidget(contentPanel);
 
 		//// Nick name panel
@@ -59,7 +60,7 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 
 		/// Send Message panel
 		HorizontalPanel sendMessagePanel = new HorizontalPanel();
-		sendMessagePanel.addStyleName("extgwt-webMessengerMessagingTestSendMessagePanel");
+		sendMessagePanel.addStyleName("extgwt-testCaseConnectionErrorSendMessagePanel");
 		contentPanel.add(sendMessagePanel);
 
 		//// Message text
@@ -135,7 +136,7 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(messagePanel);
 				connectionCS.getErrorHandlerWrapper().addErrorHandler(messagePanel);
 			} catch (ExtGWTWMException e) {
-				Window.alert(e.getMessage());
+				messagePanel.writeMessage(e.getMessage());
 			}		
 
 

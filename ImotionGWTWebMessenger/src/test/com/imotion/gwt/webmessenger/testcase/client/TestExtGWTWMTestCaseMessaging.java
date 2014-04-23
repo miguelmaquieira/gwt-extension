@@ -39,6 +39,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 	public TestExtGWTWMTestCaseMessaging() {
 
 		FlowPanel contentPanel = new FlowPanel();
+		contentPanel.addStyleName("extgwt-webMessengerMessagingTestContentPanel");
 		initWidget(contentPanel);
 
 		//// Nick name panel
@@ -69,7 +70,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 
 		/// Send Message panel
 		HorizontalPanel sendMessagePanel = new HorizontalPanel();
-		sendMessagePanel.addStyleName("extgwt-webMessengerMessagingTestSendMessagePanel");
+		sendMessagePanel.addStyleName("extgwt-testCaseMessagingSendMessagePanel");
 		contentPanel.add(sendMessagePanel);
 
 		//// Message text
@@ -115,7 +116,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 
 		// Message panel
 		SimplePanel messagePanel = new SimplePanel();
-		messagePanel.addStyleName("extgwt-webMessegerMessagingTestMessagePanel");
+		messagePanel.addStyleName("extgwt-testCaseMessagingMessagePanel");
 		contentPanel.add(messagePanel);
 		areaMessage = new TextArea();
 		areaMessage.setReadOnly(true);
@@ -137,7 +138,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
-						String text = "Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
+						String text = "Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();					
 						writeMessage(text);		
 						textMessage.setEnabled(true);
 						buttonConnect.setEnabled(false);											
@@ -154,7 +155,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 					}
 				});
 			} catch (ExtGWTWMException e) {
-				Window.alert(e.getMessage());
+				writeMessage(e.getMessage());
 			}			
 		}
 		return connectionCS;

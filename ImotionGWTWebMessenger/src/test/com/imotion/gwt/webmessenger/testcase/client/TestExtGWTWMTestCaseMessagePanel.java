@@ -25,7 +25,7 @@ public class TestExtGWTWMTestCaseMessagePanel extends Composite implements ExtGW
 		// Message panel
 		SimplePanel messagePanel = new SimplePanel();
 		initWidget(messagePanel);
-		messagePanel.addStyleName("extgwt-webMessegerMessagingTestMessagePanel");
+		messagePanel.addStyleName("extgwt-testCaseConnectionErrorMessagePanel");
 		areaMessage = new TextArea();
 		areaMessage.setReadOnly(true);
 		messagePanel.setWidget(areaMessage);

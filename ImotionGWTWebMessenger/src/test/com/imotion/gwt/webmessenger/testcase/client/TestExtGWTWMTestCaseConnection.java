@@ -28,6 +28,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 	public TestExtGWTWMTestCaseConnection() {
 
 		FlowPanel contentPanel = new FlowPanel();
+		contentPanel.addStyleName("extgwt-testCaseConnectionContentPanel");
 		initWidget(contentPanel);
 
 		Button open = new Button(TEXTS.button_conect_text());
@@ -58,7 +59,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 			}
 		});
 
-		statusLabel = new Label(TEXTS.status_label_text() + " Closed");
+		statusLabel = new Label("Status: Conection closed");
 		contentPanel.add(statusLabel);
 
 	}
@@ -77,19 +78,21 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
 					@Override
 					public void handleConnectionOpened() {
-						statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);													
+						String text = "Status: Conection open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID;						
+						statusLabel.setText(text);													
 					}
 				});
 
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {					
 					@Override
 					public void handleConnectionClosed() {
-						statusLabel.setText(TEXTS.status_label_text() + " Closed");							
+						String text = "Status: Conection closed";						
+						statusLabel.setText(text);							
 					}
 				});
 
 			} catch (ExtGWTWMException e) {
-				Window.alert(e.getMessage());
+				statusLabel.setText(e.getMessage());
 			}
 		}
 		return connectionCS;

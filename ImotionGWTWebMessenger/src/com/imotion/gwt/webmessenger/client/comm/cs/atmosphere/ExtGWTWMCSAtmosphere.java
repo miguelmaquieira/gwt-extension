@@ -36,7 +36,7 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	@Override
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) throws ExtGWTWMException {
 		if (roomId == null || roomId.length() == 0 || userId == null || userId.length() == 0) {
-			throw new ExtGWTWMException(TYPE.COMMAND, MESSAGES.error_open_connection_message_text(roomId, userId));
+			throw new ExtGWTWMException(TYPE.COMMAND, MESSAGES.error_get_connection_param_not_informed_message_text(roomId, userId));
 		}
 		String connectionKey = roomId + "_" + userId;
 		ExtGWTWMCommCSConnection connection = getConnectionsMap().get(connectionKey);
