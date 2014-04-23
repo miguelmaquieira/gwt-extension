@@ -1,11 +1,11 @@
-package trial.com.imotion.gwt.webmessenger.client;
+package test.com.imotion.gwt.webmessenger.testcase.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 			 
-public class TrialExtGWTWMEntryPoint implements EntryPoint {
+public class TestExtGWTWMTestCaseEntryPoint implements EntryPoint {
 	
 	private static final String TOKEN_CONNECTION 	= "test1";
 	private static final String TOKEN_MESSAGE 		= "test2";
@@ -18,16 +18,16 @@ public class TrialExtGWTWMEntryPoint implements EntryPoint {
 		String token = History.getToken();
 		if (token != null && token.length() > 0) {
 			if (token.equals(TOKEN_CONNECTION)) {
-				container = new TrialExtGWTWMConnectionTest();
+				container = new TestExtGWTWMTestCaseConnection();
 			} else if (token.equals(TOKEN_MESSAGE)) {
-				container = new TrialExtGWTWMMessagingTest();
+				container = new TestExtGWTWMTestCaseMessaging();
 			} else if (token.equals(TOKEN_EXCEPTION)) {
-				container = new TrialExtGWTWMConnectionExceptionTest();
+				container = new TestExtGWTWMTestCaseConnectionError();
 			} else {
-				container = new TrialExtGWTWMConnectionTest();
+				container = new TestExtGWTWMTestCaseConnection();
 			}
 		} else {
-			container = new TrialExtGWTWMConnectionTest();
+			container = new TestExtGWTWMTestCaseConnection();
 		}
 		
 		RootPanel rootPanel = RootPanel.get();

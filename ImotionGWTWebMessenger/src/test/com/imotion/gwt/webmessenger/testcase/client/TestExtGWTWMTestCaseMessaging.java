@@ -1,4 +1,4 @@
-package trial.com.imotion.gwt.webmessenger.client;
+package test.com.imotion.gwt.webmessenger.testcase.client;
 
 import java.util.Date;
 
@@ -20,9 +20,9 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class TrialExtGWTWMMessagingTest extends Composite {
+public class TestExtGWTWMTestCaseMessaging extends Composite {
 
-	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
+	private final TestExtGwtWMTestCaseTexts 	TEXTS 	= GWT.create(TestExtGwtWMTestCaseTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
 
 	private ExtGWTWMCommCSConnection connectionCS;
@@ -34,7 +34,7 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 	private Button 		buttonSend;
 
 
-	public TrialExtGWTWMMessagingTest() {
+	public TestExtGWTWMTestCaseMessaging() {
 
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
@@ -90,7 +90,7 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 				if (connection != null) {
 					connection.connect();
 				} else {
-					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
+					Window.alert("No se ha podido iniciar comunicaci??n con los par??metros: 'userId': " + userId + " ' roomId: '" + roomId);
 				}
 			}
 		});

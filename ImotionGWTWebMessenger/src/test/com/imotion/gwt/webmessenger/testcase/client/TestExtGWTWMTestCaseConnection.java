@@ -1,4 +1,4 @@
-package trial.com.imotion.gwt.webmessenger.client;
+package test.com.imotion.gwt.webmessenger.testcase.client;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,9 +13,9 @@ import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
-public class TrialExtGWTWMConnectionTest extends Composite {
+public class TestExtGWTWMTestCaseConnection extends Composite {
 
-	private final TrialExtGwtWMTexts 	TEXTS 	= GWT.create(TrialExtGwtWMTexts.class);
+	private final TestExtGwtWMTestCaseTexts 	TEXTS 	= GWT.create(TestExtGwtWMTestCaseTexts.class);
 	
 	private final static String DEFAULT_USER_ID = "defaultUserId";
 	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
@@ -24,7 +24,7 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 	private Label statusLabel;
 	
 		
-	public TrialExtGWTWMConnectionTest() {
+	public TestExtGWTWMTestCaseConnection() {
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		
@@ -39,7 +39,7 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 				if (connection != null) {
 					connection.connect();
 				} else {
-					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userNickName': " + DEFAULT_USER_ID + " ' roomId: '" + DEFAULT_ROOM_ID);
+					Window.alert("No se ha podido iniciar comunicaci??n con los par??metros: 'userNickName': " + DEFAULT_USER_ID + " ' roomId: '" + DEFAULT_ROOM_ID);
 				}
 			}							
 		});

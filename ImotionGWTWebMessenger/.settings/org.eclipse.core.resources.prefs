@@ -9,4 +9,4 @@ encoding//src/com/imotion/gwt/webmessenger/client/handler/impl/ExtGWTWMHandlerMa
 encoding//src/com/imotion/gwt/webmessenger/server/ExtGWTWMServer.java=UTF-8
 encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWMChatRoom.java=UTF-8
 encoding//src/test/com/imotion/gwt/webmessenger/client/TestExtGWTWMEntryPoint.java=UTF-8
-encoding//src/trial/com/imotion/gwt/webmessenger/client/TrialExtGWTWMEntryPoint.java=UTF-8
+encoding//src/test/com/imotion/gwt/webmessenger/testcase/client/TestExtGWTWMTestCaseEntryPoint.java=UTF-8

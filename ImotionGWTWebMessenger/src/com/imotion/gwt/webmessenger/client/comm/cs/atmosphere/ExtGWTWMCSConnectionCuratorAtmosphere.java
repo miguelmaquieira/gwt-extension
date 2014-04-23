@@ -120,7 +120,7 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			
 			@Override
 			public void execute() {
-				ExtGWTWMError error = new ExtGWTWMError(TYPE.EXCEPTION.CONNECTION_ERROR);
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.CONNECTION_ERROR);
 				conn.handlerError(error);
 			}
 		}, delay, attemps);
