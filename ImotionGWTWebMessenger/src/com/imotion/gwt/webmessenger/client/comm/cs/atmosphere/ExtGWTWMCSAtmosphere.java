@@ -40,7 +40,7 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 		}
 		String connectionKey = roomId + "_" + userId;
 		ExtGWTWMCommCSConnection connection = getConnectionsMap().get(connectionKey);
-		if (connection == null) {
+		if (connection == null) {			
 			connection = new ExtGWTWMCSConnectionAtmosphere(getHandlerManager(), roomId, userId, timeout);
 			getConnectionsMap().put(connectionKey, connection);
 		}

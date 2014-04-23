@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
@@ -26,12 +27,13 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
 
 	private ExtGWTWMCommCSConnection connectionCS;
-	
+
 	private TextBox 	textRoomName;
 	private TextBox 	textNickName;
 	private TextBox		textMessage;
 	private TextArea 	areaMessage;
 	private Button 		buttonSend;
+	private Button buttonConnect;
 
 
 	public TestExtGWTWMTestCaseMessaging() {
@@ -73,12 +75,29 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 		//// Message text
 		textMessage = new TextBox();
 		sendMessagePanel.add(textMessage);
-		sendMessagePanel.setCellWidth(textMessage, "80%");
+		textMessage.setEnabled(false);
+		sendMessagePanel.setCellWidth(textMessage, "60%");
+
+		buttonConnect = new Button(TEXTS.button_conect_text());
+		sendMessagePanel.add(buttonConnect);
+		sendMessagePanel.setCellWidth(buttonConnect, "20%");
+
+		buttonConnect.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				String userId = textNickName.getText();
+				String roomId = textRoomName.getText();
+				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+				if (connection != null) {
+					connection.connect();
+				} 
+			}
+		});
 
 		buttonSend = new Button(TEXTS.button_send_text());
 		sendMessagePanel.add(buttonSend);
 		sendMessagePanel.setCellWidth(buttonSend, "20%");
-
 
 		buttonSend.addClickHandler(new ClickHandler() {
 
@@ -88,10 +107,8 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 				String roomId = textRoomName.getText();
 				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
 				if (connection != null) {
-					connection.connect();
-				} else {
-					Window.alert("No se ha podido iniciar comunicaci??n con los par??metros: 'userId': " + userId + " ' roomId: '" + roomId);
-				}
+					connection.sendMessage(textMessage.getText());;
+				} 
 			}
 		});
 
@@ -112,38 +129,35 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 	 **********************************************************************/
 
 	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
-		if (nickname == null || nickname.length() == 0 || roomname == null || roomname.length() == 0) {
-			Window.alert("Debes informar: 'nickname' y 'roomname'");
-			return null;
-		} else  {
-			if (connectionCS == null) {
-				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);			
-				
+		if (connectionCS == null) {
+			try {
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+
+
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
-						String text ="Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
+						String text = "Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
 						writeMessage(text);		
 						textMessage.setEnabled(true);
-						buttonSend.setEnabled(false);						
-						connectionCS.sendMessage(textMessage.getText());						
+						buttonConnect.setEnabled(false);											
 					}
 				});	
-				
-								
+
+
 				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(new ExtGWTWMHasReceiveCommHandler() {				
 					@Override
 					public void handleReceivedMessage(String message, long timstamp, String sender) {
 						String time = format.format(new Date(timstamp));
 						String newMessage = sender	+ " (" + time + ")" + ": " + message;
-						writeMessage(newMessage);	
-						buttonSend.setEnabled(false);
-						
+						writeMessage(newMessage);							
 					}
 				});
-			}
-			return connectionCS;
+			} catch (ExtGWTWMException e) {
+				Window.alert(e.getMessage());
+			}			
 		}
+		return connectionCS;
 	}
 
 	private void writeMessage(String text) {

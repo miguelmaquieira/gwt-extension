@@ -86,7 +86,10 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 		}
 		getCommandMap().put(command.getType(), command);
 		
-		if (command.getType() == COMMAND_TYPE.CLOSE_HANDLER) {
+		
+		if (command.getType() == COMMAND_TYPE.OPEN_CONNECTION) {
+			executeOpenHandler(command, delay, attemps, conn);
+		} else if (command.getType() == COMMAND_TYPE.CLOSE_HANDLER) {
 			executeCloseHandler(command, delay, attemps, conn);
 		} else if (command.getType() == COMMAND_TYPE.MESSAGE_HANDLER) {
 			executeMessageHandler(command, delay, attemps, conn);
@@ -105,6 +108,18 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
 	
+	private void executeOpenHandler(ExtGWTWMCommand command, int delay, int attemps, final ExtGWTWMCSConnectionAtmosphere conn) {
+		command.execute(new Command() {
+			
+			@Override
+			public void execute() {
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.CONNECTION_ERROR);
+				conn.handlerError(error);
+			}
+		}, delay, attemps);
+	}
+	
+
 	private void executeCloseHandler(ExtGWTWMCommand command, int delay, int attemps, final ExtGWTWMCSConnectionAtmosphere conn) {
 		command.execute(new Command() {
 			
@@ -120,7 +135,9 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			
 			@Override
 			public void execute() {
-				ExtGWTWMError error = new ExtGWTWMError(TYPE.CONNECTION_ERROR);
+
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.SEND_MESSAGE);
+
 				conn.handlerError(error);
 			}
 		}, delay, attemps);
