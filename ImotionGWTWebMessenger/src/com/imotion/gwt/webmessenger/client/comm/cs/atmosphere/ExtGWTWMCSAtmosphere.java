@@ -3,12 +3,18 @@ package com.imotion.gwt.webmessenger.client.comm.cs.atmosphere;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.google.gwt.core.client.GWT;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMMessageTexts;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHandlerManager;
 import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerImpl;
 
 public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
+	
+	private final ExtGWTWMMessageTexts 	MESSAGES 	= GWT.create(ExtGWTWMMessageTexts.class);
 	
 	private static final int DEFAULT_CLIENT_TIMEOUT = 300000;
 	
@@ -23,12 +29,15 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	 *                   	   ExtGWTWMCommCS	    			          * 
 	 **********************************************************************/
 	@Override
-	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId) {
+	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId) throws ExtGWTWMException {
 		return getConnection(roomId, userId, DEFAULT_CLIENT_TIMEOUT);
 	}
 	
 	@Override
-	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) {
+	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) throws ExtGWTWMException {
+		if (roomId == null || roomId.length() == 0 || userId == null || userId.length() == 0) {
+			throw new ExtGWTWMException(TYPE.COMMAND, MESSAGES.error_open_connection_message_text(roomId, userId));
+		}
 		String connectionKey = roomId + "_" + userId;
 		ExtGWTWMCommCSConnection connection = getConnectionsMap().get(connectionKey);
 		if (connection == null) {

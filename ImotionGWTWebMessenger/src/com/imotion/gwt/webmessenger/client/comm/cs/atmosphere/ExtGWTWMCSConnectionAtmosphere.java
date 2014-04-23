@@ -38,7 +38,7 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
 public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection {
 	
-	private final ExtGWTWMMessageTexts 	MESSAGES 	= GWT.create(ExtGWTWMMessageTexts.class); 
+	private final ExtGWTWMMessageTexts 	MESSAGES 	= GWT.create(ExtGWTWMMessageTexts.class);
 
 	private ExtGWTWMSession 				sessionData;
 	
