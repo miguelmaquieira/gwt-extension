@@ -25,6 +25,7 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 	
 		
 	public TrialExtGWTWMConnectionTest() {
+		
 		FlowPanel contentPanel = new FlowPanel();
 		initWidget(contentPanel);
 		
@@ -38,9 +39,7 @@ public class TrialExtGWTWMConnectionTest extends Composite {
 				ExtGWTWMCommCSConnection connection = getCommCS(DEFAULT_USER_ID, DEFAULT_ROOM_ID);
 				if (connection != null) {
 					connection.connect();
-				} else {
-					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userNickName': " + DEFAULT_USER_ID + " ' roomId: '" + DEFAULT_ROOM_ID);
-				}
+				} 
 			}							
 		});
 		

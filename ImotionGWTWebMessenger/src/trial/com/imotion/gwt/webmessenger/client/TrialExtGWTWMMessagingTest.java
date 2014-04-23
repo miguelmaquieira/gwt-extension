@@ -32,6 +32,7 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 	private TextBox		textMessage;
 	private TextArea 	areaMessage;
 	private Button 		buttonSend;
+	private Button buttonConnect;
 
 
 	public TrialExtGWTWMMessagingTest() {
@@ -73,13 +74,30 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 		//// Message text
 		textMessage = new TextBox();
 		sendMessagePanel.add(textMessage);
-		sendMessagePanel.setCellWidth(textMessage, "80%");
+		textMessage.setEnabled(false);
+		sendMessagePanel.setCellWidth(textMessage, "60%");
 
+		buttonConnect = new Button(TEXTS.button_conect_text());
+		sendMessagePanel.add(buttonConnect);
+		sendMessagePanel.setCellWidth(buttonConnect, "20%");
+		
+		buttonConnect.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				String userId = textNickName.getText();
+				String roomId = textRoomName.getText();
+				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+				if (connection != null) {
+					connection.connect();
+				} 
+			}
+		});
+		
 		buttonSend = new Button(TEXTS.button_send_text());
 		sendMessagePanel.add(buttonSend);
 		sendMessagePanel.setCellWidth(buttonSend, "20%");
-
-
+	
 		buttonSend.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -88,10 +106,8 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 				String roomId = textRoomName.getText();
 				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
 				if (connection != null) {
-					connection.connect();
-				} else {
-					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
-				}
+					connection.sendMessage(textMessage.getText());;
+				} 
 			}
 		});
 
@@ -122,11 +138,10 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
-						String text ="Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
+						String text = "Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();						
 						writeMessage(text);		
 						textMessage.setEnabled(true);
-						buttonSend.setEnabled(false);						
-						connectionCS.sendMessage(textMessage.getText());						
+						buttonConnect.setEnabled(false);											
 					}
 				});	
 				
@@ -136,9 +151,7 @@ public class TrialExtGWTWMMessagingTest extends Composite {
 					public void handleReceivedMessage(String message, long timstamp, String sender) {
 						String time = format.format(new Date(timstamp));
 						String newMessage = sender	+ " (" + time + ")" + ": " + message;
-						writeMessage(newMessage);	
-						buttonSend.setEnabled(false);
-						
+						writeMessage(newMessage);							
 					}
 				});
 			}

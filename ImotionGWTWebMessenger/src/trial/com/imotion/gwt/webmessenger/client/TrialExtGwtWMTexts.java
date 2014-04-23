@@ -52,6 +52,15 @@ public interface TrialExtGwtWMTexts extends Constants {
 	@DefaultStringValue("Transportation failure: ")
 	String status_message_label_connection_transportation_error_text();
 	
+	@DefaultStringValue("Connection failure: Could not establish connection")
+	String status_message_label_connection_connect_error_text();
+	
+	@DefaultStringValue("Connection failure: Could not send the message")
+	String status_message_label_connection_send_message_error_text();
+	
+	@DefaultStringValue("Connection failure: Fallen network")
+	String status_message_label_connection_fallen_network_error_text();
+	
 	@DefaultStringValue("Waiting orders...")
 	String chat_message_panel_waiting_label_text();
 	
