@@ -39,6 +39,10 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	private 	double 						zoomPercentage;
 	private 	int 						objectColorAsHex;
 
+	public EXTGWTSTLVLoaderWidgetThreeJS(String modelpath, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+		this(modelpath, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+	}
+	
 	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
