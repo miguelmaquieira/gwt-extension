@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLILoaderDisplay;
-import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLVLoaderWidget;
+import com.imotion.gwt.stlviewer.client.widget.threejs.EXTGWTSTLVLoaderWidgetThreeJS;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -73,7 +73,6 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		selectUrl.addItem("[8,2 MB] knight_bookend_single.stl"				, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/knight_bookend_single.stl");
 		selectUrl.addItem("[13,7 MB] Owl_Facing_Left_fixed_sc.stl"			, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/Owl_Facing_Left_fixed_sc.stl");
 		selectUrl.addItem("[1,5 MB] skewer.stl"								, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/skewer.stl");
-		selectUrl.addItem("[27 MB] Smokin_Gnome_on_Mushroom_Multi.stl"		, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/Smokin_Gnome_on_Mushroom_Multi.stl");
 		selectUrl.addItem("[880 KB] squirrel.stl"							, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/squirrel.stl");
 		selectUrl.addItem("[6,7 MB] waving_gnome_single.stl"				, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/waving_gnome_single.stl");
 		
@@ -87,7 +86,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		});
 		
 		//Renderer
-		rendererWidget = new EXTGWTSTLVLoaderWidget(0xA09595, 0xFFFFFF, 640, 480);
+		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(0xA09595, 0xFFFFFF, 640, 480);
 		contentPanel.add(rendererWidget);
 		
 		//Controls Panel
