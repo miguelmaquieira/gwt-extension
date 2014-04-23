@@ -3,14 +3,18 @@ package test.com.imotion.gwt.stlviewer.client;
 import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVSpinner;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLILoaderDisplay;
 import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLVLoaderWidget;
 
@@ -24,6 +28,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 	
 	private TextBox 					pathTextBox;
 	private EXTGWTSTLILoaderDisplay 	rendererWidget;
+	private ListBox 					selectUrl;
 	
 	/**
 	 * This is the entry point method.
@@ -36,22 +41,50 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		contentPanel.setWidth("640px");
 
 		//FORM
-		HorizontalPanel hp = new HorizontalPanel();
-		contentPanel.add(hp);
-		hp.setWidth("100%");
+		VerticalPanel formVP = new VerticalPanel();
+		contentPanel.add(formVP);
+		formVP.setWidth("100%");
+		
+		HorizontalPanel loadZone = new HorizontalPanel();
+		formVP.add(loadZone);
+		loadZone.setWidth("100%");
 
+		//Url textBox
 		pathTextBox = new TextBox();
-		hp.add(pathTextBox);
+		loadZone.add(pathTextBox);
 		pathTextBox.setText(DEFAULT_MODEL_PATH);
 		pathTextBox.setWidth("100%");
-		hp.setCellWidth(pathTextBox, "70%");
-		hp.setCellHorizontalAlignment(pathTextBox, HasHorizontalAlignment.ALIGN_RIGHT);
+		loadZone.setCellWidth(pathTextBox, "70%");
+		loadZone.setCellHorizontalAlignment(pathTextBox, HasHorizontalAlignment.ALIGN_RIGHT);
 
+		//Load button
 		Button okButton = new Button("CARGAR");
-		hp.add(okButton);
+		loadZone.add(okButton);
 		okButton.setWidth("100%");
-		hp.setCellWidth(okButton, "30%");
-		hp.setCellHorizontalAlignment(okButton, HasHorizontalAlignment.ALIGN_LEFT);
+		loadZone.setCellWidth(okButton, "30%");
+		loadZone.setCellHorizontalAlignment(okButton, HasHorizontalAlignment.ALIGN_LEFT);
+		
+		//Model Selector
+		selectUrl = new ListBox();
+		formVP.add(selectUrl);
+		selectUrl.addItem("[3,6 MB] Doll_Multiscan.stl"						, DEFAULT_MODEL_PATH);
+		selectUrl.addItem("[600 KB] MAKE_Robot_V6.stl"						, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/MAKE_Robot_V6.stl");
+		selectUrl.addItem("[3,6 MB] COLONEL_72k_v2.stl"						, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/COLONEL_72k_v2.stl");
+		selectUrl.addItem("[8,2 MB] knight_bookend_single.stl"				, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/knight_bookend_single.stl");
+		selectUrl.addItem("[13,7 MB] Owl_Facing_Left_fixed_sc.stl"			, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/Owl_Facing_Left_fixed_sc.stl");
+		selectUrl.addItem("[1,5 MB] skewer.stl"								, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/skewer.stl");
+		selectUrl.addItem("[27 MB] Smokin_Gnome_on_Mushroom_Multi.stl"		, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/Smokin_Gnome_on_Mushroom_Multi.stl");
+		selectUrl.addItem("[880 KB] squirrel.stl"							, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/squirrel.stl");
+		selectUrl.addItem("[6,7 MB] waving_gnome_single.stl"				, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/waving_gnome_single.stl");
+		
+		selectUrl.addChangeHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				int index= selectUrl.getSelectedIndex();
+				pathTextBox.setText(selectUrl.getValue(index));
+			}
+		});
 		
 		//Renderer
 		rendererWidget = new EXTGWTSTLVLoaderWidget(0xA09595, 0xFFFFFF, 640, 480);

@@ -24,10 +24,6 @@ public class EXTGWTSTLVTHREE extends THREE {
 	public static Camera PerspectiveCamera(double ratio,double near,double far) {
 		return THREE.PerspectiveCamera(EXTGWTSTLVSceneParameters.CAMERA_VISION_ANGLE_DEGREES, ratio, near, far);
 	}
-
-	public static native final EXTGWTSTLVFog Fog(int color, double near, double far)/*-{
-		return new $wnd.THREE.Fog( color, near, far );
-	}-*/;
 	
 	public static native final EXTGWTSTLVScene EXTGWTSTLVScene()/*-{
 		return new $wnd.THREE.Scene();

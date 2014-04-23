@@ -111,7 +111,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Error cargando modelo stl");
+					Window.alert(caught.getMessage());
 				}
 			});
 		}
@@ -215,7 +215,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 		scene.add(ambientLight);
 
 		//Build mesh
-		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0xFFFFFF).shininess(10).build();
+		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0xFFFFFF).shininess(1).build();
 		objectMesh = THREE.Mesh(geometry, material);
 		objectMesh.setPosition(0, 0, 0);
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
