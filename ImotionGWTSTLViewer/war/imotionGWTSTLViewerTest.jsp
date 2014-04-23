@@ -20,6 +20,7 @@
     
     <script type="text/javascript"  src="js/three.min.js"></script>
     <script type="text/javascript"  src="js/STLLoader.js"></script>
+    <script type="text/javascript"	src="js/Detector.js"></script>
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->

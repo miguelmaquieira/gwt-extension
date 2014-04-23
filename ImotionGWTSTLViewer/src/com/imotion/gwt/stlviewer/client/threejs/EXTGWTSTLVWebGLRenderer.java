@@ -9,7 +9,19 @@ public class EXTGWTSTLVWebGLRenderer extends WebGLRenderer {
 	}
 	
 	public final native void setPhysicallyBasedShading (boolean bool)/*-{
-	this.physicallyBasedShading =bool;
+		this.physicallyBasedShading = bool;
+	}-*/;
+	
+	public final native void setAntialias (boolean bool)/*-{
+		this.antialias = bool;
+	}-*/;
+	
+	public final native void setGammaInput (boolean bool)/*-{
+		this.gammaInput = bool;
+	}-*/;
+	
+	public final native void setGammaOutput (boolean bool)/*-{
+		this.gammaOutput = bool;
 	}-*/;
 
 }

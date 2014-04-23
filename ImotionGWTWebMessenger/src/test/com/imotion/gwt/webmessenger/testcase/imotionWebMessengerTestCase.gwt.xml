@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.6.0/distro-source/core/src/gwt-module.dtd">
-<module rename-to='imotionWebMessengerTrial'>
+<module rename-to='imotionWebMessengerTestCase'>
 	
     <inherits name='com.imotion.gwt.webmessenger.ImotionGWTWebMessenger' />
 	<inherits name='com.google.gwt.user.User' />
@@ -10,7 +10,7 @@
 	<!-- Specify the app entry point class. -->
 
 <!-- Specify the app entry point class. -->
-	<entry-point class='trial.com.imotion.gwt.webmessenger.client.TrialExtGWTWMEntryPoint' />
+	<entry-point class='test.com.imotion.gwt.webmessenger.testcase.client.TestExtGWTWMTestCaseEntryPoint' />
 
 	<!-- Specify the paths for translatable code -->
 	<source path='client' />

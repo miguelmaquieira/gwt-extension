@@ -64,8 +64,8 @@ public class EXTGWTSTLVMeshPhongMaterialBuilder extends JavaScriptObject {
 	}
 	
 	public final native EXTGWTSTLVMeshPhongMaterialBuilder color(int c)/*-{
-	this["color"]=c;
-	return this;
+		this["color"]=c;
+		return this;
 	}-*/;
 	
 	public final native EXTGWTSTLVMeshPhongMaterialBuilder specular(int s)/*-{
