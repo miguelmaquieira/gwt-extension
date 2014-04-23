@@ -1,4 +1,4 @@
-package com.imotion.gwt.stlviewer.client.widget;
+package com.imotion.gwt.stlviewer.client.widget.threejs;
 
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
@@ -21,8 +21,9 @@ import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVScene;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVWebGLRenderer;
 import com.imotion.gwt.stlviewer.client.utils.EXTGWTSTLVSceneParameters;
+import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLILoaderDisplay;
 
-public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoaderDisplay {
+public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTSTLILoaderDisplay {
 
 	private 	WebGLRenderer	 			renderer;
 	private 	EXTGWTSTLVScene 			scene;
@@ -38,23 +39,23 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 	private 	double 						zoomPercentage;
 	private 	int 						objectColorAsHex;
 
-	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
 		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidget(boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
 		this(null, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidget(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
 		this(url, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidget(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
 		this.sceneHeight 			= height;
 		this.sceneWidth				= width;
 		this.objectColorAsHex		= objectColorAsHex;
@@ -229,7 +230,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
 
 		if (firstTime) {
-			AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidget.this);
+			AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidgetThreeJS.this);
 		}
 	}
 	

@@ -16,7 +16,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLILoaderDisplay;
-import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLVLoaderWidget;
+import com.imotion.gwt.stlviewer.client.widget.threejs.EXTGWTSTLVLoaderWidgetThreeJS;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -86,7 +86,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		});
 		
 		//Renderer
-		rendererWidget = new EXTGWTSTLVLoaderWidget(0xA09595, 0xFFFFFF, 640, 480);
+		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(0xA09595, 0xFFFFFF, 640, 480);
 		contentPanel.add(rendererWidget);
 		
 		//Controls Panel
