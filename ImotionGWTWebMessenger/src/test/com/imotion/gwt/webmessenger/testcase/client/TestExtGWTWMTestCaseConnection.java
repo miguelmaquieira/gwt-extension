@@ -1,0 +1,100 @@
+package test.com.imotion.gwt.webmessenger.testcase.client;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
+import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
+
+public class TestExtGWTWMTestCaseConnection extends Composite {
+
+	private final TestExtGwtWMTestCaseTexts 	TEXTS 	= GWT.create(TestExtGwtWMTestCaseTexts.class);
+
+	private final static String DEFAULT_USER_ID = "defaultUserId";
+	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
+
+	private ExtGWTWMCommCSConnection connectionCS;
+	private Label statusLabel;
+
+
+	public TestExtGWTWMTestCaseConnection() {
+
+		FlowPanel contentPanel = new FlowPanel();
+		initWidget(contentPanel);
+
+		Button open = new Button(TEXTS.button_conect_text());
+		contentPanel.add(open);
+
+		open.addClickHandler(new ClickHandler() {			
+			@Override
+			public void onClick(ClickEvent event) {
+
+				ExtGWTWMCommCSConnection connection = getCommCS(DEFAULT_USER_ID, DEFAULT_ROOM_ID);
+				if (connection != null) {
+					connection.connect();
+				} 
+			}							
+		});
+
+
+		Button close = new Button(TEXTS.button_disconect_text());
+		contentPanel.add(close);
+
+		close.addClickHandler(new ClickHandler() {			
+			@Override
+			public void onClick(ClickEvent event) {
+				if (connectionCS != null) {
+					connectionCS.disconnect();
+					connectionCS = null;
+				}			
+			}
+		});
+
+		statusLabel = new Label(TEXTS.status_label_text() + " Closed");
+		contentPanel.add(statusLabel);
+
+	}
+
+
+	/**********************************************************************
+	 *                       PRIVATE FUNCTIONS 							*
+	 **********************************************************************/
+
+	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
+		if (connectionCS == null) {
+			try {
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+
+
+				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
+					@Override
+					public void handleConnectionOpened() {
+						statusLabel.setText(TEXTS.status_label_text() + " Open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID);													
+					}
+				});
+
+				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {					
+					@Override
+					public void handleConnectionClosed() {
+						statusLabel.setText(TEXTS.status_label_text() + " Closed");							
+					}
+				});
+
+			} catch (ExtGWTWMException e) {
+				Window.alert(e.getMessage());
+			}
+		}
+		return connectionCS;
+
+	}
+
+
+}
