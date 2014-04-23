@@ -6,7 +6,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -108,6 +107,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 				String roomId = textRoomName.getText();
 				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
 				if (connection != null) {
+					//Enviamos el mensaje 
 					connection.sendMessage(textMessage.getText());;
 				} 
 			}
@@ -134,7 +134,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 			try {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 
-
+				//Añadimos el handler de apertura de la conexión
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
@@ -145,7 +145,7 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 					}
 				});	
 
-
+				//Añadimos el handler de recepción de mensajes
 				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(new ExtGWTWMHasReceiveCommHandler() {				
 					@Override
 					public void handleReceivedMessage(String message, long timstamp, String sender) {

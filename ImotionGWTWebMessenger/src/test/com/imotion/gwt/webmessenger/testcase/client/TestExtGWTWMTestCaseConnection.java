@@ -3,7 +3,6 @@ package test.com.imotion.gwt.webmessenger.testcase.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -37,9 +36,11 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 		open.addClickHandler(new ClickHandler() {			
 			@Override
 			public void onClick(ClickEvent event) {
-
+				
+				//Pedimos la conexión para un determinado roomId y userId
 				ExtGWTWMCommCSConnection connection = getCommCS(DEFAULT_USER_ID, DEFAULT_ROOM_ID);
 				if (connection != null) {
+					//Abrimos la conexion
 					connection.connect();
 				} 
 			}							
@@ -53,6 +54,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				if (connectionCS != null) {
+					//Cerramos la conexión
 					connectionCS.disconnect();
 					connectionCS = null;
 				}			
@@ -73,8 +75,8 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 		if (connectionCS == null) {
 			try {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
-
-
+				
+				//Añadimos el handler de apertura de la conexión
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
 					@Override
 					public void handleConnectionOpened() {
@@ -83,6 +85,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 					}
 				});
 
+				//Añadimos el handler de cierre de la conexión
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(new ExtGWTWMHasCloseCommHandler() {					
 					@Override
 					public void handleConnectionClosed() {

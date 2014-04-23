@@ -121,7 +121,7 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 			try {
 				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
 
-
+				//Añadimos el handler para abrir la conexión
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
@@ -132,9 +132,15 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 					}
 				});	
 
-				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(messagePanel);
+				//Añadimos el listener para el cierre de la conexión 
 				connectionCS.getCommHandlerWrapper().addCommCloseHandler(messagePanel);
+				
+				//Añadimos el listener para la recepción de mensajes 
+				connectionCS.getCommHandlerWrapper().addCommReceiveHandler(messagePanel);
+				
+				//Añadimos el listener para el manejo de  errores 
 				connectionCS.getErrorHandlerWrapper().addErrorHandler(messagePanel);
+				
 			} catch (ExtGWTWMException e) {
 				messagePanel.writeMessage(e.getMessage());
 			}		
