@@ -34,31 +34,29 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 
 	private		int							sceneWidth;
 	private		int							sceneHeight;
-	private		boolean						scale;
 	private 	double 						gyreSpeed;
 	private 	double 						zoomPercentage;
 	private 	int 						objectColorAsHex;
 
 	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
-		this(null, false, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidget(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(null, false, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidget(boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(null, canvas, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+		this(null, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidget(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(url, canvas, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+		this(url, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidget(String url, boolean canvas, boolean scale,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
+	public EXTGWTSTLVLoaderWidget(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
 		this.sceneHeight 			= height;
 		this.sceneWidth				= width;
-		this.scale					= scale;
 		this.objectColorAsHex		= objectColorAsHex;
 		setGyreSpeed(gyreSpeed);
 		setZoomPercentage(zoomPercentage);
@@ -187,7 +185,7 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 
 		double height 		= Math.abs(maxVector3.getY() - minVector3.getY());
 		double width		= Math.abs(maxVector3.getZ() - minVector3.getZ());
-		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width, this.scale	);
+		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width);
 
 		boolean firstTime = objectMesh == null;
 		if (!firstTime) {
@@ -221,7 +219,6 @@ public class EXTGWTSTLVLoaderWidget extends Composite implements EXTGWTSTLILoade
 		objectMesh.setRotation(- Math.PI / 2, 0, 0 );
 		objectMesh.setReceiveShadow(true);
 		objectMesh.setCastShadow(true);
-		objectMesh.setScale(sceneParameters.getScale(), sceneParameters.getScale(), sceneParameters.getScale());
 		scene.add(objectMesh);
 
 		//Camera
