@@ -39,7 +39,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		hp.add(okButton);
 		
 		//Renderer
-		rendererWidget = new EXTGWTSTLVLoaderWidget(DEFAULT_MODEL_PATH, false, false, 0xA09595, 0xFFFFFF, 640, 480, 0.1f);
+		rendererWidget = new EXTGWTSTLVLoaderWidget(0xA09595, 0xFFFFFF, 640, 480);
 		rootPanel.add(rendererWidget);
 		
 		okButton.addClickHandler(new ClickHandler() {
