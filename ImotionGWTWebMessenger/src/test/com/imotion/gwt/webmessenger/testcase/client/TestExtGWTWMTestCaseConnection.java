@@ -88,7 +88,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 					@Override
 					public void handleConnectionClosed() {
 						String text = "Status: Conection closed";						
-						statusLabel.setText(text);							
+						statusLabel.setText(text);				
 					}
 				});
 

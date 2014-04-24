@@ -127,11 +127,15 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 	@Override
 	public void release() {
-		errorHandler.release();
-		commHandler.release();
-		errorHandler = null;
-		commHandler = null;
 		disconnect();
+		if (errorHandler != null) {
+			errorHandler.release();
+			errorHandler = null;
+		}
+		if (commHandler != null)  {
+			commHandler.release();
+			commHandler = null;
+		}
 		atmosphereConfig = null;
 	}
 
@@ -140,29 +144,38 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	 **********************************************************************/
 
 	protected void handleCloseEvent(AtmosphereResponse response) {
-		List<ExtGWTWMHasCloseCommHandler> handlers = getCommHandlerWrapper().getCommCloseHandlers();
-		for (int index = 0; index < handlers.size(); index++) {
-			handlers.get(index).handleConnectionClosed();
+		ExtGWTWMCommCSHandler commHandlerWrapper = getCommHandlerWrapper();
+		if (commHandlerWrapper != null) {
+			List<ExtGWTWMHasCloseCommHandler> handlers = commHandlerWrapper.getCommCloseHandlers();
+			for (int index = 0; index < handlers.size(); index++) {
+				handlers.get(index).handleConnectionClosed();
+			}
 		}
 	}
 
 	protected void handleOpenEvent(AtmosphereResponse response) {
-		List<ExtGWTWMHasOpenCommHandler> handlersOpen = getCommHandlerWrapper().getCommOpenHandlers();
-		for (int index = 0; index < handlersOpen.size(); index++) {
-			handlersOpen.get(index).handleConnectionOpened();
+		ExtGWTWMCommCSHandler commHandlerWrapper = getCommHandlerWrapper();
+		if (commHandlerWrapper != null) {
+		List<ExtGWTWMHasOpenCommHandler> handlersOpen = commHandlerWrapper.getCommOpenHandlers();
+			for (int index = 0; index < handlersOpen.size(); index++) {
+				handlersOpen.get(index).handleConnectionOpened();
+			}
 		}
 	}
 
 	protected void handlerError(ExtGWTWMError error) {
 		if (error != null) {
-			List<ExtGWTWMHasErrorHandler> errorHandlers = getErrorHandlerWrapper().getErrorHandlers();
-			for (ExtGWTWMHasErrorHandler errorHandler: errorHandlers) {
-				if (errorHandler.getErrorType() == null) {
-					errorHandler.onError(error);
-				} else {
-					List<TYPE> errorTypeList = Arrays.asList(errorHandler.getErrorType());
-					if (errorTypeList.contains(error.getErrorType()) || errorTypeList.contains(TYPE.ALL)) {
+			ExtGWTWMErrorCSHandler errorHandlerWrapper = getErrorHandlerWrapper();
+			if (errorHandlerWrapper != null) { 
+				List<ExtGWTWMHasErrorHandler> errorHandlers = errorHandlerWrapper.getErrorHandlers();
+				for (ExtGWTWMHasErrorHandler errorHandler: errorHandlers) {
+					if (errorHandler.getErrorType() == null) {
 						errorHandler.onError(error);
+					} else {
+						List<TYPE> errorTypeList = Arrays.asList(errorHandler.getErrorType());
+						if (errorTypeList.contains(error.getErrorType()) || errorTypeList.contains(TYPE.ALL)) {
+							errorHandler.onError(error);
+						}
 					}
 				}
 			}
