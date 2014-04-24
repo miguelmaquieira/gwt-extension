@@ -4,8 +4,10 @@
   "http://google-web-toolkit.googlecode.com/svn/tags/2.5.1/distro-source/core/src/gwt-module.dtd">
 <module rename-to='imotionGWTWebMessengerChat'>
 
-    <inherits name='com.imotion.gwt.webmessenger.ImotionGWTWebMessenger' />
 	<inherits name='com.google.gwt.user.User' />
+	
+	<!-- Other module inherits -->
+	<inherits name='com.imotion.gwt.webmessenger.ImotionGWTWebMessenger' />
 	
     <set-property name="locale" value="default"/>
 	
