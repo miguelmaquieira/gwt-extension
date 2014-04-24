@@ -24,6 +24,7 @@
     <!-- be added before this line.                -->
     <!--                                           -->
     <script type="text/javascript" language="javascript" src="imotionGWTWebMessengerChat/imotionGWTWebMessengerChat.nocache.js"></script>
+  	<script type="text/javascript" language="javascript" src="javascript/atmosphere.js"></script>
   </head>
 
   <!--                                           -->
