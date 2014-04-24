@@ -138,7 +138,8 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
 					@Override
 					public void handleConnectionOpened() {
-						String text = "Status: Conection open. userId: " + textNickName.getText() + ", roomId: " + textRoomName.getText();					
+						String text = "Status: Conection open. userId: " + connectionCS.getSessionData().getUserId()
+														+ ", roomId: " + connectionCS.getSessionData().getRoomId();					
 						writeMessage(text);		
 						textMessage.setEnabled(true);
 						buttonConnect.setEnabled(false);											

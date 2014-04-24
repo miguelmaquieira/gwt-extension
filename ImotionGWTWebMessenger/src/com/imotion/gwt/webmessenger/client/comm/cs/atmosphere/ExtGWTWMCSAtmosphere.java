@@ -49,9 +49,11 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 
 	@Override
 	public void releaseConnection(ExtGWTWMCommCSConnection connection) {
-		String connectionKey = connection.getSessionData().getRoomId() + "_" + connection.getSessionData().getUserId();
-		getConnectionsMap().remove(connectionKey);
-		connection.release();
+		if (connection != null) {
+			String connectionKey = connection.getSessionData().getRoomId() + "_" + connection.getSessionData().getUserId();
+			getConnectionsMap().remove(connectionKey);
+			connection.release();
+		}
 	}
 	
 	
