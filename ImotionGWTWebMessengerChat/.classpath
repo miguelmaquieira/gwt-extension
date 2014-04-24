@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ImotionGWTWebMessenger"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
@@ -14,5 +13,6 @@
 	<classpathentry kind="lib" path="lib/javascript-2.0.3.war"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.1.jar"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
