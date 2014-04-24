@@ -5,6 +5,15 @@
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ImotionGWTWebMessenger"/>
-	<classpathentry kind="lib" path="lib/imotiongwtwebmessenger.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="lib" path="lib/imotion-gwtwebmessenger.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-client-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-common-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-server-2.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/javascript-2.0.3.war"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

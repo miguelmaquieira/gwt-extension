@@ -5,20 +5,39 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.imotion.gwt.webmessenger.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+   <!-- Atmosphere -->
+	<servlet>
+	  	<description>AtmosphereServlet</description>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+		
+		<init-param>
+			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+			<param-value>org.atmosphere.gwt20.server.GwtRpcInterceptor,
+						org.atmosphere.interceptor.HeartbeatInterceptor
+			</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.interceptor.HeartbeatInterceptor.heartbeatFrequencyInSeconds</param-name>
+			<param-value>30</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>
+			<param-value>org.atmosphere.cache.UUIDBroadcasterCache</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported> 
+	</servlet>
+  	<servlet-mapping>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<url-pattern>/imotionGWTWebMessengerChat/atmosphere/*</url-pattern>
+	</servlet-mapping>
   
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/imotiongwtwebmessengerchat/greet</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>ImotionGWTWebMessengerChat.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>imotionGWTWebMessengerChat.jsp</welcome-file>
+	</welcome-file-list>
 
 </web-app>

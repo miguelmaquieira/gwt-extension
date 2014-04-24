@@ -1,0 +1,294 @@
+.extgwt-webMessengerMultiChatRoomContainer {
+	margin: 0px auto;
+	width: 700px;
+	height: 580px;
+	margin-top: 20px;
+	border: 2px solid #DEDEDE;
+	padding: 10px;
+	border-radius: 5px;
+	background: #F0F0F0;
+}
+
+.extgwt-webMessengerMultiChatRoomContainer .extgwt-webMessengerChatRoomContainer {
+	margin-top: 10px;
+}
+
+.extgwt-webMessengerMultiChatRoomButtonZone {
+	padding-left: 10px;
+}
+
+.extgwt-webMessengerMultiChatRoomButtonZone .gwt-Anchor {
+	cursor: pointer;
+	margin-right: 10px;
+	color: #3F3F3F;
+}
+
+.extgwt-webMessengerMultiChatRoomContentZone {
+	
+}
+
+.extgwt-webMessengerMultiChatRoomContentZoneChat {
+	
+}
+
+.extgwt-webMessengerChatRoomContainer {
+	margin: 0px auto;
+	width: 620px;
+	height: 520px;
+	margin-top: 50px;
+	border: 2px solid #DEDEDE;
+	padding: 10px;
+	border-radius: 5px;
+	background: #FCFCFC;
+}
+
+.extgwt-webMessengerChatRoomTitle {
+	font-size: 20px;
+	padding: 5px 0px 5px 10px;
+	border-bottom: 1px solid #CECECE;
+}
+
+
+.extgwt-webMessengerChatRoomMessagePanel {
+	width: 100%;
+	margin-top: 10px;
+	padding-left: 10px;
+	font-size: 14px;
+	color: #ABABAB;
+}
+
+.extgwt-webMessengerChatRoomMessagePanel .gwt-label {
+	
+}
+
+.extgwt-webMessengerChatRoomMessagePanel .gwt-ToggleButton {
+	cursor: pointer;
+}
+
+.extgwt-webMessengerChatRoomNorthZone {
+	width: 100%;
+	margin-bottom: 10px;
+}
+	
+.extgwt-webMessegerChatRoomMessagePanel {
+	width: 95%;
+	margin: 0 auto;
+	border: 1px solid #DEDEDE;
+	padding: 5px;
+}
+
+.extgwt-webMessegerChatRoomMessagePanel .gwt-TextArea {
+	height: 250px;
+	width: 100%;
+	resize: none;
+	border: none;
+	padding: 0px;
+}
+
+
+.extgwt-webMessegerChatRoomConnectionsPanel {
+	width: 95%;
+	margin: 0 auto;
+	border: 1px solid #DEDEDE;
+	padding: 5px;
+}
+
+.extgwt-webMessegerChatRoomConnectionsPanel .gwt-ListBox {
+	height: 250px;
+	width: 100%;
+	border: none;
+}
+
+.extgwt-webMessengerChatRoomSouthZone {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.extgwt-webMessengerChatRoomNickNamePanel {
+	padding-left: 10px;
+}
+
+.extgwt-webMessengerChatRoomRoomNamePanel {
+	padding-left: 10px;
+}
+
+.extgwt-webMessengerChatRoomSouthZone .gwt-TextBox {
+	height: 25px;
+	font-size: 12px;
+	width: 95%;
+}
+
+.extgwt-webMessengerChatRoomSouthZone .gwt-Button {
+	height: 35px;
+	width: 100px;
+	cursor: pointer;
+}
+
+.extgwt-webMessengerChatRoomSendMessagePanel {
+	width: 100%;
+}
+
+.extgwt-webMessengerChatRoomSendMessagePanel .gwt-TextBox {
+	height: 30px;
+	font-size: 20px;
+	width: 95%;
+	margin-left: 10px;
+}
+
+.extgwt-webMessengerChatRoomSendMessagePanel .gwt-Button {
+	height: 35px;
+	width: 120px;
+	cursor: pointer;
+}
+
+.extgwt-webMessengerChatRoomStatusPanel {
+	width: 100%;
+	height: 40px;
+	margin-top: 15px;
+	border: 1px solid #CECECE;
+	border-radius: 3px;
+	background: #C0C0C0;
+	color: #F6F6F6;
+}
+
+.extgwt-webMessengerChatRoomStatusPanel #labelStatus {
+	padding-left: 15px;
+	font-size: 14px;
+}
+
+.extgwt-webMessengerChatRoomStatusPanel #connectionLed {
+	width: 16px;
+	padding-left: 5px;
+	margin-top: 2px;
+}
+
+.extgwt-webMessengerChatRoomStatusPanel #messageStatus {
+	font-size: 14px;
+	padding-right: 10px;
+}
+
+.extgwt-webMessengerChatRoomStatusPanel #messageStatus  {
+	font-size: 14px;
+	padding-right: 10px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 450px;
+}
+
+.extgwt-textTransition {
+	opacity: 0;
+	-webkit-transition: opacity 3s linear;
+	transition: opacity 3s linear;
+}
+
+.extgwt-textError {
+	color: #FF0000;
+	font-size: 15px !impportant;
+}
+
+.extgwt-errorTextTransition {
+	opacity: 0;
+	-webkit-transition: opacity 5s linear;
+	transition: opacity 5s linear;
+}
+
+.extgwt-anchorSelected {
+	color: #07A3E6 !important;
+}
+
+
+
+/* TEST 1*/
+.extgwt-testCaseConnectionContentPanel {
+	
+}
+
+.extgwt-testCaseConnectionContentPanel .gwt-Button {
+	width: 120px;
+	height:30px;
+	margin:10px;
+}
+
+.extgwt-testCaseConnectionContentPanel .gwt-Label{
+	margin: 10px;
+	font-weight: bold;
+}
+
+
+/* TEST 2*/
+
+.extgwt-webMessengerMessagingTestContentPanel {
+	width: 600px;
+}
+
+.extgwt-testCaseMessagingSendMessagePanel {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.extgwt-testCaseMessagingSendMessagePanel .gwt-TextBox {
+	height: 30px;
+	font-size: 20px;
+	width: 95%;
+}
+
+.extgwt-testCaseMessagingSendMessagePanel .gwt-Button {
+	height: 35px;
+	width: 100%;
+	cursor: pointer;
+}
+
+
+.extgwt-testCaseMessagingMessagePanel {
+	margin-top: 20px;
+	border: 1px solid #DEDEDE;
+}
+
+.extgwt-testCaseMessagingMessagePanel .gwt-TextArea {
+	height: 250px;
+	width: 95%;
+	resize: none;
+	border: none;
+	padding: 5px;
+}
+
+
+
+/* TEST 3*/
+.extgwt-testCaseConnectionErrorContentPanel {
+	width: 600px;
+}
+
+
+.extgwt-testCaseConnectionErrorSendMessagePanel {
+	width: 100%;
+	margin-top: 5px;
+}
+
+.extgwt-testCaseConnectionErrorSendMessagePanel .gwt-TextBox {
+	height: 30px;
+	font-size: 20px;
+	width: 95%;
+}
+
+.extgwt-testCaseConnectionErrorSendMessagePanel .gwt-Button {
+	height: 35px;
+	width: 100%;
+	cursor: pointer;
+}
+
+
+.extgwt-testCaseConnectionErrorMessagePanel {
+	margin-top: 20px;
+	border: 1px solid #DEDEDE;
+}
+
+.extgwt-testCaseConnectionErrorMessagePanel .gwt-TextArea {
+	height: 250px;
+	width: 95%;
+	resize: none;
+	border: none;
+	padding: 5px;
+}
+
