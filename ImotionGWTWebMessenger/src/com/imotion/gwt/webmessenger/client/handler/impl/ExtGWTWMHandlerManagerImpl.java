@@ -40,7 +40,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	
 	@Override
 	public List<ExtGWTWMHasOpenCommHandler> getCommOpenHandlers(String roomId) {
-		List<ExtGWTWMHasOpenCommHandler> handlerList = new ArrayList<>();
+		List<ExtGWTWMHasOpenCommHandler> handlerList = new ArrayList<ExtGWTWMHasOpenCommHandler>();
 		if (roomId != null) {
 			Stack<ExtGWTWMHasCommHandler> stack = getCommStack(roomId);
 			if (stack != null) {
@@ -58,7 +58,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 
 	@Override
 	public List<ExtGWTWMHasCloseCommHandler> getCommCloseHandlers(String roomId) {
-		List<ExtGWTWMHasCloseCommHandler> handlerList = new ArrayList<>();
+		List<ExtGWTWMHasCloseCommHandler> handlerList = new ArrayList<ExtGWTWMHasCloseCommHandler>();
 		if (roomId != null) {
 			Stack<ExtGWTWMHasCommHandler> stack = getCommStack(roomId);
 			if (stack != null) {
@@ -76,7 +76,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 
 	@Override
 	public List<ExtGWTWMHasReceiveCommHandler> getCommReceiveHandlers(String roomId) {
-		List<ExtGWTWMHasReceiveCommHandler> handlerList = new ArrayList<>();
+		List<ExtGWTWMHasReceiveCommHandler> handlerList = new ArrayList<ExtGWTWMHasReceiveCommHandler>();
 		if (roomId != null) {
 			Stack<ExtGWTWMHasCommHandler> stack = getCommStack(roomId);
 			if (stack != null) {
@@ -117,7 +117,7 @@ public class ExtGWTWMHandlerManagerImpl implements ExtGWTWMHandlerManager {
 	@Override
 	public List<ExtGWTWMHasErrorHandler> getErrorHandlers(String roomId) {
 		Stack<ExtGWTWMHasErrorHandler> stack = getErrorStack(roomId);
-		return new ArrayList<>(stack);
+		return new ArrayList<ExtGWTWMHasErrorHandler>(stack);
 		
 	}
 	
