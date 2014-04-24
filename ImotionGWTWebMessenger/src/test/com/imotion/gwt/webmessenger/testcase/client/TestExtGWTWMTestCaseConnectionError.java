@@ -3,7 +3,6 @@ package test.com.imotion.gwt.webmessenger.testcase.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -103,7 +102,6 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 			}
 		});
 
-
 		// Message panel		
 		messagePanel = new TestExtGWTWMTestCaseMessagePanel();
 		contentPanel.add(messagePanel);
@@ -143,9 +141,7 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 				
 			} catch (ExtGWTWMException e) {
 				messagePanel.writeMessage(e.getMessage());
-			}		
-
-
+			}
 		}	
 		return connectionCS;
 

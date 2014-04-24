@@ -17,9 +17,6 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 
 	private final TestExtGwtWMTestCaseTexts 	TEXTS 	= GWT.create(TestExtGwtWMTestCaseTexts.class);
 
-	private final static String DEFAULT_USER_ID = "defaultUserId";
-	private final static String DEFAULT_ROOM_ID = "defaultRoomId";
-
 	private ExtGWTWMCommCSConnection connectionCS;
 	private Label statusLabel;
 
@@ -38,7 +35,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 			public void onClick(ClickEvent event) {
 				
 				//Pedimos la conexión para un determinado roomId y userId
-				ExtGWTWMCommCSConnection connection = getCommCS(DEFAULT_USER_ID, DEFAULT_ROOM_ID);
+				ExtGWTWMCommCSConnection connection = getCommCS("defaultRoom", "defaultUser");
 				if (connection != null) {
 					//Abrimos la conexion
 					connection.connect();
@@ -55,7 +52,7 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 			public void onClick(ClickEvent event) {
 				if (connectionCS != null) {
 					//Cerramos la conexión
-					connectionCS.disconnect();
+					ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseConnection(connectionCS);
 					connectionCS = null;
 				}			
 			}
@@ -80,7 +77,8 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {					
 					@Override
 					public void handleConnectionOpened() {
-						String text = "Status: Conection open. userId: " + DEFAULT_USER_ID + ", roomId: " + DEFAULT_ROOM_ID;						
+						String text = "Status: Conection open. userId: " 	+ connectionCS.getSessionData().getUserId() 
+															+ ", roomId: " 	+ connectionCS.getSessionData().getRoomId();						
 						statusLabel.setText(text);													
 					}
 				});
@@ -101,6 +99,4 @@ public class TestExtGWTWMTestCaseConnection extends Composite {
 		return connectionCS;
 
 	}
-
-
 }
