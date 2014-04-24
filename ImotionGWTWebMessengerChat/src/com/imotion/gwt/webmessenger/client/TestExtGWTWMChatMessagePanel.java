@@ -43,7 +43,7 @@ public class TestExtGWTWMChatMessagePanel extends Composite implements ExtGWTWMH
 	public void handleReceivedMessage(String message, long timstamp, String sender) {
 		setMessage(sender + ": " + message);
 		messageLabel.addStyleName("extgwt-textTransition");
-		if (timerText != null && timerText.isRunning()) {
+		if (timerText != null) {
 			timerText.cancel();
 		}
 		timerText = new Timer() {
