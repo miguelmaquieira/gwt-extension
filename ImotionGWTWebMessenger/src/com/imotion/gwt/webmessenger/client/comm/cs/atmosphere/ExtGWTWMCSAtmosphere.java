@@ -8,6 +8,7 @@ import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMMessageTexts;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCS;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection.TRANSPORT_TYPE;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHandlerManager;
 import com.imotion.gwt.webmessenger.client.handler.impl.ExtGWTWMHandlerManagerImpl;
@@ -35,13 +36,23 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	
 	@Override
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) throws ExtGWTWMException {
+		return getConnection(roomId, userId, timeout, TRANSPORT_TYPE.WEBSOCKETS, TRANSPORT_TYPE.STREAMING);
+	}
+	
+	@Override
+	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) throws ExtGWTWMException {
+		return getConnection(roomId, userId, DEFAULT_CLIENT_TIMEOUT, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.WEBSOCKETS);
+	}
+
+	@Override
+	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) throws ExtGWTWMException {
 		if (roomId == null || roomId.length() == 0 || userId == null || userId.length() == 0) {
 			throw new ExtGWTWMException(TYPE.COMMAND, MESSAGES.error_get_connection_param_not_informed_message_text(roomId, userId));
 		}
 		String connectionKey = roomId + "_" + userId;
 		ExtGWTWMCommCSConnection connection = getConnectionsMap().get(connectionKey);
 		if (connection == null) {			
-			connection = new ExtGWTWMCSConnectionAtmosphere(getHandlerManager(), roomId, userId, timeout);
+			connection = new ExtGWTWMCSConnectionAtmosphere(getHandlerManager(), roomId, userId, timeout, protocol, fallback);
 			getConnectionsMap().put(connectionKey, connection);
 		}
 		return connection;
