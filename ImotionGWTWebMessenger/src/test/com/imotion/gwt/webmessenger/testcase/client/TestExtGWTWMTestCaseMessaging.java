@@ -133,7 +133,9 @@ public class TestExtGWTWMTestCaseMessaging extends Composite {
 	private ExtGWTWMCommCSConnection getCommCS(String nickname, String roomname) {
 		if (connectionCS == null) {
 			try {
-				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, 
+																						  TRANSPORT_TYPE.LONG_POLLING,
+																						  TRANSPORT_TYPE.STREAMING);
 
 				//Añadimos el handler de apertura de la conexión
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	
