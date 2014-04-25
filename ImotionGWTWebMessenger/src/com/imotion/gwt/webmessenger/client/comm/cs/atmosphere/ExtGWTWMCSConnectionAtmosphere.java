@@ -209,7 +209,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		atmosphereConfig = AtmosphereRequestConfig.create(rpc_serializer);
 		atmosphereConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?" + "roomId="		+ getSessionData().getRoomId()
 				+ "&userId=" 	+ getSessionData().getUserId());			
-		atmosphereConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
+		atmosphereConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
 		atmosphereConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
 		atmosphereConfig.setFlags(Flags.enableProtocol);
 		atmosphereConfig.setTimeout(timeout);
