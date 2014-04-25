@@ -41,7 +41,7 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 	
 	@Override
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) throws ExtGWTWMException {
-		return getConnection(roomId, userId, DEFAULT_CLIENT_TIMEOUT, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.WEBSOCKETS);
+		return getConnection(roomId, userId, DEFAULT_CLIENT_TIMEOUT, protocol, fallback);
 	}
 
 	@Override
