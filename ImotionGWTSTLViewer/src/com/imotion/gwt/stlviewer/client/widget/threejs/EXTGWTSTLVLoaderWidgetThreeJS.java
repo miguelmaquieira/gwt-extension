@@ -12,10 +12,11 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
 import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 import com.google.gwt.animation.client.AnimationScheduler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLException;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVScene;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVTHREE;
@@ -39,27 +40,27 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	private 	double 						zoomPercentage;
 	private 	int 						objectColorAsHex;
 
-	public EXTGWTSTLVLoaderWidgetThreeJS(String modelpath, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
-		this(modelpath, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+	public EXTGWTSTLVLoaderWidgetThreeJS(String modelpath, EXTGWTSTLExceptionCallback exceptionCallback, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+		this(modelpath, exceptionCallback, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
-	
+
 	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
-		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+		this(null, null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(null, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+		this(null, null, false, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidgetThreeJS(boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(null, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+		this(null, null, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidgetThreeJS(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
-		this(url, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
+	public EXTGWTSTLVLoaderWidgetThreeJS(String url, EXTGWTSTLExceptionCallback exceptionCallback, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {
+		this(url, exceptionCallback, canvas, objectColorAsHex, backgroundColorAsHex, width, height, gyreSpeed, DEFAULT_ZOOM_PCTG);
 	}
 
-	public EXTGWTSTLVLoaderWidgetThreeJS(String url, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
+	public EXTGWTSTLVLoaderWidgetThreeJS(String url, EXTGWTSTLExceptionCallback exceptionCallback, boolean canvas,  int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed, double zoomPercentage) {
 		this.sceneHeight 			= height;
 		this.sceneWidth				= width;
 		this.objectColorAsHex		= objectColorAsHex;
@@ -83,7 +84,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		groundMesh.setCastShadow(true);
 
 		//Model
-		loadModel(url);
+		loadModel(url, exceptionCallback);
 
 		//Renderer
 		if (canvas) {
@@ -103,7 +104,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	}
 
 	@Override
-	public void loadModel(String url) {
+	public void loadModel(String url, final EXTGWTSTLExceptionCallback exceptionCallback) {
 		if (url != null && url.length() > 0) {
 			EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
 
@@ -114,7 +115,10 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert(caught.getMessage());
+					if (exceptionCallback != null) {
+						EXTGWTSTLException exception = new EXTGWTSTLException(caught);
+						exceptionCallback.onFailure(exception);
+					}
 				}
 			});
 		}
@@ -155,12 +159,12 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 			objectMesh.setScale(scale, scale, scale);
 		}
 	}
-	
+
 	@Override
 	public void setZoomPercentage(double zoomPercentage) {
 		this.zoomPercentage = zoomPercentage;
 	}
-	
+
 	@Override
 	public void setGyreSpeed(double radiansPerIteration) {
 		this.gyreSpeed = radiansPerIteration;
@@ -237,7 +241,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 			AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidgetThreeJS.this);
 		}
 	}
-	
+
 	private double getScaleVariation() {
 		double scaleVariation 	= 0d;
 		double scale			= getScale();

@@ -2,6 +2,7 @@ package com.imotion.gwt.stlviewer.client.threejs;
 
 import com.akjava.gwt.three.client.core.Geometry;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLException;
 
 public class EXTGWTSTLVLoader {
 
@@ -28,7 +29,7 @@ public class EXTGWTSTLVLoader {
 	}
 	
 	public static void callbackError(AsyncCallback<Geometry> callback, String message) {
-		Exception exception = new Exception(message);
+		EXTGWTSTLException exception = new EXTGWTSTLException(message);
 		callback.onFailure(exception);
 	}
 

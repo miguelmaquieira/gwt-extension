@@ -2,13 +2,14 @@ package com.imotion.gwt.stlviewer.client.widget;
 
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 
 public interface EXTGWTSTLILoaderDisplay extends AnimationCallback, IsWidget {
 	
 	double DEFAULT_ZOOM_PCTG 	= 10;
 	double DEFAULT_GYRE_SPEED 	= 0.05d;
 
-	void loadModel(String url);
+	void loadModel(String url, EXTGWTSTLExceptionCallback exceptionCallback);
 
 	double increaseGyreSpeed(double radiansPerIteration);
 

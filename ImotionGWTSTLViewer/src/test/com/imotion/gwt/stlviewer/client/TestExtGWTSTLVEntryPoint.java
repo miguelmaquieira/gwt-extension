@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -15,6 +16,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLException;
+import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 import com.imotion.gwt.stlviewer.client.widget.EXTGWTSTLILoaderDisplay;
 import com.imotion.gwt.stlviewer.client.widget.threejs.EXTGWTSTLVLoaderWidgetThreeJS;
 
@@ -108,7 +111,13 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				String path = pathTextBox.getText();
-				rendererWidget.loadModel(path);
+				rendererWidget.loadModel(path, new EXTGWTSTLExceptionCallback() {
+					
+					@Override
+					public void onFailure(EXTGWTSTLException exception) {
+						Window.alert(exception.getMessage());
+					}
+				});
 
 			}
 		});
