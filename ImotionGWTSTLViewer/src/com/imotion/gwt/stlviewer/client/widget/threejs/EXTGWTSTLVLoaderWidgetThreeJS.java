@@ -43,9 +43,17 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	public EXTGWTSTLVLoaderWidgetThreeJS(String modelpath, EXTGWTSTLExceptionCallback exceptionCallback, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this(modelpath, exceptionCallback, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
+	
+	public EXTGWTSTLVLoaderWidgetThreeJS(String modelpath, EXTGWTSTLExceptionCallback exceptionCallback, boolean canvas, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+		this(modelpath, exceptionCallback, canvas, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+	}
 
 	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
 		this(null, null, false, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
+	}
+	
+	public EXTGWTSTLVLoaderWidgetThreeJS(boolean canvas, int objectColorAsHex, int backgroundColorAsHex, int width, int height) {
+		this(null, null, canvas, objectColorAsHex, backgroundColorAsHex, width, height,DEFAULT_GYRE_SPEED, DEFAULT_ZOOM_PCTG);
 	}
 
 	public EXTGWTSTLVLoaderWidgetThreeJS(int objectColorAsHex, int backgroundColorAsHex, int width, int height, double gyreSpeed) {

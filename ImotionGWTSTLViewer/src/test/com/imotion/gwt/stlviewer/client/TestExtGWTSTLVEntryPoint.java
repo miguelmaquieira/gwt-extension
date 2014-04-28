@@ -89,7 +89,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		});
 		
 		//Renderer
-		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(0xA09595, 0xFFFFFF, 640, 480);
+		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(false, 0xA09595, 0xFFFFFF, 640, 480);
 		contentPanel.add(rendererWidget);
 		
 		//Controls Panel
