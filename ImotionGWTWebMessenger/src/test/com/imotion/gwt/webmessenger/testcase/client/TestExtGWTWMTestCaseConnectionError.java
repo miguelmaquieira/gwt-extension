@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection.TRANSPORT_TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasOpenCommHandler;
 
 public class TestExtGWTWMTestCaseConnectionError extends Composite  {
@@ -117,7 +118,9 @@ public class TestExtGWTWMTestCaseConnectionError extends Composite  {
 
 		if (connectionCS == null) {
 			try {
-				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+				connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, 
+																						  TRANSPORT_TYPE.LONG_POLLING,
+																						  TRANSPORT_TYPE.STREAMING);
 
 				//Añadimos el handler para abrir la conexión
 				connectionCS.getCommHandlerWrapper().addCommOpenHandler(new ExtGWTWMHasOpenCommHandler() {	

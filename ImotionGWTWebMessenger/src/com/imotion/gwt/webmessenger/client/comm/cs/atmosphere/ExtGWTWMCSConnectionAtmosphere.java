@@ -12,6 +12,7 @@ import org.atmosphere.gwt20.client.AtmosphereReopenHandler;
 import org.atmosphere.gwt20.client.AtmosphereRequest;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig.Flags;
+import org.atmosphere.gwt20.client.AtmosphereRequestConfig.Transport;
 import org.atmosphere.gwt20.client.AtmosphereResponse;
 import org.atmosphere.gwt20.client.AtmosphereTransportFailureHandler;
 
@@ -54,12 +55,10 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	private ExtGWTWMCSConnectionAtmosphere() {
 		// not allowed
 	}
-
-	public ExtGWTWMCSConnectionAtmosphere(ExtGWTWMHandlerManager handlerManager, String roomId, String userId, int timeout) {
-
+	
+	public ExtGWTWMCSConnectionAtmosphere(ExtGWTWMHandlerManager handlerManager, String roomId, String userId, int timeout, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) {
 		this.sessionData = new ExtGWTWMSession(roomId, userId);	
-		initConnection(handlerManager, roomId, timeout);
-
+		initConnection(handlerManager, roomId, timeout, protocol, fallback);
 	}
 
 	/**********************************************************************
@@ -196,21 +195,23 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 
 
-	private void initConnection(ExtGWTWMHandlerManager handlerManager, String roomId, int timeout){
+	private void initConnection(ExtGWTWMHandlerManager handlerManager, String roomId, int timeout, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) {
 		errorHandler = new ExtGWTWMErrorCSHandlerWrapper(handlerManager, roomId);
 		commHandler = new ExtGWTWMCommCSHandlerWrapper(handlerManager, roomId);
-		initAtmosphere(timeout);
+		initAtmosphere(timeout, protocol, fallback);
 	}
 
-	private void initAtmosphere(int timeout) {
+	private void initAtmosphere(int timeout, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) {
 
 		// comm params
 		ExtGWTWMRPCSerializerAtmosphere rpc_serializer = GWT.create(ExtGWTWMRPCSerializerAtmosphere.class);
 		atmosphereConfig = AtmosphereRequestConfig.create(rpc_serializer);
 		atmosphereConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?" + "roomId="		+ getSessionData().getRoomId()
-				+ "&userId=" 	+ getSessionData().getUserId());			
-		atmosphereConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
-		atmosphereConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.STREAMING);
+				+ "&userId=" 	+ getSessionData().getUserId());
+		
+		
+		atmosphereConfig.setTransport(getProtocol(protocol));
+		atmosphereConfig.setFallbackTransport(getProtocol(fallback));
 		atmosphereConfig.setFlags(Flags.enableProtocol);
 		atmosphereConfig.setTimeout(timeout);
 
@@ -286,5 +287,21 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			curator = new ExtGWTWMCSConnectionCuratorAtmosphere(atmosphereConfig);
 		}
 		return curator;
+	}
+	
+	private Transport getProtocol(TRANSPORT_TYPE type) {
+		Transport protocolType = Transport.LONG_POLLING;
+		if (type == TRANSPORT_TYPE.WEBSOCKETS) {
+			protocolType = Transport.WEBSOCKET;
+		} else if (type == TRANSPORT_TYPE.STREAMING) {
+			protocolType = Transport.STREAMING;
+		} else if (type == TRANSPORT_TYPE.LONG_POLLING) {
+			protocolType = Transport.LONG_POLLING;
+		} else if (type == TRANSPORT_TYPE.LONG_POLLING) {
+			protocolType = Transport.SSE;
+		} else if (type == TRANSPORT_TYPE.SESSION) {
+			protocolType = Transport.SESSION;
+		}
+		return protocolType;
 	}
 }

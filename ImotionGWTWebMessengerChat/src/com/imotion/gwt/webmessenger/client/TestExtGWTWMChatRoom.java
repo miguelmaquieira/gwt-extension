@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
+import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection.TRANSPORT_TYPE;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
 public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
@@ -270,7 +271,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		} else  {
 			try {
 				if (connectionCS == null) {
-					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname);
+					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
 					connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
 					connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 					connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
