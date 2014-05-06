@@ -13,7 +13,7 @@ public interface ExtGWTWMMessageTexts extends Messages {
 	@DefaultMessage("Open connection exception. \nParams: \n\troomId: {0} \n\tuserId: {1}")
 	public String error_open_connection_exception_message_text(String roomId, String userId);
 	
-	@DefaultMessage("Connection attemp with wrong parameter. You must provide an 'userId' and a 'roomId' params. \n\troomId: {0} \n\tuserId: {1}") 
+	@DefaultMessage("Connection attemp with wrong parameter. You must provide an 'roomId' and a 'userId' params. \n\troomId: {0} \n\tuserId: {1}") 
 	public String error_get_connection_param_not_informed_message_text(String roomId, String userId);
 	
 }

@@ -204,7 +204,8 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		if (exception != null) {
 			exceptionStacktrace = ExtGWTWMUtils.getStacktrace(exception);
 		}
-		String message = MESSAGES.error_common_exception_message_text(action, 
+		String message = MESSAGES.error_common_exception_message_text(
+				action, 
 				getSessionData().getRoomId(),
 				getSessionData().getUserId(),
 				exceptionStacktrace);	

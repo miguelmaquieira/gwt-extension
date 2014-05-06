@@ -104,7 +104,7 @@ public class TestExtGWTWMTestCaseConnectionTimeOut extends Composite {
 	 *                       PRIVATE FUNCTIONS 							*
 	 **********************************************************************/
 
-	private ExtGWTWMCommCSConnection getNewCommCS(final String nickname, final String roomname) {
+	private ExtGWTWMCommCSConnection getNewCommCS(final String roomname, final String nickname) {
 		ExtGWTWMCommCSConnection conn = null;
 		try {
 			conn = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, 
