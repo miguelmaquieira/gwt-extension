@@ -1,7 +1,7 @@
 package com.imotion.gwt.webmessenger.client;
 
-import com.imotion.gwt.webmessenger.client.common.ExtGWTWMUtils;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMUtils;
 
 
 public class ExtGWTWMException extends Exception {

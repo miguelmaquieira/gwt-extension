@@ -6,8 +6,11 @@ import com.imotion.gwt.webmessenger.client.common.ExtGWTWMCommand;
 
 public interface ExtGWTWmCommCSConnectionCurator extends ExtGWTWMReleasable {
 	
+	public final int WAITING_RESPONSE 	= 0;
+	public final int ERROR_RESPONSE 	= 1;
+	
 
-	public void connect() throws Exception;
+	public int connect() throws Exception;
 	public void disconnect() throws Exception;
 	public void sendMessage(String message, String roomId, String userId) throws Exception;
 	
