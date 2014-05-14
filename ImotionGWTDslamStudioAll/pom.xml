@@ -5,7 +5,7 @@
   <artifactId>ImotionGWTDslamStudioAll</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>DslamStudioAll</name>
+  <name>ImotionGWTDslamStudioAll</name>
   <modules>
     <module>ImotionGWTAceEditor</module>
     <module>ImotionGWTDslamStudio</module>
