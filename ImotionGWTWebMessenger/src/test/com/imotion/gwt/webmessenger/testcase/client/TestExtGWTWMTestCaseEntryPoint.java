@@ -10,6 +10,7 @@ public class TestExtGWTWMTestCaseEntryPoint implements EntryPoint {
 	private static final String TOKEN_CONNECTION 	= "test1";
 	private static final String TOKEN_MESSAGE 		= "test2";
 	private static final String TOKEN_EXCEPTION 	= "test3";
+	private static final String TOKEN_CONN_TO 		= "test4";
 
 	@Override
 	public void onModuleLoad() {
@@ -23,6 +24,8 @@ public class TestExtGWTWMTestCaseEntryPoint implements EntryPoint {
 				container = new TestExtGWTWMTestCaseMessaging();
 			} else if (token.equals(TOKEN_EXCEPTION)) {
 				container = new TestExtGWTWMTestCaseConnectionError();
+			} else if (token.equals(TOKEN_CONN_TO)) {
+				container = new TestExtGWTWMTestCaseConnectionTimeOut();
 			} else {
 				container = new TestExtGWTWMTestCaseConnection();
 			}

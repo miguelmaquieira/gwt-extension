@@ -17,7 +17,6 @@ import org.atmosphere.gwt20.client.AtmosphereResponse;
 import org.atmosphere.gwt20.client.AtmosphereTransportFailureHandler;
 
 import com.google.gwt.core.client.GWT;
-import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.ExtGWTWMMessageTexts;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSHandler;
@@ -40,6 +39,8 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection {
 
 	private final ExtGWTWMMessageTexts 	MESSAGES 	= GWT.create(ExtGWTWMMessageTexts.class); 
+	
+	private final int CONNECTION_TIMEOUT = 1;
 
 	private ExtGWTWMSession 				sessionData;
 
@@ -94,23 +95,36 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			getCurator().disconnect();
 
 		} catch (Exception exception) {
+			getCurator().stopCommand(COMMAND_TYPE.CLOSE_HANDLER);
 			manageException(exception, "disconnect");
 		}
 	}
 
 	@Override
 	public void connect() {
+		connect(CONNECTION_TIMEOUT);
+	}
+	
+	@Override
+	public void connect(int connectionTimeout) {
 		try {
-			getCurator().executeCommand(COMMAND_TYPE.OPEN_CONNECTION, 1000, 1, this);
+			getCurator().executeCommand(COMMAND_TYPE.OPEN_CONNECTION, connectionTimeout * 1000, 1, this);
 
-			getCurator().connect();
-		} catch (ExtGWTWMException exception) {
-			String roomId = getSessionData().getRoomId();
-			String userId = getSessionData().getUserId();
-			String message = MESSAGES.error_open_connection_message_text(roomId, userId);
-			handlerError(new ExtGWTWMError(message));
+			int responseCode = getCurator().connect();
+		
+			// Manage error
+			if (responseCode == ExtGWTWmCommCSConnectionCurator.ERROR_RESPONSE) {
+				getCurator().stopCommand(COMMAND_TYPE.OPEN_CONNECTION);
+				String roomId = getSessionData().getRoomId();
+				String userId = getSessionData().getUserId();
+				String message = MESSAGES.error_open_connection_message_text(roomId, userId);
+				ExtGWTWMError error = new ExtGWTWMError(TYPE.CONNECTION_ERROR, message);
+				handlerError(error);
+			}
+			
 		} catch (Exception exception) {
-			manageException(exception, "connect");
+			getCurator().stopCommand(COMMAND_TYPE.OPEN_CONNECTION);
+			manageException(exception, "connect", TYPE.CONNECTION_ERROR);
 		}
 	}
 
@@ -180,13 +194,22 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			}
 		}
 	}
-
+	
 	protected void manageException(Exception exception, String action) {
-		String message = MESSAGES.error_common_exception_message_text(action, 
+		manageException(exception, action, TYPE.EXCEPTION);
+	}
+	
+	protected void manageException(Exception exception, String action, TYPE errorType) {
+		String exceptionStacktrace = null;
+		if (exception != null) {
+			exceptionStacktrace = ExtGWTWMUtils.getStacktrace(exception);
+		}
+		String message = MESSAGES.error_common_exception_message_text(
+				action, 
 				getSessionData().getRoomId(),
 				getSessionData().getUserId(),
-				ExtGWTWMUtils.getStacktrace(exception));	
-		handlerError(new ExtGWTWMError(TYPE.EXCEPTION, message, exception));
+				exceptionStacktrace);	
+		handlerError(new ExtGWTWMError(errorType, message, exception));
 	}
 
 	/**********************************************************************

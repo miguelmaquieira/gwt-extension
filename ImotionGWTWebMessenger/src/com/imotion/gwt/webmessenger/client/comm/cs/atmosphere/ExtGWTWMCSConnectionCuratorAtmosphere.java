@@ -9,7 +9,6 @@ import org.atmosphere.gwt20.client.AtmosphereRequest;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig;
 
 import com.google.gwt.user.client.Command;
-import com.imotion.gwt.webmessenger.client.ExtGWTWMException;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWmCommCSConnectionCurator;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMCommand;
 import com.imotion.gwt.webmessenger.client.common.ExtGWTWMCommand.COMMAND_TYPE;
@@ -43,13 +42,16 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 	}
 	
 	@Override
-	public void connect() throws Exception {
+	public int connect() throws Exception {
+		int responseCode = ExtGWTWmCommCSConnectionCurator.WAITING_RESPONSE;
 		if (atmosphere == null || rpcRequest == null) {
 			atmosphere = Atmosphere.create();
 			rpcRequest = atmosphere.subscribe(atmosphereConfig);
 		} else {
-			throw new ExtGWTWMException();
+			responseCode = ExtGWTWmCommCSConnectionCurator.ERROR_RESPONSE;
 		}
+		return responseCode;
+		
 	}
 
 	@Override
@@ -86,7 +88,6 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 		}
 		getCommandMap().put(command.getType(), command);
 		
-		
 		if (command.getType() == COMMAND_TYPE.OPEN_CONNECTION) {
 			executeOpenHandler(command, delay, attemps, conn);
 		} else if (command.getType() == COMMAND_TYPE.CLOSE_HANDLER) {
@@ -113,8 +114,7 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			
 			@Override
 			public void execute() {
-				ExtGWTWMError error = new ExtGWTWMError(TYPE.CONNECTION_ERROR);
-				conn.handlerError(error);
+				conn.manageException(null, "open", TYPE.CONNECTION_ERROR);
 			}
 		}, delay, attemps);
 	}
@@ -135,9 +135,7 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			
 			@Override
 			public void execute() {
-
 				ExtGWTWMError error = new ExtGWTWMError(TYPE.SEND_MESSAGE);
-
 				conn.handlerError(error);
 			}
 		}, delay, attemps);
@@ -161,7 +159,3 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 		}
 	}
 }
-
-	
-
-	
