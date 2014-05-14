@@ -11,7 +11,7 @@
 	</parent>
 	<artifactId>ImotionGWTAceEditor</artifactId>
 	<packaging>jar</packaging>
-	<name>GWT Maven Archetype</name>
+	<name>ImotionGWTAceEditor</name>
 
 	<properties>
 		<!-- Convenience property to set the GWT version -->
@@ -77,7 +77,21 @@
 					<skipTests>${skipTests}</skipTests>
 				</configuration>
 			</plugin>
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-source-plugin</artifactId>
+			<version>2.2.1</version>
+			<executions>
+				<execution>
+					<id>attach-sources</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
 		</plugins>
+		
 	</build>
 
 </project>
