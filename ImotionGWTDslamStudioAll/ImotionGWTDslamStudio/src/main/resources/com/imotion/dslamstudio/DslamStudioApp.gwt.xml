@@ -19,7 +19,7 @@
 	
 	
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.imotion.dslamstudio.client.DslamStudioApp' />
+  <entry-point class='com.imotion.dslamstudio.client.EXTGWTDSLAMEntryPoint' />
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />

@@ -1,5 +1,6 @@
 package com.imotion.dslamstudio.client;
 
+import com.imotion.dslamstudio.client.GreetingService;
 import com.imotion.dslamstudio.shared.FieldVerifier;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
