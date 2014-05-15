@@ -6,7 +6,8 @@ import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TextArea;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
@@ -21,6 +22,8 @@ public class DslamStudioApp implements EntryPoint {
 	
 	private AceEditor editor1;
 	private InlineLabel rowColLabel;
+	private FlowPanel editorPanel;
+	private FlowPanel consolePanel;
 
 	private static final String DSLAM_TEXT =
 			"//THIS IS A COMMENT \n"
@@ -57,12 +60,17 @@ public class DslamStudioApp implements EntryPoint {
 	public void onModuleLoad() {
 		buildEditor();
 		buidConsole();
+		
+		SplitLayoutPanel splitPanel = new SplitLayoutPanel(5);
+		RootLayoutPanel.get().add(splitPanel);
+		
+		splitPanel.addEast(consolePanel, 300);
+		splitPanel.add(editorPanel);
 	}
 
 	private void buildEditor() {
-		FlowPanel editorPanel = new FlowPanel();
-		RootPanel.get().add(editorPanel);
-		editorPanel.setWidth("60%");
+		editorPanel = new FlowPanel();
+		editorPanel.setWidth("100%");
 		editorPanel.setHeight("100%");
 		editorPanel.getElement().getStyle().setFloat(Float.LEFT);
 
@@ -101,9 +109,8 @@ public class DslamStudioApp implements EntryPoint {
 	}
 
 	private void buidConsole() {
-		FlowPanel consolePanel = new FlowPanel();
-		RootPanel.get().add(consolePanel);
-		consolePanel.setWidth("40%");
+		consolePanel = new FlowPanel();
+		consolePanel.setWidth("100%");
 		consolePanel.setHeight("100%");
 		consolePanel.getElement().getStyle().setFloat(Float.RIGHT);
 
