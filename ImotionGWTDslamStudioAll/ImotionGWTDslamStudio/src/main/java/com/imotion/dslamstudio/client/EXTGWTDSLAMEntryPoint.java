@@ -191,7 +191,6 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		for (String block : blocks) {
 			parseBlock(block);
 		}
-
 		return result;
 	}
 	
