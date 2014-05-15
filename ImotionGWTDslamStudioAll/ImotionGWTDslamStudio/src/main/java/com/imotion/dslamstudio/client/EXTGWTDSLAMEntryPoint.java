@@ -2,6 +2,7 @@ package com.imotion.dslamstudio.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import java.util.Set;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -185,7 +185,7 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 
 	private List<String> parseCode() {
 		List<String> result = new ArrayList<>();
-		variables = new HashMap<>();
+		variables = new HashMap();
 
 		List<String> blocks = getBlocks();
 		for (String block : blocks) {
