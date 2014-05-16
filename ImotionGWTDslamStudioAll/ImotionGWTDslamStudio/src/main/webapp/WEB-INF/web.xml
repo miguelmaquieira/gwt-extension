@@ -18,7 +18,7 @@
 
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>DslamStudioApp.html</welcome-file>
+    <welcome-file>ImotionGWTDslamStudio.html</welcome-file>
   </welcome-file-list>
 
 </web-app>
