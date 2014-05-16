@@ -2,6 +2,7 @@ package com.imotion.dslamstudio.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,6 @@ import java.util.Set;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dev.util.collect.HashMap;
 import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -227,24 +227,23 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		} else if (block.startsWith("if") || block.startsWith("IF")) {
 			parseIf(block);
 		} else {
-			parseSimpleInstruction(block);
+			parseSimpleInstruction(block, variables);
 		}
 	}
 
-	private void parseSimpleInstruction(String line) {
+	private void parseSimpleInstruction(String line, Map<String, Object> localVariables) {
 		if (line.startsWith("$")) {
 			String[] variableDefinition = line.split("=");
 			String variableName 		= variableDefinition[0].trim();
 			String variableAsignment	= variableDefinition[1].trim();
 			Object finalValue			= parseAsignment(variableAsignment);
-			variables.put(variableName, finalValue);
+			localVariables.put(variableName, finalValue);
 		} else if (line.contains("$")) {
 
 		} else {
 
 		}
-		replaceVariables(line);
-		
+		replaceVariables(line, localVariables);
 	}
 
 	private void parseIf(String block) {
@@ -262,15 +261,19 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		List<String>		linesList			= Arrays.asList(lines);
 		Map<String, Object>	currentVariables	= new HashMap<>();
 		
-		int conditionStart	= lines[0].indexOf("(");
-		int conditionEnd	= lines[0].indexOf(")");
-		String conditionStr = lines[0].substring(conditionStart, conditionEnd);
-		
-		for (String line : linesList) {
-			if (line.startsWith("//")) {
-				continue;
-			}
-
+		String 		firstLine 		= lines[0];
+		int 		conditionStart	= firstLine.indexOf("(");
+		int 		conditionEnd	= firstLine.indexOf(")");
+		String 		conditionStr 	= firstLine.substring(conditionStart, conditionEnd);
+		String[] 	intervalParts	= conditionStr.split("..");
+		String		initStr			= intervalParts[0].trim();
+		String		endStr			= intervalParts[1].trim();
+		int			init			= Integer.parseInt(initStr);
+		int			end				= Integer.parseInt(endStr);
+		int			iteratorIndex	= firstLine.indexOf("$");
+		String		iteratorStr		= firstLine.substring(iteratorIndex, conditionStart).trim();
+		for (int i = init; i <= end; i++) {
+			currentVariables.put(iteratorStr, init);
 			
 		}
 	}
@@ -322,15 +325,37 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		return integerResult;
 	}
 
-	private String replaceVariables(String line) {
+	private String replaceVariables(String line, Map<String, Object> localVariables) {
 		String lineWithValues = line;
 		if (line.contains("$")) {
 			Set<String> keySet = variables.keySet();
 			for (String key : keySet) {
-				lineWithValues = lineWithValues.replace(key, variables.get(key).toString());
+				String value = variables.get(key).toString();
+				if (localVariables.get(key) != null) {
+					value = localVariables.get(key).toString();
+				}
+				lineWithValues = lineWithValues.replace(key, value);
 			}
 		}
 		return lineWithValues;
+	}
+	
+	private boolean checkCondition(int valueA, String comparator, int valueB) {
+		boolean result = false;
+		if (comparator.equals("EQU")) {
+			result = valueA == valueB;
+		} else if (comparator.equals("NEQ")) {
+			result = valueA != valueB;
+		} else if (comparator.equals("LSS")) {
+			result = valueA < valueB;
+		} else if (comparator.equals("LEQ")) {
+			result = valueA <= valueB;
+		} else if (comparator.equals("GTR")) {
+			result = valueA > valueB;
+		} else if (comparator.equals("GEQ")) {
+			result = valueA >= valueB;
+		}
+		return result;
 	}
 
 }
