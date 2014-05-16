@@ -185,7 +185,7 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 
 	private List<String> parseCode() {
 		List<String> result = new ArrayList<>();
-		variables = new HashMap<>();
+		variables = new HashMap();
 
 		List<String> blocks = getBlocks();
 		for (String block : blocks) {

@@ -1,6 +1,6 @@
 ImotionGWTDslamStudio/target/ImotionGWTDslamStudio-0.0.1-SNAPSHOT=
 eclipse.preferences.version=1
 jarsExcludedFromWebInfLib=
-lastWarOutDir=/home/gaelhosteneo/git/gwt-extension/ImotionGWTDslamStudioAll/ImotionGWTDslamStudio/target/ImotionGWTDslamStudio-0.0.1-SNAPSHOT
-warSrcDir=src/main/webapp
+lastWarOutDir=/Users/miguelgonzalezmaquieira/gitGwtExtension/gwt-extension/ImotionGWTDslamStudioAll/ImotionGWTDslamStudio/target/ImotionGWTDslamStudio-0.0.1-SNAPSHOT
+warSrcDir=target/ImotionGWTDslamStudio-0.0.1-SNAPSHOT
 warSrcDirIsOutput=false
