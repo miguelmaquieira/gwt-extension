@@ -28,5 +28,9 @@ public class EXTGWTDSLAMToolBar extends Composite {
 	public void addRunClickHandler(ClickHandler handler) {
 		runButton.addClickHandler(handler);
 	}
+	
+	public void setButtonEnabled(boolean enabled) {
+		runButton.setEnabled(enabled);
+	}
 
 }

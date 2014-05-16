@@ -1,7 +1,6 @@
 package com.imotion.dslamstudio.client;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.Set;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Style.Float;
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
@@ -20,7 +18,6 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
-import com.google.gwt.user.client.ui.TextArea;
 import com.imotion.dslamstudio.client.widget.EXTGWTDSLAMIXMLExamples;
 import com.imotion.dslamstudio.client.widget.EXTGWTDSLAMToolBar;
 
@@ -38,9 +35,10 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 	private InlineLabel				rowColLabel;
 	private FlowPanel				editorPanel;
 	private FlowPanel				consolePanel;
-	private TextArea				console;
+	private AceEditor				console;
 
 	private Map<String, Object> 	variables;
+	private EXTGWTDSLAMToolBar toolbar;
 
 	private static final String DSLAM_TEXT =
 			"//THIS IS A COMMENT \n\n"
@@ -56,21 +54,21 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 					+ "show interface shub port xml \n"
 					+ "configure vlan shub id $ID egress-port $NETWORK \n"
 					+ "show equipment slot $ID \n\n"
-					+ "$INIT   = 1; \n"
-					+ "$END    = 12; \n"
+					+ "$INIT   = 1 \n"
+					+ "$END    = 12 \n"
 					+ "FOR $i IN ($INIT..$END) { \n"
 					+ "    configure vlan shub id $ID egress-port lt:1/1/$i \n"
 					+ "} \n\n"
 					+ "$j 	 = 15 \n"
 					+ "$last = 20 \n"
-					+ "WHILE ($j LEQ $last) \n"
+					+ "WHILE ($j LEQ $last) { \n"
 					+ "   configure vlan shub id $ID egress-port lt:1/1/$j \n"
-					+ "   $j = $j + 1; \n"
+					+ "   $j = $j + 1 \n"
 					+ "} \n\n"
 					+ "configure pppox-relay cross-connect engine $ID mac-addr-conc name INET_PPP_RES \n"
 					+ "configure equipment slot nt-b unlock \n"
 					+ "configure equipment protection-group 1 admin-status unlock \n\n"
-					+ "if ($SAVE) { \n"
+					+ "if ($SAVE EQU 1) { \n"
 					+ "    admin software-mngt shub database save \n"
 					+ "} \n";
 
@@ -97,7 +95,7 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		editorPanel.getElement().getStyle().setFloat(Float.LEFT);
 
 		//toolbar
-		EXTGWTDSLAMToolBar toolbar = new EXTGWTDSLAMToolBar();
+		toolbar = new EXTGWTDSLAMToolBar();
 		editorPanel.add(toolbar);
 
 		// create first AceEditor widget
@@ -148,13 +146,23 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		consolePanel.setHeight("100%");
 		consolePanel.getElement().getStyle().setFloat(Float.RIGHT);
 
-		console = new TextArea();
+		// create first AceEditor widget
+		console = new AceEditor();
 		consolePanel.add(console);
-		console.setSize("100%", "100%");
-		console.getElement().getStyle().setBackgroundColor("black");
-		console.getElement().getStyle().setColor("white");
-		//		console.setReadOnly(true);
-		console.getElement().getStyle().setOverflow(Overflow.AUTO);
+
+		// Label to display current row/column
+		rowColLabel = new InlineLabel("");
+		consolePanel.add(rowColLabel);
+
+		// start the first editor and set its theme and mode
+		console.startEditor(); // must be called before calling setTheme/setMode/etc.
+		console.setReadOnly(true);
+		console.setTheme(AceEditorTheme.MONOKAI);
+		console.setMode(AceEditorMode.DSLAM);
+		console.setWidth("100%");
+		console.setHeight("100%");
+		console.setShowGutter(false);
+		console.setShowPrintMargin(false);
 	}
 
 	private void updateEditor1CursorPosition() {
@@ -163,55 +171,74 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 
 	private void runCode() {
 		console.setText("");
-
+		toolbar.setButtonEnabled(false);
 		final Iterator<String> resultIterator = parseCode().iterator();
 		Timer timer = new Timer() {
 
 			@Override
 			public void run() {
 				if (resultIterator.hasNext()) {
-					String consoleText = console.getText();
 					String currentLine = resultIterator.next();
-					consoleText += currentLine + "\n";
+					String consoleText = currentLine + "\n";
 					if (currentLine.startsWith("show")) {
 						consoleText += "\n" + EXTGWTDSLAMIXMLExamples.SHOW_EXAMPLE + "\n";
 					}
-					console.setText(consoleText);
+					console.insertAtCursor(consoleText);
+				} else {
+					this.cancel();
+					toolbar.setButtonEnabled(true);
 				}
 			}
 		};
-		timer.scheduleRepeating(500);
+		timer.scheduleRepeating(1500);
+	}
+
+	protected int countConsoleLines() {
+		String consoleText = console.getText();
+		String[] lines = consoleText.split("\r\n|\r|\n");
+		return  lines.length;
 	}
 
 	private List<String> parseCode() {
-		List<String> result = new ArrayList<>();
-		variables = new HashMap();
-
+		List<String> resultList = new ArrayList<>();
+		variables = new HashMap<>();
 		List<String> blocks = getBlocks();
 		for (String block : blocks) {
-			parseBlock(block);
+			String result = parseBlock(block);
+			if (!result.isEmpty()) {
+				String[] lines = getLines(result);
+				for (int i= 0; i < lines.length; i++) {
+					String line = lines[i];
+					resultList.add(line);
+				}
+			}
 		}
-		return result;
+		return resultList;
 	}
-	
+
 	private List<String> getBlocks() {
 		List<String>	blocks		= new ArrayList<>();
 		String			text		= editor1.getText();
-		String[]		lines		= text.split("\\n");
+		text = text.replace("\t", "");
+		String[]		lines		= getLines(text);
 
 		for (int i = 0; i < lines.length; i++) {
 			String currentBlock = "";
-			if (lines[i].startsWith("//")) {
+			String currentLine	= lines[i];
+			if (lines[i].startsWith("//") || currentLine.isEmpty()) {
 				continue;
 			}
-			if (lines[i].contains("{")) {
-				while (!lines[i].contains("}")) {
-					currentBlock += lines[i];
+			if (currentLine.contains("{")) {
+				while (!currentLine.contains("}")) {
+					currentLine = lines[i] + "\n";
+					currentBlock += currentLine;
 					i++;
 				}
-				currentBlock += lines[i];
+				if (currentLine.contains("ELSE") || currentLine.contains("else")) {
+					//TODO:
+				}
 			} else {
-				currentBlock = lines[i];
+				currentBlock = currentLine;
 			}
 			blocks.add(currentBlock);
 		}
@@ -219,78 +246,132 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		return blocks;
 	}
 
-	private void parseBlock(String block) {
+	private String parseBlock(String block) {
+		String result = "";
 		if (block.startsWith("for") || block.startsWith("FOR")) {
-			parseFor(block);
+			result = parseFor(block);
 		} else if (block.startsWith("while") || block.startsWith("WHILE")) {
-			parseWhile(block);
+			result = parseWhile(block);
 		} else if (block.startsWith("if") || block.startsWith("IF")) {
-			parseIf(block);
+			result = parseIf(block);
 		} else {
-			parseSimpleInstruction(block, variables);
+			result = parseSimpleInstruction(block, null);
 		}
+		return result;
 	}
 
-	private void parseSimpleInstruction(String line, Map<String, Object> localVariables) {
+	private String parseSimpleInstruction(String line, Map<String, Object> localVariables) {
+		String result = "";
+		line = line.trim();
 		if (line.startsWith("$")) {
 			String[] variableDefinition = line.split("=");
 			String variableName 		= variableDefinition[0].trim();
-			String variableAsignment	= variableDefinition[1].trim();
-			Object finalValue			= parseAsignment(variableAsignment);
-			localVariables.put(variableName, finalValue);
-		} else if (line.contains("$")) {
-
+			String asigment				= variableDefinition[1].trim();
+			Object finalValue			= parseAsignment(asigment, localVariables);
+			if (localVariables == null || (localVariables != null && variables.containsKey(variableName))) {
+				variables.put(variableName, finalValue);
+			} else {
+				localVariables.put(variableName, finalValue);
+			}
 		} else {
-
+			result = replaceVariables(line	, localVariables);
 		}
-		replaceVariables(line, localVariables);
+		if (!result.isEmpty()) {
+			result += "\n";
+		}
+		return result;
 	}
 
-	private void parseIf(String block) {
-		// TODO Auto-generated method stub
-		
+	private String parseIf(String block) {
+		String		result 				= "";
+		String[]	lines 				= getLines(block);
+		String		firstLine 			= lines[0];
+		int			conditionInit 		= firstLine.indexOf("(") + 1;
+		int			conditionEnd 		= firstLine.indexOf(")");
+		String		conditionStr		= firstLine.substring(conditionInit, conditionEnd);
+		String[]	conditionElements	= conditionStr.split(" ");
+		String		elementOne			= conditionElements[0];
+		String		comparator			= conditionElements[1];
+		String		elementTwo			= conditionElements[2];
+
+		boolean conditionIsValid = checkIntegerCondition(elementOne, comparator, elementTwo);
+		if (conditionIsValid) {
+			for (int k = 1; k < lines.length - 1; k++ ) {
+				result += parseSimpleInstruction(lines[k], null);
+			}
+		}
+		return result;
 	}
 
-	private void parseWhile(String block) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void parseFor(String block) {
-		String[]			lines				= block.split("\\n");
-		List<String>		linesList			= Arrays.asList(lines);
+	private String parseWhile(String block) {
+		String				result				= "";
+		String[]			lines				= getLines(block);
 		Map<String, Object>	currentVariables	= new HashMap<>();
-		
+
 		String 		firstLine 		= lines[0];
-		int 		conditionStart	= firstLine.indexOf("(");
+		int 		conditionStart	= firstLine.indexOf("(") + 1;
 		int 		conditionEnd	= firstLine.indexOf(")");
 		String 		conditionStr 	= firstLine.substring(conditionStart, conditionEnd);
-		String[] 	intervalParts	= conditionStr.split("..");
-		String		initStr			= intervalParts[0].trim();
-		String		endStr			= intervalParts[1].trim();
-		int			init			= Integer.parseInt(initStr);
-		int			end				= Integer.parseInt(endStr);
-		int			iteratorIndex	= firstLine.indexOf("$");
-		String		iteratorStr		= firstLine.substring(iteratorIndex, conditionStart).trim();
-		for (int i = init; i <= end; i++) {
-			currentVariables.put(iteratorStr, init);
-			
+
+		String[]	conditionElements	= conditionStr.split(" ");
+		String		elementOne			= conditionElements[0];
+		String		comparator			= conditionElements[1];
+		String		elementTwo			= conditionElements[2];
+
+		while (checkIntegerCondition(elementOne, comparator, elementTwo)) {
+			for (int j = 1; j < lines.length - 1; j++) {
+				result += parseSimpleInstruction(lines[j], currentVariables);
+			}
 		}
+		return result;
 	}
 
-	private Object parseAsignment(String asignment) {
+	private String parseFor(String block) {
+		String				result				= "";
+		String[]			lines				= getLines(block);
+		Map<String, Object>	currentVariables	= new HashMap<>();
+
+		String 		firstLine 			= lines[0];
+		int 		conditionStart		= firstLine.indexOf("(") + 1;
+		int 		conditionEnd		= firstLine.indexOf(")");
+		String 		conditionStr 		= firstLine.substring(conditionStart, conditionEnd);
+		String[] 	intervalParts		= conditionStr.split("\\.\\.");
+		String		initStr				= intervalParts[0].trim();
+		String		endStr				= intervalParts[1].trim();
+		int			init				= getIntValueFromText(initStr);
+		int			end					= getIntValueFromText(endStr);
+		int			iteratorIndex		= firstLine.indexOf("$");
+		int			iteratorIndexEnd	= firstLine.indexOf(" IN");
+		String		iteratorStr			= firstLine.substring(iteratorIndex, iteratorIndexEnd).trim();
+		for (int i = init; i <= end; i++) {
+			currentVariables.put(iteratorStr, i);
+			for (int j = 1; j < (lines.length - 1); j++) {
+				String currentLine = lines[j];
+				result = result + parseSimpleInstruction(currentLine, currentVariables);
+			}
+		}
+		return result;
+	}
+
+	private Object parseAsignment(String asignment, Map<String, Object> localVariables) {
 		Object result = null;
 
 		if (asignment.contains("\"") || asignment.contains("'")) {
 			result = asignment;
 		} else {
-			result = parseIntegerAsignment(asignment);
+			result = parseIntegerAsignment(asignment, localVariables);
 		}
 
 		return result;
 	}
 
-	private Integer parseIntegerAsignment(String asignment) {
+	private Integer parseIntegerAsignment(String asignment, Map<String, Object> localVariables) {
+
+		Map<String , Object> allVariables = new HashMap<>();
+		allVariables.putAll(variables);
+		if (localVariables != null) {
+			allVariables.putAll(localVariables);
+		}
 		Integer integerResult = 0;
 		String[] asignmentParts = asignment.split(" ");
 		if (asignmentParts.length > 1) {
@@ -302,13 +383,13 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 			Integer secondValueAsInt	= 0;
 
 			if (firstValue.contains("$")) {
-				firstValueAsInt = (Integer) variables.get(firstValue);
+				firstValueAsInt = (Integer) allVariables.get(firstValue);
 			} else {
 				firstValueAsInt = Integer.parseInt(firstValue);
 			}
 
-			if (firstValue.contains("$")) {
-				secondValueAsInt = (Integer) variables.get(secondValue);
+			if (secondValue.contains("$")) {
+				secondValueAsInt = (Integer) allVariables.get(secondValue);
 			} else {
 				secondValueAsInt = Integer.parseInt(secondValue);
 			}
@@ -328,34 +409,59 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 	private String replaceVariables(String line, Map<String, Object> localVariables) {
 		String lineWithValues = line;
 		if (line.contains("$")) {
-			Set<String> keySet = variables.keySet();
+			Map<String, Object> allVariables = new HashMap<>();
+			allVariables.putAll(variables);
+			if (localVariables != null) {
+				allVariables.putAll(localVariables);
+			}
+			Set<String> keySet = allVariables.keySet();
 			for (String key : keySet) {
-				String value = variables.get(key).toString();
-				if (localVariables.get(key) != null) {
-					value = localVariables.get(key).toString();
+				if (lineWithValues.contains(key)) {
+					String value = null;
+					if (localVariables != null && localVariables.get(key) != null) {
+						value = localVariables.get(key).toString();
+					} else {
+						value = variables.get(key).toString();
+					}
+					lineWithValues = lineWithValues.replace(key, value);
 				}
-				lineWithValues = lineWithValues.replace(key, value);
 			}
 		}
 		return lineWithValues;
 	}
-	
-	private boolean checkCondition(int valueA, String comparator, int valueB) {
+
+	private boolean checkIntegerCondition(String valueA, String comparator, String valueB) {
 		boolean result = false;
+		int	 valueaAsInt = getIntValueFromText(valueA);
+		int	 valuebAsInt = getIntValueFromText(valueB);
 		if (comparator.equals("EQU")) {
-			result = valueA == valueB;
+			result = valueaAsInt == valuebAsInt;
 		} else if (comparator.equals("NEQ")) {
-			result = valueA != valueB;
+			result = valueaAsInt != valuebAsInt;
 		} else if (comparator.equals("LSS")) {
-			result = valueA < valueB;
+			result = valueaAsInt < valuebAsInt;
 		} else if (comparator.equals("LEQ")) {
-			result = valueA <= valueB;
+			result = valueaAsInt <= valuebAsInt;
 		} else if (comparator.equals("GTR")) {
-			result = valueA > valueB;
+			result = valueaAsInt > valuebAsInt;
 		} else if (comparator.equals("GEQ")) {
-			result = valueA >= valueB;
+			result = valueaAsInt >= valuebAsInt;
 		}
 		return result;
+	}
+
+	private String[] getLines(String block) {
+		return block.split("\\n");
+	}
+
+	private int getIntValueFromText(String text) {
+		int value = -1;
+		if (text.startsWith("$")) {
+			value = (Integer) variables.get(text);
+		} else {
+			value = Integer.parseInt(text);
+		}
+		return value;
 	}
 
 }
