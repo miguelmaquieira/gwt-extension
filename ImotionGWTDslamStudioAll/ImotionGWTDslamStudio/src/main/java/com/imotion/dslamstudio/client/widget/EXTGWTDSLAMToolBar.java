@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 public class EXTGWTDSLAMToolBar extends Composite {
 
 	private Button runButton;
+	private Button stepButton;
+	private Button restartButton;
 
 	public EXTGWTDSLAMToolBar() {
 		FlowPanel root = new FlowPanel();
@@ -23,10 +25,25 @@ public class EXTGWTDSLAMToolBar extends Composite {
 		
 		runButton = new Button("RUN ►");
 		root.add(runButton);
+		runButton.getElement().getStyle().setMarginRight(5d, Unit.PX);
+		
+		stepButton = new Button("STEP ►");
+		root.add(stepButton);
+		
+		restartButton = new Button("RESTART");
+		root.add(restartButton);
 	}
 	
 	public void addRunClickHandler(ClickHandler handler) {
 		runButton.addClickHandler(handler);
+	}
+	
+	public void addStepClickHandler(ClickHandler handler) {
+		stepButton.addClickHandler(handler);
+	}
+	
+	public void addRestartClickHandler(ClickHandler handler) {
+		restartButton.addClickHandler(handler);
 	}
 	
 	public void setButtonEnabled(boolean enabled) {

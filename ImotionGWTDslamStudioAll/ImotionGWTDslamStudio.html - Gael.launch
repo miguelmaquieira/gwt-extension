@@ -9,6 +9,7 @@
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
 </listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.maven.mavenClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war /home/gaelhosteneo/git/gwt-extension/ImotionGWTDslamStudioAll/ImotionGWTDslamStudio/target/ImotionGWTDslamStudio-0.0.1-SNAPSHOT -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl ImotionGWTDslamStudio.html -logLevel INFO -codeServerPort 9997 -port 8888 com.imotion.dslamstudio.DslamStudioApp com.imotion.dslamstudio.DslamStudioAppJUnit"/>

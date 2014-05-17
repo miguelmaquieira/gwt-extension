@@ -38,7 +38,9 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 	private AceEditor				console;
 
 	private Map<String, Object> 	variables;
-	private EXTGWTDSLAMToolBar toolbar;
+	private Iterator<String> 		resultIterator;
+	
+	private EXTGWTDSLAMToolBar 		toolbar;
 
 	private static final String DSLAM_TEXT =
 			"//THIS IS A COMMENT \n\n"
@@ -138,6 +140,22 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 				runCode();
 			}
 		});
+		
+		toolbar.addStepClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				runStep();
+			}
+		});
+		
+		toolbar.addRestartClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				runRestart();
+			}
+		});
 	}
 
 	private void buidConsole() {
@@ -172,7 +190,7 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 	private void runCode() {
 		console.setText("");
 		toolbar.setButtonEnabled(false);
-		final Iterator<String> resultIterator = parseCode().iterator();
+		final Iterator<String> resultIterator = getResultIterator();
 		Timer timer = new Timer() {
 
 			@Override
@@ -191,6 +209,25 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 			}
 		};
 		timer.scheduleRepeating(1500);
+	}
+	
+	private void runRestart() {
+		console.setText("");
+		resultIterator = null;
+		runStep();
+	}
+	
+	private void runStep() {
+		final Iterator<String> resultIterator = getResultIterator();
+		if (resultIterator.hasNext()) {
+			String currentLine = resultIterator.next();
+			String consoleText = currentLine + "\n";
+			if (currentLine.startsWith("show")) {
+				consoleText += "\n" + EXTGWTDSLAMIXMLExamples.SHOW_EXAMPLE + "\n";
+				
+			}
+			console.insertAtCursor(consoleText);
+		}
 	}
 
 	protected int countConsoleLines() {
@@ -463,5 +500,11 @@ public class EXTGWTDSLAMEntryPoint implements EntryPoint {
 		}
 		return value;
 	}
-
+	
+	private Iterator<String> getResultIterator() {
+		if (resultIterator == null) {
+			resultIterator =  parseCode().iterator();
+		}
+		return resultIterator;
+	}
 }
