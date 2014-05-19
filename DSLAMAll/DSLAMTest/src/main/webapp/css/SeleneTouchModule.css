@@ -1,0 +1,293 @@
+/***************************************************
+*             HEADER DECLARATIVE VIEW              *
+****************************************************/
+.aegwt-touchHeaderLogo {
+	margin-bottom: 5px;
+	margin-top: 10px;
+	padding-left: 5px;
+	padding-right: 15px;
+}
+
+.aegwt-touchHeaderLogo img {
+	height: 40px;
+}
+
+.aegwt-touchNavHeader {
+	background: #eee;
+	width: 100%;
+	min-width:320px;
+	height: 50px;
+	top: 0;
+	position: absolute;
+	font-family: tahoma, geneva, arial, sans-serif;
+	font-size: 12px;
+	color: Gray;
+}
+
+
+/****************************************************
+* 					NUMBER_SPINNER					*
+****************************************************/
+.aegwt-numberSpinner .gwt-Anchor {
+	padding-right: 4px;
+	padding-left: 4px;
+}
+
+/****************************************************
+* 					COMBO BOX						*
+****************************************************/
+.aegwt-customComboBox .aegwt-imageAnchor {
+	padding-left: 3px;
+}
+
+/*******************************************
+*         		DATE PICKER			       *
+********************************************/
+.datePickerMonthSelector {
+	background: #BBB;
+}
+
+.datePickerWeekdayLabel {
+	background: #DDD;
+}
+
+.datePickerWeekendLabel {
+	background: #DDD;
+}
+
+.datePickerDay {
+	height: 35px;
+	border: 1px solid #CCC;
+}
+
+/*******************************************
+*       		 INFO WIDGET		       *
+********************************************/
+
+.aegwt-touch-infoWidget {
+	padding: 15px 20px 5px 20px;
+	background:White;
+}
+
+.aegwt-touch-infoWidget .gwt-HTML-infoLabel {
+	padding-top:50px;
+	padding-bottom:25px;
+	white-space: normal;
+	text-align: center;
+	font-size:14px;
+}
+
+.aegwt-touch-infoWidget .aegwt-imageAnchorLabel-button {
+	background:Gainsboro;
+	border:1px solid Gray;
+	margin-top:25px;
+	margin-bottom:25px;
+	padding:3px 15px 3px 15px;
+	cursor:pointer;
+}
+
+.aegwt-touch-infoWidget .aegwt-imageAnchorLabel-button .aegwt-textDisplay {
+	white-space: normal;
+	text-align: center;
+	font-weight:bold;
+	
+}
+
+/******************************************************
+*                 OPTIONS CONTAINER                   *
+*******************************************************/
+.aegwt-touch-optionsContainer {
+	background: #eee;
+	font-size: 12px;
+}
+
+.aegwt-touch-optionsContainer-top {
+	z-index:50;
+	border-bottom:1px solid #ddd;
+}
+
+.aegwt-touch-optionsContainer .aegwt-buttonImage {
+	padding:3px;
+	margin-top:7px;
+	margin-right:2px;
+	margin-left:2px;
+	font-size:12px;
+}
+
+.aegwt-touch-optionsContainer .aegwt-buttonSwitch {
+	background: #eee;
+	font-weight:bold;
+}
+
+.aegwt-touch-optionsContainer .aegwt-buttonSwitch .aegwt-buttonSwitchUp {
+	width:100%;
+	text-align:center;
+	border-left: 	1px solid #fff;
+	border-right:	none;
+	border-top:		1px solid #fff;
+ 	border-bottom:	1px solid #ddd; 
+	padding-top:	5px;
+	padding-bottom:	5px;
+	color:Gray;
+}
+
+.aegwt-touch-optionsContainer .aegwt-buttonSwitch .aegwt-buttonSwitchDown {
+	background: #fff;
+	border-bottom:1px solid #ddd;	
+}
+
+.aegwt-touch-optionsContainer-bottom { 
+	
+}
+.aegwt-touch-optionsContainer .infoLabel {
+	font-size: 14px;
+	font-weight:bold;
+	padding-top:5px;
+	padding-bottom:5px;
+	color: Gray;
+	border-bottom: 1px solid #ddd;
+}
+
+.aegwt-touch-optionsContainer .aegwt-textBoxItemData-orderDate {
+	padding-right: 24px;
+}
+
+/*******************************************
+*   BUSINESS TOUCH PANEL LOGGED VIEW       *
+********************************************/
+
+.aegwt-touch-headerSubHeaderScreenContainer {
+	margin-top:132px;
+}
+
+/*******************************************
+*         		   DRAWER		           *
+********************************************/
+
+.box {
+	background-color: #777777;
+	overflow: hidden;
+}
+
+.drawerLeft {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0px;
+	width: 100%;
+	opacity: 1;
+	box-shadow: -1px 0px 8px #000000;
+	-webkit-transition: left 0.2s ease-in-out;
+	-moz-transition: left 0.2s ease-in-out;
+	-ms-transition: left 0.2s ease-in-out;
+	-o-transition: left 0.2s ease-in-out;
+	transition: left 0.2s ease-in-out;
+}
+
+.drawerRigth {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 85%;
+	width: 100%;
+	opacity: 1;
+	box-shadow: -1px 0px 8px #000000;
+	-webkit-transition: left 0.2s ease-in-out;
+	-moz-transition: left 0.2s ease-in-out;
+	-ms-transition: left 0.2s ease-in-out;
+	-o-transition: left 0.2s ease-in-out;
+	transition: left 0.2s ease-in-out;
+}
+
+.box .aegwt-menuItem {
+	color: #EAEAEA;
+	border-bottom: 1px solid #666;
+	border-top: 1px solid #999;
+	padding: 10px;
+	padding-left: 15px;
+	font-size: 17px;
+	cursor:pointer;
+}
+
+.box .aegwt-menuItem-selected {
+	background-color: #23954F;
+}
+
+.box .imageListItem-selected-img {
+	width: 18px !important;
+	height: 18px !important;
+	margin-right: 10px;
+}
+
+.menuDrawer-tittle {
+	background-color: #555555;
+	color: #EAEAEA;
+	border-bottom: 1px solid #666;
+	border-top: 1px solid #999;
+	padding-left: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.noneTopBorder {
+	border-top: none;
+}
+
+.quantifier {
+	width: 20px;
+	margin-left: 8px;
+	background-color: #FF6F0F;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 1px;
+}
+
+.quantifier .aegwt-labelContainer {
+	font-weight: bold;
+}
+
+
+
+
+.box .aegwt-textBoxItemData .aegwt-customLabel {
+	height:9px;
+	color:#505050;
+}
+
+
+
+.box .aegwt-itemData-description {
+	color: black;
+	font-size: 10px;
+}
+
+/*******************************************
+*         		   LOGIN		           *
+********************************************/
+.aegwt-loginTouchContainer {
+	margin:10px; 
+	background:white;
+	border:1px solid #CACACA;
+	border-radius: 8px;
+}
+
+
+.aegwt-loginTouchInput {
+	color: #3B3B3B;
+	padding: 4px 8px;
+	line-height: 18px;
+	overflow: auto;
+	width: 100%;
+}
+
+
+input[type="text"].aegwt-loginTouchInput,input[type="password"].aegwt-loginTouchInput {
+	height: 40px;
+	font-size: 18px;
+}
+
+
+.aegwt-loginTouchInputBorderBottom {
+	border-bottom: 1px solid #CACACA;
+}

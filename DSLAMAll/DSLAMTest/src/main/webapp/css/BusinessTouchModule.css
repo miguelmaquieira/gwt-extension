@@ -1,0 +1,31 @@
+/***************************************************
+* 					SCREEN BODY      			   *
+****************************************************/
+
+.busi-touch-screenBody {
+	min-width: 320px;
+	min-height: 560px;
+	margin: 0 auto;
+	background: #FFFFFF;
+}
+
+.busi-touch-splash {
+	border-top: 1px solid #CFCFCF;
+	border-bottom: 1px solid #CFCFCF;
+	background: #DFDFDF url("../images/textura_landing.png");
+}
+
+.busi-touch-versionFooter {
+	padding-top: 30px;
+	padding-bottom: 5px;
+	color: #BFBFBF;
+	width:100%;
+}
+
+/***************************************************
+* 					CONTROLLER      			   *
+****************************************************/
+
+.busi-touch-controllerHeader {
+	padding: 10px 0px;
+}

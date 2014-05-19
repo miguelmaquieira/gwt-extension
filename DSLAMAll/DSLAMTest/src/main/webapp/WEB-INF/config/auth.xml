@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RolCollection>
+	<RolMap>
+		<map-item rolType="2">
+			<Rol>
+				<Type>2</Type>
+				<Description>NORMAL</Description>
+				<Components>
+					<map-item componentName="BusinessServicesPresenter">
+						<Component>
+							<Name>Servicio</Name>
+							<ProhibitedActions>
+								<map-item actionName="SHOW">
+									<Action>
+										<Name>SHOW</Name>
+									</Action>
+								</map-item>
+							</ProhibitedActions>
+						</Component>
+					</map-item>
+					<map-item componentName="com.imotion.saboreando.business.service.impl.SNDOBUBusinessLoginServiceImpl">
+						<Component>
+							<Name>com.imotion.saboreando.business.service.impl.SNDOBUBusinessLoginServiceImpl</Name>
+							<ProhibitedActions>
+								<map-item actionName="modifyBusiness">
+									<Action>
+										<Name>modifyBusiness</Name>
+									</Action>
+								</map-item>
+							</ProhibitedActions>
+						</Component>
+					</map-item>
+				</Components>
+			</Rol>
+		</map-item>
+	</RolMap>
+</RolCollection>

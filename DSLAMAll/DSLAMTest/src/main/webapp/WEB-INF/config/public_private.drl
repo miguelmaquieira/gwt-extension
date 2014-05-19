@@ -1,0 +1,69 @@
+//created on: 12-abr-2013
+package com.rules.test
+
+//list any import classes here.
+import com.selene.arch.exe.core.appli.businessruleengine.wrappers.AEMFTIBREDataWrapper;
+
+//declare any global variables here
+
+rule "private pages"
+salience 100
+	when 
+    	//conditions
+     	dataWrapper : AEMFTIBREDataWrapper();
+     	eval(dataWrapper.getElementAsBool("IS_AUTENTICATED") == false);
+     	eval("dashboard".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "shoppingList".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "orderValidation".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "productList".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "historics".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "search".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "providers".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "addProvidertoProduct".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "services".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "search".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "providerInfo".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "feedback".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "newProvider".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "preferences".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "analytics".equals(dataWrapper.getElementAsString("URI_DESIRED")) ||
+	    	 "newProduct".equals(dataWrapper.getElementAsString("URI_DESIRED"))
+	    );
+    then
+    	dataWrapper.setElement("URI_RESULT", "login");
+end
+
+rule "Test private"
+salience 100
+	when 
+    	//conditions
+     	dataWrapper : AEMFTIBREDataWrapper();
+     	eval(dataWrapper.getElementAsBool("IS_AUTENTICATED") == false);
+     	eval("estoesunprueba".equals(dataWrapper.getElementAsString("URI_DESIRED")));
+    then
+    	dataWrapper.setElement("URI_RESULT", "login");
+end
+
+rule "Test estoesunprueba"
+salience 100
+	when 
+    	//conditions
+     	dataWrapper : AEMFTIBREDataWrapper();
+     	eval(dataWrapper.getElementAsBool("IS_AUTENTICATED") == true);
+     	eval("estoesunprueba".equals(dataWrapper.getElementAsString("URI_DESIRED")));
+    then
+    	dataWrapper.setElement("URI_RESULT", "test");
+end
+
+rule "Test estoesotraprueba"
+salience 100
+	when 
+    	//conditions
+     	dataWrapper : AEMFTIBREDataWrapper();
+     	eval(dataWrapper.getElementAsBool("IS_AUTENTICATED") == false);
+     	eval("estoesotraprueba".equals(dataWrapper.getElementAsString("URI_DESIRED")));
+    then
+    	dataWrapper.setElement("URI_RESULT", "test");
+end
+
+

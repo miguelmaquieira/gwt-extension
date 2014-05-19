@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="DSLAMAll" default="sync_with_selene" basedir=".">
+
+	<property name="seleneDir" location="../../SeleneArch" />
+
+	<!-- = = = = = = = = = = = = = = = = = =
+	= =   			TARGETS	  	         = =          
+	= = = = = = = = = = = = = = = = = = = -->
+	<target name="sync_with_selene" description="Synchronizes seleneApp and selene resources to local dev mode GAE">
+		<echo message="MAVEN PKG INSTALL - ALL" />
+
+		<antcall target="seleneAlone"></antcall>
+		<antcall target="seleneappAlone"></antcall>
+	</target>
+	
+	<target name="sync_with_selene_offline" description="Synchronizes seleneApp and selene resources to local dev mode GAE">
+		<echo message="MAVEN PKG INSTALL - ALL" />
+
+		<antcall target="seleneAloneOffline"></antcall>
+		<antcall target="seleneappAlone"></antcall>
+	</target>
+	
+	<target name="seleneAlone" description="Package Install of Selene projects">
+			<echo message="MAVEN PKG INSTALL - SELENE" />
+			<exec executable="mvn" dir="${seleneDir}/SeleneBase">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/Selene">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/Selene4GWT">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/SeleneDev">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+	</target>
+	
+	<target name="seleneAloneOffline" description="Package Install of Selene projects">
+			<echo message="MAVEN PKG INSTALL - SELENE" />
+			<exec executable="mvn" dir="${seleneDir}/SeleneBase">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/Selene">
+				<arg value="package" />
+				<arg value="install" />
+				<arg value="-o" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/Selene4GWT">
+				<arg value="package" />
+				<arg value="install" />
+				<arg value="-o" />
+			</exec>
+			<exec executable="mvn" dir="${seleneDir}/SeleneDev">
+				<arg value="package" />
+				<arg value="install" />
+				<arg value="-o" />
+			</exec>
+	</target>
+	
+	<target name="seleneappAlone" description="Package install of SeleneApp projects">
+		<echo message="MAVEN PKG INSTALL - ALL" />
+		<exec executable="mvn">
+			<arg value="package" />
+			<arg value="install" />
+		</exec>
+	</target>
+	
+	<target name="frontAlone" description="Package install of SeleneApp Front">
+			<echo message="MAVEN PKG INSTALL - SeleneApp-Front" />
+			<exec executable="mvn" dir="SeleneApp-Front">
+				<arg value="package" />
+				<arg value="install" />
+			</exec>
+	</target>
+	
+	<target name="cleanup">
+		<echo message="${ant.project.name} TARGET: cleanup" />
+		<exec executable="mvn" dir="${seleneDir}/SeleneBase">
+			<arg value="clean" />
+		</exec>
+		<exec executable="mvn" dir="${seleneDir}/Selene">
+			<arg value="clean" />
+		</exec>
+		<exec executable="mvn" dir="${seleneDir}/Selene4GWT">
+			<arg value="clean" />
+		</exec>
+		<exec executable="mvn" dir="${seleneDir}/SeleneDev">
+			<arg value="clean" />
+		</exec>
+		<exec executable="mvn">
+			<arg value="clean" />
+		</exec>
+	</target>
+	
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<module>
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.selene.arch.exe.gwt.SailorGwt"/>
+	<inherits name="com.google.gwt.ajaxloader.AjaxLoader" />
+	<inherits name="com.selene.arch.ArchDataModule"/>
+	<inherits name="com.google.gwt.http.HTTP" />
+	<inherits name="com.google.gwt.logging.Logging"/>
+	
+	<set-property name="gwt.logging.firebugHandler" value="ENABLED" />
+	<set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+	<set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
+	
+	<source path='client' />
+
+</module>

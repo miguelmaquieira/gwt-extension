@@ -1,0 +1,141 @@
+/********************************************************
+					COMMON
+**********************************************************/
+.invalidWarning {
+	color: #e50000;
+}
+
+.glare {
+	width: 100%;
+	height: 100%;
+	text-align: left;
+}
+
+.link {
+	color: #000000;
+	text-decoration: none;
+	border-bottom: 1px dotted;
+}
+
+.link:hover {
+	color: #000000;
+	border-bottom: 1px solid;
+}
+
+#progressIcon {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    margin-left: -110px;
+    margin-top: -50px;
+}
+
+/******************************************************
+*                HEADER DECLARATIVE VIEW              *
+******************************************************/
+
+.busi-icoHeader {
+	height: 40px;
+	border-left: #707070 1px solid;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 10px;
+}
+
+.busi-icoHeader:hover {
+	background: #555555;
+	color: #FFFFFF;
+}
+
+.busi-icoHeaderLeft {
+	border-right: #707070 1px solid;
+}
+
+.busi-headerLogo {
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding-left: 5px;
+	padding-right: 15px;
+}
+
+
+.busi-usernameAnchor {
+	height: 35px;
+	border-left: #707070 1px solid;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 15px;
+	float: right;
+}
+
+.busi-usernameAnchor:hover {
+	background: #555;
+	color: #FFFFFF;
+}
+
+/********************************************
+*			TEXT BOX ITEM DATA				*
+*********************************************/
+.aegwt-textBoxItemData .aegwt-customLabel {
+	height: 16px;
+	color: Gray;
+}
+
+.aegwt-textBoxItemData-textContentPanel {
+	border-spacing: 10px 0px;
+}
+
+.aegwt-textBoxItemData-countDownLabel {
+	width: 12px;
+}
+
+/******************************************************
+*                        SuggestBox
+******************************************************/
+.gwt-SuggestBox {
+	border: 1px solid #666;
+	text-align: left;
+	/* 	max-height:200px; */
+	/* 	overflow:scroll; */
+}
+
+.gwt-SuggestBoxPopup {
+	text-align: left;
+	cursor: pointer;
+	cursor: hand;
+	border: 1px solid #aaa;
+	background-color: #fff;
+	max-height: 200px;
+	overflow-y: scroll !important;
+	z-index: 200;
+	box-shadow: 0 0 5px 1px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.15);
+	-webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,0.15);
+	-box-shadow: 0 0 5px rgba(0,0,0,0.15);
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.gwt-SuggestBoxPopup .item {
+	border-bottom: 1px solid #eee;
+	padding: 5px 10px;
+}
+
+.gwt-SuggestBoxPopup .item-selected {
+	background-color: #8AB545;
+}
+
+/*****************************************************
+*                   JQUERY STYLES                    *
+******************************************************/
+
+.ui-btn-corner-all {
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+}
+
+
+

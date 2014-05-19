@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!-- <!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN" 
+	"http://castor.codehaus.org/mapping.dtd"> -->
+<mapping>
+	<class
+		name="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationDefinition">
+		<map-to xml="Application" />
+		<field name="name" type="java.lang.String">
+			<bind-xml name="Name" node="attribute" />
+		</field>
+		<field name="serviceList"
+			type="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceDefinition"
+			collection="arraylist" container="false">
+			<bind-xml name="ServiceList" node="element" />
+		</field>
+	</class>
+
+	<class
+		name="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceDefinition">
+		<map-to xml="Service" />
+		<field name="serviceName" type="java.lang.String">
+			<bind-xml name="Name" node="attribute" />
+		</field>
+		<field name="serviceDescription" type="java.lang.String">
+			<bind-xml name="Description" node="element" />
+		</field>
+		<field name="serviceType" type="long">
+			<bind-xml name="Type" node="element" />
+		</field>
+		<field name="serviceDescriptor" type="java.lang.String">
+			<bind-xml name="Descriptor" node="element" />
+		</field>
+		<field name="parametersMap" collection="map" container="false">
+			<bind-xml name="ParametersMap">
+				<class name="org.exolab.castor.mapping.MapItem">
+					<field name="key" type="java.lang.String">
+						<bind-xml name="id" node="attribute" />
+					</field>
+					<field name="value"
+						type="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceParameter"
+						container="false">
+						<bind-xml name="Param" />
+					</field>
+				</class>
+			</bind-xml>
+		</field>
+		<field name="subServiceList"
+			type="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceDefinition"
+			collection="arraylist" container="false">
+			<bind-xml name="SubServiceList" node="element" />
+		</field>
+	</class>
+
+	<class
+		name="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceParameter">
+		<map-to xml="Param" />
+		<field name="value" type="java.lang.String">
+			<bind-xml name="value" node="element" />
+		</field>
+		<field name="type"
+			type="com.selene.arch.exe.core.appli.application.model.AEMFTApplicationServiceParameter$PARAMETER_TYPE">
+			<bind-xml name="type" node="element" />
+		</field>
+	</class>
+
+	<!-- AUTHORIZATIONS -->
+
+	<class
+		name="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthRolCollection">
+		<map-to xml="RolCollection" />
+		<field name="rolMap" collection="map" container="false">
+			<bind-xml name="RolMap">
+				<class name="org.exolab.castor.mapping.MapItem">
+					<field name="key" type="java.lang.Integer">
+						<bind-xml name="rolType" node="attribute" />
+					</field>
+					<field name="value"
+						type="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthRol"
+						container="false">
+						<bind-xml name="Rol" />
+					</field>
+				</class>
+			</bind-xml>
+		</field>
+	</class>
+
+	<class
+		name="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthRol">
+		<map-to xml="Rol" />
+		<field name="authRolType" type="int">
+			<bind-xml name="Type" node="element" />
+		</field>
+		<field name="description" type="java.lang.String">
+			<bind-xml name="Description" node="element" />
+		</field>
+		<field name="components" collection="map" container="false">
+			<bind-xml name="Components">
+				<class name="org.exolab.castor.mapping.MapItem">
+					<field name="key" type="java.lang.String">
+						<bind-xml name="componentName" node="attribute" />
+					</field>
+					<field name="value"
+						type="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthComponent"
+						container="false">
+						<bind-xml name="Component" />
+					</field>
+				</class>
+			</bind-xml>
+		</field>
+	</class>
+	<class
+		name="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthComponent">
+		<map-to xml="Component" />
+		<field name="authComponentName" type="java.lang.String">
+			<bind-xml name="Name" node="element" />
+		</field>
+		<field name="prohibitedActions" collection="map" container="false">
+			<bind-xml name="ProhibitedActions">
+				<class name="org.exolab.castor.mapping.MapItem">
+					<field name="key" type="java.lang.String">
+						<bind-xml name="actionName" node="attribute" />
+					</field>
+					<field name="value"
+						type="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthProhibitedAction"
+						container="false">
+						<bind-xml name="Action" />
+					</field>
+				</class>
+			</bind-xml>
+		</field>
+	</class>
+
+	<class
+		name="com.selene.arch.exe.core.appli.authorization.model.AEMFTAuthProhibitedAction">
+		<map-to xml="Action" />
+		<field name="authActionName" type="java.lang.String">
+			<bind-xml name="Name" node="element" />
+		</field>
+	</class>
+
+	<!-- BOM -->
+
+
+	<class name="java.util.ArrayList" auto-complete="true">
+		<map-to xml="array-list" />
+	</class>
+</mapping>

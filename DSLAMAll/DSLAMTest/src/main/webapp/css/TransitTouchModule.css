@@ -1,0 +1,228 @@
+html, body {
+	width: 100%;
+	background: url("../images/textura_landing.png") repeat scroll 0 0 #FFFFFF;
+	font-family: tahoma, arial, sans-serif;
+	font-size: small;
+	margin: 0 auto;
+	color: #000000;
+	overflow-x:hidden;
+}
+
+.busi-touch-splash {
+	background: #DFDFDF url("../images/textura_saboreando.png");
+}
+
+/*****************************************************
+*	    			CONTROLLER VIEW                  *
+******************************************************/
+.busi-touch-controllerHeader {
+	padding-top: 10px;
+}
+
+/*****************************************************
+*	                  MEALS HEADER                   *
+******************************************************/
+
+.sndo-touch-meals-headerContentPanel {
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 50%, 
+              from(rgba(176, 188, 205, 1)), to(rgba(129, 149, 175, 1)));
+ 	padding: 5px 5px;
+	background-color: rgb(109, 132, 162);
+	border-bottom-color:1px solid rgb(45, 54, 66);
+	border-top:1px solid rgb(109, 132, 162);
+	display: block;
+	height: 31px;
+	line-height: 30px;
+	display: block;
+	border-bottom: 1px solid #2C3542;
+	border-top: 1px solid #CDD5DF;
+}
+
+.sndo-touch-meals-headerTitle {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/*****************************************************
+*                NEW MEAL CONTAINER                  *
+******************************************************/
+.sndo-touch-mealsapp-newMealContainer {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+
+
+/******************************************************
+*    				ITEM DATA BORDERS                 *
+*******************************************************/
+
+.aegwt-touch-borderTop {
+	border-spacing: 5px;
+}
+
+.aegwt-touch-borderMiddle {
+	border-spacing: 5px;
+}
+
+.aegwt-touch-borderBottom {
+	border-spacing: 5px;
+}
+
+/******************************************************
+* 				ITEM TEXT BOX ITEM DATA             *
+*******************************************************/
+
+.aegwt-touch-textBoxItemData {
+	font-size: 12px;
+}
+
+.aegwt-touch-actionTextBox-noBorder-Empty {
+	font-size: 12px;
+}
+
+.aegwt-touch-actionTextBox-noBorder-NonEmpty {
+	font-size: 12px;
+}
+
+/********************************************
+* 	        	   AEGWTTag				    *
+*********************************************/
+.aegwt-tag {
+	border-spacing: 2px 3px;
+	text-shadow: none;
+	background-color: #BDBDBD;
+	color: #FFFFFF;
+	font-size: 10px;
+}
+
+.aegwt-tagImage {
+	
+}
+
+.aegwt-tagLabel .aegwt-label {
+	font-weight: normal;
+}
+
+.sbno-tag-participants {
+	background-color: #D8D8D8;
+}
+
+.sbno-tag-host {
+	background-color: #D8D8D8;
+}
+
+
+/****************************************************
+*    		    MEALS APP DATE SELECTOR				*
+*****************************************************/
+.sndo-touch-mealsapp-dateSelectorPanel {
+	margin-top: 10px;
+}
+
+.sndo-touch-mealsapp-dateSelectorPanel .aegwt-listViewItemContainer {
+	border-spacing: 0px;
+}
+
+.sndo-touch-mealsapp-dateSelectorPanel .aegwt-listViewItem {
+	border-top: 1px solid #F0F0F0;
+	border-bottom: 0px;
+}
+
+.sndo-touch-mealsapp-dateSelectorContainer {
+	border-radius: 		5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: rgba(128, 128, 128, 0.5);
+	border-collapse: separate;
+	font-size: 12px;
+}
+
+.sndo-touch-mealsapp-dateSelectorLabel {
+	font-weight: bold;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+.sndo-touch-mealsapp-dateSelectorDeckPanel {
+	
+}
+
+/****************************************************
+*    		    MEALS APP DATE CONTAINER     		*
+*****************************************************/
+
+.sbno-touch-mealsapp-mealDateContainer {
+	
+}
+
+/******************************************************
+* 				TAG CONTAINER ITEM DATA             *
+*******************************************************/
+
+.aegwt-tagContainerItemDataContentPanel {
+	height:	45px;	
+}
+
+.aegwt-tagContainerItemDataPanel {
+	border-spacing: 10px 5px;
+}
+
+.aegwt-tagContainerItemDataLabel {
+	padding-top: 5px;
+}
+
+.aegwt-businessTagsContainer {
+	min-height: 25px;
+}
+
+/*******************************************
+*          AEGWTCUSTOMTEXTBOX             *
+********************************************/
+.aegwt-actionTextBox-searchImage {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+
+.aegwt-actionTextBox-noBorder-Empty {
+	width:100% !important;
+	font-size:14px;
+}
+
+.aegwt-actionTextBox-noBorder-NonEmpty{
+	width:100% !important;
+	font-size:14px;
+}
+
+/*****************************************************
+*	          MEALS APP MEAL LIST VIEW               *
+******************************************************/
+
+.sndo-touch-mealsapp-mealsListScreenViewContainer {
+	
+}
+
+.sndo-touch-mealsapp-mealsListScreenViewContainer .aegwt-listViewItemThumbnail-labelDetail {
+	max-width: 160px;
+}
+
+/*****************************************************
+*	          MEALS APP MEAL DATE VIEW               *
+******************************************************/
+
+.sndo-touch-mealsapp-mealDateContainer {
+	border-spacing: 5 px;
+}
+
+.sndo-touch-mealsapp-mealDateCalendar {
+	padding-top: 5px;
+}
+
+.sndo-touch-mealsapp-mealDateTimeBox {
+	padding-top: 5px;
+}
+

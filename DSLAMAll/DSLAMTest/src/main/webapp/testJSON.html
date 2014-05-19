@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Test genericServerCommServletJ2EE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!—[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]—>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body { padding-top: 60px; }
+  	</style>
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js'></script>
+	<script  type="text/javascript">
+	$(document).ready(function(){			
+		$("#open").click(function(){
+			var url = "/testDesktop/genericServerConnectionJ2EE";
+
+			var json =	{
+						"menu":{
+							"id": "file",
+							"value": "File",
+							"popup": {
+								"menuitem": [
+								       {"value": "New", "onclick": "CreateNewDoc()"},
+								       {"value": "Open", "onclick": "OpenDoc()"},
+								       {"value": "Close", "onclick": "CloseDoc()"}
+							     	]
+							}
+						}
+					};
+			var mainJSON = {
+					"ApplicationId" : "SNDO",
+					"ServiceId" : "SRV_TEST.TEST_JSON",
+					"CommCommand" : "0",
+					"ContextIn"	: json }
+			
+			
+			mainJSON = JSON.stringify(mainJSON );
+				
+			$.post(url, mainJSON)
+				.done(function(data) { alert("Data Loaded: " + JSON.stringify(data)); })
+				.fail(function(data) { alert("error " + JSON.stringify(data)); })
+		});
+	});
+	</script>
+</head>
+<body>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>	
+	<div class="navbar navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+     	</a>
+	    <a class="brand"><img src="bootstrap/img/Logo.png"/></a>
+	    <div class="nav-collapse">
+          <ul class="nav">
+          <br><br>
+          <li class="active"><a href="http://imotionfactory.com/">iMotion Factoty</a></li>
+       	  </ul>
+      	</div>
+	  </div>
+	</div>
+	<br><br><br><br>
+	<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h2>Aplicación para hacer una llamada al AEMFTGenericServerCommServletJ2EE</h2>
+			<div class="btn-group span9" align="center">
+				<button type="button" class="btn btn-primary" id="open" >Enviar</button>
+   			</div>
+   			<br><br>
+   			<div id="resultado" class="resultado" align="center">
+	    	</div>     		    					    	
+		</div>	<!--/span9-->
+    </div> <!-- row-fluid -->
+	</div> <!--  container-fluid -->
+		
+	<div id="footer" class="span12" align="center">
+		<br>
+		<span>&copy; Todos los derechos reservados</span><br/><b>Sitio maquetado con Twitter Bootstrap</b>
+	</div>
+			
+</body>
+</html>

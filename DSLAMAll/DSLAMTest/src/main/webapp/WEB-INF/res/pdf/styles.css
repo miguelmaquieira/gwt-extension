@@ -1,0 +1,138 @@
+body {
+	font-family: Arial;
+	width: 800px;
+	font-size: 8pt;
+}
+
+a {
+	color:blue;
+}
+
+table {
+	width: 100%;
+	font-size: 7pt;
+	border: 0.25px solid grey;
+	border-collapse: collapse;
+}
+
+th {
+	background-color: #57a519;
+	color: white;
+	height: 17.45pt;
+	border: 0.12px solid grey;
+	padding: 0cm 5.4pt;
+	text-align: center;
+	font-weight: bold;
+}
+
+td {
+	border: 0.12px solid grey;
+	padding: 0cm 5.4pt;
+	height: 18pt;
+}
+
+tr {
+	border: 0px;
+}
+
+.table-no-border-top {
+	border-top-width: 0px;
+}
+
+.td-no-border {
+	border-right-width: 0px;
+	border-left-width: 0px;
+	border-top-width: 0px;
+}
+
+.td-text-no-padding{
+	padding:0px;
+}
+
+.td-align-center {
+	text-align: center;
+}
+
+.td-align-right {
+	text-align: right;
+}
+
+.td-align-left {
+	text-align: left;
+}
+
+.th-align-left {
+	text-align: left;
+}
+
+.th-align-center {
+	text-align: center;
+}
+
+.table-padding-top {
+	padding-top: 10px;
+}
+
+.table-no-border {
+	border-top-style: none;
+}
+
+.table-no-border-top {
+	border-top-style: none;
+}
+
+.table-no-border-top td {
+	border-top-style: none;
+}
+
+.table-no-border-top th {
+	border-top-style: none;
+}
+
+.comments-padding {
+	padding-top: 10px;
+}
+
+.margin-bottom {
+	margin-bottom:10px;
+}
+
+.commentsTable {
+	padding-top: 10px;
+	border: 0.25px solid grey;
+	text-align: justify;
+	width: 100%;
+}
+
+.commentsText {
+	padding: 10px 5px;
+}
+
+b {
+	font-weight: bold;
+}
+
+h3 {
+	padding: 10px 0px;
+	font-weight: bold;
+}
+
+.commonFooter {
+	text-align: justify;
+	padding-top: 50px;
+}
+
+.commonHeader {
+	padding-bottom: 20px;
+}
+
+.pCenter {
+	text-align: center;
+}
+
+.pLogoText {
+	text-align: center;
+	color: #878080;
+	padding-top: 5px;
+}
+

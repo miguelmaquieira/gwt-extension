@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="TransitFront">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="TransitBom-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/TransitBom/TransitBom">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="TransitBusiness-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/TransitBusiness/TransitBusiness">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="TransitBackend-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/TransitBackend/TransitBackend">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SeleneBase-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SeleneBase/SeleneBase">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="SeleneDev-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SeleneDev/SeleneDev">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Selene4GWT-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Selene4GWT/Selene4GWT">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="TransitFront"/>
+        <property name="java-output-path" value="/TransitFront/target/classes"/>
+    </wb-module>
+</project-modules>

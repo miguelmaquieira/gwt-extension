@@ -1,0 +1,337 @@
+/*******************************************
+			      SUBHEADER
+********************************************/
+
+.aegwt-subHeader {
+	
+}
+
+.aegwt-subHeaderContainer {
+	box-shadow: 0 3px 3px 2px rgba(186, 186, 186, 0.5);
+	position: absolute;
+	width: 768px;
+	/*z-index: 100;*/
+}
+
+/*******************************************
+*         LANDING SCREEN VIEW              *
+********************************************/
+.aegwt-landingContainer {
+	width: 100%;
+	font-family: tahoma, geneva, arial, sans-serif;
+	line-height: 1.5;
+	min-width: 700px;
+	background: #FFFFFF;
+}
+
+.aegwt-landingHeader {
+	padding-top: 10px;
+	height: 100px;
+	max-width: 955px;
+	max-height: 100px;
+	margin: 0 auto;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.aegwt-landingHeader img {
+	height: 100px;
+}
+
+.aegwt-landingHeaderRightLinks {
+	float: right;
+	margin-top: 70px;
+	white-space: nowrap;
+	margin-right: 20px;
+	color: #BDBDBD;
+}
+
+.aegwt-landingHeaderRightLinks a.aegwt-rightLink {
+	margin: 0 6px;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-family: tahoma, geneva, arial, sans-serif;
+	color: #BDBDBD;
+	cursor: pointer;
+}
+
+.aegwt-landingHomeBanner {
+	background: #E0E0E0 url("../images/textura_landing.png");
+	width: 100%;
+	height: 600px;
+	min-width: 700px;
+	border-top: 2px solid #D0D0D0;
+}
+
+.aegwt-landingContentPanel {
+	border: 1px solid #D5D5D5;
+}
+
+/****************************************************
+*			NOT_LOGGED_SCREEN_CONTAINER
+*****************************************************/
+
+.aegwt-notLogged {
+	color: #1A1A1A;
+	text-decoration: none;
+	font-family: tahoma, geneva, arial, sans-serif;
+	background-color: #EBEBEB;
+}
+
+.aegwt-notLogged-bg {
+	background-color: #EBEBEB !important;
+	height: 100%;
+}
+
+.aegwt-notLogged a { /* 	font-family: tahoma; */
+	color: #A5A5A5;
+	text-decoration: none;
+}
+
+.aegwt-notLoggedLineTopBar {
+	width: 100%;
+	height: 0px;
+	border-top: 4px solid #6A6A6A;
+}
+
+.aegwt-notLoggedTopbar {
+	background-color: #F5F5F5;
+	border-bottom: 1px solid #B3B3B3;
+	height: 50px;
+	width: 100%;
+}
+
+.aegwt-notLoggedLogo .gwt-Image {
+	display: block;
+	float: left;
+	height: 32px;
+	/* 	width: 146px; */
+	text-indent: -9999px;
+	margin-top: 11px;
+	margin-left: 6px;
+}
+
+.aegwt-notLoggedContent {
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+.aegwt-notLoggedFooter {
+	margin-top: 100px;
+	font-size: 11px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/****************************************************
+*		    	STEP TOUR CONTAINER
+*****************************************************/
+
+.aegwt-stepTourContainer {
+	background-color: white;
+	border: 1px solid #BDBDBD;
+	padding: 32px;
+	width: 710px;
+	position: relative;
+}
+
+.aegwt-stepTourContainer-shadow {
+	background: transparent;
+	background-size: 100%;
+	border: 0;
+	height: 11px;
+	margin: 0 auto;
+	overflow: hidden;
+	padding: 0px;
+	width: 775px;
+	display: block;
+}
+
+.aegwt-stepTourContainer-column {
+	width: 352px;
+	display: inline-block;
+	zoom: 1;
+	vertical-align: top;
+}
+
+.aegwt-stepTourContainer-column .column1 {
+	margin-right: 26px;
+}
+
+.aegwt-stepTourContainer-form {
+	background-color: #F5F5F5;
+	padding: 16px;
+	min-width: 200px;
+}
+
+.aegwt-stepTourContainer-form-title {
+	height: 30px;
+}
+
+.aegwt-stepTourContainer-tour-buttons {
+	width: 320px;
+	float: right;
+}
+
+.aegwt-stepTourContainer-stepOnTourButton {
+	text-decoration: none;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	zoom: 1;
+	cursor: pointer;
+	font-size: 15px;
+	border: 0px;
+	height: 40px;
+	width: "100%";
+	min-width: 100px;
+	max-width: 200px;
+}
+
+.aegwt-stepTourContainer-skipStepOnTourButton { /* 	margin-right: 30px; */
+	float: right;
+	margin-right: 10px;
+	color: #69AD31;
+}
+
+.aegwt-stepTourContainer-backStepOnTourButton {
+	float: left;
+	color: #69AD31;
+}
+
+.aegwt-stepTourContainer-nextStepOnTourButton {
+	float: right;
+	color: #FFFFFF;
+	background-color: #69AD31;
+	background-image: -moz-linear-gradient(top, #6FB536, #5FA229);
+	background-image: -ms-linear-gradient(top, #6FB536, #5FA229);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6FB536),
+		to(#5FA229));
+	background-image: -webkit-linear-gradient(top, #6FB536, #5FA229);
+	background-image: -o-linear-gradient(top, #6FB536, #5FA229);
+	background-image: linear-gradient(top, #6FB536, #5FA229);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6fb536',
+		endColorstr='#5fa229', GradientType=0);
+}
+
+.aegwt-stepTourContainer-nextStepOnTourButton:hover,.aegwt-stepTourContainer-nextStepOnTourButton:focus {
+	-moz-box-shadow: 0px 0px 3px #69AE31;
+	-webkit-box-shadow: 0px 0px 3px #69AE31;
+	box-shadow: 0px 0px 3px #69AE31;
+	border: 1px solid #57A519;
+}
+
+.aegwt-stepTourContainer-intro {
+	font-size: 16px;
+	line-height: 20px;
+	color: #747474;
+	margin-bottom: 16px;
+}
+
+.aegwt-stepTourContainer-tourForm {
+	width: 100%;
+}
+
+.aegwt-stepTourContainer-tourForm .tour {
+	min-height: 44px;
+	padding: 20px 0px 0px 68px;
+}
+
+/****************************************************
+*       		       STEP TOUR
+*****************************************************/
+
+.aegwt-stepTourPanel {
+	margin: 8px 0px;
+	/*border-bottom: 1px solid #EBEBEB;*/
+}
+
+.aegwt-stepTourPanel .aegwt-stepTourPanel-image {
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+	max-width: 45px;
+}
+
+.aegwt-stepTourPanel-label {
+	color: #747474;
+	margin-bottom: 3px;
+	font-size: 11px;
+	padding-top: 3px;
+}
+
+.aegwt-stepTourPanel-inactive {
+	background: white;
+	margin-right: 0px;
+	border-bottom: 1px solid #EBEBEB;
+}
+
+.aegwt-stepTourPanel-inactive .aegwt-h4 {
+	font-size: 13px;
+}
+
+.aegwt-stepTourPanel-active {
+	background: #F5F5F5;
+	margin-right: -40px;
+	border-bottom: 1px solid #EBEBEB;
+}
+
+.aegwt-stepTourPanel-active .aegwt-h4 {
+	font-size: 13px;
+}
+
+
+/******************************************************
+*                      HELP POPUP                     *
+*******************************************************/
+
+.aegwt-helpPopup {
+	z-index: 400;
+	position: relative; /*Places the div over the laptop*/
+	height: 100%;
+}
+
+/******************************************************
+*                 CONTENT VIEWER POPUP                *
+*******************************************************/
+
+.aegwt-contextViewerPopup {
+	z-index: 400;
+	position: relative; /*Places the div over the laptop*/
+}
+
+/****************************************************
+* 			       NUMBER_SPINNER				    *
+*****************************************************/
+.aegwt-numberSpinner .gwt-Anchor {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+/****************************************************
+* 			          COMMON				        *
+*****************************************************/
+
+.aegwt-h1 {
+	border-bottom: 1px solid #BDBDBD;
+	font-size: 28px;
+	line-height: 32px;
+	color: #3B3B3B;
+	margin-bottom: 14px;
+	padding-bottom: 16px;
+}
+
+.aegwt-h3 {
+	color: #3B3B3B;
+	font-size: 18px;
+	line-height: 24px;
+	margin-bottom: 24px;
+}
+
+.aegwt-h4 {
+	font-weight: bold;
+	font-size: 13px;
+}

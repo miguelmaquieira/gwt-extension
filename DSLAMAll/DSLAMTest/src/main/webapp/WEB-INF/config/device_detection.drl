@@ -1,0 +1,26 @@
+//created on: 12-abr-2013
+package com.rules.test
+
+//list any import classes here.
+import com.selene.arch.exe.core.appli.businessruleengine.wrappers.AEMFTIBREDataWrapper;
+//declare any global variables here
+
+rule "Mobile web rule"
+	salience 20
+    when 
+    //conditions
+     dataWrapper : AEMFTIBREDataWrapper();
+     eval(dataWrapper.getElementAsBool("IS_MOBILE") == true);
+    then
+     dataWrapper.setElement("WEB_RESULT", "TOUCH");
+end
+
+/*rule "Desktop web rule"
+	salience 20
+    when 
+    //conditions
+     dataWrapper : AEMFTIBREDataWrapper();
+     eval(dataWrapper.getElementAsBool("IS_MOBILE") == false);
+    then
+     dataWrapper.setElement("WEB_RESULT", "DESKTOP");
+end*/
