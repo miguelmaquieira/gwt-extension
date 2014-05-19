@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="testDesktop">
+
+	<inherits name="com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule" />
+	
+	<replace-with class="com.imotion.dslam.front.business.desktop.test.client.TestDesktopAppEntryPoint">
+		<when-type-is class="com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppEntryPoint"/>
+	</replace-with>
+	
+	<source path="client" />
+
+	<!-- SUPERDEV MODE -->
+	<add-linker name="xsiframe" />
+	<set-configuration-property name="devModeRedirectEnabled" value="true" />
+	<set-property name="compiler.useSourceMaps" value="true" />
+	<!-- <set-property name="user.agent" value="safari" /> -->
+	 <collapse-all-properties />
+
+</module>

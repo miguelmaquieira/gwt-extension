@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Application Name="TRANS">
+<Application Name="DSLAM">
 	<ServiceList>
-		<Service Name="TRANS">
+		<Service Name="DSLAM">
 			<Description>Application SeleneM2M</Description>
 			<Type>300171086790656</Type>
 			<Descriptor></Descriptor>
 			<ParametersMap>
-				<Parameter id="CFG.TRANS.LOCALE">
+				<Parameter id="CFG.DSLAM.LOCALE">
 					<Param>
 						<value>es_ES;en_EN</value>
 						<type>STATIC</type>
@@ -148,7 +148,7 @@
 		<Service Name="SRV_BUS_CRON">
 			<Description>Cron business service</Description>
 			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.transit.business.service.impl.TRANSBUCronBusinessServiceImpl
+			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUCronBusinessServiceImpl
 			</Descriptor>
 			<SubServiceList>
 				<SubService Name="STORE_LAST_DATA">

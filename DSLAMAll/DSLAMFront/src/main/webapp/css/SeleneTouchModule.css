@@ -177,11 +177,11 @@
 	width: 100%;
 	opacity: 1;
 	box-shadow: -1px 0px 8px #000000;
-	-webkit-transition: left 0.2s ease-in-out;
-	-moz-transition: left 0.2s ease-in-out;
-	-ms-transition: left 0.2s ease-in-out;
-	-o-transition: left 0.2s ease-in-out;
-	transition: left 0.2s ease-in-out;
+	-webkit-dslamion: left 0.2s ease-in-out;
+	-moz-dslamion: left 0.2s ease-in-out;
+	-ms-dslamion: left 0.2s ease-in-out;
+	-o-dslamion: left 0.2s ease-in-out;
+	dslamion: left 0.2s ease-in-out;
 }
 
 .drawerRigth {
@@ -192,11 +192,11 @@
 	width: 100%;
 	opacity: 1;
 	box-shadow: -1px 0px 8px #000000;
-	-webkit-transition: left 0.2s ease-in-out;
-	-moz-transition: left 0.2s ease-in-out;
-	-ms-transition: left 0.2s ease-in-out;
-	-o-transition: left 0.2s ease-in-out;
-	transition: left 0.2s ease-in-out;
+	-webkit-dslamion: left 0.2s ease-in-out;
+	-moz-dslamion: left 0.2s ease-in-out;
+	-ms-dslamion: left 0.2s ease-in-out;
+	-o-dslamion: left 0.2s ease-in-out;
+	dslamion: left 0.2s ease-in-out;
 }
 
 .box .aegwt-menuItem {

@@ -1079,7 +1079,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 /* "page" containers - full-screen views, one should always be in view post-pageload */
 .ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; }
 .ui-mobile .ui-page-active { display: block; overflow: visible; }
-/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+/* on ios4, setting focus on the page element causes flashing during dslamions when there is an outline, so we turn off outlines */
 .ui-page { outline: none; }
 /*orientations from js are available */
 @media screen and (orientation: portrait){
@@ -1153,8 +1153,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-hide-label label.ui-input-text, .ui-hide-label label.ui-select, .ui-hide-label label.ui-slider, .ui-hide-label label.ui-submit, .ui-hide-label .ui-controlgroup-label,
 .ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
 /* Transitions originally inspired by those from jQtouch, nice work, folks */
-.ui-mobile-viewport-transitioning,
-.ui-mobile-viewport-transitioning .ui-page {
+.ui-mobile-viewport-dslamioning,
+.ui-mobile-viewport-dslamioning .ui-page {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
@@ -1582,7 +1582,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
     from { transform: translateY(0); }
     to { transform: translateY(100%); }
 }
-/* The properties in this rule are only necessary for the 'flip' transition.
+/* The properties in this rule are only necessary for the 'flip' dslamion.
  * We need specify the perspective to create a projection matrix. This will add
  * some depth as the element flips. The depth number represents the distance of
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
@@ -1682,7 +1682,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
     from { transform: rotateY(90deg) scale(.9); }
     to { transform: rotateY(0); }
 }
-/* The properties in this rule are only necessary for the 'flip' transition.
+/* The properties in this rule are only necessary for the 'flip' dslamion.
  * We need specify the perspective to create a projection matrix. This will add
  * some depth as the element flips. The depth number represents the distance of
  * the viewer from the z-plane. According to the CSS3 spec, 1000 is a moderate
@@ -1789,7 +1789,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
     from { transform: rotateY(90deg) scale(.9); }
     to { transform: rotateY(0); }
 }
-/* flow transition */
+/* flow dslamion */
 .flow {
 	-webkit-transform-origin: 50% 30%;
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
@@ -2506,7 +2506,7 @@ input.ui-input-text.ui-mini, textarea.ui-input-text.ui-mini,
 .ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text { margin: 0; }
 textarea.ui-input-text { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 input.ui-input-text { -webkit-appearance: none; }
-textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
+textarea.ui-input-text { height: 50px; -webkit-dslamion: height 200ms linear; -moz-dslamion: height 200ms linear; -o-dslamion: height 200ms linear; dslamion: height 200ms linear; }
 textarea.ui-mini { height: 45px; }
 .ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }
 .ui-input-search .ui-input-clear, .ui-input-text .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
@@ -2872,8 +2872,8 @@ div.ui-slider-switch.ui-mini {
 	padding: 0;
 }
 .ui-slider-handle-snapping {
-	-webkit-transition: left 70ms linear;
-	-moz-transition: left 70ms linear;
+	-webkit-dslamion: left 70ms linear;
+	-moz-dslamion: left 70ms linear;
 }
 .ui-slider-switch.ui-mini .ui-slider-handle .ui-btn-inner {
 	height: 30px;
@@ -3203,11 +3203,11 @@ div.ui-slider-switch.ui-mini {
 }
 /* animate class is added to panel, wrapper and fixed toolbars */
 .ui-panel-animate {
-	-webkit-transition: -webkit-transform 350ms ease;
-	-moz-transition: -moz-transform 350ms ease;
-	transition: transform 350ms ease;
+	-webkit-dslamion: -webkit-transform 350ms ease;
+	-moz-dslamion: -moz-transform 350ms ease;
+	dslamion: transform 350ms ease;
 }
-/* hardware acceleration for smoother transitions on WebKit browsers */
+/* hardware acceleration for smoother dslamions on WebKit browsers */
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal),
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div,
 .ui-panel-animate.ui-panel-closed.ui-panel-display-reveal > div,

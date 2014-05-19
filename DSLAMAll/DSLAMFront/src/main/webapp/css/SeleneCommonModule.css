@@ -1986,13 +1986,13 @@ sprite .cellTreeSelectedItem {
 	color: #fff;
 	border-radius: 3px;
 	z-index: 100;
-	transition: opacity 0.3s linear;
+	dslamion: opacity 0.3s linear;
 	top: 0px;
 }
 
 .aegwt-overpanel-hide {
 	opacity: 0;
-	transition: opacity 0.3s linear;
+	dslamion: opacity 0.3s linear;
 }
 
 .aegwt-overpanel .aegwt-imageAnchorLabel {
