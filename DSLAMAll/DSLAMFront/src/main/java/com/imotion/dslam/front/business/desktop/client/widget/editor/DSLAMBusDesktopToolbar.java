@@ -24,7 +24,7 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		//ACTIONS
 		SimplePanel fileActionsZone = new SimplePanel();
 		root.add(fileActionsZone);
-		fileActionsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		fileActionsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 	
 		fileActions = new DSLAMBusDesktopEditorToolbarFileActions();
 		fileActionsZone.add(fileActions);
@@ -32,7 +32,7 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		//INFO
 		SimplePanel fileInfoZone = new SimplePanel();
 		root.add(fileInfoZone);
-		fileInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
+		fileInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
 		
 		fileInfo = new DSLAMBusDesktopEditorToolbarFileInfo();
 		fileInfoZone.add(fileInfo);

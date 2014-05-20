@@ -22,4 +22,16 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Último guardado: ")
 	String last_saved();
 
+	@DefaultStringValue("Abrir")
+	String open();
+	
+	@DefaultStringValue("Renombrar")
+	String rename();
+	
+	@DefaultStringValue("Eliminar")
+	String delete();
+	
+	@DefaultStringValue("Navegador")
+	String navigator();
+
 }

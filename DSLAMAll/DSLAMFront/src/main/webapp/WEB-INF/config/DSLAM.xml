@@ -145,19 +145,19 @@
 			</SubServiceList>
 		</Service>
 		
-		<Service Name="SRV_BUS_CRON">
-			<Description>Cron business service</Description>
-			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUCronBusinessServiceImpl
-			</Descriptor>
-			<SubServiceList>
-				<SubService Name="STORE_LAST_DATA">
-					<Descriptor>storeLastData</Descriptor>
-				</SubService>
-				<SubService Name="COMPUTE_DAILY_DATA">
-					<Descriptor>computeDailyData</Descriptor>
-				</SubService>
-			</SubServiceList>
-		</Service>
+<!-- 		<Service Name="SRV_BUS_CRON"> -->
+<!-- 			<Description>Cron business service</Description> -->
+<!-- 			<Type>300171153899520</Type> -->
+<!-- 			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUCronBusinessServiceImpl -->
+<!-- 			</Descriptor> -->
+<!-- 			<SubServiceList> -->
+<!-- 				<SubService Name="STORE_LAST_DATA"> -->
+<!-- 					<Descriptor>storeLastData</Descriptor> -->
+<!-- 				</SubService> -->
+<!-- 				<SubService Name="COMPUTE_DAILY_DATA"> -->
+<!-- 					<Descriptor>computeDailyData</Descriptor> -->
+<!-- 				</SubService> -->
+<!-- 			</SubServiceList> -->
+<!-- 		</Service> -->
 	</ServiceList>
 </Application>

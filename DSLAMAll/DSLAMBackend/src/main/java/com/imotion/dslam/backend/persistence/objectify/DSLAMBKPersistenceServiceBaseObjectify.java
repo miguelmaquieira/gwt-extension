@@ -8,8 +8,7 @@ public abstract class DSLAMBKPersistenceServiceBaseObjectify<T, Q extends T, Id 
 
 	private static final long serialVersionUID = 1696084081676617946L;
 	
-	private DSLAMBKPersistenceModuleObjectify<Q, Id> 		persistenceModule;
-	
+	private DSLAMBKPersistenceModuleObjectify<Q, Id> persistenceModule;
 
 	@Override
 	public DSLAMBKPersistenceModuleObjectify<Q, Id> getPersistenceModule() {

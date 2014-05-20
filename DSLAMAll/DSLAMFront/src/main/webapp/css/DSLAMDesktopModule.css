@@ -1,3 +1,11 @@
+.dslam_studio-editorView {
+	height: 100%;
+}
+
+.dslam_studio-editorView-bottomZone {
+	height: 100%;
+}
+
 .dslam_studio-toolbar {
 	height: 40px;
 	border: 1px solid #CCCCCC;
@@ -34,6 +42,32 @@
 
 .dslam_studio-toolbar-file_info-lastsaved {
 	text-align: left;
+}
+
+.dslam_studio-filelist {
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: visible;
+}
+
+.dslam_studio-filelist-element {
+	width: 100%;
+}
+
+.dslam_studio-filelist-element button {
+	width: 76%;
+	border-radius: 0px;
+	border-top-width: 0px;
+}
+
+.dslam_studio-filelist-element .dropdown-toggle {
+	width: 20%;
+}
+
+.dslam_studio-filelist-element .dropdown-menu {
+	left: auto;
+	right: 0px;
+	float: right;
 }
 
 .gwt-Label {

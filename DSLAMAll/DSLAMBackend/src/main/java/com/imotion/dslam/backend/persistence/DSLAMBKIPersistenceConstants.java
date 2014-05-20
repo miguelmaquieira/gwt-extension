@@ -1,8 +1,6 @@
 package com.imotion.dslam.backend.persistence;
 
 import com.imotion.dslam.backend.DSLAMBKIConstants;
-import com.imotion.dslam.backend.persistence.service.computedtransitdata.DSLAMBKComputedTransitDataPersistenceServiceObjectify;
-import com.imotion.dslam.backend.persistence.service.transitdata.DSLAMBKTransitDataPersistenceServiceObjectify;
 import com.selene.arch.base.MFTIConstant;
 
 public interface DSLAMBKIPersistenceConstants {
@@ -19,13 +17,8 @@ public interface DSLAMBKIPersistenceConstants {
 	// Constants
 	public final static long 	CTE_DSLAM_PERSISTENCE_BASE_SERVICE_RANGE_TRACE				= CTE_DSLAM_PERSISTENCE_BASE_SERVICE_TYPE | MFTIConstant.CTE_MFT_RANGE_TRACE;
 
-	//TransitData
-	public static final String CFG_DSLAM_PERSISTENCE_DSLAMIT_DATA_PERSISTENCE_IMPL				= "BACKEND.DSLAMIT_DATA_PERSISTENCE_IMPL";
-	public static final String CTE_DSLAM_PERSISTENCE_DSLAMIT_DATA_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKTransitDataPersistenceServiceObjectify.class.getName();
-
-	//ComputedTransitData
-	public static final String CFG_DSLAM_PERSISTENCE_COMPUTED_DSLAMIT_DATA_PERSISTENCE_IMPL				= "BACKEND.COMPUTED_DSLAMIT_DATA_PERSISTENCE_IMPL";
-	public static final String CTE_DSLAM_PERSISTENCE_COMPUTED_DSLAMIT_DATA_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKComputedTransitDataPersistenceServiceObjectify.class.getName();
-
+//	//TransitData
+//	public static final String CFG_DSLAM_PERSISTENCE_DSLAMIT_DATA_PERSISTENCE_IMPL				= "BACKEND.DSLAMIT_DATA_PERSISTENCE_IMPL";
+//	public static final String CTE_DSLAM_PERSISTENCE_DSLAMIT_DATA_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKTransitDataPersistenceServiceObjectify.class.getName();
 
 }

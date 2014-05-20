@@ -11,4 +11,14 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR_FILE_INFO_FILE_NAME_ZONE 	= TOOLBAR_FILE_INFO	+ "-filename";		//dslam_studio-toolbar-file_info-filename
 	String TOOLBAR_FILE_INFO_LAST_SAVED_ZONE 	= TOOLBAR_FILE_INFO	+ "-lastsaved";		//dslam_studio-toolbar-file_info-lastsaved
 	String TOOLBAR_FILE_INFO_CLOSE_ZONE 		= TOOLBAR_FILE_INFO	+ "-close";			//dslam_studio-toolbar-file_info-close 
+
+	//FILE LIST
+	String FILE_LIST							= APP_ID_PREFFIX 		+ "filelist";
+	String FILE_LIST_CONTAINER					= FILE_LIST		 		+ "-container";		//dslam_studio-filelist-container
+	String FILE_LIST_HEADER 					= FILE_LIST				+ "-header";		//dslam_studio-filelist-header
+	String FILE_LIST_ELEMENT 					= FILE_LIST				+ "-element";		//dslam_studio-filelist-element
+
+	String EDITOR_VIEW 							= APP_ID_PREFFIX	+ "editorView";			//dslam_studio-editorView
+	String EDITOR_VIEW_BOTTOM_ZONE 				= EDITOR_VIEW		+ "-bottomZone";		//dslam_studio-editorView-bottomZone
+	
 }

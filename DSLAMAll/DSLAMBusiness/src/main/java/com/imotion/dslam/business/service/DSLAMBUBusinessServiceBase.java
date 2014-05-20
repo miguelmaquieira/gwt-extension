@@ -1,9 +1,6 @@
 package com.imotion.dslam.business.service;
 
-import com.imotion.dslam.backend.persistence.service.computedtransitdata.DSLAMBKIComputedTransitDataPersistenceService;
-import com.imotion.dslam.backend.persistence.service.transitdata.DSLAMBKITransitDataPersistenceService;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
-import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.bus.service.impl.AEMFTBusinessServiceBaseImpl;
 import com.selene.arch.exe.bus.tagsearch.persistence.AEMFTTagIndexPersistence;
 
@@ -11,9 +8,7 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 
 	private static final long serialVersionUID = -8777397730307974465L;
 	
-	private DSLAMBKITransitDataPersistenceService 			dslamDataPersistence;
-	
-	private DSLAMBKIComputedTransitDataPersistenceService 	computedTransitDataPersistence;
+//	private DSLAMBKITransitDataPersistenceService 			dslamDataPersistence;
 
 	@Override
 	public String getName() {
@@ -27,19 +22,13 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 
 	//PERSISTENCE SERVICES
 
-	protected DSLAMBKITransitDataPersistenceService getTransitDataPersistence() {
-		if (dslamDataPersistence == null) {
-			dslamDataPersistence =  getPersistence().getAppFactoryPersistence().newTransitDataPersistence();
-		}
-		return dslamDataPersistence;
-	}
+//	protected DSLAMBKITransitDataPersistenceService getTransitDataPersistence() {
+//		if (dslamDataPersistence == null) {
+//			dslamDataPersistence =  getPersistence().getAppFactoryPersistence().newTransitDataPersistence();
+//		}
+//		return dslamDataPersistence;
+//	}
 	
-	protected DSLAMBKIComputedTransitDataPersistenceService getComputedTransitDataPersistence() {
-		if (computedTransitDataPersistence == null) {
-			computedTransitDataPersistence =  getPersistence().getAppFactoryPersistence().newComputedTransitDataPersistence();
-		}
-		return computedTransitDataPersistence;
-	}
 	
 	@Override
 	protected AEMFTTagIndexPersistence getTagIndexPersistence() {
@@ -222,14 +211,10 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 	@Override
 	public void releaseInstance() {
 		super.releaseInstance();
-		if (dslamDataPersistence != null) {
-			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) dslamDataPersistence);
-			dslamDataPersistence = null;
-		}
-		if (computedTransitDataPersistence != null) {
-			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) computedTransitDataPersistence);
-			computedTransitDataPersistence = null;
-		}
+//		if (dslamDataPersistence != null) {
+//			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) dslamDataPersistence);
+//			dslamDataPersistence = null;
+//		}
 	}
 
 	/********************************************************************
