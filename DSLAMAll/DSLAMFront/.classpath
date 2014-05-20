@@ -29,5 +29,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene4GWT"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SeleneBase"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ImotionGWTAceEditor"/>
 	<classpathentry kind="output" path="target/DSLAMFront/WEB-INF/classes"/>
 </classpath>

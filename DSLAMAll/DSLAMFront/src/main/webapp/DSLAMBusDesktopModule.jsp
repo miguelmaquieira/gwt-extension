@@ -5,16 +5,16 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<!-- IEXPLORER -->
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
-		<title>Transit</title>
+		<title>DSLAM STUDIO</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		
-		<link type="text/css" rel="stylesheet" href="css/bootstrap3/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
 		<link type="text/css" rel="stylesheet" href="css/SeleneCommonModule.css">
 		<link type="text/css" rel="stylesheet" href="css/SeleneDesktopModule.css">
 		<link type="text/css" rel="stylesheet" href="css/BusinessCommonModule.css">
 		<link type="text/css" rel="stylesheet" href="css/BusinessDesktopModule.css">
-		<link type="text/css" rel="stylesheet" href="css/TRANSCommonModule.css">
-		<link type="text/css" rel="stylesheet" href="css/TRANSDesktopModule.css">
+		<link type="text/css" rel="stylesheet" href="css/DSLAMCommonModule.css">
+		<link type="text/css" rel="stylesheet" href="css/DSLAMDesktopModule.css">
 
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
@@ -27,7 +27,7 @@
 		<!-- <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
 		
 		<!-- GWT-MODULE -->
-		<script type="text/javascript" src="transBusDesktop/transBusDesktop.nocache.js"></script>
+		<script type="text/javascript" src="dslamBusDesktop/dslamBusDesktop.nocache.js"></script>
 	</head>
 	<body>
 		<div id="progressIcon">
@@ -46,7 +46,7 @@
 		</div>
 		<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0;display:none"></iframe>
 		<!--[if IE]>
-		<h3>Tu navegador no es compatible con Transit, te recomendamos descargar la última versión de Chrome o Firefox:</h3>
+		<h3>Tu navegador no es compatible con DSLAM Studio, te recomendamos descargar la última versión de Chrome o Firefox:</h3>
 		<table width='400px'>
 			<tr>
 				<td>

@@ -4,7 +4,6 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.header.AEGWTIHeader;
 import com.selene.arch.exe.gwt.client.view.AEGWTCompositeDesktopPanelLoggedView;
 import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelLoggedViewDisplay;
@@ -22,7 +21,7 @@ public abstract class DSLAMBusDesktopPanelBaseView extends AEGWTCompositeDesktop
 		
 		//CONTENT
 		Widget contentPanelAsWidget = (Widget) contentPanel;
-		contentPanelAsWidget.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
+//		contentPanelAsWidget.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
 		rootPanel.add(contentPanelAsWidget);
 		setContentPanel(contentPanel, false);
 	}

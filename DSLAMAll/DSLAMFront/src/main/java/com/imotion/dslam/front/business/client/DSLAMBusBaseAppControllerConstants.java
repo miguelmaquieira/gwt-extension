@@ -19,4 +19,7 @@ public interface DSLAMBusBaseAppControllerConstants {
 	// STORE
 	public static final String DSLAM_STORE							= "DSLAM_STORE";
 	
+	//JS
+	public static final String BOOTSTRAP_JS_URL 						= "bootstrap-3.1.1-dist/js/bootstrap.min.js";
+	
 }

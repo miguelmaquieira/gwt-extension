@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.google.gwt.core.client.Callback;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
+import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerDisplay;
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
-import com.imotion.dslam.front.business.desktop.client.presenter.example.DSLAMBusDesktopExamplePresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
-import com.imotion.dslam.front.business.desktop.client.view.example.DSLAMBusDesktopExampleScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTIJSLoaderConstants;
@@ -29,7 +30,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	public void loadJS(Callback<Void, Exception> callback) {
 		List<String> bootstrapLibraries = new ArrayList<String>();
 		bootstrapLibraries.add(AEGWTIJSLoaderConstants.JQUERY_JS_URL);
-		bootstrapLibraries.add(AEGWTIJSLoaderConstants.BOOTSTRAP_JS_URL);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_JS_URL);
 		AEGWTJSLoader.fromUrl(bootstrapLibraries.iterator(), callback);
 	}
 
@@ -60,11 +61,11 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEGWTIPresenter presenter = null;
 		String token1 = tokenElements[0];
 		if (AEGWTStringUtils.isEmptyString(token1)) {
-			token1 = "test";
+			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_STUDIO;
 		}
 		
-		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXAMPLE.equals(token1) ) {
-			presenter = new DSLAMBusDesktopExamplePresenter(new DSLAMBusDesktopExampleScreenView());
+		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_STUDIO.equals(token1) ) {
+			presenter = new DSLAMBusDesktopStudioPresenter(new DSLAMBusDesktopStudioScreenView());
 		}
 		return presenter;
 	}
