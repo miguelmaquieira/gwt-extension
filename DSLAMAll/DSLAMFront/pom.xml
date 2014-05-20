@@ -82,6 +82,19 @@
 			<version>${validation-api.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
+		<dependency>
+			<groupId>com.imotion.dslamstudio</groupId>
+			<artifactId>ImotionGWTAceEditor</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>sources</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.oscillation.gwt</groupId>
+			<artifactId>goda-time</artifactId>
+			<version>0.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- DSLAM -->
 		<dependency>
 			<groupId>com.imotion</groupId>
@@ -242,7 +255,8 @@
 					<!-- <skip>${gwt.skipCompilation}</skip> -->
 					<!-- Number of cores -->
 					<localWorkers>4</localWorkers>
-					<extraJvmArgs>-Xms768m -Xmx2048m -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+					<extraJvmArgs>-Xms768m -Xmx2048m
+						-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
 				</configuration>
 			</plugin>
 			<plugin>

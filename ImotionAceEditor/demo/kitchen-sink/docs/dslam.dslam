@@ -1,0 +1,56 @@
+show equipment protection-element xml
+
+configure equipment slot nt-b no unlock
+
+configure equipment protection-group 1 admin-status lock
+
+configure vlan id 2845 mode residential-bridge name INET_PPP_RES protocol-filter pass-pppoe
+
+configure vlan id 2845 pppoe-relay-tag configurable circuit-id-pppoe physical-id remote-id-pppoe customer-id
+
+configure vlan shub id 2845 mode residential-bridge name INET_PPP_RES
+
+show interface shub port xml
+configure vlan shub id 2845 egress-port network:4
+
+show equipment slot xml
+configure vlan shub id 2845 egress-port lt:1/1/1
+
+configure vlan shub id 2845 egress-port lt:1/1/2
+
+configure vlan shub id 2845 egress-port lt:1/1/3
+
+configure vlan shub id 2845 egress-port lt:1/1/4
+
+configure vlan shub id 2845 egress-port lt:1/1/5
+
+configure vlan shub id 2845 egress-port lt:1/1/6
+
+configure vlan shub id 2845 egress-port lt:1/1/7
+
+configure vlan shub id 2845 egress-port lt:1/1/8
+
+configure vlan shub id 2845 egress-port lt:1/1/12
+
+configure vlan shub id 2845 egress-port lt:1/1/13
+
+configure vlan shub id 2845 egress-port lt:1/1/14
+
+configure vlan shub id 2845 egress-port lt:1/1/15
+
+configure vlan shub id 2845 egress-port lt:1/1/16
+
+configure vlan shub id 2845 egress-port lt:1/1/17
+
+configure vlan shub id 2845 egress-port lt:1/1/18
+
+configure vlan shub id 2845 egress-port lt:1/1/19
+
+configure pppox-relay cross-connect engine 2845 mac-addr-conc name INET_PPP_RES
+
+configure equipment slot nt-b unlock
+
+configure equipment protection-group 1 admin-status unlock
+
+admin software-mngt shub database save
+

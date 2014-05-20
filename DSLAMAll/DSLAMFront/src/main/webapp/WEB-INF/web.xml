@@ -49,7 +49,7 @@
 	<!-- GWT-RPC -->
 		<servlet-mapping>
 			<servlet-name>serverConnectionRPC</servlet-name>
-			<url-pattern>/transDesktop/serverConnectionRPC</url-pattern>
+			<url-pattern>/dslamBusDesktop/serverConnectionRPC</url-pattern>
 		</servlet-mapping>
 	
 		<servlet>
@@ -62,7 +62,7 @@
 		<!-- Generic-GWT -->
 		<!-- <servlet-mapping> -->
 		<!-- <servlet-name>genericServerConnectionGWT</servlet-name> -->
-		<!-- <url-pattern>/transDesktop/genericServerConnectionGWT</url-pattern> -->
+		<!-- <url-pattern>/dslamBusDesktop/genericServerConnectionGWT</url-pattern> -->
 		<!-- </servlet-mapping> -->
 	
 		<!-- <servlet> -->
@@ -75,7 +75,7 @@
 		<!--  Generic-J2EE -->	
 		<servlet-mapping>
 			<servlet-name>genericServerConnectionJ2EE</servlet-name>
-			<url-pattern>/transDesktop/genericServerConnectionJ2EE</url-pattern>
+			<url-pattern>/dslamBusDesktop/genericServerConnectionJ2EE</url-pattern>
 		</servlet-mapping>
 	
 		<servlet>

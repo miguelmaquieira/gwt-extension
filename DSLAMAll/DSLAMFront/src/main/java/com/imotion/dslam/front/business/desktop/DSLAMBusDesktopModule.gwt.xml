@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.0//EN"
   "http://google-web-toolkit.googlecode.com/svn/tags/2.6.0/distro-source/core/src/gwt-module.dtd">
-<module rename-to="transBusDesktop">
+<module rename-to="dslamBusDesktop">
 	<inherits name="com.imotion.dslam.front.business.DSLAMBusModule" />
-	
+	<inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
+	<inherits name='org.goda.Goda'/>
 	<entry-point class="com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppEntryPoint" />
 
 	<extend-property name="locale" values="en_EN,es_ES" />
