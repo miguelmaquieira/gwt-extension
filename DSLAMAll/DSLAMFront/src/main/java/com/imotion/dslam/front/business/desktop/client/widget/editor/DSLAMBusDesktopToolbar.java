@@ -19,7 +19,7 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	public DSLAMBusDesktopToolbar() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_INFO);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR);
 	
 		//ACTIONS
 		SimplePanel fileActionsZone = new SimplePanel();

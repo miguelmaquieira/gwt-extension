@@ -42,7 +42,7 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 		root.add(saveButtonZone);
 		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
 		
-		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PENCIL, texts.save(), texts.save());
+		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		saveButtonZone.add(saveButton);
 
 		//RUN

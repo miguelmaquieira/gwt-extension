@@ -63,7 +63,8 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 	
 	public void setLastSaved(Date date) {
 		DateTime lastSavedDateTime = new DateTime(date.getTime());
-		String lastSavedTimeStr = lastSavedDateTime.toString("dd/mm/yyyy hh:mm:ss");
+		String lastSavedTimeStr = lastSavedDateTime.toString("dd/MM/yyyy hh:mm:ss");
+		lastSavedTimeStr = texts.last_saved() + lastSavedTimeStr;
 		lastSavedLabel.setText(lastSavedTimeStr);
 	}
 	

@@ -1,7 +1,49 @@
+.dslam_studio-toolbar {
+	height: 40px;
+	border: 1px solid #CCCCCC;
+	padding: 2px;
+}
+
+.dslam_studio-toolbar div {
+	height: 100%;
+}
+
 .dslam_studio-toolbar-file_actions button {
 	width: 100%;
 }
 
 .dslam_studio-toolbar-file_info-close button {
 	float: right;
+}
+
+.dslam_studio-toolbar-file_info-lastsaved {
+	border-left: 1px solid #CCCCCC;
+}
+
+.dslam_studio-toolbar-file_info .gwt-Label {
+	padding: 6px 12px;
+}
+
+.dslam_studio-toolbar-file_info {
+	border-left: 1px solid #CCCCCC;
+}
+
+.dslam_studio-toolbar-file_info-filename {
+	text-align: right;
+}
+
+.dslam_studio-toolbar-file_info-lastsaved {
+	text-align: left;
+}
+
+.gwt-Label {
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.gwt-Button {
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

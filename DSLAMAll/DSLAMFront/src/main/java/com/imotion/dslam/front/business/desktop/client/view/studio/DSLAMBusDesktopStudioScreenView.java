@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.view.studio;
 
+import java.util.Date;
+
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
@@ -19,6 +21,9 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		
 		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
+		toolbar.setFilename("script1");
+		toolbar.setModified(false);
+		toolbar.setLastSaved(new Date());
 	}
 
 	/**

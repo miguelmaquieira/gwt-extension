@@ -18,5 +18,8 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 
 	@DefaultStringValue("Salir")
 	String exit();
+	
+	@DefaultStringValue("Último guardado: ")
+	String last_saved();
 
 }
