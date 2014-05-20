@@ -78,7 +78,7 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 	}
 
 	/**
-	 * AEGWTICompositePanel
+	 *  AEGWTICompositePanel
 	 */
 	@Override
 	public String getName() {
