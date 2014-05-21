@@ -87,7 +87,6 @@
 			<artifactId>ImotionGWTAceEditor</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<classifier>sources</classifier>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.oscillation.gwt</groupId>
@@ -236,7 +235,7 @@
 					<modules>
 						<!-- Marketplace gwt module inherits Core gwt module therefore both 
 							will be gwt:compiled -->
-						<module>com.imotion.saboreando.front.business.desktop.entrypoint.BusinessDesktopModule</module>
+						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
 					</modules>
 					<runTarget>${jspToRun}</runTarget>
 					<appEngineVersion>${appengine.target.version}</appEngineVersion>
@@ -255,8 +254,7 @@
 					<!-- <skip>${gwt.skipCompilation}</skip> -->
 					<!-- Number of cores -->
 					<localWorkers>4</localWorkers>
-					<extraJvmArgs>-Xms768m -Xmx2048m
-						-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+					<extraJvmArgs>-Xms768m -Xmx2048m -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
 				</configuration>
 			</plugin>
 			<plugin>

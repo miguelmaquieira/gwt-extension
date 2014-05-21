@@ -23,5 +23,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 
 	String EDITOR_VIEW 							= APP_ID_PREFFIX	+ "editorView";			//dslam_studio-editorView
 	String EDITOR_VIEW_BOTTOM_ZONE 				= EDITOR_VIEW		+ "-bottomZone";		//dslam_studio-editorView-bottomZone
+
+	String EDITOR_ZONE 							= APP_ID_PREFFIX	+ "editorZone";			//dslam_studio-editorZone
 	
 }

@@ -6,6 +6,7 @@
 	<inherits name="com.selene.arch.ArchDataModule"/>
 	<inherits name="com.google.gwt.http.HTTP" />
 	<inherits name="com.google.gwt.logging.Logging"/>
+	<inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
 	
 	<set-property name="gwt.logging.firebugHandler" value="ENABLED" />
 	<set-property name="gwt.logging.consoleHandler" value="ENABLED" />
