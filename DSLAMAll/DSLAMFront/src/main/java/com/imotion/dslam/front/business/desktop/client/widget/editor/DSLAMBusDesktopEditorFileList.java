@@ -8,7 +8,6 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.common.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
@@ -23,7 +22,7 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel {
 	public DSLAMBusDesktopEditorFileList() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_CONTAINER);
+		addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST);
 		
 		//Header
 		FlowPanel headerZone = new FlowPanel();
@@ -40,12 +39,8 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel {
 	}
 	
 	public void addFile(AEMFTMetadataElementComposite fileData) {
-		FlowPanel fileWrapper = new FlowPanel();
-		fileListContainer.add(fileWrapper);
-		fileWrapper.addStyleName(AEGWTIBoostrapConstants.ROW);
-		
 		DSLAMBusDesktopEditorFileListElement file = new DSLAMBusDesktopEditorFileListElement();
-		fileWrapper.add(file);
+		fileListContainer.add(file);
 		file.setData(fileData);
 	}
 

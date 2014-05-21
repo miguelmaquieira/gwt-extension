@@ -32,6 +32,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
 		toolbar.setFilename("script1");
+		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());
 		
@@ -45,6 +46,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		FlowPanel fileListZone = new FlowPanel();
 		bottomZone.add(fileListZone);
 		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ZONE);
 		
 		fileList = new DSLAMBusDesktopEditorFileList();
 		fileListZone.add(fileList);
