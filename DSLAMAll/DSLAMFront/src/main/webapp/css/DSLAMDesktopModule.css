@@ -100,6 +100,11 @@
 	float: right;
 }
 
+.dslam_studio-editorZone {
+	padding-left: 0px;
+	height: 100%;
+}
+
 .gwt-Label {
 	white-space: nowrap;
 	text-overflow: ellipsis;

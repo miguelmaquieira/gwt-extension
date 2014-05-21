@@ -23,6 +23,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -194,11 +195,9 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	/**
 	 * Set font size.
 	 */
-	public native void setFontSize(String fontSize) /*-{
-		var elementId = this.@edu.ycp.cs.dh.acegwt.client.ace.AceEditor::elementId;
-		var elt = $doc.getElementById(elementId);
-		elt.style.fontSize = fontSize;
-	}-*/;
+	public void setFontSize(double fontSize) {
+		divElement.getStyle().setFontSize(fontSize, Unit.PX);
+	};
 
 	/**
 	 * Get the complete text in the editor as a String.

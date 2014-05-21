@@ -60,9 +60,9 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 
 		//Bottom Zone - Editor zone
 		FlowPanel editorZone = new FlowPanel();
-		bottomZone.add(fileListZone);
-		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_ZONE);
+		bottomZone.add(editorZone);
+		editorZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
+		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_ZONE);
 
 		// create first AceEditor widget
 		editor = new AceEditor();
@@ -73,6 +73,8 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		editor.setTheme(AceEditorTheme.ECLIPSE);
 		editor.setMode(AceEditorMode.DSLAM);
 		editor.setAutoCompletionEnabled(true);
+		editor.setShowPrintMargin(false);
+		editor.setFontSize(14);
 		// use cursor position change events to keep a label updated
 		// with the current row/col
 		editor.addOnCursorPositionChangeHandler(new AceEditorCallback() {
