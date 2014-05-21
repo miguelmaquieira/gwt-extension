@@ -88,6 +88,9 @@
 .dslam_studio-filelist-element .dropdown-toggle {
 	width: 25%;
 	border-right-width: 0px;
+}
+
+.dslam_studio-filelist-element .dropdown-toggle:HOVER, .dslam_studio-filelist-element .dropdown-toggle:ACTIVE, .dslam_studio-filelist-element .dropdown-toggle:FOCUS {
 	z-index: 0;
 }
 
