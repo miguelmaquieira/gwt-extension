@@ -15,7 +15,6 @@ import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktop
 import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
-import com.selene.arch.exe.gwt.client.jsloaders.AEGWTIJSLoaderConstants;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTControllerPresenter;
 import com.selene.arch.exe.gwt.client.presenter.error.AEGWTErrorDisplay;
@@ -29,7 +28,9 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	@Override
 	public void loadJS(Callback<Void, Exception> callback) {
 		List<String> bootstrapLibraries = new ArrayList<String>();
-		bootstrapLibraries.add(AEGWTIJSLoaderConstants.JQUERY_JS_URL);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_JS_URL);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_MOUSE_WHEEL_JS_URL);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_PERFECT_SCROLLBAR_JS_URL);
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_JS_URL);
 		AEGWTJSLoader.fromUrl(bootstrapLibraries.iterator(), callback);
 	}

@@ -14,8 +14,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR_FILE_INFO_CLOSE_ZONE 		= TOOLBAR_FILE_INFO		+ "-close";			//dslam_studio-toolbar-file_info-close 
 
 	//FILE LIST
-	String FILE_LIST							= APP_ID_PREFFIX 		+ "filelist";
+	String FILE_LIST							= APP_ID_PREFFIX 		+ "filelist";		//dslam_studio-filelist
 	String FILE_LIST_CONTAINER					= FILE_LIST		 		+ "-container";		//dslam_studio-filelist-container
+	String FILE_LIST_CONTAINER_ZONE 			= FILE_LIST_CONTAINER	+ "-zone";			//dslam_studio-filelist-container-zone
 	String FILE_LIST_HEADER 					= FILE_LIST				+ "-header";		//dslam_studio-filelist-header
 	String FILE_LIST_ELEMENT 					= FILE_LIST				+ "-element";		//dslam_studio-filelist-element
 	String FILE_LIST_ZONE 						= FILE_LIST				+ "-zone";			//dslam_studio-filelist-zone

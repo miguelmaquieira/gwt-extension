@@ -62,6 +62,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		fileList.postDisplay();
 		//TEST
 		buildExample();
 	}
@@ -81,7 +82,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private void buildExample() {
 		AEMFTMetadataElementCompositeRecordSetListRegroup fileListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getCompositeListRegroup();
 		
-		for (int i = 0; i < 10 ; i++) {
+		for (int i = 0; i < 20 ; i++) {
 			AEMFTMetadataElementComposite fileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			DateTime fileDate = new DateTime();
 			fileDate = fileDate.minusDays(i);

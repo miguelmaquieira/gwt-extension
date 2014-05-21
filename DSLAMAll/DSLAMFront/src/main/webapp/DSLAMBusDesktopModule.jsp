@@ -9,6 +9,7 @@
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		
 		<link type="text/css" rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" href="jquery/perfect-scrollbar-0.4.10/perfect-scrollbar.css">
 		<link type="text/css" rel="stylesheet" href="css/SeleneCommonModule.css">
 		<link type="text/css" rel="stylesheet" href="css/SeleneDesktopModule.css">
 		<link type="text/css" rel="stylesheet" href="css/BusinessCommonModule.css">
