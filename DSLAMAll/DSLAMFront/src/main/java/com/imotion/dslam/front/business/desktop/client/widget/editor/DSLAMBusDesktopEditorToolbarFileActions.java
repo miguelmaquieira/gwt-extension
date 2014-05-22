@@ -22,7 +22,6 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 
 	private AEGWTBootstrapGlyphiconButton newButton;
 	private AEGWTBootstrapGlyphiconButton saveButton;
-	private AEGWTBootstrapGlyphiconButton runButton;
 
 	public DSLAMBusDesktopEditorToolbarFileActions() {
 		FlowPanel root = new FlowPanel();
@@ -32,7 +31,7 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 		//NEW
 		SimplePanel newButtonZone = new SimplePanel();
 		root.add(newButtonZone);
-		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
 		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
 		newButtonZone.add(newButton);
@@ -40,25 +39,17 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 		//SAVE
 		SimplePanel saveButtonZone = new SimplePanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		saveButtonZone.add(saveButton);
-
-		//RUN
-		SimplePanel runButtonZone = new SimplePanel();
-		root.add(runButtonZone);
-		runButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
-		
-		runButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY_CIRCLE, texts.run(), texts.run());
-		runButtonZone.add(runButton);
 
 		newButton.addClickHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.ADD_EVENT);
+				evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
 				getLogicalEventHandlerManager().fireEvent(evt);
 			}
 		});
@@ -69,16 +60,6 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 			public void onClick(ClickEvent event) {
 				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 				evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-				getLogicalEventHandlerManager().fireEvent(evt);
-			}
-		});
-
-		runButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.RUN_EVENT);
 				getLogicalEventHandlerManager().fireEvent(evt);
 			}
 		});

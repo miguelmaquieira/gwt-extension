@@ -8,6 +8,8 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.client.view.studio.DSLAMBusI18NStudioTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
@@ -22,8 +24,8 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 	private AEGWTBootstrapDropdownAndLabelTextBox	filenameField;
 	private AEGWTButton								saveButton;
 	
-	public DSLAMBusDesktopNewScriptPopupForm() {
-		super(true);
+	public DSLAMBusDesktopNewScriptPopupForm(AEGWTICompositePanel parent) {
+		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_SCRIPT_FORM);
@@ -44,6 +46,8 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 		
 		saveButton = new AEGWTButton(COMMON_TEXTS.create());
 		saveButtonZone.add(saveButton);
+		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN);
+		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN_PRIMARY);
 	}
 
 	/**
