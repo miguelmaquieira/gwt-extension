@@ -4,9 +4,7 @@ import java.util.Date;
 
 import org.goda.time.DateTime;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.InlineLabel;
 import com.imotion.dslam.bom.DSLAMBOIFileConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
@@ -19,7 +17,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
-import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
@@ -31,7 +28,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private DSLAMBusDesktopToolbar			toolbar;
 	private DSLAMBusDesktopEditorFileList	fileList;
 	private AceEditor						editor;
-	private InlineLabel 					rowColLabel;
 
 	public DSLAMBusDesktopStudioScreenView() {
 		root = new FlowPanel();
@@ -70,12 +66,8 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		editor = new AceEditor();
 		editorZone.add(editor);
 		editor.setWidth("100%");
-		editor.setHeight("80%");
+		editor.setHeight("100%");
 
-		// Label to display current row/column
-		rowColLabel = new InlineLabel("");
-		editorZone.add(rowColLabel);
-		rowColLabel.setHeight("20%");
 
 		// start the first editor and set its theme and mode
 		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
@@ -84,15 +76,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		editor.setAutoCompletionEnabled(true);
 		editor.setShowPrintMargin(false);
 		editor.setFontSize(14);
-		// use cursor position change events to keep a label updated
-		// with the current row/col
-		editor.addOnCursorPositionChangeHandler(new AceEditorCallback() {
-
-			public void invokeAceCallback(JavaScriptObject obj) {
-				updateEditor1CursorPosition();
-			}
-		});
-		updateEditor1CursorPosition(); // initial update
 	}
 
 	/**
@@ -140,8 +123,5 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		fileList.setData(fileListData);
 	}
 
-	private void updateEditor1CursorPosition() {
-		rowColLabel.setText(editor.getCursorPosition().toString());
-	}
 
 }

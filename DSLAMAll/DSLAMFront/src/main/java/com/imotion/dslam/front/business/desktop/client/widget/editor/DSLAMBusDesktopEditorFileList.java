@@ -3,7 +3,6 @@ package com.imotion.dslam.front.business.desktop.client.widget.editor;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.common.DSLAMBusI18NTexts;
@@ -75,11 +74,8 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel {
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		int fullHeight 		= Window.getClientHeight();
-		int offset 			= fileListContainerZone.getOffsetHeight();
-		int scrollHeight	= fullHeight - offset - 100;
-		fileListContainerZone.setHeight(scrollHeight + "px");
-		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, fileListContainerZone);
+		setHeightToDecrease(80);
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, fileListContainerZone, getCurrentHeight());
 	}
 
 }
