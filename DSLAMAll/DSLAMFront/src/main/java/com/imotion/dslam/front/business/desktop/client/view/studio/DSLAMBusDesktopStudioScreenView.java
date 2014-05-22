@@ -6,6 +6,7 @@ import org.goda.time.DateTime;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.imotion.dslam.bom.DSLAMBOIFileConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
@@ -30,6 +31,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private DSLAMBusDesktopToolbar			toolbar;
 	private DSLAMBusDesktopEditorFileList	fileList;
 	private AceEditor						editor;
+	private InlineLabel 					rowColLabel;
 
 	public DSLAMBusDesktopStudioScreenView() {
 		root = new FlowPanel();
@@ -67,6 +69,13 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		// create first AceEditor widget
 		editor = new AceEditor();
 		editorZone.add(editor);
+		editor.setWidth("100%");
+		editor.setHeight("80%");
+
+		// Label to display current row/column
+		rowColLabel = new InlineLabel("");
+		editorZone.add(rowColLabel);
+		rowColLabel.setHeight("20%");
 
 		// start the first editor and set its theme and mode
 		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
@@ -84,16 +93,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			}
 		});
 		updateEditor1CursorPosition(); // initial update
-
-		// set some initial text in editor 1
-		//				editor.setText(DSLAM_TEXT);
-
-		// add some annotations
-		//				editor1.addAnnotation(0, 1, "What's up?", AceAnnotationType.WARNING);
-		//				editor1.addAnnotation(2, 1, "This code is lame", AceAnnotationType.ERROR);
-		//				editor1.setAnnotations();
-		editor.setWidth("100%");
-		editor.setHeight("95%");
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	}
 
 	private void updateEditor1CursorPosition() {
-		//		rowColLabel.setText(editor1.getCursorPosition().toString());
+		rowColLabel.setText(editor.getCursorPosition().toString());
 	}
 
 }
