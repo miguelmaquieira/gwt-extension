@@ -29,12 +29,18 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_LIST_ELEMENT 				= PROCESS_LIST				+ "-element";		//dslam_studio-processlist-element
 	String PROCESS_LIST_ZONE 					= PROCESS_LIST				+ "-zone";			//dslam_studio-processlist-zone
 
+	String EDITOR_ZONE 							= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
+	String PROCESS_ZONE 						= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
+
+	String NEW_SCRIPT_FORM 						= APP_ID_PREFFIX			+ "newScriptForm";	//dslam_studio-newScriptForm
+	String NEW_SCRIPT_FORM_INPUT_ZONE 			= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
+	String NEW_SCRIPT_FORM_SAVE_ZONE 			= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
+
 	
 	String EDITOR_VIEW 							= APP_ID_PREFFIX			+ "editorView";		//dslam_studio-editorView
 	String EDITOR_VIEW_BOTTOM_ZONE 				= EDITOR_VIEW				+ "-bottomZone";	//dslam_studio-editorView-bottomZone
 	String PROCESSES_VIEW 						= APP_ID_PREFFIX			+ "processesView";	//dslam_studio-processesView
 	String PROCESSES_VIEW_BOTTOM_ZONE 			= PROCESSES_VIEW			+ "-bottomZone";	//dslam_studio-processesView-bottomZone
 	
-	String EDITOR_ZONE 							= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
-	String PROCESS_ZONE 						= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
+	
 }

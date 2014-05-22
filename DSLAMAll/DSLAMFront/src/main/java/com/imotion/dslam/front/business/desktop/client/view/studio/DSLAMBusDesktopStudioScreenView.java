@@ -10,24 +10,30 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileList;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileActions;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
-public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopStudioDisplay {
+public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopStudioDisplay , AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopStudioScreenView";
 
-	private FlowPanel 						root;
-	private DSLAMBusDesktopToolbar			toolbar;
-	private DSLAMBusDesktopEditorFileList	fileList;
-	private AceEditor						editor;
+	private FlowPanel 							root;
+	private DSLAMBusDesktopToolbar				toolbar;
+	private DSLAMBusDesktopEditorFileList		fileList;
+	private AceEditor							editor;
+	private DSLAMBusDesktopNewScriptPopupForm	newScriptPopup;
 
 	public DSLAMBusDesktopStudioScreenView() {
 		root = new FlowPanel();
@@ -88,7 +94,9 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		fileList.postDisplay();
+		newScriptPopup = new DSLAMBusDesktopNewScriptPopupForm(this);
 		//TEST
 		buildExample();
 	}
@@ -121,6 +129,28 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			fileListData.addElement(fileData);
 		}
 		fileList.setData(fileListData);
+	}
+
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		String			srcWidget	= evt.getSourceWidget();
+		LOGICAL_TYPE	type		= evt.getEventType();
+		if (DSLAMBusDesktopEditorToolbarFileActions.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
+				newScriptPopup.center();
+			}
+		}
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.NEW_EVENT.equals(type);
 	}
 
 

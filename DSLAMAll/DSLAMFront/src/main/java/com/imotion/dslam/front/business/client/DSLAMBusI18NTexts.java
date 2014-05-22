@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.common;
+package com.imotion.dslam.front.business.client;
 
 import com.selene.arch.exe.gwt.client.common.AEGWTI18NCommonTexts;
 
