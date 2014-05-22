@@ -17,7 +17,7 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 
 	private AEGWTIFlowController			flowController;
 	private AEGWTBaseAppContextMapper		contextMapper;
-	private DSLAMBusMessageWrapper				messageWrapper;
+	private DSLAMBusMessageWrapper			messageWrapper;
 
 	@Override
 	protected String getModuleBaseUrl() {

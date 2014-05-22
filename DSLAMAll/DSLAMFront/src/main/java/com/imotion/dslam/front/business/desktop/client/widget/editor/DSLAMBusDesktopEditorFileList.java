@@ -68,7 +68,6 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel {
 				addFile((AEMFTMetadataElementComposite) fileData);
 			}
 		}
-
 	}
 	
 	@Override

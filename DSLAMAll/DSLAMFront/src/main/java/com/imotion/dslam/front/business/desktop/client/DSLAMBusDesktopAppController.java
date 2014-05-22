@@ -9,9 +9,11 @@ import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstant
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerDisplay;
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
+import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.processpage.DSLAMBusDesktopProcessPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
@@ -67,6 +69,9 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		
 		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_STUDIO.equals(token1) ) {
 			presenter = new DSLAMBusDesktopStudioPresenter(new DSLAMBusDesktopStudioScreenView());
+		}
+		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE.equals(token1) ) {
+			presenter = new DSLAMBusDesktopProcessPagePresenter(new DSLAMBusDesktopProcessPageScreenView());
 		}
 		return presenter;
 	}
