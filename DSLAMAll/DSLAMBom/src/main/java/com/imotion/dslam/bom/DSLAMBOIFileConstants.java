@@ -8,5 +8,8 @@ public interface DSLAMBOIFileConstants {
 	String FILE_NAME 	= "filename";
 	String CONTENT		= "content";
 	String LAST_SAVED	= "lastSaved";
+	
+	//FILE TYPES
+	String FILE_EXTENSION_DSLAM = ".dslam";
 
 }

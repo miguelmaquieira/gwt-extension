@@ -1,7 +1,6 @@
 package com.imotion.dslam.front.business.client;
 
 import com.google.gwt.core.shared.GWT;
-import com.imotion.dslam.front.business.desktop.client.common.DSLAMBusI18NCommonMessages;
 import com.selene.arch.exe.gwt.client.common.AEGWTMessageWrapper;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 

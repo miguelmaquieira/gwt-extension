@@ -2,8 +2,8 @@ package com.imotion.dslam.front.business.desktop.client.widget.editor;
 
 import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.bom.DSLAMBOIFileConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.common.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapSplitButtonDropdown;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;

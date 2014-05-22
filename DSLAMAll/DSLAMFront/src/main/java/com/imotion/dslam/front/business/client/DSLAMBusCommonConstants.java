@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.common;
+package com.imotion.dslam.front.business.client;
 
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementConstant;
 

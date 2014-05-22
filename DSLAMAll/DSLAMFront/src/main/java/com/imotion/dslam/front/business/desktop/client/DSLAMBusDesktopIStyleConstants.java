@@ -25,5 +25,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EDITOR_VIEW_BOTTOM_ZONE 				= EDITOR_VIEW		+ "-bottomZone";		//dslam_studio-editorView-bottomZone
 
 	String EDITOR_ZONE 							= APP_ID_PREFFIX	+ "editorZone";			//dslam_studio-editorZone
+
+	String NEW_SCRIPT_FORM 						= APP_ID_PREFFIX	+ "newScriptForm";		//dslam_studio-newScriptForm
+	String NEW_SCRIPT_FORM_INPUT_ZONE 			= NEW_SCRIPT_FORM	+ "-inputZone";			//dslam_studio-newScriptForm-inputZone
+	String NEW_SCRIPT_FORM_SAVE_ZONE 			= NEW_SCRIPT_FORM	+ "-saveZone";			//dslam_studio-newScriptForm-saveZone
 	
 }
