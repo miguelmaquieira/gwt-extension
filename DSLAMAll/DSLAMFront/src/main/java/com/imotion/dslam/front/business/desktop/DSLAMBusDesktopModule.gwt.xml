@@ -4,6 +4,7 @@
 <module rename-to="dslamBusDesktop">
 	<inherits name="com.imotion.dslam.front.business.DSLAMBusModule" />
 	<inherits name='org.goda.Goda'/>
+	<inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
 	
 	<entry-point class="com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppEntryPoint" />
 
@@ -20,7 +21,7 @@
 		<when-type-is class="com.selene.arch.exe.gwt.mvp.AppInitializer" />
 	</replace-with>
 	
-	<set-property name="user.agent" value="gecko1_8,safari"/>
+<!-- 	<set-property name="user.agent" value="gecko1_8,safari"/> -->
 
 	<!-- SUPERDEV MODE -->
 	<add-linker name="xsiframe" />
@@ -28,7 +29,7 @@
 	<set-property name="compiler.useSourceMaps" value="true" />
 	<!-- <set-property name="user.agent" value="safari" /> -->
 	<!-- <set-configuration-property name='includeSourceMapUrl' value='http://192.168.1.2:9876/'/> -->
-	<!-- <collapse-all-properties /> -->
+	<collapse-all-properties />
 
 	<source path="client" />
 

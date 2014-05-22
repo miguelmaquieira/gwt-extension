@@ -18,7 +18,7 @@ var DslamHighlightRules = function() {
            regex: '\\b(?!-)(?:equipment|interface|vlan|pppox-relay|software-mngt)(?!-)\\b',
            caseInsensitive: true },
          { token: 'keyword.command.levelthree',
-           regex: '\\b(?!-)(?:slot|protection-group|protection-element|admin-status|id|mode|name|protocol-filte|pppoe-relay-tag|circuit-id-pppoe|remote-id-pppoe|customer-id|shub|port|egress-port|cross-connect|engine|mac-addr-conc|unlock|database|save)(?!-)\\b',
+           regex: '\\b(?!-)(?:slot|protection-group|protection-element|admin-status|id|mode|name|protocol-filter|pppoe-relay-tag|circuit-id-pppoe|remote-id-pppoe|customer-id|shub|port|egress-port|cross-connect|engine|mac-addr-conc|unlock|database|save)(?!-)\\b',
            caseInsensitive: true },
          { token: 'keyword.control',
            regex: '\\bin\\b',
