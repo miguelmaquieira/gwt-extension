@@ -18,18 +18,18 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-tools-sdk</artifactId>
-			<version>${appengine.target.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-remote-api</artifactId>
-			<version>${appengine.target.version}</version>
-			<scope>runtime</scope>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.appengine</groupId> -->
+<!-- 			<artifactId>appengine-tools-sdk</artifactId> -->
+<!-- 			<version>${appengine.target.version}</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.google.appengine</groupId> -->
+<!-- 			<artifactId>appengine-remote-api</artifactId> -->
+<!-- 			<version>${appengine.target.version}</version> -->
+<!-- 			<scope>runtime</scope> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -127,6 +127,28 @@
 			<groupId>com.selene</groupId>
 			<artifactId>Selene</artifactId>
 			<version>${selene.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.code.morphia</groupId>
+					<artifactId>morphia</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mongodb</groupId>
+					<artifactId>mongo-java-driver</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-api-1.0-sdk</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.googlecode.objectify</groupId>
+					<artifactId>objectify</artifactId>
+				</exclusion>
+<!-- 				<exclusion> -->
+<!-- 					<groupId>com.google.guava</groupId> -->
+<!-- 					<artifactId>guava</artifactId> -->
+<!-- 				</exclusion> -->
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.selene</groupId>
@@ -242,8 +264,8 @@
 							will be gwt:compiled -->
 						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
 					</modules>
-					<runTarget>${jspToRun}</runTarget>
-					<appEngineVersion>${appengine.target.version}</appEngineVersion>
+					<runTarget>DSLAMBusDesktopModule.jsp</runTarget>
+					<!-- <appEngineVersion>${appengine.target.version}</appEngineVersion> -->
 					<!-- TO AVOID : You will not be able to access files from your working 
 						directory on the production server. -->
 					<workDir>${webappDirectory}</workDir>
@@ -255,7 +277,7 @@
 					<!-- Normally the gwt maven plugin executes dev mode using a builtin 
 						jetty server. This config property instructs the gwt maven plugin to execute 
 						dev mode using the jetty server supplied by the appengine sdk. -->
-					<server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server>
+					<!-- <server>com.google.appengine.tools.development.gwt.AppEngineLauncher</server> -->
 					<!-- <skip>${gwt.skipCompilation}</skip> -->
 					<!-- Number of cores -->
 					<localWorkers>4</localWorkers>

@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.editor;
 
 import com.google.gwt.core.shared.GWT;
-import com.imotion.dslam.bom.DSLAMBOIFileConstants;
+import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -39,8 +39,8 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 	
 	public void setData(AEMFTMetadataElementComposite data) {
 		filedata = data;
-		String	fileId		= getElementController().getElementAsString(DSLAMBOIFileConstants.ID		, 	filedata);
-		String	filename	= getElementController().getElementAsString(DSLAMBOIFileConstants.FILE_NAME	, 	filedata);
+		String	fileId		= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_ID		, 	filedata);
+		String	filename	= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME	, 	filedata);
 		
 		setId(fileId);
 		setActionText(filename);

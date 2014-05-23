@@ -11,11 +11,11 @@
 	<artifactId>DSLAMBom</artifactId>
 	<name>DSLAMBom</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -33,20 +33,20 @@
 			<artifactId>SeleneBase</artifactId>
 			<version>${selene.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${appengine.target.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.objectify</groupId>
-			<artifactId>objectify</artifactId>
-			<version>${objectify.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.google.appengine</groupId> -->
+		<!-- <artifactId>appengine-api-1.0-sdk</artifactId> -->
+		<!-- <version>${appengine.target.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.googlecode.objectify</groupId> -->
+		<!-- <artifactId>objectify</artifactId> -->
+		<!-- <version>${objectify.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>com.google.guava</groupId> -->
+		<!-- <artifactId>guava</artifactId> -->
+		<!-- <version>${guava.version}</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 </project>

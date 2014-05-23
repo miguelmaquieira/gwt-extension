@@ -33,5 +33,8 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Navegador")
 	String navigator();
+	
+	@DefaultStringValue("Cancelar")
+	String cancel();
 
 }

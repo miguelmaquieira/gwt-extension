@@ -17,6 +17,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBackend"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBom"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBusiness"/>

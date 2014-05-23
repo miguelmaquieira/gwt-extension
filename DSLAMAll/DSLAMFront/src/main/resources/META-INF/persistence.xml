@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="dslam"	transaction-type="RESOURCE_LOCAL">
+
+ 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<!-- Registered entities -->
+		<class>com.imotion.dslam.bom.data.DSLAMBOFile</class>
+
+		<properties>
+
+			<!-- =============================== -->
+			<!-- ===========DATABASE============ -->
+			<!-- =============================== -->
+
+			<!-- MySQL -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdb" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+
+
+			<!-- =============================== -->
+			<!-- =============LOGIN============= -->
+			<!-- =============================== -->
+			<property name="hibernate.connection.user" value="dslamuser" />
+			<property name="hibernate.connection.password" value="dslampassword" />
+
+			<!-- =============================== -->
+			<!-- ===========OTHER PROPS========== -->
+			<!-- =============================== -->
+			<!-- updates automatically scheme, NOT RECOMMENDED IN PRODUCTION.Check 
+				grants of user -->
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.show_sql" value="true" />
+         	<property name="hibernate.format_sql" value="true" />
+			<!-- autocommit not recommended by Hibernate -->
+			<!-- <property name="hibernate.connection.autocommit" value="false" /> -->
+
+			<!-- =============================== -->
+			<!-- ==============POOL============= -->
+			<!-- =============================== -->
+			<!-- Connection pools Hibernate-C3P0 -->
+			<property name="hibernate.connection.provider_class"
+				value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.c3p0.acquire_increment" value="5" />
+			<property name="hibernate.c3p0.idle_test_period" value="100" />
+			<property name="hibernate.c3p0.max_size" value="50" />
+			<property name="hibernate.c3p0.max_statements" value="0" />
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.timeout" value="100" />
+		</properties>
+	</persistence-unit>
+</persistence>
