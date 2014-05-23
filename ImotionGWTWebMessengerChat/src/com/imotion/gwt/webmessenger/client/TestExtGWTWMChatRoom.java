@@ -162,7 +162,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			@Override
 			public void onClick(ClickEvent event) {
 				if (connectionCS != null) {
-					connectionCS.disconnect();
+					ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseConnection(connectionCS);
 					connectionCS = null;
 					textMessage.setEnabled(false);
 					chatMessagePanel.setEnabledButton(false);

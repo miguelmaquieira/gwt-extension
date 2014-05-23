@@ -89,7 +89,7 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	public void disconnect() {
 		try {
 			// fix when the close handle is not invoke
-			getCurator().executeCommand(COMMAND_TYPE.CLOSE_HANDLER, 3000, 1, this);
+			getCurator().executeCommand(COMMAND_TYPE.CLOSE_HANDLER, 1500, 1, this);
 
 			// connection
 			getCurator().disconnect();
@@ -127,6 +127,17 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			manageException(exception, "connect", TYPE.CONNECTION_ERROR);
 		}
 	}
+	
+	@Override
+	public void unsubscribe() {
+		try {
+			// unsusbcribe
+			getCurator().unsubscribe();
+
+		} catch (Exception exception) {
+			manageException(exception, "unsubscribe");
+		}
+	}
 
 	@Override
 	public ExtGWTWMCommCSHandler getCommHandlerWrapper() {
@@ -141,6 +152,11 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	@Override
 	public void release() {
 		disconnect();
+		handleCloseEvent(null);
+		if (curator != null) {
+			curator.release();
+			curator = null;
+		}
 		if (errorHandler != null) {
 			errorHandler.release();
 			errorHandler = null;
@@ -149,7 +165,15 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			commHandler.release();
 			commHandler = null;
 		}
+		if (atmosphereConfig != null) {
+			atmosphereConfig.setMessageHandler(null);
+		}
 		atmosphereConfig = null;
+	}
+	
+	@Override
+	public String toString() {
+		return sessionData.toString();
 	}
 
 	/**********************************************************************

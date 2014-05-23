@@ -12,6 +12,7 @@ public interface ExtGWTWmCommCSConnectionCurator extends ExtGWTWMReleasable {
 
 	public int connect() throws Exception;
 	public void disconnect() throws Exception;
+	public void unsubscribe() throws Exception;
 	public void sendMessage(String message, String roomId, String userId) throws Exception;
 	
 	public void executeCommand(ExtGWTWMCommand.COMMAND_TYPE type, int delay, int attemps, final ExtGWTWMCSConnectionAtmosphere conn);

@@ -18,7 +18,7 @@ import com.imotion.gwt.webmessenger.shared.ExtGWTWMRPCEvent;
 
 public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConnectionCurator {
 	
-	private Atmosphere 						atmosphere ;
+	private Atmosphere 						atmosphere;
 	private AtmosphereRequest 				rpcRequest;
 	private AtmosphereRequestConfig 		atmosphereConfig;
 	
@@ -34,10 +34,16 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			atmosphereConfig = null;
 			rpcRequest = null;
 			releaseCommandMap();
-			atmosphere.unsubscribe();
 			atmosphere = null;
 		} catch (Exception exception) {
 			atmosphere = null;
+		}
+	}
+	
+	@Override
+	public void unsubscribe() throws Exception {
+		if (atmosphere != null) {
+			atmosphere.unsubscribe();
 		}
 	}
 	
@@ -51,13 +57,11 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			responseCode = ExtGWTWmCommCSConnectionCurator.ERROR_RESPONSE;
 		}
 		return responseCode;
-		
 	}
 
 	@Override
 	public void disconnect() throws Exception {
 		if (atmosphere != null) {
-			atmosphere.unsubscribe();
 			atmosphere = null;
 			rpcRequest = null;		
 		}
