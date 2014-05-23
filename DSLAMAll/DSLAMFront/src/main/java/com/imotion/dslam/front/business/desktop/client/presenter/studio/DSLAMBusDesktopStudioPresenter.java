@@ -1,8 +1,13 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.studio;
 
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
+import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
+import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -35,7 +40,26 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 		if (DSLAMBusDesktopNewScriptPopupForm.NAME.equals(srcWidget)) {
 			String filename		= evt.getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME);
 			String contentType	= evt.getElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE);
-			String lala = "";
+			
+			AEMFTMetadataElementComposite fileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			fileData.addElement(DSLAMBOIFileDataConstants.FILE_NAME		, filename);
+			fileData.addElement(DSLAMBOIFileDataConstants.CONTENT_TYPE	, contentType);
+			
+			getClientServerConnection().executeComm(fileData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_FILE_ADD_FILE_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+				
+				@Override
+				public void onResult(AEMFTMetadataElementComposite dataResult) {
+					AEMFTMetadataElementComposite fileData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
+					getView().addFile(fileData);
+				}
+				
+				@Override
+				public void onError(Throwable th) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 		}
 	}
 

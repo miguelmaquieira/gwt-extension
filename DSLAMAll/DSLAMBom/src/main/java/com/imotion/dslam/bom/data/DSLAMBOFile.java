@@ -2,6 +2,7 @@ package com.imotion.dslam.bom.data;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.DSLAMBOIFile;
 
+@Entity(name="File")
 public class DSLAMBOFile implements DSLAMBOIFile {
 
 	private static final long serialVersionUID = 4235149869033046131L;

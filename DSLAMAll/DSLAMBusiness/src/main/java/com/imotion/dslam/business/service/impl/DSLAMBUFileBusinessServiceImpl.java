@@ -5,6 +5,7 @@ import java.util.Date;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
+import com.imotion.dslam.business.service.DSLAMBUBomToMetadataConversor;
 import com.imotion.dslam.business.service.DSLAMBUBusinessServiceBase;
 import com.imotion.dslam.business.service.DSLAMBUIBusinessFileServiceTrace;
 import com.imotion.dslam.business.service.DSLAMBUIFileBusinessService;
@@ -37,9 +38,9 @@ public class DSLAMBUFileBusinessServiceImpl extends DSLAMBUBusinessServiceBase i
 		//end-trace
 		
 		//ContextOut
+		AEMFTMetadataElementComposite fileDataElement = DSLAMBUBomToMetadataConversor.fromFile(file);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(FILE_DATA, contextOut);
-		
+		contextOut.addElement(FILE_DATA, fileDataElement);
 	}
 
 }

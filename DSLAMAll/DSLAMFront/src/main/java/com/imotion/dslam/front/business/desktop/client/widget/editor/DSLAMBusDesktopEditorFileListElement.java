@@ -39,10 +39,10 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 	
 	public void setData(AEMFTMetadataElementComposite data) {
 		filedata = data;
-		String	fileId		= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_ID		, 	filedata);
+		Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFileDataConstants.FILE_ID	, 	filedata);
 		String	filename	= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME	, 	filedata);
 		
-		setId(fileId);
+		setId(String.valueOf(fileId));
 		setActionText(filename);
 	}
 	

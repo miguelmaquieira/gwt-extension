@@ -5,6 +5,7 @@ import java.util.Date;
 import org.goda.time.DateTime;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
@@ -83,6 +84,17 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		editor.setShowPrintMargin(false);
 		editor.setFontSize(14);
 	}
+	
+	@Override
+	public void addFile(AEMFTMetadataElementComposite fileData) {
+		newScriptPopup.hide();
+		fileList.addFile(fileData);
+		
+		String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, fileData);
+		Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
+		toolbar.setLastSaved(lastSaved);
+		toolbar.setFilename(filename);
+	}
 
 	/**
 	 * AEGWTICompositePanel
@@ -97,8 +109,8 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		fileList.postDisplay();
 		newScriptPopup = new DSLAMBusDesktopNewScriptPopupForm(this);
-		//TEST
-		buildExample();
+//		//TEST
+//		buildExample();
 	}
 
 	@Override
