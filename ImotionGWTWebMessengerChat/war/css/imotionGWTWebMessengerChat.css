@@ -19,7 +19,7 @@
 
 .extgwt-webMessengerMultiChatRoomButtonZone .gwt-Anchor {
 	cursor: pointer;
-	margin-right: 10px;
+	margin-right: 5px;
 	color: #3F3F3F;
 }
 
@@ -56,6 +56,17 @@
 	font-size: 14px;
 	color: #ABABAB;
 }
+
+.extgwt-webMessengerChatRoomTab {
+	margin-right: 10px;
+	font-size: 14px;
+}
+
+.extgwt-webMessengerChatRoomTab .gwt-Image {
+	height: 12px;
+	cursor: pointer;
+} 
+
 
 .extgwt-webMessengerChatRoomMessagePanel .gwt-label {
 	

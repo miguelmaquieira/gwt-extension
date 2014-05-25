@@ -30,10 +30,21 @@ public class TestExtGWTWMMultiChatRoom extends Composite {
 		buttonZone.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		contentPanel.add(buttonZone);
 		
+		//// Add button chat
+		Anchor addChatButton = new Anchor("Add room");
+		buttonZone.add(addChatButton);
+		addChatButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				addChatRoom();
+			}
+		});
+		
 		//// Button chat1
-		Anchor btChat1 = new Anchor("Room 1");
+		TestExtGWTWMChatRoomTab btChat1 = new TestExtGWTWMChatRoomTab("Room 1");
 		buttonZone.add(btChat1);
-		btChat1.addClickHandler(new ClickHandler() {
+		btChat1.addClickAction(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -42,9 +53,9 @@ public class TestExtGWTWMMultiChatRoom extends Composite {
 		});
 		
 		//// Button chat2
-		Anchor btChat2 = new Anchor("Room 2");
+		TestExtGWTWMChatRoomTab btChat2 = new TestExtGWTWMChatRoomTab("Room 2");
 		buttonZone.add(btChat2);
-		btChat2.addClickHandler(new ClickHandler() {
+		btChat2.addClickAction(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -80,15 +91,46 @@ public class TestExtGWTWMMultiChatRoom extends Composite {
 	/**********************************************************************
 	 *                		   PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
+	private void addChatRoom() {
+		int index = deckPanel.getWidgetCount();
+		
+		// Chat room
+		final SimplePanel chatRoomZone = new SimplePanel();
+		TestExtGWTWMChatRoom chatroom = new TestExtGWTWMChatRoom();
+		chatroom.setChatRoomId("room" + String.valueOf(index + 1));
+		chatroom.addStyleName("extgwt-webMessengerMultiChatRoomContentZoneChat");
+		chatRoomZone.setWidget(chatroom);
+		deckPanel.add(chatRoomZone);
+		
+		// Create button
+		TestExtGWTWMChatRoomTab btChat = new TestExtGWTWMChatRoomTab("Room " + String.valueOf(index + 1));
+		buttonZone.add(btChat);
+		btChat.addClickAction(new ClickHandler() {
+				
+			@Override
+			public void onClick(ClickEvent event) {
+				showChat(chatRoomZone);
+			}
+		});
+	}
+	
+	private void showChat(Widget widget) {
+		int widgetIndex = deckPanel.getWidgetIndex(widget);
+		showChat(widgetIndex);
+	}
+	
 	private void showChat(int index) {
 		deckPanel.showWidget(index);
 		int buttonCount = buttonZone.getWidgetCount();
-		for (int i = 0; i < buttonCount; i++) {
-			Widget button = buttonZone.getWidget(i);
-			if (i == index) {
-				button.addStyleName("extgwt-anchorSelected");
-			} else {
-				button.removeStyleName("extgwt-anchorSelected");
+		for (int i = 1; i < buttonCount; i++) {
+			Widget widget = buttonZone.getWidget(i);
+			if (widget instanceof TestExtGWTWMChatRoomTab) {
+				TestExtGWTWMChatRoomTab button = (TestExtGWTWMChatRoomTab) widget;
+				if ((i - 1) == index) {
+					button.addAnchorStylename("extgwt-anchorSelected");
+				} else {
+					button.removeAnchorStylename("extgwt-anchorSelected");
+				}
 			}
 		}
 	}
