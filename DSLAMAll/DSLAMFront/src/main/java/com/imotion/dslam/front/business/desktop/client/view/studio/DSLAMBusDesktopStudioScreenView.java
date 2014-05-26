@@ -173,7 +173,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				String currentText = editor.getText();
-				fireSave(srcWidgetId, currentText);
+				fireSaveChanges(srcWidgetId, currentText);
 			}
 		} else if (DSLAMBusDesktopEditorToolbarFileInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CLOSE_EVENT.equals(type)) {
@@ -186,6 +186,10 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 				openFile(fileId);
 			} else {
 
+			}
+		} else if (DSLAMBusDesktopNewScriptPopupForm.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				fireNewFileEvent(evt);
 			}
 		}
 	}
@@ -233,7 +237,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		editor.setVisible(false);
 	}
 
-	private void fireSave(String fileId, String content) {
+	private void fireSaveChanges(String fileId, String content) {
 		AEMFTMetadataElementComposite updateFileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		updateFileData.addElement(DSLAMBOIFile.FILE_ID, fileId);
 		updateFileData.addElement(DSLAMBOIFile.CONTENT, content);
@@ -258,6 +262,25 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			toolbar.setModified(false);
 			toolbar.setFileInfoVisible(true);
 			editor.setVisible(true);
+		}
+	}
+	
+	private void fireNewFileEvent(AEGWTLogicalEvent saveButtonEvt) {
+		String filename		= saveButtonEvt.getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME);
+		AEMFTMetadataElementComposite existentFileData = fileList.getFileDataByName(filename);
+		if (existentFileData != null) {
+			newScriptPopup.setError(TEXTS.filename_exists());
+		} else {
+			String contentType = saveButtonEvt.getElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE);
+			
+			AEMFTMetadataElementComposite fileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			fileData.addElement(DSLAMBOIFileDataConstants.FILE_NAME		, filename);
+			fileData.addElement(DSLAMBOIFileDataConstants.CONTENT_TYPE	, contentType);
+			
+			AEGWTLogicalEvent saveNewFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveNewFileEvent.setEventType(LOGICAL_TYPE.NEW_EVENT);
+			saveNewFileEvent.addElementAsDataValue(fileData);
+			getLogicalEventHandlerManager().fireEvent(saveNewFileEvent);
 		}
 	}
 

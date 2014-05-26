@@ -1,22 +1,27 @@
 package com.imotion.dslam.front.business.desktop.client.widget.editor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.ui.widget.AEGWTComparator;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapSplitButtonDropdown;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitButtonDropdown {
+public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitButtonDropdown  {
 
 	public static final String OPEN_FILE_ID	= "open";
 	public static final String RENAME_FILE_ID	= "rename";
 	public static final String DELETE_FILE_ID	= "delete";
 	
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private		static DSLAMBusI18NTexts				TEXTS			= GWT.create(DSLAMBusI18NTexts.class);
+	private		static Map<String, AEGWTComparator>		ascComparators	= new HashMap<String, AEGWTComparator>();
 	
 	private AEMFTMetadataElementComposite filedata; 
 	
@@ -31,6 +36,10 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 
 	public AEMFTMetadataElementComposite getData() {
 		return filedata;
+	}
+	
+	public String getFilename() {
+		return getActionText();
 	}
 	
 	/**

@@ -33,6 +33,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_ZONE 						= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 
 	String NEW_SCRIPT_FORM 						= APP_ID_PREFFIX			+ "newScriptForm";	//dslam_studio-newScriptForm
+	String NEW_SCRIPT_FORM_ERROR_ZONE 			= NEW_SCRIPT_FORM			+ "-errorZone";		//dslam_studio-newScriptForm-errorZone
 	String NEW_SCRIPT_FORM_INPUT_ZONE 			= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
 	String NEW_SCRIPT_FORM_SAVE_ZONE 			= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
 

@@ -40,4 +40,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("El documento actual tiene cambios sin guardar. ¿Seguro que quieres cerrarlo?")
 	String exit_without_save();
 
+	@DefaultStringValue("Ya existe un fichero con ese nombre")
+	String filename_exists();
+
 }
