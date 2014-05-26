@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="DSLAMFront">
-        <wb-resource deploy-path="/" source-path="/target/DSLAMFront"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/DSLAMFront/WEB-INF/classes"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <property name="context-root" value="DSLAMFront"/>
         <property name="java-output-path" value="/DSLAMFront/target/classes"/>
     </wb-module>

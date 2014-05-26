@@ -4,6 +4,7 @@ import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
+import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -23,6 +24,7 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 	@Override
 	public void bind() {
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		loadFiles();
 	}
 
 	@Override
@@ -59,13 +61,49 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 					
 				}
 			});
-			
+		} else if (DSLAMBusDesktopStudioScreenView.NAME.equals(srcWidget)) {
+			AEMFTMetadataElementComposite fileData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+			getClientServerConnection().executeComm(fileData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_FILE_UPDATE_FILE_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+				
+				@Override
+				public void onResult(AEMFTMetadataElementComposite dataResult) {
+					AEMFTMetadataElementComposite fileData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
+					getView().updateFile(fileData);
+				}
+				
+				@Override
+				public void onError(Throwable th) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.SAVE_EVENT.equals(type);
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private void loadFiles() {
+		getClientServerConnection().executeComm(null, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_FILE_GET_ALL_FILES_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+			
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				AEMFTMetadataElementComposite fileListData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
+				getView().setData(fileListData);
+			}
+			
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 }

@@ -37,4 +37,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Cancelar")
 	String cancel();
 
+	@DefaultStringValue("El documento actual tiene cambios sin guardar. ¿Seguro que quieres cerrarlo?")
+	String exit_without_save();
+
 }

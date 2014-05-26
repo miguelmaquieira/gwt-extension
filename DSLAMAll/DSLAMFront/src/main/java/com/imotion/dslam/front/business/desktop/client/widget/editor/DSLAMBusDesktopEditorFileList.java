@@ -49,6 +49,19 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel {
 		fileListContainer.add(file);
 		file.setData(fileData);
 	}
+	
+	public AEMFTMetadataElementComposite getFileData(String fileId) {
+		AEMFTMetadataElementComposite fileData = null;
+		int fileCount = fileListContainer.getWidgetCount();
+		for (int i = 0; i < fileCount; i++) {
+			DSLAMBusDesktopEditorFileListElement fileWidget = (DSLAMBusDesktopEditorFileListElement) fileListContainer.getWidget(i);
+			if (fileId.equals(fileWidget.getId())) {
+				fileData = fileWidget.getData();
+				break;
+			}
+		}
+		return fileData;
+	}
 
 	/**
 	 * AEGWTCompositePanel

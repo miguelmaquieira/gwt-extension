@@ -1,10 +1,12 @@
 package com.imotion.dslam.backend.persistence.service.file;
 
 import java.util.Date;
+import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class DSLAMBKFilePersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<DSLAMBOIFile, DSLAMBOFile, Long> implements DSLAMBKIFilePersistenceService {
 
@@ -18,12 +20,27 @@ public class DSLAMBKFilePersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	}
 	
 	@Override
-	public DSLAMBOIFile updateFile(Long fileId, String content) {
+	public DSLAMBOIFile updateFileContent(Long fileId, String content) {
 		DSLAMBOFile file = getPersistenceModule().get(fileId);
 		file.setContent(content);
 		file.setSavedTime(new Date());
 		file = getPersistenceModule().update(file);
 		return file;
+	}
+	
+	@Override
+	public DSLAMBOIFile updateFileName(Long fileId, String filename) {
+		DSLAMBOFile file = getPersistenceModule().get(fileId);
+		file.setFilename(filename);
+		file.setSavedTime(new Date());
+		file = getPersistenceModule().update(file);
+		return file;
+	}
+	
+	@Override
+	public List<DSLAMBOIFile> getAllFiles() {
+		List<DSLAMBOFile> fileListJpa = getPersistenceModule().findAll();
+		return AEMFTCommonUtilsBase.castList(fileListJpa);
 	}
 
 	/**

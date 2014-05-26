@@ -153,6 +153,12 @@
 				<SubService Name="ADD_FILE">
 					<Descriptor>addFile</Descriptor>
 				</SubService>
+				<SubService Name="UPDATE_FILE">
+					<Descriptor>updateFile</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_FILES">
+					<Descriptor>getAllFiles</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 	</ServiceList>

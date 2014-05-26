@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.editor;
 
 import java.util.Date;
 
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -44,12 +45,24 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		fileInfo.setModified(modified);
 	}
 	
+	public boolean isModified() {
+		return fileInfo.isModified();
+	}
+	
 	public void setLastSaved(Date date) {
 		fileInfo.setLastSaved(date);
 	}
 	
 	public void setFilename(String fileName) {
 		fileInfo.setFileName(fileName);
+	}
+	
+	public void setFileInfoVisible(boolean visible) {
+		if (visible) {
+			fileInfo.setVisibility(Visibility.VISIBLE);
+		} else {
+			fileInfo.setVisibility(Visibility.HIDDEN);
+		}
 	}
 
 	/**

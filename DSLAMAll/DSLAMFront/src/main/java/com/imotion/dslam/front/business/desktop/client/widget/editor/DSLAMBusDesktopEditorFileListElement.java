@@ -55,6 +55,9 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 		AEGWTLogicalEvent selectedEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 		if (!AEGWTStringUtils.isEmptyString(menuActionId)) {
 			selectedEvent.setSourceWidgetId(menuActionId);
+			selectedEvent.setSourceContainerId(getId());
+		} else {
+			selectedEvent.setSourceWidgetId(getId());
 		}
 		selectedEvent.setEventType(LOGICAL_TYPE.SELECT_EVENT);
 		selectedEvent.addElementAsDataValue(getData());
