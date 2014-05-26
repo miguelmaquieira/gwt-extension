@@ -1,14 +1,10 @@
 package com.imotion.dslam.front.business.desktop.client.widget.editor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.ui.widget.AEGWTComparator;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapSplitButtonDropdown;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -21,7 +17,6 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 	public static final String DELETE_FILE_ID	= "delete";
 	
 	private		static DSLAMBusI18NTexts				TEXTS			= GWT.create(DSLAMBusI18NTexts.class);
-	private		static Map<String, AEGWTComparator>		ascComparators	= new HashMap<String, AEGWTComparator>();
 	
 	private AEMFTMetadataElementComposite filedata; 
 	
@@ -48,7 +43,7 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 	
 	public void setData(AEMFTMetadataElementComposite data) {
 		filedata = data;
-		Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFileDataConstants.FILE_ID	, 	filedata);
+		Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFileDataConstants.FILE_ID		, 	filedata);
 		String	filename	= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME	, 	filedata);
 		
 		setId(String.valueOf(fileId));

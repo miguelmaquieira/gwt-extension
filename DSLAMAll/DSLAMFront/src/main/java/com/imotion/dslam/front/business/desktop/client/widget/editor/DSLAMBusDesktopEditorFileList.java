@@ -64,15 +64,20 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel implement
 		sort(null, false);
 	}
 	
+	public void updateFile(AEMFTMetadataElementComposite fileData) {
+		if (fileData != null) {
+			Long fileId = getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID, fileData);
+			DSLAMBusDesktopEditorFileListElement fileWidget = getFileElementById(String.valueOf(fileId));
+			fileWidget.setData(fileData);
+			sort(null, false);
+		}
+	}
+	
 	public AEMFTMetadataElementComposite getFileData(String fileId) {
 		AEMFTMetadataElementComposite fileData = null;
-		int fileCount = fileListContainer.getWidgetCount();
-		for (int i = 0; i < fileCount; i++) {
-			DSLAMBusDesktopEditorFileListElement fileWidget = (DSLAMBusDesktopEditorFileListElement) fileListContainer.getWidget(i);
-			if (fileId.equals(fileWidget.getId())) {
-				fileData = fileWidget.getData();
-				break;
-			}
+		DSLAMBusDesktopEditorFileListElement fileWidget = getFileElementById(fileId);
+		if (fileWidget != null) {
+			fileData = fileWidget.getData();
 		}
 		return fileData;
 	}
@@ -178,6 +183,19 @@ public class DSLAMBusDesktopEditorFileList extends AEGWTCompositePanel implement
 			widgetList.add(fileWidget);
 		}
 		return widgetList;
+	}
+	
+	private DSLAMBusDesktopEditorFileListElement getFileElementById(String fileId) {
+		DSLAMBusDesktopEditorFileListElement fileWidget = null;
+		int fileCount = fileListContainer.getWidgetCount();
+		for (int i = 0; i < fileCount; i++) {
+			DSLAMBusDesktopEditorFileListElement currentFileWidget = (DSLAMBusDesktopEditorFileListElement) fileListContainer.getWidget(i);
+			if (fileId.equals(currentFileWidget.getId())) {
+				fileWidget = currentFileWidget;
+				break;
+			}
+		}
+		return fileWidget;
 	}
 
 }

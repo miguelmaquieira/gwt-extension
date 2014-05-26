@@ -5,6 +5,7 @@ import java.util.Date;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -75,7 +76,16 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
+		if (data != null) {
+			Long	fileId	 	= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID	, data);
+			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, data);
+			Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, data);
+			
+			setId(String.valueOf(fileId));
+			setLastSaved(lastSaved);
+			setFilename(filename);
+			setModified(false);
+		}
 
 	}
 

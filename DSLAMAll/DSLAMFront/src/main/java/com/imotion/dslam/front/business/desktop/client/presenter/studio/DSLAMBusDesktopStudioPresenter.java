@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.studio;
 
+import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
@@ -40,9 +41,15 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 		if (DSLAMBusDesktopStudioScreenView.NAME.equals(srcWidget)) {
 			AEMFTMetadataElementComposite fileData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				evt.stopPropagation();
 				updateFile(fileData);
 			} else if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
+				evt.stopPropagation();
 				createFile(fileData);
+			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
+				evt.stopPropagation();
+				fileData.addElement(DSLAMBOIFileDataConstants.FILE_ID	, evt.getSourceWidgetId());
+				updateFile(fileData);
 			}
 		}
 	}
@@ -51,7 +58,9 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.SAVE_EVENT.equals(type)
 				||
-				LOGICAL_TYPE.NEW_EVENT.equals(type);
+				LOGICAL_TYPE.NEW_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
 	}
 
 	/**

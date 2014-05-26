@@ -3,8 +3,6 @@ package com.imotion.dslam.front.business.desktop.client.view.studio;
 import java.util.Date;
 import java.util.List;
 
-import org.goda.time.DateTime;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
@@ -16,13 +14,13 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileList;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileActions;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileInfo;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapSplitButtonDropdown;
@@ -123,11 +121,12 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 
 	@Override
 	public void updateFile(AEMFTMetadataElementComposite fileData) {
-		String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, fileData);
-		Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
-		toolbar.setLastSaved(lastSaved);
-		toolbar.setFilename(filename);
-
+		String	fileId		 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_ID	, fileData);
+		String	currentFileId	= toolbar.getId();
+		if (!fileId.equals(currentFileId)) {
+			toolbar.setData(fileData);
+		}
+		fileList.updateFile(fileData);
 	}
 
 	/**
@@ -143,8 +142,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		fileList.postDisplay();
 		newScriptPopup = new DSLAMBusDesktopNewScriptPopupForm(this);
-		//		//TEST
-		//		buildExample();
 	}
 
 	@Override
@@ -169,6 +166,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		LOGICAL_TYPE	type		= evt.getEventType();
 		if (DSLAMBusDesktopEditorToolbarFileActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
+				newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_NEW_FILE);
 				newScriptPopup.center();
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
@@ -180,16 +178,20 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 				closeCurrentFile();
 			}
 		} else if (AEGWTBootstrapSplitButtonDropdown.NAME.equals(srcWidget)) {
-			boolean fileSelected = AEGWTStringUtils.isEmptyString(srcContainerId);
-			String fileId = fileSelected ? srcWidgetId : srcContainerId;
-			if (fileSelected) {
+			boolean openFile = AEGWTStringUtils.isEmptyString(srcContainerId) || DSLAMBusDesktopEditorFileListElement.OPEN_FILE_ID.equals(srcWidgetId);
+			if (openFile) {
+				String fileId = AEGWTStringUtils.isEmptyString(srcContainerId) ? srcWidgetId : srcContainerId;
 				openFile(fileId);
 			} else {
-
+				if (DSLAMBusDesktopEditorFileListElement.RENAME_FILE_ID.equals(srcWidgetId)) {
+					showRenameForm((AEMFTMetadataElementComposite) evt.getElementAsDataValue());
+				} else if (DSLAMBusDesktopEditorFileListElement.DELETE_FILE_ID.equals(srcWidgetId)) {
+					fireDeleteFile(srcContainerId);
+				}
 			}
 		} else if (DSLAMBusDesktopNewScriptPopupForm.NAME.equals(srcWidget)) {
-			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-				fireNewFileEvent(evt);
+			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
+				fireSaveFormDataEvent(evt);
 			}
 		}
 	}
@@ -202,7 +204,9 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 				||
 				LOGICAL_TYPE.CLOSE_EVENT.equals(type)
 				||
-				LOGICAL_TYPE.SELECT_EVENT.equals(type);
+				LOGICAL_TYPE.SELECT_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
 	}
 
 	/************************************************************************
@@ -213,23 +217,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/
-	private void buildExample() {
-		AEMFTMetadataElementCompositeRecordSetListRegroup fileListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getCompositeListRegroup();
-
-		for (int i = 0; i < 20 ; i++) {
-			AEMFTMetadataElementComposite fileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			DateTime fileDate = new DateTime();
-			fileDate = fileDate.minusDays(i);
-
-			getElementController().setElement(DSLAMBOIFileDataConstants.FILE_ID, fileData, "A-" + i);
-			getElementController().setElement(DSLAMBOIFileDataConstants.FILE_NAME, fileData, "file-" + i);
-			getElementController().setElement(DSLAMBOIFileDataConstants.CONTENT, fileData, "sdfsdfsfd \n aakskaskask \n\n scsdcscc -- " + i);
-			getElementController().setElement(DSLAMBOIFileDataConstants.SAVED_TIME, fileData, fileDate.toDate());
-
-			fileListData.addElement(fileData);
-		}
-		fileList.setData(fileListData);
-	}
 
 	private void closeCurrentFile() {
 		toolbar.setFileInfoVisible(false);
@@ -256,6 +243,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			String	content 	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT		, fileData);
 			String	contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE	, fileData);
 			Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
+			toolbar.setId(fileId);
 			toolbar.setLastSaved(lastSaved);
 			toolbar.setFilename(filename);
 			editor.setText(content);
@@ -265,7 +253,8 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		}
 	}
 	
-	private void fireNewFileEvent(AEGWTLogicalEvent saveButtonEvt) {
+	private void fireSaveFormDataEvent(AEGWTLogicalEvent saveButtonEvt) {
+		saveButtonEvt.stopPropagation();
 		String filename		= saveButtonEvt.getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME);
 		AEMFTMetadataElementComposite existentFileData = fileList.getFileDataByName(filename);
 		if (existentFileData != null) {
@@ -277,11 +266,25 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			fileData.addElement(DSLAMBOIFileDataConstants.FILE_NAME		, filename);
 			fileData.addElement(DSLAMBOIFileDataConstants.CONTENT_TYPE	, contentType);
 			
-			AEGWTLogicalEvent saveNewFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
-			saveNewFileEvent.setEventType(LOGICAL_TYPE.NEW_EVENT);
-			saveNewFileEvent.addElementAsDataValue(fileData);
-			getLogicalEventHandlerManager().fireEvent(saveNewFileEvent);
+			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveFileEvent.setEventType(saveButtonEvt.getEventType());
+			saveFileEvent.addElementAsDataValue(fileData);
+			saveFileEvent.setSourceWidgetId(saveButtonEvt.getSourceWidgetId());
+			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
 		}
+	}
+	
+	private void showRenameForm(AEMFTMetadataElementComposite fileData) {
+		newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_RENAME_FILE);
+		newScriptPopup.center();
+		newScriptPopup.setData(fileData);
+	}
+	
+	private void fireDeleteFile(String fileId) {
+		AEGWTLogicalEvent deleteEvent = new AEGWTLogicalEvent(getWindowName(), getName());
+		deleteEvent.setSourceWidgetId(fileId);
+		deleteEvent.setEventType(LOGICAL_TYPE.DELETE_EVENT);
+		getLogicalEventHandlerManager().fireEvent(deleteEvent);
 	}
 
 }

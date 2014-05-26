@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.client.view.studio.DSLAMBusI18NStudioTexts;
@@ -23,6 +24,9 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 	public static final String NAME = "DSLAMBusDesktopNewScriptForm";
+	
+	public static final int MODE_NEW_FILE		= 1;
+	public static final int MODE_RENAME_FILE	= 2;
 
 	private static final DSLAMBusI18NStudioTexts	STUDIO_TEXTS = GWT.create(DSLAMBusI18NStudioTexts.class);
 	private static final DSLAMBusI18NTexts		COMMON_TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -30,6 +34,8 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 	private AEGWTBootstrapDropdownAndLabelTextBox	filenameField;
 	private AEGWTButton								saveButton;
 	private AEGWTButton								cancelButton;
+	
+	private int mode = MODE_NEW_FILE;
 
 	public DSLAMBusDesktopNewScriptPopupForm(AEGWTICompositePanel parent) {
 		super(true, parent);
@@ -67,7 +73,12 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 			@Override
 			public void onClick(ClickEvent event) {
 				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+				if (mode == MODE_NEW_FILE) {
+					evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
+				} else if (mode == MODE_RENAME_FILE) {
+					evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
+				}
+				evt.setSourceWidgetId(getId());
 				evt.addElementAsString(DSLAMBOIFileDataConstants.FILE_NAME		, filenameField.getText());
 				evt.addElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE	, filenameField.getSelectedId());
 				getLogicalEventHandlerManager().fireEvent(evt);
@@ -94,12 +105,25 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 	public void setError(String error) {
 		filenameField.setErrorLabelText(error);
 	}
+	
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
 
 	@Override
 	public void center() {
 		filenameField.setText("");
 		filenameField.setErrorLabelVisible(false);
+		if (mode == MODE_NEW_FILE) {
+			setContentTypeEnabled(true);
+		} else if (mode == MODE_RENAME_FILE) {
+			setContentTypeEnabled(false);
+		} 
 		super.center();
+	}
+	
+	public void setContentTypeEnabled(boolean enabled) {
+		filenameField.setDropdownEnabled(enabled);
 	}
 
 	/**
@@ -113,8 +137,12 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		if (data != null) {
+			Long fileId = getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID		, data);
+			String fileName = getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, data);
+			setId(String.valueOf(fileId));
+			filenameField.setText(fileName);
+		}
 	}
 
 }
