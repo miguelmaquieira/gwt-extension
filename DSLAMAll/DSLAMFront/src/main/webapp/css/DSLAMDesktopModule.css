@@ -53,7 +53,7 @@
 	border-width: 0px;
 }
 
-.dslam_studio-filelist-zone {
+.dslam_studio-list-zone {
 	padding-right: 0px;
 }
 
@@ -74,7 +74,11 @@
 	border: 1px solid #CCCCCC;
 }
 
+<<<<<<< HEAD
 .dslam_studio-list-container-zone {
+=======
+.dslam_studio-container-zone {
+>>>>>>> refs/remotes/origin/Issue_0300
 	width:100%;
 }
 
@@ -96,7 +100,8 @@
 	border-right-width: 0px;
 }
 
-.dslam_studio-list-element .dropdown-toggle:HOVER, .dslam_studio-filelist-element .dropdown-toggle:ACTIVE, .dslam_studio-filelist-element .dropdown-toggle:FOCUS {
+
+.dslam_studio-list-element .dropdown-toggle:HOVER, .dslam_studio-filelist-element .dropdown-toggle:ACTIVE, .dslam_studio-list-element .dropdown-toggle:FOCUS {
 	z-index: 0;
 }
 
@@ -281,5 +286,4 @@
     width: 500px;
     padding-bottom: 20px;
     padding-top: 20px;
-}
 }

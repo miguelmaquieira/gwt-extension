@@ -116,8 +116,10 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 		filenameField.setErrorLabelVisible(false);
 		if (mode == MODE_NEW_FILE) {
 			setContentTypeEnabled(true);
+			saveButton.setText(COMMON_TEXTS.create());
 		} else if (mode == MODE_RENAME_FILE) {
 			setContentTypeEnabled(false);
+			saveButton.setText(COMMON_TEXTS.rename());
 		} 
 		super.center();
 	}
