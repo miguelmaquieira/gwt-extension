@@ -33,13 +33,13 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 	public DSLAMBusDesktopEditorToolbarFileInfo() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_INFO);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO);
 
 		//FILENAME
 		SimplePanel fileNameZone = new SimplePanel();
 		root.add(fileNameZone);
 		fileNameZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
-		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_INFO_FILE_NAME_ZONE);
+		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_FILE_NAME_ZONE);
 
 		fileNameLabel = new AEGWTLabel();
 		fileNameZone.add(fileNameLabel);
@@ -48,7 +48,7 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 		SimplePanel lastSavedZone = new SimplePanel();
 		root.add(lastSavedZone);
 		lastSavedZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
-		lastSavedZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_INFO_LAST_SAVED_ZONE);
+		lastSavedZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_LAST_SAVED_ZONE);
 
 		lastSavedLabel = new AEGWTLabel();
 		lastSavedZone.add(lastSavedLabel);
@@ -57,7 +57,7 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 		SimplePanel closeZone = new SimplePanel();
 		root.add(closeZone);
 		closeZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		closeZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_INFO_CLOSE_ZONE);
+		closeZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_CLOSE_ZONE);
 
 		AEGWTBootstrapGlyphiconButton closeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, texts.exit());
 		closeZone.add(closeButton);

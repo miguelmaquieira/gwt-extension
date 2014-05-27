@@ -26,7 +26,7 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 	public DSLAMBusDesktopEditorToolbarFileActions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_FILE_ACTIONS);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);
 
 		//NEW
 		SimplePanel newButtonZone = new SimplePanel();

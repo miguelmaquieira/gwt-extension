@@ -35,6 +35,10 @@ public class DSLAMBusDesktopProcessConfigure extends DSLAMBusDesktopPanelBaseVie
 		nodeZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 	}
 	
+	public void postDisplay() {
+		super.postDisplay();
+	}
+	
 	@Override
 	public String getName() {
 		return NAME;

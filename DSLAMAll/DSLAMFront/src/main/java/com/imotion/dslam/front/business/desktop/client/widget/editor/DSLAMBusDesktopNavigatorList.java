@@ -27,8 +27,9 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	private FlowPanel listContainerZone;
-	private FlowPanel listContainer;
+	private FlowPanel elementListContainerZone;
+	private FlowPanel elementListContainer;
+	
 
 	private AEGWTComparator nameComparatorAsc;
 
@@ -46,20 +47,20 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 		headerZone.add(headerLabel);
 		
 		//Container
-		listContainerZone = new FlowPanel();
-		root.add(listContainerZone);
-		listContainerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER_ZONE);
+		elementListContainerZone = new FlowPanel();
+		root.add(elementListContainerZone);
+		elementListContainerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER_ZONE);
 		
-		listContainer = new FlowPanel();
-		listContainerZone.add(listContainer);
-		listContainer.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER);
+		elementListContainer = new FlowPanel();
+		elementListContainerZone.add(elementListContainer);
+		elementListContainer.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER);
 		
 		initComparators();
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
 		DSLAMBusDesktopNavigatorListElement element = new DSLAMBusDesktopNavigatorListElement();
-		listContainer.add(element);
+		elementListContainer.add(element);
 		element.setData(elementData);
 		sort(null, false);
 	}
@@ -84,9 +85,9 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	
 	public AEMFTMetadataElementComposite getElementDataByName(String elementName) {
 		AEMFTMetadataElementComposite elementData = null;
-		int elementCount = listContainer.getWidgetCount();
+		int elementCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < elementCount; i++) {
-			DSLAMBusDesktopNavigatorListElement elementWidget = (DSLAMBusDesktopNavigatorListElement) listContainer.getWidget(i);
+			DSLAMBusDesktopNavigatorListElement elementWidget = (DSLAMBusDesktopNavigatorListElement) elementListContainer.getWidget(i);
 			elementData = elementWidget.getData();
 			String currentFileName = getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, elementData);
 			if (elementName.equals(currentFileName)) {
@@ -110,7 +111,7 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			listContainer.clear();
+			elementListContainer.clear();
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
 				addElement((AEMFTMetadataElementComposite) elementData);
@@ -122,7 +123,7 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	public void postDisplay() {
 		super.postDisplay();
 		setHeightToDecrease(80);
-		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, listContainerZone, getCurrentHeight());
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, elementListContainerZone, getCurrentHeight());
 	}
 
 	/**
@@ -145,9 +146,9 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 		List<DSLAMBusDesktopNavigatorListElement> widgetList = getElementWidgetList();
 		if (widgetList != null && widgetList.size() > 0) {
 			Collections.sort(widgetList, getComparator(null, false));
-			listContainer.clear();
+			elementListContainer.clear();
 			for (DSLAMBusDesktopNavigatorListElement item : widgetList) {
-				listContainer.add(item);
+				elementListContainer.add(item);
 			}
 		}
 	}
@@ -178,8 +179,8 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	 */
 	private List<DSLAMBusDesktopNavigatorListElement> getElementWidgetList() {
 		List<DSLAMBusDesktopNavigatorListElement> widgetList = new ArrayList<>();
-		for (int i = 0; i < listContainer.getWidgetCount(); i++) {
-			DSLAMBusDesktopNavigatorListElement elementWidget = (DSLAMBusDesktopNavigatorListElement) listContainer.getWidget(i);
+		for (int i = 0; i < elementListContainer.getWidgetCount(); i++) {
+			DSLAMBusDesktopNavigatorListElement elementWidget = (DSLAMBusDesktopNavigatorListElement) elementListContainer.getWidget(i);
 			widgetList.add(elementWidget);
 		}
 		return widgetList;
@@ -187,9 +188,9 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	
 	private DSLAMBusDesktopNavigatorListElement getElementById(String elementId) {
 		DSLAMBusDesktopNavigatorListElement elementWidget = null;
-		int fileCount = listContainer.getWidgetCount();
+		int fileCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < fileCount; i++) {
-			DSLAMBusDesktopNavigatorListElement currentElementWidget = (DSLAMBusDesktopNavigatorListElement) listContainer.getWidget(i);
+			DSLAMBusDesktopNavigatorListElement currentElementWidget = (DSLAMBusDesktopNavigatorListElement) elementListContainer.getWidget(i);
 			if (elementId.equals(currentElementWidget.getId())) {
 				elementWidget = currentElementWidget;
 				break;

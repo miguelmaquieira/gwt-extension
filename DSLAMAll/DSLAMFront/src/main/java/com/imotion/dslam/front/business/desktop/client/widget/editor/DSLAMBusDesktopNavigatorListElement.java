@@ -22,7 +22,7 @@ public class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrapSplitButt
 	
 	public DSLAMBusDesktopNavigatorListElement() {
 		super(null, "");
-		addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ELEMENT);
+		addStyleName(DSLAMBusDesktopIStyleConstants.LIST_ELEMENT);
 		addMenuElement(OPEN_ID,	TEXTS.open());
 		addMenuElement(RENAME_ID,	TEXTS.rename());
 		addSeparator();
