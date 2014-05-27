@@ -5,7 +5,7 @@ import java.util.Date;
 import org.goda.time.DateTime;
 
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIFileConstants;
+import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
@@ -105,10 +105,10 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			DateTime fileDate = new DateTime();
 			fileDate = fileDate.minusDays(i);
 
-			getElementController().setElement(DSLAMBOIFileConstants.ID, fileData, "A-" + i);
-			getElementController().setElement(DSLAMBOIFileConstants.FILE_NAME, fileData, "file-" + i);
-			getElementController().setElement(DSLAMBOIFileConstants.CONTENT, fileData, "sdfsdfsfd \n aakskaskask \n\n scsdcscc -- " + i);
-			getElementController().setElement(DSLAMBOIFileConstants.LAST_SAVED, fileData, fileDate.toDate());
+			getElementController().setElement(DSLAMBOIFileDataConstants.FILE_ID, fileData, "A-" + i);
+			getElementController().setElement(DSLAMBOIFileDataConstants.FILE_NAME, fileData, "file-" + i);
+			getElementController().setElement(DSLAMBOIFileDataConstants.CONTENT, fileData, "sdfsdfsfd \n aakskaskask \n\n scsdcscc -- " + i);
+			getElementController().setElement(DSLAMBOIFileDataConstants.SAVED_TIME, fileData, fileDate.toDate());
 
 			fileListData.addElement(fileData);
 		}

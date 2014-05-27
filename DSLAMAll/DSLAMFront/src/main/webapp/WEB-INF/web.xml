@@ -47,17 +47,16 @@
 
 	<!-- Server Connection -->
 	<!-- GWT-RPC -->
+		<servlet>
+			<servlet-name>serverConnectionRPC</servlet-name>
+			<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTCommServerServletRPC</servlet-class>
+			<load-on-startup>0</load-on-startup>
+		</servlet>
+	
 		<servlet-mapping>
 			<servlet-name>serverConnectionRPC</servlet-name>
 			<url-pattern>/dslamBusDesktop/serverConnectionRPC</url-pattern>
 		</servlet-mapping>
-	
-		<servlet>
-			<servlet-name>serverConnectionRPC</servlet-name>
-			<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTCommServerServletRPC
-			</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>
 		
 		<!-- Generic-GWT -->
 		<!-- <servlet-mapping> -->
@@ -72,18 +71,18 @@
 		<!-- <load-on-startup>0</load-on-startup> -->
 		<!-- </servlet> -->
 		
-		<!--  Generic-J2EE -->	
-		<servlet-mapping>
-			<servlet-name>genericServerConnectionJ2EE</servlet-name>
-			<url-pattern>/dslamBusDesktop/genericServerConnectionJ2EE</url-pattern>
-		</servlet-mapping>
-	
-		<servlet>
-			<servlet-name>genericServerConnectionJ2EE</servlet-name>
-			<servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletJ2EE
-			</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>	
+		<!--  Generic-J2EE -->
+	<!-- <servlet> -->
+	<!-- <servlet-name>genericServerConnectionJ2EE</servlet-name> -->
+	<!-- <servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletJ2EE -->
+	<!-- </servlet-class> -->
+	<!-- <load-on-startup>0</load-on-startup> -->
+	<!-- </servlet> -->
+
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>genericServerConnectionJ2EE</servlet-name> -->
+	<!-- <url-pattern>/dslamBusDesktop/genericServerConnectionJ2EE</url-pattern> -->
+	<!-- </servlet-mapping> -->
 
 	<!-- remote logging for client side (gwt) -->
 <!-- 	<servlet> -->
@@ -109,17 +108,17 @@
 <!-- 	</servlet> -->
 	
 	<!-- GAE REMOTE API -->
-	<servlet>
-		<display-name>Remote API Servlet</display-name>
-		<servlet-name>RemoteApiServlet</servlet-name>
-		<servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet
-		</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RemoteApiServlet</servlet-name>
-		<url-pattern>/remote_api</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet> -->
+<!-- 		<display-name>Remote API Servlet</display-name> -->
+<!-- 		<servlet-name>RemoteApiServlet</servlet-name> -->
+<!-- 		<servlet-class>com.google.apphosting.utils.remoteapi.RemoteApiServlet -->
+<!-- 		</servlet-class> -->
+<!-- 		<load-on-startup>1</load-on-startup> -->
+<!-- 	</servlet> -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>RemoteApiServlet</servlet-name> -->
+<!-- 		<url-pattern>/remote_api</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 	
 	<!-- CRON JOBS -->
 <!-- 	<servlet> -->
@@ -143,14 +142,14 @@
 <!-- 	</security-constraint> -->
 	
 	<!-- Objectify -->
-	<filter>
-		<filter-name>ObjectifyFilter</filter-name>
-		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>ObjectifyFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+<!-- 	<filter> -->
+<!-- 		<filter-name>ObjectifyFilter</filter-name> -->
+<!-- 		<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>ObjectifyFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
 	
 	<!-- Default page to serve -->
 	<welcome-file-list>

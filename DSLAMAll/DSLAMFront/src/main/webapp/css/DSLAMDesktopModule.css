@@ -63,6 +63,7 @@
 
 .dslam_studio-filelist {
 	height: 100%;
+	position: relative;
 }
 
 .dslam_studio-filelist-header {
@@ -74,6 +75,7 @@
 }
 
 .dslam_studio-filelist-container-zone {
+	width:100%;
 }
 
 .dslam_studio-filelist-element {
@@ -114,6 +116,7 @@
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #888888;
+	width: 380px;
 }
 
 .dslam_studio-processConfigureOptionsVariablesHeader {

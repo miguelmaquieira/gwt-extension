@@ -1,6 +1,8 @@
 package com.imotion.dslam.business.service;
 
+import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
+import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.bus.service.impl.AEMFTBusinessServiceBaseImpl;
 import com.selene.arch.exe.bus.tagsearch.persistence.AEMFTTagIndexPersistence;
 
@@ -8,7 +10,7 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 
 	private static final long serialVersionUID = -8777397730307974465L;
 	
-//	private DSLAMBKITransitDataPersistenceService 			dslamDataPersistence;
+	private DSLAMBKIFilePersistenceService	filePersistence;
 
 	@Override
 	public String getName() {
@@ -21,21 +23,31 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 	}
 
 	//PERSISTENCE SERVICES
+	protected DSLAMBKIFilePersistenceService getFilePersistence() {
+		if (filePersistence == null) {
+			filePersistence =  getPersistence().getAppFactoryPersistence().newFilePersistence();
+		}
+		return filePersistence;
+	}
+	
+	/******************************************************************
+	 * 					      AEMFTIFactorable                        *
+	 ******************************************************************/
 
-//	protected DSLAMBKITransitDataPersistenceService getTransitDataPersistence() {
-//		if (dslamDataPersistence == null) {
-//			dslamDataPersistence =  getPersistence().getAppFactoryPersistence().newTransitDataPersistence();
-//		}
-//		return dslamDataPersistence;
-//	}
-	
-	
 	@Override
-	protected AEMFTTagIndexPersistence getTagIndexPersistence() {
-		// TODO Auto-generated method stub
-		return null;
+	public void initialize(Object[] args) {
+		super.initialize(args);
 	}
 
+	@Override
+	public void releaseInstance() {
+		super.releaseInstance();
+		if (filePersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) filePersistence);
+			filePersistence = null;
+		}
+	}
+	
 	/********************************************************************
 	 * 								TRACES								*
 	 ********************************************************************/
@@ -199,27 +211,14 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 				params);
 	}
 
-	/******************************************************************
-	 * 					      AEMFTIFactorable                        *
-	 ******************************************************************/
-
-	@Override
-	public void initialize(Object[] args) {
-		super.initialize(args);
-	}
-
-	@Override
-	public void releaseInstance() {
-		super.releaseInstance();
-//		if (dslamDataPersistence != null) {
-//			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) dslamDataPersistence);
-//			dslamDataPersistence = null;
-//		}
-	}
-
 	/********************************************************************
 	 * 				      PROTECTED FUNCTIONS    						*
 	 ********************************************************************/
 
+	@Override
+	protected AEMFTTagIndexPersistence getTagIndexPersistence() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
