@@ -16,6 +16,7 @@
 		<link type="text/css" rel="stylesheet" href="css/BusinessDesktopModule.css">
 		<link type="text/css" rel="stylesheet" href="css/DSLAMCommonModule.css">
 		<link type="text/css" rel="stylesheet" href="css/DSLAMDesktopModule.css">
+		<link type="text/css" rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />

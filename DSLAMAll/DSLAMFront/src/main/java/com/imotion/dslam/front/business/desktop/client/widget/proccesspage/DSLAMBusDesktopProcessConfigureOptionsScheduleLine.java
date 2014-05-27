@@ -7,7 +7,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
 public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCompositePanel  {
@@ -15,8 +15,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 	public 		static final String 		NAME 	= "DSLAMBusDesktopProcessConfigureOptionsScheduleLine";
 	
 	
-	private AEGWTBootstrapFormFieldTextBox	dateTimeBox;
-	private AEGWTButton 					deleteButton;
+	private AEGWTBootstrapDateTimePickerTextBox		dateTimeBox;
+	private AEGWTButton 							deleteButton;
 
 	public DSLAMBusDesktopProcessConfigureOptionsScheduleLine(AEMFTMetadataElement date) {
 		FlowPanel root = new FlowPanel();
@@ -37,7 +37,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 			}
 		});
 		
-		dateTimeBox 	= new AEGWTBootstrapFormFieldTextBox();
+		dateTimeBox 	= new AEGWTBootstrapDateTimePickerTextBox(null);
 		
 		
 		FlowPanel deleteZone = new FlowPanel();
