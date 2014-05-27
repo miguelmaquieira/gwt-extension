@@ -2,11 +2,13 @@ package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
@@ -15,9 +17,9 @@ public class DSLAMBusDesktopConnectionToolbar extends AEGWTCompositePanel {
 	public static final String NAME = "DSLAMBusDesktopConnectionToolbar";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	private AEGWTBootstrapFormFieldTextBox serverTextBox;
-	private AEGWTBootstrapFormFieldTextBox userTextBox;
-	private AEGWTBootstrapFormFieldTextBox passwordTextBox;
+	private AEGWTBootstrapDropdownAndLabelTextBox 	serverTextBox ;
+	private AEGWTBootstrapFormFieldTextBox 			userTextBox;
+	private AEGWTBootstrapFormFieldTextBox 			passwordTextBox;
 	
 	public DSLAMBusDesktopConnectionToolbar() {
 		FlowPanel root = new FlowPanel();
@@ -34,17 +36,20 @@ public class DSLAMBusDesktopConnectionToolbar extends AEGWTCompositePanel {
 		serverLabel.addStyleName(DSLAMBusDesktopIStyleConstants.SERVER_LABEL);
 		conectionZone.add(serverLabel);
 		
-		serverTextBox = new AEGWTBootstrapFormFieldTextBox();
-		serverTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+		serverTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(TEXTS.ip());
+		serverTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		serverTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.SERVER_TEXTBOX);
 		conectionZone.add(serverTextBox);
+		
+		serverTextBox.addElement(DSLAMBOIVariablesDataConstants.PROTOCOL_ID, TEXTS.protocol1());
+		serverTextBox.addElement(DSLAMBOIVariablesDataConstants.PROTOCOL_ID, TEXTS.protocol2());
 		
 		AEGWTLabel userLabel = new AEGWTLabel(TEXTS.user());
 		userLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 		userLabel.addStyleName(DSLAMBusDesktopIStyleConstants.USER_LABEL);
 		conectionZone.add(userLabel);
 		
-		userTextBox = new AEGWTBootstrapFormFieldTextBox();
+		userTextBox = new AEGWTBootstrapFormFieldTextBox("",TEXTS.user_placeholder());
 		userTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		userTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.USER_TEXTBOX);
 		conectionZone.add(userTextBox);
@@ -54,7 +59,7 @@ public class DSLAMBusDesktopConnectionToolbar extends AEGWTCompositePanel {
 		passwordLabel.addStyleName(DSLAMBusDesktopIStyleConstants.PASSWORD_LABEL);
 		conectionZone.add(passwordLabel);
 		
-		passwordTextBox = new AEGWTBootstrapFormFieldTextBox();
+		passwordTextBox = new AEGWTBootstrapFormFieldTextBox("",TEXTS.password_placeholder());
 		passwordTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		passwordTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.PASSWORD_TEXTBOX);
 		conectionZone.add(passwordTextBox);

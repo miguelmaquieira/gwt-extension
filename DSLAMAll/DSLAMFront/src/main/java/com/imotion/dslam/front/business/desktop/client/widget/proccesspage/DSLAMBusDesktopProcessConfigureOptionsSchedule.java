@@ -1,6 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -39,7 +41,40 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends DSLAMBusDesk
 		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		headerZone.add(addDateTimeButton);
 		
+		addDateTimeButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				addDateTimeBox();
+			}
+		});	
+		
 	}
+	
+	public void addDateTimeBox() {
+		
+		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
+		root.add(line);
+//		AEGWTButton deleteButton = new AEGWTButton();
+//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN);
+//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN_DANGER);
+//		deleteButton.setHTML(AEGWTIBoostrapConstants.SPAN_GLYPHICON_MINUS);
+//
+//		deleteButton.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				remove();
+//			}
+//		});
+//		AEGWTBootstrapFormFieldTextBox dateTimeBox = new AEGWTBootstrapFormFieldTextBox();
+//		root.add(dateTimeBox);
+//		
+	}
+//	
+//	public void remove() {
+//		this.re
+//	}
 	
 	@Override
 	public String getName() {

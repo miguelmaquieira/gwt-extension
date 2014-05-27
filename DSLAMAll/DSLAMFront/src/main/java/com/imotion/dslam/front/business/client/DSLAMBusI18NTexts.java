@@ -58,6 +58,12 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Contraseña: ")
 	String password();
 	
+	@DefaultStringValue("Usuario")
+	String user_placeholder();
+	
+	@DefaultStringValue("Contraseña")
+	String password_placeholder();
+	
 	@DefaultStringValue("Nodos")
 	String nodes();
 	
@@ -75,5 +81,17 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
+	
+	@DefaultStringValue("Protocolo1")
+	String protocol1();
+
+	@DefaultStringValue("Protocolo2")
+	String protocol2();
+	
+	@DefaultStringValue("Dirección Ip")
+	String ip();
+	
+	@DefaultStringValue("Campo vacío")
+	String empty_textbox();
 
 }

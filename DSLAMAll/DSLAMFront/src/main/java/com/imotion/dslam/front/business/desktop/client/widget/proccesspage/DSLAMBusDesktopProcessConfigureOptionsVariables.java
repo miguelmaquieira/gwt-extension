@@ -13,8 +13,11 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureOptionsVariables extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopProcessPageDisplay {
+public class DSLAMBusDesktopProcessConfigureOptionsVariables extends DSLAMBusDesktopPanelBaseView implements AEGWTHasLogicalEventHandlers, DSLAMBusDesktopProcessPageDisplay {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsVariables";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -67,17 +70,45 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends DSLAMBusDes
 	}
 	
 	/**
+	 * AEGWTICompositePanel
+	 */
+	
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+	
+	}
+	
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		AEMFTMetadataElementComposite data =  (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+		variableList.setData(data);
+		
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type);
+	}
+	
+	/**
 	 * PRIVATE
 	 */
 	private AEGWTPopup getPartPopup() {
 		if (popup == null || variableForm == null) {
 			popup = new AEGWTPopup(true);
+			//popup.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_ADD_VARIABLES);
 			variableForm	= new DSLAMBusDesktopProcessConfigureOptionsVariablesForm();
 			popup.setContentWidget(variableForm);
-			//variableForm.postDisplay();
 		}
 		variableForm.resetForm();
 			
 		return popup;
 	}
+
 }

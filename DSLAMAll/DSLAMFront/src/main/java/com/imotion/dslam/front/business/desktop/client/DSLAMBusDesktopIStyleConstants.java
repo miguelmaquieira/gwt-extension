@@ -25,12 +25,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PASSWORD_TEXTBOX								= APP_ID_PREFFIX 			+ "password-textbox"; //dslam_studio-password-textbox
 	
 	//FILE LIST
-	String FILE_LIST									= APP_ID_PREFFIX 			+ "filelist";		//dslam_studio-filelist
-	String FILE_LIST_CONTAINER							= FILE_LIST		 			+ "-container";		//dslam_studio-filelist-container
-	String FILE_LIST_CONTAINER_ZONE 					= FILE_LIST_CONTAINER		+ "-zone";			//dslam_studio-filelist-container-zone
-	String FILE_LIST_HEADER 							= FILE_LIST					+ "-header";		//dslam_studio-filelist-header
-	String FILE_LIST_ELEMENT 							= FILE_LIST					+ "-element";		//dslam_studio-filelist-element
-	String FILE_LIST_ZONE 								= FILE_LIST					+ "-zone";			//dslam_studio-filelist-zone
+	String LIST											= APP_ID_PREFFIX 		+ "list";		//dslam_studio-list
+	String LIST_CONTAINER								= LIST		 			+ "-container";	//dslam_studio-list-container
+	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";		//dslam_studio-list-container-zone
+	String LIST_HEADER 									= LIST					+ "-header";	//dslam_studio-list-header
+	String FILE_LIST_ELEMENT 							= LIST					+ "-element";	//dslam_studio-filelist-element
+	String FILE_LIST_ZONE 								= LIST					+ "-zone";		//dslam_studio-filelist-zone
 
 	//PROCESS LIST
 	String PROCESS_LIST									= APP_ID_PREFFIX 			+ "processlist";	//dslam_studio-processlist

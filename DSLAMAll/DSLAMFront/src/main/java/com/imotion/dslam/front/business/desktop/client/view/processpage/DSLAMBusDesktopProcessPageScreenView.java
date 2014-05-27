@@ -9,7 +9,7 @@ import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileList;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopConnectionToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessConfigure;
@@ -25,7 +25,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	private FlowPanel 							root;
 	private DSLAMBusDesktopToolbar				toolbar;
 	private DSLAMBusDesktopConnectionToolbar	connectionToolbar;
-	private DSLAMBusDesktopEditorFileList		processList;
+	private DSLAMBusDesktopNavigatorList		processList;
 	private DSLAMBusDesktopProcessConfigure		processOptions;
 	
 	public DSLAMBusDesktopProcessPageScreenView() {
@@ -56,7 +56,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		processListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		processListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_LIST_ZONE);
 
-		processList = new DSLAMBusDesktopEditorFileList();
+		processList = new DSLAMBusDesktopNavigatorList();
 		processListZone.add(processList);
 
 		//Bottom Zone - Process configure zone

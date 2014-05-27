@@ -13,10 +13,10 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileList;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileActions;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileInfo;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorList;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -43,7 +43,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 
 	private FlowPanel 							root;
 	private DSLAMBusDesktopToolbar				toolbar;
-	private DSLAMBusDesktopEditorFileList		fileList;
+	private DSLAMBusDesktopNavigatorList		fileList;
 	private AceEditor							editor;
 	private DSLAMBusDesktopNewScriptPopupForm	newScriptPopup;
 
@@ -72,7 +72,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ZONE);
 
-		fileList = new DSLAMBusDesktopEditorFileList();
+		fileList = new DSLAMBusDesktopNavigatorList();
 		fileListZone.add(fileList);
 
 		//Bottom Zone - Editor zone
@@ -111,7 +111,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	@Override
 	public void addFile(AEMFTMetadataElementComposite fileData) {
 		newScriptPopup.hide();
-		fileList.addFile(fileData);
+		fileList.addElement(fileData);
 
 		String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, fileData);
 		Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
@@ -126,7 +126,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		if (!fileId.equals(currentFileId)) {
 			toolbar.setData(fileData);
 		}
-		fileList.updateFile(fileData);
+		fileList.updateElement(fileData);
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		if (data != null) {
 			List<AEMFTMetadataElement> fileDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement fileData : fileDataList) {
-				fileList.addFile((AEMFTMetadataElementComposite) fileData);
+				fileList.addElement((AEMFTMetadataElementComposite) fileData);
 			}
 		}
 	}
@@ -178,14 +178,14 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 				closeCurrentFile();
 			}
 		} else if (AEGWTBootstrapSplitButtonDropdown.NAME.equals(srcWidget)) {
-			boolean openFile = AEGWTStringUtils.isEmptyString(srcContainerId) || DSLAMBusDesktopEditorFileListElement.OPEN_FILE_ID.equals(srcWidgetId);
+			boolean openFile = AEGWTStringUtils.isEmptyString(srcContainerId) || DSLAMBusDesktopNavigatorListElement.OPEN_ID.equals(srcWidgetId);
 			if (openFile) {
 				String fileId = AEGWTStringUtils.isEmptyString(srcContainerId) ? srcWidgetId : srcContainerId;
 				openFile(fileId);
 			} else {
-				if (DSLAMBusDesktopEditorFileListElement.RENAME_FILE_ID.equals(srcWidgetId)) {
+				if (DSLAMBusDesktopNavigatorListElement.RENAME_ID.equals(srcWidgetId)) {
 					showRenameForm((AEMFTMetadataElementComposite) evt.getElementAsDataValue());
-				} else if (DSLAMBusDesktopEditorFileListElement.DELETE_FILE_ID.equals(srcWidgetId)) {
+				} else if (DSLAMBusDesktopNavigatorListElement.DELETE_ID.equals(srcWidgetId)) {
 					fireDeleteFile(srcContainerId);
 				}
 			}
@@ -238,7 +238,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private void openFile(String fileId) {
 		if (!toolbar.isModified() || (toolbar.isModified() && Window.confirm(TEXTS.exit_without_save())) ) {
 			closeCurrentFile();
-			AEMFTMetadataElementComposite fileData = fileList.getFileData(fileId);
+			AEMFTMetadataElementComposite fileData = fileList.getElementData(fileId);
 			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME		, fileData);
 			String	content 	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT		, fileData);
 			String	contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE	, fileData);
@@ -256,7 +256,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private void fireSaveFormDataEvent(AEGWTLogicalEvent saveButtonEvt) {
 		saveButtonEvt.stopPropagation();
 		String filename		= saveButtonEvt.getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME);
-		AEMFTMetadataElementComposite existentFileData = fileList.getFileDataByName(filename);
+		AEMFTMetadataElementComposite existentFileData = fileList.getElementDataByName(filename);
 		if (existentFileData != null) {
 			newScriptPopup.setError(TEXTS.filename_exists());
 		} else {

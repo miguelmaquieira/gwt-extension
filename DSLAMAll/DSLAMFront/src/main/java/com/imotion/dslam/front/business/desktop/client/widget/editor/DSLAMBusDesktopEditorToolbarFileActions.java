@@ -16,7 +16,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopEditorToolbar";
+	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileActions";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 

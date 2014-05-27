@@ -218,7 +218,7 @@
 }
 
 .dslam_studio-server-label {
-	margin-top: 15px;
+	margin-top: 17px;
 }
 
 .dslam_studio-user-textbox {
@@ -227,7 +227,7 @@
 }
 
 .dslam_studio-user-label {
-	margin-top: 15px;
+	margin-top: 17px;
 }
 
 .dslam_studio-password-textbox {
@@ -236,7 +236,7 @@
 }
 
 .dslam_studio-password-label {
-	margin-top: 15px;
+	margin-top: 17px;
 }
 
 .dslam_studio-toolbar-connection-zone > .form-group {
@@ -278,5 +278,9 @@
 }
 
 .dslam_studio-processConfigureOptionsVariablesFormContainer {
-	background-color: grey;
+	background-color: darkgray;
+    width: 500px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
 }

@@ -32,12 +32,12 @@ public class DSLAMBusDesktopProcessConfigureOptions extends DSLAMBusDesktopPanel
 		varListZone = new DSLAMBusDesktopProcessConfigureOptionsVariables();
 		root.add(varListZone);
 		varListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_VARIABLES_ZONE);
-		varListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		varListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
 
 		scheduleZone = new DSLAMBusDesktopProcessConfigureOptionsSchedule();
 		root.add(scheduleZone);
 		scheduleZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_ZONE);
-		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
 	}
 
 	@Override

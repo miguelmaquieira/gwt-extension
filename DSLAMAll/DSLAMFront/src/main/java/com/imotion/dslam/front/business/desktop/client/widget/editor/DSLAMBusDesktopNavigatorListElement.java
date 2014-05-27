@@ -10,30 +10,30 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitButtonDropdown  {
+public class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrapSplitButtonDropdown  {
 
-	public static final String OPEN_FILE_ID	= "open";
-	public static final String RENAME_FILE_ID	= "rename";
-	public static final String DELETE_FILE_ID	= "delete";
+	public static final String OPEN_ID	= "open";
+	public static final String RENAME_ID	= "rename";
+	public static final String DELETE_ID	= "delete";
 	
 	private		static DSLAMBusI18NTexts				TEXTS			= GWT.create(DSLAMBusI18NTexts.class);
 	
-	private AEMFTMetadataElementComposite filedata; 
+	private AEMFTMetadataElementComposite dataElement; 
 	
-	public DSLAMBusDesktopEditorFileListElement() {
+	public DSLAMBusDesktopNavigatorListElement() {
 		super(null, "");
 		addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ELEMENT);
-		addMenuElement(OPEN_FILE_ID,	TEXTS.open());
-		addMenuElement(RENAME_FILE_ID,	TEXTS.rename());
+		addMenuElement(OPEN_ID,	TEXTS.open());
+		addMenuElement(RENAME_ID,	TEXTS.rename());
 		addSeparator();
-		addMenuElement(DELETE_FILE_ID,	TEXTS.delete());
+		addMenuElement(DELETE_ID,	TEXTS.delete());
 	}
 
 	public AEMFTMetadataElementComposite getData() {
-		return filedata;
+		return dataElement;
 	}
 	
-	public String getFilename() {
+	public String getElementName() {
 		return getActionText();
 	}
 	
@@ -42,9 +42,9 @@ public class DSLAMBusDesktopEditorFileListElement extends AEGWTBootstrapSplitBut
 	 */
 	
 	public void setData(AEMFTMetadataElementComposite data) {
-		filedata = data;
-		Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFileDataConstants.FILE_ID		, 	filedata);
-		String	filename	= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME	, 	filedata);
+		dataElement = data;
+		Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFileDataConstants.FILE_ID		, 	dataElement);
+		String	filename	= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME	, 	dataElement);
 		
 		setId(String.valueOf(fileId));
 		setActionText(filename);

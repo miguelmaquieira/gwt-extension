@@ -4,5 +4,6 @@ public interface DSLAMBOIVariablesDataConstants {
 	
 	public String VARIABLE_ID 		= "Variable";
 	public String VARIABLE_VALUE 	= "Valor";
+	public String PROTOCOL_ID		= "Protocolo";
 
 }

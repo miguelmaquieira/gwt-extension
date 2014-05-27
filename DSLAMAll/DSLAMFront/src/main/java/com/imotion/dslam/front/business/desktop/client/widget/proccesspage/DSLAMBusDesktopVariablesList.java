@@ -1,5 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.GWT;
 import com.imotion.dslam.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
@@ -25,6 +28,16 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
+		String variable = getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data);
+		String valor 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, data);
+	
+		Map<String,String> variableRow = new HashMap<String, String>();
+		variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
+		variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
+		
+		String key = data.getKey();
+		
+		addRowItem(variableRow, key, true, true);
 	}
 
 	/*
