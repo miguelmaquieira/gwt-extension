@@ -72,6 +72,17 @@ public class ExtGWTWMCSAtmosphere implements ExtGWTWMCommCS {
 		}
 	}
 	
+	@Override
+	public void releaseCloseConnection(ExtGWTWMCommCSConnection connection) {
+		if (connection != null) {
+			String connectionKey = connection.getSessionData().getRoomId() + "_" + connection.getSessionData().getUserId();
+			Map<String, ExtGWTWMCommCSConnection> connectionMap = getConnectionsMap();
+			connectionMap.remove(connectionKey);
+			connection.release();
+			connection = null;
+		}
+	}
+	
 	
 	/**********************************************************************
 	 *                        PROTECTED FUNCTIONS						  *

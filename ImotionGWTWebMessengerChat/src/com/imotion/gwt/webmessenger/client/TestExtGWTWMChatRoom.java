@@ -21,12 +21,12 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.imotion.gwt.webmessenger.client.ExtGWTWMFactory;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection.TRANSPORT_TYPE;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler {
+public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler, ExtGWTWMHasCloseCommHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
@@ -148,7 +148,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 					textMessage.setEnabled(true);
 					chatMessagePanel.setEnabledButton(true);
 				} else {
-					Window.alert("No se ha podido iniciar comunicaci??n con los par??metros: 'userId': " + userId + " ' roomId: '" + roomId);
+					Window.alert("No se ha podido iniciar comunicación con los parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
 				}
 			}
 		});
@@ -252,6 +252,17 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	}
 	
 	/**********************************************************************
+	 *                   	IExtGWTWebCloseHandler				          *
+	 **********************************************************************/
+	@Override
+	public void handleConnectionClosed() {
+		ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseCloseConnection(connectionCS);
+		connectionCS = null;
+		textMessage.setEnabled(false);
+		chatMessagePanel.setEnabledButton(false);
+	}
+	
+	/**********************************************************************
 	 *                		   PUBLIC FUNCTIONS						      *
 	 **********************************************************************/
 	
@@ -271,10 +282,11 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		} else  {
 			try {
 				if (connectionCS == null) {
-					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
-					connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
+					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, 30000, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
 					connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 					connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
+					connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
+					connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
 				}
 			} catch (ExtGWTWMException exception) {
 				Window.alert("Exception: " + exception.getMessage());

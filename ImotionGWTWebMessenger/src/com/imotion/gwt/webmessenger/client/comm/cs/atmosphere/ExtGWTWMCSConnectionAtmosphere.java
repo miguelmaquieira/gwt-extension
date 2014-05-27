@@ -184,8 +184,12 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		ExtGWTWMCommCSHandler commHandlerWrapper = getCommHandlerWrapper();
 		if (commHandlerWrapper != null) {
 			List<ExtGWTWMHasCloseCommHandler> handlers = commHandlerWrapper.getCommCloseHandlers();
-			for (int index = 0; index < handlers.size(); index++) {
-				handlers.get(index).handleConnectionClosed();
+			for (int i = 0; i < handlers.size(); i++) {
+				ExtGWTWMHasCloseCommHandler handler = handlers.get(i);
+				commHandlerWrapper.removeCommCloseHandler(handler);
+				if (handler != null) {
+					handler.handleConnectionClosed();
+				}
 			}
 		}
 	}
