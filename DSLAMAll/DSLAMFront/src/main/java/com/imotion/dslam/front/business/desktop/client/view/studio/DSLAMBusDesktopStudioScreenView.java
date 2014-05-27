@@ -15,10 +15,10 @@ import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBus
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileActions;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileInfo;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorList;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;

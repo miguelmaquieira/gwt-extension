@@ -5,13 +5,13 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String APP_ID_PREFFIX = "dslam_studio-";
 	
 	//TOOLBAR
-	String TOOLBAR										= APP_ID_PREFFIX 			+ "toolbar"; 		//dslam_studio-toolbar
-	String TOOLBAR_FILE_ACTIONS 						= TOOLBAR					+ "-file_actions";	//dslam_studio-toolbar-file_actions
-	String TOOLBAR_FILE_ACTIONS_ZONE					= TOOLBAR_FILE_ACTIONS		+ "-zone";			//dslam_studio-toolbar-file_actions-zone
-	String TOOLBAR_FILE_INFO 							= TOOLBAR					+ "-file_info";		//dslam_studio-toolbar-file_info
-	String TOOLBAR_FILE_INFO_FILE_NAME_ZONE 			= TOOLBAR_FILE_INFO			+ "-filename";		//dslam_studio-toolbar-file_info-filename
-	String TOOLBAR_FILE_INFO_LAST_SAVED_ZONE 			= TOOLBAR_FILE_INFO			+ "-lastsaved";		//dslam_studio-toolbar-file_info-lastsaved
-	String TOOLBAR_FILE_INFO_CLOSE_ZONE 				= TOOLBAR_FILE_INFO			+ "-close";			//dslam_studio-toolbar-file_info-close 
+	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 	//dslam_studio-toolbar
+	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";	//dslam_studio-toolbar-actions
+	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";		//dslam_studio-toolbar-actions-zone
+	String TOOLBAR_INFO 								= TOOLBAR				+ "-file_info";	//dslam_studio-toolbar-info
+	String TOOLBAR_INFO_FILE_NAME_ZONE 					= TOOLBAR_INFO			+ "-filename";		//dslam_studio-toolbar-info-filename
+	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";		//dslam_studio-toolbar-info-lastsaved
+	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";			//dslam_studio-toolbar-info-close 
 	
 	
 	//CONNECTION TOOLBAR
@@ -24,12 +24,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String USER_TEXTBOX									= APP_ID_PREFFIX 			+ "user-textbox"; //dslam_studio-user-textbox
 	String PASSWORD_TEXTBOX								= APP_ID_PREFFIX 			+ "password-textbox"; //dslam_studio-password-textbox
 	
-	//FILE LIST
+	//LIST
 	String LIST											= APP_ID_PREFFIX 		+ "list";		//dslam_studio-list
 	String LIST_CONTAINER								= LIST		 			+ "-container";	//dslam_studio-list-container
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";		//dslam_studio-list-container-zone
 	String LIST_HEADER 									= LIST					+ "-header";	//dslam_studio-list-header
-	String FILE_LIST_ELEMENT 							= LIST					+ "-element";	//dslam_studio-filelist-element
+	String LIST_ELEMENT 								= LIST					+ "-element";	//dslam_studio-list-element
 	String FILE_LIST_ZONE 								= LIST					+ "-zone";		//dslam_studio-filelist-zone
 
 	//PROCESS LIST
@@ -40,13 +40,13 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_LIST_ELEMENT 						= PROCESS_LIST				+ "-element";		//dslam_studio-processlist-element
 	String PROCESS_LIST_ZONE 							= PROCESS_LIST				+ "-zone";			//dslam_studio-processlist-zone
 
-	String EDITOR_ZONE 							= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
-	String PROCESS_ZONE 						= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
+	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
+	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 
-	String NEW_SCRIPT_FORM 						= APP_ID_PREFFIX			+ "newScriptForm";	//dslam_studio-newScriptForm
-	String NEW_SCRIPT_FORM_ERROR_ZONE 			= NEW_SCRIPT_FORM			+ "-errorZone";		//dslam_studio-newScriptForm-errorZone
-	String NEW_SCRIPT_FORM_INPUT_ZONE 			= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
-	String NEW_SCRIPT_FORM_SAVE_ZONE 			= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
+	String NEW_SCRIPT_FORM 								= APP_ID_PREFFIX			+ "newScriptForm";	//dslam_studio-newScriptForm
+	String NEW_SCRIPT_FORM_ERROR_ZONE 					= NEW_SCRIPT_FORM			+ "-errorZone";		//dslam_studio-newScriptForm-errorZone
+	String NEW_SCRIPT_FORM_INPUT_ZONE 					= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
+	String NEW_SCRIPT_FORM_SAVE_ZONE 					= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
 
 	String EDITOR_VIEW 									= APP_ID_PREFFIX			+ "editorView";		//dslam_studio-editorView
 	String EDITOR_VIEW_BOTTOM_ZONE 						= EDITOR_VIEW				+ "-bottomZone";	//dslam_studio-editorView-bottomZone

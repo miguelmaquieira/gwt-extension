@@ -16,40 +16,40 @@
 	height: 100%;
 }
 
-.dslam_studio-toolbar-file_actions-zone {
+.dslam_studio-toolbar-actions-zone {
 	border-right: 1px solid #CCCCCC;
 }
 
-.dslam_studio-toolbar-file_actions button {
+.dslam_studio-toolbar-actions button {
 	width: 100%;
 	border-width: 0px;
 }
 
-.dslam_studio-toolbar-file_info-close button {
+.dslam_studio-toolbar-info-close button {
 	float: right;
 }
 
-.dslam_studio-toolbar-file_info-lastsaved {
+.dslam_studio-toolbar-info-lastsaved {
 	border-left: 1px solid #CCCCCC;
 }
 
-.dslam_studio-toolbar-file_info .gwt-Label {
+.dslam_studio-toolbar-info .gwt-Label {
 	padding: 6px 12px;
 }
 
-.dslam_studio-toolbar-file_info {
+.dslam_studio-toolbar-info {
 	
 }
 
-.dslam_studio-toolbar-file_info-filename {
+.dslam_studio-toolbar-info-filename {
 	text-align: right;
 }
 
-.dslam_studio-toolbar-file_info-lastsaved {
+.dslam_studio-toolbar-info-lastsaved {
 	text-align: left;
 }
 
-.dslam_studio-toolbar-file_info-close button {
+.dslam_studio-toolbar-info-close button {
 	border-width: 0px;
 }
 
@@ -152,7 +152,6 @@
 	padding-left: 0px;
 	padding-right: 0px;
 }
-
 
 .dslam_studio-processConfigureOptionsPropertiesCheckBox {
 	padding: 15px;

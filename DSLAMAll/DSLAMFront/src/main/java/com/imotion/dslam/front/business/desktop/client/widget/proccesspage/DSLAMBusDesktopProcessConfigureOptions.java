@@ -39,6 +39,10 @@ public class DSLAMBusDesktopProcessConfigureOptions extends DSLAMBusDesktopPanel
 		scheduleZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_ZONE);
 		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
 	}
+	
+	public void postDisplay() {
+		super.postDisplay();
+	}
 
 	@Override
 	public String getName() {

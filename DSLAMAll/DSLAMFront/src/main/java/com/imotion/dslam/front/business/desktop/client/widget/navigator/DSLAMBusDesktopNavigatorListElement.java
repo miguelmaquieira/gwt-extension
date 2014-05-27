@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.navigator;
 
 import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
@@ -22,7 +22,7 @@ public class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrapSplitButt
 	
 	public DSLAMBusDesktopNavigatorListElement() {
 		super(null, "");
-		addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ELEMENT);
+		addStyleName(DSLAMBusDesktopIStyleConstants.LIST_ELEMENT);
 		addMenuElement(OPEN_ID,	TEXTS.open());
 		addMenuElement(RENAME_ID,	TEXTS.rename());
 		addSeparator();
