@@ -11,6 +11,8 @@ import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSL
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorFileList;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopConnectionToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessConfigure;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -20,11 +22,12 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 	public static final String NAME = "DSLAMBusDesktopProcessPageScreenView";
 
-	private FlowPanel 						root;
-	private DSLAMBusDesktopToolbar			toolbar;
-	private DSLAMBusDesktopEditorFileList	fileList;
-	//private AceEditor						editor;
-
+	private FlowPanel 							root;
+	private DSLAMBusDesktopToolbar				toolbar;
+	private DSLAMBusDesktopConnectionToolbar	connectionToolbar;
+	private DSLAMBusDesktopEditorFileList		processList;
+	private DSLAMBusDesktopProcessConfigure		processOptions;
+	
 	public DSLAMBusDesktopProcessPageScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
@@ -36,6 +39,10 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());
+		
+		connectionToolbar = new DSLAMBusDesktopConnectionToolbar();
+		root.add(connectionToolbar);
+		connectionToolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
@@ -43,35 +50,24 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESSES_VIEW_BOTTOM_ZONE);
 		bottomZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 
-		//Bottom Zone - File list zone
-		FlowPanel fileListZone = new FlowPanel();
-		bottomZone.add(fileListZone);
-		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
-		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_LIST_ZONE);
+		//Bottom Zone - Process list zone
+		FlowPanel processListZone = new FlowPanel();
+		bottomZone.add(processListZone);
+		processListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		processListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_LIST_ZONE);
 
-		fileList = new DSLAMBusDesktopEditorFileList();
-		fileListZone.add(fileList);
+		processList = new DSLAMBusDesktopEditorFileList();
+		processListZone.add(processList);
 
-		//Bottom Zone - Editor zone
-		FlowPanel editorZone = new FlowPanel();
-		bottomZone.add(editorZone);
-		editorZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_ZONE);
+		//Bottom Zone - Process configure zone
+		FlowPanel processConfigureZone = new FlowPanel();
+		bottomZone.add(processConfigureZone);
+		processConfigureZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
+		processConfigureZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_ZONE);
 
-//		// create first AceEditor widget
-//		editor = new AceEditor();
-//		editorZone.add(editor);
-//		editor.setWidth("100%");
-//		editor.setHeight("100%");
-//
-//
-//		// start the first editor and set its theme and mode
-//		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
-//		editor.setTheme(AceEditorTheme.ECLIPSE);
-//		editor.setMode(AceEditorMode.DSLAM);
-//		editor.setAutoCompletionEnabled(true);
-//		editor.setShowPrintMargin(false);
-//		editor.setFontSize(14);
+		processOptions = new DSLAMBusDesktopProcessConfigure();
+		processConfigureZone.add(processOptions);
+		
 	}
 
 	/**
@@ -84,7 +80,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		fileList.postDisplay();
+		processList.postDisplay();
 		//TEST
 		buildExample();
 	}
@@ -116,7 +112,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 			fileListData.addElement(fileData);
 		}
-		fileList.setData(fileListData);
+		processList.setData(fileListData);
 	}
 
 

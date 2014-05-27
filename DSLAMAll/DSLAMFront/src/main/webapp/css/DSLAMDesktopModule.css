@@ -116,6 +116,87 @@
 	box-shadow: 0px 0px 10px #888888;
 }
 
+.dslam_studio-processConfigureOptionsVariablesHeader {
+	height: 35px;
+	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #CCCCCC;
+}
+
+.dslam_studio-processConfigureOptionsScheduleHeader{
+	height: 35px;
+	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #CCCCCC;
+}
+
+.dslam_studio-processConfigureOptionsPropertiesHeader {
+	height: 35px;
+	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #CCCCCC;
+}
+
+.dslam_studio-processConfigureOptionsVariablesZone {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.dslam_studio-processConfigureOptionsPropertiesZone {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+
+.dslam_studio-processConfigureOptionsPropertiesCheckBox {
+	padding: 15px;
+}
+
+.dslam_studio-processConfigureOptionsScheduleZone {
+	padding-left: 0px;
+}
+
+.dslam_studio-processConfigureOptionsVariablesHeader > button {
+	margin-top: -3px;
+	height: 30px;
+}
+
+.dslam_studio-processConfigureOptionsVariablesFormSubmitButton {
+	margin-left: 15px;
+}
+
+.dslam_studio-processConfigureOptionsVariablesHeader > .btn:hover {
+	background-color: rgb(184,184,184);
+}
+
+.dslam_studio-processConfigureOptionsVariablesHeader > .btn:focus {
+	background-color: rgb(184,184,184);
+}
+
+.dslam_studio-processConfigureOptionsVariablesHeader > .col-xs-10 {
+	padding-left: 0px;
+} 
+
+.dslam_studio-processConfigureOptionsScheduleHeader > button {
+	margin-top: -3px;
+	height: 30px;
+}
+
+.dslam_studio-processConfigureOptionsScheduleHeader > .btn:hover {
+	background-color: rgb(184,184,184);
+}
+
+.dslam_studio-processConfigureOptionsScheduleHeader > .btn:focus {
+	background-color: rgb(184,184,184);
+}
+
+.dslam_studio-processConfigureOptionsScheduleHeader > .col-xs-10 {
+	padding-left: 0px;
+}
+
 .gwt-Label {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -126,4 +207,73 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.dslam_studio-server-textbox {
+	margin-top: 10px;
+	margin-left: -35px;
+}
+
+.dslam_studio-server-label {
+	margin-top: 15px;
+}
+
+.dslam_studio-user-textbox {
+	margin-top: 10px;
+	margin-left: -39px;
+}
+
+.dslam_studio-user-label {
+	margin-top: 15px;
+}
+
+.dslam_studio-password-textbox {
+	margin-top: 10px;
+	margin-left: -117px;
+}
+
+.dslam_studio-password-label {
+	margin-top: 15px;
+}
+
+.dslam_studio-toolbar-connection-zone > .form-group {
+	margin-bottom: 10px;
+}
+
+.dslam_studio-processConfigureNodesSelectionHeader {
+	height: 35px;
+	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #CCCCCC;
+	padding-left:0px
+}
+
+.dslam_studio-processConfigureNodesPropertiesHeader {
+	height: 35px;
+	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	border: 1px solid #CCCCCC;
+}
+
+.dslam_studio-processConfigureNodesSelectionZone {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.dslam_studio-processConfigureNodesPropertiesZone {
+	padding-left: 0px;
+}
+
+.dslam_studio-processConfigureOptionsZone {
+	height: 250px;
+}
+
+.dslam_studio-processConfigureNodesSelectionHeader > .gwt-Label {
+	padding-left: 5px;
+}
+
+.dslam_studio-processConfigureOptionsVariablesFormContainer {
+	background-color: grey;
 }

@@ -25,6 +25,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Abrir")
 	String open();
 	
+	@DefaultStringValue("Añadir")
+	String add();
+	
 	@DefaultStringValue("Renombrar")
 	String rename();
 	
@@ -33,5 +36,35 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Navegador")
 	String navigator();
+	
+	@DefaultStringValue("Propiedades")
+	String properties();
+	
+	@DefaultStringValue("Variables")
+	String variables();
+	
+	@DefaultStringValue("Schedule")
+	String schedule();
+	
+	@DefaultStringValue("Síncrono")
+	String synchronous();
+	
+	@DefaultStringValue("Servidor: ")
+	String server();
+	
+	@DefaultStringValue("Usuario: ")
+	String user();
+	
+	@DefaultStringValue("Contraseña: ")
+	String password();
+	
+	@DefaultStringValue("Nodos")
+	String nodes();
+	
+	@DefaultStringValue("Variable")
+	String variable();
+	
+	@DefaultStringValue("Valor")
+	String value();
 
 }
