@@ -12,6 +12,7 @@ import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanel
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopConnectionToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopNavigatorProcessList;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessConfigure;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
@@ -56,7 +57,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		processListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		processListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_LIST_ZONE);
 
-		processList = new DSLAMBusDesktopNavigatorList();
+		processList = new DSLAMBusDesktopNavigatorProcessList();
 		processListZone.add(processList);
 
 		//Bottom Zone - Process configure zone

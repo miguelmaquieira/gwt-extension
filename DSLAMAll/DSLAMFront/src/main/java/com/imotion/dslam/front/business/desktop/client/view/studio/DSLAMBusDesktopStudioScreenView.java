@@ -15,6 +15,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBus
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileActions;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopEditorToolbarFileInfo;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorFileList;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
@@ -72,7 +73,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.FILE_LIST_ZONE);
 
-		fileList = new DSLAMBusDesktopNavigatorList();
+		fileList = new DSLAMBusDesktopNavigatorFileList();
 		fileListZone.add(fileList);
 
 		//Bottom Zone - Editor zone

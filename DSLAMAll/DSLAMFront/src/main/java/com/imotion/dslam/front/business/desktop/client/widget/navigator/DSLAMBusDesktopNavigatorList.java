@@ -21,7 +21,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEvent;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 
-public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
+public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
 
 	public static final String NAME = "DSLAMBusDesktopNavigatorList";
 	
@@ -59,12 +59,12 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		DSLAMBusDesktopNavigatorListElement element = new DSLAMBusDesktopNavigatorListElement();
+		DSLAMBusDesktopNavigatorListElement element = createListElement();
 		elementListContainer.add(element);
 		element.setData(elementData);
 		sort(null, false);
 	}
-	
+
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
 			Long elementId = getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID, elementData);
@@ -173,6 +173,12 @@ public class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel implements
 			}
 		};
 	}
+	
+	/**
+	 * PROTECTED
+	 */
+	
+	protected abstract DSLAMBusDesktopNavigatorListElement createListElement();
 	
 	/**
 	 * PRIVATE
