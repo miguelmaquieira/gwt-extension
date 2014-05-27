@@ -8,21 +8,21 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 	//dslam_studio-toolbar
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";	//dslam_studio-toolbar-actions
 	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";		//dslam_studio-toolbar-actions-zone
-	String TOOLBAR_INFO 								= TOOLBAR				+ "-file_info";	//dslam_studio-toolbar-info
-	String TOOLBAR_INFO_FILE_NAME_ZONE 					= TOOLBAR_INFO			+ "-filename";		//dslam_studio-toolbar-info-filename
-	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";		//dslam_studio-toolbar-info-lastsaved
-	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";			//dslam_studio-toolbar-info-close 
+	String TOOLBAR_INFO 								= TOOLBAR				+ "-info";	//dslam_studio-toolbar-info
+	String TOOLBAR_INFO_FILE_NAME_ZONE 					= TOOLBAR_INFO			+ "-filename";	//dslam_studio-toolbar-info-filename
+	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";	//dslam_studio-toolbar-info-lastsaved
+	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";		//dslam_studio-toolbar-info-close 
 	
 	
 	//CONNECTION TOOLBAR
-	String TOOLBAR_CONNECTION_ZONE 						= APP_ID_PREFFIX			+ "toolbar-connection-zone";			//dslam_studio-toolbar-connection-zone 
-	String CONNECTION_TOOLBAR							= APP_ID_PREFFIX 			+ "connection-toolbar"; //dslam_studio-connection-toolbar
-	String SERVER_LABEL									= APP_ID_PREFFIX 			+ "server-label"; //dslam_studio-server-label
-	String USER_LABEL									= APP_ID_PREFFIX 			+ "user-label"; //dslam_studio-user-label
-	String PASSWORD_LABEL								= APP_ID_PREFFIX 			+ "password-label"; //dslam_studio-password-label
-	String SERVER_TEXTBOX								= APP_ID_PREFFIX 			+ "server-textbox"; //dslam_studio-server-textbox
-	String USER_TEXTBOX									= APP_ID_PREFFIX 			+ "user-textbox"; //dslam_studio-user-textbox
-	String PASSWORD_TEXTBOX								= APP_ID_PREFFIX 			+ "password-textbox"; //dslam_studio-password-textbox
+	String TOOLBAR_CONNECTION_ZONE 						= APP_ID_PREFFIX			+ "toolbar-connection-zone";	//dslam_studio-toolbar-connection-zone 
+	String CONNECTION_TOOLBAR							= APP_ID_PREFFIX 			+ "connection-toolbar"; 		//dslam_studio-connection-toolbar
+	String SERVER_LABEL									= APP_ID_PREFFIX 			+ "server-label"; 				//dslam_studio-server-label
+	String USER_LABEL									= APP_ID_PREFFIX 			+ "user-label"; 				//dslam_studio-user-label
+	String PASSWORD_LABEL								= APP_ID_PREFFIX 			+ "password-label"; 			//dslam_studio-password-label
+	String SERVER_TEXTBOX								= APP_ID_PREFFIX 			+ "server-textbox"; 			//dslam_studio-server-textbox
+	String USER_TEXTBOX									= APP_ID_PREFFIX 			+ "user-textbox"; 				//dslam_studio-user-textbox
+	String PASSWORD_TEXTBOX								= APP_ID_PREFFIX 			+ "password-textbox"; 			//dslam_studio-password-textbox
 	
 	//LIST
 	String LIST											= APP_ID_PREFFIX 		+ "list";		//dslam_studio-list
@@ -30,7 +30,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";		//dslam_studio-list-container-zone
 	String LIST_HEADER 									= LIST					+ "-header";	//dslam_studio-list-header
 	String LIST_ELEMENT 								= LIST					+ "-element";	//dslam_studio-list-element
-	String FILE_LIST_ZONE 								= LIST					+ "-zone";		//dslam_studio-filelist-zone
+	String LIST_ZONE 									= LIST					+ "-zone";		//dslam_studio-filelist-zone
 
 	//PROCESS LIST
 	String PROCESS_LIST									= APP_ID_PREFFIX 			+ "processlist";	//dslam_studio-processlist

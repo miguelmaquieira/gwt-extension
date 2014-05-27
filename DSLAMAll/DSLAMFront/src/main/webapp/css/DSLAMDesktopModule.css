@@ -53,7 +53,7 @@
 	border-width: 0px;
 }
 
-.dslam_studio-filelist-zone {
+.dslam_studio-list-zone {
 	padding-right: 0px;
 }
 
@@ -61,12 +61,12 @@
 	padding-right: 0px;
 }
 
-.dslam_studio-filelist {
+.dslam_studio-list {
 	height: 100%;
 	position: relative;
 }
 
-.dslam_studio-filelist-header {
+.dslam_studio-list-header {
 	height: 35px;
 	background-color: #F2F1F0; border : 1px solid #CCCCCC;
 	padding: 5px;
@@ -74,33 +74,33 @@
 	border: 1px solid #CCCCCC;
 }
 
-.dslam_studio-filelist-container-zone {
+.dslam_studio-container-zone {
 	width:100%;
 }
 
-.dslam_studio-filelist-element {
+.dslam_studio-list-element {
 	width: 100%;
 	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
 }
 
-.dslam_studio-filelist-element button {
+.dslam_studio-list-element button {
 	width: 75%;
 	border-radius: 0px;
 	border-top-width: 0px;
 	border-bottom-width: 0px;
 }
 
-.dslam_studio-filelist-element .dropdown-toggle {
+.dslam_studio-list-element .dropdown-toggle {
 	width: 25%;
 	border-right-width: 0px;
 }
 
-.dslam_studio-filelist-element .dropdown-toggle:HOVER, .dslam_studio-filelist-element .dropdown-toggle:ACTIVE, .dslam_studio-filelist-element .dropdown-toggle:FOCUS {
+.dslam_studio-list-element .dropdown-toggle:HOVER, .dslam_studio-filelist-element .dropdown-toggle:ACTIVE, .dslam_studio-list-element .dropdown-toggle:FOCUS {
 	z-index: 0;
 }
 
-.dslam_studio-filelist-element .dropdown-menu {
+.dslam_studio-list-element .dropdown-menu {
 	left: auto;
 	right: 0px;
 	float: right;
@@ -281,5 +281,4 @@
     width: 500px;
     padding-bottom: 20px;
     padding-top: 20px;
-}
 }
