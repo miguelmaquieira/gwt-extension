@@ -11,6 +11,6 @@ public interface ExtGWTWMCommCS {
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout) throws ExtGWTWMException;
 	public ExtGWTWMCommCSConnection getConnection(String roomId, String userId, int timeout, TRANSPORT_TYPE protocol, TRANSPORT_TYPE fallback) throws ExtGWTWMException;
 	public void releaseConnection(ExtGWTWMCommCSConnection connection);
-	public void releaseCloseConnection(ExtGWTWMCommCSConnection connection);
+	public void releaseClosedConnection(ExtGWTWMCommCSConnection connection);
 
 }
