@@ -40,15 +40,14 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 		LOGICAL_TYPE	type		= evt.getEventType();
 		if (DSLAMBusDesktopStudioScreenView.NAME.equals(srcWidget)) {
 			AEMFTMetadataElementComposite fileData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
-			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-				evt.stopPropagation();
-				updateFile(fileData);
-			} else if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
+			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();
 				createFile(fileData);
-			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
+			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				fileData.addElement(DSLAMBOIFileDataConstants.FILE_ID	, evt.getSourceWidgetId());
+				if (!fileData.contains(DSLAMBOIFileDataConstants.FILE_ID)) {
+					fileData.addElement(DSLAMBOIFileDataConstants.FILE_ID	, evt.getSourceWidgetId());
+				}
 				updateFile(fileData);
 			}
 		}
