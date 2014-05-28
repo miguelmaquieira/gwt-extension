@@ -41,12 +41,26 @@
 	
 }
 
-.dslam_studio-toolbar-info-filename {
-	text-align: right;
+.dslam_studio-toolbar-info-titleZone {
+	text-align: center;
+}
+
+.dslam_studio-toolbar-info-titleZone span {
+	line-height: 33px;
+}
+
+.dslam_studio-toolbar-info-titleZone-mainTitle, .dslam_studio-editorView-filename {
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.dslam_studio-toolbar-info-titleZone-secondaryTitle, .dslam_studio-editorView-contentType {
+	text-transform: lowercase;
+	margin-left: 10px;
 }
 
 .dslam_studio-toolbar-info-lastsaved {
-	text-align: left;
+	text-align: center;
 }
 
 .dslam_studio-toolbar-info-close button {
@@ -104,6 +118,10 @@
 	left: auto;
 	right: 0px;
 	float: right;
+}
+
+.dslam_studio-fileListElement .aegwt-actionButton {
+	text-align: right;
 }
 
 .dslam_studio-editorZone {

@@ -52,8 +52,12 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		fileInfo.setLastSaved(date);
 	}
 	
-	public void setTitleText(String fileName) {
-		fileInfo.setTitleText(fileName);
+	public void setMainTitleText(String text) {
+		fileInfo.setMainTitleText(text);
+	}
+	
+	public void setSecondaryTitleText(String text) {
+		fileInfo.setSecondaryTitleText(text);
 	}
 	
 	public void setFileInfoVisible(boolean visible) {

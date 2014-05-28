@@ -36,7 +36,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 		toolbar = new DSLAMBusDesktopProcessToolbar();
 		root.add(toolbar);
-		toolbar.setTitleText("script1");
+		toolbar.setMainTitleText("script1");
 		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());

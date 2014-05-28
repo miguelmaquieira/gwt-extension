@@ -15,14 +15,16 @@ public class DSLAMBusDesktopFileToolbar extends DSLAMBusDesktopToolbar {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			Long	fileId	 	= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID	, data);
-			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, data);
+			Long	fileId	 	= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID			, data);
+			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME		, data);
+			String	contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE	, data);
 			Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, data);
 			
 			String fileIdStr = String.valueOf(fileId);
 			setId(fileIdStr);
 			setLastSaved(lastSaved);
-			setTitleText(filename);
+			setMainTitleText(filename);
+			setSecondaryTitleText(contentType);
 			setModified(false);
 		}
 

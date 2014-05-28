@@ -1,6 +1,5 @@
 package com.imotion.dslam.front.business.desktop.client.view.studio;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -16,7 +15,6 @@ import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanel
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopFileToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorFileList;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarActions;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarInfo;
@@ -43,8 +41,8 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 
 
 	private FlowPanel 							root;
-	private DSLAMBusDesktopFileToolbar				toolbar;
-	private DSLAMBusDesktopNavigatorList		fileList;
+	private DSLAMBusDesktopFileToolbar			toolbar;
+	private DSLAMBusDesktopNavigatorFileList	fileList;
 	private AceEditor							editor;
 	private DSLAMBusDesktopNewScriptPopupForm	newScriptPopup;
 
@@ -55,7 +53,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 
 		toolbar = new DSLAMBusDesktopFileToolbar();
 		root.add(toolbar);
-		toolbar.setTitleText("");
+		toolbar.setMainTitleText("");
 		toolbar.setLastSaved(null);
 		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
@@ -113,9 +111,6 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	public void addFile(AEMFTMetadataElementComposite fileData) {
 		newScriptPopup.hide();
 		fileList.addElement(fileData);
-
-		String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, fileData);
-		Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
 		toolbar.setData(fileData);
 	}
 
@@ -249,13 +244,9 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		if (!toolbar.isModified() || (toolbar.isModified() && Window.confirm(TEXTS.exit_without_save())) ) {
 			closeCurrentFile();
 			AEMFTMetadataElementComposite fileData = fileList.getElementData(fileId);
-			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME		, fileData);
 			String	content 	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT		, fileData);
 			String	contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE	, fileData);
-			Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, fileData);
-			toolbar.setId(fileId);
-			toolbar.setLastSaved(lastSaved);
-			toolbar.setTitleText(filename + " - " + contentType);
+			toolbar.setData(fileData);
 			editor.setText(content);
 			toolbar.setModified(false);
 			toolbar.setFileInfoVisible(true);
@@ -264,6 +255,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM.equals(contentType)) {
 				editor.setMode(AceEditorMode.DSLAM);
 			} else {
+				//testing
 				editor.setMode(AceEditorMode.JAVA);
 			}
 		}

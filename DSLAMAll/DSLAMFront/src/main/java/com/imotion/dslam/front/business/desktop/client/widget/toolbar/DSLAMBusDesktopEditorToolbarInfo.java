@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -16,6 +17,7 @@ import com.selene.arch.exe.gwt.client.business.ui.utils.AEGWTBusinessUtils;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
+import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
@@ -25,7 +27,9 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTLabel	titleLabel;
+	private InlineHTML	mainTitleLabel;
+	private InlineHTML	separatorTitleLabel;
+	private InlineHTML	secondaryTitleLabel;
 	private AEGWTLabel	lastSavedLabel;
 
 	private boolean modified;
@@ -35,14 +39,23 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO);
 
-		//FILENAME
-		SimplePanel fileNameZone = new SimplePanel();
+		//TITLE ZONE
+		FlowPanel fileNameZone = new FlowPanel();
 		root.add(fileNameZone);
 		fileNameZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
-		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_FILE_NAME_ZONE);
+		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE);
 
-		titleLabel = new AEGWTLabel();
-		fileNameZone.add(titleLabel);
+		mainTitleLabel = new InlineHTML();
+		fileNameZone.add(mainTitleLabel);
+		mainTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_MAIN_TITLE);
+		
+		separatorTitleLabel = new InlineHTML("-");
+		fileNameZone.add(separatorTitleLabel);
+		separatorTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_SEPARATOR);
+		
+		secondaryTitleLabel = new InlineHTML();
+		fileNameZone.add(secondaryTitleLabel);
+		secondaryTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE);
 
 		//LASTSAVED
 		SimplePanel lastSavedZone = new SimplePanel();
@@ -76,8 +89,17 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 		});
 	}
 
-	public void setTitleText(String fileName) {
-		titleLabel.setText(fileName);
+	public void setMainTitleText(String text) {
+		mainTitleLabel.setText(text);
+	}
+	
+	public void setSecondaryTitleText(String text) {
+		secondaryTitleLabel.setHTML(text);
+		if (AEGWTStringUtils.isEmptyString(text)) {
+			separatorTitleLabel.setVisible(false);
+		} else {
+			separatorTitleLabel.setVisible(true);
+		}
 	}
 
 	public void setLastSaved(Date date) {
@@ -92,13 +114,13 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 
 	public void setModified(boolean modified) {
 		this.modified = modified;
-		String currentText = titleLabel.getText();
+		String currentText = mainTitleLabel.getText();
 		if (modified && !currentText.startsWith("*")) {
 			currentText = "*" + currentText; 
 		} else {
 			currentText = currentText.replaceFirst("\\*", "");
 		}
-		titleLabel.setText(currentText);
+		setMainTitleText(currentText);
 	}
 
 	public boolean isModified() {
