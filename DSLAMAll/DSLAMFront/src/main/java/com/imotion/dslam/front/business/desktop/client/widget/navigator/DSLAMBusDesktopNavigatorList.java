@@ -205,4 +205,9 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 		return elementWidget;
 	}
 
+	public void removeElement(String fileId) {
+		DSLAMBusDesktopNavigatorListElement element = getElementById(fileId);
+		elementListContainer.remove(element);
+	}
+
 }

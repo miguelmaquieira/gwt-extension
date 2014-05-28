@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.navigator;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.user.client.Window;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -53,8 +54,10 @@ public abstract class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrap
 	protected void handleClick(String menuActionId) {
 		AEGWTLogicalEvent selectedEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 		if (!AEGWTStringUtils.isEmptyString(menuActionId)) {
-			selectedEvent.setSourceWidgetId(menuActionId);
-			selectedEvent.setSourceContainerId(getId());
+			if (!DELETE_ID.equals(menuActionId) || Window.confirm(TEXTS.delete_confirmation())) {
+				selectedEvent.setSourceWidgetId(menuActionId);
+				selectedEvent.setSourceContainerId(getId());
+			}
 		} else {
 			selectedEvent.setSourceWidgetId(getId());
 		}

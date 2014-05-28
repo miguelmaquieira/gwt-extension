@@ -17,6 +17,7 @@ public interface DSLAMBUIFileBusinessServiceConstants {
 	String 	METHOD_ADD_FILE			= "ADD_FILE";
 	String 	METHOD_GET_ALL_FILES	= "GET_ALL_FILES";
 	String 	METHOD_UPDATE_FILE		= "UPDATE_FILE";
+	String 	METHOD_REMOVE_FILE		= "REMOVE_FILE";
 	
 	//CONTEXT
 	String 	FILE_DATA = "FILE_DATA";

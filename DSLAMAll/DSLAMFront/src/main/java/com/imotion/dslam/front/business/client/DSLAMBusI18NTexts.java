@@ -94,4 +94,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Campo vacío")
 	String empty_textbox();
 
+	@DefaultStringValue("¿Seguro que quieres eliminarlo?")
+	String delete_confirmation();
+
 }

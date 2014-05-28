@@ -10,4 +10,6 @@ public interface DSLAMBUIFileBusinessService extends DSLAMBUIBusinessService {
 
 	void updateFile();
 
+	void removeFile();
+
 }
