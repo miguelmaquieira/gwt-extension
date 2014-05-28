@@ -81,12 +81,20 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 			String	filename 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, data);
 			Date	lastSaved	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME, data);
 			
-			setId(String.valueOf(fileId));
+			String fileIdStr = String.valueOf(fileId);
+			setId(fileIdStr);
+			fileActions.setId(fileIdStr);
 			setLastSaved(lastSaved);
 			setFilename(filename);
 			setModified(false);
 		}
 
+	}
+	
+	@Override
+	public void setId(String id) {
+		super.setId(id);
+		fileActions.setId(id);
 	}
 
 }

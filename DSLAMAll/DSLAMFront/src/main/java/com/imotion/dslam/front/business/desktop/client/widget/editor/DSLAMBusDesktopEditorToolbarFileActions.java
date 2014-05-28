@@ -60,6 +60,7 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 			public void onClick(ClickEvent event) {
 				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 				evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+				evt.setSourceWidgetId(getId());
 				getLogicalEventHandlerManager().fireEvent(evt);
 			}
 		});

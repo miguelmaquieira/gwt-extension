@@ -227,6 +227,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		toolbar.setFileInfoVisible(false);
 		toolbar.setModified(false);
 		editor.setVisible(false);
+		toolbar.setId(null);
 	}
 
 	private void fireSaveChanges(String fileId, String content) {

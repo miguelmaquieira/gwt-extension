@@ -55,7 +55,7 @@ public class DSLAMBUFileBusinessServiceImpl extends DSLAMBUBusinessServiceBase i
 		
 		Long fileIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(fileId);
 		DSLAMBOIFile updatedfile = null;
-		if (!AEMFTCommonUtilsBase.isEmptyString(content)) {
+		if (AEMFTCommonUtilsBase.isEmptyString(filename)) {
 			updatedfile = getFilePersistence().updateFileContent(fileIdAsLong	, content);
 		} else {
 			updatedfile = getFilePersistence().updateFileName(fileIdAsLong		, filename);
