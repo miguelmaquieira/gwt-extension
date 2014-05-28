@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.client.view.studio.DSLAMBusI18NStudioTexts;
+import com.imotion.dslam.front.business.client.view.scriptsmanager.DSLAMBusI18NStudioTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -18,6 +18,7 @@ import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
+import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
@@ -25,6 +26,8 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 	public static final String NAME = "DSLAMBusDesktopNewScriptForm";
 	
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+
 	public static final int MODE_NEW_FILE		= 1;
 	public static final int MODE_RENAME_FILE	= 2;
 
@@ -34,7 +37,7 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 	private AEGWTBootstrapDropdownAndLabelTextBox	filenameField;
 	private AEGWTButton								saveButton;
 	private AEGWTButton								cancelButton;
-	
+
 	private int mode = MODE_NEW_FILE;
 
 	public DSLAMBusDesktopNewScriptPopupForm(AEGWTICompositePanel parent) {
@@ -72,16 +75,20 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				if (mode == MODE_NEW_FILE) {
-					evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
-				} else if (mode == MODE_RENAME_FILE) {
-					evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
+				if (AEGWTStringUtils.isEmptyString(filenameField.getText())) {
+					filenameField.setErrorLabelText(TEXTS.empty_textbox());
+				} else {
+					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
+					if (mode == MODE_NEW_FILE) {
+						evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
+					} else if (mode == MODE_RENAME_FILE) {
+						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
+					}
+					evt.setSourceWidgetId(getId());
+					evt.addElementAsString(DSLAMBOIFileDataConstants.FILE_NAME		, filenameField.getText());
+					evt.addElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE	, filenameField.getSelectedId());
+					getLogicalEventHandlerManager().fireEvent(evt);
 				}
-				evt.setSourceWidgetId(getId());
-				evt.addElementAsString(DSLAMBOIFileDataConstants.FILE_NAME		, filenameField.getText());
-				evt.addElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE	, filenameField.getSelectedId());
-				getLogicalEventHandlerManager().fireEvent(evt);
 			}
 		});
 
@@ -92,20 +99,20 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 				hide();
 			}
 		});
-		
+
 		filenameField.addKeyUpHandler(new KeyUpHandler() {
-			
+
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
 				filenameField.setErrorLabelVisible(false);
 			}
 		});
 	}
-	
+
 	public void setError(String error) {
 		filenameField.setErrorLabelText(error);
 	}
-	
+
 	public void setMode(int mode) {
 		this.mode = mode;
 	}
@@ -123,7 +130,7 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 		} 
 		super.center();
 	}
-	
+
 	public void setContentTypeEnabled(boolean enabled) {
 		filenameField.setDropdownEnabled(enabled);
 	}

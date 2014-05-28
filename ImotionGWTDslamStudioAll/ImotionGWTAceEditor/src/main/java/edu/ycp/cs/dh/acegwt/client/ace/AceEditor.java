@@ -23,6 +23,7 @@ package edu.ycp.cs.dh.acegwt.client.ace;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
@@ -399,6 +400,12 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	 */
 	public void onResize() {
 		redisplay();
+	}
+
+	public void focus() {
+		NodeList<Element> textAreaElements = divElement.getElementsByTagName("textarea");
+		Element textArea = textAreaElements.getItem(0);
+		textArea.focus();
 	}
 
 }

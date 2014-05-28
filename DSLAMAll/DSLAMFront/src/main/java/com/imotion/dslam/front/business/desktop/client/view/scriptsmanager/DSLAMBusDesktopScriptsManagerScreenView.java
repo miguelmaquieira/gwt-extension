@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.view.studio;
+package com.imotion.dslam.front.business.desktop.client.view.scriptsmanager;
 
 import java.util.List;
 
@@ -10,12 +10,12 @@ import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioDisplay;
+import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopFileToolbar;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNavigatorFileList;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
+import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopFileToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopNavigatorFileList;
+import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopNewScriptPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarActions;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarInfo;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -33,9 +33,9 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
-public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopStudioDisplay , AEGWTHasLogicalEventHandlers {
+public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopScriptsManagerDisplay , AEGWTHasLogicalEventHandlers {
 
-	public static final String NAME = "DSLAMBusDesktopStudioScreenView";
+	public static final String NAME = "DSLAMBusDesktopScriptsManagerScreenView";
 
 	private static final DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
@@ -46,7 +46,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	private AceEditor							editor;
 	private DSLAMBusDesktopNewScriptPopupForm	newScriptPopup;
 
-	public DSLAMBusDesktopStudioScreenView() {
+	public DSLAMBusDesktopScriptsManagerScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW);
@@ -111,7 +111,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 	public void addFile(AEMFTMetadataElementComposite fileData) {
 		newScriptPopup.hide();
 		fileList.addElement(fileData);
-		toolbar.setData(fileData);
+		openFile(fileData);
 	}
 
 	@Override
@@ -170,8 +170,11 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		LOGICAL_TYPE	type		= evt.getEventType();
 		if (DSLAMBusDesktopEditorToolbarActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
-				newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_NEW_FILE);
-				newScriptPopup.center();
+				if (!toolbar.isModified() || Window.confirm(TEXTS.exit_without_save())) {
+					closeCurrentFile();
+					newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_NEW_FILE);
+					newScriptPopup.center();
+				}
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				String currentText = editor.getText();
@@ -240,6 +243,14 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 		getLogicalEventHandlerManager().fireEvent(updateEvent);
 	}
 
+	private void openFile(AEMFTMetadataElementComposite fileData) {
+		if (fileData != null) {
+			Long	fileId		= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID, fileData);
+			String	fileIdStr	= String.valueOf(fileId);
+			openFile(fileIdStr);
+		}
+	}
+	
 	private void openFile(String fileId) {
 		if (!toolbar.isModified() || (toolbar.isModified() && Window.confirm(TEXTS.exit_without_save())) ) {
 			closeCurrentFile();
@@ -251,6 +262,7 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			toolbar.setModified(false);
 			toolbar.setFileInfoVisible(true);
 			editor.setVisible(true);
+			editor.focus();
 			
 			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM.equals(contentType)) {
 				editor.setMode(AceEditorMode.DSLAM);

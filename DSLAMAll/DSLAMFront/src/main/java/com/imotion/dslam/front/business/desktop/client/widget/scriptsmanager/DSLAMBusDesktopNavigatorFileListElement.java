@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager;
 
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;

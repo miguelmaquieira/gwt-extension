@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.client.view.studio;
+package com.imotion.dslam.front.business.client.view.scriptsmanager;
 
 import com.google.gwt.i18n.client.Constants;
 
