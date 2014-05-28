@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 
 import java.util.Date;
 
@@ -19,18 +19,18 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
+public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileInfo";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTLabel	fileNameLabel;
+	private AEGWTLabel	titleLabel;
 	private AEGWTLabel	lastSavedLabel;
 
 	private boolean modified;
 
-	public DSLAMBusDesktopEditorToolbarFileInfo() {
+	public DSLAMBusDesktopEditorToolbarInfo() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO);
@@ -41,8 +41,8 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 		fileNameZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
 		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_FILE_NAME_ZONE);
 
-		fileNameLabel = new AEGWTLabel();
-		fileNameZone.add(fileNameLabel);
+		titleLabel = new AEGWTLabel();
+		fileNameZone.add(titleLabel);
 
 		//LASTSAVED
 		SimplePanel lastSavedZone = new SimplePanel();
@@ -76,8 +76,8 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 		});
 	}
 
-	public void setFileName(String fileName) {
-		fileNameLabel.setText(fileName);
+	public void setTitleText(String fileName) {
+		titleLabel.setText(fileName);
 	}
 
 	public void setLastSaved(Date date) {
@@ -92,13 +92,13 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 
 	public void setModified(boolean modified) {
 		this.modified = modified;
-		String currentText = fileNameLabel.getText();
+		String currentText = titleLabel.getText();
 		if (modified && !currentText.startsWith("*")) {
 			currentText = "*" + currentText; 
 		} else {
 			currentText = currentText.replaceFirst("\\*", "");
 		}
-		fileNameLabel.setText(currentText);
+		titleLabel.setText(currentText);
 	}
 
 	public boolean isModified() {
