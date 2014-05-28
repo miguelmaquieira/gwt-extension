@@ -8,5 +8,7 @@ public interface DSLAMBusDesktopStudioDisplay extends AEGWTCompositePanelLoggedV
 	void addFile(AEMFTMetadataElementComposite fileData);
 
 	void updateFile(AEMFTMetadataElementComposite fileData);
+
+	void removeFile(String fileId);
 	
 }	

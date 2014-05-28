@@ -133,6 +133,11 @@ public class DSLAMBusDesktopStudioScreenView extends DSLAMBusDesktopPanelBaseVie
 			newScriptPopup.hide();
 		}
 	}
+	
+	@Override
+	public void removeFile(String fileId) {
+		fileList.removeElement(fileId);
+	}
 
 	/**
 	 * AEGWTICompositePanel

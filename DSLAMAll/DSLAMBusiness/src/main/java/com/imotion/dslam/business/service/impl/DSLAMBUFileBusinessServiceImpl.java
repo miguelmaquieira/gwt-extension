@@ -13,6 +13,7 @@ import com.imotion.dslam.business.service.DSLAMBUIFileBusinessService;
 import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 
 public class DSLAMBUFileBusinessServiceImpl extends DSLAMBUBusinessServiceBase implements DSLAMBUIFileBusinessService, DSLAMBUIFileBusinessServiceConstants, DSLAMBUIBusinessFileServiceTrace {
 
@@ -67,6 +68,27 @@ public class DSLAMBUFileBusinessServiceImpl extends DSLAMBUBusinessServiceBase i
 
 		//ContextOut
 		AEMFTMetadataElementComposite fileDataElement = DSLAMBUBomToMetadataConversor.fromFile(updatedfile);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(FILE_DATA, fileDataElement);
+	}
+	
+	@Override
+	public void removeFile() {
+		//ContextIn
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
+		String fileId		= getElementDataController().getElementAsString(DSLAMBOIFileDataConstants.FILE_ID		, contextIn);
+		
+		Long fileIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(fileId);
+		getFilePersistence().removeFile(fileIdAsLong);
+		
+		//init-trace
+		traceItemRemovedFromPersistence(METHOD_REMOVE_FILE, DSLAMBOIFile.class.getSimpleName(), fileId);
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite fileDataElement = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		fileDataElement.addElement(DSLAMBOIFileDataConstants.FILE_ID, fileIdAsLong);
+		
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(FILE_DATA, fileDataElement);
 	}

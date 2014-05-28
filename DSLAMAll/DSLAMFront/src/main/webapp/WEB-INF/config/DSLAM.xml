@@ -159,6 +159,9 @@
 				<SubService Name="GET_ALL_FILES">
 					<Descriptor>getAllFiles</Descriptor>
 				</SubService>
+				<SubService Name="REMOVE_FILE">
+					<Descriptor>removeFile</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 	</ServiceList>

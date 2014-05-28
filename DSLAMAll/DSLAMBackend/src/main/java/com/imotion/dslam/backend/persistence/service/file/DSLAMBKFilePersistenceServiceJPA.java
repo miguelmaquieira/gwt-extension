@@ -42,6 +42,11 @@ public class DSLAMBKFilePersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		List<DSLAMBOFile> fileListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(fileListJpa);
 	}
+	
+	@Override
+	public void removeFile(Long fileIdAsLong) {
+		getPersistenceModule().remove(fileIdAsLong);
+	}
 
 	/**
 	 * AEMFTIHasPersistenceModule

@@ -16,4 +16,6 @@ public interface DSLAMBKIFilePersistenceService {
 
 	List<DSLAMBOIFile> getAllFiles();
 
+	void removeFile(Long fileIdAsLong);
+
 }
