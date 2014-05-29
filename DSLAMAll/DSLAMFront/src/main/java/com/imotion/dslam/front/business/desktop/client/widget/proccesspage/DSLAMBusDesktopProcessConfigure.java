@@ -4,13 +4,12 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 
-public class DSLAMBusDesktopProcessConfigure extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopProcessPageDisplay {
+public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigure";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -21,7 +20,7 @@ public class DSLAMBusDesktopProcessConfigure extends DSLAMBusDesktopPanelBaseVie
 
 	public DSLAMBusDesktopProcessConfigure() {
 		root = new FlowPanel();
-		initContentPanel(root);
+		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE);
 
 		optionsZone = new DSLAMBusDesktopProcessConfigureOptions();
@@ -37,6 +36,7 @@ public class DSLAMBusDesktopProcessConfigure extends DSLAMBusDesktopPanelBaseVie
 	
 	public void postDisplay() {
 		super.postDisplay();
+		optionsZone.postDisplay();
 	}
 	
 	@Override

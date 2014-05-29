@@ -82,6 +82,8 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	public void postDisplay() {
 		super.postDisplay();
 		processList.postDisplay();
+		processOptions.postDisplay();
+		
 		//TEST
 		buildExample();
 	}

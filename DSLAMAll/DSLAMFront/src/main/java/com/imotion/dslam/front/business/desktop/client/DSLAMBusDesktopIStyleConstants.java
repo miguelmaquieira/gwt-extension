@@ -5,6 +5,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String APP_ID_PREFFIX = "dslam_studio-";
 	
 	//TOOLBAR
+
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 			//dslam_studio-toolbar
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";			//dslam_studio-toolbar-actions
 	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";				//dslam_studio-toolbar-actions-zone
@@ -75,9 +76,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_OPTIONS_VARIABLES_ZONE		= APP_ID_PREFFIX			+ "processConfigureOptionsVariablesZone";		//dslam_studio-processConfigureOptionsvariablesZone
 	String PROCESS_CONFIGURE_OPTIONS_VARIABLES			= APP_ID_PREFFIX			+ "processConfigureOptionsVariables";			//dslam_studio-processConfigureOptionsVariables
 	String PROCESS_CONFIGURE_OPTIONS_VARIABLES_HEADER	= APP_ID_PREFFIX			+ "processConfigureOptionsVariablesHeader"; 	//dslam_studio-processConfigureOptionsVariablesHeader
+	String PROCESS_CONFIGURE_OPTIONS_VARIABLES_LIST		= APP_ID_PREFFIX			+ "processConfigureOptionsVariablesList";		//dslam_studio-processConfigureOptionsVariablesList
 	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE_ZONE		= APP_ID_PREFFIX			+ "processConfigureOptionsScheduleZone";		//dslam_studio-processConfigureOptionsScheduleZone
 	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE			= APP_ID_PREFFIX			+ "processConfigureOptionsSchedule";			//dslam_studio-processConfigureOptionsSchedule
-	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE_HEADER	= APP_ID_PREFFIX			+ "processConfigureOptionsScheduleHeader";  	//dslam_studio-processConfigureOptionsScheduleHeader
+	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE_HEADER	= APP_ID_PREFFIX			+ "processConfigureOptionsScheduleHeader"; 		//dslam_studio-processConfigureOptionsScheduleHeader
+	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LIST		= APP_ID_PREFFIX			+ "processConfigureOptionsScheduleList";		//dslam_studio-processConfigureOptionsScheduleList
+	String PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LINE		= APP_ID_PREFFIX			+ "processConfigureOptionsScheduleLine";		//dslam_studio-processConfigureOptionsScheduleLine
 	String PROCESS_CONFIGURE_NODES_ZONE 				= APP_ID_PREFFIX			+ "processConfigureNodesZone"; 					//dslam_studio-processConfigureNodeZone
 	String PROCESS_CONFIGURE_NODES 						= APP_ID_PREFFIX			+ "processConfigureNodes"; 						//dslam_studio-processConfigureNode
 	String PROCESS_CONFIGURE_NODES_SELECTION_ZONE 		= APP_ID_PREFFIX			+ "processConfigureNodesSelectionZone";			//dslam_studio-processConfigureNodesSelectionZone

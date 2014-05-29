@@ -5,12 +5,11 @@ import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
-public class DSLAMBusDesktopProcessConfigureOptionsProperties extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopProcessPageDisplay {
+public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsProperties";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -23,7 +22,6 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends DSLAMBusDe
 	public DSLAMBusDesktopProcessConfigureOptionsProperties() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES);
 
 		//Header
 		headerZone 		= new FlowPanel();

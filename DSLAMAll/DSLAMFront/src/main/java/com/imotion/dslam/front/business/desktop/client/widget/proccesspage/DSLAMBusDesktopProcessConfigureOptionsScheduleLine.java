@@ -1,33 +1,34 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
-import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 
 public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCompositePanel  {
 
-	public 		static final String 		NAME 	= "DSLAMBusDesktopProcessConfigureOptionsScheduleLine";
+	public 	static final String 		NAME 	= "DSLAMBusDesktopProcessConfigureOptionsScheduleLine";
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	
-	private AEGWTBootstrapFormFieldTextBox	dateTimeBox;
-	private AEGWTButton 					deleteButton;
+	private AEGWTBootstrapDateTimePickerTextBox		dateTimeBox;
+	private AEGWTBootstrapGlyphiconButton 			deleteButton;
 
 	public DSLAMBusDesktopProcessConfigureOptionsScheduleLine(AEMFTMetadataElement date) {
 		FlowPanel root = new FlowPanel();
 		root.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
-		//root.addStyleName(BusinessDesktopManagementIStyleConstants.EVENT_LINE_DATE);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LINE);
 		initWidget(root);
 		
-		deleteButton = new AEGWTButton();
-		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN);
-		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN_DANGER);
-		deleteButton.setHTML(AEGWTIBoostrapConstants.SPAN_GLYPHICON_MINUS);
+		AEGWTBootstrapGlyphiconButton deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
 
 		deleteButton.addClickHandler(new ClickHandler() {
 
@@ -37,23 +38,18 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 			}
 		});
 		
-		dateTimeBox 	= new AEGWTBootstrapFormFieldTextBox();
-		
+		dateTimeBox 	= new AEGWTBootstrapDateTimePickerTextBox(null);
 		
 		FlowPanel deleteZone = new FlowPanel();
 		deleteZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		//root.addStyleName(BusinessDesktopManagementIStyleConstants.EVENT_LINE_DELETEZONE);
 		deleteZone.add(deleteButton);
 		
 		FlowPanel startDateZone = new FlowPanel();
 		startDateZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
-		//root.addStyleName(BusinessDesktopManagementIStyleConstants.EVENT_LINE_START_DATE);
 		startDateZone.add(dateTimeBox);
-		
-		
-		
-		root.add(deleteZone);
+	
 		root.add(startDateZone);
+		root.add(deleteZone);
 		
 //		if (date != null) {
 //			
@@ -109,4 +105,12 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		dateTimeBox.addJS(getId());
+	}
+	
+	
 }

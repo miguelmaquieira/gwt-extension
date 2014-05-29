@@ -123,7 +123,7 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 	public void postDisplay() {
 		super.postDisplay();
 		setHeightToDecrease(80);
-		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, elementListContainerZone, getCurrentHeight());
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, elementListContainerZone, getCurrentHeight(), true);
 	}
 
 	/**

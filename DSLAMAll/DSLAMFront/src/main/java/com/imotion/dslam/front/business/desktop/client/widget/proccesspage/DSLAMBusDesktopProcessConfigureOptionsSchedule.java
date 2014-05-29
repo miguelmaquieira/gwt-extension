@@ -6,26 +6,27 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
-public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopProcessPageDisplay {
+public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsSchedule";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 						root;
-	private FlowPanel						headerZone; 
+	private FlowPanel						headerZone;
+	private FlowPanel 						scheduleListZone;
 	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
+	private int 							numberAddDateTimePicker;
 
 	public DSLAMBusDesktopProcessConfigureOptionsSchedule() {
 		root = new FlowPanel();
-		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE);
+		initWidget(root);
 		
 		//Header
 		headerZone 		= new FlowPanel();
@@ -37,6 +38,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends DSLAMBusDesk
 		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
 		headerZone.add(headerLabel);
 		
+		numberAddDateTimePicker = 0;
+		
 		addDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
 		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		headerZone.add(addDateTimeButton);
@@ -45,36 +48,23 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends DSLAMBusDesk
 
 			@Override
 			public void onClick(ClickEvent event) {
-				addDateTimeBox();
+				numberAddDateTimePicker++;
+				addDateTimeBox(numberAddDateTimePicker);
 			}
-		});	
+		});
+		
+		scheduleListZone = new FlowPanel();
+		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LIST);
+		root.add(scheduleListZone);
 		
 	}
 	
-	public void addDateTimeBox() {
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, scheduleListZone, scheduleListZone.getElement().getClientHeight(), false);
 		
-		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
-		root.add(line);
-//		AEGWTButton deleteButton = new AEGWTButton();
-//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN);
-//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN_DANGER);
-//		deleteButton.setHTML(AEGWTIBoostrapConstants.SPAN_GLYPHICON_MINUS);
-//
-//		deleteButton.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				remove();
-//			}
-//		});
-//		AEGWTBootstrapFormFieldTextBox dateTimeBox = new AEGWTBootstrapFormFieldTextBox();
-//		root.add(dateTimeBox);
-//		
 	}
-//	
-//	public void remove() {
-//		this.re
-//	}
 	
 	@Override
 	public String getName() {
@@ -84,5 +74,17 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends DSLAMBusDesk
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private void addDateTimeBox(int numberAddDateTimePicker) {
+		
+		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
+		scheduleListZone.add(line);
+		line.setId(String.valueOf(numberAddDateTimePicker));
+		line.postDisplay();
 	}
 }
