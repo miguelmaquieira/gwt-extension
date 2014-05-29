@@ -17,6 +17,12 @@ var supportedScopes = {
    "keyword": "keyword",
    "keyword.operator": "keyword.operator",
    "keyword.other.unit": "keyword.other.unit",
+   "keyword.levelone": "keyword.levelone",
+   "keyword.leveltwo": "keyword.leveltwo",
+   "keyword.levelthree": "keyword.levelthree",
+   "keyword.control": "keyword.control",
+   "keyword.control.conditional": "keyword.control.conditional",
+   "keyword.control.repeat": "keyword.control.repeat",
 
    "constant": "constant",
    "constant.language": "constant.language",

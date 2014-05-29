@@ -2,10 +2,12 @@ package com.imotion.dslam.bom.data;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +25,8 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "FileIdGenerator")
 	private Long 		fileId;
 	private String 		filename;
+	@Lob 
+	@Column(columnDefinition="TEXT")
 	private String 		content;
 	private String 		contentType;
 	@Temporal(TemporalType.TIMESTAMP)
