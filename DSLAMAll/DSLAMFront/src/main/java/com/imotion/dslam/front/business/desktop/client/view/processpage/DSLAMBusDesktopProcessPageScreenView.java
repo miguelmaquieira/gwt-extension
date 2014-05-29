@@ -9,11 +9,11 @@ import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopConnectionToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopNavigatorProcessList;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessConfigure;
+import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -23,20 +23,20 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 	public static final String NAME = "DSLAMBusDesktopProcessPageScreenView";
 
-	private FlowPanel 												root;
-	private DSLAMBusDesktopToolbar									toolbar;
-	private DSLAMBusDesktopConnectionToolbar						connectionToolbar;
-	private DSLAMBusDesktopNavigatorList							processList;
-	private DSLAMBusDesktopProcessConfigure							processOptions;
+	private FlowPanel 							root;
+	private DSLAMBusDesktopProcessToolbar		toolbar;
+	private DSLAMBusDesktopConnectionToolbar	connectionToolbar;
+	private DSLAMBusDesktopNavigatorList		processList;
+	private DSLAMBusDesktopProcessConfigure		processOptions;
 	
 	public DSLAMBusDesktopProcessPageScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESSES_VIEW);
 
-		toolbar = new DSLAMBusDesktopToolbar();
+		toolbar = new DSLAMBusDesktopProcessToolbar();
 		root.add(toolbar);
-		toolbar.setFilename("script1");
+		toolbar.setMainTitleText("script1");
 		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());

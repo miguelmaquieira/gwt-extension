@@ -10,11 +10,11 @@ import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusCont
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPagePresenter;
-import com.imotion.dslam.front.business.desktop.client.presenter.studio.DSLAMBusDesktopStudioPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.processpage.DSLAMBusDesktopProcessPageScreenView;
-import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
@@ -65,11 +65,11 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEGWTIPresenter presenter = null;
 		String token1 = tokenElements[0];
 		if (AEGWTStringUtils.isEmptyString(token1)) {
-			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_STUDIO;
+			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER;
 		}
 		
-		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_STUDIO.equals(token1) ) {
-			presenter = new DSLAMBusDesktopStudioPresenter(new DSLAMBusDesktopStudioScreenView());
+		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER.equals(token1) ) {
+			presenter = new DSLAMBusDesktopScriptsManagerPresenter(new DSLAMBusDesktopScriptsManagerScreenView());
 		}
 		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE.equals(token1) ) {
 			presenter = new DSLAMBusDesktopProcessPagePresenter(new DSLAMBusDesktopProcessPageScreenView());

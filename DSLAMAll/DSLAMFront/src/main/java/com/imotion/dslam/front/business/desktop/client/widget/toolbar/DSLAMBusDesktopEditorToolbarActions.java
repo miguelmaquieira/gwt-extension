@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -14,7 +14,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphico
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel {
+public class DSLAMBusDesktopEditorToolbarActions extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileActions";
 
@@ -23,7 +23,7 @@ public class DSLAMBusDesktopEditorToolbarFileActions extends AEGWTCompositePanel
 	private AEGWTBootstrapGlyphiconButton newButton;
 	private AEGWTBootstrapGlyphiconButton saveButton;
 
-	public DSLAMBusDesktopEditorToolbarFileActions() {
+	public DSLAMBusDesktopEditorToolbarActions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);

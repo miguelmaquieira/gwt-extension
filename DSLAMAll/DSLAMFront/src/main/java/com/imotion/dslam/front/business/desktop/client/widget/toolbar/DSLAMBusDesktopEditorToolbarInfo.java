@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.editor;
+package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 
 import java.util.Date;
 
@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineHTML;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -16,33 +17,45 @@ import com.selene.arch.exe.gwt.client.business.ui.utils.AEGWTBusinessUtils;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
+import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
+public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileInfo";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTLabel	fileNameLabel;
+	private InlineHTML	mainTitleLabel;
+	private InlineHTML	separatorTitleLabel;
+	private InlineHTML	secondaryTitleLabel;
 	private AEGWTLabel	lastSavedLabel;
 
 	private boolean modified;
 
-	public DSLAMBusDesktopEditorToolbarFileInfo() {
+	public DSLAMBusDesktopEditorToolbarInfo() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO);
 
-		//FILENAME
-		SimplePanel fileNameZone = new SimplePanel();
+		//TITLE ZONE
+		FlowPanel fileNameZone = new FlowPanel();
 		root.add(fileNameZone);
 		fileNameZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
-		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_FILE_NAME_ZONE);
+		fileNameZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE);
 
-		fileNameLabel = new AEGWTLabel();
-		fileNameZone.add(fileNameLabel);
+		mainTitleLabel = new InlineHTML();
+		fileNameZone.add(mainTitleLabel);
+		mainTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_MAIN_TITLE);
+		
+		separatorTitleLabel = new InlineHTML("-");
+		fileNameZone.add(separatorTitleLabel);
+		separatorTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_SEPARATOR);
+		
+		secondaryTitleLabel = new InlineHTML();
+		fileNameZone.add(secondaryTitleLabel);
+		secondaryTitleLabel.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE);
 
 		//LASTSAVED
 		SimplePanel lastSavedZone = new SimplePanel();
@@ -76,8 +89,17 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 		});
 	}
 
-	public void setFileName(String fileName) {
-		fileNameLabel.setText(fileName);
+	public void setMainTitleText(String text) {
+		mainTitleLabel.setText(text);
+	}
+	
+	public void setSecondaryTitleText(String text) {
+		secondaryTitleLabel.setHTML(text);
+		if (AEGWTStringUtils.isEmptyString(text)) {
+			separatorTitleLabel.setVisible(false);
+		} else {
+			separatorTitleLabel.setVisible(true);
+		}
 	}
 
 	public void setLastSaved(Date date) {
@@ -92,13 +114,13 @@ public class DSLAMBusDesktopEditorToolbarFileInfo extends AEGWTCompositePanel {
 
 	public void setModified(boolean modified) {
 		this.modified = modified;
-		String currentText = fileNameLabel.getText();
+		String currentText = mainTitleLabel.getText();
 		if (modified && !currentText.startsWith("*")) {
 			currentText = "*" + currentText; 
 		} else {
 			currentText = currentText.replaceFirst("\\*", "");
 		}
-		fileNameLabel.setText(currentText);
+		setMainTitleText(currentText);
 	}
 
 	public boolean isModified() {

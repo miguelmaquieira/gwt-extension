@@ -1,11 +1,11 @@
-package com.imotion.dslam.front.business.desktop.client.presenter.studio;
+package com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager;
 
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
-import com.imotion.dslam.front.business.desktop.client.view.studio.DSLAMBusDesktopStudioScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
@@ -13,11 +13,11 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMBusDesktopStudioDisplay> implements AEGWTHasLogicalEventHandlers {
+public class DSLAMBusDesktopScriptsManagerPresenter extends DSLAMBusBasePresenter<DSLAMBusDesktopScriptsManagerDisplay> implements AEGWTHasLogicalEventHandlers {
 
-	public static final String NAME = "DSLAMBusDesktopStudioPresenter";
+	public static final String NAME = "DSLAMBusDesktopScriptsManagerPresenter";
 
-	public DSLAMBusDesktopStudioPresenter(DSLAMBusDesktopStudioDisplay view) {
+	public DSLAMBusDesktopScriptsManagerPresenter(DSLAMBusDesktopScriptsManagerDisplay view) {
 		super(view);
 	}
 
@@ -41,7 +41,7 @@ public class DSLAMBusDesktopStudioPresenter extends DSLAMBusBasePresenter<DSLAMB
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sourceWidgetId	= evt.getSourceWidgetId();
-		if (DSLAMBusDesktopStudioScreenView.NAME.equals(srcWidget)) {
+		if (DSLAMBusDesktopScriptsManagerScreenView.NAME.equals(srcWidget)) {
 			AEMFTMetadataElementComposite fileData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();

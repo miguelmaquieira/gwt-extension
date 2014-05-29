@@ -1,6 +1,7 @@
 package com.imotion.dslam.business.service;
 
 import com.imotion.dslam.business.DSLAMBUIConstant;
+import com.imotion.dslam.business.DSLAMBUIServiceConstant;
 import com.selene.arch.base.MFTIConstant;
 
 public interface DSLAMBUIFileBusinessServiceConstants {
