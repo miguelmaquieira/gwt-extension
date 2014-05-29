@@ -17,6 +17,7 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -28,7 +29,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 												root;
-	private FlowPanel												headerZone; 
+	private FlowPanel												headerZone;
+	private FlowPanel												variableListZone;
 	private AEGWTBootstrapGlyphiconButton 							addVariableButton;
 	private AEGWTBootstrapGlyphiconButton 							deleteVariablesButton;
 	private	 DSLAMBusDesktopVariablesList   						variableList;
@@ -67,8 +69,11 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			}
 		});	
 		
+		variableListZone = new FlowPanel();
+		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_VARIABLES_LIST);
+		root.add(variableListZone);
 		variableList = new DSLAMBusDesktopVariablesList( (AEGWTButton) deleteVariablesButton);
-		root.add(variableList);
+		variableListZone.add(variableList);
 	}
 
 	@Override
@@ -90,6 +95,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		super.postDisplay();
 		variablesForm = new DSLAMBusDesktopProcessConfigureOptionsVariablesForm(this);
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, variableListZone, variableListZone.getElement().getClientHeight(), false);
 	
 	}
 	

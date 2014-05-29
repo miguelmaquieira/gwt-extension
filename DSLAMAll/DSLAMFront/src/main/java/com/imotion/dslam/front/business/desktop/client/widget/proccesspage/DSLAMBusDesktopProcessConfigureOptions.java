@@ -22,11 +22,6 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 		root = new FlowPanel();
 		initWidget(root);
 
-		propertiesZone = new DSLAMBusDesktopProcessConfigureOptionsProperties();
-		root.add(propertiesZone);
-		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_ZONE);
-		propertiesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-
 		varListZone = new DSLAMBusDesktopProcessConfigureOptionsVariables();
 		root.add(varListZone);
 		varListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_VARIABLES_ZONE);
@@ -36,11 +31,17 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 		root.add(scheduleZone);
 		scheduleZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_ZONE);
 		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		
+		propertiesZone = new DSLAMBusDesktopProcessConfigureOptionsProperties();
+		root.add(propertiesZone);
+		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_ZONE);
+		propertiesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 	}
 	
 	public void postDisplay() {
 		super.postDisplay();
 		varListZone.postDisplay();
+		scheduleZone.postDisplay();
 	}
 
 	@Override

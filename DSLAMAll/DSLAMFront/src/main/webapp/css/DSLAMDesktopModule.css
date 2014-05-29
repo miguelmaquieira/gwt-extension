@@ -169,7 +169,7 @@
 
 .dslam_studio-processConfigureOptionsPropertiesZone {
 	padding-left: 0px;
-	padding-right: 0px;
+	
 }
 
 .dslam_studio-processConfigureOptionsPropertiesCheckBox {
@@ -178,6 +178,7 @@
 
 .dslam_studio-processConfigureOptionsScheduleZone {
 	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .dslam_studio-processConfigureOptionsVariablesHeader > button {
@@ -294,7 +295,16 @@
 }
 
 .dslam_studio-processConfigureOptionsZone {
-	height: 250px;
+	height: 300px;
+}
+
+.dslam_studio-processConfigureOptionsVariablesList {
+	width:100%;
+	height: 260px;
+}
+
+.dslam_studio-processConfigureOptionsScheduleList {
+	height: 260px;
 }
 
 .dslam_studio-processConfigureNodesSelectionHeader > .gwt-Label {
@@ -312,4 +322,8 @@
 .dslam_studio-processConfigureOptionsScheduleLine button {
 	border-width: 0px;
 	float: right;
+}
+
+.dslam_studio-processConfigureOptionsScheduleLine {
+	width: 95%;
 }

@@ -10,6 +10,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
 public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTCompositePanel {
@@ -18,7 +19,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 						root;
-	private FlowPanel						headerZone; 
+	private FlowPanel						headerZone;
+	private FlowPanel 						scheduleListZone;
 	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
 	private int 							numberAddDateTimePicker;
 
@@ -49,36 +51,20 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 				numberAddDateTimePicker++;
 				addDateTimeBox(numberAddDateTimePicker);
 			}
-		});	
+		});
+		
+		scheduleListZone = new FlowPanel();
+		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LIST);
+		root.add(scheduleListZone);
 		
 	}
 	
-	private void addDateTimeBox(int numberAddDateTimePicker) {
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, scheduleListZone, scheduleListZone.getElement().getClientHeight(), false);
 		
-		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
-		root.add(line);
-		line.setId(String.valueOf(numberAddDateTimePicker));
-		line.postDisplay();
-//		AEGWTButton deleteButton = new AEGWTButton();
-//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN);
-//		deleteButton.addStyleName(AEGWTIBoostrapConstants.BTN_DANGER);
-//		deleteButton.setHTML(AEGWTIBoostrapConstants.SPAN_GLYPHICON_MINUS);
-//
-//		deleteButton.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				remove();
-//			}
-//		});
-//		AEGWTBootstrapFormFieldTextBox dateTimeBox = new AEGWTBootstrapFormFieldTextBox();
-//		root.add(dateTimeBox);
-//		
 	}
-//	
-//	public void remove() {
-//		this.re
-//	}
 	
 	@Override
 	public String getName() {
@@ -88,5 +74,17 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private void addDateTimeBox(int numberAddDateTimePicker) {
+		
+		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
+		scheduleListZone.add(line);
+		line.setId(String.valueOf(numberAddDateTimePicker));
+		line.postDisplay();
 	}
 }
