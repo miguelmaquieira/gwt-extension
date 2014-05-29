@@ -4,12 +4,11 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public class DSLAMBusDesktopProcessConfigureOptions extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopProcessPageDisplay {
+public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptions";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -21,8 +20,7 @@ public class DSLAMBusDesktopProcessConfigureOptions extends DSLAMBusDesktopPanel
 
 	public DSLAMBusDesktopProcessConfigureOptions() {
 		root = new FlowPanel();
-		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS);
+		initWidget(root);
 
 		propertiesZone = new DSLAMBusDesktopProcessConfigureOptionsProperties();
 		root.add(propertiesZone);
@@ -32,16 +30,17 @@ public class DSLAMBusDesktopProcessConfigureOptions extends DSLAMBusDesktopPanel
 		varListZone = new DSLAMBusDesktopProcessConfigureOptionsVariables();
 		root.add(varListZone);
 		varListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_VARIABLES_ZONE);
-		varListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
+		varListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
 		scheduleZone = new DSLAMBusDesktopProcessConfigureOptionsSchedule();
 		root.add(scheduleZone);
 		scheduleZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_ZONE);
-		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_5);
+		scheduleZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
 	}
 	
 	public void postDisplay() {
 		super.postDisplay();
+		varListZone.postDisplay();
 	}
 
 	@Override

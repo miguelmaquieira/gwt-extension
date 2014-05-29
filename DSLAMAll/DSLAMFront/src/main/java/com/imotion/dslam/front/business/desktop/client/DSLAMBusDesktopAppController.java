@@ -34,7 +34,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_MOUSE_WHEEL_JS_URL);
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_PERFECT_SCROLLBAR_JS_URL);
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_JS_URL);
-		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_DATETIMEPICKER_JS);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_DATETIMEPICKER_JS);
 		AEGWTJSLoader.fromUrl(bootstrapLibraries.iterator(), callback);
 	}
 

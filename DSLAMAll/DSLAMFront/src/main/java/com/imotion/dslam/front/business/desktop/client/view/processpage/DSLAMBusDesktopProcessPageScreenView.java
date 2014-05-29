@@ -23,11 +23,11 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 	public static final String NAME = "DSLAMBusDesktopProcessPageScreenView";
 
-	private FlowPanel 							root;
-	private DSLAMBusDesktopToolbar				toolbar;
-	private DSLAMBusDesktopConnectionToolbar	connectionToolbar;
-	private DSLAMBusDesktopNavigatorList		processList;
-	private DSLAMBusDesktopProcessConfigure		processOptions;
+	private FlowPanel 												root;
+	private DSLAMBusDesktopToolbar									toolbar;
+	private DSLAMBusDesktopConnectionToolbar						connectionToolbar;
+	private DSLAMBusDesktopNavigatorList							processList;
+	private DSLAMBusDesktopProcessConfigure							processOptions;
 	
 	public DSLAMBusDesktopProcessPageScreenView() {
 		root = new FlowPanel();
@@ -82,6 +82,8 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	public void postDisplay() {
 		super.postDisplay();
 		processList.postDisplay();
+		processOptions.postDisplay();
+		
 		//TEST
 		buildExample();
 	}

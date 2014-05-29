@@ -1,11 +1,13 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
-import com.imotion.dslam.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTable;
 
@@ -15,7 +17,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	public DSLAMBusDesktopVariablesList() {
-		super(true,true);
+		super(true,true,false);
 	}
 
 	/**
@@ -28,16 +30,20 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		String variable = getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data);
-		String valor 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, data);
-	
-		Map<String,String> variableRow = new HashMap<String, String>();
-		variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
-		variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
 		
-		String key = data.getKey();
 		
-		addRowItem(variableRow, key, true, true);
+		List<AEMFTMetadataElement> variableList = data.getSortedElementList();
+		
+		for (AEMFTMetadataElement variable : variableList) {
+			String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
+			String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+		
+			Map<String,String> variableRow = new HashMap<String, String>();
+			variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableId);
+			variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
+			
+			addRowItem(variableRow, variableId, true, true,false);
+		}	
 	}
 
 	/*
@@ -65,5 +71,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 }
 	

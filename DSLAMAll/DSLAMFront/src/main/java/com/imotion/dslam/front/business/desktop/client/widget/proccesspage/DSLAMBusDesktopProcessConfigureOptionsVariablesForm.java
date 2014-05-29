@@ -4,19 +4,20 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
-import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
+import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPopup {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsVariablesForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -24,24 +25,29 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTCo
 	private AEGWTBootstrapFormFieldTextBox  		variableIdTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		variableValueTextBox; 
 	private AEGWTButton 							saveButton;
+	private AEGWTButton								cancelButton;
+	private boolean								editMode;
 
-	public DSLAMBusDesktopProcessConfigureOptionsVariablesForm() {
+	public DSLAMBusDesktopProcessConfigureOptionsVariablesForm(AEGWTICompositePanel parent) {
+		super(true, parent);
 		FlowPanel root = new FlowPanel();
-		root.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
+		setWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_VARIABLES_FORM_CONTAINER);
-		initWidget(root);
 
-		variableIdTextBox 			= new AEGWTBootstrapFormFieldTextBox(TEXTS.variable()	, TEXTS.variable());
-		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(TEXTS.value()		, TEXTS.value());
+
+		variableIdTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.variable());
+		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.value());
 		
 		root.add(variableIdTextBox);
 		root.add(variableValueTextBox);
 		
-		saveButton = new AEGWTButton("Guardar");
-		root.add(saveButton);
+		FlowPanel saveButtonZone = new FlowPanel();
+		root.add(saveButtonZone);
+		
+		saveButton = new AEGWTButton(TEXTS.save());
+		saveButtonZone.add(saveButton);
 		saveButton.setStyleName(AEGWTIBoostrapConstants.BTN);
-		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN_SUCCESS);
-		//saveButton.addStyleName(BusinessDesktopManagementIStyleConstants.MENUPART_POPUP_BUTTONS);
+		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN_PRIMARY);
 		
 		saveButton.addClickHandler(new ClickHandler() {
 
@@ -61,18 +67,31 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTCo
 					variableValueTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 				}
 				
-				AEMFTMetadataElementComposite data = getData();
-				if (data != null && errors == false) {
+				if (errors == false) {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsDataValue(data);
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableIdTextBox.getText());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
 		});
+		
+		cancelButton = new AEGWTButton(TEXTS.cancel());
+		saveButtonZone.add(cancelButton);
+		cancelButton.addStyleName(AEGWTIBoostrapConstants.BTN);
+		cancelButton.addStyleName(AEGWTIBoostrapConstants.BTN_LINK);
+		
+		cancelButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				hide();
+			}
+		});
 	}
-	
+
 	@Override
 	public String getName() {
 		return NAME;
@@ -80,19 +99,19 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTCo
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
-//		if (variableData != null) {
-//			String 			variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
-//			String 			variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
-//			
+		if (variableData != null) {
+			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
+			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
+			
 //			if (!AEGWTStringUtils.isEmptyString(variableId)) {
 //				super.setEditMode(true);
 //			}
-//
-//			variableIdTextBox.setText(variableId);
-//			variableValueTextBox.setText(variableValue);
-//		}
+
+			variableIdTextBox.setText(variableId);
+			variableValueTextBox.setText(variableValue);
+		}
 	}
-//
+
 	
 	public AEMFTMetadataElementComposite getData() {
 
@@ -106,11 +125,38 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTCo
 
 	protected void resetForm() {
 		variableIdTextBox.setText("");
-		variableValueTextBox.setText(""); 
+		variableValueTextBox.setText("");
+		variableIdTextBox.setEnabled(true);
+		resetErrors();
+		hide();
 	}
 	
 	protected void resetErrors() {
 		variableIdTextBox.setErrorLabelVisible(false);
 		variableValueTextBox.setErrorLabelVisible(false); 
+	}
+	
+	protected void setErrorVariableExist() {
+		variableIdTextBox.setErrorLabelTextAndShow(TEXTS.error_variable_exist());
+	}
+	
+	protected void setEditMode(String mode) {
+		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
+			editMode = true;
+		} else {
+			editMode = false;
+		}
+	}
+	
+	protected boolean getEditMode() {
+		return editMode;
+	}
+	
+	protected void setVariableIdTextBoxEnable(boolean enable) {
+		if (enable) {
+			variableIdTextBox.setEnabled(true);
+		} else {
+			variableIdTextBox.setEnabled(false);
+		}
 	}
 }
