@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -10,9 +12,11 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
+import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -26,6 +30,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	private FlowPanel 												root;
 	private FlowPanel												headerZone; 
 	private AEGWTBootstrapGlyphiconButton 							addVariableButton;
+	private AEGWTBootstrapGlyphiconButton 							deleteVariablesButton;
 	private	 DSLAMBusDesktopVariablesList   						variableList;
 	private DSLAMBusDesktopProcessConfigureOptionsVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite							variablesData;
@@ -41,8 +46,13 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_VARIABLES_HEADER);
 
 		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.variables());
-		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
+		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
 		headerZone.add(headerLabel);
+		
+		deleteVariablesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
+		deleteVariablesButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+		deleteVariablesButton.setVisible(false);
+		headerZone.add(deleteVariablesButton);
 		
 		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
 		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
@@ -57,7 +67,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			}
 		});	
 		
-		variableList = new DSLAMBusDesktopVariablesList();
+		variableList = new DSLAMBusDesktopVariablesList( (AEGWTButton) deleteVariablesButton);
 		root.add(variableList);
 	}
 
@@ -114,11 +124,19 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			variablesForm.center();
 		}
 		
+		if(LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
+			List<String> rowIds = (List<String>) data.getValueAsSerializable();
+		
+			for (String rowId : rowIds) {
+				variablesData.removeElement(rowId);
+			}	
+		}	
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type);
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type) || LOGICAL_TYPE.DELETE_EVENT.equals(type);
 		
 	}
 	

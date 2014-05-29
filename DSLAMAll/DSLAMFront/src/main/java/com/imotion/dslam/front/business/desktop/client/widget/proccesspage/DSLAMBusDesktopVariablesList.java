@@ -10,14 +10,15 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTable;
+import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
 public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	public static final String NAME = "DSLAMBusDesktopVariablesList";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	public DSLAMBusDesktopVariablesList() {
-		super(true,true,false);
+	public DSLAMBusDesktopVariablesList(AEGWTButton deleteButton) {
+		super(true,true,false, deleteButton);
 	}
 
 	/**
@@ -68,8 +69,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	protected String getMsgDeleteText() {
-		// TODO Auto-generated method stub
-		return null;
+		return TEXTS.delete_variables_confirmation();
 	}
 
 
