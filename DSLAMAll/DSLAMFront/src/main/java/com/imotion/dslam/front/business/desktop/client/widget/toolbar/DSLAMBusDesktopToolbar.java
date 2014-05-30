@@ -34,6 +34,7 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		SimplePanel fileInfoZone = new SimplePanel();
 		root.add(fileInfoZone);
 		fileInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
+		fileInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_ZONE);
 		
 		fileInfo = new DSLAMBusDesktopEditorToolbarInfo();
 		fileInfoZone.add(fileInfo);

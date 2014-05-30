@@ -10,6 +10,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";			//dslam_studio-toolbar-actions
 	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";				//dslam_studio-toolbar-actions-zone
 	String TOOLBAR_INFO 								= TOOLBAR				+ "-info";				//dslam_studio-toolbar-info
+	String TOOLBAR_INFO_ZONE 							= TOOLBAR_INFO			+ "-zone";				//dslam_studio-toolbar-info-zone
 	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";			//dslam_studio-toolbar-info-lastsaved
 	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";				//dslam_studio-toolbar-info-close 
 	String TOOLBAR_INFO_TITLE_ZONE 						= TOOLBAR_INFO			+ "-titleZone";			//dslam_studio-toolbar-info-titleZone
