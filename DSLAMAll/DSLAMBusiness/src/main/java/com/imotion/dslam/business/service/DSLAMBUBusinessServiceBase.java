@@ -1,6 +1,7 @@
 package com.imotion.dslam.business.service;
 
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.bus.service.impl.AEMFTBusinessServiceBaseImpl;
@@ -10,7 +11,8 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 
 	private static final long serialVersionUID = -8777397730307974465L;
 	
-	private DSLAMBKIFilePersistenceService	filePersistence;
+	private DSLAMBKIFilePersistenceService		filePersistence;
+	private DSLAMBKIProcessPersistenceService	processPersistence;
 
 	@Override
 	public String getName() {
@@ -30,6 +32,13 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 		return filePersistence;
 	}
 	
+	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
+		if (processPersistence == null) {
+			processPersistence =  getPersistence().getAppFactoryPersistence().newProcessPersistence();
+		}
+		return processPersistence;
+	}
+	
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -45,6 +54,10 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 		if (filePersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) filePersistence);
 			filePersistence = null;
+		}
+		if (processPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) processPersistence);
+			processPersistence = null;
 		}
 	}
 	

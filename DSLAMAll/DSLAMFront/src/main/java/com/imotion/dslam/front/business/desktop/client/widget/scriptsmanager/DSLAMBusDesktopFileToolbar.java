@@ -27,7 +27,5 @@ public class DSLAMBusDesktopFileToolbar extends DSLAMBusDesktopToolbar {
 			setSecondaryTitleText(contentType);
 			setModified(false);
 		}
-
 	}
-
 }
