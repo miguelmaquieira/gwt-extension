@@ -28,6 +28,12 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LINE);
 		initWidget(root);
 		
+		dateTimeBox 	= new AEGWTBootstrapDateTimePickerTextBox(null);
+		
+		FlowPanel startDateZone = new FlowPanel();
+		startDateZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
+		startDateZone.add(dateTimeBox);
+		
 		AEGWTBootstrapGlyphiconButton deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
 
 		deleteButton.addClickHandler(new ClickHandler() {
@@ -38,16 +44,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 			}
 		});
 		
-		dateTimeBox 	= new AEGWTBootstrapDateTimePickerTextBox(null);
-		
 		FlowPanel deleteZone = new FlowPanel();
 		deleteZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		deleteZone.add(deleteButton);
 		
-		FlowPanel startDateZone = new FlowPanel();
-		startDateZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
-		startDateZone.add(dateTimeBox);
-	
 		root.add(startDateZone);
 		root.add(deleteZone);
 		
@@ -87,10 +87,20 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 //		return dateLong;
 //	}
 //	
-
-	
 	public void remove(){
 		this.removeFromParent();
+	}
+	
+	public void setEmptyError() {
+		dateTimeBox.setEmptyError(TEXTS.error_date_empty());
+	}
+	
+	public void resetErrorLabel() {
+		dateTimeBox.resetErrorLabel();
+	}
+	
+	public String getDateText() {
+		return dateTimeBox.getDateText();
 	}
 	
 	/**
@@ -110,7 +120,5 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 	public void postDisplay() {
 		super.postDisplay();
 		dateTimeBox.addJS(getId());
-	}
-	
-	
+	}	
 }

@@ -100,6 +100,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("La variable ya existe")
 	String error_variable_exist();
 	
+	@DefaultStringValue("Este campo esta vacio")
+	String error_date_empty();
+	
 	@DefaultStringValue("¿Desea eliminar las variables seleccionadas?")
 	String delete_variables_confirmation();
 
