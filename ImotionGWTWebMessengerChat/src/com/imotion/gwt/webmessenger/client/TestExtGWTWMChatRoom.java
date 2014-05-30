@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -142,9 +143,23 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			public void onClick(ClickEvent event) {
 				String userId = textNickName.getText();
 				String roomId = textRoomName.getText();
-				ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
+				final ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
 				if (connection != null) {
 					connection.connect();
+					
+					Timer timer = new Timer() {
+						
+						int attemps = 0;
+						@Override
+						public void run() {
+							connection.sendMessage("PING" + attemps);
+							attemps++;
+							if (attemps > 3) {
+								cancel();
+							}
+						}
+					};
+					timer.scheduleRepeating(1500);
 					textMessage.setEnabled(true);
 					chatMessagePanel.setEnabledButton(true);
 				} else {
@@ -282,7 +297,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		} else  {
 			try {
 				if (connectionCS == null) {
-					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, 30000, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
+					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, -1, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
 					connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 					connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
 					connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
