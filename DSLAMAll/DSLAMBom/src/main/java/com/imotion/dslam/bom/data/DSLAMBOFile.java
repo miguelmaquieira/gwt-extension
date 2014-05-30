@@ -20,24 +20,19 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 
 	private static final long serialVersionUID = 4235149869033046131L;
 	
-	@Id
-	@SequenceGenerator(name = "FileIdGenerator", sequenceName = "FileSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "FileIdGenerator")
-	private Long 		fileId;
-	private String 		filename;
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	private String 		content;
-	private String 		contentType;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date 		savedTime;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date 		creationTime;
-	@Version
-	private 	Long	version; 
+	private Long 	fileId;
+	private String 	filename;
+	private String 	content;
+	private String 	contentType;
+	private Date 	savedTime;
+	private Date 	creationTime;
+	private Long	version; 
 
 	public DSLAMBOFile() {}
 
+	@Id
+	@SequenceGenerator(name = "FileIdGenerator", sequenceName = "FileSeq") //It only takes effect for databases providing identifier generators.
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "FileIdGenerator")	
 	@Override
 	public Long getFileId() {
 		return fileId;
@@ -57,7 +52,9 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-
+	
+	@Lob 
+	@Column(columnDefinition="TEXT")
 	@Override
 	public String getContent() {
 		return content;
@@ -78,6 +75,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 		this.contentType = contentType;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Override
 	public Date getSavedTime() {
 		return savedTime;
@@ -88,6 +86,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 		this.savedTime = savedTime;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Override
 	public Date getCreationTime() {
 		return creationTime;
@@ -98,6 +97,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 		this.creationTime = creationTime;
 	}
 
+	@Version
 	@Override
 	public Long getVersion() {
 		return version;
