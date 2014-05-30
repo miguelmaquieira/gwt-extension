@@ -20,7 +20,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene4GWT"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SeleneBase"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SeleneDev"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBackend"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBom"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBusiness"/>
