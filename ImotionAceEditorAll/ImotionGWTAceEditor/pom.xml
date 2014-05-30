@@ -5,8 +5,8 @@
 	<!-- POM file generated with GWT webAppCreator -->
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>ImotionGWTDslamStudioAll</artifactId>
-		<groupId>com.imotion.dslamstudio</groupId>
+		<artifactId>ImotionAceEditorAll</artifactId>
+		<groupId>com.imotion.ace</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>ImotionGWTAceEditor</artifactId>

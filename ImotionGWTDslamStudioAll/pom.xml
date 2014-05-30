@@ -7,7 +7,6 @@
   <packaging>pom</packaging>
   <name>ImotionGWTDslamStudioAll</name>
   <modules>
-    <module>ImotionGWTAceEditor</module>
     <module>ImotionGWTDslamStudio</module>
   </modules>
   <properties>

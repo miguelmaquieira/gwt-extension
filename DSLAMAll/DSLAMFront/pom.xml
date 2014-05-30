@@ -83,7 +83,7 @@
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
-			<groupId>com.imotion.dslamstudio</groupId>
+			<groupId>com.imotion.ace</groupId>
 			<artifactId>ImotionGWTAceEditor</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
