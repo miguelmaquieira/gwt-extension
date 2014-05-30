@@ -15,5 +15,4 @@ public interface DSLAMBOIVariable extends Serializable, DSLAMBOIVariablesDataCon
 	Long getVersion();
 
 	void setVersion(Long version);
-
 }
