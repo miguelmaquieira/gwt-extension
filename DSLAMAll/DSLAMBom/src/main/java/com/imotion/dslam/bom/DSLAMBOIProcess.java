@@ -2,6 +2,9 @@ package com.imotion.dslam.bom;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.imotion.dslam.bom.data.DSLAMBOVariable;
 
 public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConstants {
 
@@ -13,13 +16,17 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 
 	void setProcessName(String processName);
 
-	String getSynchronous();
+	boolean getSynchronous();
 
-	void setContent(String content);
+	void setSynchronous(boolean synchronous);
 
-	String getContentType();
+	List<Date> getScheduleList();
 
-	void setContentType(String contentType);
+	void setScheduleList(List<Date> scheduleList);
+	
+	List<DSLAMBOVariable> getVariableList();
+
+	void setVariableList(List<DSLAMBOVariable> variableList);
 	
 	Date getSavedTime();
 

@@ -1,7 +1,9 @@
 package com.imotion.dslam.bom.data;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,25 +17,23 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 
 @Entity(name="Process")
 public class DSLAMBOProcess implements DSLAMBOIProcess {
-
-	private static final long serialVersionUID = 4235149869033046131L;
 	
-	@Id
-	@SequenceGenerator(name = "ProcessIdGenerator", sequenceName = "ProcessSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ProcessIdGenerator")
-	private Long 			processId;
-	private String 			processName;
-	private boolean 		synchronous;
+	private static final long serialVersionUID = 7636685992356098248L;
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date 		savedTime;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date 		creationTime;
-	@Version
-	private 	Long	version; 
+	private Long 					processId;
+	private String 					processName;
+	private boolean 				synchronous;
+	private List<Date>				scheduleList;
+	private List<DSLAMBOVariable> 	variableList;
+	private Date 					savedTime;
+	private Date 					creationTime;
+	private Long					version; 
 
 	public DSLAMBOProcess() {}
 
+	@Id
+	@SequenceGenerator(name = "ProcessIdGenerator", sequenceName = "ProcessSeq") //It only takes effect for databases providing identifier generators.
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ProcessIdGenerator")	
 	@Override
 	public Long getProcessId() {
 		return processId;
@@ -53,27 +53,41 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public void setProcessName(String processName) {
 		this.processName = processName;
 	}
+	
+	@Override
+	public boolean getSynchronous() {
+		return synchronous;
+	}
 
-//	@Override
-//	public String getContent() {
-//		return content;
-//	}
-//
-//	@Override
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
-//
-//	@Override
-//	public String getContentType() {
-//		return contentType;
-//	}
+	@Override
+	public void setSynchronous(boolean synchronous) {
+		this.synchronous = synchronous;
+		
+	}
+	
+	@Embedded
+	@Override
+	public List<Date> getScheduleList() {
+		return scheduleList;
+	}
 
-//	@Override
-//	public void setContentType(String contentType) {
-//		this.contentType = contentType;
-//	}
+	@Override
+	public void setScheduleList(List<Date> scheduleList) {
+		this.scheduleList = scheduleList;
+		
+	}
 
+	@Override
+	public List<DSLAMBOVariable> getVariableList() {
+		return variableList;
+	}
+
+	@Override
+	public void setVariableList(List<DSLAMBOVariable> variableList) {
+		this.variableList = variableList;	
+	}
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Override
 	public Date getSavedTime() {
 		return savedTime;
@@ -84,6 +98,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.savedTime = savedTime;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Override
 	public Date getCreationTime() {
 		return creationTime;
@@ -94,6 +109,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.creationTime = creationTime;
 	}
 
+	@Version
 	@Override
 	public Long getVersion() {
 		return version;
@@ -103,29 +119,4 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-
-	@Override
-	public String getSynchronous() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setContent(String content) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getContentType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setContentType(String contentType) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
