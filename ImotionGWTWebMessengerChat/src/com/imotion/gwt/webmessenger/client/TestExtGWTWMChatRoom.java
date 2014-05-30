@@ -256,7 +256,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	 **********************************************************************/
 	@Override
 	public void handleConnectionClosed() {
-		ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseCloseConnection(connectionCS);
+		ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseClosedConnection(connectionCS);
 		connectionCS = null;
 		textMessage.setEnabled(false);
 		chatMessagePanel.setEnabledButton(false);
