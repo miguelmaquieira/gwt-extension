@@ -67,43 +67,43 @@
 		</servlet>
 		
 		<!-- Generic-GWT -->
-		<servlet-mapping>
-			<servlet-name>genericServerConnectionGWT</servlet-name>
-			<url-pattern>/testDesktop/genericServerConnectionGWT</url-pattern>
-		</servlet-mapping>
+<!-- 		<servlet-mapping> -->
+<!-- 			<servlet-name>genericServerConnectionGWT</servlet-name> -->
+<!-- 			<url-pattern>/testDesktop/genericServerConnectionGWT</url-pattern> -->
+<!-- 		</servlet-mapping> -->
 	
-		<servlet>
-			<servlet-name>genericServerConnectionGWT</servlet-name>
-			<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTGenericServerCommServletGWT
-			</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>
+<!-- 		<servlet> -->
+<!-- 			<servlet-name>genericServerConnectionGWT</servlet-name> -->
+<!-- 			<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTGenericServerCommServletGWT -->
+<!-- 			</servlet-class> -->
+<!-- 			<load-on-startup>0</load-on-startup> -->
+<!-- 		</servlet> -->
 		
 		<!--  Generic-J2EE -->	
-		<servlet-mapping>
-			<servlet-name>genericServerConnectionJ2EE</servlet-name>
-			<url-pattern>/testDesktop/genericServerConnectionJ2EE</url-pattern>
-		</servlet-mapping>
+<!-- 		<servlet-mapping> -->
+<!-- 			<servlet-name>genericServerConnectionJ2EE</servlet-name> -->
+<!-- 			<url-pattern>/testDesktop/genericServerConnectionJ2EE</url-pattern> -->
+<!-- 		</servlet-mapping> -->
 	
-		<servlet>
-			<servlet-name>genericServerConnectionJ2EE</servlet-name>
-			<servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletJ2EE
-			</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>	
+<!-- 		<servlet> -->
+<!-- 			<servlet-name>genericServerConnectionJ2EE</servlet-name> -->
+<!-- 			<servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletJ2EE -->
+<!-- 			</servlet-class> -->
+<!-- 			<load-on-startup>0</load-on-startup> -->
+<!-- 		</servlet>	 -->
 		
 		<!--  Servlet test -->	
-		<servlet-mapping>
-			<servlet-name>genericServerTest</servlet-name>
-			<url-pattern>/testDesktop/genericServerTest</url-pattern>
-		</servlet-mapping>
+<!-- 		<servlet-mapping> -->
+<!-- 			<servlet-name>genericServerTest</servlet-name> -->
+<!-- 			<url-pattern>/testDesktop/genericServerTest</url-pattern> -->
+<!-- 		</servlet-mapping> -->
 	
-		<servlet>
-			<servlet-name>genericServerTest</servlet-name>
-			<servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletTest
-			</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>	
+<!-- 		<servlet> -->
+<!-- 			<servlet-name>genericServerTest</servlet-name> -->
+<!-- 			<servlet-class> com.selene.arch.exe.bus.comm.AEMFTGenericServerCommServletTest -->
+<!-- 			</servlet-class> -->
+<!-- 			<load-on-startup>0</load-on-startup> -->
+<!-- 		</servlet>	 -->
 
 	<!-- remote logging for client side (gwt) -->
 	<servlet>
@@ -142,25 +142,25 @@
 	</servlet-mapping>
 	
 	<!-- CRON JOBS -->
-	<servlet>
-		<servlet-name>CronJobs</servlet-name>
-		<servlet-class>com.selene.arch.exe.bus.cron.AEMFTCronJobsServiceImpl</servlet-class>
-	</servlet>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>CronJobs</servlet-name> -->
+<!-- 		<servlet-class>com.selene.arch.exe.bus.cron.AEMFTCronJobsServiceImpl</servlet-class> -->
+<!-- 	</servlet> -->
 	
-	<servlet-mapping>
-		<servlet-name>CronJobs</servlet-name>
-		<url-pattern>/cron</url-pattern>
-	</servlet-mapping>
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>CronJobs</servlet-name> -->
+<!-- 		<url-pattern>/cron</url-pattern> -->
+<!-- 	</servlet-mapping> -->
 
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>CronJobs</web-resource-name>
-			<url-pattern>/cron/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>admin</role-name>
-		</auth-constraint>
-	</security-constraint>
+<!-- 	<security-constraint> -->
+<!-- 		<web-resource-collection> -->
+<!-- 			<web-resource-name>CronJobs</web-resource-name> -->
+<!-- 			<url-pattern>/cron/*</url-pattern> -->
+<!-- 		</web-resource-collection> -->
+<!-- 		<auth-constraint> -->
+<!-- 			<role-name>admin</role-name> -->
+<!-- 		</auth-constraint> -->
+<!-- 	</security-constraint> -->
 	
 	<!-- Objectify -->
 	<filter>
