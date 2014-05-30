@@ -1,15 +1,23 @@
 .dslam_studio-editorView {
 	height: 100%;
+	position: relative;
 }
 
 .dslam_studio-editorView-bottomZone {
-	height: 100%;
+	position: absolute;
+	top: 40px;
+	width: 100%;
+	bottom: 0px;
+	height: auto;
 }
 
 .dslam_studio-toolbar {
 	height: 40px;
 	border: 1px solid #CCCCCC;
 	padding: 2px;
+	top: 0px;
+	position: absolute;
+	width: 100%;
 }
 
 .dslam_studio-toolbar div {
@@ -17,12 +25,16 @@
 }
 
 .dslam_studio-toolbar-actions-zone {
-	border-right: 1px solid #CCCCCC;
 }
 
 .dslam_studio-toolbar-actions button {
 	width: 100%;
 	border-width: 0px;
+}
+
+.dslam_studio-toolbar-info-zone {
+	border-left: 1px solid #CCCCCC;
+	margin-left: -3px;
 }
 
 .dslam_studio-toolbar-info-close button {
@@ -49,12 +61,14 @@
 	line-height: 33px;
 }
 
-.dslam_studio-toolbar-info-titleZone-mainTitle, .dslam_studio-editorView-filename {
+.dslam_studio-toolbar-info-titleZone-mainTitle,.dslam_studio-editorView-filename
+	{
 	font-weight: bold;
 	margin-right: 10px;
 }
 
-.dslam_studio-toolbar-info-titleZone-secondaryTitle, .dslam_studio-editorView-contentType {
+.dslam_studio-toolbar-info-titleZone-secondaryTitle,.dslam_studio-editorView-contentType
+	{
 	text-transform: lowercase;
 	margin-left: 10px;
 }
@@ -69,6 +83,8 @@
 
 .dslam_studio-list-zone {
 	padding-right: 0px;
+	padding-left: 0px;
+	height: 100%;
 }
 
 .dslam_studio-list-container-zone {
@@ -82,23 +98,23 @@
 .dslam_studio-list {
 	height: 100%;
 	position: relative;
+	border-right: 1px solid #CCC;
 }
 
 .dslam_studio-list-header {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	border: 1px solid #CCCCCC;
 }
 
 .dslam_studio-container-zone {
-	width:100%;
+	width: 100%;
 }
 
 .dslam_studio-list-element {
 	width: 100%;
-	border-right: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
 }
 
@@ -114,8 +130,8 @@
 	border-right-width: 0px;
 }
 
-
-.dslam_studio-list-element .dropdown-toggle:HOVER, .dslam_studio-list-element .dropdown-toggle:ACTIVE, .dslam_studio-list-element .dropdown-toggle:FOCUS {
+.dslam_studio-list-element .dropdown-toggle:HOVER,.dslam_studio-list-element .dropdown-toggle:ACTIVE,.dslam_studio-list-element .dropdown-toggle:FOCUS
+	{
 	z-index: 0;
 }
 
@@ -131,6 +147,7 @@
 
 .dslam_studio-editorZone {
 	padding-left: 0px;
+	padding-right: 0px;
 	height: 100%;
 }
 
@@ -144,15 +161,17 @@
 
 .dslam_studio-processConfigureOptionsVariablesHeader {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader{
+.dslam_studio-processConfigureOptionsScheduleHeader {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
@@ -160,7 +179,8 @@
 
 .dslam_studio-processConfigureOptionsPropertiesHeader {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
@@ -173,7 +193,6 @@
 
 .dslam_studio-processConfigureOptionsPropertiesZone {
 	padding-left: 0px;
-	
 }
 
 .dslam_studio-processConfigureOptionsPropertiesCheckBox {
@@ -185,7 +204,7 @@
 	padding-right: 0px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader > button {
+.dslam_studio-processConfigureOptionsVariablesHeader>button {
 	margin-top: -3px;
 	height: 30px;
 	border-width: 0px;
@@ -198,34 +217,34 @@
 	margin-left: 15px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader > .btn:hover {
-	background-color: rgb(184,184,184);
+.dslam_studio-processConfigureOptionsVariablesHeader>.btn:hover {
+	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader > .btn:focus {
-	background-color: rgb(184,184,184);
+.dslam_studio-processConfigureOptionsVariablesHeader>.btn:focus {
+	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader > .col-xs-10 {
+.dslam_studio-processConfigureOptionsVariablesHeader>.col-xs-10 {
 	padding-left: 0px;
-} 
+}
 
-.dslam_studio-processConfigureOptionsScheduleHeader > button {
+.dslam_studio-processConfigureOptionsScheduleHeader>button {
 	margin-top: -3px;
 	height: 30px;
 	border-width: 0px;
 	background-color: rgb(242, 241, 240);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader > .btn:hover {
-	background-color: rgb(184,184,184);
+.dslam_studio-processConfigureOptionsScheduleHeader>.btn:hover {
+	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader > .btn:focus {
-	background-color: rgb(184,184,184);
+.dslam_studio-processConfigureOptionsScheduleHeader>.btn:focus {
+	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader > .col-xs-10 {
+.dslam_studio-processConfigureOptionsScheduleHeader>.col-xs-10 {
 	padding-left: 0px;
 }
 
@@ -268,22 +287,24 @@
 	margin-top: 17px;
 }
 
-.dslam_studio-toolbar-connection-zone > .form-group {
+.dslam_studio-toolbar-connection-zone>.form-group {
 	margin-bottom: 10px;
 }
 
 .dslam_studio-processConfigureNodesSelectionHeader {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
-	padding-left:0px
+	padding-left: 0px
 }
 
 .dslam_studio-processConfigureNodesPropertiesHeader {
 	height: 35px;
-	background-color: #F2F1F0; border : 1px solid #CCCCCC;
+	background-color: #F2F1F0;
+	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
@@ -303,7 +324,7 @@
 }
 
 .dslam_studio-processConfigureOptionsVariablesList {
-	width:100%;
+	width: 100%;
 	height: 260px;
 }
 
@@ -311,7 +332,7 @@
 	height: 260px;
 }
 
-.dslam_studio-processConfigureNodesSelectionHeader > .gwt-Label {
+.dslam_studio-processConfigureNodesSelectionHeader>.gwt-Label {
 	padding-left: 5px;
 }
 
@@ -320,7 +341,7 @@
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #888888;
-    width: 500px;
+	width: 500px;
 }
 
 .dslam_studio-processConfigureOptionsScheduleLine button {

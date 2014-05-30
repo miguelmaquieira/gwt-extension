@@ -129,6 +129,7 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 			saveButton.setText(COMMON_TEXTS.rename());
 		} 
 		super.center();
+		filenameField.setFocus(true);
 	}
 
 	public void setContentTypeEnabled(boolean enabled) {

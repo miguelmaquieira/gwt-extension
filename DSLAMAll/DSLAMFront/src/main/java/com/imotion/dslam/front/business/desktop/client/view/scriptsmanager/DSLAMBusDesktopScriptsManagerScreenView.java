@@ -55,7 +55,6 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		root.add(toolbar);
 		toolbar.setMainTitleText("");
 		toolbar.setLastSaved(null);
-		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setFileInfoVisible(false);
 
@@ -63,7 +62,6 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		FlowPanel bottomZone = new FlowPanel();
 		root.add(bottomZone);
 		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW_BOTTOM_ZONE);
-		bottomZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 
 		//Bottom Zone - File list zone
 		FlowPanel fileListZone = new FlowPanel();
