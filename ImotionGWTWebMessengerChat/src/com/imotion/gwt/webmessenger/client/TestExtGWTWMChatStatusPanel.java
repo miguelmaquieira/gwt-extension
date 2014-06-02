@@ -108,6 +108,7 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 		} else if (error.getErrorType() == TYPE.CONNECTION_TIMEOUT) {
 			statusMessageLabel.setText(TEXTS.status_message_label_connection_timeout_error_text());
 			statusMessageLabel.addStyleName("extgwt-errorTextTransition");
+			connectionLed.setUrl("images/connection_off.png");
 			Timer timerText = new Timer() {
 				public void run() {
 					statusMessageLabel.setText(TEXTS.status_message_label_waiting_connection_text());
