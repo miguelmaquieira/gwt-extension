@@ -17,7 +17,6 @@ public interface ExtGWTWMCommCSConnection extends ExtGWTWMReleasable {
 	public void connect();
 	public void connect(int connectionTimeout);
 	public void disconnect();
-	public void unsubscribe();
 	public void sendMessage(String message);
 	
 	public ExtGWTWMSession getSessionData();

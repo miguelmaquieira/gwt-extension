@@ -133,17 +133,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 			manageException(exception, "connect", TYPE.CONNECTION_ERROR);
 		}
 	}
-	
-	@Override
-	public void unsubscribe() {
-		try {
-			// unsusbcribe
-			getCurator().unsubscribe();
-
-		} catch (Exception exception) {
-			manageException(exception, "unsubscribe");
-		}
-	}
 
 	@Override
 	public ExtGWTWMCommCSHandler getCommHandlerWrapper() {
@@ -157,12 +146,6 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 
 	@Override
 	public void release() {
-		disconnect();
-		handleCloseEvent(null);
-		if (curator != null) {
-			curator.release();
-			curator = null;
-		}
 		if (errorHandler != null) {
 			errorHandler.release();
 			errorHandler = null;
@@ -174,7 +157,9 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		if (atmosphereConfig != null) {
 			atmosphereConfig.setMessageHandler(null);
 		}
+		curator = null;
 		atmosphereConfig = null;
+		sessionData = null;
 	}
 	
 	@Override

@@ -27,25 +27,6 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 	public ExtGWTWMCSConnectionCuratorAtmosphere(AtmosphereRequestConfig atmosphereConfig) {
 		this.atmosphereConfig = atmosphereConfig;
 	}
-
-	@Override
-	public void release() {
-		try {
-			atmosphereConfig = null;
-			rpcRequest = null;
-			releaseCommandMap();
-			atmosphere = null;
-		} catch (Exception exception) {
-			atmosphere = null;
-		}
-	}
-	
-	@Override
-	public void unsubscribe() throws Exception {
-		if (atmosphere != null) {
-			atmosphere.unsubscribe();
-		}
-	}
 	
 	@Override
 	public int connect() throws Exception {
@@ -61,9 +42,15 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 
 	@Override
 	public void disconnect() throws Exception {
-		if (atmosphere != null) {
+		try {
+			releaseCommandMap();
+			String url = getUrl(rpcRequest);
+			unsubscribe(url);
 			atmosphere = null;
-			rpcRequest = null;		
+			atmosphereConfig = null;
+			rpcRequest = null;
+		} catch (Exception exception) {
+			atmosphere = null;
 		}
 	}
 
@@ -108,10 +95,24 @@ public class ExtGWTWMCSConnectionCuratorAtmosphere implements ExtGWTWmCommCSConn
 			command.cancel();
 		}
 	}
+
+	/**********************************************************************
+	 *                           NATIVE FUNCTIONS						  *
+	 **********************************************************************/
+	
+	public native void unsubscribe(String url) /*-{
+		$wnd.atmosphere.unsubscribeUrl(url);
+	}-*/;
+	
+	public native String getUrl(AtmosphereRequest request) /*-{
+		var requestImpl = request;
+		return requestImpl.getUrl();
+	}-*/;
 	
 	/**********************************************************************
 	 *                           PRIVATE FUNCTIONS						  *
 	 **********************************************************************/
+	
 	
 	private void executeOpenHandler(ExtGWTWMCommand command, int delay, int attemps, final ExtGWTWMCSConnectionAtmosphere conn) {
 		command.execute(new Command() {
