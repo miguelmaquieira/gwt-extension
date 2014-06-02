@@ -90,11 +90,11 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 	@Override
 	public void onError(ExtGWTWMError error) {
 		statusMessageLabel.addStyleName("extgwt-textError");
+		final String oldText = statusMessageLabel.getText();
 		if (error.getErrorType() == TYPE.TRANSPORT) {
 			String message = TEXTS.status_message_label_connection_transportation_error_text() + error.getMessage();
 			statusMessageLabel.setText(message);
 		} else if (error.getErrorType() == TYPE.COMMAND) {
-			final String oldText = statusMessageLabel.getText();
 			statusMessageLabel.addStyleName("extgwt-errorTextTransition");
 			statusMessageLabel.setText(error.getMessage());
 			Timer timerText = new Timer() {
@@ -105,7 +105,17 @@ public class TestExtGWTWMChatStatusPanel extends Composite implements ExtGWTWMHa
 				}
 			};
 			timerText.schedule(5000);
-			
+		} else if (error.getErrorType() == TYPE.CONNECTION_TIMEOUT) {
+			statusMessageLabel.setText(TEXTS.status_message_label_connection_timeout_error_text());
+			statusMessageLabel.addStyleName("extgwt-errorTextTransition");
+			Timer timerText = new Timer() {
+				public void run() {
+					statusMessageLabel.setText(TEXTS.status_message_label_waiting_connection_text());
+					statusMessageLabel.removeStyleName("extgwt-errorTextTransition");
+					statusMessageLabel.removeStyleName("extgwt-textError");
+				}
+			};
+			timerText.schedule(5000);
 		}
 	}
 

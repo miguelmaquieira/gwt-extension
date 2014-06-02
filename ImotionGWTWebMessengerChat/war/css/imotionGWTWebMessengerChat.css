@@ -123,6 +123,11 @@
 	padding-left: 10px;
 }
 
+.extgwt-webMessengerChatRoomConnTimeoutPanel {
+	padding-left: 10px;
+	width: 100px;
+}
+
 .extgwt-webMessengerChatRoomSouthZone .gwt-TextBox {
 	height: 25px;
 	font-size: 12px;

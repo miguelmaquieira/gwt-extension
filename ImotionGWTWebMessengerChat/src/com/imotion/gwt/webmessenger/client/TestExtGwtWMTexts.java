@@ -19,11 +19,17 @@ public interface TestExtGwtWMTexts extends Constants {
 	@DefaultStringValue("roomDefault")
 	String room_name_default_value_text();
 	
+	@DefaultStringValue("-1")
+	String room_conn_timeout_default_value_text();
+	
 	@DefaultStringValue("Nick name")
 	String nick_name_label_text();
 	
 	@DefaultStringValue("Room name")
 	String room_name_label_text();
+	
+	@DefaultStringValue("Timeout (seg.)")
+	String room_conn_timeout_text();
 	
 	@DefaultStringValue("Conect")
 	String button_conect_text();
@@ -51,6 +57,9 @@ public interface TestExtGwtWMTexts extends Constants {
 	
 	@DefaultStringValue("Transportation failure: ")
 	String status_message_label_connection_transportation_error_text();
+	
+	@DefaultStringValue("Connection timeout")
+	String status_message_label_connection_timeout_error_text();
 	
 	@DefaultStringValue("Waiting orders...")
 	String chat_message_panel_waiting_label_text();

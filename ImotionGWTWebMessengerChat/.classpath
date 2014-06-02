@@ -5,14 +5,12 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ImotionGWTWebMessenger"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="lib/atmosphere-gwt20-client-2.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/atmosphere-gwt20-common-2.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/atmosphere-gwt20-server-2.0.0.jar"/>
-	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/imotion-gwtwebmessenger.jar"/>
 	<classpathentry kind="lib" path="lib/javascript-2.0.3.war"/>
-	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.6.1.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/gwt-2.5.0"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-client-2.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-common-2.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-gwt20-server-2.1.2.jar"/>
+	<classpathentry kind="lib" path="lib/atmosphere-runtime-2.2.0-RC1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

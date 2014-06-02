@@ -15,7 +15,6 @@ public class ExtGWTWMCommand implements Serializable {
 		MESSAGE_HANDLER,
 		CLOSE_CONNECTION,
 		CLOSE_HANDLER,
-		UNSUBSCRIBE
 	}
 	
 	private Timer 			action;

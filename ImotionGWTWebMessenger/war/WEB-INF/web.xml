@@ -7,7 +7,6 @@
 
   <!-- Servlets -->
   
-  
   <!-- Atmosphere -->
 	<servlet>
 	  	<description>AtmosphereServlet</description>

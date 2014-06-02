@@ -2,7 +2,10 @@ package com.imotion.gwt.webmessenger.client.comm.cs.atmosphere;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.atmosphere.gwt20.client.AtmosphereClientTimeoutHandler;
 import org.atmosphere.gwt20.client.AtmosphereCloseHandler;
 import org.atmosphere.gwt20.client.AtmosphereErrorHandler;
 import org.atmosphere.gwt20.client.AtmosphereMessageHandler;
@@ -11,6 +14,7 @@ import org.atmosphere.gwt20.client.AtmosphereReconnectHandler;
 import org.atmosphere.gwt20.client.AtmosphereReopenHandler;
 import org.atmosphere.gwt20.client.AtmosphereRequest;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig;
+import org.atmosphere.gwt20.client.RequestConfig;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig.Flags;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig.Transport;
 import org.atmosphere.gwt20.client.AtmosphereResponse;
@@ -41,6 +45,8 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 	private final ExtGWTWMMessageTexts 	MESSAGES 	= GWT.create(ExtGWTWMMessageTexts.class); 
 	
 	private final int CONNECTION_TIMEOUT = 1;
+	
+	private final static Logger logger = Logger.getLogger("ExtGWTWMClient");
 
 	private ExtGWTWMSession 				sessionData;
 
@@ -310,6 +316,16 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 				handlerError(error);
 			}
 		});
+		
+		atmosphereConfig.setClientTimeoutHandler(new AtmosphereClientTimeoutHandler() {
+			
+			@Override
+			public void onClientTimeout(AtmosphereRequest request) {
+				logger.log(Level.INFO, "Timeout event: " 
+														+ "\n\tRequest info: " + request.toString());
+				handlerError(new ExtGWTWMError(TYPE.CONNECTION_TIMEOUT));
+			}
+		});
 
 		atmosphereConfig.setTransportFailureHandler(new AtmosphereTransportFailureHandler() {
 			@Override
@@ -326,8 +342,9 @@ public class ExtGWTWMCSConnectionAtmosphere implements ExtGWTWMCommCSConnection 
 		});
 
 		atmosphereConfig.setReconnectHandler(new AtmosphereReconnectHandler() {
+			
 			@Override
-			public void onReconnect(AtmosphereRequestConfig request, AtmosphereResponse response) {
+			public void onReconnect(RequestConfig request, AtmosphereResponse response) {
 				// nothing to do
 			}
 		});

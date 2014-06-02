@@ -4,6 +4,15 @@
               http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0"
          xmlns="http://java.sun.com/xml/ns/javaee">
+         
+	<servlet>
+		<servlet-name>remoteLogging</servlet-name>
+    	<servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>remoteLogging</servlet-name>
+    	<url-pattern>/imotionGWTWebMessengerChat/remote_logging</url-pattern>
+    </servlet-mapping>
 
    <!-- Atmosphere -->
 	<servlet>

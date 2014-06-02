@@ -9,7 +9,6 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -24,10 +23,12 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection;
 import com.imotion.gwt.webmessenger.client.comm.ExtGWTWMCommCSConnection.TRANSPORT_TYPE;
-import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasCloseCommHandler;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError;
+import com.imotion.gwt.webmessenger.client.common.ExtGWTWMError.TYPE;
+import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasErrorHandler;
 import com.imotion.gwt.webmessenger.client.handler.ExtGWTWMHasReceiveCommHandler;
 
-public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler, ExtGWTWMHasCloseCommHandler {
+public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiveCommHandler, ExtGWTWMHasErrorHandler {
 
 	private final TestExtGwtWMTexts 	TEXTS 	= GWT.create(TestExtGwtWMTexts.class);
 	private final DateTimeFormat 		format 	= DateTimeFormat.getFormat("HH:mm:ss");
@@ -38,6 +39,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	private TextBox		textMessage;
 	private TextBox		textNickName;
 	private TextBox		textRoomName;
+	private TextBox		textConnTimeout;
 	
 	private TestExtGWTWMChatStatusPanel 	statusPanel;
 	private TestExtGWTWMChatMessagePanel	chatMessagePanel;
@@ -132,6 +134,22 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		textRoomName = new TextBox();
 		textRoomName.setText(TEXTS.room_name_default_value_text());
 		roomNamePanel.add(textRoomName);
+		
+		//// Connection timeot panel
+		FlowPanel connTimeoutPanel = new FlowPanel();
+		connTimeoutPanel.addStyleName("extgwt-webMessengerChatRoomConnTimeoutPanel");
+		southZone.add(connTimeoutPanel);
+
+		///// Label connection timeout
+		Label lblConnTimeout = new Label(TEXTS.room_conn_timeout_text());
+		connTimeoutPanel.add(lblConnTimeout);
+
+		///// Text connection timeout
+		textConnTimeout = new TextBox();
+		textConnTimeout.setText(TEXTS.room_conn_timeout_default_value_text());
+		connTimeoutPanel.add(textConnTimeout);
+		
+		
 
 		//// Button connect
 		Button buttonConnect = new Button(TEXTS.button_conect_text());
@@ -146,20 +164,6 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 				final ExtGWTWMCommCSConnection connection = getCommCS(userId, roomId);
 				if (connection != null) {
 					connection.connect();
-					
-					Timer timer = new Timer() {
-						
-						int attemps = 0;
-						@Override
-						public void run() {
-							connection.sendMessage("PING" + attemps);
-							attemps++;
-							if (attemps > 3) {
-								cancel();
-							}
-						}
-					};
-					timer.scheduleRepeating(1500);
 					textMessage.setEnabled(true);
 					chatMessagePanel.setEnabledButton(true);
 				} else {
@@ -208,7 +212,7 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 						connection.sendMessage(textMessage.getText());
 						textMessage.setText("");
 					} else {
-						Window.alert("No se ha podido enviar el mensaje. Par??metros: 'userId': " + userId + " ' roomId: '" + roomId);
+						Window.alert("No se ha podido enviar el mensaje. Parámetros: 'userId': " + userId + " ' roomId: '" + roomId);
 					}
 				}
 			}
@@ -269,13 +273,6 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 	/**********************************************************************
 	 *                   	IExtGWTWebCloseHandler				          *
 	 **********************************************************************/
-	@Override
-	public void handleConnectionClosed() {
-		ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseClosedConnection(connectionCS);
-		connectionCS = null;
-		textMessage.setEnabled(false);
-		chatMessagePanel.setEnabledButton(false);
-	}
 	
 	/**********************************************************************
 	 *                		   PUBLIC FUNCTIONS						      *
@@ -297,10 +294,16 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 		} else  {
 			try {
 				if (connectionCS == null) {
-					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, -1, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
+					int connectionTimeout = -1;
+					try {
+						connectionTimeout = Integer.parseInt(textConnTimeout.getText()) * 1000;
+					} catch (NumberFormatException nfe) {
+						
+					}
+					connectionCS = ExtGWTWMFactory.getDefaultStandaloneCommCS().getConnection(roomname, nickname, connectionTimeout, TRANSPORT_TYPE.LONG_POLLING, TRANSPORT_TYPE.STREAMING);
 					connectionCS.getCommHandlerWrapper().addCommHandler(statusPanel);
 					connectionCS.getErrorHandlerWrapper().addErrorHandler(statusPanel);
-					connectionCS.getCommHandlerWrapper().addCommCloseHandler(this);
+					connectionCS.getErrorHandlerWrapper().addErrorHandler(this);
 					connectionCS.getCommHandlerWrapper().addCommReceiveHandler(this);
 				}
 			} catch (ExtGWTWMException exception) {
@@ -318,5 +321,22 @@ public class TestExtGWTWMChatRoom extends Composite implements ExtGWTWMHasReceiv
 			.toString();
 		areaMessage.setText(finalText);
 		areaMessage.setCursorPos(finalText.length());
+	}
+
+	@Override
+	public void onError(ExtGWTWMError error) {
+		if (error != null && connectionCS != null) {
+			if (connectionCS != null) {
+				ExtGWTWMFactory.getDefaultStandaloneCommCS().releaseClosedConnection(connectionCS);
+				connectionCS = null;
+				textMessage.setEnabled(false);
+				chatMessagePanel.setEnabledButton(false);
+			}
+		}
+	}
+
+	@Override
+	public TYPE[] getErrorType() {
+		return new TYPE[] { TYPE.CONNECTION_TIMEOUT };
 	}
 }
