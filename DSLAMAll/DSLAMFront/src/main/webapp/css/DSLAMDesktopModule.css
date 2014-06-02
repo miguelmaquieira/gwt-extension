@@ -11,6 +11,49 @@
 	height: auto;
 }
 
+.dslam_studio-processesView {
+	height: 100%;
+	position: relative;
+}
+
+.dslam_studio-processesView-bottomZone {
+	position: absolute;
+	top: 95px;
+	width: 100%;
+	bottom: 0px;
+	height: auto;
+}
+
+.dslam_studio-connection-toolbar {
+	position: absolute;
+	top: 40px;
+	width: 100%;	
+}
+
+.dslam_studio-processConfigureZone {
+	padding-right: 0px;
+	padding-left: 0px;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	top: 0px;
+}
+.dslam_studio-processConfigure {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	top: 0px;
+}
+
+.dslam_studio-processConfigureNodesZone {
+	bottom: 0px;
+	height: auto;
+	top: 298px;
+	position: absolute;
+	width: 100%;
+	right: 0px;
+}
+
 .dslam_studio-toolbar {
 	height: 40px;
 	border: 1px solid #CCCCCC;
@@ -92,7 +135,8 @@
 }
 
 .dslam_studio-processlist-zone {
-	padding-right: 0px;
+	padding-left: 0px;
+	height: 100%
 }
 
 .dslam_studio-list {
@@ -107,6 +151,10 @@
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
+}
+
+.dslam_studio-connection-toolbar {
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .dslam_studio-container-zone {
@@ -162,33 +210,32 @@
 .dslam_studio-processConfigureOptionsVariablesHeader {
 	height: 35px;
 	background-color: #F2F1F0;
-	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	border: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .dslam_studio-processConfigureOptionsScheduleHeader {
 	height: 35px;
 	background-color: #F2F1F0;
-	border: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	border: 1px solid #CCCCCC;
 }
 
 .dslam_studio-processConfigureOptionsPropertiesHeader {
 	height: 35px;
 	background-color: #F2F1F0;
-	border: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	border: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .dslam_studio-processConfigureOptionsVariablesZone {
 	padding-left: 0px;
 	padding-right: 0px;
+	border-right: 1px solid #CCCCCC;
+	height: 100%
 }
 
 .dslam_studio-processConfigureOptionsPropertiesZone {
@@ -202,6 +249,8 @@
 .dslam_studio-processConfigureOptionsScheduleZone {
 	padding-left: 0px;
 	padding-right: 0px;
+	height: 100%;
+	border-right: 1px solid #CCCCCC;
 }
 
 .dslam_studio-processConfigureOptionsVariablesHeader>button {
@@ -294,11 +343,12 @@
 .dslam_studio-processConfigureNodesSelectionHeader {
 	height: 35px;
 	background-color: #F2F1F0;
-	border: 1px solid #CCCCCC;
+	border-top: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	border: 1px solid #CCCCCC;
-	padding-left: 0px
+	border-bottom: 1px solid #CCCCCC;
+	padding-left: 0px;
+	margin-left: -15px;
 }
 
 .dslam_studio-processConfigureNodesPropertiesHeader {
@@ -308,11 +358,16 @@
 	padding: 5px;
 	font-weight: bold;
 	border: 1px solid #CCCCCC;
+	margin-left: -1px;
+	margin-right: -15px;
 }
 
 .dslam_studio-processConfigureNodesSelectionZone {
 	padding-left: 0px;
 	padding-right: 0px;
+	height: 100%;
+	border-right: 1px solid #CCCCCC;
+	margin-left: -15px;
 }
 
 .dslam_studio-processConfigureNodesPropertiesZone {
@@ -320,7 +375,7 @@
 }
 
 .dslam_studio-processConfigureOptionsZone {
-	height: 300px;
+	height: 299px;
 }
 
 .dslam_studio-processConfigureOptionsVariablesList {
