@@ -37,19 +37,16 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		toolbar = new DSLAMBusDesktopProcessToolbar();
 		root.add(toolbar);
 		toolbar.setMainTitleText("script1");
-		toolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());
 		
 		connectionToolbar = new DSLAMBusDesktopConnectionToolbar();
 		root.add(connectionToolbar);
-		connectionToolbar.addStyleName(AEGWTIBoostrapConstants.ROW);
 
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
 		root.add(bottomZone);
 		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESSES_VIEW_BOTTOM_ZONE);
-		bottomZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 
 		//Bottom Zone - Process list zone
 		FlowPanel processListZone = new FlowPanel();
