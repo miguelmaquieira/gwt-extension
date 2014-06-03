@@ -1,12 +1,9 @@
 package com.imotion.dslam.bom.data;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Version;
 
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 
-@Entity(name="Variable")
 @Embeddable
 public class DSLAMBOVariable implements DSLAMBOIVariable {
 	
@@ -14,39 +11,32 @@ public class DSLAMBOVariable implements DSLAMBOIVariable {
 	
 	private String variableName;
 	private String 	variableValue;
-	private Long	version; 
+	private String 	variableType;
 
 	public DSLAMBOVariable() {}
 
-	@Override
 	public String getVariableName() {
 		return variableName;
 	}
 
-	@Override
 	public void setVariableName(String variableName) {
 		this.variableName = variableName;
 	}
-	
-	@Override
+
 	public String getVariableValue() {
 		return variableValue;
 	}
 
-	@Override
 	public void setVariableValue(String variableValue) {
 		this.variableValue = variableValue;
 	}
 
-	@Version
-	@Override
-	public Long getVersion() {
-		return version;
+	public String getVariableType() {
+		return variableType;
 	}
 
-	@Override
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setVariableType(String variableType) {
+		this.variableType = variableType;
 	}
 
 }

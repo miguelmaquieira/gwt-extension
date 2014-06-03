@@ -26,7 +26,6 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel {
 		optionsZone = new DSLAMBusDesktopProcessConfigureOptions();
 		root.add(optionsZone);
 		optionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_ZONE);
-		optionsZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 
 		nodeZone = new DSLAMBusDesktopProcessConfigureNodes();
 		root.add(nodeZone);

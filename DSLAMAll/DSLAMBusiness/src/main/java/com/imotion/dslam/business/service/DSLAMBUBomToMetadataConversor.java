@@ -25,24 +25,36 @@ public class DSLAMBUBomToMetadataConversor {
 
 			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
 			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
-			data.addElement(DSLAMBOIProcess.PROCESS_SYNCHRONOUS		, process.getSynchronous());
-			//TODO
+			data.addElement(DSLAMBOIProcess.PROCESS_SYNCHRONOUS		, process.isSynchronous());
 			//data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, process.getScheduleList());
 			//data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, process.getVariableList());
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
+			data.addElement(DSLAMBOIProcess.PROCESS_SCRIPT			, fromFile(process.getProcessScript()));
 		}
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProcessList(List<DSLAMBOIProcess> processList) {
+	public  static AEMFTMetadataElementComposite fromProcessList(List<DSLAMBOIProcess> processList, List<DSLAMBOIFile> fileList) {
 		AEMFTMetadataElementComposite data = null;
+		data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
-			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			AEMFTMetadataElementComposite dataProcessList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (DSLAMBOIProcess process : processList) {
-				data.addElement(process.getProcessName(), fromProcess(process));
+				dataProcessList.addElement(process.getProcessName(), fromProcess(process));
 			}
+			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
+		
+		if (!AEMFTCommonUtilsBase.isEmptyList(fileList)) {
+			AEMFTMetadataElementComposite dataFilesList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			for (DSLAMBOIFile file : fileList) {
+				dataFilesList.addElement(file.getFilename(),fromFileIdName(file));
+			}
+			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_FILE_DATA_LIST,dataFilesList);
+		}
+		
 		return data;
 	}
 	
@@ -72,6 +84,17 @@ public class DSLAMBUBomToMetadataConversor {
 			for (DSLAMBOIFile file : fileList) {
 				data.addElement(file.getFilename(), fromFile(file));
 			}
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromFileIdName(DSLAMBOIFile file) {
+		AEMFTMetadataElementComposite data = null;
+		if (file != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+
+			data.addElement(DSLAMBOIFile.FILE_ID				, file.getFileId());
+			data.addElement(DSLAMBOIFile.FILE_NAME				, file.getFilename());
 		}
 		return data;
 	}

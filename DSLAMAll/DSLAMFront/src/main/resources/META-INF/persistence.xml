@@ -10,6 +10,8 @@
 
 		<!-- Registered entities -->
 		<class>com.imotion.dslam.bom.data.DSLAMBOFile</class>
+		<class>com.imotion.dslam.bom.data.DSLAMBOProcess</class>
+		
 
 		<properties>
 
