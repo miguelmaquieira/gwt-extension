@@ -20,7 +20,7 @@ var ImolangHighlightRules = function() {
 	         { token: 'variable-local', 	 	regex: '\\$[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
 	         { token: 'variable-process',		regex: '#[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
 	         { token: 'variable-extern', 		regex: '%[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
-	         { token: keywordMapper,			regex: '[a-zA-Z_$][a-zA-Z0-9]*\\b', caseInsensitive: true}
+	         { token: keywordMapper}
 	 	]
     };
     
