@@ -46,6 +46,10 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 			addRowItem(variableRow, variableId, true, true,false);
 		}	
 	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		return null;
+	}
 
 	/*
 	 * AEGWTBootstrapTable

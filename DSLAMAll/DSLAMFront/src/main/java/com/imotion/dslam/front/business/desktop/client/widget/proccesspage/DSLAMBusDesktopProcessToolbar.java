@@ -30,9 +30,8 @@ public class DSLAMBusDesktopProcessToolbar extends DSLAMBusDesktopToolbar {
 			setLastSaved(lastSaved);
 			setMainTitleText(processName);
 			setSecondaryTitleText(scriptName);
-			setModified(false);
 			super.getInfo().setVisible(true);
-			super.getActions().getSaveButton().setEnabled(true);
+			setModified(true);
 		}
 	}
 }

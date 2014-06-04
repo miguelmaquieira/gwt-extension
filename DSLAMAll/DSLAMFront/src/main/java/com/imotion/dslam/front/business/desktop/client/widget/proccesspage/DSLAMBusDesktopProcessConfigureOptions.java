@@ -38,6 +38,10 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 		propertiesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 	}
 	
+	/**
+	 * AEGWTCompositePanel
+	 */
+	
 	public void postDisplay() {
 		super.postDisplay();
 		varListZone.postDisplay();
@@ -51,6 +55,12 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
-
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		propertiesZone.getData();
+		varListZone.getData();
+		scheduleZone.getData();
+		return null;
 	}
 }

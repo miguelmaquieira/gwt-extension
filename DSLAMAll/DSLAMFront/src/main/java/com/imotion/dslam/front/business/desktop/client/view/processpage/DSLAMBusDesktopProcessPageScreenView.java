@@ -3,6 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.view.processpage;
 import java.util.Date;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -80,8 +81,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 
 		processOptions = new DSLAMBusDesktopProcessConfigure();
 		processConfigureZone.add(processOptions);
-		
-		processOptions.setVisible(false);
+		processOptions.setVisibility(Visibility.HIDDEN);
 		
 	}
 	
@@ -136,7 +136,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 				}
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				String currentText = newProcessPopup.getNameText();
+				processOptions.getData();
 				//fireSaveChanges(srcWidgetId, currentText);
 			}
 		} else if (DSLAMBusDesktopEditorToolbarInfo.NAME.equals(srcWidget)) {
@@ -189,7 +189,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	private void closeCurrentProcess() {
 		toolbar.setFileInfoVisible(false);
 		toolbar.setModified(false);
-		processOptions.setVisible(false);
+		processOptions.setVisibility(Visibility.HIDDEN);
 		toolbar.setId(null);
 	}
 	
@@ -211,10 +211,10 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			
 			toolbar.setData(processData);
 			//editor.setText(content);
-			toolbar.setModified(false);
 			toolbar.setFileInfoVisible(true);
-			processOptions.setVisible(true);
-			
+			processOptions.setVisibility(Visibility.VISIBLE);
+			//AEGWTJQueryPerfectScrollBar.updateScroll(DSLAMBusDesktopProcessConfigureOptionsVariables.NAME);
+			//AEGWTJQueryPerfectScrollBar.updateScroll(DSLAMBusDesktopProcessConfigureOptionsSchedule.NAME);
 		}
 	}
 	

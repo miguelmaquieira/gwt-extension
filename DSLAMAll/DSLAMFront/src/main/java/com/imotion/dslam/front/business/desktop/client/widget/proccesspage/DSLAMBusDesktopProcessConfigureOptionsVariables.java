@@ -76,15 +76,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		variableListZone.add(variableList);
 	}
 
-	@Override
-	public String getName() {
-		return NAME;
-	}
-	@Override
-	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
-	}
+	
 	
 	/**
 	 * AEGWTICompositePanel
@@ -97,6 +89,20 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, variableListZone, variableListZone.getElement().getClientHeight(), false);
 	
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+	@Override
+	public void setData(AEMFTMetadataElementComposite data) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		 return variableList.getData();
 	}
 	
 	/**

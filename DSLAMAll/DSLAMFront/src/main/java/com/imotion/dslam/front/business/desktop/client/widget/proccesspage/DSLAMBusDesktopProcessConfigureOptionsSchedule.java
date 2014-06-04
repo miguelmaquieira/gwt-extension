@@ -86,6 +86,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		return null;
+	}
 
 	/**
 	 * PRIVATE
