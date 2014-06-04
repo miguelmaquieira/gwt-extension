@@ -116,12 +116,28 @@
 	margin-left: 10px;
 }
 
+.dslam_studio-toolbar-info-titleZone-mainTitle,.dslam_studio-processesView-processName
+	{
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.dslam_studio-toolbar-info-titleZone-secondaryTitle,.dslam_studio-processesView-scriptName
+	{
+	text-transform: lowercase;
+	margin-left: 10px;
+}
+
 .dslam_studio-toolbar-info-lastsaved {
 	text-align: center;
 }
 
 .dslam_studio-toolbar-info-close button {
 	border-width: 0px;
+}
+
+.gwt-SuggestBoxPopup .item-selected {
+    background-color: rgb(102, 175, 233);
 }
 
 .dslam_studio-list-zone {
@@ -135,8 +151,9 @@
 }
 
 .dslam_studio-processlist-zone {
+	padding-right: 0px;
 	padding-left: 0px;
-	height: 100%
+	height: 100%;
 }
 
 .dslam_studio-list {
@@ -207,6 +224,14 @@
 	width: 380px;
 }
 
+.dslam_studio-newProcessForm {
+	background-color: #FFFFFF;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #888888;
+	width: 380px;
+}
+
 .dslam_studio-processConfigureOptionsVariablesHeader {
 	height: 35px;
 	background-color: #F2F1F0;
@@ -229,6 +254,7 @@
 	padding: 5px;
 	font-weight: bold;
 	border-bottom: 1px solid #CCCCCC;
+	margin-right: -15px;
 }
 
 .dslam_studio-processConfigureOptionsVariablesZone {
@@ -348,7 +374,6 @@
 	font-weight: bold;
 	border-bottom: 1px solid #CCCCCC;
 	padding-left: 0px;
-	margin-left: -15px;
 }
 
 .dslam_studio-processConfigureNodesPropertiesHeader {

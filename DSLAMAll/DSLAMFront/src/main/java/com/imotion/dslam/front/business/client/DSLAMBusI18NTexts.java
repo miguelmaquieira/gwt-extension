@@ -105,5 +105,17 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("¿Desea eliminar las variables seleccionadas?")
 	String delete_variables_confirmation();
+	
+	@DefaultStringValue("Nombre del proceso")
+	String process_name();
+	
+	@DefaultStringValue("Nombre del Script")
+	String script_name();
+	
+	@DefaultStringValue("Variable de proceso")
+	String process_variable();
+	
+	@DefaultStringValue("Variable externa")
+	String external_variable();
 
 }

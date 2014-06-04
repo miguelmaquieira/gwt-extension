@@ -70,6 +70,10 @@ public class DSLAMBusDesktopEditorToolbarActions extends AEGWTCompositePanel {
 		saveButton.setEnabled(modified);
 	}
 	
+	public AEGWTBootstrapGlyphiconButton getSaveButton() {
+		return saveButton;
+	}
+	
 	/**
 	 * AEGWTICompositePanel
 	 */

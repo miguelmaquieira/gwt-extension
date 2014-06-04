@@ -98,6 +98,10 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 		}
 		return elementData;
 	}
+	
+	public FlowPanel getElementListContainer() {
+		return elementListContainer;
+	}
 
 	/**
 	 * AEGWTCompositePanel
