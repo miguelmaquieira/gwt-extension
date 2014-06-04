@@ -144,7 +144,25 @@
 				</SubService>
 			</SubServiceList>
 		</Service>
-		
+			<Service Name="SRV_BUS_PROCESS">
+			<Description>Process business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUProcessBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="ADD_PROCESS">
+					<Descriptor>addProcess</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PROCESS">
+					<Descriptor>updateProcess</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_PROCESSES">
+					<Descriptor>getAllProcesses</Descriptor>
+				</SubService>
+				<SubService Name="REMOVE_PROCESS">
+					<Descriptor>removeProcess</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
 		<Service Name="SRV_BUS_FILE">
 			<Description>Cron business service</Description>
 			<Type>300171153899520</Type>

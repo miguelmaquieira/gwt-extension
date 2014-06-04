@@ -10,7 +10,9 @@ public interface DSLAMBUIProcessBusinessServiceConstants {
 	String 	METHOD_REMOVE_PROCESS		= "REMOVE_PROCESS";
 	
 	//CONTEXT
-	String 	PROCESS_DATA = "PROCESS_DATA";
+	String 	PROCESS_DATA 			= "PROCESS_DATA";
+	String 	PROCESS_DATA_LIST 		= "PROCESS_DATA_LIST";
+	String 	PROCESS_FILE_DATA_LIST 	= "PROCESS_FILE_DATA_LIST";
 	
 	
 }

@@ -3,6 +3,7 @@ package com.imotion.dslam.business.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
@@ -17,6 +18,7 @@ import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElem
 
 public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBase implements DSLAMBUIProcessBusinessService, DSLAMBUIProcessBusinessServiceConstants, DSLAMBUIBusinessProcessServiceTrace {
 
+	private static final long serialVersionUID = 15615107513521193L;
 
 	@Override
 	public void addProcess() {
@@ -24,9 +26,14 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		String 					processName		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME					, contextIn);
 		boolean 				synchronous		= getElementDataController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS			, contextIn);
-	//	List<Date> 				scheduleList	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST			, contextIn);
-	//	List<DSLAMBOVariable> 	variableList	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST			, contextIn);
+		String					processScriptId	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT					, contextIn);
+		//List<Date> 				scheduleList	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST			, contextIn);
+		//List<DSLAMBOVariable> 	variableList	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST			, contextIn);
 
+		Long formatProcessScriptId = AEMFTCommonUtilsBase.getLongFromString(processScriptId);
+		
+		DSLAMBOIFile script = getFilePersistence().getFile(formatProcessScriptId);
+		
 		Date creationTime = new Date();
 		DSLAMBOIProcess process = new DSLAMBOProcess();
 		process.setProcessName(processName);
@@ -35,6 +42,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 	//	process.setVariableList(variableList);
 		process.setCreationTime(creationTime);
 		process.setSavedTime(creationTime);
+		process.setProcessScript(script);
 		process = getProcessPersistence().addProcess(process);
 
 		//init-trace
@@ -101,7 +109,8 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 	
 	@Override
 	public void getAllProcesses() {
-		List<DSLAMBOIProcess> processList = getProcessPersistence().getAllProcesses();
+		List<DSLAMBOIProcess> 	processList = getProcessPersistence().getAllProcesses();
+		List<DSLAMBOIFile> 		fileList 	= getFilePersistence().getAllFiles();
 		
 		//trace-init
 		int resultsNumber = 0;
@@ -112,7 +121,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 		
 		//ContextOut
-		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcessList(processList);
+		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcessList(processList, fileList);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}

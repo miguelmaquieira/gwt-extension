@@ -11,6 +11,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
@@ -22,7 +23,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsVariablesForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTBootstrapFormFieldTextBox  		variableIdTextBox;
+	private AEGWTBootstrapDropdownAndLabelTextBox  	variableIdTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		variableValueTextBox; 
 	private AEGWTButton 							saveButton;
 	private AEGWTButton								cancelButton;
@@ -35,10 +36,12 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_VARIABLES_FORM_CONTAINER);
 
 
-		variableIdTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.variable());
-		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.value());
+		variableIdTextBox 			= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.variable());
+		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null			, TEXTS.value());
 		
 		root.add(variableIdTextBox);
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE, TEXTS.process_variable());
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE, TEXTS.external_variable());
 		root.add(variableValueTextBox);
 		
 		FlowPanel saveButtonZone = new FlowPanel();
@@ -59,7 +62,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 				
 				if (variableIdTextBox.getTextBox().getValue() == null || variableIdTextBox.getTextBox().getValue() == "") {
 					errors = true;
-					variableIdTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
+					variableIdTextBox.setErrorLabelText(TEXTS.empty_textbox());
 				}
 				
 				if (variableValueTextBox.getTextBox().getValue() == null || variableValueTextBox.getTextBox().getValue() == "") {
@@ -73,6 +76,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 					evt.setSourceWidgetId(getId());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableIdTextBox.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -102,8 +106,9 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 		if (variableData != null) {
 			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
 			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
-			
-//			if (!AEGWTStringUtils.isEmptyString(variableId)) {
+			String 	variableType 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableData);
+
+			//			if (!AEGWTStringUtils.isEmptyString(variableId)) {
 //				super.setEditMode(true);
 //			}
 
@@ -137,7 +142,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 	}
 	
 	protected void setErrorVariableExist() {
-		variableIdTextBox.setErrorLabelTextAndShow(TEXTS.error_variable_exist());
+		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
 	}
 	
 	protected void setEditMode(String mode) {
