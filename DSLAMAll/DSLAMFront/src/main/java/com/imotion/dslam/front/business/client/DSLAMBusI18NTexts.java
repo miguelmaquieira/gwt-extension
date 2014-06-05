@@ -31,6 +31,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Renombrar")
 	String rename();
 	
+	@DefaultStringValue("Cambiar Script")
+	String change_file();
+	
 	@DefaultStringValue("Eliminar")
 	String delete();
 	
@@ -82,6 +85,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
 	
+	@DefaultStringValue("Ya existe un proceso con ese nombre")
+	String processname_exists();
+	
 	@DefaultStringValue("Protocolo1")
 	String protocol1();
 
@@ -99,6 +105,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("La variable ya existe")
 	String error_variable_exist();
+	
+	@DefaultStringValue("El script no existe")
+	String error_script_no_exist();
 	
 	@DefaultStringValue("Este campo esta vacio")
 	String error_date_empty();

@@ -18,7 +18,7 @@
 
 .dslam_studio-processesView-bottomZone {
 	position: absolute;
-	top: 95px;
+	top: 40px;
 	width: 100%;
 	bottom: 0px;
 	height: auto;
@@ -148,6 +148,10 @@
 
 .dslam_studio-list-container-zone {
 	width: 100%;
+}
+
+.dslam_studio-processConfigureOptionsVariablesHeader .gwt-Label {
+	padding-left: 0px;
 }
 
 .dslam_studio-processlist-zone {

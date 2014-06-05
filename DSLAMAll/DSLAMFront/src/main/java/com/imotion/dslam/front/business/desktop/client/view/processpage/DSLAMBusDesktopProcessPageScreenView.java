@@ -14,9 +14,7 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
-import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopConnectionToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopNavigatorProcessList;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopNewProcessPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.proccesspage.DSLAMBusDesktopProcessConfigure;
@@ -38,12 +36,11 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	private static final DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	private static final String PROCESS_DATA_LIST = null;
 	
-	private FlowPanel 							root;
-	private DSLAMBusDesktopProcessToolbar		toolbar;
-	private DSLAMBusDesktopConnectionToolbar	connectionToolbar;
-	private DSLAMBusDesktopNavigatorList		processList;
-	private DSLAMBusDesktopProcessConfigure		processOptions;
-	private DSLAMBusDesktopNewProcessPopupForm newProcessPopup;
+	private FlowPanel 								root;
+	private DSLAMBusDesktopProcessToolbar			toolbar;
+	private DSLAMBusDesktopNavigatorProcessList		processList;
+	private DSLAMBusDesktopProcessConfigure			processOptions;
+	private DSLAMBusDesktopNewProcessPopupForm 		newProcessPopup;
 	
 	public DSLAMBusDesktopProcessPageScreenView() {
 		root = new FlowPanel();
@@ -56,9 +53,6 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		toolbar.setModified(false);
 		toolbar.setLastSaved(new Date());
 		toolbar.getInfo().setVisible(false);
-		
-		connectionToolbar = new DSLAMBusDesktopConnectionToolbar();
-		root.add(connectionToolbar);
 
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
@@ -105,6 +99,11 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			processList.updateElement(processData);
 			newProcessPopup.hide();
 		}
+	}
+	
+	@Override
+	public void removeProcess(String processId) {
+		processList.removeElement(processId);
 	}
 	
 	
@@ -163,17 +162,14 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			if (openProcess) {
 				String processId = AEGWTStringUtils.isEmptyString(srcContainerId) ? srcWidgetId : srcContainerId;
 				openProcess(processId);
-			} 
-		}
-//			else {
-//				if (DSLAMBusDesktopNavigatorListElement.RENAME_ID.equals(srcWidgetId)) {
-//					showRenameForm((AEMFTMetadataElementComposite) evt.getElementAsDataValue());
-//				} else if (DSLAMBusDesktopNavigatorListElement.DELETE_ID.equals(srcWidgetId)) {
-//					fireDeleteFile(srcContainerId);
-//				}
-//			}
-//		} 
-		else if (DSLAMBusDesktopNewProcessPopupForm.NAME.equals(srcWidget)) {
+			} else if (DSLAMBusDesktopNavigatorListElement.RENAME_ID.equals(srcWidgetId)) {
+				showRenameForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
+			} else if (DSLAMBusDesktopNavigatorListElement.DELETE_ID.equals(srcWidgetId)) {
+				fireDeleteProcess(srcContainerId);
+			} else if (DSLAMBusDesktopNavigatorListElement.CHANGE_SCRIPT_ID.equals(srcWidgetId)) {
+				showChangeScriptForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
+			}
+		} else if (DSLAMBusDesktopNewProcessPopupForm.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
 			}
@@ -259,7 +255,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		String processName		= saveButtonEvt.getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME);
 		AEMFTMetadataElementComposite existentProcessData = processList.getElementDataByName(processName);
 		if (existentProcessData != null) {
-			newProcessPopup.setError(TEXTS.filename_exists());
+			newProcessPopup.setError(TEXTS.processname_exists());
 		} else {
 			String processScript = saveButtonEvt.getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT);
 
@@ -284,5 +280,24 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		updateEvent.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 		updateEvent.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA ,updateProcessData);
 		getLogicalEventHandlerManager().fireEvent(updateEvent);
+	}
+	
+	private void showRenameForm(AEMFTMetadataElementComposite processData) {
+		newProcessPopup.setMode(DSLAMBusDesktopNewProcessPopupForm.MODE_RENAME_PROCESS);
+		newProcessPopup.center();
+		newProcessPopup.setData(processData);
+	}
+	
+	private void showChangeScriptForm(AEMFTMetadataElementComposite processData) {
+		newProcessPopup.setMode(DSLAMBusDesktopNewProcessPopupForm.MODE_CHANGE_SCRIPT_PROCESS);
+		newProcessPopup.center();
+		newProcessPopup.setData(processData);
+	}
+
+	private void fireDeleteProcess(String processId) {
+		AEGWTLogicalEvent deleteEvent = new AEGWTLogicalEvent(getWindowName(), getName());
+		deleteEvent.setSourceWidgetId(processId);
+		deleteEvent.setEventType(LOGICAL_TYPE.DELETE_EVENT);
+		getLogicalEventHandlerManager().fireEvent(deleteEvent);
 	}
 }

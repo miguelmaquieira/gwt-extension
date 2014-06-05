@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -67,7 +66,7 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
-			Long elementId = getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID, elementData);
+			Long elementId = getItemIdAsLong(elementData);
 			DSLAMBusDesktopNavigatorListElement elementWidget = getElementById(String.valueOf(elementId));
 			elementWidget.setData(elementData);
 			sort(null, false);
@@ -89,8 +88,8 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 		for (int i = 0; i < elementCount; i++) {
 			DSLAMBusDesktopNavigatorListElement elementWidget = (DSLAMBusDesktopNavigatorListElement) elementListContainer.getWidget(i);
 			elementData = elementWidget.getData();
-			String currentFileName = getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME, elementData);
-			if (elementName.equals(currentFileName)) {
+			String currentItemName = getItemNameFromData(elementData);
+			if (elementName.equals(currentItemName)) {
 				break;
 			} else {
 				elementData = null;	
@@ -183,6 +182,8 @@ public abstract  class DSLAMBusDesktopNavigatorList extends AEGWTCompositePanel 
 	 */
 	
 	protected abstract DSLAMBusDesktopNavigatorListElement createListElement();
+	protected abstract String getItemNameFromData(AEMFTMetadataElementComposite elementData);
+	protected abstract Long getItemIdAsLong(AEMFTMetadataElementComposite elementData);
 	
 	/**
 	 * PRIVATE

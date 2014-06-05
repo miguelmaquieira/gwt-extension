@@ -7,5 +7,5 @@ public interface DSLAMBusDesktopProcessPageDisplay extends AEGWTCompositePanelLo
 
 	void addProcess(AEMFTMetadataElementComposite processData);
 	void updateProcess(AEMFTMetadataElementComposite processData);
-	
+	void removeProcess(String processId);
 }	

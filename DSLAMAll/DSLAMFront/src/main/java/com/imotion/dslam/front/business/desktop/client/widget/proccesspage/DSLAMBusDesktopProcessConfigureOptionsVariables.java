@@ -143,7 +143,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			variablesForm.center();
 		}
 		
-		if(LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+		if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
 		

@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import java.util.List;
 
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -27,6 +28,18 @@ public class DSLAMBusDesktopNavigatorProcessList extends DSLAMBusDesktopNavigato
 				addElement((AEMFTMetadataElementComposite) elementData);
 			}
 		}
+	}
+
+	@Override
+	protected String getItemNameFromData(AEMFTMetadataElementComposite elementData) {
+		String processName = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_NAME, elementData);
+		return processName;
+	}
+
+	@Override
+	protected Long getItemIdAsLong(AEMFTMetadataElementComposite elementData) {
+		Long processId = getElementController().getElementAsLong(DSLAMBOIProcess.PROCESS_ID, elementData);;
+		return processId;
 	}
 
 }

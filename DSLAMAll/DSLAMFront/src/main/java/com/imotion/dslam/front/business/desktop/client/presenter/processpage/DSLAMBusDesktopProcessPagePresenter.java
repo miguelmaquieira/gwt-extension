@@ -1,12 +1,13 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.processpage;
 
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
-import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.view.processpage.DSLAMBusDesktopProcessPageScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -52,17 +53,22 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 					processData.addElement(DSLAMBOIProcessDataConstants.PROCESS_ID	, sourceWidgetId);
 				}
 				updateProcess(processData);
-			} 
-//			else if (LOGICAL_TYPE.DELETE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				deleteProcess(sourceWidgetId);
-//			}
+			} else if (LOGICAL_TYPE.DELETE_EVENT.equals(type)) {
+				evt.stopPropagation();
+				deleteProcess(sourceWidgetId);
+			}
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
+		return LOGICAL_TYPE.NEW_EVENT.equals(type) 
+				|| 
+				LOGICAL_TYPE.SAVE_EVENT.equals(type) 
+				|| 
+				LOGICAL_TYPE.DELETE_EVENT.equals(type) 
+				||
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
 	}
 	
 	/**
@@ -108,11 +114,34 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				AEMFTMetadataElementComposite processData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
+				AEMFTMetadataElementComposite processData = getElementDataController().getElementAsComposite(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA, dataResult);
 				getView().updateProcess(processData);
 				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getName(), getName());
 				evt.setEventType(LOGICAL_TYPE.OK_EVENT);
 				getLogicalEventHandlerManager().fireEvent(evt);	
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+	
+	private void deleteProcess(String processId) {
+		AEMFTMetadataElementComposite processData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		processData.addElement(DSLAMBOIProcess.PROCESS_ID, processId);
+		getClientServerConnection().executeComm(processData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROCESS_REMOVE_PROCESS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				AEMFTMetadataElementComposite processData = getElementDataController().getElementAsComposite(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA, dataResult);
+				if (processData != null) {
+					Long	processId		= getElementDataController().getElementAsLong(DSLAMBOIProcess.PROCESS_ID, processData);
+					String	processIdStr	= String.valueOf(processId); 
+					getView().removeProcess(processIdStr);
+				}
 			}
 
 			@Override

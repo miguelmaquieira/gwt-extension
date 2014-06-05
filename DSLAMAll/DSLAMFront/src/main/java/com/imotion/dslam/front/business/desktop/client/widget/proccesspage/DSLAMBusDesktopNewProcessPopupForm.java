@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
@@ -32,8 +33,9 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 	
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	public static final int MODE_NEW_PROCESS		= 1;
-	public static final int MODE_RENAME_PROCESS	= 2;
+	public static final int MODE_NEW_PROCESS				= 1;
+	public static final int MODE_RENAME_PROCESS			= 2;
+	public static final int MODE_CHANGE_SCRIPT_PROCESS	= 3;
 
 	private static final DSLAMBusI18NTexts		COMMON_TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
@@ -83,6 +85,8 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 			@Override
 			public void onClick(ClickEvent event) {
 				boolean errors = false;
+				processNameField.setErrorLabelVisible(false);
+				scriptNameField.setErrorLabelVisible(false);
 				if (AEGWTStringUtils.isEmptyString(processNameField.getText())) {
 					processNameField.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 					errors = true;
@@ -91,8 +95,12 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 				if (AEGWTStringUtils.isEmptyString(scriptNameField.getText())) {
 					scriptNameField.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 					errors = true;
+				} else {
+					if(!scriptNameField.containsSuggestion(scriptNameField.getText())){
+						scriptNameField.setErrorLabelTextAndShow(TEXTS.error_script_no_exist());
+						errors = true;	
+					}	
 				}
-				
 				if (errors == false) {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					if (mode == MODE_NEW_PROCESS) {
@@ -128,7 +136,7 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 	}
 
 	public void setError(String error) {
-		processNameField.setErrorLabelText(error);
+		processNameField.setErrorLabelTextAndShow(error);
 	}
 
 	public void setMode(int mode) {
@@ -143,12 +151,16 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 	public void center() {
 		processNameField.setText("");
 		processNameField.setErrorLabelVisible(false);
+		processNameField.setEnabled(true);
 		scriptNameField.setText("");
 		scriptNameField.setErrorLabelVisible(false);
+		scriptNameField.setEnabled(true);
 		if (mode == MODE_NEW_PROCESS) {
 			saveButton.setText(COMMON_TEXTS.create());
 		} else if (mode == MODE_RENAME_PROCESS) {
 			saveButton.setText(COMMON_TEXTS.rename());
+		} else if (mode == MODE_CHANGE_SCRIPT_PROCESS) {
+			saveButton.setText(COMMON_TEXTS.change_file());
 		} 
 		super.center();
 		processNameField.setFocus(true);
@@ -174,12 +186,19 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 			processNameField.setText(processName);
 			
 			AEMFTMetadataElementComposite processFileList = getElementController().getElementAsComposite(DSLAMBUIProcessBusinessServiceConstants.PROCESS_FILE_DATA_LIST, data);
-			List<AEMFTMetadataElement> processFileDataList = processFileList.getSortedElementList();
-			for (AEMFTMetadataElement file : processFileDataList) {
-				String 	fileName 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME			, file);
-				Long 	fileId 		= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID				, file);
-				String 	fileIdStr 	= String.valueOf(fileId);
-				scriptNameField.addSuggestItem(fileIdStr,fileName);
+			if (processFileList == null) {
+				AEMFTMetadataElementComposite processFileRename = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT, data);
+				String script = getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME, processFileRename);
+				scriptNameField.setText(script);
+				scriptNameField.setEnabled(false);
+			} else {
+				List<AEMFTMetadataElement> processFileDataList = processFileList.getSortedElementList();
+				for (AEMFTMetadataElement file : processFileDataList) {
+					String 	fileName 	= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME		, file);
+					Long 	fileId 		= getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID			, file);
+					String 	fileIdStr 	= String.valueOf(fileId);
+					scriptNameField.addSuggestItem(fileIdStr,fileName);
+				}
 			}
 		}
 	}
