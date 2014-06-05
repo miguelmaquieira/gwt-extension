@@ -76,6 +76,11 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	public DSLAMBusDesktopEditorToolbarActions getActions() {
 		return fileActions;	
 	}
+	
+	public void reset() {
+		fileActions.reset();
+		fileInfo.reset();
+	}
 
 	/**
 	 *	AEGWTICompositePanel 

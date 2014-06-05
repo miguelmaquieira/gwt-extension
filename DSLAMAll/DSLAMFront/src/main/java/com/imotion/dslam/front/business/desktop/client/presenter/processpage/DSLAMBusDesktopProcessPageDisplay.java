@@ -6,5 +6,6 @@ import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelLoggedViewDisplay;
 public interface DSLAMBusDesktopProcessPageDisplay extends AEGWTCompositePanelLoggedViewDisplay {
 
 	void addProcess(AEMFTMetadataElementComposite processData);
+	void updateProcess(AEMFTMetadataElementComposite processData);
 	
 }	

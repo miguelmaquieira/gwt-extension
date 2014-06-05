@@ -36,6 +36,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	private	 DSLAMBusDesktopVariablesList   						variableList;
 	private DSLAMBusDesktopProcessConfigureOptionsVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite							variablesData;
+	private int													numberVariablesData;
 
 	public DSLAMBusDesktopProcessConfigureOptionsVariables() {
 		variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
@@ -76,7 +77,11 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		variableListZone.add(variableList);
 	}
 
-	
+	public void reset() {
+		variableList.reset();
+		variablesData.removeAll();
+		variablesForm.resetForm();
+	}
 	
 	/**
 	 * AEGWTICompositePanel
@@ -102,7 +107,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
-		 return variableList.getData();
+		 return variablesData;
 	}
 	
 	/**
@@ -114,10 +119,12 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		if (LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
 			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
 			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+			String type 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data	, id);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, type);
 			if (variablesForm.getEditMode()) {
 				addVariables(id,data);
 			} else if (!variablesData.contains(id)) {

@@ -12,6 +12,7 @@ import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstant
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPageDisplay;
+import com.imotion.dslam.front.business.desktop.client.presenter.processpage.DSLAMBusDesktopProcessPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorList;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
@@ -92,6 +93,20 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		openProcess(processData);
 	}
 	
+	@Override
+	public void updateProcess(AEMFTMetadataElementComposite processData) {
+		if (processData != null) {
+			Long	processId		= getElementController().getElementAsLong(DSLAMBOIProcess.PROCESS_ID	, processData);
+			String	processIdStr	= String.valueOf(processId);
+			String	currentFileId	= toolbar.getId();
+			if (processIdStr.equals(currentFileId)) {
+				toolbar.setData(processData);
+			}
+			processList.updateElement(processData);
+			newProcessPopup.hide();
+		}
+	}
+	
 	
 	/**
 	 * AEGWTICompositePanel
@@ -117,9 +132,9 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 		
 	}
 
-	/**
-	 * AEGWTHasLogicalEventHandlers
-	 */
+	/****************************************************************************
+	 *                      AEGWTHasLogicalEventHandlers
+	 ****************************************************************************/
 
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
@@ -136,8 +151,8 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 				}
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				processOptions.getData();
-				//fireSaveChanges(srcWidgetId, currentText);
+				AEMFTMetadataElementComposite optionsData = processOptions.getData();
+				fireSaveChanges(srcWidgetId, optionsData);
 			}
 		} else if (DSLAMBusDesktopEditorToolbarInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CLOSE_EVENT.equals(type)) {
@@ -162,6 +177,13 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
 			}
+		} if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.OK_EVENT)) {
+			reset();	
+			Window.alert("Transacción finalizada");
+		} else if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.ERROR_EVENT)) {
+			AEMFTMetadataElementComposite dataErrors = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+			//showErrors(dataErrors);
+			Window.alert("Transacción errónea");
 		}
 	}
 
@@ -175,7 +197,11 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 				||
 				LOGICAL_TYPE.SELECT_EVENT.equals(type)
 				||
-				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.OK_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.ERROR_EVENT.equals(type);
 	}
 	
 	/************************************************************************
@@ -186,6 +212,18 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/
+	private boolean isValidEvent(AEGWTLogicalEvent evt) {
+		if (DSLAMBusDesktopProcessPagePresenter.NAME.equals(evt.getSourceWidget())) {
+			return true;
+		} else return false;
+	}
+	
+	private void reset() {
+		processOptions.reset();
+		toolbar.reset();
+	
+	}
+	
 	private void closeCurrentProcess() {
 		toolbar.setFileInfoVisible(false);
 		toolbar.setModified(false);
@@ -213,8 +251,6 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			//editor.setText(content);
 			toolbar.setFileInfoVisible(true);
 			processOptions.setVisibility(Visibility.VISIBLE);
-			//AEGWTJQueryPerfectScrollBar.updateScroll(DSLAMBusDesktopProcessConfigureOptionsVariables.NAME);
-			//AEGWTJQueryPerfectScrollBar.updateScroll(DSLAMBusDesktopProcessConfigureOptionsSchedule.NAME);
 		}
 	}
 	
@@ -230,23 +266,23 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			AEMFTMetadataElementComposite processData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			processData.addElement(DSLAMBOIProcessDataConstants.PROCESS_NAME		, processName);
 			processData.addElement(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT		, processScript);
-
+		
 			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveFileEvent.setEventType(saveButtonEvt.getEventType());
-			saveFileEvent.addElementAsDataValue(processData);
+			saveFileEvent.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA , processData);
 			saveFileEvent.setSourceWidgetId(saveButtonEvt.getSourceWidgetId());
 			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
 		}
 	}
 	
-	private void fireSaveChanges(String processId, String content) {
+	private void fireSaveChanges(String processId, AEMFTMetadataElementComposite optionsData) {
 		AEMFTMetadataElementComposite updateProcessData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		updateProcessData.addElement(DSLAMBOIProcess.PROCESS_ID, processId);
-		//updateFileData.addElement(DSLAMBOIFile.CONTENT, content);
+		updateProcessData.addElement(DSLAMBOIProcessDataConstants.PROCESS_OPTIONS_DATA , optionsData);
 
 		AEGWTLogicalEvent updateEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 		updateEvent.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-		updateEvent.addElementAsDataValue(updateProcessData);
+		updateEvent.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA ,updateProcessData);
 		getLogicalEventHandlerManager().fireEvent(updateEvent);
 	}
 }

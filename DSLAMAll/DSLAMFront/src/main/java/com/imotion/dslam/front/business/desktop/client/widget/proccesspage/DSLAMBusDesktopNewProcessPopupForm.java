@@ -84,12 +84,12 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 			public void onClick(ClickEvent event) {
 				boolean errors = false;
 				if (AEGWTStringUtils.isEmptyString(processNameField.getText())) {
-					processNameField.setErrorLabelText(TEXTS.empty_textbox());
+					processNameField.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 					errors = true;
 				}
 				
 				if (AEGWTStringUtils.isEmptyString(scriptNameField.getText())) {
-					scriptNameField.setErrorLabelText(TEXTS.empty_textbox());
+					scriptNameField.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 					errors = true;
 				}
 				
@@ -143,6 +143,8 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 	public void center() {
 		processNameField.setText("");
 		processNameField.setErrorLabelVisible(false);
+		scriptNameField.setText("");
+		scriptNameField.setErrorLabelVisible(false);
 		if (mode == MODE_NEW_PROCESS) {
 			saveButton.setText(COMMON_TEXTS.create());
 		} else if (mode == MODE_RENAME_PROCESS) {

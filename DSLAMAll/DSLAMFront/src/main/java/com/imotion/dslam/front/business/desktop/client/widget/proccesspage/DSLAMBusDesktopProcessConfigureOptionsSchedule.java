@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -26,7 +27,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	private FlowPanel						headerZone;
 	private FlowPanel 						scheduleListZone;
 	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
-	private int 							numberAddDateTimePicker;
+	private int 							numberAddDateTimePicker;							
 
 	public DSLAMBusDesktopProcessConfigureOptionsSchedule() {
 		root = new FlowPanel();
@@ -70,6 +71,17 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 		root.add(scheduleListZone);
 
 	}
+	
+	public void reset() {
+		int numberDateTimePickers = scheduleListZone.getWidgetCount();
+		for (int i = 0; i < numberDateTimePickers; i++) {
+			scheduleListZone.getWidget(0).removeFromParent();
+		}
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public void postDisplay() {
@@ -88,7 +100,13 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
-		return null;
+		AEMFTMetadataElementComposite scheduleListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		int numberDateTimePickers = scheduleListZone.getWidgetCount();
+		for (int i = 0; i < numberDateTimePickers; i++) {
+			DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = (DSLAMBusDesktopProcessConfigureOptionsScheduleLine) scheduleListZone.getWidget(i);
+			scheduleListData.addElement(String.valueOf(i),line.getDateText());	 
+		}	
+		return scheduleListData;
 	}
 
 	/**

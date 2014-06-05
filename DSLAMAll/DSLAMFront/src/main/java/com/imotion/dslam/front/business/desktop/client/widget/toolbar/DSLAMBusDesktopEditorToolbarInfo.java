@@ -3,6 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 import java.util.Date;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -87,6 +88,11 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 				}
 			}
 		});
+	}
+	
+	public void reset() {
+		modified = false;
+		setVisibility(Visibility.HIDDEN);
 	}
 
 	public void setMainTitleText(String text) {

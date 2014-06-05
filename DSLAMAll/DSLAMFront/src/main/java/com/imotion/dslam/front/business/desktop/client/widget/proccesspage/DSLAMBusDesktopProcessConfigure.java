@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -9,7 +10,7 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 
-public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel  {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigure";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -33,6 +34,15 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel {
 		nodeZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 	}
 	
+	public void reset() {
+		optionsZone.reset();
+		this.setVisibility(Visibility.HIDDEN);
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
+	
 	public void postDisplay() {
 		super.postDisplay();
 		optionsZone.postDisplay();
@@ -47,7 +57,6 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel {
 		// TODO Auto-generated method stub
 
 	}
-	
 	
 	public AEMFTMetadataElementComposite getData() {
 		return optionsZone.getData();

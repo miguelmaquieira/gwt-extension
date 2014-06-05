@@ -20,6 +20,10 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	public DSLAMBusDesktopVariablesList(AEGWTButton deleteButton) {
 		super(true,true,false, deleteButton);
 	}
+	
+	public void reset () {
+		clearUpdateList();
+	}
 
 	/**
 	 * AEGWTICompositePanel
@@ -45,10 +49,6 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 			
 			addRowItem(variableRow, variableId, true, true,false);
 		}	
-	}
-	
-	public AEMFTMetadataElementComposite getData() {
-		return null;
 	}
 
 	/*
