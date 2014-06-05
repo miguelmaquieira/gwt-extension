@@ -1,51 +1,52 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.imotion</groupId>
-    <artifactId>DSLAMAll</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>DSLAM-ANTLR</artifactId>
-  <name>DSLAM-ANTLR</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-		<groupId>org.antlr</groupId>
-		<artifactId>antlr</artifactId>
-		<version>3.3</version>
-		<type>jar</type>
-		<scope>compile</scope>
-	</dependency>
-  </dependencies>
-  
-   <build>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.imotion</groupId>
+		<artifactId>DSLAMAll</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>DSLAM-ANTLR</artifactId>
+	<name>DSLAM-ANTLR</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<antlr.version>4.2.2</antlr.version>
+		<antlr4.visitor>true</antlr4.visitor>
+   		<antlr4.listener>true</antlr4.listener>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4</artifactId>
+			<version>${antlr.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.antlr</groupId>
-				<artifactId>antlr3-maven-plugin</artifactId>
-				<version>3.3</version>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr.version}</version>
 				<executions>
 					<execution>
-						<id>run antlr</id>
-						<phase>generate-sources</phase>
+						<id>antlr</id>
 						<goals>
-							<goal>antlr</goal>
+							<goal>antlr4</goal>
 						</goals>
 					</execution>
-					<execution></execution>
 				</executions>
-
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -60,14 +61,14 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>${basedir}/target/generated-sources/antlr3</source>
+								<source>${basedir}/target/generated-sources/antlr4/com/imotion/antlr</source>
 							</sources>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -80,10 +81,10 @@
 								<pluginExecution>
 									<pluginExecutionFilter>
 										<groupId>org.antlr</groupId>
-										<artifactId>antlr3-maven-plugin</artifactId>
-										<versionRange>[3.3,)</versionRange>
+										<artifactId>antlr4-maven-plugin</artifactId>
+										<versionRange>[${antlr.version},)</versionRange>
 										<goals>
-											<goal>antlr</goal>
+											<goal>antlr4</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
@@ -110,5 +111,5 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-  
+
 </project>
