@@ -66,13 +66,14 @@ public class DSLAMBusDesktopEditorToolbarActions extends AEGWTCompositePanel {
 		});
 	}
 	
+	public void reset() {
+		setSaveEnabled(false);
+	}
+	
+	
 	public void setSaveEnabled(boolean modified) {
 		saveButton.setEnabled(modified);
 	}
-	
-//	public AEGWTBootstrapGlyphiconButton getSaveButton() {
-//		return saveButton;
-//	}
 	
 	/**
 	 * AEGWTICompositePanel

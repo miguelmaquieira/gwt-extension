@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.processpage;
 
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.business.service.DSLAMBUIFileBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
@@ -39,18 +41,19 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sourceWidgetId	= evt.getSourceWidgetId();
 		if (DSLAMBusDesktopProcessPageScreenView.NAME.equals(srcWidget)) {
-			AEMFTMetadataElementComposite processData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+			AEMFTMetadataElementComposite processData = (AEMFTMetadataElementComposite) evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA);
+			
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();
 				createProcess(processData);
+			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				evt.stopPropagation();
+				if (!processData.contains(DSLAMBOIProcessDataConstants.PROCESS_ID)) {
+					processData.addElement(DSLAMBOIProcessDataConstants.PROCESS_ID	, sourceWidgetId);
+				}
+				updateProcess(processData);
 			} 
-//			else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				if (!ProcessData.contains(DSLAMBOIProcessDataConstants.PROCESS_ID)) {
-//					ProcessData.addElement(DSLAMBOIProcessDataConstants.PROCESS_ID	, sourceWidgetId);
-//				}
-//				updateFile(ProcessData);
-//			} else if (LOGICAL_TYPE.DELETE_EVENT.equals(type)) {
+//			else if (LOGICAL_TYPE.DELETE_EVENT.equals(type)) {
 //				evt.stopPropagation();
 //				deleteProcess(sourceWidgetId);
 //			}
@@ -59,7 +62,7 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.NEW_EVENT.equals(type);
+		return LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
 	}
 	
 	/**
@@ -100,6 +103,24 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 		});
 	}
 
+	private void updateProcess(AEMFTMetadataElementComposite processData) {
+		getClientServerConnection().executeComm(processData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROCESS_UPDATE_PROCESS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				AEMFTMetadataElementComposite processData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
+				getView().updateProcess(processData);
+				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getName(), getName());
+				evt.setEventType(LOGICAL_TYPE.OK_EVENT);
+				getLogicalEventHandlerManager().fireEvent(evt);	
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
 
 }

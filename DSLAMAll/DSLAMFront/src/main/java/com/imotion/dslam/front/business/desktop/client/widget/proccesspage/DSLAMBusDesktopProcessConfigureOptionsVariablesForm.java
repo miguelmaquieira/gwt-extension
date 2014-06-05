@@ -40,8 +40,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null			, TEXTS.value());
 		
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE, TEXTS.process_variable());
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE, TEXTS.external_variable());
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE, TEXTS.process_variable());
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE, TEXTS.external_variable());
 		root.add(variableValueTextBox);
 		
 		FlowPanel saveButtonZone = new FlowPanel();
@@ -74,6 +74,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
+					String z = variableIdTextBox.getSelectedId();
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableIdTextBox.getSelectedId());

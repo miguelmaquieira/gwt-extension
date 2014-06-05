@@ -11,7 +11,7 @@ public class DSLAMBOVariable implements DSLAMBOIVariable {
 	
 	private String variableName;
 	private String 	variableValue;
-	private String 	variableType;
+	private int 	variableType;
 
 	public DSLAMBOVariable() {}
 
@@ -31,11 +31,11 @@ public class DSLAMBOVariable implements DSLAMBOIVariable {
 		this.variableValue = variableValue;
 	}
 
-	public String getVariableType() {
+	public int getVariableType() {
 		return variableType;
 	}
 
-	public void setVariableType(String variableType) {
+	public void setVariableType(int variableType) {
 		this.variableType = variableType;
 	}
 

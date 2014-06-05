@@ -41,6 +41,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 		propertiesZone.add(synchroCheckBox);
 		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_CHECKBOX);
 	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
@@ -57,5 +61,9 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 		boolean synchronous = synchroCheckBox.getValue();
 		data.addElement(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS, synchronous);
 		return data;
+	}
+	
+	public void reset() {
+		synchroCheckBox.setValue(false);
 	}
 }
