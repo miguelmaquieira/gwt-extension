@@ -15,8 +15,21 @@ import com.imotion.antlr.DSLAMParser;
 public class App {
 
 	private static final String DSLAM_TEXT = 
-												"$ID = 2845;"
-												+ "$KEY = 3000;";
+												  "$a = 2845;"
+												+ "$b = 3000;"
+												+ "if ($a < #a) {"
+												+ "	$c = 5 + $a;"
+												+ "} else {"
+												+ " $c = 0;"
+												+ "	$b = 9;"
+												+ "}"
+												+ "for $j in (1..3) {"
+												+ "	$p = 3 * ($j + 4);"
+												+ "}"
+												+ "$k = 1;"
+												+ "while ($k < 3) {"
+												+ "	$k = $k + 1;"
+												+ "}";
 
 	public static void main( String[] args ) {
 		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT));
@@ -25,7 +38,9 @@ public class App {
 
 		ParserRuleContext tree = parser.program(); // parse
 
-		Visitor visitor = new Visitor();
+		System.out.println(tree.toStringTree(parser));
+		
+//		Visitor visitor = new Visitor();
 //		List<String> commands = visitor.visit(tree);
 //		System.out.println(commands.toString());
 	}

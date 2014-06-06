@@ -11,7 +11,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 
 	private static final long serialVersionUID = -3861653720997741685L;
 
-	private AEMFTIPersistenceModule<Q, Id> persistenceModule;
+	private DSLAMBKPersistenceModuleJPA<Q, Id> persistenceModule;
 	
 	private DSLAMBKFilePersistenceServiceJPA filePersistence;
 	
@@ -22,6 +22,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			persistenceModule = new DSLAMBKPersistenceModuleJPA<Q, Id>();
 			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass()});
 		}
+		persistenceModule.createEntityManager();
 		return persistenceModule;
 	}
 	
@@ -32,6 +33,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	@Override
 	public void releaseInstance() {
 		super.releaseInstance();
+		persistenceModule.destroyCurrentEntityManager();
 		persistenceModule 		= null;
 		if (filePersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) filePersistence);

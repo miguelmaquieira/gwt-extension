@@ -4,7 +4,6 @@ grammar DSLAM;
 	package com.imotion.antlr;
 }
 
-
 //PARSER
 program :	statement+;
 statement   :	assignStatement
@@ -16,15 +15,19 @@ assignStatement: VARIABLE_SCRIPT '=' expression  ';';
 
 ifStatement: 	'if' condition '{' statement+ '}' ('else' '{' statement+ '}')?;
 whileStatement: 'while' condition '{' statement+ '}';
-forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' (INTEGER|VARIABLE_SCRIPT|VARIABLE_PROCESS|VARIABLE_EXTERNAL) '..' (INTEGER|VARIABLE_SCRIPT|VARIABLE_PROCESS|VARIABLE_EXTERNAL) ')' '{' statement+ '}';
+forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' integerValue '..' integerValue ')' '{' statement+ '}';
 
-expression : INTEGER							  #atom
-			 | VARIABLE_SCRIPT					  #atom
-			 | expression ('*' | '/') expression  #aritOp
-			 | expression ('+' | '-') expression  #aritOp
-			 ;
+expression :	'(' expression ')'								#parentExp
+				| left=expression op=('*'|'/') right=expression #aritOp
+   				| left=expression op=('+'|'-') right=expression #aritOp
+     			| atom=integerValue                        		#atomExpr
+     			;
+			 
 //exec : 'execute' COMMAND_ITEM+ ';';
-condition : '(' (INTEGER|variable) (LOGICAL_COMPARATOR (INTEGER|variable))? ')';
+condition : '(' (integerValue) (LOGICAL_COMPARATOR (integerValue))? ')';
+
+integerValue: 	INTEGER
+				|	variable;
 
 variable : 	VARIABLE_SCRIPT
 			| VARIABLE_PROCESS
@@ -37,7 +40,7 @@ WS  :  [ \t\r\n\u000C]+ -> skip
 VARIABLE_SCRIPT : 	'$' VARIABLE_NAME;
 VARIABLE_PROCESS : 	'%' VARIABLE_NAME;
 VARIABLE_EXTERNAL : '#' VARIABLE_NAME;
-VARIABLE_NAME : IDENT_CHAR ('_'| IDENT_CHAR)+ ;
+VARIABLE_NAME : IDENT_CHAR ('_'| IDENT_CHAR)* ;
 COMMAND_ITEM	: (IDENT_CHAR)(IDENT_CHAR | ':' | '_' |'-' | '/')+;
 LOGICAL_COMPARATOR :   '=='
 					 | '!='
