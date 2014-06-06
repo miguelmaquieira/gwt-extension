@@ -107,6 +107,8 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 						evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
 					} else if (mode == MODE_RENAME_PROCESS) {
 						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
+					} else if (mode == MODE_CHANGE_SCRIPT_PROCESS) {
+						evt.setEventType(LOGICAL_TYPE.SELECT_EVENT);
 					}
 					
 					scriptNameField.getSuggestItemKey();
@@ -186,11 +188,16 @@ public class DSLAMBusDesktopNewProcessPopupForm extends AEGWTPopup {
 			processNameField.setText(processName);
 			
 			AEMFTMetadataElementComposite processFileList = getElementController().getElementAsComposite(DSLAMBUIProcessBusinessServiceConstants.PROCESS_FILE_DATA_LIST, data);
-			if (processFileList == null) {
-				AEMFTMetadataElementComposite processFileRename = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT, data);
-				String script = getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME, processFileRename);
+			if (this.mode == MODE_RENAME_PROCESS) {
+				AEMFTMetadataElementComposite processRename = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT, data);
+				String script = getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME, processRename);
 				scriptNameField.setText(script);
 				scriptNameField.setEnabled(false);
+			} else if(this.mode == MODE_CHANGE_SCRIPT_PROCESS){
+				processNameField.setEnabled(false);
+				AEMFTMetadataElementComposite processChangeScript = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT, data);
+				String script = getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME, processChangeScript);
+				scriptNameField.setText(script);
 			} else {
 				List<AEMFTMetadataElement> processFileDataList = processFileList.getSortedElementList();
 				for (AEMFTMetadataElement file : processFileDataList) {

@@ -170,7 +170,7 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 				showChangeScriptForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
 			}
 		} else if (DSLAMBusDesktopNewProcessPopupForm.NAME.equals(srcWidget)) {
-			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
+			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
 			}
 		} if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.OK_EVENT)) {
@@ -252,9 +252,11 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 	
 	private void fireSaveFormDataEvent(AEGWTLogicalEvent saveButtonEvt) {
 		saveButtonEvt.stopPropagation();
-		String processName		= saveButtonEvt.getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME);
+		LOGICAL_TYPE	type		= saveButtonEvt.getEventType();
+		String 			processName	= saveButtonEvt.getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME);
 		AEMFTMetadataElementComposite existentProcessData = processList.getElementDataByName(processName);
-		if (existentProcessData != null) {
+		
+		if (existentProcessData != null && !LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 			newProcessPopup.setError(TEXTS.processname_exists());
 		} else {
 			String processScript = saveButtonEvt.getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOVariable;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
@@ -51,6 +52,15 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	public DSLAMBOIProcess updateProcessName(Long processId, String processName) {
 		DSLAMBOProcess process = getPersistenceModule().get(processId);
 		process.setProcessName(processName);
+		process.setSavedTime(new Date());
+		process = getPersistenceModule().update(process);
+		return process;
+	}
+	
+	@Override
+	public DSLAMBOIProcess updateProcessScript(Long processId, DSLAMBOFile processScript) {
+		DSLAMBOProcess process = getPersistenceModule().get(processId);
+		process.setProcessScript(processScript);
 		process.setSavedTime(new Date());
 		process = getPersistenceModule().update(process);
 		return process;

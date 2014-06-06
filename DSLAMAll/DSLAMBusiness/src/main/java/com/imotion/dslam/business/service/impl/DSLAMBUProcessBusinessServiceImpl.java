@@ -35,7 +35,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 
 		Long formatProcessScriptId = AEMFTCommonUtilsBase.getLongFromString(processScriptId);
 		DSLAMBOIFile script = getFilePersistence().getFile(formatProcessScriptId);
-		
+
 		Date creationTime = new Date();
 		DSLAMBOIProcess process = new DSLAMBOProcess();
 		process.setProcessName(processName);
@@ -65,50 +65,54 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		boolean 						synchronous		= getElementDataController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS		, propertiesData);
 		String 							processId		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_ID					, contextIn);
 		String 							processName		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME				, contextIn);
-		
+		String							processScript	= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT				, contextIn);
+
 		DSLAMBOIProcess updatedProcess = null;
-		Long processIdAsLong 	= (long) 0;
+		Long processIdAsLong 		= AEMFTCommonUtilsBase.getLongFromString(processId);
+		Long processScriptAsLong	= AEMFTCommonUtilsBase.getLongFromString(processScript);
 		
-		if (AEMFTCommonUtilsBase.isEmptyString(processName)) {
-			List<Date> scheduleList= new ArrayList<>();
-			String formatDate = "dd/MM/yyyy HH:mm";
-			for (int i= 0; i < scheduleData.getElementList().size(); i++) {
-				AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData.getElement(String.valueOf(i));
-				Date date = AEMFTCommonUtils.getDateFromFormattedString(schedule.getValueAsString(), formatDate);
-				scheduleList.add(date);
-			}
+		if (!AEMFTCommonUtilsBase.isEmptyString(processScript)) {
 			
-			List<DSLAMBOVariable> variableList= new ArrayList<>();
-			List<AEMFTMetadataElement> variableListData =  variablesData.getSortedElementList();
-			String id 		= "";
-			String value 	= "";
-			String type		= "";
-			
-			if(!AEMFTCommonUtilsBase.isEmptyList(variableListData)){
-				for (AEMFTMetadataElement variableData : variableListData) {
-					DSLAMBOVariable variable = new DSLAMBOVariable();
-					AEMFTMetadataElementComposite variableComposite = (AEMFTMetadataElementComposite) variableData;
-					id 		= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableComposite);
-					value 	= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableComposite);
-					type 	= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableComposite);
-				
-					variable.setVariableName(id);
-					variable.setVariableValue(value);
-					variable.setVariableType(Integer.parseInt(type));
-					variableList.add(variable);
+			updatedProcess = getProcessPersistence().updateProcessScript(processIdAsLong	, processScriptAsLong);
+		}else {
+			if (AEMFTCommonUtilsBase.isEmptyString(processName)) {
+				List<Date> scheduleList= new ArrayList<>();
+				String formatDate = "dd/MM/yyyy HH:mm";
+				for (int i= 0; i < scheduleData.getElementList().size(); i++) {
+					AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData.getElement(String.valueOf(i));
+					Date date = AEMFTCommonUtils.getDateFromFormattedString(schedule.getValueAsString(), formatDate);
+					scheduleList.add(date);
 				}
+
+				List<DSLAMBOVariable> variableList= new ArrayList<>();
+				List<AEMFTMetadataElement> variableListData =  variablesData.getSortedElementList();
+				String id 		= "";
+				String value 	= "";
+				String type		= "";
+
+				if(!AEMFTCommonUtilsBase.isEmptyList(variableListData)){
+					for (AEMFTMetadataElement variableData : variableListData) {
+						DSLAMBOVariable variable = new DSLAMBOVariable();
+						AEMFTMetadataElementComposite variableComposite = (AEMFTMetadataElementComposite) variableData;
+						id 		= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableComposite);
+						value 	= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableComposite);
+						type 	= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableComposite);
+
+						variable.setVariableName(id);
+						variable.setVariableValue(value);
+						variable.setVariableType(Integer.parseInt(type));
+						variableList.add(variable);
+					}
+				}
+
+				updatedProcess = getProcessPersistence().updateProcessSynchronous(processIdAsLong	, synchronous);
+				updatedProcess = getProcessPersistence().updateProcessScheduleList(processIdAsLong	, scheduleList);
+				updatedProcess = getProcessPersistence().updateProcessVariableList(processIdAsLong	, variableList);	
+			} else {
+				updatedProcess = getProcessPersistence().updateProcessName(processIdAsLong			, processName);
 			}
-			
-			processIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(processId);
-			
-			updatedProcess = getProcessPersistence().updateProcessSynchronous(processIdAsLong	, synchronous);
-			updatedProcess = getProcessPersistence().updateProcessScheduleList(processIdAsLong	, scheduleList);
-			updatedProcess = getProcessPersistence().updateProcessVariableList(processIdAsLong	, variableList);	
-		} else {
-			processIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(processId);
-			updatedProcess = getProcessPersistence().updateProcessName(processIdAsLong			, processName);
 		}
-		
+
 		//init-trace
 		traceItemModifiedInPersistence(METHOD_UPDATE_PROCESS, DSLAMBOIProcess.class.getSimpleName(), processId);
 		//end-trace
@@ -118,16 +122,16 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
-	
+
 	@Override
 	public void removeProcess() {
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		String processId		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_ID		, contextIn);
-		
+
 		Long processIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(processId);
 		getProcessPersistence().removeProcess(processIdAsLong);
-		
+
 		//init-trace
 		traceItemRemovedFromPersistence(METHOD_REMOVE_PROCESS, DSLAMBOIProcess.class.getSimpleName(), processId);
 		//end-trace
@@ -135,17 +139,17 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//ContextOut
 		AEMFTMetadataElementComposite processDataElement = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		processDataElement.addElement(DSLAMBOIProcessDataConstants.PROCESS_ID, processIdAsLong);
-		
+
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
 
-	
+
 	@Override
 	public void getAllProcesses() {
 		List<DSLAMBOIProcess> 	processList = getProcessPersistence().getAllProcesses();
 		List<DSLAMBOIFile> 		fileList 	= getFilePersistence().getAllFiles();
-		
+
 		//trace-init
 		int resultsNumber = 0;
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
@@ -153,7 +157,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		}
 		traceNumberOfResults(METHOD_GET_ALL_PROCESSES, DSLAMBOIProcess.class.getSimpleName(), resultsNumber);
 		//end-trace
-		
+
 		//ContextOut
 		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcessList(processList, fileList);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();

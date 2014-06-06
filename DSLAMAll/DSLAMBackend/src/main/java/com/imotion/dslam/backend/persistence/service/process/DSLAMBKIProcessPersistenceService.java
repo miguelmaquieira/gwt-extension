@@ -19,6 +19,8 @@ public interface DSLAMBKIProcessPersistenceService {
 	DSLAMBOIProcess updateProcessScheduleList(Long processId, List<Date> scheduleList);
 	
 	DSLAMBOIProcess updateProcessName(Long processId, String processname);
+	
+	DSLAMBOIProcess updateProcessScript(Long processId, Long processScript);
 
 	List<DSLAMBOIProcess> getAllProcesses();
 

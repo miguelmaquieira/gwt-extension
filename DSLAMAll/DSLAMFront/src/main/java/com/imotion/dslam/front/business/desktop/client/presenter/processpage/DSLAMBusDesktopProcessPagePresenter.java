@@ -47,7 +47,7 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();
 				createProcess(processData);
-			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 				evt.stopPropagation();
 				if (!processData.contains(DSLAMBOIProcessDataConstants.PROCESS_ID)) {
 					processData.addElement(DSLAMBOIProcessDataConstants.PROCESS_ID	, sourceWidgetId);
@@ -68,7 +68,9 @@ public class DSLAMBusDesktopProcessPagePresenter extends DSLAMBusBasePresenter<D
 				|| 
 				LOGICAL_TYPE.DELETE_EVENT.equals(type) 
 				||
-				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.SELECT_EVENT.equals(type);
 	}
 	
 	/**
