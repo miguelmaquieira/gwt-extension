@@ -15,8 +15,11 @@ import com.imotion.antlr.DSLAMParser;
 public class App {
 
 	private static final String DSLAM_TEXT = 
-												"$ID = 2845;"
-												+ "$KEY = 3000;";
+												"$a = 2845;"
+												+ "$b = 3000;"
+												+ "if ($a < 4) {"
+												+ "	$c = 5;"
+												+ "}";
 
 	public static void main( String[] args ) {
 		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT));
