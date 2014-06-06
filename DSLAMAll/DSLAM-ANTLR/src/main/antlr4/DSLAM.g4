@@ -9,9 +9,9 @@ program :	statement+;
 statement   :	assignStatement
 			|   ifStatement
 			|	whileStatement
-			|	forStatement ;
-//			| exec;
-assignStatement: VARIABLE_SCRIPT '=' expression  ';';
+			|	forStatement
+			| 	execution;
+assignStatement: VARIABLE_SCRIPT '=' (expression | execution)  ';';
 
 ifStatement: 	'if' condition '{' statement+ '}' ('else' '{' statement+ '}')?;
 whileStatement: 'while' condition '{' statement+ '}';
@@ -20,10 +20,11 @@ forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' integerValue '..' integerValue ')'
 expression :	'(' expression ')'								#parentExp
 				| left=expression op=('*'|'/') right=expression #aritOp
    				| left=expression op=('+'|'-') right=expression #aritOp
-     			| atom=integerValue                        		#atomExpr
+     			| atom=integerValue								#atomExpr
      			;
 			 
-//exec : 'execute' COMMAND_ITEM+ ';';
+execution : 'execute' ('a' | 'b')+ ;
+
 condition : '(' (integerValue) (LOGICAL_COMPARATOR (integerValue))? ')';
 
 integerValue: 	INTEGER
@@ -41,7 +42,6 @@ VARIABLE_SCRIPT : 	'$' VARIABLE_NAME;
 VARIABLE_PROCESS : 	'%' VARIABLE_NAME;
 VARIABLE_EXTERNAL : '#' VARIABLE_NAME;
 VARIABLE_NAME : IDENT_CHAR ('_'| IDENT_CHAR)* ;
-COMMAND_ITEM	: (IDENT_CHAR)(IDENT_CHAR | ':' | '_' |'-' | '/')+;
 LOGICAL_COMPARATOR :   '=='
 					 | '!='
 					 | '<'
