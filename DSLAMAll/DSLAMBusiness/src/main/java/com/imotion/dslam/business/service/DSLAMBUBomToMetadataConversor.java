@@ -39,7 +39,7 @@ public class DSLAMBUBomToMetadataConversor {
 			
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			List<DSLAMBOVariable> 			variableList = process.getVariableList();
-			for (int i = 0; i < scheduleList.size(); i++) {
+			for (int i = 0; i < variableList.size(); i++) {
 				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 				DSLAMBOVariable 				variable 			= variableList.get(i);
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());

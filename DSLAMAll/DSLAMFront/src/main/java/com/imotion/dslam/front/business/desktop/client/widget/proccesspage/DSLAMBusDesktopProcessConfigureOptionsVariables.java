@@ -6,6 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -36,7 +37,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	private	 DSLAMBusDesktopVariablesList   						variableList;
 	private DSLAMBusDesktopProcessConfigureOptionsVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite							variablesData;
-	private int													numberVariablesData;
+	//private int													numberVariablesData;
 
 	public DSLAMBusDesktopProcessConfigureOptionsVariables() {
 		variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
@@ -102,13 +103,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		variableList.setData(variablesData);
-		
-//		variableList.clearList();
-//		variablesData.addElement(id,data);
-//		variableList.setData(variablesData);
-//		variablesForm.resetForm();	
-	
+		variablesData.removeAll();
+		variablesData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST, data);
+		variableList.clearList();
+		variableList.setData(variablesData);	
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
