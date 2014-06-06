@@ -17,11 +17,12 @@ ifStatement: 	'if' condition '{' statement+ '}' ('else' '{' statement+ '}')?;
 whileStatement: 'while' condition '{' statement+ '}';
 forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' integerValue '..' integerValue ')' '{' statement+ '}';
 
-expression : INTEGER							  #atom
-			 | VARIABLE_SCRIPT					  #atom
-			 | expression ('*' | '/') expression  #aritOp
-			 | expression ('+' | '-') expression  #aritOp
-			 ;
+expression :	'(' expression ')'								#parentExp
+				| left=expression op=('*'|'/') right=expression #aritOp
+   				| left=expression op=('+'|'-') right=expression #aritOp
+     			| atom=integerValue                        		#atomExpr
+     			;
+			 
 //exec : 'execute' COMMAND_ITEM+ ';';
 condition : '(' (integerValue) (LOGICAL_COMPARATOR (integerValue))? ')';
 
