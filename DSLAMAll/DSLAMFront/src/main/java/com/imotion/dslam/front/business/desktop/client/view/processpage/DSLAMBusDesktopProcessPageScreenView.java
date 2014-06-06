@@ -241,9 +241,14 @@ public class DSLAMBusDesktopProcessPageScreenView extends DSLAMBusDesktopPanelBa
 			AEMFTMetadataElementComposite processData = processList.getElementData(processId);
 			
 			toolbar.setData(processData);
-			processOptions.setData(processData);
+			
 			toolbar.setFileInfoVisible(true);
 			processOptions.setVisibility(Visibility.VISIBLE);
+			
+			AEMFTMetadataElementComposite data = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST, processData);
+			if(data != null) {
+				processOptions.setData(processData);
+			}
 		}
 	}
 	

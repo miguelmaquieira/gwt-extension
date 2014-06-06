@@ -22,8 +22,22 @@ public class DSLAMBUBomToMetadataConversor {
 	/**
 	 * PROCESS
 	 */
-
+	
 	public  static AEMFTMetadataElementComposite fromProcess(DSLAMBOIProcess process, Locale locale) {
+		AEMFTMetadataElementComposite data = null;
+		if (process != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
+			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
+			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
+			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
+			data.addElement(DSLAMBOIProcess.PROCESS_SCRIPT			, fromFile(process.getProcessScript()));
+		}
+		return data;
+	}
+
+	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -68,7 +82,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
 			AEMFTMetadataElementComposite dataProcessList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (DSLAMBOIProcess process : processList) {
-				dataProcessList.addElement(process.getProcessName(), fromProcess(process,locale));
+				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process,locale));
 			}
 			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
