@@ -72,8 +72,10 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.synchronous = synchronous;
 	}
 
+	
 	@ElementCollection
 	@Temporal(TemporalType.TIMESTAMP)
+	
 //	@CollectionTable(
 //	        name="PHONE",
 //	        joinColumns=@JoinColumn(name="OWNER_ID")

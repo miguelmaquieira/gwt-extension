@@ -102,8 +102,13 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		variableList.setData(variablesData);
+		
+//		variableList.clearList();
+//		variablesData.addElement(id,data);
+//		variableList.setData(variablesData);
+//		variablesForm.resetForm();	
+	
 	}
 	
 	public AEMFTMetadataElementComposite getData() {

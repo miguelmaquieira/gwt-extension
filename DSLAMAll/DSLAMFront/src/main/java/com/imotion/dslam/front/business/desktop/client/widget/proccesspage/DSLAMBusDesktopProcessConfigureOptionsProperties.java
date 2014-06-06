@@ -52,8 +52,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS, data);
+		synchroCheckBox.setValue(synchronous);
 	}
 	
 	public AEMFTMetadataElementComposite getData() {

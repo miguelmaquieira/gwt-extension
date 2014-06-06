@@ -49,7 +49,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(process);
+		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(process, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
@@ -118,7 +118,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(updatedProcess);
+		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(updatedProcess, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
@@ -159,7 +159,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcessList(processList, fileList);
+		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcessList(processList, fileList, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}

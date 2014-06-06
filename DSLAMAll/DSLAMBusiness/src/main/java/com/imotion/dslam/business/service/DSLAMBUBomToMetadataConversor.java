@@ -1,14 +1,19 @@
 package com.imotion.dslam.business.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.data.DSLAMBOVariable;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class DSLAMBUBomToMetadataConversor {
 
@@ -18,16 +23,38 @@ public class DSLAMBUBomToMetadataConversor {
 	 * PROCESS
 	 */
 
-	public  static AEMFTMetadataElementComposite fromProcess(DSLAMBOIProcess process) {
+	public  static AEMFTMetadataElementComposite fromProcess(DSLAMBOIProcess process, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 
+			AEMFTMetadataElementComposite 	scheduleListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			List<Date> 						scheduleList = process.getScheduleList();
+			for (int i = 0; i < scheduleList.size(); i++) {
+				Date date = scheduleList.get(i);
+				String formatDate = "dd/MM/yyyy HH:mm";
+				String dateString = AEMFTCommonUtils.formatDate(date, formatDate, locale);
+				scheduleListData.addElement(String.valueOf(i), dateString);	
+			}
+			
+			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			List<DSLAMBOVariable> 			variableList = process.getVariableList();
+			for (int i = 0; i < scheduleList.size(); i++) {
+				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+				DSLAMBOVariable 				variable 			= variableList.get(i);
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variable.getVariableType());
+				variableListData.addElement(String.valueOf(i)							, variableData);
+			}
+				
+				
+			
 			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
 			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
 			data.addElement(DSLAMBOIProcess.PROCESS_SYNCHRONOUS		, process.isSynchronous());
-			//data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, process.getScheduleList());
-			//data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, process.getVariableList());
+			data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, scheduleListData);
+			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
 			data.addElement(DSLAMBOIProcess.PROCESS_SCRIPT			, fromFile(process.getProcessScript()));
@@ -35,13 +62,13 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProcessList(List<DSLAMBOIProcess> processList, List<DSLAMBOIFile> fileList) {
+	public  static AEMFTMetadataElementComposite fromProcessList(List<DSLAMBOIProcess> processList, List<DSLAMBOIFile> fileList, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
 			AEMFTMetadataElementComposite dataProcessList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (DSLAMBOIProcess process : processList) {
-				dataProcessList.addElement(process.getProcessName(), fromProcess(process));
+				dataProcessList.addElement(process.getProcessName(), fromProcess(process,locale));
 			}
 			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}

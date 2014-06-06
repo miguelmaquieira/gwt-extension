@@ -54,8 +54,7 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel  {
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		optionsZone.setData(data);
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
