@@ -11,7 +11,7 @@ statement   :	assignStatement
 			|	whileStatement
 			|	forStatement
 			| 	execution;
-assignStatement: VARIABLE_SCRIPT '=' (expression | execution)  ';';
+assignStatement: VARIABLE_SCRIPT '=' ((expression ';') | execution);
 
 ifStatement: 	'if' condition '{' statement+ '}' ('else' '{' statement+ '}')?;
 whileStatement: 'while' condition '{' statement+ '}';
@@ -23,7 +23,7 @@ expression :	'(' expression ')'								#parentExp
      			| atom=integerValue								#atomExpr
      			;
 			 
-execution : 'execute' ('a' | 'b')+ ;
+execution : 'execute' (dslamCommands | variable)+ ';';
 
 condition : '(' (integerValue) (LOGICAL_COMPARATOR (integerValue))? ')';
 
@@ -33,6 +33,13 @@ integerValue: 	INTEGER
 variable : 	VARIABLE_SCRIPT
 			| VARIABLE_PROCESS
 			|VARIABLE_EXTERNAL;
+			
+dslamCommands : 	'cli'|'environment'|'configure'|'show'|'admin'|'equipment'
+					|'interface'|'vlan'|'pppox-relay'|'software-mngt'
+					|'slot'|'protection-group'|'protection-element'|'admin-status'
+    				|'id'|'mode'|'name'|'protocol-filter'|'pppoe-relay-tag'|'circuit-id-pppoe'
+    				|'remote-id-pppoe'|'customer-id'|'shub'|'port'|'egress-port'|'cross-connect'
+    				|'engine'|'mac-addr-conc'|'unlock'|'database'|'save';
 
 //LEXER
 INTEGER: (DIGIT)+;
