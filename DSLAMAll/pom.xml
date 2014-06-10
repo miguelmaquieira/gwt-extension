@@ -42,7 +42,7 @@
 		<module>DSLAMBusiness</module>
 		<module>DSLAMFront</module>
 		<module>DSLAMTest</module>
-    	<module>DSLAM-ANTLR</module>
+    	<module>DSLAMExecute</module>
   </modules>
 
 	<build>
