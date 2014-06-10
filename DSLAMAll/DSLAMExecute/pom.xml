@@ -45,6 +45,9 @@
 						<goals>
 							<goal>antlr4</goal>
 						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/generated-sources/antlr4/com/imotion/antlr</outputDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
