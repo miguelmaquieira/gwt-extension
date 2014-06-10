@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import java.util.List;
 
@@ -66,6 +66,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 
 			@Override
 			public void onClick(ClickEvent event) {
+				variablesForm.resetForm();
 				variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
 				variablesForm.center();
 			}
@@ -142,7 +143,6 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			AEMFTMetadataElement variableData = variablesData.getElement(evt.getSourceWidgetId());
 			variablesForm.setData((AEMFTMetadataElementComposite) variableData);
 			variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
-			variablesForm.setVariableIdTextBoxEnable(false);
 			variablesForm.center();
 		}
 		

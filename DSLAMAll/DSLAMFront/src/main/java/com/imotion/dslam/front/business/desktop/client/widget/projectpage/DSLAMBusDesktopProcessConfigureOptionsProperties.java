@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.CheckBox;

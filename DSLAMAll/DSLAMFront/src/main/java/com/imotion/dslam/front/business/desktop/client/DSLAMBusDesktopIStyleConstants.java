@@ -39,20 +39,20 @@ public interface DSLAMBusDesktopIStyleConstants {
 	
 	
 	//PROCESS LIST
-	String PROCESS_LIST									= APP_ID_PREFFIX 			+ "processlist";	//dslam_studio-processlist
+	
 	String PROCESS_LIST_CONTAINER						= PROCESS_LIST		 		+ "-container";		//dslam_studio-processlist-container
 	String PROCESS_LIST_CONTAINER_ZONE 					= PROCESS_LIST_CONTAINER	+ "-zone";			//dslam_studio-processlist-container-zone
 	String PROCESS_LIST_HEADER 							= PROCESS_LIST				+ "-header";		//dslam_studio-processlist-header
 	String PROCESS_LIST_ELEMENT 						= PROCESS_LIST				+ "-element";		//dslam_studio-processlist-element
-	String PROCESS_LIST_ZONE 							= PROCESS_LIST				+ "-zone";			//dslam_studio-processlist-zone
+	
 
 	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
 	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 
-	String NEW_SCRIPT_FORM 								= APP_ID_PREFFIX			+ "newScriptForm";	//dslam_studio-newScriptForm
-	String NEW_SCRIPT_FORM_ERROR_ZONE 					= NEW_SCRIPT_FORM			+ "-errorZone";		//dslam_studio-newScriptForm-errorZone
-	String NEW_SCRIPT_FORM_INPUT_ZONE 					= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
-	String NEW_SCRIPT_FORM_SAVE_ZONE 					= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
+	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
+	String NEW_PROJECT_FORM_ERROR_ZONE 					= NEW_PROJECT_FORM			+ "-errorZone";		//dslam_studio-newProjectForm-errorZone
+	String NEW_PROJECT_FORM_INPUT_ZONE 					= NEW_PROJECT_FORM			+ "-inputZone";		//dslam_studio-newProjectForm-inputZone
+	String NEW_PROJECT_FORM_SAVE_ZONE 					= NEW_PROJECT_FORM			+ "-saveZone";		//dslam_studio-newProjectForm-saveZone
 
 	String NEW_PROCESS_FORM 							= APP_ID_PREFFIX			+ "newProcessForm";	//dslam_studio-newProcessForm
 	String NEW_PROCESS_FORM_INPUT_ZONE 					= NEW_PROCESS_FORM			+ "-inputZone";		//dslam_studio-newProcessForm-inputZone
@@ -64,15 +64,18 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EDITOR_VIEW_FILE_NAME 						= EDITOR_VIEW				+ "-filename";		//dslam_studio-editorView-filename
 	String EDITOR_VIEW_CONTENT_TYPE						= EDITOR_VIEW				+ "-contentType";	//dslam_studio-editorView-contentType
 	
-	//PROCESSES VIEW
-	String PROCESSES_VIEW 								= APP_ID_PREFFIX			+ "processesView";	//dslam_studio-processesView
-	String PROCESSES_VIEW_BOTTOM_ZONE 					= PROCESSES_VIEW			+ "-bottomZone";	//dslam_studio-processesView-bottomZone
-	String PROCESSES_VIEW_PROCESS_NAME 					= PROCESSES_VIEW			+ "-processName";	//dslam_studio-processesView-processName
-	String PROCESSES_VIEW_SCRIPT_NAME 					= PROCESSES_VIEW			+ "-scriptName";	//dslam_studio-processesView-scriptName
+	//PROJECTS VIEW
+	String PROJECTS_VIEW 								= APP_ID_PREFFIX		+ "projectsView";	//dslam_studio-projectsView
+	String PROJECTS_VIEW_BOTTOM_ZONE 					= PROJECTS_VIEW			+ "-bottomZone";	//dslam_studio-projectsView-bottomZone
+	String PROJECTS_VIEW_PROCESS_NAME 					= PROJECTS_VIEW			+ "-projectName";	//dslam_studio-projectsView-projectName
+	String PROJECTS_VIEW_SECTION_NAME 					= PROJECTS_VIEW			+ "-sectionName";	//dslam_studio-projectsView-sectionName
 	
+	String PROJECT_LIST									= APP_ID_PREFFIX 			+ "projectlist";	//dslam_studio-projectlist
+	String PROJECT_LIST_ZONE 							= PROJECT_LIST				+ "-zone";			//dslam_studio-projectlist-zone
+	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "projectConfigureZone"; 						//dslam_studio-projectConfigureZone
 	
 	//PROCESS OPTIONS
-	String PROCESS_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "processConfigureZone"; 						//dslam_studio-processConfigureZone
+	
 	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 							//dslam_studio-processConfigure
 	String PROCESS_CONFIGURE_OPTIONS_ZONE 				= APP_ID_PREFFIX			+ "processConfigureOptionsZone";				//dslam_studio-processConfigureOptionsZone
 	String PROCESS_CONFIGURE_OPTIONS					= APP_ID_PREFFIX			+ "processConfigureOptions"; 					//dslam_studio-processConfigureOptions

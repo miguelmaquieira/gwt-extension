@@ -1,9 +1,9 @@
-.dslam_studio-editorView {
+.dslam_studio-projectsView {
 	height: 100%;
 	position: relative;
 }
 
-.dslam_studio-editorView-bottomZone {
+.dslam_studio-projectsView-bottomZone {
 	position: absolute;
 	top: 40px;
 	width: 100%;
@@ -11,12 +11,40 @@
 	height: auto;
 }
 
-.dslam_studio-processesView {
+.nav-list {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 0;
+}
+
+.dslam_studio-projectlist-zone {
+	padding-right: 0px;
+	padding-left: 0px;
+	height: 100%;
+}
+
+.dslam_studio-newProjectForm {
+	background-color: #FFFFFF;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #888888;
+	width: 380px;
+}
+
+
+
+
+
+
+
+
+
+.dslam_studio-editorView {
 	height: 100%;
 	position: relative;
 }
 
-.dslam_studio-processesView-bottomZone {
+.dslam_studio-editorView-bottomZone {
 	position: absolute;
 	top: 40px;
 	width: 100%;
@@ -154,12 +182,6 @@
 	padding-left: 0px;
 }
 
-.dslam_studio-processlist-zone {
-	padding-right: 0px;
-	padding-left: 0px;
-	height: 100%;
-}
-
 .dslam_studio-list {
 	height: 100%;
 	position: relative;
@@ -220,13 +242,7 @@
 	height: 100%;
 }
 
-.dslam_studio-newScriptForm {
-	background-color: #FFFFFF;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px #888888;
-	width: 380px;
-}
+
 
 .dslam_studio-newProcessForm {
 	background-color: #FFFFFF;

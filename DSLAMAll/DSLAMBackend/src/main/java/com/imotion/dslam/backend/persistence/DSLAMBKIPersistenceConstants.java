@@ -3,6 +3,7 @@ package com.imotion.dslam.backend.persistence;
 import com.imotion.dslam.backend.DSLAMBKIConstants;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
+import com.imotion.dslam.backend.persistence.service.project.DSLAMBKProjectPersistenceServiceJPA;
 import com.selene.arch.base.MFTIConstant;
 
 public interface DSLAMBKIPersistenceConstants {
@@ -23,8 +24,12 @@ public interface DSLAMBKIPersistenceConstants {
 	public static final String CFG_DSLAM_PERSISTENCE_FILE_PERSISTENCE_IMPL				= "BACKEND.FILE_PERSISTENCE_IMPL";
 	public static final String CTE_DSLAM_PERSISTENCE_FILE_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKFilePersistenceServiceJPA.class.getName();
 	
-	//FILE
+	//PROCESS
 	public static final String CFG_DSLAM_PERSISTENCE_PROCESS_PERSISTENCE_IMPL				= "BACKEND.PROCESS_PERSISTENCE_IMPL";
 	public static final String CTE_DSLAM_PERSISTENCE_PROCESS_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKProcessPersistenceServiceJPA.class.getName();
+
+	//PROJECT
+	public static final String CFG_DSLAM_PERSISTENCE_PROJECT_PERSISTENCE_IMPL				= "BACKEND.PROJECT_PERSISTENCE_IMPL";
+	public static final String CTE_DSLAM_PERSISTENCE_PROJECT_PERSISTENCE_DEFAULT_IMPL		= DSLAMBKProjectPersistenceServiceJPA.class.getName();
 
 }

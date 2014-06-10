@@ -15,11 +15,6 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 	String getProcessName();
 
 	void setProcessName(String processName);
-	
-	DSLAMBOIFile getProcessScript();
-
-	void setProcessScript(DSLAMBOIFile script);
-
 
 	boolean isSynchronous();
 

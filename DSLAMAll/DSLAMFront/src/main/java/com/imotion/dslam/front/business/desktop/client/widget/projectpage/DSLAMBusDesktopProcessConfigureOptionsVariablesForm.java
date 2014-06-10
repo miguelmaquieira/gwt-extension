@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -40,8 +40,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null			, TEXTS.value());
 		
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE, TEXTS.process_variable());
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE, TEXTS.external_variable());
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE, TEXTS.process_variable());
+		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE, TEXTS.external_variable());
 		root.add(variableValueTextBox);
 		
 		FlowPanel saveButtonZone = new FlowPanel();
@@ -112,6 +112,16 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 			//			if (!AEGWTStringUtils.isEmptyString(variableId)) {
 //				super.setEditMode(true);
 //			}
+			
+			
+			variableIdTextBox.setEnabled(false);
+			variableIdTextBox.setDropdownEnabled(true);
+			
+			if (DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE.equals(variableType)) {
+				variableIdTextBox.setItemSelected(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE);	
+			} else {
+				variableIdTextBox.setItemSelected(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE);	
+			}
 
 			variableIdTextBox.setText(variableId);
 			variableValueTextBox.setText(variableValue);

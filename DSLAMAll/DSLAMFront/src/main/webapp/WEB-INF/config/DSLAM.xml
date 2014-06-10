@@ -182,5 +182,24 @@
 				</SubService>
 			</SubServiceList>
 		</Service>
+		<Service Name="SRV_BUS_PROJECT">
+			<Description>Cron business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUProjectBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="ADD_PROJECT">
+					<Descriptor>addProject</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PROJECT">
+					<Descriptor>updateProject</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_PROJECTS">
+					<Descriptor>getAllProjects</Descriptor>
+				</SubService>
+				<SubService Name="REMOVE_PROJECT">
+					<Descriptor>removeProject</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
 	</ServiceList>
 </Application>
