@@ -11,13 +11,15 @@ statement   :	assignStatement
 			|	whileStatement
 			|	forStatement
 			| 	execution;
-assignStatement: VARIABLE_SCRIPT '=' ((expression ';') | execution);
+assignStatement: VARIABLE_SCRIPT '=' (( (expression | STRING_LITERAL) ';') | execution);
 
-ifStatement: 	'if' condition '{' statement+ '}' ('else' '{' statement+ '}')?;
+ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
+ifBlock: statement+;
+elseBlock: statement+;
 whileStatement: 'while' condition '{' statement+ '}';
 forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' integerValue '..' integerValue ')' '{' statement+ '}';
 
-expression :	'(' expression ')'								#parentExp
+expression :	'(' expression ')'								#parExp
 				| left=expression op=('*'|'/') right=expression #aritOp
    				| left=expression op=('+'|'-') right=expression #aritOp
      			| atom=integerValue								#atomExpr
@@ -42,7 +44,7 @@ dslamCommands : 	'cli'|'environment'|'configure'|'show'|'admin'|'equipment'
     				|'engine'|'mac-addr-conc'|'unlock'|'database'|'save';
 
 //LEXER
-INTEGER: (DIGIT)+;
+INTEGER: ('-')?(DIGIT)+;
 WS  :  [ \t\r\n\u000C]+ -> skip
     ;
 VARIABLE_SCRIPT : 	'$' VARIABLE_NAME;

@@ -1,11 +1,14 @@
 package com.imotion.dslam.antlr;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.ParserRuleContext;
 
 import com.imotion.antlr.DSLAMLexer;
 import com.imotion.antlr.DSLAMParser;
+import com.imotion.antlr.DSLAMParser.ProgramContext;
 
 
 /**
@@ -15,33 +18,35 @@ import com.imotion.antlr.DSLAMParser;
 public class App {
 
 	private static final String DSLAM_TEXT = 
-												  "$a = 2845;"
-												+ "$b = 3000;"
-												+ "if ($a < #a) {"
-												+ "	$c = 5 + $a;"
+												  "$a = 1;"
+												+ "$b = 2;"
+												+ "if ($a < $b) {"
+												+ "	$a = $a + $b;"
 												+ "} else {"
-												+ " $c = 0;"
+												+ " $a = 0;"
 												+ "	$b = 9;"
 												+ "}"
+												+ "$p = 0;"
 												+ "for $j in (1..3) {"
-												+ "	$p = 3 * ($j + 4);"
+												+ "	$p = 2 * ($j + $j);"
 												+ "}"
 												+ "$k = 1;"
-												+ "while ($k < 3) {"
+												+ "while ($k <= 3) {"
 												+ "	$k = $k + 1;"
-												+ "}";
+												+ "}"
+												+ "execute configure admin $k;";
 
 	public static void main( String[] args ) {
 		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		DSLAMParser parser = new DSLAMParser(tokens);
-
-		ParserRuleContext tree = parser.program(); // parse
-
-		System.out.println(tree.toStringTree(parser));
 		
-//		Visitor visitor = new Visitor();
-//		List<String> commands = visitor.visit(tree);
-//		System.out.println(commands.toString());
+		DSLAMParser parser = new DSLAMParser(tokens);
+		ProgramContext tree = parser.program();
+		
+		DSLAMIConnection connection = new DSLAMConnectionImpl();
+		
+		Map<String, Object> variables = new HashMap<>();
+		DSLAMVisitorImpl visitor = new DSLAMVisitorImpl(connection, variables);
+		visitor.visit(tree);
 	}
 }
