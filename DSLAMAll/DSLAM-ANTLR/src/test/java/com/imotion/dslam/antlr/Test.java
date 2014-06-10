@@ -9,13 +9,15 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import com.imotion.antlr.DSLAMLexer;
 import com.imotion.antlr.DSLAMParser;
 import com.imotion.antlr.DSLAMParser.ProgramContext;
+import com.imotion.dslam.comm.DSLAMConnectionImpl;
+import com.imotion.dslam.comm.DSLAMIConnection;
 
 
 /**
  * Hello world!
  *
  */
-public class App {
+public class Test {
 
 	private static final String DSLAM_TEXT = 
 												  "$a = 1;"
@@ -46,7 +48,7 @@ public class App {
 		DSLAMIConnection connection = new DSLAMConnectionImpl();
 		
 		Map<String, Object> variables = new HashMap<>();
-		DSLAMVisitorImpl visitor = new DSLAMVisitorImpl(connection, variables);
+		DSLAMInterpreterVisitorImpl visitor = new DSLAMInterpreterVisitorImpl(connection, variables);
 		visitor.visit(tree);
 	}
 }
