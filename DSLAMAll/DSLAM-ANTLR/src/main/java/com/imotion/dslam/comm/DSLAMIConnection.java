@@ -1,4 +1,4 @@
-package com.imotion.dslam.antlr;
+package com.imotion.dslam.comm;
 
 public interface DSLAMIConnection {
 

@@ -1,11 +1,14 @@
 package com.imotion.dslam.antlr;
-public class Value {
 
-	public static Value VOID = new Value(new Object());
+import com.imotion.dslam.comm.DSLAMIResponse;
+
+public class DSLAMInterpreterVisitorValue {
+
+	public static DSLAMInterpreterVisitorValue VOID = new DSLAMInterpreterVisitorValue(new Object());
 
 	private final Object value;
 
-	public Value(Object value) {
+	public DSLAMInterpreterVisitorValue(Object value) {
 		this.value = value;
 	}
 
@@ -66,7 +69,7 @@ public class Value {
 			return false;
 		}
 
-		Value that = (Value)o;
+		DSLAMInterpreterVisitorValue that = (DSLAMInterpreterVisitorValue)o;
 
 		return this.value.equals(that.value);
 	}
