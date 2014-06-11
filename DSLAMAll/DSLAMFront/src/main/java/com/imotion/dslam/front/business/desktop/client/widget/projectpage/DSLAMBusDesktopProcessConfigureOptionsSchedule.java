@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import java.util.ArrayList;
 import java.util.List;

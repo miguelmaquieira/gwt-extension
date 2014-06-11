@@ -6,11 +6,13 @@ import java.util.Locale;
 
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.DSLAMBOVariable;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
@@ -32,7 +34,6 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
-			data.addElement(DSLAMBOIProcess.PROCESS_SCRIPT			, fromFile(process.getProcessScript()));
 		}
 		return data;
 	}
@@ -54,12 +55,13 @@ public class DSLAMBUBomToMetadataConversor {
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			List<DSLAMBOVariable> 			variableList = process.getVariableList();
 			for (int i = 0; i < variableList.size(); i++) {
-				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-				DSLAMBOVariable 				variable 			= variableList.get(i);
+				
+				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+				DSLAMBOVariable 				variable 		= variableList.get(i);
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variable.getVariableType());
-				variableListData.addElement(String.valueOf(i)							, variableData);
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
+				variableListData.addElement(variable.getVariableName()	, variableData);
 			}
 				
 				
@@ -71,7 +73,6 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
-			data.addElement(DSLAMBOIProcess.PROCESS_SCRIPT			, fromFile(process.getProcessScript()));
 		}
 		return data;
 	}
@@ -139,6 +140,59 @@ public class DSLAMBUBomToMetadataConversor {
 		}
 		return data;
 	}
+	
+	/**
+	 * PROJECT
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromProject(DSLAMBOIProject project, Locale locale) {
+		AEMFTMetadataElementComposite data = null;
+		if (project != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(DSLAMBOIProject.PROJECT_ID				, project.getProjectId());
+			data.addElement(DSLAMBOIProject.PROJECT_NAME			, project.getProjectName());
+			data.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, project.getMachineType());
+			data.addElement(DSLAMBOIProcess.CREATION_TIME			, project.getCreationTime());
+			data.addElement(DSLAMBOIProcess.SAVED_TIME				, project.getSavedTime());
+		}
+		return data;
+	}
+
+	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project, Locale locale) {
+		AEMFTMetadataElementComposite data = null;
+		if (project != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			DSLAMBOIFile 	mainScript 		= project.getMainScript();
+			DSLAMBOIFile 	rollBackScript 	= project.getRollBackScript();
+			DSLAMBOIProcess process 		= project.getProcess();
+			AEMFTMetadataElementComposite mainScriptData 		= DSLAMBUBomToMetadataConversor.fromFile(mainScript);
+			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
+			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcess(process, locale);
+			
+			data.addElement(DSLAMBOIProject.PROJECT_ID				, project.getProjectId());
+			data.addElement(DSLAMBOIProject.PROJECT_NAME			, project.getProjectName());
+			data.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, project.getMachineType());
+			data.addElement(DSLAMBOIProject.PROJECT_SCRIPT			, mainScriptData);
+			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	, rollBackScriptData);
+			data.addElement(DSLAMBOIProject.PROJECT_PROCESS			, processData);
+			data.addElement(DSLAMBOIProject.CREATION_TIME			, project.getCreationTime());
+			data.addElement(DSLAMBOIProject.SAVED_TIME				, project.getSavedTime());
+		}
+		return data;
+	}
+
+	public  static AEMFTMetadataElementComposite fromProjectList(List<DSLAMBOIProject> projectList,Locale locale) {
+		AEMFTMetadataElementComposite dataProjectList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
+			for (DSLAMBOIProject project : projectList) {
+				dataProjectList.addElement(project.getProjectName(), fromProjectFull(project,locale));
+			}
+		}
+		return dataProjectList;
+	}
+	
 
 	/**
 	 * PRIVATE

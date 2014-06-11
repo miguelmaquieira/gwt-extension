@@ -11,7 +11,7 @@ statement   :	assignStatement
 			|	whileStatement
 			|	forStatement
 			| 	execution;
-assignStatement: VARIABLE_SCRIPT '=' (( (expression | STRING_LITERAL) ';') | execution);
+assignStatement: VARIABLE_SCRIPT '=' (( (integerExpression | stringExpr) ';') | execution);
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
 ifBlock: statement+;
@@ -19,18 +19,23 @@ elseBlock: statement+;
 whileStatement: 'while' condition '{' statement+ '}';
 forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' integerValue '..' integerValue ')' '{' statement+ '}';
 
-expression :	'(' expression ')'								#parExp
-				| left=expression op=('*'|'/') right=expression #aritOp
-   				| left=expression op=('+'|'-') right=expression #aritOp
-     			| atom=integerValue								#atomExpr
+integerExpression :	'(' integerExpression ')'									#parExp
+				| left=integerExpression op=('*'|'/') right=integerExpression	#aritOp
+   				| left=integerExpression op=('+'|'-') right=integerExpression 	#aritOp
+     			| atom=integerValue												#atomExpr
      			;
+     			
+stringExpr : stringValue ('+' stringValue)*;
 			 
 execution : 'execute' (dslamCommands | variable)+ ';';
 
 condition : '(' (integerValue) (LOGICAL_COMPARATOR (integerValue))? ')';
 
 integerValue: 	INTEGER
-				|	variable;
+				| variable;
+				
+stringValue: STRING_LITERAL
+			 |variable; 
 
 variable : 	VARIABLE_SCRIPT
 			| VARIABLE_PROCESS

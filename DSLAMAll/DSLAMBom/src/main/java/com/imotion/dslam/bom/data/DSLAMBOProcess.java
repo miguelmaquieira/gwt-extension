@@ -8,14 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 
 @Entity(name="Process")
@@ -25,7 +22,6 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	
 	private Long 					processId;
 	private String 					processName;
-	private DSLAMBOIFile            processScript;
 	private boolean 				synchronous;
 	private List<Date>				scheduleList;
 	private List<DSLAMBOVariable> 	variableList;
@@ -53,16 +49,6 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public void setProcessName(String processName) {
 		this.processName = processName;
 	}
-	
-	@ManyToOne(optional=false, targetEntity=DSLAMBOFile.class) 
-    @JoinColumn(name=DSLAMBOFile.FILE_ID, nullable=false, updatable=true)
-	public DSLAMBOIFile getProcessScript() {
-		return processScript;
-	}
-
-	public void setProcessScript(DSLAMBOIFile processScript) {
-		this.processScript = processScript;
-	}
 
 	public boolean isSynchronous() {
 		return synchronous;
@@ -75,12 +61,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	
 	@ElementCollection
 	@Temporal(TemporalType.TIMESTAMP)
-	
-//	@CollectionTable(
-//	        name="PHONE",
-//	        joinColumns=@JoinColumn(name="OWNER_ID")
-//	  )
-//	@Column(name="PHONE_NUMBER")
+
 	public List<Date> getScheduleList() {
 		return scheduleList;
 	}
@@ -89,7 +70,6 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.scheduleList = scheduleList;
 	}
 
-//	@Embedded
 	@ElementCollection
 	public List<DSLAMBOVariable> getVariableList() {
 		return variableList;

@@ -37,9 +37,15 @@ public class Test {
 												+ "	$k = $k + 1;"
 												+ "}"
 												+ "execute configure admin $k;";
+	
+	private static final String DSLAM_TEXT_2 = 	"$a = \"hola\";"
+													+ "$b = \" que tal\";"
+													+ "$c = $a + $b + \"!!\";"; 
 
+	private static final String DSLAM_TEXT_3 = DSLAM_TEXT_2 + DSLAM_TEXT;
+	
 	public static void main( String[] args ) {
-		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT));
+		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT_3));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		DSLAMParser parser = new DSLAMParser(tokens);

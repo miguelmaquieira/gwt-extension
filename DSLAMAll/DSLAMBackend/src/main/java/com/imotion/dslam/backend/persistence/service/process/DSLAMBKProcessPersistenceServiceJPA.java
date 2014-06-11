@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
-import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOVariable;
@@ -58,16 +57,6 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcessScript(Long processId, Long processScriptAsLong) {
-		DSLAMBOProcess 	process = getPersistenceModule().get(processId);
-		DSLAMBOIFile 	script 	= getFilePersistence().getFile(processScriptAsLong);
-		process.setProcessScript(script);
-		process.setSavedTime(new Date());
-		process = getPersistenceModule().update(process);
-		return process;
-	}
-	
-	@Override
 	public List<DSLAMBOIProcess> getAllProcesses() {
 		List<DSLAMBOProcess> processListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(processListJpa);
@@ -76,6 +65,12 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	@Override
 	public void removeProcess(Long processIdAsLong) {
 		getPersistenceModule().remove(processIdAsLong);
+	}
+	
+	@Override
+	public DSLAMBOIProcess getProcess(Long processIdAsLong) {
+		DSLAMBOProcess processJpa = getPersistenceModule().get(processIdAsLong);
+		return processJpa;
 	}
 
 	/**

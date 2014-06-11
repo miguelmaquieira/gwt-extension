@@ -85,8 +85,8 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
 	
-	@DefaultStringValue("Ya existe un proceso con ese nombre")
-	String processname_exists();
+	@DefaultStringValue("Ya existe un proyecto con ese nombre")
+	String projectname_exists();
 	
 	@DefaultStringValue("Protocolo1")
 	String protocol1();
@@ -126,5 +126,23 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Variable externa")
 	String external_variable();
-
+	
+	@DefaultStringValue("Scripts")
+	String scripts_label();
+	
+	@DefaultStringValue("Proceso")
+	String process_label();
+	
+	@DefaultStringValue("Main Script")
+	String main_script_label();
+	
+	@DefaultStringValue("Rollback Script")
+	String roolback_script_label();
+	
+	@DefaultStringValue("Nombre del Proyecto")
+	String projectame_input_placeholder();
+	
+	@DefaultStringValue("DSLAM")
+	String project_type_dslam();
+	
 }
