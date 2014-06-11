@@ -176,10 +176,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		} if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.OK_EVENT)) {
 			reset();	
 			Window.alert("Transacción finalizada");
-		} else if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.ERROR_EVENT)) {
-			AEMFTMetadataElementComposite dataErrors = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
-			//showErrors(dataErrors);
-			Window.alert("Transacción errónea");
 		}
 	}
 
@@ -196,8 +192,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
 				||
 				LOGICAL_TYPE.OK_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.ERROR_EVENT.equals(type)
 				||
 				LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}

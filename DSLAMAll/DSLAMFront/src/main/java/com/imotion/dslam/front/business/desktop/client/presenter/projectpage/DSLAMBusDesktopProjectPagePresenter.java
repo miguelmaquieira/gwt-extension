@@ -47,11 +47,8 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();
 				createProject(projectData);
-			} else if (LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
+			} else if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				if (!projectData.contains(DSLAMBOIProjectDataConstants.PROJECT_ID)) {
-					projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_ID	, sourceWidgetId);
-				}
 				updateProject(projectData);
 			} else if (LOGICAL_TYPE.DELETE_EVENT.equals(type)) {
 				evt.stopPropagation();
@@ -67,12 +64,7 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 				LOGICAL_TYPE.SAVE_EVENT.equals(type) 
 				|| 
 				LOGICAL_TYPE.DELETE_EVENT.equals(type) 
-				||
-				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.SELECT_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.OPEN_EVENT.equals(type);
+				;
 	}
 	
 	/**

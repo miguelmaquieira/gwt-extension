@@ -5,10 +5,9 @@ import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIBusDesktopScriptsEditor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-
-import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 
 public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
@@ -17,10 +16,10 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	
-	private DeckPanel 											root;
-	private AceEditor											mainScriptConfigure;
-	private AceEditor											rollBackScriptConfigure;
-	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
+	private DeckPanel 									root;
+	private CRONIBusDesktopScriptsEditor				mainScriptEditor;
+	private CRONIBusDesktopScriptsEditor				rollBackScriptEditor;
+	private DSLAMBusDesktopProcessConfigureVariables	variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureProperties	propertiesProcessConfigure;
 	//private DSLAMBusDesktopProcessConfigureOptions		optionsZone;
@@ -39,14 +38,14 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
 		
-		mainScriptConfigure 		= new AceEditor();
-		rollBackScriptConfigure 	= new AceEditor();
+		mainScriptEditor 		= new CRONIBusDesktopScriptsEditor();
+		rollBackScriptEditor 	= new CRONIBusDesktopScriptsEditor();
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
 		propertiesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureProperties();
 		
-		root.add(mainScriptConfigure);
-		root.add(rollBackScriptConfigure);
+		root.add(mainScriptEditor);
+		root.add(rollBackScriptEditor);
 		root.add(variablesProcessConfigure);
 		root.add(scheduleProcessConfigure);
 		root.add(propertiesProcessConfigure);
