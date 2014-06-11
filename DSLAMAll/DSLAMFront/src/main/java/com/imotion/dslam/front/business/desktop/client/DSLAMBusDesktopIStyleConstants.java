@@ -18,16 +18,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR_INFO_TITLE_ZONE_SEPARATOR 			= TOOLBAR_INFO_TITLE_ZONE + "-separator";		//dslam_studio-toolbar-info-titleZone-separator
 	String TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE 		= TOOLBAR_INFO_TITLE_ZONE + "-secondaryTitle";	//dslam_studio-toolbar-info-titleZone-secondaryTitle
 	
-	//CONNECTION TOOLBAR
-	String TOOLBAR_CONNECTION_ZONE 						= APP_ID_PREFFIX			+ "toolbar-connection-zone";	//dslam_studio-toolbar-connection-zone 
-	String CONNECTION_TOOLBAR							= APP_ID_PREFFIX 			+ "connection-toolbar"; 		//dslam_studio-connection-toolbar
-	String SERVER_LABEL									= APP_ID_PREFFIX 			+ "server-label"; 				//dslam_studio-server-label
-	String USER_LABEL									= APP_ID_PREFFIX 			+ "user-label"; 				//dslam_studio-user-label
-	String PASSWORD_LABEL								= APP_ID_PREFFIX 			+ "password-label"; 			//dslam_studio-password-label
-	String SERVER_TEXTBOX								= APP_ID_PREFFIX 			+ "server-textbox"; 			//dslam_studio-server-textbox
-	String USER_TEXTBOX									= APP_ID_PREFFIX 			+ "user-textbox"; 				//dslam_studio-user-textbox
-	String PASSWORD_TEXTBOX								= APP_ID_PREFFIX 			+ "password-textbox"; 			//dslam_studio-password-textbox
-	
 	//LIST
 	String LIST											= APP_ID_PREFFIX 		+ "list";				//dslam_studio-list
 	String LIST_CONTAINER								= LIST		 			+ "-container";			//dslam_studio-list-container
@@ -35,35 +25,33 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST_HEADER 									= LIST					+ "-header";			//dslam_studio-list-header
 	String LIST_ELEMENT 								= LIST					+ "-element";			//dslam_studio-list-element
 	String LIST_ZONE 									= LIST					+ "-zone";				//dslam_studio-list-zone
-	String FILE_LIST_ELEMENT 							= APP_ID_PREFFIX		+ "fileListElement";	//dslam_studio-fileListElement
 	
-	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
-	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
-
+	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
 	String NEW_PROJECT_FORM_ERROR_ZONE 					= NEW_PROJECT_FORM			+ "-errorZone";		//dslam_studio-newProjectForm-errorZone
 	String NEW_PROJECT_FORM_INPUT_ZONE 					= NEW_PROJECT_FORM			+ "-inputZone";		//dslam_studio-newProjectForm-inputZone
 	String NEW_PROJECT_FORM_SAVE_ZONE 					= NEW_PROJECT_FORM			+ "-saveZone";		//dslam_studio-newProjectForm-saveZone
 
-	String NEW_PROCESS_FORM 							= APP_ID_PREFFIX			+ "newProcessForm";	//dslam_studio-newProcessForm
-	String NEW_PROCESS_FORM_INPUT_ZONE 					= NEW_PROCESS_FORM			+ "-inputZone";		//dslam_studio-newProcessForm-inputZone
-	String NEW_PROCESS_FORM_SAVE_ZONE 					= NEW_PROCESS_FORM			+ "-saveZone";		//dslam_studio-newProcessForm-saveZone
+	//PROJECTS VIEW
+	String PROJECTS_VIEW 								= APP_ID_PREFFIX		+ "projectsView";	//dslam_studio-projectsView
+	String PROJECTS_VIEW_BOTTOM_ZONE 					= PROJECTS_VIEW			+ "-bottomZone";	//dslam_studio-projectsView-bottomZone
+	String PROJECTS_VIEW_PROCESS_NAME 					= PROJECTS_VIEW			+ "-projectName";	//dslam_studio-projectsView-projectName
+	String PROJECTS_VIEW_SECTION_NAME 					= PROJECTS_VIEW			+ "-sectionName";	//dslam_studio-projectsView-sectionName	
+	String PROJECT_LIST									= APP_ID_PREFFIX 		+ "projectlist";	//dslam_studio-projectlist
+	String PROJECT_LIST_ZONE 							= PROJECT_LIST			+ "-zone";			//dslam_studio-projectlist-zone
+	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX		+ "projectConfigureZone"; 						//dslam_studio-projectConfigureZone
+	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX		+ "projectConfigureDeckPanel"; 						//dslam_studio-projectConfigureDeckPanel
+		
 	
+	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
+	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
+
 	//EDITOR VIEW
 	String EDITOR_VIEW 									= APP_ID_PREFFIX			+ "editorView";		//dslam_studio-editorView
 	String EDITOR_VIEW_BOTTOM_ZONE 						= EDITOR_VIEW				+ "-bottomZone";	//dslam_studio-editorView-bottomZone
 	String EDITOR_VIEW_FILE_NAME 						= EDITOR_VIEW				+ "-filename";		//dslam_studio-editorView-filename
 	String EDITOR_VIEW_CONTENT_TYPE						= EDITOR_VIEW				+ "-contentType";	//dslam_studio-editorView-contentType
 	
-	//PROJECTS VIEW
-	String PROJECTS_VIEW 								= APP_ID_PREFFIX		+ "projectsView";	//dslam_studio-projectsView
-	String PROJECTS_VIEW_BOTTOM_ZONE 					= PROJECTS_VIEW			+ "-bottomZone";	//dslam_studio-projectsView-bottomZone
-	String PROJECTS_VIEW_PROCESS_NAME 					= PROJECTS_VIEW			+ "-projectName";	//dslam_studio-projectsView-projectName
-	String PROJECTS_VIEW_SECTION_NAME 					= PROJECTS_VIEW			+ "-sectionName";	//dslam_studio-projectsView-sectionName
-	
-	String PROJECT_LIST									= APP_ID_PREFFIX 			+ "projectlist";	//dslam_studio-projectlist
-	String PROJECT_LIST_ZONE 							= PROJECT_LIST				+ "-zone";			//dslam_studio-projectlist-zone
-	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "projectConfigureZone"; 						//dslam_studio-projectConfigureZone
 	
 	//PROCESS OPTIONS
 	

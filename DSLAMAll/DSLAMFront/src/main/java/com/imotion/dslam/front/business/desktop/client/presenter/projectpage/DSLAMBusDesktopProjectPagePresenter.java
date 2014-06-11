@@ -70,7 +70,9 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 				||
 				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
 				||
-				LOGICAL_TYPE.SELECT_EVENT.equals(type);
+				LOGICAL_TYPE.SELECT_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}
 	
 	/**

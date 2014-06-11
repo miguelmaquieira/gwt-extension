@@ -26,20 +26,27 @@ public class DSLAMBusDesktopNavigatorElement extends AEGWTCompositePanel {
 	private AEGWTBootstrapTreeMenuFinalItem 	propertiesProcess;
 	private AEGWTBootstrapTreeMenuFinalItem 	nodesProcess;
 	
+	public String MAIN_SCRIPT 			= "mainScritp";
+	public String ROLLBACK_SCRIPT 		= "rollbackScritp";
+	public String VARIABLE_PROCESS 		= "variableProcess";
+	public String SCHEDULE_PROCESS 		= "scheduleProcess";
+	public String PROPERTIES_PROCESS 	= "propertiesProcess";
+	public String NODES_PROCESS			= "nodesProcess";	
+	
 	public DSLAMBusDesktopNavigatorElement(String name) {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		
-		menu 			= new AEGWTBootstrapTreeMenu();
-		menuProject 	= new AEGWTBootstrapTreeMenuItem(name);
-		menuScritp 		= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
-		menuProcess 	= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
-		mainScritp 		= new AEGWTBootstrapTreeMenuFinalItem("main",TEXTS.main_script_label());
-		rollbackScritp 	= new AEGWTBootstrapTreeMenuFinalItem("rollback",TEXTS.roolback_script_label());
-		variableProcess = new AEGWTBootstrapTreeMenuFinalItem("Variables",TEXTS.variables());
-		scheduleProcess = new AEGWTBootstrapTreeMenuFinalItem("Schedule",TEXTS.schedule());
-		propertiesProcess = new AEGWTBootstrapTreeMenuFinalItem("Properties",TEXTS.properties());
-		nodesProcess = new AEGWTBootstrapTreeMenuFinalItem("Nodes",TEXTS.nodes());
+		menu 				= new AEGWTBootstrapTreeMenu();
+		menuProject 		= new AEGWTBootstrapTreeMenuItem(name);
+		menuScritp 			= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
+		menuProcess 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
+		mainScritp 			= new AEGWTBootstrapTreeMenuFinalItem(MAIN_SCRIPT			,TEXTS.main_script_label(), this);
+		rollbackScritp 		= new AEGWTBootstrapTreeMenuFinalItem(ROLLBACK_SCRIPT		,TEXTS.roolback_script_label(),this);
+		variableProcess 	= new AEGWTBootstrapTreeMenuFinalItem(VARIABLE_PROCESS		,TEXTS.variables(),this);
+		scheduleProcess 	= new AEGWTBootstrapTreeMenuFinalItem(SCHEDULE_PROCESS		,TEXTS.schedule(),this);
+		propertiesProcess 	= new AEGWTBootstrapTreeMenuFinalItem(PROPERTIES_PROCESS	,TEXTS.properties(),this);
+		nodesProcess 		= new AEGWTBootstrapTreeMenuFinalItem(NODES_PROCESS			,TEXTS.nodes(),this);
 		
 		
 		root.add(menu);
@@ -63,27 +70,19 @@ public class DSLAMBusDesktopNavigatorElement extends AEGWTCompositePanel {
 	}
 	
 	public String getElementName() {
-		return null;
+		return menuProject.getLabelText();
 	}
 	
-	/************************************************************************
-	 * JS
-	 ************************************************************************/
-	
+//	protected static native void addJS() /*-{
 //	$wnd.jQuery('label.tree-toggler').click(function () {
 //			$wnd.jQuery(this).parent().children('ul.tree').toggle(300);
 //	});
-	
-	protected static native void addJS() /*-{
-	$wnd.jQuery('.tree-toggler').click(function () {
-			$wnd.jQuery(this).parent().children('ul.tree').toggle(300);
-	});
-}-*/;
+//	}-*/;
 
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		addJS();
+		//addJS();
 	}
 	
 	@Override

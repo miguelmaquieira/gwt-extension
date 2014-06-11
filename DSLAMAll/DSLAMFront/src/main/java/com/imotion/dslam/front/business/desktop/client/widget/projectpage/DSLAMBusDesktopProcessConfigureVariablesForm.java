@@ -18,9 +18,9 @@ import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPopup {
+public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsVariablesForm";
+	public static final String NAME = "DSLAMBusDesktopProcessConfigureVariablesForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapDropdownAndLabelTextBox  	variableIdTextBox;
@@ -29,7 +29,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariablesForm extends AEGWTPo
 	private AEGWTButton								cancelButton;
 	private boolean								editMode;
 
-	public DSLAMBusDesktopProcessConfigureOptionsVariablesForm(AEGWTICompositePanel parent) {
+	public DSLAMBusDesktopProcessConfigureVariablesForm(AEGWTICompositePanel parent) {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);

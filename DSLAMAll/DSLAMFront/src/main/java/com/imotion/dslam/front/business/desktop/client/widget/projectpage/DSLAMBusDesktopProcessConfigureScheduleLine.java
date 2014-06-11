@@ -13,16 +13,16 @@ import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 
-public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCompositePanel  {
+public class DSLAMBusDesktopProcessConfigureScheduleLine extends AEGWTCompositePanel  {
 
-	public 	static final String 		NAME 	= "DSLAMBusDesktopProcessConfigureOptionsScheduleLine";
+	public 	static final String 		NAME 	= "DSLAMBusDesktopProcessConfigureScheduleLine";
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	
 	private AEGWTBootstrapDateTimePickerTextBox		dateTimeBox;
 	private AEGWTBootstrapGlyphiconButton 			deleteButton;
 
-	public DSLAMBusDesktopProcessConfigureOptionsScheduleLine(AEMFTMetadataElement date) {
+	public DSLAMBusDesktopProcessConfigureScheduleLine(AEMFTMetadataElement date) {
 		FlowPanel root = new FlowPanel();
 		root.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LINE);

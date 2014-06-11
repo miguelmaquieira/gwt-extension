@@ -14,16 +14,16 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphico
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorToolbarActions extends AEGWTCompositePanel {
+public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileActions";
+	public static final String NAME = "DSLAMBusDesktopToolbarFileActions";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapGlyphiconButton newButton;
 	private AEGWTBootstrapGlyphiconButton saveButton;
 
-	public DSLAMBusDesktopEditorToolbarActions() {
+	public DSLAMBusDesktopToolbarActions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);

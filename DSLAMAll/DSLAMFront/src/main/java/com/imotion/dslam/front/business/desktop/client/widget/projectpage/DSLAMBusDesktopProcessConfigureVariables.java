@@ -24,22 +24,22 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
+public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsVariables";
+	public static final String NAME = "DSLAMBusDesktopProcessConfigureVariables";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private FlowPanel 												root;
-	private FlowPanel												headerZone;
-	private FlowPanel												variableListZone;
-	private AEGWTBootstrapGlyphiconButton 							addVariableButton;
-	private AEGWTBootstrapGlyphiconButton 							deleteVariablesButton;
-	private	 DSLAMBusDesktopVariablesList   						variableList;
-	private DSLAMBusDesktopProcessConfigureOptionsVariablesForm		variablesForm;
-	private	 AEMFTMetadataElementComposite							variablesData;
-	//private int													numberVariablesData;
+	private FlowPanel 											root;
+	private FlowPanel											headerZone;
+	private FlowPanel											variableListZone;
+	private AEGWTBootstrapGlyphiconButton 						addVariableButton;
+	private AEGWTBootstrapGlyphiconButton 						deleteVariablesButton;
+	private	 DSLAMBusDesktopVariablesList   					variableList;
+	private DSLAMBusDesktopProcessConfigureVariablesForm		variablesForm;
+	private	 AEMFTMetadataElementComposite						variablesData;
+	//private int												numberVariablesData;
 
-	public DSLAMBusDesktopProcessConfigureOptionsVariables() {
+	public DSLAMBusDesktopProcessConfigureVariables() {
 		variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
 		root = new FlowPanel();
 		initWidget(root);
@@ -92,7 +92,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		variablesForm = new DSLAMBusDesktopProcessConfigureOptionsVariablesForm(this);
+		variablesForm = new DSLAMBusDesktopProcessConfigureVariablesForm(this);
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, variableListZone, variableListZone.getElement().getClientHeight(), false);
 	
