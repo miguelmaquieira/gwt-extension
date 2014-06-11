@@ -18,12 +18,13 @@ import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanel
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigure;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectToolbar;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarActions;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarInfo;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarInfo;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -35,7 +36,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private static final String PROJECT_DATA_LIST = null;
 	
 	private FlowPanel 								root;
-	private DSLAMBusDesktopProjectToolbar			toolbar;
+	private DSLAMBusDesktopToolbar					toolbar;
 	private DSLAMBusDesktopNavigator				projectList;
 	private DSLAMBusDesktopProcessConfigure			projectOptions;
 	private DSLAMBusDesktopNewProjectPopupForm 		newProjectPopup;
@@ -45,7 +46,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_VIEW);
 
-		toolbar = new DSLAMBusDesktopProjectToolbar();
+		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
 		toolbar.setMainTitleText("script1");
 		toolbar.setModified(false);
@@ -136,7 +137,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		String			srcWidgetId		= evt.getSourceWidgetId();
 		String			srcContainerId	= evt.getSourceContainerId();
 		LOGICAL_TYPE	type		= evt.getEventType();
-		if (DSLAMBusDesktopEditorToolbarActions.NAME.equals(srcWidget)) {
+		if (DSLAMBusDesktopToolbarActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				if (!toolbar.isModified() || Window.confirm(TEXTS.exit_without_save())) {
 					closeCurrentProject();
@@ -148,7 +149,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 				AEMFTMetadataElementComposite optionsData = projectOptions.getData();
 				fireSaveChanges(srcWidgetId, optionsData);
 			}
-		} else if (DSLAMBusDesktopEditorToolbarInfo.NAME.equals(srcWidget)) {
+		} else if (DSLAMBusDesktopToolbarInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CLOSE_EVENT.equals(type)) {
 				closeCurrentProject();
 			}
@@ -164,6 +165,10 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 //			} else if (DSLAMBusDesktopNavigatorListElement.CHANGE_SCRIPT_ID.equals(srcWidgetId)) {
 //				showChangeScriptForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
 //			}
+		} else if (AEGWTBootstrapTreeMenuFinalItem.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				openSectionProject(evt);
+			}
 		} else if (DSLAMBusDesktopNewProjectPopupForm.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
@@ -192,7 +197,9 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 				||
 				LOGICAL_TYPE.OK_EVENT.equals(type)
 				||
-				LOGICAL_TYPE.ERROR_EVENT.equals(type);
+				LOGICAL_TYPE.ERROR_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}
 	
 	/************************************************************************
@@ -298,5 +305,10 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		deleteEvent.setSourceWidgetId(projectId);
 		deleteEvent.setEventType(LOGICAL_TYPE.DELETE_EVENT);
 		getLogicalEventHandlerManager().fireEvent(deleteEvent);
+	}
+	
+	private void openSectionProject(AEGWTLogicalEvent evt) {
+		String itemId = evt.getElementAsString(AEGWTBootstrapTreeMenuFinalItem.ITEM_ID);
+		projectOptions.showSection(itemId);
 	}
 }

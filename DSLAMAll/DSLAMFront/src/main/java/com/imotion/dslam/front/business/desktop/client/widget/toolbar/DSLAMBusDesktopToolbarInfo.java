@@ -22,9 +22,9 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
+public class DSLAMBusDesktopToolbarInfo extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopEditorToolbarFileInfo";
+	public static final String NAME = "DSLAMBusDesktopToolbarFileInfo";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
@@ -35,7 +35,7 @@ public class DSLAMBusDesktopEditorToolbarInfo extends AEGWTCompositePanel {
 
 	private boolean modified;
 
-	public DSLAMBusDesktopEditorToolbarInfo() {
+	public DSLAMBusDesktopToolbarInfo() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO);

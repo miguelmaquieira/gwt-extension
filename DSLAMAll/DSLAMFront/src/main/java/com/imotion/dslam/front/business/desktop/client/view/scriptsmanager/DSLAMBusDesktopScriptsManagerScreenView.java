@@ -13,17 +13,14 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectToolbar;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarActions;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarInfo;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarInfo;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapSplitButtonDropdown;
-import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -41,7 +38,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 
 
 	private FlowPanel 							root;
-	private DSLAMBusDesktopProjectToolbar		toolbar;
+	private DSLAMBusDesktopToolbar				toolbar;
 	private DSLAMBusDesktopNavigator			fileList;
 	private AceEditor							editor;
 	private DSLAMBusDesktopNewProjectPopupForm	newScriptPopup;
@@ -51,7 +48,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW);
 
-		toolbar = new DSLAMBusDesktopProjectToolbar();
+		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
 		toolbar.setMainTitleText("");
 		toolbar.setLastSaved(null);
@@ -166,7 +163,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		String			srcWidgetId		= evt.getSourceWidgetId();
 		String			srcContainerId	= evt.getSourceContainerId();
 		LOGICAL_TYPE	type		= evt.getEventType();
-		if (DSLAMBusDesktopEditorToolbarActions.NAME.equals(srcWidget)) {
+		if (DSLAMBusDesktopToolbarActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				if (!toolbar.isModified() || Window.confirm(TEXTS.exit_without_save())) {
 					closeCurrentFile();
@@ -178,21 +175,9 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 				String currentText = editor.getText();
 				fireSaveChanges(srcWidgetId, currentText);
 			}
-		} else if (DSLAMBusDesktopEditorToolbarInfo.NAME.equals(srcWidget)) {
+		} else if (DSLAMBusDesktopToolbarInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CLOSE_EVENT.equals(type)) {
 				closeCurrentFile();
-			}
-		} else if (AEGWTBootstrapSplitButtonDropdown.NAME.equals(srcWidget)) {
-			boolean openFile = AEGWTStringUtils.isEmptyString(srcContainerId) || DSLAMBusDesktopNavigatorListElement.OPEN_ID.equals(srcWidgetId);
-			if (openFile) {
-				String fileId = AEGWTStringUtils.isEmptyString(srcContainerId) ? srcWidgetId : srcContainerId;
-				openFile(fileId);
-			} else {
-				if (DSLAMBusDesktopNavigatorListElement.RENAME_ID.equals(srcWidgetId)) {
-					showRenameForm((AEMFTMetadataElementComposite) evt.getElementAsDataValue());
-				} else if (DSLAMBusDesktopNavigatorListElement.DELETE_ID.equals(srcWidgetId)) {
-					fireDeleteFile(srcContainerId);
-				}
 			}
 		} else if (DSLAMBusDesktopNewProjectPopupForm.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {

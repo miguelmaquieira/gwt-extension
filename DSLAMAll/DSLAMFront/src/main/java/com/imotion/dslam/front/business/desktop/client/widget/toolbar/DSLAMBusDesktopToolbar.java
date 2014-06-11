@@ -5,16 +5,18 @@ import java.util.Date;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
+public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	
 	public static final String NAME = "DSLAMBusDesktopToolbar";
 	
-	private DSLAMBusDesktopEditorToolbarActions fileActions;
-	private DSLAMBusDesktopEditorToolbarInfo	 fileInfo;
+	private DSLAMBusDesktopToolbarActions 	projectActions;
+	private DSLAMBusDesktopToolbarInfo	 	projectInfo;
 
 	public DSLAMBusDesktopToolbar() {
 		FlowPanel root = new FlowPanel();
@@ -22,64 +24,64 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR);
 	
 		//ACTIONS
-		SimplePanel fileActionsZone = new SimplePanel();
-		root.add(fileActionsZone);
-		fileActionsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
-		fileActionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_ZONE);
+		SimplePanel projectActionsZone = new SimplePanel();
+		root.add(projectActionsZone);
+		projectActionsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		projectActionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_ZONE);
 	
-		fileActions = new DSLAMBusDesktopEditorToolbarActions();
-		fileActionsZone.add(fileActions);
+		projectActions = new DSLAMBusDesktopToolbarActions();
+		projectActionsZone.add(projectActions);
 		
 		//INFO
-		SimplePanel fileInfoZone = new SimplePanel();
-		root.add(fileInfoZone);
-		fileInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		fileInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_ZONE);
+		SimplePanel projectInfoZone = new SimplePanel();
+		root.add(projectInfoZone);
+		projectInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
+		projectInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_INFO_ZONE);
 		
-		fileInfo = new DSLAMBusDesktopEditorToolbarInfo();
-		fileInfoZone.add(fileInfo);
+		projectInfo = new DSLAMBusDesktopToolbarInfo();
+		projectInfoZone.add(projectInfo);
 	}
 	
 	public void setModified(boolean modified) {
-		fileActions.setSaveEnabled(modified);
-		fileInfo.setModified(modified);
+		projectActions.setSaveEnabled(modified);
+		projectInfo.setModified(modified);
 	}
 	
 	public boolean isModified() {
-		return fileInfo.isModified();
+		return projectInfo.isModified();
 	}
 	
 	public void setLastSaved(Date date) {
-		fileInfo.setLastSaved(date);
+		projectInfo.setLastSaved(date);
 	}
 	
 	public void setMainTitleText(String text) {
-		fileInfo.setMainTitleText(text);
+		projectInfo.setMainTitleText(text);
 	}
 	
 	public void setSecondaryTitleText(String text) {
-		fileInfo.setSecondaryTitleText(text);
+		projectInfo.setSecondaryTitleText(text);
 	}
 	
 	public void setFileInfoVisible(boolean visible) {
 		if (visible) {
-			fileInfo.setVisibility(Visibility.VISIBLE);
+			projectInfo.setVisibility(Visibility.VISIBLE);
 		} else {
-			fileInfo.setVisibility(Visibility.HIDDEN);
+			projectInfo.setVisibility(Visibility.HIDDEN);
 		}
 	}
 	
-	public DSLAMBusDesktopEditorToolbarInfo getInfo() {
-		return fileInfo;	
+	public DSLAMBusDesktopToolbarInfo getInfo() {
+		return projectInfo;	
 	}
 	
-	public DSLAMBusDesktopEditorToolbarActions getActions() {
-		return fileActions;	
+	public DSLAMBusDesktopToolbarActions getActions() {
+		return projectActions;	
 	}
 	
 	public void reset() {
-		fileActions.reset();
-		fileInfo.reset();
+		projectActions.reset();
+		projectInfo.reset();
 	}
 
 	/**
@@ -93,7 +95,26 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	@Override
 	public void setId(String id) {
 		super.setId(id);
-		fileActions.setId(id);
+		projectActions.setId(id);
 	}
+	
+	@Override
+	public void setData(AEMFTMetadataElementComposite data) {
+		if (data != null) {
+			Long	projectId	 	= getElementController().getElementAsLong(DSLAMBOIProject.PROJECT_ID				, data);
+			String	projectName 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME			, data);
+			Date	lastSaved		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProject.SAVED_TIME	, data);
+			
+			String processIdStr = String.valueOf(projectId);
+			setId(processIdStr);
+			setLastSaved(lastSaved);
+			setMainTitleText("seccion");
+			setSecondaryTitleText(projectName);
+			getInfo().setVisible(true);
+			setModified(true);
+		}
+	}
+	
+	
 
 }
