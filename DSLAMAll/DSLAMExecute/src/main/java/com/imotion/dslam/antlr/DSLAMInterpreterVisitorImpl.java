@@ -1,5 +1,6 @@
 package com.imotion.dslam.antlr;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,12 @@ import com.imotion.antlr.DSLAMParser;
 import com.imotion.antlr.DSLAMParser.ConditionContext;
 import com.imotion.antlr.DSLAMParser.DslamCommandsContext;
 import com.imotion.antlr.DSLAMParser.ExecutionContext;
-import com.imotion.antlr.DSLAMParser.IntegerExpressionContext;
+import com.imotion.antlr.DSLAMParser.ExpressionContext;
+import com.imotion.antlr.DSLAMParser.ListExpContext;
+import com.imotion.antlr.DSLAMParser.ListItemContext;
 import com.imotion.antlr.DSLAMParser.StatementContext;
 import com.imotion.antlr.DSLAMParser.StringExprContext;
-import com.imotion.antlr.DSLAMParser.StringValueContext;
+import com.imotion.antlr.DSLAMParser.ValueContext;
 import com.imotion.antlr.DSLAMParser.VariableContext;
 import com.imotion.dslam.comm.DSLAMIConnection;
 import com.imotion.dslam.comm.DSLAMIResponse;
@@ -65,15 +68,23 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		String varName = ctx.VARIABLE_SCRIPT().getText();
 		DSLAMInterpreterVisitorValue varValue = null;
 
-		IntegerExpressionContext	integerExpression	= ctx.integerExpression();
+		ExpressionContext			expression			= ctx.expression();
 		StringExprContext			stringExpression	= ctx.stringExpr();
+		ListExpContext				listExpContext 		= ctx.listExp();
 		ExecutionContext			execution			= ctx.execution();
-		if (integerExpression != null) {
-			varValue = this.visit(integerExpression);
-		} else if (execution != null) {
-			varValue = this.visit(execution);
+		if (expression != null) {
+			if (expression.getChildCount() == 1) {
+				ParseTree firstChild = expression.getChild(0);
+				varValue = this.visit(firstChild);
+			} else {
+				varValue = this.visit(expression);
+			}
 		} else if (stringExpression != null) {
 			varValue =this.visit(stringExpression);
+		} else if (listExpContext != null) {
+			varValue =this.visit(listExpContext);
+		} else if (execution != null) {
+			varValue = this.visit(execution);
 		}
 
 		allVariables.put(varName, varValue.asObject());
@@ -98,8 +109,8 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 	@Override
 	public DSLAMInterpreterVisitorValue visitForStatement(@NotNull DSLAMParser.ForStatementContext ctx) {
 		String iterVarName = ctx.VARIABLE_SCRIPT().getText();
-		DSLAMInterpreterVisitorValue start = this.visit(ctx.integerValue(0));
-		DSLAMInterpreterVisitorValue end = this.visit(ctx.integerValue(1));
+		DSLAMInterpreterVisitorValue start = this.visit(ctx.value(0));
+		DSLAMInterpreterVisitorValue end = this.visit(ctx.value(1));
 
 		List<StatementContext> statementContextList = ctx.statement();
 		allVariables.put(iterVarName, start.asInteger());
@@ -127,8 +138,8 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		boolean result = false;
 
 		String	logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
-		DSLAMInterpreterVisitorValue	leftSideValue		= this.visit(ctx.integerValue(0));
-		DSLAMInterpreterVisitorValue	rightSideValue		= this.visit(ctx.integerValue(1));
+		DSLAMInterpreterVisitorValue	leftSideValue		= this.visit(ctx.value(0));
+		DSLAMInterpreterVisitorValue	rightSideValue		= this.visit(ctx.value(1));
 		int		leftSideInt			= leftSideValue.asInteger();
 		int		rightSideInt		= rightSideValue.asInteger();
 
@@ -148,40 +159,50 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		DSLAMInterpreterVisitorValue resultValue = new DSLAMInterpreterVisitorValue(result);
 		return resultValue;
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
-	public DSLAMInterpreterVisitorValue visitIntegerValue(@NotNull DSLAMParser.IntegerValueContext ctx) {
-		VariableContext variableContext	= ctx.variable();
-		TerminalNode 	integerNode		= ctx.INTEGER();
-
-		Integer integer = null;
-		if (variableContext != null) {
-			String variableName = variableContext.getText();
-			integer = (Integer) allVariables.get(variableName);
-		} else {
+	public DSLAMInterpreterVisitorValue visitValue(@NotNull DSLAMParser.ValueContext ctx) {
+		TerminalNode 			integerNode				= ctx.INTEGER();
+		TerminalNode 			stringNode				= ctx.STRING_LITERAL();
+		VariableContext 		variableContext			= ctx.variable();
+		ListItemContext 		listItemContext 		= ctx.listItem();
+		
+		Object object = null;
+		if (integerNode != null) {
 			String integerStr = integerNode.getText();
-			integer = new Integer(integerStr);
+			object = new Integer(integerStr);
+		} else if (stringNode != null) {
+			object = stringNode.getText();
+		}else if (variableContext != null) {
+			String variableName = variableContext.getText();
+			object = allVariables.get(variableName);
+		} else if (listItemContext != null) {
+			VariableContext					variableListContext = listItemContext.variable();
+			ValueContext					indexValueContext	= listItemContext.value();
+			String							variableName		= variableListContext.getText();
+			List<Object>					list				= (List<Object>) allVariables.get(variableName);
+			DSLAMInterpreterVisitorValue	indexValue			= this.visit(indexValueContext);
+			object	= list.get(indexValue.asInteger());
+		}
+		
+		if (object instanceof String) {
+			String objectAsString = (String) object;
+			objectAsString = objectAsString.replace("\"", "");
+			object = objectAsString;
 		}
 
-		DSLAMInterpreterVisitorValue integerValue = new DSLAMInterpreterVisitorValue(integer);
-		return integerValue; 
+		DSLAMInterpreterVisitorValue value = new DSLAMInterpreterVisitorValue(object);
+		return value; 
 	}
 	
 	@Override 
 	public DSLAMInterpreterVisitorValue visitStringExpr(@NotNull DSLAMParser.StringExprContext ctx) {
-		List<StringValueContext> stringValueContextList = ctx.stringValue();
+		List<ValueContext> stringValueContextList = ctx.value();
 		StringBuilder sb = new StringBuilder();
-		for (StringValueContext stringValueContext : stringValueContextList) {
-			VariableContext	variable		= stringValueContext.variable();
-			TerminalNode	stringLiteral	= stringValueContext.STRING_LITERAL();
-			String string = "";
-			if (variable != null) {
-				String variableName	= variable.getText();
-				string = (String) allVariables.get(variableName);
-			} else if (stringLiteral != null) {
-				string = stringLiteral.getText();
-			}
-			string = string.replace("\"", "");
+		for (ValueContext stringValueContext : stringValueContextList) {
+			DSLAMInterpreterVisitorValue stringValue = this.visit(stringValueContext);
+			String string = stringValue.asString(); 
 			sb.append(string);
 		}
 		String result = sb.toString();
@@ -191,14 +212,14 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 
 	@Override
 	public DSLAMInterpreterVisitorValue visitParExp(@NotNull DSLAMParser.ParExpContext ctx) {
-		return this.visit(ctx.integerExpression());
+		return this.visit(ctx.expression());
 	}
 
 	@Override 
 	public DSLAMInterpreterVisitorValue visitAritOp(@NotNull DSLAMParser.AritOpContext ctx) {
-		IntegerExpressionContext 	leftExpresion	= ctx.left;
-		IntegerExpressionContext 	rightExpresion	= ctx.right;
-		String 						operator 		= ctx.op.getText();
+		ExpressionContext 	leftExpresion	= ctx.left;
+		ExpressionContext 	rightExpresion	= ctx.right;
+		String 				operator 		= ctx.op.getText();
 
 		DSLAMInterpreterVisitorValue 	leftValue 	= this.visit(leftExpresion);
 		DSLAMInterpreterVisitorValue	rightValue	= this.visit(rightExpresion);
@@ -218,9 +239,21 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 
 	@Override 
 	public DSLAMInterpreterVisitorValue visitAtomExpr(@NotNull DSLAMParser.AtomExprContext ctx) { 
-		return this.visit(ctx.integerValue());
+		return this.visit(ctx.value());
 	}
-
+	
+	@Override
+	public DSLAMInterpreterVisitorValue visitListExp(@NotNull DSLAMParser.ListExpContext ctx) {
+		List<ValueContext> valueContextList = ctx.value();
+		List<Object> list = new ArrayList<>();
+		for (ValueContext valueContext : valueContextList) {
+			DSLAMInterpreterVisitorValue value = this.visit(valueContext);
+			list.add(value.asObject());
+		}
+		DSLAMInterpreterVisitorValue listValue = new DSLAMInterpreterVisitorValue(list);
+		return listValue; 
+	}
+	
 	/**
 	 * PRIVATE
 	 */
