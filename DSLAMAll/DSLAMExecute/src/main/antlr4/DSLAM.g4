@@ -10,6 +10,7 @@ statement   :	assignStatement
 			|   ifStatement
 			|	whileStatement
 			|	forStatement
+			|	forEachStatement
 			| 	execution;
 assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp) ';') | execution);
 
@@ -18,6 +19,7 @@ ifBlock: statement+;
 elseBlock: statement+;
 whileStatement: 'while' condition '{' statement+ '}';
 forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' value '..' value ')' '{' statement+ '}';
+forEachStatement: 	'foreach' '(' VARIABLE_SCRIPT ':' variable ')' '{' statement+ '}';
 
 expression :	'(' expression ')'									#parExp
 				| left=expression op=('*'|'/') right=expression		#aritOp

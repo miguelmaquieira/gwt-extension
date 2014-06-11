@@ -122,6 +122,21 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		allVariables.remove(iterVarName);
 		return DSLAMInterpreterVisitorValue.VOID;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public DSLAMInterpreterVisitorValue visitForEachStatement(@NotNull DSLAMParser.ForEachStatementContext ctx) {
+		String							listVarName				= ctx.variable().getText();
+		String							itemListVarName			= ctx.VARIABLE_SCRIPT().getText();
+		List<StatementContext>			statementContextList	= ctx.statement();
+		List<Object> 					objectList 				= (List<Object>) allVariables.get(listVarName);
+		for (Object object : objectList) {
+			allVariables.put(itemListVarName, object);
+			visitStamentContextList(statementContextList);
+		}
+		allVariables.remove(itemListVarName);
+		return DSLAMInterpreterVisitorValue.VOID;
+	}
 
 	@Override
 	public DSLAMInterpreterVisitorValue visitWhileStatement(@NotNull DSLAMParser.WhileStatementContext ctx) {
