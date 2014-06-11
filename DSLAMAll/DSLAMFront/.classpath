@@ -10,18 +10,24 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/DSLAMFront/WEB-INF/classes" path="src/main/java">
+	<classpathentry including="**/*.java" kind="src" output="target/DSLAMFront/WEB-INF/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBackend"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBom"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DSLAMBusiness"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Selene4GWT"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SeleneBase"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/DSLAMFront/WEB-INF/classes"/>
 </classpath>

@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -7,10 +7,9 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.client.view.scriptsmanager.DSLAMBusI18NStudioTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -22,51 +21,48 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
+public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 
-	public static final String NAME = "DSLAMBusDesktopNewScriptForm";
+	public static final String NAME = "DSLAMBusDesktopNewProjectPopupForm";
 	
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	public static final int MODE_NEW_FILE		= 1;
-	public static final int MODE_RENAME_FILE	= 2;
+	public static final int MODE_NEW_PROJECT		= 1;
+	public static final int MODE_RENAME_PROJECT	= 2;
 
-	private static final DSLAMBusI18NStudioTexts	STUDIO_TEXTS = GWT.create(DSLAMBusI18NStudioTexts.class);
-	private static final DSLAMBusI18NTexts		COMMON_TEXTS = GWT.create(DSLAMBusI18NTexts.class);
-
-	private AEGWTBootstrapDropdownAndLabelTextBox	filenameField;
+	private AEGWTBootstrapDropdownAndLabelTextBox	projectNameField;
 	private AEGWTButton								saveButton;
 	private AEGWTButton								cancelButton;
 
-	private int mode = MODE_NEW_FILE;
+	private int mode = MODE_NEW_PROJECT;
 
-	public DSLAMBusDesktopNewScriptPopupForm(AEGWTICompositePanel parent) {
+	public DSLAMBusDesktopNewProjectPopupForm(AEGWTICompositePanel parent) {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_SCRIPT_FORM);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_PROJECT_FORM);
 
-		//FILENAME
+		//PROJECTNAME
 		SimplePanel inputZone = new SimplePanel();
 		root.add(inputZone);
-		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_SCRIPT_FORM_INPUT_ZONE);
+		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_PROJECT_FORM_INPUT_ZONE);
 
-		filenameField = new AEGWTBootstrapDropdownAndLabelTextBox(STUDIO_TEXTS.filename_input_placeholder());
-		inputZone.add(filenameField);
-		filenameField.addElement(DSLAMBOIFileDataConstants.CONTENT_TYPE_DSLAM, STUDIO_TEXTS.file_type_dslam());
+		projectNameField = new AEGWTBootstrapDropdownAndLabelTextBox(TEXTS.projectame_input_placeholder());
+		inputZone.add(projectNameField);
+		projectNameField.addElement(String.valueOf(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE_DSLAM), TEXTS.project_type_dslam());
 
 		//SAVE
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_SCRIPT_FORM_SAVE_ZONE);
+		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_PROJECT_FORM_SAVE_ZONE);
 
-		saveButton = new AEGWTButton(COMMON_TEXTS.create());
+		saveButton = new AEGWTButton(TEXTS.create());
 		saveButtonZone.add(saveButton);
 		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN);
 		saveButton.addStyleName(AEGWTIBoostrapConstants.BTN_PRIMARY);
 
 		//SAVE
-		cancelButton = new AEGWTButton(COMMON_TEXTS.cancel());
+		cancelButton = new AEGWTButton(TEXTS.cancel());
 		saveButtonZone.add(cancelButton);
 		cancelButton.addStyleName(AEGWTIBoostrapConstants.BTN);
 		cancelButton.addStyleName(AEGWTIBoostrapConstants.BTN_LINK);
@@ -75,18 +71,19 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				if (AEGWTStringUtils.isEmptyString(filenameField.getText())) {
-					filenameField.setErrorLabelText(TEXTS.empty_textbox());
+				if (AEGWTStringUtils.isEmptyString(projectNameField.getText())) {
+					projectNameField.setErrorLabelText(TEXTS.empty_textbox());
 				} else {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-					if (mode == MODE_NEW_FILE) {
+					if (mode == MODE_NEW_PROJECT) {
 						evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
-					} else if (mode == MODE_RENAME_FILE) {
-						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
-					}
+					} 
+//					else if (mode == MODE_RENAME_PROJECT) {
+//						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
+//					}
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIFileDataConstants.FILE_NAME		, filenameField.getText());
-					evt.addElementAsString(DSLAMBOIFileDataConstants.CONTENT_TYPE	, filenameField.getSelectedId());
+					evt.addElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
+					evt.addElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				}
 			}
@@ -100,17 +97,17 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 			}
 		});
 
-		filenameField.addKeyUpHandler(new KeyUpHandler() {
+		projectNameField.addKeyUpHandler(new KeyUpHandler() {
 
 			@Override
 			public void onKeyUp(KeyUpEvent event) {
-				filenameField.setErrorLabelVisible(false);
+				projectNameField.setErrorLabelVisible(false);
 			}
 		});
 	}
 
 	public void setError(String error) {
-		filenameField.setErrorLabelText(error);
+		projectNameField.setErrorLabelText(error);
 	}
 
 	public void setMode(int mode) {
@@ -119,21 +116,22 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 
 	@Override
 	public void center() {
-		filenameField.setText("");
-		filenameField.setErrorLabelVisible(false);
-		if (mode == MODE_NEW_FILE) {
+		projectNameField.setText("");
+		projectNameField.setErrorLabelVisible(false);
+		if (mode == MODE_NEW_PROJECT) {
 			setContentTypeEnabled(true);
-			saveButton.setText(COMMON_TEXTS.create());
-		} else if (mode == MODE_RENAME_FILE) {
-			setContentTypeEnabled(false);
-			saveButton.setText(COMMON_TEXTS.rename());
+			saveButton.setText(TEXTS.create());
 		} 
+//		else if (mode == MODE_RENAME_FILE) {
+//			setContentTypeEnabled(false);
+//			saveButton.setText(COMMON_TEXTS.rename());
+//		} 
 		super.center();
-		filenameField.setFocus(true);
+		projectNameField.setFocus(true);
 	}
 
 	public void setContentTypeEnabled(boolean enabled) {
-		filenameField.setDropdownEnabled(enabled);
+		projectNameField.setDropdownEnabled(enabled);
 	}
 
 	/**
@@ -148,10 +146,10 @@ public class DSLAMBusDesktopNewScriptPopupForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			Long fileId = getElementController().getElementAsLong(DSLAMBOIFile.FILE_ID		, data);
-			String fileName = getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, data);
-			setId(String.valueOf(fileId));
-			filenameField.setText(fileName);
+			Long 	projectId 		= getElementController().getElementAsLong(DSLAMBOIProject.PROJECT_ID		, data);
+			String 	projectName 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME	, data);
+			setId(String.valueOf(projectId));
+			projectNameField.setText(projectName);
 		}
 	}
 
