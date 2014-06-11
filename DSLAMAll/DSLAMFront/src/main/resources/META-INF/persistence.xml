@@ -10,6 +10,8 @@
 
 		<!-- Registered entities -->
 		<class>com.imotion.dslam.bom.data.DSLAMBOFile</class>
+		<class>com.imotion.dslam.bom.data.DSLAMBOProcess</class>
+		
 
 		<properties>
 
@@ -19,6 +21,10 @@
 
 			<!-- MySQL -->
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdb" />
+			
+			<!-- CLOUDBEE -->
+			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb" /> -->
+			
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
 
@@ -28,6 +34,10 @@
 			<!-- =============================== -->
 			<property name="hibernate.connection.user" value="dslamuser" />
 			<property name="hibernate.connection.password" value="dslampassword" />
+			
+			<!-- CLOUDBEE -->
+			<!-- <property name="hibernate.connection.user" value="b3824f64a6f0d8" /> -->
+			<!-- <property name="hibernate.connection.password" value="e5a71044" /> -->
 
 			<!-- =============================== -->
 			<!-- ===========OTHER PROPS========== -->
@@ -44,14 +54,14 @@
 			<!-- ==============POOL============= -->
 			<!-- =============================== -->
 			<!-- Connection pools Hibernate-C3P0 -->
-			<property name="hibernate.connection.provider_class"
-				value="org.hibernate.connection.C3P0ConnectionProvider" />
-			<property name="hibernate.c3p0.acquire_increment" value="5" />
-			<property name="hibernate.c3p0.idle_test_period" value="100" />
-			<property name="hibernate.c3p0.max_size" value="50" />
-			<property name="hibernate.c3p0.max_statements" value="0" />
-			<property name="hibernate.c3p0.min_size" value="5" />
-			<property name="hibernate.c3p0.timeout" value="100" />
+<!-- 			<property name="hibernate.connection.provider_class" -->
+<!-- 				value="org.hibernate.connection.C3P0ConnectionProvider" /> -->
+<!-- 			<property name="hibernate.c3p0.acquire_increment" value="5" /> -->
+<!-- 			<property name="hibernate.c3p0.idle_test_period" value="100" /> -->
+<!-- 			<property name="hibernate.c3p0.max_size" value="50" /> -->
+<!-- 			<property name="hibernate.c3p0.max_statements" value="0" /> -->
+<!-- 			<property name="hibernate.c3p0.min_size" value="5" /> -->
+<!-- 			<property name="hibernate.c3p0.timeout" value="100" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>

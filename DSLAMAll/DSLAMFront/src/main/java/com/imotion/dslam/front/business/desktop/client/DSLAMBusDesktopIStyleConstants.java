@@ -54,6 +54,10 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NEW_SCRIPT_FORM_INPUT_ZONE 					= NEW_SCRIPT_FORM			+ "-inputZone";		//dslam_studio-newScriptForm-inputZone
 	String NEW_SCRIPT_FORM_SAVE_ZONE 					= NEW_SCRIPT_FORM			+ "-saveZone";		//dslam_studio-newScriptForm-saveZone
 
+	String NEW_PROCESS_FORM 							= APP_ID_PREFFIX			+ "newProcessForm";	//dslam_studio-newProcessForm
+	String NEW_PROCESS_FORM_INPUT_ZONE 					= NEW_PROCESS_FORM			+ "-inputZone";		//dslam_studio-newProcessForm-inputZone
+	String NEW_PROCESS_FORM_SAVE_ZONE 					= NEW_PROCESS_FORM			+ "-saveZone";		//dslam_studio-newProcessForm-saveZone
+	
 	//EDITOR VIEW
 	String EDITOR_VIEW 									= APP_ID_PREFFIX			+ "editorView";		//dslam_studio-editorView
 	String EDITOR_VIEW_BOTTOM_ZONE 						= EDITOR_VIEW				+ "-bottomZone";	//dslam_studio-editorView-bottomZone
@@ -63,6 +67,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	//PROCESSES VIEW
 	String PROCESSES_VIEW 								= APP_ID_PREFFIX			+ "processesView";	//dslam_studio-processesView
 	String PROCESSES_VIEW_BOTTOM_ZONE 					= PROCESSES_VIEW			+ "-bottomZone";	//dslam_studio-processesView-bottomZone
+	String PROCESSES_VIEW_PROCESS_NAME 					= PROCESSES_VIEW			+ "-processName";	//dslam_studio-processesView-processName
+	String PROCESSES_VIEW_SCRIPT_NAME 					= PROCESSES_VIEW			+ "-scriptName";	//dslam_studio-processesView-scriptName
+	
 	
 	//PROCESS OPTIONS
 	String PROCESS_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "processConfigureZone"; 						//dslam_studio-processConfigureZone

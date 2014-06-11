@@ -39,10 +39,11 @@
 	<modules>
 		<module>DSLAMBom</module>
 		<module>DSLAMBackend</module>
+		<module>DSLAMExecute</module>
 		<module>DSLAMBusiness</module>
 		<module>DSLAMFront</module>
 		<module>DSLAMTest</module>
-  	</modules>
+  </modules>
 
 	<build>
 		<plugins>

@@ -50,43 +50,8 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 		
 		root.add(startDateZone);
 		root.add(deleteZone);
-		
-//		if (date != null) {
-//			
-//			long start	= getElementController().getElementAsLong(SNDOBOICalendarDataConstants.START_TIME	, date);
-//			long finish	= getElementController().getElementAsLong(SNDOBOICalendarDataConstants.FINISH_TIME	, date);
-//			
-//			Date dateStart 	= new Date(start);
-//			Date dateFinish = new Date(finish);
-//			
-//			String formatDate ="dd/MM/yyyy HH:mm";
-//			String formattedStartDate			= AEGWTBusinessUtils.getFormattedTimeMessage(dateStart		, formatDate);
-//			String formattedFinishDate 			= AEGWTBusinessUtils.getFormattedTimeMessage(dateFinish		, formatDate);
-//	
-//			startDateTextBox.setText(formattedStartDate);
-//			endDateTextBox.setText(formattedFinishDate);
-//		}
 	}
 
-//	public long getStartDate() {
-//		Date	date		= null;
-//		String 	formatDate 	= "dd/MM/yyyy HH:mm";
-//		long 	dateLong 	= 0;
-//		String 	startDateString = startDateTextBox.getText();
-//		if (!AEMFTCommonUtilsBase.isEmptyString(startDateString) && !startDateString.matches("([0][1-9]|[1-2][0-9]|[3][0-1])\\/([0][1-9]|[1][0-2])\\/[0-9]{4}\\s([0-1][0-9]|[2][0-3])\\:[0-5][0-9]")) {
-//			startDateTextBox.setErrorLabelTextAndShow(TEXTS.common_error_format());
-//		} else {
-//			if (AEMFTCommonUtilsBase.isEmptyString(startDateString)) {
-//				startDateTextBox.setErrorLabelTextAndShow(TEXTS.common_error_empty());
-//			} else {
-//				date 		= AEGWTBusinessUtils.getDateFromFormattedTime(startDateString, formatDate);
-//				dateLong	= date.getTime();
-//				startDateTextBox.setErrorLabelVisible(false);
-//			}
-//		}
-//		return dateLong;
-//	}
-//	
 	public void remove(){
 		this.removeFromParent();
 	}
@@ -101,6 +66,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsScheduleLine extends AEGWTCom
 	
 	public String getDateText() {
 		return dateTimeBox.getDateText();
+	}
+	
+	public void setDateText(String text) {
+		dateTimeBox.setDateText(text);
 	}
 	
 	/**

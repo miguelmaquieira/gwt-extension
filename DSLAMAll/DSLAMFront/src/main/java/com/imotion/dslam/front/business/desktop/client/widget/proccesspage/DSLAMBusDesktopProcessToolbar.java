@@ -2,7 +2,9 @@ package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import java.util.Date;
 
+import com.imotion.dslam.bom.DSLAMBOIFileDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
@@ -19,11 +21,17 @@ public class DSLAMBusDesktopProcessToolbar extends DSLAMBusDesktopToolbar {
 			String	processName 	= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_NAME			, data);
 			Date	lastSaved		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcess.SAVED_TIME	, data);
 			
+			AEMFTMetadataElementComposite scriptData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCRIPT, data);
+			
+			String scriptName		= getElementController().getElementAsString(DSLAMBOIFileDataConstants.FILE_NAME				, 	scriptData);
+			
 			String processIdStr = String.valueOf(processId);
 			setId(processIdStr);
 			setLastSaved(lastSaved);
 			setMainTitleText(processName);
-			setModified(false);
+			setSecondaryTitleText(scriptName);
+			super.getInfo().setVisible(true);
+			setModified(true);
 		}
 	}
 }

@@ -44,6 +44,12 @@ public class DSLAMBKFilePersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	}
 	
 	@Override
+	public DSLAMBOIFile getFile(Long fileIdAsLong) {
+		DSLAMBOFile fileJpa = getPersistenceModule().get(fileIdAsLong);
+		return fileJpa;
+	}
+	
+	@Override
 	public void removeFile(Long fileIdAsLong) {
 		getPersistenceModule().remove(fileIdAsLong);
 	}

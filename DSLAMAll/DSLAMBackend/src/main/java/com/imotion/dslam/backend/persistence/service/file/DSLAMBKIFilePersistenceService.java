@@ -15,6 +15,8 @@ public interface DSLAMBKIFilePersistenceService {
 	DSLAMBOIFile updateFileName(Long fileId, String filename);
 
 	List<DSLAMBOIFile> getAllFiles();
+	
+	DSLAMBOIFile getFile(Long fileIdAsLong);
 
 	void removeFile(Long fileIdAsLong);
 

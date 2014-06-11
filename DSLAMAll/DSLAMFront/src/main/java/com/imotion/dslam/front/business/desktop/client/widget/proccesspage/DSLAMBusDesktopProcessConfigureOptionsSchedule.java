@@ -7,9 +7,13 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -26,7 +30,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	private FlowPanel						headerZone;
 	private FlowPanel 						scheduleListZone;
 	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
-	private int 							numberAddDateTimePicker;
+	private int 							numberAddDateTimePicker;							
 
 	public DSLAMBusDesktopProcessConfigureOptionsSchedule() {
 		root = new FlowPanel();
@@ -70,6 +74,17 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 		root.add(scheduleListZone);
 
 	}
+	
+	public void reset() {
+		int numberDateTimePickers = scheduleListZone.getWidgetCount();
+		for (int i = 0; i < numberDateTimePickers; i++) {
+			scheduleListZone.getWidget(0).removeFromParent();
+		}
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public void postDisplay() {
@@ -84,19 +99,38 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
+		AEMFTMetadataElementComposite scheduleListData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST, data);
+		List<AEMFTMetadataElement> scheduleList = scheduleListData.getSortedElementList();
+		for (AEMFTMetadataElement scheduleData : scheduleList) {
+			numberAddDateTimePicker++;
+			AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData;
+			String scheduleStr = schedule.getValueAsString();
+			DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = addDateTimeBox(numberAddDateTimePicker);
+			line.setDateText(scheduleStr);	
+		}
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		AEMFTMetadataElementComposite scheduleListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		int numberDateTimePickers = scheduleListZone.getWidgetCount();
+		for (int i = 0; i < numberDateTimePickers; i++) {
+			DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = (DSLAMBusDesktopProcessConfigureOptionsScheduleLine) scheduleListZone.getWidget(i);
+			scheduleListData.addElement(String.valueOf(i),line.getDateText());	 
+		}	
+		return scheduleListData;
 	}
 
 	/**
 	 * PRIVATE
 	 */
 
-	private void addDateTimeBox(int numberAddDateTimePicker) {
+	private DSLAMBusDesktopProcessConfigureOptionsScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
 
 		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
 		scheduleListZone.add(line);
 		line.setId(String.valueOf(numberAddDateTimePicker));
 		line.postDisplay();
+		return line;
 	}
 
 	private List<String> dateTimePickersEmpty() {

@@ -6,6 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -36,6 +37,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	private	 DSLAMBusDesktopVariablesList   						variableList;
 	private DSLAMBusDesktopProcessConfigureOptionsVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite							variablesData;
+	//private int													numberVariablesData;
 
 	public DSLAMBusDesktopProcessConfigureOptionsVariables() {
 		variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
@@ -76,14 +78,10 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		variableListZone.add(variableList);
 	}
 
-	@Override
-	public String getName() {
-		return NAME;
-	}
-	@Override
-	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+	public void reset() {
+		variableList.reset();
+		variablesData.removeAll();
+		variablesForm.resetForm();
 	}
 	
 	/**
@@ -99,6 +97,22 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 	
 	}
 	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+	@Override
+	public void setData(AEMFTMetadataElementComposite data) {
+		variablesData.removeAll();
+		variablesData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST, data);
+		variableList.clearList();
+		variableList.setData(variablesData);	
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		 return variablesData;
+	}
+	
 	/**
 	 * AEGWTHasLogicalEventHandlers
 	 */
@@ -108,10 +122,12 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 		if (LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
 			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
 			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+			String type 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data	, id);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, type);
 			if (variablesForm.getEditMode()) {
 				addVariables(id,data);
 			} else if (!variablesData.contains(id)) {
@@ -130,7 +146,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsVariables extends AEGWTCompos
 			variablesForm.center();
 		}
 		
-		if(LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+		if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
 		

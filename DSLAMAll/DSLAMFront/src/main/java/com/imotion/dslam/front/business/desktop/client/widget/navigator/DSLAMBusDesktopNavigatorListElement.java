@@ -12,9 +12,10 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public abstract class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrapSplitButtonDropdown  {
 
-	public static final String OPEN_ID	= "open";
-	public static final String RENAME_ID	= "rename";
-	public static final String DELETE_ID	= "delete";
+	public static final String OPEN_ID			= "open";
+	public static final String RENAME_ID			= "rename";
+	public static final String CHANGE_SCRIPT_ID	= "changeScript";
+	public static final String DELETE_ID			= "delete";
 	
 	private	 static DSLAMBusI18NTexts TEXTS	 = GWT.create(DSLAMBusI18NTexts.class);
 	
@@ -23,8 +24,9 @@ public abstract class DSLAMBusDesktopNavigatorListElement extends AEGWTBootstrap
 	public DSLAMBusDesktopNavigatorListElement() {
 		super(null, "");
 		addStyleName(DSLAMBusDesktopIStyleConstants.LIST_ELEMENT);
-		addMenuElement(OPEN_ID,	TEXTS.open());
-		addMenuElement(RENAME_ID,	TEXTS.rename());
+		addMenuElement(OPEN_ID			,	TEXTS.open());
+		addMenuElement(RENAME_ID		,	TEXTS.rename());
+		addMenuElement(CHANGE_SCRIPT_ID	,	TEXTS.change_file());
 		addSeparator();
 		addMenuElement(DELETE_ID,	TEXTS.delete());
 	}

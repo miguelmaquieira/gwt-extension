@@ -27,6 +27,11 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.imotion</groupId>
+			<artifactId>DSLAMExecute</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.selene</groupId>
 			<artifactId>Selene</artifactId>
 			<version>${selene.version}</version>

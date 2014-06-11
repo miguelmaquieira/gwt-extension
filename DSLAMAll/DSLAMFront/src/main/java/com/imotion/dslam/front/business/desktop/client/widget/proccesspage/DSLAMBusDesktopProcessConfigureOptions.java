@@ -2,9 +2,11 @@ package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
@@ -38,6 +40,10 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 		propertiesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 	}
 	
+	/**
+	 * AEGWTCompositePanel
+	 */
+	
 	public void postDisplay() {
 		super.postDisplay();
 		varListZone.postDisplay();
@@ -50,7 +56,27 @@ public class DSLAMBusDesktopProcessConfigureOptions extends AEGWTCompositePanel 
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		propertiesZone.setData(data);
+		varListZone.setData(data);
+		scheduleZone.setData(data);
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		AEMFTMetadataElementComposite optionsData 		= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		AEMFTMetadataElementComposite propertiesData 	= propertiesZone.getData();
+		AEMFTMetadataElementComposite varListData 		= varListZone.getData();
+		AEMFTMetadataElementComposite scheduleData 		= scheduleZone.getData();
+		
+		optionsData.addElement(DSLAMBOIProcessDataConstants.PROCESS_PROPERTIES_DATA, propertiesData);
+		optionsData.addElement(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, varListData);
+		optionsData.addElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, scheduleData);
+		
+		return optionsData;
+	}
+	
+	public void reset() {
+		propertiesZone.reset();
+		varListZone.reset();
+		scheduleZone.reset();
 	}
 }

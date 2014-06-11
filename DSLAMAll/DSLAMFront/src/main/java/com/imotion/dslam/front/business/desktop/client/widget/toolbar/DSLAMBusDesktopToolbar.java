@@ -68,6 +68,19 @@ public abstract class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 			fileInfo.setVisibility(Visibility.HIDDEN);
 		}
 	}
+	
+	public DSLAMBusDesktopEditorToolbarInfo getInfo() {
+		return fileInfo;	
+	}
+	
+	public DSLAMBusDesktopEditorToolbarActions getActions() {
+		return fileActions;	
+	}
+	
+	public void reset() {
+		fileActions.reset();
+		fileInfo.reset();
+	}
 
 	/**
 	 *	AEGWTICompositePanel 

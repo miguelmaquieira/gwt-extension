@@ -3,9 +3,11 @@ package com.imotion.dslam.front.business.desktop.client.widget.proccesspage;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
@@ -17,6 +19,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 	private FlowPanel 	root;
 	private FlowPanel 	headerZone;
 	private FlowPanel 	propertiesZone;
+	private CheckBox 	synchroCheckBox;
 
 
 	public DSLAMBusDesktopProcessConfigureOptionsProperties() {
@@ -34,10 +37,14 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 		//PropertiesZone
 		propertiesZone 	= new FlowPanel();
 		root.add(propertiesZone);
-		CheckBox synchroCheckBox 	= new CheckBox(TEXTS.synchronous());
+		synchroCheckBox 	= new CheckBox(TEXTS.synchronous());
 		propertiesZone.add(synchroCheckBox);
 		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_CHECKBOX);
 	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
@@ -45,7 +52,18 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS, data);
+		synchroCheckBox.setValue(synchronous);
+	}
+	
+	public AEMFTMetadataElementComposite getData() {
+		AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		boolean synchronous = synchroCheckBox.getValue();
+		data.addElement(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS, synchronous);
+		return data;
+	}
+	
+	public void reset() {
+		synchroCheckBox.setValue(false);
 	}
 }
