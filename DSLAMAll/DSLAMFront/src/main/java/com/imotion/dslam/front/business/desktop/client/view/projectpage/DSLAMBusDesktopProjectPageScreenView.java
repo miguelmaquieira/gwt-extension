@@ -17,7 +17,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSL
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigure;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectConfigure;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarInfo;
@@ -38,7 +38,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private FlowPanel 								root;
 	private DSLAMBusDesktopToolbar					toolbar;
 	private DSLAMBusDesktopNavigator				projectList;
-	private DSLAMBusDesktopProcessConfigure			projectOptions;
+	private DSLAMBusDesktopProjectConfigure			projectOptions;
 	private DSLAMBusDesktopNewProjectPopupForm 		newProjectPopup;
 	
 	public DSLAMBusDesktopProjectPageScreenView() {
@@ -73,7 +73,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		projectConfigureZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
 		projectConfigureZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_ZONE);
 
-		projectOptions = new DSLAMBusDesktopProcessConfigure();
+		projectOptions = new DSLAMBusDesktopProjectConfigure();
 		projectConfigureZone.add(projectOptions);
 		projectOptions.setVisibility(Visibility.HIDDEN);
 		
@@ -310,5 +310,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private void openSectionProject(AEGWTLogicalEvent evt) {
 		String itemId = evt.getElementAsString(AEGWTBootstrapTreeMenuFinalItem.ITEM_ID);
 		projectOptions.showSection(itemId);
+		projectOptions.setVisibility(Visibility.VISIBLE);
 	}
 }

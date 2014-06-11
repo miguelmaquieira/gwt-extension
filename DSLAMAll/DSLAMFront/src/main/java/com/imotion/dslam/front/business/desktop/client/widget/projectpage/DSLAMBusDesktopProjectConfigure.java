@@ -11,18 +11,18 @@ import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 
-public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel  {
+public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigure";
+	public static final String NAME = "DSLAMBusDesktopProjectConfigure";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	//private FlowPanel 									root;
+	
 	private DeckPanel 											root;
 	private AceEditor											mainScriptConfigure;
 	private AceEditor											rollBackScriptConfigure;
-	private DSLAMBusDesktopProcessConfigureOptionsVariables		variablesProcessConfigure;
-	private DSLAMBusDesktopProcessConfigureOptionsSchedule		scheduleProcessConfigure;
-	private DSLAMBusDesktopProcessConfigureOptionsProperties	propertiesProcessConfigure;
+	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
+	private DSLAMBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
+	private DSLAMBusDesktopProcessConfigureProperties	propertiesProcessConfigure;
 	//private DSLAMBusDesktopProcessConfigureOptions		optionsZone;
 	//private DSLAMBusDesktopProcessConfigureNodes		nodeZone;
 	
@@ -33,19 +33,17 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel  {
 	public String PROPERTIES_PROCESS 	= "propertiesProcess";
 	public String NODES_PROCESS			= "nodesProcess";
 
-	public DSLAMBusDesktopProcessConfigure() {
+	public DSLAMBusDesktopProjectConfigure() {
 		
 		root = new DeckPanel();
-		//root = new FlowPanel();
 		initWidget(root);
-		//root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
 		
 		mainScriptConfigure 		= new AceEditor();
 		rollBackScriptConfigure 	= new AceEditor();
-		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureOptionsVariables();
-		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureOptionsSchedule();
-		propertiesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureOptionsProperties();
+		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
+		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
+		propertiesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureProperties();
 		
 		root.add(mainScriptConfigure);
 		root.add(rollBackScriptConfigure);
@@ -53,16 +51,6 @@ public class DSLAMBusDesktopProcessConfigure extends AEGWTCompositePanel  {
 		root.add(scheduleProcessConfigure);
 		root.add(propertiesProcessConfigure);
 		
-		
-
-//		optionsZone = new DSLAMBusDesktopProcessConfigureOptions();
-//		root.add(optionsZone);
-//		optionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_ZONE);
-//
-//		nodeZone = new DSLAMBusDesktopProcessConfigureNodes();
-//		root.add(nodeZone);
-//		nodeZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_ZONE);
-//		nodeZone.addStyleName(AEGWTIBoostrapConstants.ROW);
 	}
 	
 	public void reset() {

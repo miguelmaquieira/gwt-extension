@@ -21,9 +21,9 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphico
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
-public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsSchedule";
+	public static final String NAME = "DSLAMBusDesktopProcessConfigureSchedule";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 						root;
@@ -32,7 +32,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
 	private int 							numberAddDateTimePicker;							
 
-	public DSLAMBusDesktopProcessConfigureOptionsSchedule() {
+	public DSLAMBusDesktopProcessConfigureSchedule() {
 		root = new FlowPanel();
 		initWidget(root);
 
@@ -62,7 +62,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 					List<String> errors = dateTimePickersEmpty();
 					
 					for (String error : errors) {
-						DSLAMBusDesktopProcessConfigureOptionsScheduleLine dateWidget = (DSLAMBusDesktopProcessConfigureOptionsScheduleLine) scheduleListZone.getWidget(Integer.valueOf(error));
+						DSLAMBusDesktopProcessConfigureScheduleLine dateWidget = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(Integer.valueOf(error));
 						dateWidget.setEmptyError();
 					}
 				}
@@ -105,7 +105,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 			numberAddDateTimePicker++;
 			AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData;
 			String scheduleStr = schedule.getValueAsString();
-			DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = addDateTimeBox(numberAddDateTimePicker);
+			DSLAMBusDesktopProcessConfigureScheduleLine line = addDateTimeBox(numberAddDateTimePicker);
 			line.setDateText(scheduleStr);	
 		}
 	}
@@ -114,7 +114,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 		AEMFTMetadataElementComposite scheduleListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		int numberDateTimePickers = scheduleListZone.getWidgetCount();
 		for (int i = 0; i < numberDateTimePickers; i++) {
-			DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = (DSLAMBusDesktopProcessConfigureOptionsScheduleLine) scheduleListZone.getWidget(i);
+			DSLAMBusDesktopProcessConfigureScheduleLine line = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(i);
 			scheduleListData.addElement(String.valueOf(i),line.getDateText());	 
 		}	
 		return scheduleListData;
@@ -124,9 +124,9 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 	 * PRIVATE
 	 */
 
-	private DSLAMBusDesktopProcessConfigureOptionsScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
+	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
 
-		DSLAMBusDesktopProcessConfigureOptionsScheduleLine line = new DSLAMBusDesktopProcessConfigureOptionsScheduleLine(null);
+		DSLAMBusDesktopProcessConfigureScheduleLine line = new DSLAMBusDesktopProcessConfigureScheduleLine(null);
 		scheduleListZone.add(line);
 		line.setId(String.valueOf(numberAddDateTimePicker));
 		line.postDisplay();
@@ -141,7 +141,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsSchedule extends AEGWTComposi
 		int count = scheduleListZone.getWidgetCount();
 		if (count > 0) {
 			for (int i = 0; i < count; i++) {
-				DSLAMBusDesktopProcessConfigureOptionsScheduleLine lineDateWidget = (DSLAMBusDesktopProcessConfigureOptionsScheduleLine) scheduleListZone.getWidget(i);
+				DSLAMBusDesktopProcessConfigureScheduleLine lineDateWidget = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(i);
 				String lineDate = lineDateWidget.getDateText();
 				if (AEMFTCommonUtilsBase.isEmptyString(lineDate)) {
 					if (errors == false) {

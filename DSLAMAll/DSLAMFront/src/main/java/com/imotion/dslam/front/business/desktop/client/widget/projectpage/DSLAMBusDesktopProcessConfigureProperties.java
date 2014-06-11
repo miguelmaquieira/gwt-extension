@@ -11,9 +11,9 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
-public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProcessConfigureProperties extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureOptionsProperties";
+	public static final String NAME = "DSLAMBusDesktopProcessConfigureProperties";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 	root;
@@ -22,7 +22,7 @@ public class DSLAMBusDesktopProcessConfigureOptionsProperties extends AEGWTCompo
 	private CheckBox 	synchroCheckBox;
 
 
-	public DSLAMBusDesktopProcessConfigureOptionsProperties() {
+	public DSLAMBusDesktopProcessConfigureProperties() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 
