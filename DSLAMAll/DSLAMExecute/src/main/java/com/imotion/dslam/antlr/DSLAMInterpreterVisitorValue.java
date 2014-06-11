@@ -1,5 +1,7 @@
 package com.imotion.dslam.antlr;
 
+import java.util.List;
+
 import com.imotion.dslam.comm.DSLAMIResponse;
 
 public class DSLAMInterpreterVisitorValue {
@@ -18,6 +20,11 @@ public class DSLAMInterpreterVisitorValue {
 
 	public String asString() {
 		return (String) value;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Object> asList() {
+		return (List<Object>) value;
 	}
 
 	public DSLAMIResponse asResponse() {

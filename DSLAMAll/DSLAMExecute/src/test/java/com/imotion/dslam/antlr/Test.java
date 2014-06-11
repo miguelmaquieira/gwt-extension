@@ -40,12 +40,26 @@ public class Test {
 	
 	private static final String DSLAM_TEXT_2 = 	"$a = \"hola\";"
 													+ "$b = \" que tal\";"
-													+ "$c = $a + $b + \"!!\";"; 
+													+ "$c = $a . $b . \"!!\";"; 
 
 	private static final String DSLAM_TEXT_3 = DSLAM_TEXT_2 + DSLAM_TEXT;
 	
+	private static final String DSLAM_LISTS	= 	"$a = {1,2,3,4};"
+													+ "$b = {\"hola\", \" que\", \" tal\"};"
+													+ "$c = 1; $d = 2; $e = 4;"
+													+ "$listInt = {$c, $d, $e, 49};"
+													+ "$stringA = \"Hola que ase\";"
+													+ "$stringB = \" estoy muy bien\";"
+													+ "$stringList = {$stringA, $stringB, \" Literal\"};"
+													+ "$holaItem = $stringList[0];"
+													+ "$estoyBien = $stringList[1];"
+													+ "$index = 1;"
+													+ "$estoyBien2 = $stringList[$index];";
+	
+	private static final String DSLAM_FULL = DSLAM_TEXT_2 + DSLAM_TEXT + DSLAM_LISTS;
+	
 	public static void main( String[] args ) {
-		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_TEXT_3));
+		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_FULL));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		DSLAMParser parser = new DSLAMParser(tokens);
