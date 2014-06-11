@@ -28,6 +28,11 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 		return persistenceModule;
 	}
 	
+	@Override
+	public void releaseModule() {
+		persistenceModule = null;
+	}
+	
 	/**************************************************************
      *                AEMFTIFACTORABLE FUNCTIONS                  *
      **************************************************************/
