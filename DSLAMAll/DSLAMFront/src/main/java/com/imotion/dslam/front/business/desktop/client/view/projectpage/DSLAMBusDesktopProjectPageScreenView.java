@@ -10,7 +10,6 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPageDisplay;
@@ -124,10 +123,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		AEMFTMetadataElementComposite projectDataList = getElementController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, data);
-		projectList.setData(projectDataList);
-		newProjectPopup.setData(data);
-		
+		projectList.setData(data);
 	}
 
 	/****************************************************************************
@@ -268,7 +264,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 			
 			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveFileEvent.setEventType(saveButtonEvt.getEventType());
-			saveFileEvent.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA , projectData);
+			saveFileEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA , projectData);
 			saveFileEvent.setSourceWidgetId(saveButtonEvt.getSourceWidgetId());
 			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
 		}

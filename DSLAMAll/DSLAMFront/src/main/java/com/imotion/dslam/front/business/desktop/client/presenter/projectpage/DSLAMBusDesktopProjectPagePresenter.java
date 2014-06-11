@@ -82,7 +82,7 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				AEMFTMetadataElementComposite projectListData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA, dataResult);
+				AEMFTMetadataElementComposite projectListData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, dataResult);
 				getView().setData(projectListData);
 			}
 

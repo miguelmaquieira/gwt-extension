@@ -3,8 +3,12 @@ package com.imotion.dslam.business.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
+import com.imotion.dslam.bom.data.DSLAMBOFile;
+import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
 import com.imotion.dslam.business.service.DSLAMBUBomToMetadataConversor;
 import com.imotion.dslam.business.service.DSLAMBUBusinessServiceBase;
@@ -22,13 +26,21 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 	public void addProject() {
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 	= getContext().getContextDataIN();
-		String 							projectName	= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME				, contextIn);
-		int 							machineType	= getElementDataController().getElementAsInt(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
-
+		String 							projectName	= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME			, contextIn);
+		String 							machineType	= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
+		
+		DSLAMBOIFile 	mainScript 		= new DSLAMBOFile();
+		DSLAMBOIFile 	rollBackScript 	= new DSLAMBOFile();
+		DSLAMBOIProcess process 		= new DSLAMBOProcess();
+		
+		int machineTypeInt = Integer.parseInt(machineType);
 		Date creationTime = new Date();
 		DSLAMBOIProject project = new DSLAMBOProject();
 		project.setProjectName(projectName);
-		project.setMachineType(machineType);
+		project.setMachineType(machineTypeInt);
+		project.setMainScript(mainScript);
+		project.setRollBackScript(rollBackScript);
+		project.setProcess(process);
 		project.setCreationTime(creationTime);
 		project.setSavedTime(creationTime);
 		project = getProjectPersistence().addProject(project);

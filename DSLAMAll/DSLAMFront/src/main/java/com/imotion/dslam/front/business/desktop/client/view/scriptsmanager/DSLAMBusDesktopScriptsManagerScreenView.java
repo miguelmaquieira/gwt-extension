@@ -12,10 +12,10 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigatorListElement;
-import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopFileToolbar;
-import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopNavigatorFileList;
-import com.imotion.dslam.front.business.desktop.client.widget.scriptsmanager.DSLAMBusDesktopNewScriptPopupForm;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarActions;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopEditorToolbarInfo;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -41,17 +41,17 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 
 
 	private FlowPanel 							root;
-	private DSLAMBusDesktopFileToolbar			toolbar;
-	private DSLAMBusDesktopNavigatorFileList	fileList;
+	private DSLAMBusDesktopProjectToolbar		toolbar;
+	private DSLAMBusDesktopNavigator			fileList;
 	private AceEditor							editor;
-	private DSLAMBusDesktopNewScriptPopupForm	newScriptPopup;
+	private DSLAMBusDesktopNewProjectPopupForm	newScriptPopup;
 
 	public DSLAMBusDesktopScriptsManagerScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW);
 
-		toolbar = new DSLAMBusDesktopFileToolbar();
+		toolbar = new DSLAMBusDesktopProjectToolbar();
 		root.add(toolbar);
 		toolbar.setMainTitleText("");
 		toolbar.setLastSaved(null);
@@ -69,7 +69,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_ZONE);
 
-		fileList = new DSLAMBusDesktopNavigatorFileList();
+		fileList = new DSLAMBusDesktopNavigator();
 		fileListZone.add(fileList);
 
 		//Bottom Zone - Editor zone
@@ -143,7 +143,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		super.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		fileList.postDisplay();
-		newScriptPopup = new DSLAMBusDesktopNewScriptPopupForm(this);
+		newScriptPopup = new DSLAMBusDesktopNewProjectPopupForm(this);
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				if (!toolbar.isModified() || Window.confirm(TEXTS.exit_without_save())) {
 					closeCurrentFile();
-					newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_NEW_FILE);
+					newScriptPopup.setMode(DSLAMBusDesktopNewProjectPopupForm.MODE_NEW_PROJECT);
 					newScriptPopup.center();
 				}
 			} if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
@@ -194,7 +194,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 					fireDeleteFile(srcContainerId);
 				}
 			}
-		} else if (DSLAMBusDesktopNewScriptPopupForm.NAME.equals(srcWidget)) {
+		} else if (DSLAMBusDesktopNewProjectPopupForm.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
 			}
@@ -293,7 +293,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	}
 
 	private void showRenameForm(AEMFTMetadataElementComposite fileData) {
-		newScriptPopup.setMode(DSLAMBusDesktopNewScriptPopupForm.MODE_RENAME_FILE);
+		newScriptPopup.setMode(DSLAMBusDesktopNewProjectPopupForm.MODE_RENAME_PROJECT);
 		newScriptPopup.center();
 		newScriptPopup.setData(fileData);
 	}

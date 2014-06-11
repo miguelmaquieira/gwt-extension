@@ -13,10 +13,14 @@ public interface DSLAMBOIProjectDataConstants {
 	
 	String PROJECT_CONFIGURE_OPTION_ID	= "projectConfigureOptionId";
 	String PROJECT_CONFIGURE_DATA		= "projectConfigureData";
-	String PROJECT_DATA				= "projectData";
+	String PROJECT_DATA					= "projectData";
 	
 	//Project TYPES
 	int 	PROJECT_MACHINE_TYPE_DSLAM = 0;
+	
+	String MAIN_SCRIPT_ID 		= "mainScriptId";
+	String ROLLBACK_SCRIPT_ID 	= "rollBackScriptId";
+	
 	
 
 }

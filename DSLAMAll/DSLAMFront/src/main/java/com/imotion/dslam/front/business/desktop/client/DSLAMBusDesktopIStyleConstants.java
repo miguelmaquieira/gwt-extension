@@ -37,15 +37,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST_ZONE 									= LIST					+ "-zone";				//dslam_studio-list-zone
 	String FILE_LIST_ELEMENT 							= APP_ID_PREFFIX		+ "fileListElement";	//dslam_studio-fileListElement
 	
-	
-	//PROCESS LIST
-	
-	String PROCESS_LIST_CONTAINER						= PROCESS_LIST		 		+ "-container";		//dslam_studio-processlist-container
-	String PROCESS_LIST_CONTAINER_ZONE 					= PROCESS_LIST_CONTAINER	+ "-zone";			//dslam_studio-processlist-container-zone
-	String PROCESS_LIST_HEADER 							= PROCESS_LIST				+ "-header";		//dslam_studio-processlist-header
-	String PROCESS_LIST_ELEMENT 						= PROCESS_LIST				+ "-element";		//dslam_studio-processlist-element
-	
-
 	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
 	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 

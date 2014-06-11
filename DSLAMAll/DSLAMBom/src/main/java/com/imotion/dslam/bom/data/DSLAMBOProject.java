@@ -17,11 +17,12 @@ import javax.persistence.Version;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 
 @Entity(name="Project")
 public class DSLAMBOProject implements DSLAMBOIProject {
 
-	
+	private static final long serialVersionUID = -5386591730111246458L;
 	
 	private Long 				projectId;
 	private String 				projectName;
@@ -63,8 +64,8 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.machineType = machineType;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name=DSLAMBOFile.FILE_ID, nullable=false, updatable=true)
+	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
+    @JoinColumn(name=DSLAMBOIProjectDataConstants.MAIN_SCRIPT_ID)
 	public DSLAMBOIFile getMainScript() {
 		return mainScript;
 	}
@@ -73,8 +74,8 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.mainScript = mainScript;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name=DSLAMBOFile.FILE_ID, nullable=true, updatable=true)
+	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
+	@JoinColumn(name=DSLAMBOIProjectDataConstants.ROLLBACK_SCRIPT_ID)
 	public DSLAMBOIFile getRollBackScript() {
 		return rollBackScript;
 	}
@@ -83,8 +84,8 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.rollBackScript = rollBackScript;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name=DSLAMBOProcess.PROCESS_ID, nullable=false, updatable=true)
+	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOProcess.class)
+	@JoinColumn(name=DSLAMBOProcess.PROCESS_ID)
 	public DSLAMBOIProcess getProcess() {
 		return process;
 	}

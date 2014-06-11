@@ -28,7 +28,7 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	public static final int MODE_NEW_PROJECT		= 1;
-//	public static final int MODE_RENAME_PROJECT	= 2;
+	public static final int MODE_RENAME_PROJECT	= 2;
 
 	private AEGWTBootstrapDropdownAndLabelTextBox	projectNameField;
 	private AEGWTButton								saveButton;
