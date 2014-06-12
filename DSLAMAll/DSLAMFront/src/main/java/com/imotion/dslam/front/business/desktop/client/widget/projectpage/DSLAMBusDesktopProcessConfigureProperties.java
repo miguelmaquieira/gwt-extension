@@ -29,7 +29,7 @@ public class DSLAMBusDesktopProcessConfigureProperties extends AEGWTCompositePan
 		//Header
 		headerZone 		= new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_PROPERTIES_HEADER);
 
 		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.properties());
 		headerZone.add(headerLabel);
@@ -39,7 +39,7 @@ public class DSLAMBusDesktopProcessConfigureProperties extends AEGWTCompositePan
 		root.add(propertiesZone);
 		synchroCheckBox 	= new CheckBox(TEXTS.synchronous());
 		propertiesZone.add(synchroCheckBox);
-		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_PROPERTIES_CHECKBOX);
+		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_PROPERTIES_CHECKBOX);
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
@@ -17,13 +18,13 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	
-	private DeckPanel 											root;
-	private AceEditor											mainScriptConfigure;
-	private AceEditor											rollBackScriptConfigure;
-	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
+	private DeckPanel 									root;
+	private AceEditor									mainScriptConfigure;
+	private AceEditor									rollBackScriptConfigure;
+	private DSLAMBusDesktopProcessConfigureVariables	variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureProperties	propertiesProcessConfigure;
-	//private DSLAMBusDesktopProcessConfigureOptions		optionsZone;
+	//private DSLAMBusDesktopProcessConfigureOptions	optionsZone;
 	//private DSLAMBusDesktopProcessConfigureNodes		nodeZone;
 	
 	public String MAIN_SCRIPT 			= "mainScritp";
@@ -38,6 +39,7 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 		root = new DeckPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
+		root.addStyleName(AEGWTIBoostrapConstants.ROW);
 		
 		mainScriptConfigure 		= new AceEditor();
 		rollBackScriptConfigure 	= new AceEditor();
@@ -81,7 +83,7 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	
 	public void postDisplay() {
 		super.postDisplay();
-		//optionsZone.postDisplay();
+		variablesProcessConfigure.postDisplay();
 	}
 	
 	@Override

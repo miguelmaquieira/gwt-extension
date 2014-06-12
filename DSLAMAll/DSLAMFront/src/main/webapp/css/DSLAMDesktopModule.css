@@ -31,6 +31,46 @@
 	width: 380px;
 }
 
+.dslam_studio-toolbar-info-close button {
+	float: right;
+}
+
+.dslam_studio-processConfigureVariablesHeader>button {
+	margin-top: -3px;
+	height: 30px;
+	border-width: 0px;
+	background-color: rgb(242, 241, 240);
+	width: 50px;
+	float: right;
+}
+
+.dslam_studio-processConfigureScheduleHeader>button {
+	margin-top: -3px;
+	height: 30px;
+	border-width: 0px;
+	background-color: rgb(242, 241, 240);
+	width: 50px;
+	float: right;
+}
+
+.dslam_studio-list-header {
+	height: 35px;
+	background-color: #F2F1F0;
+	border-bottom: 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -50,12 +90,6 @@
 	width: 100%;
 	bottom: 0px;
 	height: auto;
-}
-
-.dslam_studio-connection-toolbar {
-	position: absolute;
-	top: 40px;
-	width: 100%;	
 }
 
 .dslam_studio-processConfigureZone {
@@ -95,9 +129,6 @@
 	height: 100%;
 }
 
-.dslam_studio-toolbar-actions-zone {
-}
-
 .dslam_studio-toolbar-actions button {
 	width: 100%;
 	border-width: 0px;
@@ -106,10 +137,6 @@
 .dslam_studio-toolbar-info-zone {
 	border-left: 1px solid #CCCCCC;
 	margin-left: -3px;
-}
-
-.dslam_studio-toolbar-info-close button {
-	float: right;
 }
 
 .dslam_studio-toolbar-info-lastsaved {
@@ -164,10 +191,6 @@
 	border-width: 0px;
 }
 
-.gwt-SuggestBoxPopup .item-selected {
-    background-color: rgb(102, 175, 233);
-}
-
 .dslam_studio-list-zone {
 	padding-right: 0px;
 	padding-left: 0px;
@@ -178,7 +201,7 @@
 	width: 100%;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader .gwt-Label {
+.dslam_studio-processConfigureVariablesHeader .gwt-Label {
 	padding-left: 0px;
 }
 
@@ -186,18 +209,6 @@
 	height: 100%;
 	position: relative;
 	border-right: 1px solid #CCC;
-}
-
-.dslam_studio-list-header {
-	height: 35px;
-	background-color: #F2F1F0;
-	border-bottom: 1px solid #CCCCCC;
-	padding: 5px;
-	font-weight: bold;
-}
-
-.dslam_studio-connection-toolbar {
-	border-bottom: 1px solid #CCCCCC;
 }
 
 .dslam_studio-container-zone {
@@ -252,7 +263,7 @@
 	width: 380px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader {
+.dslam_studio-processConfigureVariablesHeader {
 	height: 35px;
 	background-color: #F2F1F0;
 	padding: 5px;
@@ -260,7 +271,7 @@
 	border-bottom: 1px solid #CCCCCC;
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader {
+.dslam_studio-processConfigureScheduleHeader {
 	height: 35px;
 	background-color: #F2F1F0;
 	border-bottom: 1px solid #CCCCCC;
@@ -268,7 +279,7 @@
 	font-weight: bold;
 }
 
-.dslam_studio-processConfigureOptionsPropertiesHeader {
+.dslam_studio-processConfigurePropertiesHeader {
 	height: 35px;
 	background-color: #F2F1F0;
 	padding: 5px;
@@ -277,69 +288,62 @@
 	margin-right: -15px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesZone {
+.dslam_studio-processConfigureVariablesZone {
 	padding-left: 0px;
 	padding-right: 0px;
 	border-right: 1px solid #CCCCCC;
 	height: 100%
 }
 
-.dslam_studio-processConfigureOptionsPropertiesZone {
+.dslam_studio-processConfigurePropertiesZone {
 	padding-left: 0px;
 }
 
-.dslam_studio-processConfigureOptionsPropertiesCheckBox {
+.dslam_studio-processConfigurePropertiesCheckBox {
 	padding: 15px;
 }
 
-.dslam_studio-processConfigureOptionsScheduleZone {
+.dslam_studio-processConfigureScheduleZone {
 	padding-left: 0px;
 	padding-right: 0px;
 	height: 100%;
 	border-right: 1px solid #CCCCCC;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader>button {
-	margin-top: -3px;
-	height: 30px;
-	border-width: 0px;
-	background-color: rgb(242, 241, 240);
-	width: 50px;
-	float: right;
-}
 
-.dslam_studio-processConfigureOptionsVariablesFormSubmitButton {
+
+.dslam_studio-processConfigureVariablesFormSubmitButton {
 	margin-left: 15px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader>.btn:hover {
+.dslam_studio-processConfigureVariablesHeader>.btn:hover {
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader>.btn:focus {
+.dslam_studio-processConfigureVariablesHeader>.btn:focus {
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsVariablesHeader>.col-xs-10 {
+.dslam_studio-processConfigureVariablesHeader>.col-xs-10 {
 	padding-left: 0px;
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader>button {
+.dslam_studio-processConfigureScheduleHeader>button {
 	margin-top: -3px;
 	height: 30px;
 	border-width: 0px;
 	background-color: rgb(242, 241, 240);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader>.btn:hover {
+.dslam_studio-processConfigureScheduleHeader>.btn:hover {
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader>.btn:focus {
+.dslam_studio-processConfigureScheduleHeader>.btn:focus {
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-processConfigureOptionsScheduleHeader>.col-xs-10 {
+.dslam_studio-processConfigureScheduleHeader>.col-xs-10 {
 	padding-left: 0px;
 }
 
@@ -419,16 +423,16 @@
 	padding-left: 0px;
 }
 
-.dslam_studio-processConfigureOptionsZone {
+.dslam_studio-processConfigureZone {
 	height: 299px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesList {
+.dslam_studio-processConfigureVariablesList {
 	width: 100%;
 	height: 260px;
 }
 
-.dslam_studio-processConfigureOptionsScheduleList {
+.dslam_studio-processConfigureScheduleList {
 	height: 260px;
 }
 
@@ -436,7 +440,7 @@
 	padding-left: 5px;
 }
 
-.dslam_studio-processConfigureOptionsVariablesFormContainer {
+.dslam_studio-processConfigureVariablesFormContainer {
 	background-color: #FFFFFF;
 	padding: 20px;
 	border-radius: 5px;
@@ -444,11 +448,11 @@
 	width: 500px;
 }
 
-.dslam_studio-processConfigureOptionsScheduleLine button {
+.dslam_studio-processConfigureScheduleLine button {
 	border-width: 0px;
 	float: right;
 }
 
-.dslam_studio-processConfigureOptionsScheduleLine {
+.dslam_studio-processConfigureScheduleLine {
 	width: 95%;
 }
