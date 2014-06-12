@@ -35,8 +35,6 @@ public class CRONIOBusDesktopScriptsEditor extends AEGWTCompositePanel {
 		editor.setAutoCompletionEnabled(true);
 		editor.setShowPrintMargin(false);
 		editor.setFontSize(14);
-		editor.setVisible(false);
-
 		editor.addOnChangeHandler(new AceEditorCallback() {
 
 			@Override
