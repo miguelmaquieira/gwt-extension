@@ -11,13 +11,13 @@ import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
-public class CRONIBusDesktopScriptsEditor extends AEGWTCompositePanel {
+public class CRONIOBusDesktopScriptsEditor extends AEGWTCompositePanel {
 	
 	public static final String NAME = "CRONIBusDesktopScriptsEditor";
 	
 	private AceEditor editor;
 
-	public CRONIBusDesktopScriptsEditor() {
+	public CRONIOBusDesktopScriptsEditor() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR);
