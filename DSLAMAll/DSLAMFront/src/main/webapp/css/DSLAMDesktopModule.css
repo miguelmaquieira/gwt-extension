@@ -427,15 +427,6 @@
 	height: 299px;
 }
 
-.dslam_studio-processConfigureVariablesList {
-	width: 100%;
-	height: 260px;
-}
-
-.dslam_studio-processConfigureScheduleList {
-	height: 260px;
-}
-
 .dslam_studio-processConfigureNodesSelectionHeader>.gwt-Label {
 	padding-left: 5px;
 }

@@ -18,7 +18,6 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
-import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
 public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel {
@@ -89,8 +88,6 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, scheduleListZone, scheduleListZone.getElement().getClientHeight(), false);
-
 	}
 
 	@Override

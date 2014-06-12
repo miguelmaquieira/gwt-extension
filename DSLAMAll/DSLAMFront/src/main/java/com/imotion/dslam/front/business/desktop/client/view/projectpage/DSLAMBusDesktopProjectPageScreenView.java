@@ -17,6 +17,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSL
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectConfigure;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
@@ -149,28 +150,20 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 				AEMFTMetadataElementComposite optionsData = projectOptions.getData();
 				fireSaveChanges(srcWidgetId, optionsData);
 			}
+		} else if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				fireSaveVariablesDataEvent(evt);
+			}
 		} else if (DSLAMBusDesktopToolbarInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CLOSE_EVENT.equals(type)) {
 				closeCurrentProject();
 			}
-//		} else if (AEGWTBootstrapSplitButtonDropdown.NAME.equals(srcWidget)) {
-//			boolean openProcess = AEGWTStringUtils.isEmptyString(srcContainerId) || DSLAMBusDesktopNavigatorListElement.OPEN_ID.equals(srcWidgetId);
-//			if (openProcess) {
-//				String processId = AEGWTStringUtils.isEmptyString(srcContainerId) ? srcWidgetId : srcContainerId;
-//				openProcess(processId);
-//			} else if (DSLAMBusDesktopNavigatorListElement.RENAME_ID.equals(srcWidgetId)) {
-//				showRenameForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
-//			} else if (DSLAMBusDesktopNavigatorListElement.DELETE_ID.equals(srcWidgetId)) {
-//				fireDeleteProcess(srcContainerId);
-//			} else if (DSLAMBusDesktopNavigatorListElement.CHANGE_SCRIPT_ID.equals(srcWidgetId)) {
-//				showChangeScriptForm(evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_DATA));
-//			}
 		} else if (AEGWTBootstrapTreeMenuFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				openSectionProject(evt);
 			}
 		} else if (DSLAMBusDesktopNewProjectPopupForm.NAME.equals(srcWidget)) {
-			if (LOGICAL_TYPE.NEW_EVENT.equals(type) || LOGICAL_TYPE.CHANGE_EVENT.equals(type) || LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
+			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				fireSaveFormDataEvent(evt);
 			}
 		} if (isValidEvent(evt) && evt.getEventType().equals(LOGICAL_TYPE.OK_EVENT)) {
@@ -186,10 +179,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 				LOGICAL_TYPE.NEW_EVENT.equals(type)
 				||
 				LOGICAL_TYPE.CLOSE_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.SELECT_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.CHANGE_EVENT.equals(type)
 				||
 				LOGICAL_TYPE.OK_EVENT.equals(type)
 				||
@@ -305,5 +294,27 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		String itemId = evt.getElementAsString(AEGWTBootstrapTreeMenuFinalItem.ITEM_ID);
 		projectOptions.showSection(itemId);
 		projectOptions.setVisibility(Visibility.VISIBLE);
+	}
+	
+	private void fireSaveVariablesDataEvent(AEGWTLogicalEvent saveVariablesEvt) {
+		saveVariablesEvt.stopPropagation();
+		LOGICAL_TYPE	type		= saveVariablesEvt.getEventType();
+		String 			projectName			= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME);
+		String 			projectMachineType	= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
+		AEMFTMetadataElementComposite existentProjectData = projectList.getElementDataByName(projectName);
+		
+		if (existentProjectData != null && !LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
+			newProjectPopup.setError(TEXTS.projectname_exists());
+		} else {
+			AEMFTMetadataElementComposite projectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectName);
+			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
+			
+			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveFileEvent.setEventType(saveVariablesEvt.getEventType());
+			saveFileEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA , projectData);
+			saveFileEvent.setSourceWidgetId(saveVariablesEvt.getSourceWidgetId());
+			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
+		}
 	}
 }

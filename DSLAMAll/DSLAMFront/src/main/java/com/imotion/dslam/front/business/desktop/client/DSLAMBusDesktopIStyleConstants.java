@@ -59,16 +59,11 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 							//dslam_studio-processConfigure
 	String PROCESS_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "processConfigureZone";				//dslam_studio-processConfigureZone
 		
-	String PROCESS_CONFIGURE_PROPERTIES_ZONE			= APP_ID_PREFFIX			+ "processConfigurePropertiesZone";		//dslam_studio-processConfigurePropertiesZone
-	String PROCESS_CONFIGURE_PROPERTIES					= APP_ID_PREFFIX			+ "processConfigureProperties";			//dslam_studio-processConfigureProperties
+
 	String PROCESS_CONFIGURE_PROPERTIES_HEADER			= APP_ID_PREFFIX			+ "processConfigurePropertiesHeader";	//dslam_studio-processConfigurePropertiesHeader
 	String PROCESS_CONFIGURE_PROPERTIES_CHECKBOX		= APP_ID_PREFFIX			+ "processConfigurePropertiesCheckBox";	//dslam_studio-processConfigurePropertiesCheckBox
-	String PROCESS_CONFIGURE_VARIABLES_ZONE				= APP_ID_PREFFIX			+ "processConfigureVariablesZone";		//dslam_studio-processConfigurevariablesZone
-	String PROCESS_CONFIGURE_VARIABLES					= APP_ID_PREFFIX			+ "processConfigureVariables";			//dslam_studio-processConfigureVariables
 	String PROCESS_CONFIGURE_VARIABLES_HEADER			= APP_ID_PREFFIX			+ "processConfigureVariablesHeader"; 	//dslam_studio-processConfigureVariablesHeader
 	String PROCESS_CONFIGURE_VARIABLES_LIST				= APP_ID_PREFFIX			+ "processConfigureVariablesList";		//dslam_studio-processConfigureVariablesList
-	String PROCESS_CONFIGURE_SCHEDULE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleZone";		//dslam_studio-processConfigureScheduleZone
-	String PROCESS_CONFIGURE_SCHEDULE					= APP_ID_PREFFIX			+ "processConfigureSchedule";			//dslam_studio-processConfigureSchedule
 	String PROCESS_CONFIGURE_SCHEDULE_HEADER			= APP_ID_PREFFIX			+ "processConfigureScheduleHeader"; 		//dslam_studio-processConfigureScheduleHeader
 	String PROCESS_CONFIGURE_SCHEDULE_LIST				= APP_ID_PREFFIX			+ "processConfigureScheduleList";		//dslam_studio-processConfigureScheduleList
 	String PROCESS_CONFIGURE_SCHEDULE_LINE				= APP_ID_PREFFIX			+ "processConfigureScheduleLine";		//dslam_studio-processConfigureScheduleLine

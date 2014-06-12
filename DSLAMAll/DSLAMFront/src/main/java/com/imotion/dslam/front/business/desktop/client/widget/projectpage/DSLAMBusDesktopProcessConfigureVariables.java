@@ -133,6 +133,11 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			} else {
 				variablesForm.setErrorVariableExist();
 			}
+			
+			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
+			getLogicalEventHandlerManager().fireEvent(evt);
 		}
 		
 		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
@@ -155,8 +160,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type) || LOGICAL_TYPE.DELETE_EVENT.equals(type);
-		
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type) || LOGICAL_TYPE.DELETE_EVENT.equals(type);	
 	}
 	
 	/**
