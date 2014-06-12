@@ -31,14 +31,6 @@
 	width: 380px;
 }
 
-
-
-
-
-
-
-
-
 .dslam_studio-editorView {
 	height: 100%;
 	position: relative;
@@ -236,13 +228,24 @@
 	text-align: right;
 }
 
-.dslam_studio-editorZone {
+
+/*******************************************************
+*			SCRIPTS EDITOR
+********************************************************/
+
+.dslam_studio-scriptsEditorContainer {
 	padding-left: 0px;
 	padding-right: 0px;
 	height: 100%;
 }
 
+.dslam_studio-scriptsEditorArea {
+	height: 100%;
+}
 
+/********************************************************
+*			PROCESS
+*********************************************************/
 
 .dslam_studio-newProcessForm {
 	background-color: #FFFFFF;

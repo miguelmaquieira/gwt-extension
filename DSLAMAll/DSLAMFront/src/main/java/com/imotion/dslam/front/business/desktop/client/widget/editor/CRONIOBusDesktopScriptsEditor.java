@@ -20,7 +20,7 @@ public class CRONIOBusDesktopScriptsEditor extends AEGWTCompositePanel {
 	public CRONIOBusDesktopScriptsEditor() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR_CONTAINER);
 
 		// create first AceEditor widget
 		editor = new AceEditor();

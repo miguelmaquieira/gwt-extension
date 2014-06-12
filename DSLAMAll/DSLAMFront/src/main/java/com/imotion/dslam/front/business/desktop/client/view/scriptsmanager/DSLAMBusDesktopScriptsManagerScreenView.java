@@ -73,7 +73,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		FlowPanel editorZone = new FlowPanel();
 		bottomZone.add(editorZone);
 		editorZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR);
+//		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR);
 
 		// create first AceEditor widget
 		editor = new AceEditor();

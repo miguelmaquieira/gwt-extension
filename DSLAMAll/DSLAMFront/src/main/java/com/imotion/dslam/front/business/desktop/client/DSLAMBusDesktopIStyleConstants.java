@@ -39,12 +39,13 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECTS_VIEW_SECTION_NAME 					= PROJECTS_VIEW			+ "-sectionName";	//dslam_studio-projectsView-sectionName	
 	String PROJECT_LIST									= APP_ID_PREFFIX 		+ "projectlist";	//dslam_studio-projectlist
 	String PROJECT_LIST_ZONE 							= PROJECT_LIST			+ "-zone";			//dslam_studio-projectlist-zone
-	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX		+ "projectConfigureZone"; 						//dslam_studio-projectConfigureZone
-	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX		+ "projectConfigureDeckPanel"; 						//dslam_studio-projectConfigureDeckPanel
-		
+	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX		+ "projectConfigureZone"; 		//dslam_studio-projectConfigureZone
+	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX		+ "projectConfigureDeckPanel"; 	//dslam_studio-projectConfigureDeckPanel
 	
-	String SCRIPTS_EDITOR 								= APP_ID_PREFFIX			+ "scriptsEditor";	//dslam_studio-scriptsEditor
-	String SCRIPTS_EDITOR_AREA 							= SCRIPTS_EDITOR			+ "Area";			//dslam_studio-scriptsEditorArea
+	
+	//SCRITPS EDITOR
+	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
+	String SCRIPTS_EDITOR_AREA 							= APP_ID_PREFFIX		+ "scriptsEditorArea";		//dslam_studio-scriptsEditorArea
 	
 	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 
