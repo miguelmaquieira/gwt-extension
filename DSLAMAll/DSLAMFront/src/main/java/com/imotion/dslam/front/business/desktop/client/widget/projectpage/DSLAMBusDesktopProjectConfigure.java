@@ -5,11 +5,10 @@ import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopScriptsEditor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-
-import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 
 public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
@@ -19,8 +18,8 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	
 	
 	private DeckPanel 									root;
-	private AceEditor									mainScriptConfigure;
-	private AceEditor									rollBackScriptConfigure;
+	private CRONIOBusDesktopScriptsEditor				mainScriptEditor;
+	private CRONIOBusDesktopScriptsEditor				rollBackScriptEditor;
 	private DSLAMBusDesktopProcessConfigureVariables	variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureProperties	propertiesProcessConfigure;
@@ -41,14 +40,14 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
 		root.addStyleName(AEGWTIBoostrapConstants.ROW);
 		
-		mainScriptConfigure 		= new AceEditor();
-		rollBackScriptConfigure 	= new AceEditor();
+		mainScriptEditor 			= new CRONIOBusDesktopScriptsEditor();
+		rollBackScriptEditor 		= new CRONIOBusDesktopScriptsEditor();
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
 		propertiesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureProperties();
 		
-		root.add(mainScriptConfigure);
-		root.add(rollBackScriptConfigure);
+		root.add(mainScriptEditor);
+		root.add(rollBackScriptEditor);
 		root.add(variablesProcessConfigure);
 		root.add(scheduleProcessConfigure);
 		root.add(propertiesProcessConfigure);

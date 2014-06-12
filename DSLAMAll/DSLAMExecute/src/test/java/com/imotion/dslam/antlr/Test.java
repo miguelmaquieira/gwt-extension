@@ -58,8 +58,13 @@ public class Test {
 	
 	private static final String DSLAM_FULL = DSLAM_TEXT_2 + DSLAM_TEXT + DSLAM_LISTS;
 	
+	private static final String FOR_EACH_EXAMPLE = 	"$list = {\"¿ hola\", \" que\", \" tal\", \" estás\", \" ?\"};"
+														+ "foreach ($item : $list) {"
+														+ "	execute admin $item ;"
+														+ "}";
+	
 	public static void main( String[] args ) {
-		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(DSLAM_FULL));
+		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(FOR_EACH_EXAMPLE));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		DSLAMParser parser = new DSLAMParser(tokens);

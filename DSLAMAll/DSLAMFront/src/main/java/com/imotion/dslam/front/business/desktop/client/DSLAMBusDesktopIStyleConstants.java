@@ -42,12 +42,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECT_CONFIGURE_ZONE 						= APP_ID_PREFFIX		+ "projectConfigureZone"; 						//dslam_studio-projectConfigureZone
 	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX		+ "projectConfigureDeckPanel"; 						//dslam_studio-projectConfigureDeckPanel
 		
-	
-	
-	
-	
-	
-	String EDITOR_ZONE 									= APP_ID_PREFFIX			+ "editorZone";		//dslam_studio-editorZone
+	String SCRIPTS_EDITOR 								= APP_ID_PREFFIX			+ "scriptsEditor";	//dslam_studio-scriptsEditor
+	String SCRIPTS_EDITOR_AREA 							= SCRIPTS_EDITOR			+ "Area";			//dslam_studio-scriptsEditorArea
+
 	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
 
 	//EDITOR VIEW

@@ -65,13 +65,12 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEGWTIPresenter presenter = null;
 		String token1 = tokenElements[0];
 		if (AEGWTStringUtils.isEmptyString(token1)) {
-			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER;
+			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE;
 		}
 		
 		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER.equals(token1) ) {
 			presenter = new DSLAMBusDesktopScriptsManagerPresenter(new DSLAMBusDesktopScriptsManagerScreenView());
-		}
-		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE.equals(token1) ) {
+		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE.equals(token1) ) {
 			presenter = new DSLAMBusDesktopProjectPagePresenter(new DSLAMBusDesktopProjectPageScreenView());
 		}
 		return presenter;
