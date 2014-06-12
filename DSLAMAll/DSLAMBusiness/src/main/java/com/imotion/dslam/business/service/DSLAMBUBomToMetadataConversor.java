@@ -25,7 +25,7 @@ public class DSLAMBUBomToMetadataConversor {
 	 * PROCESS
 	 */
 	
-	public  static AEMFTMetadataElementComposite fromProcess(DSLAMBOIProcess process, Locale locale) {
+	public  static AEMFTMetadataElementComposite fromProcess(DSLAMBOIProcess process) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -41,7 +41,7 @@ public class DSLAMBUBomToMetadataConversor {
 	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
-			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			data =fromProcess(process);
 
 			AEMFTMetadataElementComposite 	scheduleListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			List<Date> 						scheduleList = process.getScheduleList();
@@ -63,16 +63,9 @@ public class DSLAMBUBomToMetadataConversor {
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
 				variableListData.addElement(variable.getVariableName()	, variableData);
 			}
-				
-				
-			
-			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
-			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
 			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, process.isSynchronous());
 			data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, scheduleListData);
 			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
-			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
-			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
 		}
 		return data;
 	}
@@ -145,7 +138,7 @@ public class DSLAMBUBomToMetadataConversor {
 	 * PROJECT
 	 */
 	
-	public  static AEMFTMetadataElementComposite fromProject(DSLAMBOIProject project, Locale locale) {
+	public  static AEMFTMetadataElementComposite fromProject(DSLAMBOIProject project) {
 		AEMFTMetadataElementComposite data = null;
 		if (project != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -162,14 +155,14 @@ public class DSLAMBUBomToMetadataConversor {
 	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (project != null) {
-			data = fromProject(project, locale);
+			data = fromProject(project);
 			
 			DSLAMBOIFile 	mainScript 		= project.getMainScript();
 			DSLAMBOIFile 	rollBackScript 	= project.getRollBackScript();
 			DSLAMBOIProcess process 		= project.getProcess();
 			AEMFTMetadataElementComposite mainScriptData 		= DSLAMBUBomToMetadataConversor.fromFile(mainScript);
 			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
-			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcess(process, locale);
+			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process, locale);
 			
 			data.addElement(DSLAMBOIProject.PROJECT_MAIN_SCRIPT			, mainScriptData);
 			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT		, rollBackScriptData);

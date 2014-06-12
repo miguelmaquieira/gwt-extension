@@ -44,7 +44,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(process, getSession().getCurrentLocale());
+		AEMFTMetadataElementComposite processDataElement = DSLAMBUBomToMetadataConversor.fromProcess(process);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
