@@ -57,7 +57,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		AEMFTMetadataElementComposite 	propertiesData 	= getElementDataController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_PROPERTIES_DATA	, optionsData);
 		AEMFTMetadataElementComposite 	variablesData 	= getElementDataController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA	, optionsData);
 		AEMFTMetadataElementComposite 	scheduleData 	= getElementDataController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA	, optionsData);
-		boolean 						synchronous		= getElementDataController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNCHRONOUS		, propertiesData);
+		boolean 						synchronous		= getElementDataController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS		, propertiesData);
 		String 							processId		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_ID					, contextIn);
 		String 							processName		= getElementDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_NAME				, contextIn);
 

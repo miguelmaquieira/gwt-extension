@@ -1,3 +1,7 @@
+/**************************************
+*			PROJECTS
+***************************************/
+
 .dslam_studio-projectsView {
 	height: 100%;
 	position: relative;
@@ -9,6 +13,14 @@
 	width: 100%;
 	bottom: 0px;
 	height: auto;
+}
+
+.dslam_studio-projectConfigureZone {
+	height: 100%;
+}
+
+.dslam_studio-projectConfigureDeckPanel {
+	height: 100%;
 }
 
 .nav-list {
@@ -61,23 +73,6 @@
 	font-weight: bold;
 	margin-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .dslam_studio-editorView {
 	height: 100%;
@@ -247,13 +242,23 @@
 	text-align: right;
 }
 
-.dslam_studio-editorZone {
+/*******************************************************
+*			SCRIPTS EDITOR
+********************************************************/
+
+.dslam_studio-scriptsEditorContainer {
 	padding-left: 0px;
 	padding-right: 0px;
 	height: 100%;
 }
 
+.dslam_studio-scriptsEditorArea {
+	height: 100%;
+}
 
+/********************************************************
+*			PROCESS
+*********************************************************/
 
 .dslam_studio-newProcessForm {
 	background-color: #FFFFFF;

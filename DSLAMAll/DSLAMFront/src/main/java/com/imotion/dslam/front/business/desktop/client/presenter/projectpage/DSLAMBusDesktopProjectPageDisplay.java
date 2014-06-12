@@ -8,4 +8,5 @@ public interface DSLAMBusDesktopProjectPageDisplay extends AEGWTCompositePanelLo
 	void addProject(AEMFTMetadataElementComposite projectData);
 	void updateProject(AEMFTMetadataElementComposite projectData);
 	void removeProject(String projectId);
+	void openProjectSection(String sectionId, AEMFTMetadataElementComposite projectData);
 }	

@@ -1,11 +1,13 @@
 package com.imotion.dslam.bom;
 
+import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
+
 public interface DSLAMBOIProjectDataConstants {
 	
 	String PROJECT_ID 				= "projectId";
 	String PROJECT_NAME				= "projectName";
 	String PROJECT_MACHINE_TYPE		= "projectMachineType";
-	String PROJECT_SCRIPT			= "projectScript";
+	String PROJECT_MAIN_SCRIPT		= "projectMainScript";
 	String PROJECT_ROLLBACK_SCRIPT	= "projectRollBackScript";	
 	String PROJECT_PROCESS			= "projectProcess";
 	String SAVED_TIME				= "savedTime";
@@ -21,6 +23,12 @@ public interface DSLAMBOIProjectDataConstants {
 	String MAIN_SCRIPT_ID 		= "mainScriptId";
 	String ROLLBACK_SCRIPT_ID 	= "rollBackScriptId";
 	
+	//CONTEXT
+	String PROJECT_PROCESS_PREFFIX			= PROJECT_PROCESS + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
+	String PROJECT_PROCESS_VARIABLE_LIST	= PROJECT_PROCESS_PREFFIX + DSLAMBOIProcess.PROCESS_VARIABLE_LIST;
+	String PROJECT_PROCESS_SCHEDULE_LIST	= PROJECT_PROCESS_PREFFIX + DSLAMBOIProcess.PROCESS_SCHEDULE_LIST;
+	String PROJECT_PROCESS_NODES			= PROJECT_PROCESS_PREFFIX + DSLAMBOIProcess.PROCESS_NODES;
+	String PROJECT_PROCESS_EXTRA_OPTIONS	= PROJECT_PROCESS_PREFFIX + DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS;
 	
 
 }

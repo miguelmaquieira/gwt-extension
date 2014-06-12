@@ -1,5 +1,7 @@
 package com.imotion.dslam.business.service;
 
+import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
+
 
 public interface DSLAMBUIProjectBusinessServiceConstants {
 	
@@ -10,6 +12,8 @@ public interface DSLAMBUIProjectBusinessServiceConstants {
 	String 	METHOD_REMOVE_PROJECT		= "REMOVE_PROJECT";
 	
 	//CONTEXT
-	String 	PROJECT_DATA 				= "PROJECT_DATA";
-	String 	PROJECT_DATA_LIST 			= "PROJECT_DATA_LIST";	
+	String 	PROJECT_DATA 					= "PROJECT_DATA";
+	String 	PROJECT_DATA_LIST 				= "PROJECT_DATA_LIST";
+	String 	PROJECT_DATA_LIST_PREFFIX 		= PROJECT_DATA_LIST	+	AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
+
 }

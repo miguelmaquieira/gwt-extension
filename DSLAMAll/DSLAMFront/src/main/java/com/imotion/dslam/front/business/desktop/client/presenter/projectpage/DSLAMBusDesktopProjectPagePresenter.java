@@ -9,6 +9,7 @@ import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBus
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -25,6 +26,7 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 	public void bind() {
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		getAllProjects();
+		
 	}
 
 	@Override
@@ -54,6 +56,10 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 				evt.stopPropagation();
 				deleteProject(sourceWidgetId);
 			}
+		} else if (AEGWTBootstrapTreeMenuFinalItem.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				openProjectSection(evt);
+			}
 		}
 	}
 
@@ -78,6 +84,7 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				AEMFTMetadataElementComposite projectListData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, dataResult);
 				getView().setData(projectListData);
+				getContextDataController().setElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectListData);
 			}
 
 			@Override
@@ -146,6 +153,20 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 
 			}
 		});
+	}
+	
+	private void openProjectSection(AEGWTLogicalEvent evt) {
+		String			projectId	= evt.getSourceContainerId();
+		String			sectionId	= evt.getSourceWidgetId();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST_PREFFIX);
+		sb.append(projectId);
+		
+		String projectDataKey = sb.toString();
+		
+		AEMFTMetadataElementComposite projectData = getContextDataController().getElementAsComposite(projectDataKey);
+		getView().openProjectSection(sectionId, projectData);
 	}
 
 }
