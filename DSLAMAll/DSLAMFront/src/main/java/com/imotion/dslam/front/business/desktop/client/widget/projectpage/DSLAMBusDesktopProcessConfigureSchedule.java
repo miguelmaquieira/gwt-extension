@@ -39,7 +39,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		//Header
 		headerZone 		= new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_HEADER);
 
 		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.schedule());
 		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
@@ -70,7 +70,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		});
 
 		scheduleListZone = new FlowPanel();
-		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LIST);
+		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_LIST);
 		root.add(scheduleListZone);
 
 	}

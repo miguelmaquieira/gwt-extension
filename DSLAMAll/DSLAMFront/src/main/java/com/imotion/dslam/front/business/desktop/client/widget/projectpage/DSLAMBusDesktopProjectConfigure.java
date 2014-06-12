@@ -7,6 +7,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopScriptsEditor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 
@@ -22,7 +23,7 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	private DSLAMBusDesktopProcessConfigureVariables	variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureProperties	propertiesProcessConfigure;
-	//private DSLAMBusDesktopProcessConfigureOptions		optionsZone;
+	//private DSLAMBusDesktopProcessConfigureOptions	optionsZone;
 	//private DSLAMBusDesktopProcessConfigureNodes		nodeZone;
 	
 	public String MAIN_SCRIPT 			= "mainScritp";
@@ -37,6 +38,7 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 		root = new DeckPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
+		root.addStyleName(AEGWTIBoostrapConstants.ROW);
 		
 		mainScriptEditor 			= new CRONIOBusDesktopScriptsEditor();
 		rollBackScriptEditor 		= new CRONIOBusDesktopScriptsEditor();
@@ -80,7 +82,7 @@ public class DSLAMBusDesktopProjectConfigure extends AEGWTCompositePanel  {
 	
 	public void postDisplay() {
 		super.postDisplay();
-		//optionsZone.postDisplay();
+		variablesProcessConfigure.postDisplay();
 	}
 	
 	@Override

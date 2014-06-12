@@ -25,7 +25,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleLine extends AEGWTCompositeP
 	public DSLAMBusDesktopProcessConfigureScheduleLine(AEMFTMetadataElement date) {
 		FlowPanel root = new FlowPanel();
 		root.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_OPTIONS_SCHEDULE_LINE);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_LINE);
 		initWidget(root);
 		
 		dateTimeBox 	= new AEGWTBootstrapDateTimePickerTextBox(null);
