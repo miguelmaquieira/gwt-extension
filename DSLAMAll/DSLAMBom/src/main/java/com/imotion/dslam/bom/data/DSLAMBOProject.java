@@ -14,10 +14,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 
 @Entity(name="Project")
 public class DSLAMBOProject implements DSLAMBOIProject {
@@ -65,7 +65,7 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 	}
 	
 	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
-    @JoinColumn(name=DSLAMBOIProjectDataConstants.MAIN_SCRIPT_ID)
+    @JoinColumn(name=CRONIOBOIProjectDataConstants.MAIN_SCRIPT_ID)
 	public DSLAMBOIFile getMainScript() {
 		return mainScript;
 	}
@@ -75,7 +75,7 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 	}
 	
 	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
-	@JoinColumn(name=DSLAMBOIProjectDataConstants.ROLLBACK_SCRIPT_ID)
+	@JoinColumn(name=CRONIOBOIProjectDataConstants.ROLLBACK_SCRIPT_ID)
 	public DSLAMBOIFile getRollBackScript() {
 		return rollBackScript;
 	}

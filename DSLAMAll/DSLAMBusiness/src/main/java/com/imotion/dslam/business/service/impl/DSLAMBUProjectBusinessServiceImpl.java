@@ -3,10 +3,10 @@ package com.imotion.dslam.business.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
@@ -26,8 +26,8 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 	public void addProject() {
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 	= getContext().getContextDataIN();
-		String 							projectName	= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME			, contextIn);
-		String 							machineType	= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
+		String 							projectName	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
+		String 							machineType	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
 		
 		DSLAMBOIFile 	mainScript 		= new DSLAMBOFile();
 		DSLAMBOIFile 	rollBackScript 	= new DSLAMBOFile();
@@ -122,7 +122,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 public void removeProject() {
 	//ContextIn
 	AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
-	String projectId		= getElementDataController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_ID		, contextIn);
+	String projectId		= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID		, contextIn);
 
 	Long projectIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(projectId);
 	getProjectPersistence().removeProject(projectIdAsLong);
@@ -133,7 +133,7 @@ public void removeProject() {
 
 	//ContextOut
 	AEMFTMetadataElementComposite projectDataElement = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-	projectDataElement.addElement(DSLAMBOIProjectDataConstants.PROJECT_ID, projectIdAsLong);
+	projectDataElement.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, projectIdAsLong);
 
 	AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 	contextOut.addElement(PROJECT_DATA, projectDataElement);

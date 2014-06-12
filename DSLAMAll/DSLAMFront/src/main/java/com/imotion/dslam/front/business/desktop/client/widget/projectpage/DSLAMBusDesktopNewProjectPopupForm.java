@@ -7,8 +7,8 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -49,7 +49,7 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 
 		projectNameField = new AEGWTBootstrapDropdownAndLabelTextBox(TEXTS.projectame_input_placeholder());
 		inputZone.add(projectNameField);
-		projectNameField.addElement(String.valueOf(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE_DSLAM), TEXTS.project_type_dslam());
+		projectNameField.addElement(String.valueOf(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE_DSLAM), TEXTS.project_type_dslam());
 
 		//SAVE
 		FlowPanel saveButtonZone = new FlowPanel();
@@ -82,8 +82,8 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 //						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
 //					}
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
-					evt.addElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
+					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
+					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				}
 			}

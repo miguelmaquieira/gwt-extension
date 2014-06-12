@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.projectpage;
 
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
@@ -26,7 +26,6 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 	public void bind() {
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		getAllProjects();
-		
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<D
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sourceWidgetId	= evt.getSourceWidgetId();
 		if (DSLAMBusDesktopProjectPageScreenView.NAME.equals(srcWidget)) {
-			AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA);
+			AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA);
 			
 			if (LOGICAL_TYPE.NEW_EVENT.equals(type)) {
 				evt.stopPropagation();

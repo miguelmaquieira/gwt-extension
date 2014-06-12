@@ -3,7 +3,7 @@ package com.imotion.dslam.bom;
 import java.io.Serializable;
 import java.util.Date;
 
-public interface DSLAMBOIProject extends Serializable, DSLAMBOIProjectDataConstants {
+public interface DSLAMBOIProject extends Serializable, CRONIOBOIProjectDataConstants {
 
 	Long getProjectId();
 	

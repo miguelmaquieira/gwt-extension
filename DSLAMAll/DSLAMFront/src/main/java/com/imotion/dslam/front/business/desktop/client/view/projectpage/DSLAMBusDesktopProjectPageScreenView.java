@@ -6,17 +6,17 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPageDisplay;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopProjectNavigator;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessSectionsDeckPanel;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProjectSectionsDeckPanel;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -35,7 +35,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private FlowPanel 									root;
 	private DSLAMBusDesktopToolbar						toolbar;
 	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
-	private DSLAMBusDesktopProjectSectionsDeckPanel		projectSectionsDeckPanel;
+	private CRONIOBusDesktopProcessSectionsDeckPanel	projectSectionsDeckPanel;
 	private DSLAMBusDesktopNewProjectPopupForm 			newProjectPopup;
 	
 	public DSLAMBusDesktopProjectPageScreenView() {
@@ -71,7 +71,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		projectConfigureZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
 		projectConfigureZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_WORK_ZONE);
 
-		projectSectionsDeckPanel = new DSLAMBusDesktopProjectSectionsDeckPanel();
+		projectSectionsDeckPanel = new CRONIOBusDesktopProcessSectionsDeckPanel();
 		projectConfigureZone.add(projectSectionsDeckPanel);
 		projectSectionsDeckPanel.setVisibility(Visibility.HIDDEN);
 		
@@ -232,20 +232,20 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private void fireSaveFormDataEvent(AEGWTLogicalEvent saveButtonEvt) {
 		saveButtonEvt.stopPropagation();
 		LOGICAL_TYPE	type		= saveButtonEvt.getEventType();
-		String 			projectName			= saveButtonEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME);
-		String 			projectMachineType	= saveButtonEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
+		String 			projectName			= saveButtonEvt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME);
+		String 			projectMachineType	= saveButtonEvt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
 		AEMFTMetadataElementComposite existentProjectData = projectListNavigator.getElementDataByName(projectName);
 		
 		if (existentProjectData != null && !LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 			newProjectPopup.setError(TEXTS.projectname_exists());
 		} else {
 			AEMFTMetadataElementComposite projectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectName);
-			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
+			projectData.addElement(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectName);
+			projectData.addElement(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
 			
 			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveFileEvent.setEventType(saveButtonEvt.getEventType());
-			saveFileEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA , projectData);
+			saveFileEvent.addElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA , projectData);
 			saveFileEvent.setSourceWidgetId(saveButtonEvt.getSourceWidgetId());
 			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
 		}
@@ -254,11 +254,11 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private void fireSaveChanges(String projectId, AEMFTMetadataElementComposite optionsData) {
 		AEMFTMetadataElementComposite updateProjectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		updateProjectData.addElement(DSLAMBOIProject.PROJECT_ID, projectId);
-		updateProjectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_CONFIGURE_DATA , optionsData);
+		updateProjectData.addElement(CRONIOBOIProjectDataConstants.PROJECT_CONFIGURE_DATA , optionsData);
 
 		AEGWTLogicalEvent updateEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 		updateEvent.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-		updateEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA ,updateProjectData);
+		updateEvent.addElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA ,updateProjectData);
 		getLogicalEventHandlerManager().fireEvent(updateEvent);
 	}
 	
@@ -284,20 +284,20 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	private void fireSaveVariablesDataEvent(AEGWTLogicalEvent saveVariablesEvt) {
 		saveVariablesEvt.stopPropagation();
 		LOGICAL_TYPE	type		= saveVariablesEvt.getEventType();
-		String 			projectName			= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME);
-		String 			projectMachineType	= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
+		String 			projectName			= saveVariablesEvt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME);
+		String 			projectMachineType	= saveVariablesEvt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
 		AEMFTMetadataElementComposite existentProjectData = projectListNavigator.getElementDataByName(projectName);
 		
 		if (existentProjectData != null && !LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
 			newProjectPopup.setError(TEXTS.projectname_exists());
 		} else {
 			AEMFTMetadataElementComposite projectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectName);
-			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
+			projectData.addElement(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectName);
+			projectData.addElement(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
 			
 			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveFileEvent.setEventType(saveVariablesEvt.getEventType());
-			saveFileEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA , projectData);
+			saveFileEvent.addElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA , projectData);
 			saveFileEvent.setSourceWidgetId(saveVariablesEvt.getSourceWidgetId());
 			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
 		}
