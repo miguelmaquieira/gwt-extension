@@ -50,7 +50,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProject(project, getSession().getCurrentLocale());
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProject(project);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA, projectDataElement);
 	}
