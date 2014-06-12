@@ -6,46 +6,37 @@ import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopScriptsEditor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 
-public class DSLAMBusDesktopProjectSectionsDeckPanel extends AEGWTCompositePanel  {
+public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePanel  {
 
-	public static final String NAME = "DSLAMBusDesktopProjectSectionsDeckPanel";
+	public static final String NAME = "CRONIOBusDesktopProcessSectionsDeckPanel";
 	
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	
 	private DeckPanel 										rootDeckPanel;
-	private CRONIOBusDesktopScriptsEditor					mainScriptEditor;
-	private CRONIOBusDesktopScriptsEditor					rollBackScriptEditor;
 	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule			scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureExtraOptions		extraOptionsConfigure;
 	//private DSLAMBusDesktopProcessConfigureNodes		nodeZone;
 	
-	public DSLAMBusDesktopProjectSectionsDeckPanel() {
+	public CRONIOBusDesktopProcessSectionsDeckPanel() {
 		
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
 		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
 		rootDeckPanel.addStyleName(AEGWTIBoostrapConstants.ROW);
 		
-		mainScriptEditor 			= new CRONIOBusDesktopScriptsEditor();
-		rollBackScriptEditor 		= new CRONIOBusDesktopScriptsEditor();
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
-		extraOptionsConfigure 	= new DSLAMBusDesktopProcessConfigureExtraOptions();
+		extraOptionsConfigure 		= new DSLAMBusDesktopProcessConfigureExtraOptions();
 		
-		rootDeckPanel.add(mainScriptEditor);
-		rootDeckPanel.add(rollBackScriptEditor);
 		rootDeckPanel.add(variablesProcessConfigure);
 		rootDeckPanel.add(scheduleProcessConfigure);
 		rootDeckPanel.add(extraOptionsConfigure);
-		
 	}
 	
 	public void reset() {
@@ -54,23 +45,17 @@ public class DSLAMBusDesktopProjectSectionsDeckPanel extends AEGWTCompositePanel
 	}
 	
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
-		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+		if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
 			rootDeckPanel.showWidget(0);
-			mainScriptEditor.setData(sectionData);
-		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
-			rootDeckPanel.showWidget(1);
-			rollBackScriptEditor.setData(sectionData);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
-			rootDeckPanel.showWidget(2);
 			variablesProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
-			rootDeckPanel.showWidget(3);
+			rootDeckPanel.showWidget(1);
 			scheduleProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
-			rootDeckPanel.showWidget(4);
+			rootDeckPanel.showWidget(2);
 			extraOptionsConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
-			rootDeckPanel.showWidget(5);
+			rootDeckPanel.showWidget(3);
 //			nodes.setData(sectionData);
 		}
 	}

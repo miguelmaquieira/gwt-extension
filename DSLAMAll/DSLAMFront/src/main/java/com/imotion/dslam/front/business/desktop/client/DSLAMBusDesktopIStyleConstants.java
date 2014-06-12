@@ -54,7 +54,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EDITOR_VIEW_FILE_NAME 						= EDITOR_VIEW				+ "-filename";		//dslam_studio-editorView-filename
 	String EDITOR_VIEW_CONTENT_TYPE						= EDITOR_VIEW				+ "-contentType";	//dslam_studio-editorView-contentType
 
-
+	//PROCESS VIEW
+	String PROCESS_VIEW 							= APP_ID_PREFFIX			+ "processView";		//dslam_studio-processView
+	
 	//PROCESS OPTIONS
 
 	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 							//dslam_studio-processConfigure

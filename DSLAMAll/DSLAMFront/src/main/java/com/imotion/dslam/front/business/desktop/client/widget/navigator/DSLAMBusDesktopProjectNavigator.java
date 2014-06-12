@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIProjectDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -60,8 +60,8 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		String projectId	= getElementController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_ID, elementData);
-		String projectName	= getElementController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME, elementData);
+		String projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
+		String projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
 		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
 		elementListContainer.add(element);
 		element.setData(elementData);

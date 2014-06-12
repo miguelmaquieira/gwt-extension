@@ -2,7 +2,8 @@ package com.imotion.dslam.bom;
 
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 
-public interface DSLAMBOIProjectDataConstants {
+public interface CRONIOBOIProjectDataConstants {
+	
 	
 	String PROJECT_ID 				= "projectId";
 	String PROJECT_NAME				= "projectName";
