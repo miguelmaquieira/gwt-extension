@@ -22,7 +22,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEvent;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 
-public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
+public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
 
 	public static final String NAME = "DSLAMBusDesktopNavigator";
 	
@@ -34,7 +34,7 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 
 	private AEGWTComparator nameComparatorAsc;
 
-	public DSLAMBusDesktopNavigator() {
+	public DSLAMBusDesktopProjectNavigator() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		addStyleName(DSLAMBusDesktopIStyleConstants.LIST);
@@ -60,10 +60,9 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		
-		String projectName = getElementController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME, elementData);
-		
-		DSLAMBusDesktopNavigatorElement element = createElement(projectName);
+		String projectId	= getElementController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_ID, elementData);
+		String projectName	= getElementController().getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME, elementData);
+		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
 		elementListContainer.add(element);
 		element.setData(elementData);
 		sort(null, false);
@@ -72,7 +71,7 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
 			Long elementId = getItemIdAsLong(elementData);
-			DSLAMBusDesktopNavigatorElement elementWidget = getElementById(String.valueOf(elementId));
+			DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(String.valueOf(elementId));
 			elementWidget.setData(elementData);
 			sort(null, false);
 		}
@@ -80,7 +79,7 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	
 	public AEMFTMetadataElementComposite getElementData(String elementId) {
 		AEMFTMetadataElementComposite elementData = null;
-		DSLAMBusDesktopNavigatorElement elementWidget = getElementById(elementId);
+		DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(elementId);
 		if (elementWidget != null) {
 			elementData = elementWidget.getData();
 		}
@@ -91,7 +90,7 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 		AEMFTMetadataElementComposite elementData = null;
 		int elementCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < elementCount; i++) {
-			DSLAMBusDesktopNavigatorElement elementWidget = (DSLAMBusDesktopNavigatorElement) elementListContainer.getWidget(i);
+			DSLAMBusDesktopProjectNavigatorElement elementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
 			elementData = elementWidget.getData();
 			String currentItemName = getItemNameFromData(elementData);
 			if (elementName.equals(currentItemName)) {
@@ -151,11 +150,11 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 
 	@Override
 	public void sort(String comparatorKey, boolean ascendent) {
-		List<DSLAMBusDesktopNavigatorElement> widgetList = getElementWidgetList();
+		List<DSLAMBusDesktopProjectNavigatorElement> widgetList = getElementWidgetList();
 		if (widgetList != null && widgetList.size() > 0) {
 			Collections.sort(widgetList, getComparator(null, false));
 			elementListContainer.clear();
-			for (DSLAMBusDesktopNavigatorElement item : widgetList) {
+			for (DSLAMBusDesktopProjectNavigatorElement item : widgetList) {
 				elementListContainer.add(item);
 			}
 		}
@@ -175,8 +174,8 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 
 			@Override
 			public int compare(AEGWTICompositePanel o1, AEGWTICompositePanel o2) {
-				DSLAMBusDesktopNavigatorElement o1Element = (DSLAMBusDesktopNavigatorElement) o1;
-				DSLAMBusDesktopNavigatorElement o2Element = (DSLAMBusDesktopNavigatorElement) o2;
+				DSLAMBusDesktopProjectNavigatorElement o1Element = (DSLAMBusDesktopProjectNavigatorElement) o1;
+				DSLAMBusDesktopProjectNavigatorElement o2Element = (DSLAMBusDesktopProjectNavigatorElement) o2;
 				return o1Element.getElementName().compareTo(o2Element.getElementName());
 			}
 		};
@@ -187,8 +186,8 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	 */
 	
 	
-	protected DSLAMBusDesktopNavigatorElement createElement(String name) {
-		return new DSLAMBusDesktopNavigatorElement(name);
+	protected DSLAMBusDesktopProjectNavigatorElement createElement(String projectId, String name) {
+		return new DSLAMBusDesktopProjectNavigatorElement(projectId, name);
 	}
 	
 	
@@ -208,20 +207,20 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	/**
 	 * PRIVATE
 	 */
-	private List<DSLAMBusDesktopNavigatorElement> getElementWidgetList() {
-		List<DSLAMBusDesktopNavigatorElement> widgetList = new ArrayList<>();
+	private List<DSLAMBusDesktopProjectNavigatorElement> getElementWidgetList() {
+		List<DSLAMBusDesktopProjectNavigatorElement> widgetList = new ArrayList<>();
 		for (int i = 0; i < elementListContainer.getWidgetCount(); i++) {
-			DSLAMBusDesktopNavigatorElement elementWidget = (DSLAMBusDesktopNavigatorElement) elementListContainer.getWidget(i);
+			DSLAMBusDesktopProjectNavigatorElement elementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
 			widgetList.add(elementWidget);
 		}
 		return widgetList;
 	}
 	
-	private DSLAMBusDesktopNavigatorElement getElementById(String elementId) {
-		DSLAMBusDesktopNavigatorElement elementWidget = null;
+	private DSLAMBusDesktopProjectNavigatorElement getElementById(String elementId) {
+		DSLAMBusDesktopProjectNavigatorElement elementWidget = null;
 		int fileCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < fileCount; i++) {
-			DSLAMBusDesktopNavigatorElement currentElementWidget = (DSLAMBusDesktopNavigatorElement) elementListContainer.getWidget(i);
+			DSLAMBusDesktopProjectNavigatorElement currentElementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
 			if (elementId.equals(currentElementWidget.getId())) {
 				elementWidget = currentElementWidget;
 				break;
@@ -231,7 +230,7 @@ public class DSLAMBusDesktopNavigator extends AEGWTCompositePanel implements AEG
 	}
 
 	public void removeElement(String fileId) {
-		DSLAMBusDesktopNavigatorElement element = getElementById(fileId);
+		DSLAMBusDesktopProjectNavigatorElement element = getElementById(fileId);
 		elementListContainer.remove(element);
 	}
 

@@ -68,7 +68,7 @@ public class DSLAMBUBomToMetadataConversor {
 			
 			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
 			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
-			data.addElement(DSLAMBOIProcess.PROCESS_SYNCHRONOUS		, process.isSynchronous());
+			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, process.isSynchronous());
 			data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, scheduleListData);
 			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
@@ -150,7 +150,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (project != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			
-			data.addElement(DSLAMBOIProject.PROJECT_ID				, project.getProjectId());
+			data.addElement(DSLAMBOIProject.PROJECT_ID				, String.valueOf(project.getProjectId()));
 			data.addElement(DSLAMBOIProject.PROJECT_NAME			, project.getProjectName());
 			data.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, project.getMachineType());
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, project.getCreationTime());
@@ -162,7 +162,7 @@ public class DSLAMBUBomToMetadataConversor {
 	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (project != null) {
-			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			data = fromProject(project, locale);
 			
 			DSLAMBOIFile 	mainScript 		= project.getMainScript();
 			DSLAMBOIFile 	rollBackScript 	= project.getRollBackScript();
@@ -171,14 +171,9 @@ public class DSLAMBUBomToMetadataConversor {
 			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
 			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcess(process, locale);
 			
-			data.addElement(DSLAMBOIProject.PROJECT_ID				, project.getProjectId());
-			data.addElement(DSLAMBOIProject.PROJECT_NAME			, project.getProjectName());
-			data.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, project.getMachineType());
-			data.addElement(DSLAMBOIProject.PROJECT_SCRIPT			, mainScriptData);
-			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	, rollBackScriptData);
-			data.addElement(DSLAMBOIProject.PROJECT_PROCESS			, processData);
-			data.addElement(DSLAMBOIProject.CREATION_TIME			, project.getCreationTime());
-			data.addElement(DSLAMBOIProject.SAVED_TIME				, project.getSavedTime());
+			data.addElement(DSLAMBOIProject.PROJECT_MAIN_SCRIPT			, mainScriptData);
+			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT		, rollBackScriptData);
+			data.addElement(DSLAMBOIProject.PROJECT_PROCESS				, processData);
 		}
 		return data;
 	}

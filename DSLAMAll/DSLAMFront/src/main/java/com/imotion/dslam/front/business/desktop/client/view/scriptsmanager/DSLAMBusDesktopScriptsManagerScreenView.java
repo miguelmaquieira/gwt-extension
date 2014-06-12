@@ -12,7 +12,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopNavigator;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopProjectNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbarActions;
@@ -39,7 +39,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 
 	private FlowPanel 							root;
 	private DSLAMBusDesktopToolbar				toolbar;
-	private DSLAMBusDesktopNavigator			fileList;
+	private DSLAMBusDesktopProjectNavigator			fileList;
 	private AceEditor							editor;
 	private DSLAMBusDesktopNewProjectPopupForm	newScriptPopup;
 
@@ -66,7 +66,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		fileListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		fileListZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_ZONE);
 
-		fileList = new DSLAMBusDesktopNavigator();
+		fileList = new DSLAMBusDesktopProjectNavigator();
 		fileListZone.add(fileList);
 
 		//Bottom Zone - Editor zone

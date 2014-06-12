@@ -101,20 +101,17 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			Long	projectId	 	= getElementController().getElementAsLong(DSLAMBOIProject.PROJECT_ID				, data);
+			String	projectId	 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID				, data);
 			String	projectName 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME			, data);
 			Date	lastSaved		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProject.SAVED_TIME	, data);
+			setId(projectId);
 			
 			String processIdStr = String.valueOf(projectId);
 			setId(processIdStr);
 			setLastSaved(lastSaved);
-			setMainTitleText("seccion");
 			setSecondaryTitleText(projectName);
 			getInfo().setVisible(true);
-			setModified(true);
 		}
 	}
-	
-	
 
 }
