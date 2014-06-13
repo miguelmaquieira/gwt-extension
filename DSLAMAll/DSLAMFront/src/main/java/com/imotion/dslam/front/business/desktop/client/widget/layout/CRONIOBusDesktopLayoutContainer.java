@@ -19,8 +19,8 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	
 	public static final String LAYOUT_PROJECT_ID = "PROJECT_LAYOUT_ID";
 
-	private DeckLayoutPanel rootSwitcher;
-	private AEGWTBasePresenter<?> currentPresenter;
+	private DeckLayoutPanel			rootSwitcher;
+	private AEGWTBasePresenter<?>	currentPresenter;
 
 	private Map<String, Integer> layoutIndexMap;
 	
@@ -30,6 +30,11 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 		layoutIndexMap = new HashMap<>();
 	}
 
+	@Override
+	public CRONIOBusDesktopIsLayout getCurrentLayout() {
+		return (CRONIOBusDesktopIsLayout) rootSwitcher.getVisibleWidget();
+	}
+	
 	@Override
 	public void addLayout(String layoutId, CRONIOBusDesktopIsLayout layout) {
 		int layoutIndex = rootSwitcher.getWidgetCount();
@@ -119,10 +124,6 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	/**
 	 * PRIVATE
 	 */
-
-	private CRONIOBusDesktopIsLayout getCurrentLayout() {
-		return (CRONIOBusDesktopIsLayout) rootSwitcher.getVisibleWidget();
-	}
 	
 	private void setLayoutData(String layoutId, AEMFTMetadataElementComposite data) {
 		int								layoutIndex = layoutIndexMap.get(layoutId);

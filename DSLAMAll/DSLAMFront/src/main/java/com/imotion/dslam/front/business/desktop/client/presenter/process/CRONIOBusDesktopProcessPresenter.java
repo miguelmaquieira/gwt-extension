@@ -68,6 +68,16 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	}
 	
 	/**
+	 * PROTECTED
+	 */
+	
+	@Override
+	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
 	 * PRIVATE
 	 */
 

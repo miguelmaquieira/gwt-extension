@@ -73,6 +73,16 @@ public class DSLAMBusDesktopProjectPagePresenter extends CRONIOBusProjectBasePre
 	}
 	
 	/**
+	 * PROTECTED
+	 */
+	
+	@Override
+	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
 	 * PRIVATE
 	 */
 	
