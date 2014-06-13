@@ -14,6 +14,9 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 
 	public static final String NAME = "DSLAMBusDesktopProjectNavigatorElement";
 	
+	private static final String SECTION_TYPE_PROCESS 	= "SECTION_TYPE_PROCESS";
+	private static final String SECTION_TYPE_SCRIPT	= "SECTION_TYPE_SCRIPT"; 
+	
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private AEGWTBootstrapTreeMenu 				menu;
@@ -44,11 +47,11 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.addWidget(menuScript);
 		
 		//MENU -> Project -> Script -> MainScript
-		mainScript 			= new AEGWTBootstrapTreeMenuFinalItem(projectId, DSLAMBOIProject.PROJECT_MAIN_SCRIPT		,TEXTS.main_script_label(), this);
+		mainScript 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_MAIN_SCRIPT		,TEXTS.main_script_label(), this);
 		menuScript.addWidget(mainScript);
 		
 		//MENU -> Project -> Script -> RollbackScript
-		rollbackScript 		= new AEGWTBootstrapTreeMenuFinalItem(projectId, DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	,TEXTS.roolback_script_label(),this);
+		rollbackScript 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	,TEXTS.roolback_script_label(),this);
 		menuScript.addWidget(rollbackScript);
 		
 		//MENU -> Project  -> Process
@@ -56,19 +59,19 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.addWidget(menuProcess);
 		
 		//MENU -> Project  -> Process -> Variables
-		variableProcess 	= new AEGWTBootstrapTreeMenuFinalItem(projectId, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
+		variableProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
 		menuProcess.addWidget(variableProcess);
 		
 		//MENU -> Project  -> Process -> Schedule
-		scheduleProcess 	= new AEGWTBootstrapTreeMenuFinalItem(projectId, DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
+		scheduleProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
 		menuProcess.addWidget(scheduleProcess);
 		
 		//MENU -> Project  -> Process -> Properties
-		propertiesProcess 	= new AEGWTBootstrapTreeMenuFinalItem(projectId, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
+		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
 		menuProcess.addWidget(propertiesProcess);
 		
 		//MENU -> Project  -> Process -> Nodes
-		nodesProcess 		= new AEGWTBootstrapTreeMenuFinalItem(projectId,  DSLAMBOIProject.PROJECT_PROCESS_NODES				,TEXTS.nodes(), this);
+		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODES				,TEXTS.nodes(), this);
 		menuProcess.addWidget(nodesProcess);
 		
 		menu.addSeparator();

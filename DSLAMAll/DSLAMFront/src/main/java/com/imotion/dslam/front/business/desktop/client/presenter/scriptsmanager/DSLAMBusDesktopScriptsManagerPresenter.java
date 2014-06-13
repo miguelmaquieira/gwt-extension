@@ -63,6 +63,16 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 				||
 				LOGICAL_TYPE.DELETE_EVENT.equals(type);
 	}
+	
+	/**
+	 * PROTECTED
+	 */
+	
+	@Override
+	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * PRIVATE
@@ -101,4 +111,5 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 			}
 		});
 	}
+	
 }

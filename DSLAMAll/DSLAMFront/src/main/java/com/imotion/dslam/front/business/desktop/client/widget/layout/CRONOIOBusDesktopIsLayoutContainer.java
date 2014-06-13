@@ -11,4 +11,6 @@ public interface CRONOIOBusDesktopIsLayoutContainer extends CRONIOBusDesktopIsLa
 
 	void setCurrentPresenter(AEGWTBasePresenter<?> currentPresenter);
 
+	CRONIOBusDesktopIsLayout getCurrentLayout();
+
 }
