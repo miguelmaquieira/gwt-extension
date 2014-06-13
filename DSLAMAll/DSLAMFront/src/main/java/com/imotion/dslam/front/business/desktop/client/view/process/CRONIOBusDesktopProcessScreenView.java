@@ -3,7 +3,6 @@ package com.imotion.dslam.front.business.desktop.client.view.process;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessDisplay;
@@ -31,6 +30,8 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		root.add(processSectionsDeckPanel);
 		processSectionsDeckPanel.setVisibility(Visibility.HIDDEN);
 		
+		
+		
 	}
 	
 	@Override
@@ -41,11 +42,10 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 	@Override
 	public void openProcessSection(String sectionId ,AEMFTMetadataElementComposite processData) {
-		String		processId			= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, processData);
-		
-		AEMFTMetadataElementComposite sectionData = getElementController().getElementAsComposite(sectionId, processData);
+		//Long		processId			= getElementController().getElementAsLong(DSLAMBOIProcess.PROCESS_ID, processData);
+		//AEMFTMetadataElementComposite sectionData = getElementController().getElementAsComposite(sectionId, processData);
+		processSectionsDeckPanel.showSection(sectionId, processData);
 		processSectionsDeckPanel.setVisibility(Visibility.VISIBLE);
-		processSectionsDeckPanel.setData(sectionData);	
 	}
 	
 	/**

@@ -1,8 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
@@ -11,6 +9,7 @@ import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDes
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -26,14 +25,6 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	@Override
 	public void bind() {
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
-		getAllProjects();
-		String projectId = getAppController().getContextDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID);
-		getAppController().getContextDataController().removeElement(CRONIOBOIProjectDataConstants.PROJECT_ID);
-		String processId = getAppController().getContextDataController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_ID);
-		getAppController().getContextDataController().removeElement(DSLAMBOIProcessDataConstants.PROCESS_ID);
-		String sectionId = getAppController().getContextDataController().getElementAsString(CRONIOBOIProjectDataConstants.CURRENT_SECTION);
-		getAppController().getContextDataController().removeElement(CRONIOBOIProjectDataConstants.CURRENT_SECTION);
-		openProcessSection(projectId, processId, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST);
 	}
 
 	@Override
@@ -49,7 +40,15 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		//String			sourceWidgetId	= evt.getSourceWidgetId();
+		String			sectionId		= evt.getSourceWidgetId();
+		String			projectId		= evt.getSourceContainerId();
+		if (AEGWTBootstrapTreeMenuFinalItem.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				evt.stopPropagation();
+				openProcessSection(projectId, sectionId);
+			}
+		} 
+		
 		if (CRONIOBusDesktopProcessScreenView.NAME.equals(srcWidget)) {
 			AEMFTMetadataElementComposite processData = (AEMFTMetadataElementComposite) evt.getElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA);
 			
@@ -91,40 +90,15 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 		});
 	}
 	
-
-	
-	private void openProcessSection(String projectId, String processId, String sectionId) {
-		
-		
+	private void openProcessSection(String projectId, String sectionId) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST_PREFFIX);
+		sb.append(DSLAMBUIProjectBusinessServiceConstants.PROJECTS_DATA_PREFFIX);
 		sb.append(projectId);
 		sb.append(AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR);
-		sb.append(processId);
-		
+		sb.append(CRONIOBOIProjectDataConstants.PROJECT_PROCESS);
 		String processDataKey = sb.toString();
 		
 		AEMFTMetadataElementComposite processData = getContextDataController().getElementAsComposite(processDataKey);
 		getView().openProcessSection(sectionId, processData);
 	}
-	
-	
-	private void getAllProjects() {
-		getClientServerConnection().executeComm(null, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
-
-			@Override
-			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				AEMFTMetadataElementComposite projectListData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, dataResult);
-				getView().setData(projectListData);
-				getContextDataController().setElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectListData);
-			}
-
-			@Override
-			public void onError(Throwable th) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-	}
-
 }

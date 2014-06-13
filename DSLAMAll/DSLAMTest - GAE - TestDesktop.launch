@@ -28,9 +28,11 @@
 <listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry internalArchive=&quot;/DSLAMBusiness/src/main/java&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#10;"/>
 <listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#10;&lt;runtimeClasspathEntry internalArchive=&quot;/DSLAMFront/src/main/java&quot; path=&quot;3&quot; type=&quot;2&quot;/&gt;&#10;"/>
 </listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -war target/DSLAMTest -startupUrl TestDesktopModule.jsp -logLevel INFO -codeServerPort 9997 -port 8888 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.imotion.dslam.front.business.desktop.test.TestDesktopModule"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="DSLAMTest"/>
+<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dconfig.ConfigService.impl=config.ConfigServiceJEE -Xms700M -Xmx2500M &quot;-javaagent:${GAE_SDK}/lib/agent/appengine-agent.jar&quot; &quot;-Dappengine.sdk.root=${GAE_SDK}&quot; -Dappengine.user.timezone.impl=UTC -Dmail.log_mail_level=WARNING -Dmail.log_mail_body=true -Dgwt.codeserver.port=9876"/>
 </launchConfiguration>
