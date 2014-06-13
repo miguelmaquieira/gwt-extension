@@ -106,7 +106,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	
 	@Override
 	protected void buildContainer(HasWidgets container) {
-		CRONIOBusDesktopLayoutContainer deckPanelLayout = new CRONIOBusDesktopLayoutContainer();
+		CRONIOBusDesktopLayoutContainer deckPanelLayout = new CRONIOBusDesktopLayoutContainer(this);
 		container.add(deckPanelLayout);
 		super.container = deckPanelLayout;
 		

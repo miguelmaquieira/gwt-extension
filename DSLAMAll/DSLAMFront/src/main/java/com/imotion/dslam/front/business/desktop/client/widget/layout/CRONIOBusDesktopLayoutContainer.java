@@ -7,7 +7,10 @@ import java.util.Map;
 import com.google.gwt.user.client.ui.DeckLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenter;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelViewDisplay;
+import com.selene.arch.exe.gwt.mvp.event.AEGWTIEventHandlerManager;
 
 public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel implements CRONOIOBusDesktopIsLayoutContainer {
 
@@ -16,10 +19,12 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	public static final String LAYOUT_PROJECT_ID = "PROJECT_LAYOUT_ID";
 
 	private DeckLayoutPanel rootSwitcher;
+	private AEGWTBasePresenter<AEGWTCompositePanelViewDisplay> parent;
 
 	private Map<String, Integer> layoutIndexMap;
 	
-	public CRONIOBusDesktopLayoutContainer() {
+	public CRONIOBusDesktopLayoutContainer(AEGWTBasePresenter<AEGWTCompositePanelViewDisplay> parent) {
+		this.parent = parent;
 		rootSwitcher = new DeckLayoutPanel();
 		initWidget(rootSwitcher);
 		layoutIndexMap = new HashMap<>();
@@ -57,6 +62,16 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public AEGWTIEventHandlerManager getLogicalEventHandlerManager() {
+		return parent.getLogicalEventHandlerManager();
+	}
+
+	@Override
+	public AEGWTIEventHandlerManager getFlowEventHandlerManager() {
+		return parent.getFlowEventHandlerManager();
 	}
 
 	/**
