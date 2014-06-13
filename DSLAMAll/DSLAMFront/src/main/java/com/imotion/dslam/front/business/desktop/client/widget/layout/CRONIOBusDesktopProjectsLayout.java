@@ -11,7 +11,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implements CRONOIOBusDesktopIsLayout {
+public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout {
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";

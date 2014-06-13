@@ -74,7 +74,7 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				AEMFTMetadataElementComposite fileData = getElementDataController().getElementAsComposite(DSLAMBUIFileBusinessServiceConstants.FILE_DATA, dataResult);
-				getView().addFile(fileData);
+//				getView().addFile(fileData);
 			}
 			
 			@Override
