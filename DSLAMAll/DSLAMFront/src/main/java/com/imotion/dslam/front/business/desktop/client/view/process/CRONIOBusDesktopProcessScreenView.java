@@ -46,6 +46,7 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		//AEMFTMetadataElementComposite sectionData = getElementController().getElementAsComposite(sectionId, processData);
 		processSectionsDeckPanel.showSection(sectionId, processData);
 		processSectionsDeckPanel.setVisibility(Visibility.VISIBLE);
+		
 	}
 	
 	/**

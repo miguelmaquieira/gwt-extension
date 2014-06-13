@@ -18,17 +18,25 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
+import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureSchedule";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private FlowPanel 						root;
-	private FlowPanel						headerZone;
-	private FlowPanel 						scheduleListZone;
-	private AEGWTBootstrapGlyphiconButton	addDateTimeButton;
+	private FlowPanel 										root;
+	private FlowPanel										headerZone;
+	private FlowPanel 										scheduleListZone;
+	private AEGWTBootstrapGlyphiconButton					addDateTimeButton;
+	private AEGWTBootstrapGlyphiconButton 					deleteDateTimeButton;
+	private	 DSLAMBusDesktopScheduleList    				scheduleList;
+	private DSLAMBusDesktopProcessConfigureScheduleForm		scheduleForm;
+	private	 AEMFTMetadataElementComposite					schedulesData;
 	private int 							numberAddDateTimePicker;							
 
 	public DSLAMBusDesktopProcessConfigureSchedule() {
@@ -41,10 +49,13 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_HEADER);
 
 		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.schedule());
-		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
+		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
 		headerZone.add(headerLabel);
 
-		numberAddDateTimePicker = 0;
+		deleteDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
+		deleteDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+		deleteDateTimeButton.setVisible(false);
+		headerZone.add(deleteDateTimeButton);
 
 		addDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
 		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
@@ -54,31 +65,23 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 
 			@Override
 			public void onClick(ClickEvent event) {
- 				if (numberAddDateTimePicker == 0 || dateTimePickersEmpty() == null) {
-					numberAddDateTimePicker++;
-					addDateTimeBox(numberAddDateTimePicker);
-				} else {
-					List<String> errors = dateTimePickersEmpty();
-					
-					for (String error : errors) {
-						DSLAMBusDesktopProcessConfigureScheduleLine dateWidget = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(Integer.valueOf(error));
-						dateWidget.setEmptyError();
-					}
-				}
+				scheduleForm.resetForm();
+				scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.SAVE_MODE);
+				scheduleForm.center();
 			}
 		});
 
 		scheduleListZone = new FlowPanel();
 		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_LIST);
 		root.add(scheduleListZone);
-
+		scheduleList = new DSLAMBusDesktopScheduleList( (AEGWTButton) deleteDateTimeButton);
+		scheduleListZone.add(scheduleList);
 	}
 	
 	public void reset() {
-		int numberDateTimePickers = scheduleListZone.getWidgetCount();
-		for (int i = 0; i < numberDateTimePickers; i++) {
-			scheduleListZone.getWidget(0).removeFromParent();
-		}
+		scheduleList.reset();
+		schedulesData.removeAll();
+		scheduleForm.resetForm();
 	}
 	
 	/**
@@ -88,6 +91,8 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
 	@Override
@@ -96,30 +101,76 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		AEMFTMetadataElementComposite scheduleListData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST, data);
-		List<AEMFTMetadataElement> scheduleList = scheduleListData.getSortedElementList();
-		for (AEMFTMetadataElement scheduleData : scheduleList) {
-			numberAddDateTimePicker++;
-			AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData;
-			String scheduleStr = schedule.getValueAsString();
-			DSLAMBusDesktopProcessConfigureScheduleLine line = addDateTimeBox(numberAddDateTimePicker);
-			line.setDateText(scheduleStr);	
-		}
+		schedulesData.removeAll();
+		schedulesData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST, data);
+		scheduleList.clearList();
+		scheduleList.setData(schedulesData);	
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
-		AEMFTMetadataElementComposite scheduleListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		int numberDateTimePickers = scheduleListZone.getWidgetCount();
-		for (int i = 0; i < numberDateTimePickers; i++) {
-			DSLAMBusDesktopProcessConfigureScheduleLine line = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(i);
-			scheduleListData.addElement(String.valueOf(i),line.getDateText());	 
-		}	
-		return scheduleListData;
+		return schedulesData;
 	}
 
 	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		if (LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
+			String schedule  =  evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
+			
+			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+
+			getElementController().setElement(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, data	, schedule);
+			
+			if (scheduleForm.getEditMode()) {
+				addSchedules(schedule,data);
+			} else if (!schedulesData.contains(schedule)) {
+				addSchedules(schedule,data);
+			} else {
+				scheduleForm.setErrorScheduleExist();
+			}
+			
+			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, schedulesData);
+			getLogicalEventHandlerManager().fireEvent(evt);
+		}
+		
+		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
+			
+			AEMFTMetadataElement scheduleData = schedulesData.getElement(evt.getSourceWidgetId());
+			scheduleForm.setData((AEMFTMetadataElementComposite) schedulesData);
+			scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
+			scheduleForm.center();
+		}
+		
+		if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
+			List<String> rowIds = (List<String>) data.getValueAsSerializable();
+		
+			for (String rowId : rowIds) {
+				schedulesData.removeElement(rowId);
+			}	
+		}	
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type) || LOGICAL_TYPE.DELETE_EVENT.equals(type);	
+	}
+	
+	/**
 	 * PRIVATE
 	 */
+	
+	private void addSchedules(String id, AEMFTMetadataElementComposite data) {
+		scheduleList.clearList();
+		schedulesData.addElement(id,data);
+		scheduleList.setData(schedulesData);
+		scheduleForm.resetForm();	
+	}
 
 	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
 

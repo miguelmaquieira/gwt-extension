@@ -1,15 +1,18 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
-import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDesktopProcessScreenView;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.CRONIOBusDesktopProjectNavigatorFinalItem;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureSchedule;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -42,20 +45,32 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sectionId		= evt.getSourceWidgetId();
 		String			projectId		= evt.getSourceContainerId();
-		if (AEGWTBootstrapTreeMenuFinalItem.NAME.equals(srcWidget)) {
+		if (CRONIOBusDesktopProjectNavigatorFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				evt.stopPropagation();
 				openProcessSection(projectId, sectionId);
 			}
 		} 
-		
-		if (CRONIOBusDesktopProcessScreenView.NAME.equals(srcWidget)) {
-			AEMFTMetadataElementComposite processData = (AEMFTMetadataElementComposite) evt.getElementAsComposite(CRONIOBOIProjectDataConstants.PROJECT_DATA);
-			
+		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				updateProcess(processData);
-			}
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+			}	
+		}
+		if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				evt.stopPropagation();
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+			}	
+		}
+		if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				evt.stopPropagation();
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+			}	
 		} 
 	}
 

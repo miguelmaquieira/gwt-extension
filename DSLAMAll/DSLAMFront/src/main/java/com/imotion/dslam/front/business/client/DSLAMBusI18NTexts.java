@@ -106,6 +106,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("La variable ya existe")
 	String error_variable_exist();
 	
+	@DefaultStringValue("La fecha ya existe")
+	String error_schedule_exist();
+	
 	@DefaultStringValue("El script no existe")
 	String error_script_no_exist();
 	
@@ -114,6 +117,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("¿Desea eliminar las variables seleccionadas?")
 	String delete_variables_confirmation();
+	
+	@DefaultStringValue("¿Desea eliminar las fechas seleccionadas?")
+	String delete_schedules_confirmation();
 	
 	@DefaultStringValue("Nombre del proceso")
 	String process_name();

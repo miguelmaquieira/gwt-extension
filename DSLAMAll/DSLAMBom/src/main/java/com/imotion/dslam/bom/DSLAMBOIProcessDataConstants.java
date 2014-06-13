@@ -10,6 +10,10 @@ public interface DSLAMBOIProcessDataConstants {
 	String CREATION_TIME			= "creationTime";
 	String PROCESS_EXTRA_OPTIONS	= "processExtraOptions";
 	String PROCESS_NODES			= "processNodes";
+
+	String SCHEDULE_VALUE			= "SCHEDULE_VALUE";
+	String EDIT_MODE			= "EditMode";
+	String SAVE_MODE			= "SaveMode";
 	
 	//CONTEXT
 	String PROCESS_DATA				= "processData";
@@ -17,4 +21,6 @@ public interface DSLAMBOIProcessDataConstants {
 	String PROCESS_PROPERTIES_DATA	= "propertiesData";
 	String PROCESS_VARIABLES_DATA	= "variablesData";
 	String PROCESS_SCHEDULE_DATA	= "scheduleData";
+	
+	
 }
