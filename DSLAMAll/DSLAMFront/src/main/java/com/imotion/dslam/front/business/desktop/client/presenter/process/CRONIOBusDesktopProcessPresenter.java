@@ -55,21 +55,21 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
-				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+				updateFinalSectionInContext(finalSectionData);
 			}	
 		}
 		if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
-				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+				updateFinalSectionInContext(finalSectionData);
 			}	
 		}
 		if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
-				updateFinalSectionInContext(projectId, "", sectionId, finalSectionData);
+				updateFinalSectionInContext(finalSectionData);
 			}	
 		} 
 	}
@@ -87,8 +87,12 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		// TODO Auto-generated method stub
-		
+		getView().openProcessSection(projectFinalSectionId, finalSectionData);
+	}
+	
+	@Override
+	protected String getSectionType() {
+		return SECTION_TYPE_PROCESS;
 	}
 	
 	/**

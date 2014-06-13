@@ -63,7 +63,10 @@ public class DSLAMBUBomToMetadataConversor {
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
 				variableListData.addElement(variable.getVariableName()	, variableData);
 			}
-			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, process.isSynchronous());
+			AEMFTMetadataElementComposite extraOptions = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			extraOptions.addElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, process.isSynchronous());
+			
+			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, extraOptions);
 			data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, scheduleListData);
 			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
 		}

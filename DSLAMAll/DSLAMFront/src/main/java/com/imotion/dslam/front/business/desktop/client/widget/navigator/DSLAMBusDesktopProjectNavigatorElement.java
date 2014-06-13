@@ -4,18 +4,16 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuItem;
 
-public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
 
 	public static final String NAME = "DSLAMBusDesktopProjectNavigatorElement";
-	
-	private static final String SECTION_TYPE_PROCESS 	= "SECTION_TYPE_PROCESS";
-	private static final String SECTION_TYPE_SCRIPT	= "SECTION_TYPE_SCRIPT"; 
 	
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	

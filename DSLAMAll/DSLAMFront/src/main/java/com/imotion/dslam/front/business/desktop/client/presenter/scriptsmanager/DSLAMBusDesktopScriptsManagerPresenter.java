@@ -73,6 +73,11 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	protected String getSectionType() {
+		return SECTION_TYPE_SCRIPT;
+	}
 
 	/**
 	 * PRIVATE

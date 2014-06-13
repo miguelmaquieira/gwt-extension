@@ -8,7 +8,6 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
@@ -47,26 +46,27 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 	}
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite processData) {
-		if (processData != null) {
-			AEMFTMetadataElementComposite sectionData = null;
-			if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
-				sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST);
-				rootDeckPanel.showWidget(0);
-				//variablesProcessConfigure.setData(sectionData);
-			} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
-				sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST);
-				rootDeckPanel.showWidget(1);
-				//scheduleProcessConfigure.setData(sectionData);
-			} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
-				AEMFTMetadataElementSingle sectionDataSingle =  (AEMFTMetadataElementSingle) processData.getElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
-				rootDeckPanel.showWidget(2);
-				//extraOptionsConfigure.setData(sectionData);
-			} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
-				//sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
-				rootDeckPanel.showWidget(3);
-				//			nodes.setData(sectionData);
-			}
+
+		AEMFTMetadataElementComposite sectionData = null;
+		if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST);
+			rootDeckPanel.showWidget(0);
+			//variablesProcessConfigure.setData(sectionData);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST);
+			rootDeckPanel.showWidget(1);
+			//scheduleProcessConfigure.setData(sectionData);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
+			rootDeckPanel.showWidget(2);
+			//extraOptionsConfigure.setData(sectionData);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
+			//sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
+			rootDeckPanel.showWidget(3);
+//			nodes.setData(sectionData);
+
 		}
+		this.setVisibility(Visibility.VISIBLE);
 	}
 
 	/**
