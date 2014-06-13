@@ -26,7 +26,7 @@
 		
 		<!-- THIRD PARTY JS -->
 		<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
-		<script type="text/javascript" src="js/cordova-2.6.0.js" charset="utf-8"></script>
+		<!-- <script type="text/javascript" src="js/cordova-2.6.0.js" charset="utf-8"></script> -->
 		<!-- <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
 		
 		<!-- ACE Editor -->
