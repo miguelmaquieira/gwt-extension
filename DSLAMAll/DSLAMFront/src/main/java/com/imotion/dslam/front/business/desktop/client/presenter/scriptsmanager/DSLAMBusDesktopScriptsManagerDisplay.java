@@ -5,10 +5,6 @@ import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelLoggedViewDisplay;
 
 public interface DSLAMBusDesktopScriptsManagerDisplay extends AEGWTCompositePanelLoggedViewDisplay {
 
-	void addFile(AEMFTMetadataElementComposite fileData);
-
 	void updateFile(AEMFTMetadataElementComposite fileData);
 
-	void removeFile(String fileId);
-	
 }	

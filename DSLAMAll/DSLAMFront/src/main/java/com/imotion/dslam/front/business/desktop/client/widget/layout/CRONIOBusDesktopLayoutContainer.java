@@ -26,7 +26,7 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	}
 
 	@Override
-	public void addLayout(String layoutId, CRONOIOBusDesktopIsLayout layout) {
+	public void addLayout(String layoutId, CRONIOBusDesktopIsLayout layout) {
 		int layoutIndex = rootSwitcher.getWidgetCount();
 		rootSwitcher.add(layout);
 		layoutIndexMap.put(layoutId, layoutIndex);
@@ -40,7 +40,7 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 
 	@Override
 	public void setLayoutContent(Widget widget) {
-		CRONOIOBusDesktopIsLayout currentLayout = getCurrentLayout();
+		CRONIOBusDesktopIsLayout currentLayout = getCurrentLayout();
 		currentLayout.setLayoutContent(widget);
 	}
 
@@ -92,8 +92,8 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	 * PRIVATE
 	 */
 
-	private CRONOIOBusDesktopIsLayout getCurrentLayout() {
-		return (CRONOIOBusDesktopIsLayout) rootSwitcher.getVisibleWidget();
+	private CRONIOBusDesktopIsLayout getCurrentLayout() {
+		return (CRONIOBusDesktopIsLayout) rootSwitcher.getVisibleWidget();
 	}
 
 }
