@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.Callback;
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerDisplay;
@@ -15,6 +16,8 @@ import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusD
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
@@ -100,4 +103,15 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	protected AEGWTIPresenter getNotFoundPresenter() {
 		return null;
 	}
+	
+	@Override
+	protected void buildContainer(HasWidgets container) {
+		CRONIOBusDesktopLayoutContainer deckPanelLayout = new CRONIOBusDesktopLayoutContainer();
+		container.add(deckPanelLayout);
+		super.container = deckPanelLayout;
+		
+		CRONIOBusDesktopProjectsLayout projectsLayout = new CRONIOBusDesktopProjectsLayout();
+		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsLayout);
+	}
+	
 }

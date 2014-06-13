@@ -69,7 +69,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		FlowPanel projectConfigureZone = new FlowPanel();
 		bottomZone.add(projectConfigureZone);
 		projectConfigureZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		projectConfigureZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_ZONE);
+		projectConfigureZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_WORK_ZONE);
 
 		projectSectionsDeckPanel = new CRONIOBusDesktopProcessSectionsDeckPanel();
 		projectConfigureZone.add(projectSectionsDeckPanel);
