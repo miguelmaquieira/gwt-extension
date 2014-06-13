@@ -1,6 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.flow;
 
 import com.google.gwt.user.client.History;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopHistoryNavigationConstants;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.exe.gwt.client.AEGWTHistoryNavigationConstants;
 import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenterConstants;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTControllerPresenterConstants;
@@ -42,6 +44,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					infoProcessFlowEvent(evt);
 				} else if (AEGWTControllerPresenterConstants.NAME.equals(sourceWindow)) {
 					controllerProcessFlowEvent(evt);
+				} else if (CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER.equals(sourceWindow)) {
+					projectProcessFlowEvent(evt);
 				}
 			}
 		}
@@ -67,6 +71,17 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 	 **********************************************************************/
 	private void controllerProcessFlowEvent(AEGWTFlowEvent evt) {
 
+	}
+	
+	private void projectProcessFlowEvent(AEGWTFlowEvent evt) {
+		String mainSectionId = evt.getSourceWidgetId();
+		if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_PROCESS.equals(mainSectionId)) {
+			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE);
+		} else if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_SCRIPT.equals(mainSectionId)) {
+			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER);
+		} else {
+			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE);
+		}
 	}
 
 	private void infoProcessFlowEvent(AEGWTFlowEvent evt) {

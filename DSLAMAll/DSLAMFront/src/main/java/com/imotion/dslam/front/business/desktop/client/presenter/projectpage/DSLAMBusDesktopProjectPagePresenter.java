@@ -82,6 +82,11 @@ public class DSLAMBusDesktopProjectPagePresenter extends CRONIOBusProjectBasePre
 		
 	}
 	
+	@Override
+	protected String getSectionType() {
+		return SECTION_TYPE_PROJECT_ROOT;
+	}
+	
 	/**
 	 * PRIVATE
 	 */

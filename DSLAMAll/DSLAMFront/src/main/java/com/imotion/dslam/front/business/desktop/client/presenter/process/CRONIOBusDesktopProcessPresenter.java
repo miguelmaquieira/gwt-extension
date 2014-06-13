@@ -72,8 +72,12 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		// TODO Auto-generated method stub
-		
+		getView().openProcessSection(projectFinalSectionId, finalSectionData);
+	}
+	
+	@Override
+	protected String getSectionType() {
+		return SECTION_TYPE_PROCESS;
 	}
 	
 	/**
