@@ -22,7 +22,6 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProcessSectionsDeckPanel	processSectionsDeckPanel;
 	
-	
 	public CRONIOBusDesktopProcessScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
@@ -65,7 +64,8 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		processSectionsDeckPanel.setData(data);
+		//processSectionsDeckPanel.setData(data);
+		
 	}
 
 	/****************************************************************************
