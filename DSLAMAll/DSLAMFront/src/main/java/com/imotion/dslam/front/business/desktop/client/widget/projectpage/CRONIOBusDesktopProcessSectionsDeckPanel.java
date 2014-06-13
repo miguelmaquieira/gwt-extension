@@ -65,6 +65,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 			rootDeckPanel.showWidget(3);
 //			nodes.setData(sectionData);
 		}
+		this.setVisibility(Visibility.VISIBLE);
 	}
 	
 	/**
