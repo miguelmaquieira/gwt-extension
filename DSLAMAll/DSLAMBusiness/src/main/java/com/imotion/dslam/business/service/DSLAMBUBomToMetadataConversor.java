@@ -175,7 +175,7 @@ public class DSLAMBUBomToMetadataConversor {
 		AEMFTMetadataElementComposite dataProjectList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			for (DSLAMBOIProject project : projectList) {
-				dataProjectList.addElement(project.getProjectName(), fromProjectFull(project,locale));
+				dataProjectList.addElement(String.valueOf(project.getProjectId()), fromProjectFull(project,locale));
 			}
 		}
 		return dataProjectList;

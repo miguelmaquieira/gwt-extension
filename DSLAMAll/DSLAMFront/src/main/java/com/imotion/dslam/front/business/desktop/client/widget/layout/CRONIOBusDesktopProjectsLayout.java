@@ -72,8 +72,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-
+		if (data != null) {
+			projectListNavigator.setData(data);
+		}
 	}
 
 }

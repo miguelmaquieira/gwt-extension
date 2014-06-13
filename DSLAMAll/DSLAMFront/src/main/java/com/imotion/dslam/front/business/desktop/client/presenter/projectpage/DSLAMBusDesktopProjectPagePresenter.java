@@ -4,7 +4,7 @@ import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
-import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -14,7 +14,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProjectPagePresenter extends DSLAMBusBasePresenter<DSLAMBusDesktopProjectPageDisplay> implements AEGWTHasLogicalEventHandlers {
+public class DSLAMBusDesktopProjectPagePresenter extends CRONIOBusProjectBasePresenter<DSLAMBusDesktopProjectPageDisplay> implements AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopProjectPagePresenter";
 

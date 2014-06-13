@@ -101,7 +101,7 @@
 			<Description>Utilities class for business common functions
 			</Description>
 			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.saboreando.business.service.impl.SNDOBUBusinessLoginServiceImpl
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUBusinessLoginServiceImpl
 			</Descriptor>
 			<SubServiceList>
 				<SubService Name="IS_VALID_SESSION">
