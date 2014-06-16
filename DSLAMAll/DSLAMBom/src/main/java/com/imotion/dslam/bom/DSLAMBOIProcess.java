@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.bom.data.DSLAMBOVariable;
-
 public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConstants {
 
 	Long getProcessId();
@@ -24,9 +22,13 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 
 	void setScheduleList(List<Date> scheduleList);
 	
-	List<DSLAMBOVariable> getVariableList();
+	void addSchedule(Date schedule);
+	
+	List<DSLAMBOIVariable> getVariableList();
 
-	void setVariableList(List<DSLAMBOVariable> variableList);
+	void setVariableList(List<DSLAMBOIVariable> variableList);
+	
+	void addVariable(DSLAMBOIVariable variable);
 	
 	Date getSavedTime();
 

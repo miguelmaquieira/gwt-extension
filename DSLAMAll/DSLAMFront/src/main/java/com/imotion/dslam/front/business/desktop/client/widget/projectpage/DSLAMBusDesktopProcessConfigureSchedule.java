@@ -101,8 +101,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		schedulesData.removeAll();
-		schedulesData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST, data);
+		schedulesData = data;
 		scheduleList.clearList();
 		scheduleList.setData(schedulesData);	
 	}
