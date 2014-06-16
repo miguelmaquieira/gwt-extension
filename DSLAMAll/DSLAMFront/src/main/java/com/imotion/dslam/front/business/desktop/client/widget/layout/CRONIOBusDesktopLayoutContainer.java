@@ -83,6 +83,12 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 	}
 	
 	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		getCurrentLayout().postDisplay();
+	}
+	
+	@Override
 	public AEGWTIEventHandlerManager getLogicalEventHandlerManager() {
 		return currentPresenter.getLogicalEventHandlerManager();
 	}

@@ -39,26 +39,25 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-//		String			sectionId		= evt.getSourceWidgetId();
-//		String			projectId		= evt.getSourceContainerId();
+		String			sectionId		= evt.getSourceWidgetId();
+		String			projectId		= evt.getSourceContainerId();
+
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
-		}
-		if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
+		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
-		}
-		if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
+		} else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} 

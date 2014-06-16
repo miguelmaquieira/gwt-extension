@@ -137,17 +137,13 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, schedulesData);
 			getLogicalEventHandlerManager().fireEvent(evt);
-		}
-		
-		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
+		} else if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
 			AEMFTMetadataElement scheduleData = schedulesData.getElement(evt.getSourceWidgetId());
 			scheduleForm.setData((AEMFTMetadataElementComposite) scheduleData);
 			scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
 			scheduleForm.center();
-		}
-		
-		if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+		} else 	if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
 		
