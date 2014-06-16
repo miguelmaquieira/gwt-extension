@@ -76,5 +76,12 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 			projectListNavigator.setData(data);
 		}
 	}
+	
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		projectListNavigator.postDisplay();
+		toolbar.postDisplay();
+	}
 
 }
