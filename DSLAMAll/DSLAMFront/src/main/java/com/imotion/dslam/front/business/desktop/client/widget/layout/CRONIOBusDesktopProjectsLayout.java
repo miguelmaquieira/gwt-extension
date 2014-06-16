@@ -80,6 +80,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		setHeightToDecrease(90);
 		projectListNavigator.postDisplay();
 		toolbar.postDisplay();
 	}

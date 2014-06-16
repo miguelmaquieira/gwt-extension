@@ -66,6 +66,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		elementListContainer.add(element);
 		element.setData(elementData);
 		sort(null, false);
+		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}
 
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
@@ -129,7 +130,6 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		setHeightToDecrease(80);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, elementListContainerZone, getCurrentHeight(), true);
 	}
 

@@ -134,6 +134,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 
 		CRONIOBusDesktopProjectsLayout projectsLayout = new CRONIOBusDesktopProjectsLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsLayout);
+		projectsLayout.postDisplay();
 	}
 
 	//DELETE WHEN LOGIN WORKS!!
