@@ -117,7 +117,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		if (LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
+		if (DSLAMBusDesktopProcessConfigureVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
 			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
 			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 			String type 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
@@ -139,17 +139,15 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			saveEvt.setSourceWidget(getName());
 			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
-		}
-		
-		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
+			
+		} else if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
 			AEMFTMetadataElement variableData = variablesData.getElement(evt.getSourceWidgetId());
 			variablesForm.setData((AEMFTMetadataElementComposite) variableData);
 			variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
 			variablesForm.center();
-		}
-		
-		if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
+			
+		} else if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
 		

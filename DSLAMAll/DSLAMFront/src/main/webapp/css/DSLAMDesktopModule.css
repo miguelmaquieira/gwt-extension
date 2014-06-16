@@ -391,10 +391,6 @@
 	margin-top: 17px;
 }
 
-.dslam_studio-toolbar-connection-zone>.form-group {
-	margin-bottom: 10px;
-}
-
 .dslam_studio-processConfigureNodesSelectionHeader {
 	height: 35px;
 	background-color: #F2F1F0;
@@ -449,18 +445,10 @@
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #888888;
-	width: 300px;
+	width: 500px;
 }
 
 .dslam_studio-processConfigureScheduleFormContainer .form-control {
-	margin-bottom: 20px;
+	margin-bottom: 15px;
 }
 
-.dslam_studio-processConfigureScheduleLine button {
-	border-width: 0px;
-	float: right;
-}
-
-.dslam_studio-processConfigureScheduleLine {
-	width: 95%;
-}

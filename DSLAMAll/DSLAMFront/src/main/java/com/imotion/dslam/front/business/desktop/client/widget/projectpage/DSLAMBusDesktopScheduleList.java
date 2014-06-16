@@ -38,15 +38,13 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 		
 		
 		List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
-		
 		for (AEMFTMetadataElement schedule : scheduleList) {
-			String scheduleId 	= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, schedule);
-			
+			String scheduleValue 	= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, schedule);
 		
 			Map<String,String> scheduleRow = new HashMap<String, String>();
-			scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleId);
+			scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleValue);
 			
-			addRowItem(scheduleRow, scheduleId, true, true,false);
+			addRowItem(scheduleRow, scheduleValue, true, true,false);
 		}	
 	}
 
@@ -63,8 +61,8 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 
 	@Override
 	protected String getEventName() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return NAME;
 	}
 
 	@Override

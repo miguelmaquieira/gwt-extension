@@ -37,11 +37,14 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	private	 DSLAMBusDesktopScheduleList    				scheduleList;
 	private DSLAMBusDesktopProcessConfigureScheduleForm		scheduleForm;
 	private	 AEMFTMetadataElementComposite					schedulesData;
-	private int 											numberAddDateTimePicker;							
+	private boolean 										addJS;							
 
 	public DSLAMBusDesktopProcessConfigureSchedule() {
+		schedulesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
 		root = new FlowPanel();
 		initWidget(root);
+		
+		addJS = false;
 
 		//Header
 		headerZone 		= new FlowPanel();
@@ -65,9 +68,14 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 
 			@Override
 			public void onClick(ClickEvent event) {
-				scheduleForm.resetForm();
-				scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.SAVE_MODE);
-				scheduleForm.center();
+				
+				getSchedulePopup().resetForm();
+				getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.SAVE_MODE);
+				getSchedulePopup().center();
+				if (addJS == false) {
+					scheduleForm.postDisplay();
+					addJS = true;
+				}
 			}
 		});
 
@@ -81,7 +89,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	public void reset() {
 		scheduleList.reset();
 		schedulesData.removeAll();
-		scheduleForm.resetForm();
+		getSchedulePopup().resetForm();
 	}
 	
 	/**
@@ -91,8 +99,6 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);
-		scheduleForm.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
@@ -118,31 +124,32 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		if (LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String schedule  =  evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
+		if (DSLAMBusDesktopProcessConfigureScheduleForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
+			String schedule  		= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
+			String removeLastEdit 	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_LAST_EDIT); 
 			
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
 			getElementController().setElement(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, data	, schedule);
 			
-			if (scheduleForm.getEditMode()) {
-				addSchedules(schedule,data);
+			if (getSchedulePopup().getEditMode()) {
+				addSchedules(schedule,removeLastEdit ,data);
 			} else if (!schedulesData.contains(schedule)) {
-				addSchedules(schedule,data);
+				addSchedules(schedule, removeLastEdit,data);
 			} else {
-				scheduleForm.setErrorScheduleExist();
+				getSchedulePopup().setErrorScheduleExist();
 			}
 			
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, schedulesData);
-			getLogicalEventHandlerManager().fireEvent(evt);
-		} else if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
+			getLogicalEventHandlerManager().fireEvent(saveEvt);
+		} else if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
 			AEMFTMetadataElement scheduleData = schedulesData.getElement(evt.getSourceWidgetId());
-			scheduleForm.setData((AEMFTMetadataElementComposite) scheduleData);
-			scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
-			scheduleForm.center();
+			getSchedulePopup().setData((AEMFTMetadataElementComposite) scheduleData);
+			getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
+			getSchedulePopup().center();
 		} else 	if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
@@ -150,6 +157,12 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			for (String rowId : rowIds) {
 				schedulesData.removeElement(rowId);
 			}	
+			
+			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			deleteEvt.setSourceWidget(getName());
+			deleteEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, schedulesData);
+			getLogicalEventHandlerManager().fireEvent(deleteEvt);
 		}	
 	}
 
@@ -162,11 +175,14 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	 * PRIVATE
 	 */
 	
-	private void addSchedules(String id, AEMFTMetadataElementComposite data) {
+	private void addSchedules(String id, String removeLastEdit, AEMFTMetadataElementComposite data) {
 		scheduleList.clearList();
+		if (removeLastEdit != null){
+			schedulesData.removeElement(removeLastEdit);
+		}
 		schedulesData.addElement(id,data);
 		scheduleList.setData(schedulesData);
-		scheduleForm.resetForm();	
+		getSchedulePopup().resetForm();	
 	}
 
 //	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
@@ -204,5 +220,13 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		} else {
 			return null;
 		}
+	}
+	
+	private DSLAMBusDesktopProcessConfigureScheduleForm getSchedulePopup() {
+		if (scheduleForm == null) {
+			scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);
+			
+		}
+		return scheduleForm;
 	}
 }

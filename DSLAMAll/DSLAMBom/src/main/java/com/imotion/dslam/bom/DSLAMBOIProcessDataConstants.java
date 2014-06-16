@@ -11,7 +11,10 @@ public interface DSLAMBOIProcessDataConstants {
 	String PROCESS_SYNC_OPTION		= "processSyncOption";
 	String PROCESS_NODES			= "processNodes";
 
+	String SCHEDULE_ID				= "SCHEDULE_ID";
 	String SCHEDULE_VALUE			= "SCHEDULE_VALUE";
+	String SCHEDULE_LAST_EDIT		= "SCHEDULE_LAST_EDIT";
+	
 	String EDIT_MODE				= "EditMode";
 	String SAVE_MODE				= "SaveMode";
 	

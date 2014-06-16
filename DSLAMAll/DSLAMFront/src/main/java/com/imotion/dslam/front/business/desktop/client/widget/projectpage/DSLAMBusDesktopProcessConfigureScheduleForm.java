@@ -27,9 +27,10 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	private AEGWTButton 							saveButton;
 	private AEGWTButton								cancelButton;
 	private boolean								editMode;
+	private String									lastEditSchedule;
 
 	public DSLAMBusDesktopProcessConfigureScheduleForm(AEGWTICompositePanel parent) {
-		super(true, parent);
+		super(false, false, true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_SCHEDULE_FORM_CONTAINER);
@@ -62,7 +63,10 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleTextBox.getDateText());
+					evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleTextBox.getDateText());
+					if (editMode) {
+						evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_LAST_EDIT	, lastEditSchedule);
+					}
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -90,9 +94,9 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite scheduleData) {
 		if (scheduleData != null) {
-			String 	schedule 		= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleData);
+			String 	schedule 		= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleData);
 			scheduleTextBox.setDateText(schedule);
-			
+			lastEditSchedule = schedule;	
 		}
 	}
 
@@ -116,6 +120,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	
 	protected void setErrorScheduleExist() {
 		scheduleTextBox.setErrorLabel(TEXTS.error_schedule_exist());
+		scheduleTextBox.setErrorLabelVisible(true);
 	}
 	
 	protected void setEditMode(String mode) {
@@ -132,6 +137,6 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	
 	@Override
 	public void postDisplay() {
-		scheduleTextBox.addJS("datetimepicker");
+		scheduleTextBox.addJS(getId());
 	}
 }

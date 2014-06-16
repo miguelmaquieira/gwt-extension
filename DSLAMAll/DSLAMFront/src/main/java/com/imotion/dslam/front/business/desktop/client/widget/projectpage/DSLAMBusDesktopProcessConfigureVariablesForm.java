@@ -153,6 +153,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	
 	protected void setErrorVariableExist() {
 		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
+		variableIdTextBox.setErrorLabelVisible(true);
 	}
 	
 	protected void setEditMode(String mode) {
