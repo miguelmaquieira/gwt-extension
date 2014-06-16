@@ -97,7 +97,25 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 
 
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData) {
-		//TODO
+		String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+		String currentSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
+		
+		StringBuilder sbKey = new StringBuilder();
+		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(currentProjectId);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(currentSectionId);
+
+		String finalSectionKey = sbKey.toString();
+
+		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+		storageEvent.setFullKey(finalSectionKey);
+		storageEvent.addElementAsDataValue(finalSectionData);
+		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+		getLogicalEventHandlerManager().fireEvent(storageEvent);
+
+		getContextDataController().setElement(finalSectionKey, finalSectionData.cloneObject());
 	}
 	
 	protected abstract String getSectionType();

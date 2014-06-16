@@ -143,7 +143,6 @@ public void removeProject() {
 @Override
 public void getAllProjects() {
 	List<DSLAMBOIProject> 	projectList = getProjectPersistence().getAllProjects();
-	
 
 	//trace-init
 	int resultsNumber = 0;

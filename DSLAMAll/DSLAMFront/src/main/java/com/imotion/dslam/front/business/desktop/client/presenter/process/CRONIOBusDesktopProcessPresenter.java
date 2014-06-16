@@ -64,9 +64,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.OPEN_EVENT.equals(type) 
-				|| 
-				LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
+		return 	LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
 	}
 	
 	/**

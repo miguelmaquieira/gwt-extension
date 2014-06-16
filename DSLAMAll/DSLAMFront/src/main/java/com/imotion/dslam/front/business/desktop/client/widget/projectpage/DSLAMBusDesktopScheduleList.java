@@ -9,6 +9,7 @@ import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTable;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
@@ -35,18 +36,12 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		
-		
 		List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
-		
 		for (AEMFTMetadataElement schedule : scheduleList) {
-			String scheduleId 	= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, schedule);
-			
-		
+			String scheduleValue = ((AEMFTMetadataElementSingle) schedule).getValueAsString();
 			Map<String,String> scheduleRow = new HashMap<String, String>();
-			scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleId);
-			
-			addRowItem(scheduleRow, scheduleId, true, true,false);
+			scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE, scheduleValue);
+			addRowItem(scheduleRow, scheduleValue, true, true,false);
 		}	
 	}
 
