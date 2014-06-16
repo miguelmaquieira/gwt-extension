@@ -22,6 +22,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 	private AEGWTBootstrapGlyphiconButton newButton;
 	private AEGWTBootstrapGlyphiconButton saveButton;
+	private AEGWTBootstrapGlyphiconButton saveAllButton;
 
 	public DSLAMBusDesktopToolbarActions() {
 		FlowPanel root = new FlowPanel();
@@ -31,18 +32,26 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//NEW
 		SimplePanel newButtonZone = new SimplePanel();
 		root.add(newButtonZone);
-		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+
 		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
 		newButtonZone.add(newButton);
-		
+
 		//SAVE
 		SimplePanel saveButtonZone = new SimplePanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		saveButtonZone.add(saveButton);
+
+
+		//SAVE ALL
+		SimplePanel saveAllButtonZone = new SimplePanel();
+		root.add(saveAllButtonZone);
+		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
+		saveAllButtonZone.add(saveAllButton);
 
 		newButton.addClickHandler(new ClickHandler() {
 
@@ -64,17 +73,34 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 				getLogicalEventHandlerManager().fireEvent(evt);
 			}
 		});
+		
+		saveAllButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
+				evt.setEventType(LOGICAL_TYPE.SAVE_ALL_EVENT);
+				evt.setSourceWidgetId(getId());
+				getLogicalEventHandlerManager().fireEvent(evt);
+			}
+		});
+		
 	}
-	
+
 	public void reset() {
 		setSaveEnabled(false);
+		setSaveAllEnabled(false);
+	}
+
+
+	public void setSaveEnabled(boolean enabled) {
+		saveButton.setEnabled(enabled);
 	}
 	
-	
-	public void setSaveEnabled(boolean modified) {
-		saveButton.setEnabled(modified);
+	public void setSaveAllEnabled(boolean enabled) {
+		saveAllButton.setEnabled(enabled);
 	}
-	
+
 	/**
 	 * AEGWTICompositePanel
 	 */

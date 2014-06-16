@@ -10,6 +10,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Guardar")
 	String save();
 	
+	@DefaultStringValue("Guardar todo")
+	String save_all();
+	
 	@DefaultStringValue("Nuevo")
 	String create();
 	
