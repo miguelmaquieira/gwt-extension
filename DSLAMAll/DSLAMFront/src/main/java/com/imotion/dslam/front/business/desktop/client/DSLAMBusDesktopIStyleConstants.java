@@ -78,6 +78,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_NODES_SELECTION_HEADER 	= APP_ID_PREFFIX			+ "processConfigureNodesSelectionHeader";		//dslam_studio-processConfigureNodesSelectionHeader
 
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
+	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
 }
