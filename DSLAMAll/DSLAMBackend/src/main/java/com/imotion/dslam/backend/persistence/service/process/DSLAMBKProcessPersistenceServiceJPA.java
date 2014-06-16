@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
-import com.imotion.dslam.bom.data.DSLAMBOVariable;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<DSLAMBOIProcess, DSLAMBOProcess, Long> implements DSLAMBKIProcessPersistenceService {
@@ -39,7 +39,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcessVariableList(Long processId, List<DSLAMBOVariable> variableList) {
+	public DSLAMBOIProcess updateProcessVariableList(Long processId, List<DSLAMBOIVariable> variableList) {
 		DSLAMBOProcess process = getPersistenceModule().get(processId);
 		process.setVariableList(variableList);
 		process.setSavedTime(new Date());

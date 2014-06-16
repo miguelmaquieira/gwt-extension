@@ -40,8 +40,8 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null			, TEXTS.value());
 		
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE, TEXTS.process_variable());
-		variableIdTextBox.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE, TEXTS.external_variable());
+		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE), TEXTS.process_variable());
+		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE), TEXTS.external_variable());
 		root.add(variableValueTextBox);
 		
 		FlowPanel saveButtonZone = new FlowPanel();
@@ -115,12 +115,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 			
 			variableIdTextBox.setEnabled(false);
 			variableIdTextBox.setDropdownEnabled(true);
-			
-			if (DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE.equals(variableType)) {
-				variableIdTextBox.setItemSelected(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE);	
-			} else {
-				variableIdTextBox.setItemSelected(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE);	
-			}
+			variableIdTextBox.setItemSelected(variableType);	
 
 			variableIdTextBox.setText(variableId);
 			variableValueTextBox.setText(variableValue);

@@ -7,8 +7,8 @@ import java.util.Locale;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
-import com.imotion.dslam.bom.data.DSLAMBOVariable;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
@@ -53,11 +53,11 @@ public class DSLAMBUBomToMetadataConversor {
 			}
 			
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-			List<DSLAMBOVariable> 			variableList = process.getVariableList();
+			List<DSLAMBOIVariable> 			variableList = process.getVariableList();
 			for (int i = 0; i < variableList.size(); i++) {
 				
 				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-				DSLAMBOVariable 				variable 		= variableList.get(i);
+				DSLAMBOIVariable 				variable 		= variableList.get(i);
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
 				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));

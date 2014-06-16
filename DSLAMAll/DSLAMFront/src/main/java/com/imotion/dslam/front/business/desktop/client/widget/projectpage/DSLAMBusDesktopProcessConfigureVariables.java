@@ -101,8 +101,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		variablesData.removeAll();
-		variablesData = getElementController().getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST, data);
+		variablesData = data;
 		variableList.clearList();
 		variableList.setData(variablesData);	
 	}

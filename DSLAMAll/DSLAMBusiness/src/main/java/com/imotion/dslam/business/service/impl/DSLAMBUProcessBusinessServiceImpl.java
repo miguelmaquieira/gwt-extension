@@ -7,6 +7,7 @@ import java.util.List;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOVariable;
@@ -74,7 +75,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 				scheduleList.add(date);
 			}
 
-			List<DSLAMBOVariable> variableList= new ArrayList<>();
+			List<DSLAMBOIVariable> variableList= new ArrayList<>();
 			List<AEMFTMetadataElement> variableListData =  variablesData.getSortedElementList();
 			String id 		= "";
 			String value 	= "";
@@ -82,7 +83,7 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 
 			if(!AEMFTCommonUtilsBase.isEmptyList(variableListData)){
 				for (AEMFTMetadataElement variableData : variableListData) {
-					DSLAMBOVariable variable = new DSLAMBOVariable();
+					DSLAMBOIVariable variable = new DSLAMBOVariable();
 					AEMFTMetadataElementComposite variableComposite = (AEMFTMetadataElementComposite) variableData;
 					id 		= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableComposite);
 					value 	= getElementDataController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableComposite);
