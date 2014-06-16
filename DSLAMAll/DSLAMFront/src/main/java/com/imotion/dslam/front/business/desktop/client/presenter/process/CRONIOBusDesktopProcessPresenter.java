@@ -1,16 +1,12 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.CRONIOBusDesktopProjectNavigatorFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureSchedule;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
-import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
@@ -43,14 +39,8 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		String			sectionId		= evt.getSourceWidgetId();
-		String			projectId		= evt.getSourceContainerId();
-		if (CRONIOBusDesktopProjectNavigatorFinalItem.NAME.equals(srcWidget)) {
-			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
-				evt.stopPropagation();
-				openProcessSection(projectId, sectionId);
-			}
-		} 
+//		String			sectionId		= evt.getSourceWidgetId();
+//		String			projectId		= evt.getSourceContainerId();
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
@@ -76,9 +66,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.OPEN_EVENT.equals(type) 
-				|| 
-				LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
 	}
 	
 	/**
@@ -117,17 +105,5 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 			}
 		});
-	}
-	
-	private void openProcessSection(String projectId, String sectionId) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(DSLAMBUIProjectBusinessServiceConstants.PROJECTS_DATA_PREFFIX);
-		sb.append(projectId);
-		sb.append(AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR);
-		sb.append(CRONIOBOIProjectDataConstants.PROJECT_PROCESS);
-		String processDataKey = sb.toString();
-		
-		AEMFTMetadataElementComposite processData = getContextDataController().getElementAsComposite(processDataKey);
-		getView().openProcessSection(sectionId, processData);
 	}
 }

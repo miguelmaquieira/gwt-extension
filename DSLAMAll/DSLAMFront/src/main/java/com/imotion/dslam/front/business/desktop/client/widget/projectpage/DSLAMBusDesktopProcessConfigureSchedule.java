@@ -37,7 +37,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	private	 DSLAMBusDesktopScheduleList    				scheduleList;
 	private DSLAMBusDesktopProcessConfigureScheduleForm		scheduleForm;
 	private	 AEMFTMetadataElementComposite					schedulesData;
-	private int 							numberAddDateTimePicker;							
+	private int 											numberAddDateTimePicker;							
 
 	public DSLAMBusDesktopProcessConfigureSchedule() {
 		root = new FlowPanel();
@@ -92,6 +92,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	public void postDisplay() {
 		super.postDisplay();
 		scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);
+		scheduleForm.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
@@ -141,7 +142,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
 			AEMFTMetadataElement scheduleData = schedulesData.getElement(evt.getSourceWidgetId());
-			scheduleForm.setData((AEMFTMetadataElementComposite) schedulesData);
+			scheduleForm.setData((AEMFTMetadataElementComposite) scheduleData);
 			scheduleForm.setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
 			scheduleForm.center();
 		}
@@ -172,14 +173,14 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		scheduleForm.resetForm();	
 	}
 
-	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
-
-		DSLAMBusDesktopProcessConfigureScheduleLine line = new DSLAMBusDesktopProcessConfigureScheduleLine(null);
-		scheduleListZone.add(line);
-		line.setId(String.valueOf(numberAddDateTimePicker));
-		line.postDisplay();
-		return line;
-	}
+//	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
+//
+//		DSLAMBusDesktopProcessConfigureScheduleLine line = new DSLAMBusDesktopProcessConfigureScheduleLine(null);
+//		scheduleListZone.add(line);
+//		line.setId(String.valueOf(numberAddDateTimePicker));
+//		line.postDisplay();
+//		return line;
+//	}
 
 	private List<String> dateTimePickersEmpty() {
 		

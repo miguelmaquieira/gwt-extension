@@ -136,8 +136,9 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			saveEvt.setSourceWidget(getName());
 			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
-			getLogicalEventHandlerManager().fireEvent(evt);
+			getLogicalEventHandlerManager().fireEvent(saveEvt);
 		}
 		
 		if(LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
@@ -155,6 +156,11 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			for (String rowId : rowIds) {
 				variablesData.removeElement(rowId);
 			}	
+			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			deleteEvt.setSourceWidget(getName());
+			deleteEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
+			getLogicalEventHandlerManager().fireEvent(deleteEvt);
 		}	
 	}
 

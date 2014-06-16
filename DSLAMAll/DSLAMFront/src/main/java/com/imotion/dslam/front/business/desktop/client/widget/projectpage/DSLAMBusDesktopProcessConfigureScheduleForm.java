@@ -129,4 +129,9 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	protected boolean getEditMode() {
 		return editMode;
 	}
+	
+	@Override
+	public void postDisplay() {
+		scheduleTextBox.addJS("datetimepicker");
+	}
 }

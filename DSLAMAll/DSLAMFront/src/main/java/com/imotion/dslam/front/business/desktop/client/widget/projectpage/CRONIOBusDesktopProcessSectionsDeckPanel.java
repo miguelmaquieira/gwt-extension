@@ -49,15 +49,21 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 
 		AEMFTMetadataElementComposite sectionData = null;
 		if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
-			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST);
+			if (processData != null) {
+				sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_VARIABLE_LIST);
+			}
 			rootDeckPanel.showWidget(0);
 			//variablesProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
-			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST);
+			if (processData != null) {
+				sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_LIST);
+			}
 			rootDeckPanel.showWidget(1);
 			//scheduleProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
-			sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
+			if (processData != null) {
+				sectionData = processData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
+			}
 			rootDeckPanel.showWidget(2);
 			//extraOptionsConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
@@ -76,6 +82,9 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 	public void postDisplay() {
 		super.postDisplay();
 		variablesProcessConfigure.postDisplay();
+		scheduleProcessConfigure.postDisplay();
+		extraOptionsConfigure.postDisplay();
+		//variablesProcessConfigure.postDisplay();
 	}
 
 	@Override

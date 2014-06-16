@@ -7,6 +7,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.widget.navigator.CRONIOBusDesktopProjectNavigatorFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessSectionsDeckPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
@@ -75,7 +76,15 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE	type			= evt.getEventType();
+		String 			srcWidget 		= evt.getSourceWidget();
+		String 			srcWidgetId 	= evt.getSourceWidgetId();
 		
+		if (CRONIOBusDesktopProjectNavigatorFinalItem.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				openProcessSection(srcWidgetId, null);
+			}
+		}
 	}
 
 	@Override
