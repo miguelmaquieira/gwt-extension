@@ -25,6 +25,11 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.dom.client.TextAreaElement;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.EventListener;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -47,6 +52,8 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	private JsArray<AceAnnotation> annotations = JavaScriptObject.createArray().cast();
 	
 	private Element divElement;
+	
+	private TextAreaElement textAreaElement;
 
 	/**
 	 * Preferred constructor.
@@ -403,9 +410,31 @@ public class AceEditor extends Composite implements RequiresResize, HasText, Tak
 	}
 
 	public void focus() {
-		NodeList<Element> textAreaElements = divElement.getElementsByTagName("textarea");
-		Element textArea = textAreaElements.getItem(0);
-		textArea.focus();
+		getTextAreaElement().focus();
+	}
+	
+	public void addBlurHandler(final BlurHandler handler) {
+		DOM.sinkEvents(getTextAreaElement(), Event.ONBLUR);
+		DOM.setEventListener(getTextAreaElement(), new EventListener() {
+			
+			@Override
+			public void onBrowserEvent(Event event) {
+				handler.onBlur(null);
+			}
+			
+		});
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private TextAreaElement getTextAreaElement() {
+		if (textAreaElement == null) {
+			NodeList<Element> textAreaElements = divElement.getElementsByTagName("textarea");
+			textAreaElement = (TextAreaElement) textAreaElements.getItem(0);
+		}
+		return textAreaElement;
 	}
 
 }
