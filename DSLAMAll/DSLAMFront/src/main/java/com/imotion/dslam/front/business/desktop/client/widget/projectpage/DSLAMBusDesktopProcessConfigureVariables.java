@@ -39,7 +39,6 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	//private int												numberVariablesData;
 
 	public DSLAMBusDesktopProcessConfigureVariables() {
-		variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
 		root = new FlowPanel();
 		initWidget(root);
 
@@ -103,7 +102,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public void setData(AEMFTMetadataElementComposite data) {
 		variablesData = data;
 		variableList.clearList();
-		variableList.setData(variablesData);	
+		variableList.setData(data);	
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
@@ -132,7 +131,6 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			} else {
 				variablesForm.setErrorVariableExist();
 			}
-			
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.setSourceWidget(getName());

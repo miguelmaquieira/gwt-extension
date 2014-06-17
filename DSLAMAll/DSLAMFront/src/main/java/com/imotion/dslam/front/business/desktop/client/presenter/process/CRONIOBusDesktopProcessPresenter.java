@@ -37,7 +37,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		String			srcWidget		= evt.getSourceWidget();
+ 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sectionId		= evt.getSourceWidgetId();
 		String			projectId		= evt.getSourceContainerId();

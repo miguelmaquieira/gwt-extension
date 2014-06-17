@@ -51,7 +51,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 			variablesProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
 			rootDeckPanel.showWidget(1);
-			scheduleProcessConfigure.setData(sectionData);
+			//scheduleProcessConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			rootDeckPanel.showWidget(2);
 			//extraOptionsConfigure.setData(sectionData);
