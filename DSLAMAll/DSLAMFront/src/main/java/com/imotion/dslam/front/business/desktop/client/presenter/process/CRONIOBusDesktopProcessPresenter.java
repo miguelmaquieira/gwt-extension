@@ -1,14 +1,11 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProcessBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureSchedule;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -39,8 +36,8 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
  		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		String			sectionId		= evt.getSourceWidgetId();
-		String			projectId		= evt.getSourceContainerId();
+		//String			sectionId		= evt.getSourceWidgetId();
+		//String			projectId		= evt.getSourceContainerId();
 
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
@@ -85,24 +82,4 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	/**
 	 * PRIVATE
 	 */
-
-	private void updateProcess(AEMFTMetadataElementComposite processData) {
-		getClientServerConnection().executeComm(processData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROCESS_UPDATE_PROCESS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
-
-			@Override
-			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				AEMFTMetadataElementComposite processData = getElementDataController().getElementAsComposite(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA, dataResult);
-				getView().updateProcess(processData);
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getName(), getName());
-				evt.setEventType(LOGICAL_TYPE.OK_EVENT);
-				getLogicalEventHandlerManager().fireEvent(evt);	
-			}
-
-			@Override
-			public void onError(Throwable th) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-	}
 }

@@ -28,10 +28,7 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 		processSectionsDeckPanel = new CRONIOBusDesktopProcessSectionsDeckPanel();
 		root.add(processSectionsDeckPanel);
-		processSectionsDeckPanel.setVisibility(Visibility.HIDDEN);
-		
-		
-		
+		processSectionsDeckPanel.setVisibility(Visibility.HIDDEN);	
 	}
 	
 	@Override
@@ -78,19 +75,11 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String 			srcWidget 		= evt.getSourceWidget();
 		String 			srcWidgetId 	= evt.getSourceWidgetId();
-		
-//		if (CRONIOBusDesktopProjectNavigatorFinalItem.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
-//				openProcessSection(srcWidgetId, null);
-//			}
-//		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.SAVE_EVENT.equals(type);
-//				||
-//				LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}
 	
 	/************************************************************************

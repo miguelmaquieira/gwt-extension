@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -38,14 +39,18 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 	public void setData(AEMFTMetadataElementComposite data) {
 		List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
 		for (AEMFTMetadataElement schedule : scheduleList) {
+			
+			String itemKey = schedule.getKey();
+			if (!DSLAMBOIProcess.IS_MODIFIED.equals(itemKey)) {
 
-			String scheduleValue = ((AEMFTMetadataElementSingle) schedule).getValueAsString();
+				String scheduleValue = ((AEMFTMetadataElementSingle) schedule).getValueAsString();
 
-			Map<String,String> scheduleRow = new HashMap<String, String>();
+				Map<String,String> scheduleRow = new HashMap<String, String>();
 
-			scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleValue);
+				scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleValue);
 
-			addRowItem(scheduleRow, scheduleValue, true, true,false);
+				addRowItem(scheduleRow, scheduleValue, true, true,false);
+			}
 		}	
 	}
 

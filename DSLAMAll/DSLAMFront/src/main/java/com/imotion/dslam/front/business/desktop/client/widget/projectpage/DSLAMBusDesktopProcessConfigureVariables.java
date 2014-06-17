@@ -17,7 +17,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadata
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
-import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -73,7 +72,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		variableListZone = new FlowPanel();
 		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_LIST);
 		root.add(variableListZone);
-		variableList = new DSLAMBusDesktopVariablesList( (AEGWTButton) deleteVariablesButton);
+		variableList = new DSLAMBusDesktopVariablesList(deleteVariablesButton);
 		variableListZone.add(variableList);
 	}
 

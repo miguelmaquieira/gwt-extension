@@ -25,5 +25,8 @@ public interface DSLAMBusBaseAppControllerConstants {
 	public static final String JQUERY_JS_URL 						= "jquery/jquery-2.0.3.min.js";
 	public static final String JQUERY_PERFECT_SCROLLBAR_JS_URL 	= "jquery/perfect-scrollbar-0.4.10/perfect-scrollbar.js";
 	public static final String JQUERY_MOUSE_WHEEL_JS_URL 			= "jquery/perfect-scrollbar-0.4.10/jquery.mousewheel.js";
+	public static final String JQUERY_TABLESORTER 				= "js/jquery.tablesorter.min.js";
+	public static final String JQUERY_TABLESORTER_PAGER			= "js/jquery.tablesorter.pager.min.js";
+	public static final String JQUERY_TABLESORTER_WIDGETS			= "js/jquery.tablesorter.widgets.min.js";
 	
 }
