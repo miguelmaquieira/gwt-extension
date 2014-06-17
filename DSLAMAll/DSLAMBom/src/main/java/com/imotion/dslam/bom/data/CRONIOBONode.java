@@ -1,0 +1,122 @@
+package com.imotion.dslam.bom.data;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+
+import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
+
+@Entity(name="Node")
+public class CRONIOBONode implements CRONIOBOINode {
+	
+	
+	private Long 					nodeId;
+	private String 					nodeName;
+	private String 					nodeIp;
+	private int 					nodeType;
+	private List<DSLAMBOIVariable> variableList;
+	private Date 					savedTime;
+	private Date 					creationTime;
+	private Long					version;
+
+	public CRONIOBONode() {}
+	
+	@Id
+	@SequenceGenerator(name = "NodeIdGenerator", sequenceName = "NodeSeq") //It only takes effect for databases providing identifier generators.
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "NodeIdGenerator")
+	@Override
+	public Long getNodeId() {
+		return nodeId;
+	}
+
+	@Override
+	public void setNodeId(Long nodeId) {
+		this.nodeId = nodeId;
+	}
+
+	@Override
+	public String getNodeName() {
+		return nodeName;
+	}
+
+	@Override
+	public void setNodeName(String nodeName) {
+		this.nodeName = nodeName;
+	}
+
+	@Override
+	public String getNodeIp() {
+		return nodeIp;
+	}
+
+	@Override
+	public void setNodeIp(String nodeIp) {
+		this.nodeIp = nodeIp;
+	}
+
+	@Override
+	public int getNodeType() {
+		return nodeType;
+	}
+
+	@Override
+	public void setNodeType(int nodeType) {
+		this.nodeType = nodeType;
+	}
+
+	@ElementCollection(targetClass=DSLAMBOVariable.class)
+	@Override
+	public List<DSLAMBOIVariable> getVariableList() {
+		return variableList;
+	}
+	
+	@Override
+	public void setVariableList(List<DSLAMBOIVariable> variableList) {
+		this.variableList = variableList;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Override
+	public Date getSavedTime() {
+		return savedTime;
+	}
+	
+	@Override
+	public void setSavedTime(Date savedTime) {
+		this.savedTime = savedTime;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Override
+	public Date getCreationTime() {
+		return creationTime;
+	}
+
+	@Override
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	@Version
+	@Override
+	public Long getVersion() {
+		return version;
+	}
+
+	@Override
+	public void setVersion(Long version) {
+		this.version = version;
+	}
+	
+	
+}

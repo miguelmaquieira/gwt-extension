@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 
@@ -27,6 +28,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	private boolean 				synchronous;
 	private List<Date>				scheduleList;
 	private List<DSLAMBOIVariable> 	variableList;
+	private List<CRONIOBOINode>		nodeList;
 	private Date 					savedTime;
 	private Date 					creationTime;
 	private Long					version; 
@@ -105,6 +107,25 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		}
 		variableList.add(variable);
 	}
+	
+	@ElementCollection(targetClass=CRONIOBONode.class)
+	@Override
+	public List<CRONIOBOINode> getNodeList() {
+		return nodeList;
+	}
+	
+	@Override
+	public void setNodeList(List<CRONIOBOINode> nodeList) {
+		this.nodeList = nodeList;
+	}
+	
+	@Override
+	public void addNode(CRONIOBOINode node) {
+		if (nodeList == null) {
+			nodeList = new ArrayList<>();
+		}
+		nodeList.add(node);
+	}
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Override
@@ -137,6 +158,5 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	@Override
 	public void setVersion(Long version) {
 		this.version = version;
-	}
-	
+	}	
 }
