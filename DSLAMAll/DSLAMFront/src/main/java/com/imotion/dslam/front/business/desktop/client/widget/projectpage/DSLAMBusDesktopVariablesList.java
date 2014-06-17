@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -20,7 +21,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	public DSLAMBusDesktopVariablesList(AEGWTButton deleteButton) {
 		super(true,true,false, deleteButton);
 	}
-	
+
 	public void reset () {
 		clearUpdateList();
 	}
@@ -35,34 +36,37 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		
-		
+
+
 		List<AEMFTMetadataElement> variableList = data.getSortedElementList();
-		
+
 		for (AEMFTMetadataElement variable : variableList) {
-			String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
-			String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
-		
-			Map<String,String> variableRow = new HashMap<String, String>();
-			variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableId);
-			variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
-			
-			addRowItem(variableRow, variableId, true, true,false);
+			String itemKey = variable.getKey();
+			if (!DSLAMBOIProcess.IS_MODIFIED.equals(itemKey)) {
+				String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
+				String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+
+				Map<String,String> variableRow = new HashMap<String, String>();
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableId);
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
+
+				addRowItem(variableRow, variableId, true, true,false);
+			}
 		}	
 	}
 
 	/*
 	 * AEGWTBootstrapTable
 	 */
-	
+
 	@Override
 	protected void setupHeader() {
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
-		
+
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, TEXTS.variable());
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
-		
+
 	}
 
 	@Override
@@ -77,4 +81,3 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 
 }
-	

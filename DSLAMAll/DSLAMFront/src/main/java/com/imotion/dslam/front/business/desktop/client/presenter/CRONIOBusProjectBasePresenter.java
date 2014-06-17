@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasProjectEventHandlers;
@@ -105,6 +106,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 
 
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData) {
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		
 		String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 		String currentSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
 
@@ -116,7 +119,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		sbKey.append(currentSectionId);
 		String finalSectionKey = sbKey.toString();
 		
-		finalSectionData.addElement(CRONIODesktopIAppControllerConstants.IS_MODIFIED, true);
+		finalSectionData.addElement(DSLAMBOIProcess.IS_MODIFIED, true);
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
 		storageEvent.setFullKey(finalSectionKey);

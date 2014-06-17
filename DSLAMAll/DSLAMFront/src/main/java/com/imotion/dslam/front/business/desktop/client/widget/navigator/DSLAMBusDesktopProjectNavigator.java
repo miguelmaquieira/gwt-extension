@@ -7,9 +7,9 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -235,7 +235,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	}
 	
 	private boolean isProjectModified(AEMFTMetadataElementComposite projectData) {
-		boolean modified = getElementController().getElementAsBoolean(CRONIODesktopIAppControllerConstants.IS_MODIFIED, projectData);
+		boolean modified = getElementController().getElementAsBoolean(DSLAMBOIProcess.IS_MODIFIED, projectData);
 //		modified = modified || getElementController().getElementAsBoolean(
 		
 		return false;
