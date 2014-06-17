@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.view.scriptsmanager;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
@@ -10,8 +12,9 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
@@ -23,42 +26,28 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	public static final String NAME = "DSLAMBusDesktopScriptsManagerScreenView";
 
 	private static final DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
-
-
-	private FlowPanel	root;
+	
 	private AceEditor	editor;
+	
+	private AEMFTMetadataElementComposite fileData;
 
 	public DSLAMBusDesktopScriptsManagerScreenView() {
-		root = new FlowPanel();
-		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW);
-
-		//Bottom Zone
-		FlowPanel bottomZone = new FlowPanel();
-		root.add(bottomZone);
-		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.EDITOR_VIEW_BOTTOM_ZONE);
-
-		//Bottom Zone - Editor zone
+		//Editor zone
 		FlowPanel editorZone = new FlowPanel();
-		bottomZone.add(editorZone);
-		editorZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-//		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR);
+		initWidget(editorZone);
+		editorZone.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR_CONTAINER);
 
 		// create first AceEditor widget
 		editor = new AceEditor();
 		editorZone.add(editor);
-		editor.setWidth("100%");
-		editor.setHeight("100%");
-
+		editor.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR_AREA);
 
 		// start the first editor and set its theme and mode
 		editor.startEditor(); // must be called before calling setTheme/setMode/etc.
 		editor.setTheme(AceEditorTheme.ECLIPSE);
-		editor.setMode(AceEditorMode.DSLAM);
 		editor.setAutoCompletionEnabled(true);
 		editor.setShowPrintMargin(false);
 		editor.setFontSize(14);
-		editor.setVisible(false);
 
 		editor.addOnChangeHandler(new AceEditorCallback() {
 
@@ -74,8 +63,13 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 			
 			@Override
 			public void onBlur(BlurEvent event) {
-				// TODO Auto-generated method stub
+				fileData.addElement(DSLAMBOIFile.CONTENT, editor.getText());
+				fileData.addElement(DSLAMBOIFile.SAVED_TIME, new Date());
 				
+				CRONIOBusDesktopProjectEvent saveEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				saveEvt.setEventType(EVENT_TYPE.PRE_SAVE_SECTION_EVENT);
+				saveEvt.addElementAsDataValue(fileData);
+				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}
 		});
 	}
@@ -96,11 +90,20 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-//			String text
+			fileData = data;
+			String content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
+			String contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE, data);
+			
+			editor.setText(content);
+			
+			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM.equals(contentType)) {
+				editor.setMode(AceEditorMode.DSLAM);
+			} else {
+				editor.setMode(AceEditorMode.TEXT);
+			}
 		}
 	}
-
-
+	
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
@@ -139,6 +142,5 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 //			}
 //		}
 	}
-
 
 }

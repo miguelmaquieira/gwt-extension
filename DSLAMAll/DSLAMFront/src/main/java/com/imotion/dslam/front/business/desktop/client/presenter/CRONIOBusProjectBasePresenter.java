@@ -33,42 +33,50 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		String projectId		= evt.getProjectId();
-		String mainSectionId	= evt.getMainSectionId();
-		String finalSectionId	= evt.getFinalSectionId();
+		EVENT_TYPE evtTyp = evt.getEventType();
 
-		String currentProjectId		= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+		if (EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(evtTyp)) {
+			String projectId		= evt.getProjectId();
+			String mainSectionId	= evt.getMainSectionId();
+			String finalSectionId	= evt.getFinalSectionId();
 
-		boolean navigate 		= !getSectionType().equals(mainSectionId);
-		boolean	 projectChange	= !projectId.equals(currentProjectId);
+			String currentProjectId		= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 
-		AEMFTMetadataElementComposite navigationData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		navigationData.addElement(CURRENT_PROJECT_ID		, projectId);
-		navigationData.addElement(CURRENT_MAIN_SECTION_ID	, mainSectionId);
-		navigationData.addElement(CURRENT_FINAL_SECTION_ID	, finalSectionId);
+			boolean navigate 		= !getSectionType().equals(mainSectionId);
+			boolean	 projectChange	= !projectId.equals(currentProjectId);
+
+			AEMFTMetadataElementComposite navigationData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			navigationData.addElement(CURRENT_PROJECT_ID		, projectId);
+			navigationData.addElement(CURRENT_MAIN_SECTION_ID	, mainSectionId);
+			navigationData.addElement(CURRENT_FINAL_SECTION_ID	, finalSectionId);
 
 
-		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
-		storageEvent.setFullKey(PROJECT_NAVIGATION_DATA);
-		storageEvent.addElementAsDataValue(navigationData);
-		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
-		getLogicalEventHandlerManager().fireEvent(storageEvent);
+			AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+			storageEvent.setFullKey(PROJECT_NAVIGATION_DATA);
+			storageEvent.addElementAsDataValue(navigationData);
+			storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+			getLogicalEventHandlerManager().fireEvent(storageEvent);
 
-		getContextDataController().setElement(PROJECT_NAVIGATION_DATA, navigationData.cloneObject());
+			getContextDataController().setElement(PROJECT_NAVIGATION_DATA, navigationData.cloneObject());
 
-		if (navigate) {
-			AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
-			flowEvent.setSourceWidgetId(mainSectionId);
-			getFlowEventHandlerManager().fireEvent(flowEvent);
-		} else {
-			openFinalSection(projectChange, projectId, finalSectionId);
+			if (navigate) {
+				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+				flowEvent.setSourceWidgetId(mainSectionId);
+				getFlowEventHandlerManager().fireEvent(flowEvent);
+			} else {
+				openFinalSection(projectChange, projectId, finalSectionId);
+			}
+		} else if (EVENT_TYPE.PRE_SAVE_SECTION_EVENT.equals(evtTyp)) {
+			AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+			updateFinalSectionInContext(finalSectionData);
 		}
-
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		return type.equals(EVENT_TYPE.OPEN_FINAL_SECTION_EVENT);
+		return EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(type)
+				||
+				EVENT_TYPE.PRE_SAVE_SECTION_EVENT.equals(type);
 	}
 
 	/**
@@ -99,15 +107,16 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData) {
 		String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 		String currentSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
-		
+
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentProjectId);
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentSectionId);
-
 		String finalSectionKey = sbKey.toString();
+		
+		finalSectionData.addElement(CRONIODesktopIAppControllerConstants.IS_MODIFIED, true);
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
 		storageEvent.setFullKey(finalSectionKey);
@@ -115,9 +124,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 		getLogicalEventHandlerManager().fireEvent(storageEvent);
 
-		getContextDataController().setElement(finalSectionKey, finalSectionData.cloneObject());
+		
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		getContextDataController().setElement(finalSectionKey, finalSectionData);
 	}
-	
+
 	protected abstract String getSectionType();
 
 	/**
@@ -134,6 +145,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		String finalSectionKey = sbKey.toString();
 
 		AEMFTMetadataElementComposite sectionData = getContextDataController().getElementAsComposite(finalSectionKey);
+		sectionData = (AEMFTMetadataElementComposite) sectionData.cloneObject();
 		return sectionData;
 	}
 

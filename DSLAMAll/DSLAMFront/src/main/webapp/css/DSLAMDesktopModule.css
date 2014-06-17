@@ -2,6 +2,11 @@
 *			PROJECTS
 ***************************************/
 
+.dslam_studio-projectWorkZone {
+	height: 100%;
+	padding: 0px;
+}
+
 .dslam_studio-projectsView {
 	height: 100%;
 	position: relative;
