@@ -75,14 +75,22 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE	type			= evt.getEventType();
+		String 			srcWidget 		= evt.getSourceWidget();
+		String 			srcWidgetId 	= evt.getSourceWidgetId();
 		
+//		if (CRONIOBusDesktopProjectNavigatorFinalItem.NAME.equals(srcWidget)) {
+//			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+//				openProcessSection(srcWidgetId, null);
+//			}
+//		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.OPEN_EVENT.equals(type);
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type);
+//				||
+//				LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}
 	
 	/************************************************************************

@@ -68,6 +68,9 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 	public void postDisplay() {
 		super.postDisplay();
 		variablesProcessConfigure.postDisplay();
+		scheduleProcessConfigure.postDisplay();
+		extraOptionsConfigure.postDisplay();
+		//variablesProcessConfigure.postDisplay();
 	}
 
 	@Override

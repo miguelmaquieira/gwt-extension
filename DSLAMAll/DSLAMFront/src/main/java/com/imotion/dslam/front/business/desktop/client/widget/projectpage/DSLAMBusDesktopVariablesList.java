@@ -67,8 +67,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	protected String getEventName() {
-		// TODO Auto-generated method stub
-		return null;
+		return NAME;
 	}
 
 	@Override

@@ -41,6 +41,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 		LOGICAL_TYPE	type			= evt.getEventType();
 		String			sectionId		= evt.getSourceWidgetId();
 		String			projectId		= evt.getSourceContainerId();
+
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
@@ -64,7 +65,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return 	LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type); 			
 	}
 	
 	/**
@@ -104,5 +105,4 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 			}
 		});
 	}
-	
 }
