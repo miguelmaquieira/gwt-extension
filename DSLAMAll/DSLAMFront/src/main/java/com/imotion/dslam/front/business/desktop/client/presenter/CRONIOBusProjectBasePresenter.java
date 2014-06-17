@@ -114,8 +114,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		sbKey.append(currentProjectId);
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentSectionId);
-
 		String finalSectionKey = sbKey.toString();
+		
+		finalSectionData.addElement(CRONIODesktopIAppControllerConstants.IS_MODIFIED, true);
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
 		storageEvent.setFullKey(finalSectionKey);
@@ -123,7 +124,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 		getLogicalEventHandlerManager().fireEvent(storageEvent);
 
-		getContextDataController().setElement(finalSectionKey, finalSectionData.cloneObject());
+		
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		getContextDataController().setElement(finalSectionKey, finalSectionData);
 	}
 
 	protected abstract String getSectionType();
@@ -142,6 +145,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		String finalSectionKey = sbKey.toString();
 
 		AEMFTMetadataElementComposite sectionData = getContextDataController().getElementAsComposite(finalSectionKey);
+		sectionData = (AEMFTMetadataElementComposite) sectionData.cloneObject();
 		return sectionData;
 	}
 

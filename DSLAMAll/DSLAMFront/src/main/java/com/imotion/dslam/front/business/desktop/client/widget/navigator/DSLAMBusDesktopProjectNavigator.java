@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -60,8 +61,11 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		String projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
-		String projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
+		String		projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
+		String		projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
+		boolean		modified	= isProjectModified(elementData);
+		
+		
 		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
 		elementListContainer.add(element);
 		element.setData(elementData);
@@ -103,8 +107,9 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		return elementData;
 	}
 	
-	public FlowPanel getElementListContainer() {
-		return elementListContainer;
+	public void removeElement(String fileId) {
+		DSLAMBusDesktopProjectNavigatorElement element = getElementById(fileId);
+		elementListContainer.remove(element);
 	}
 
 	/**
@@ -228,10 +233,12 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		}
 		return elementWidget;
 	}
-
-	public void removeElement(String fileId) {
-		DSLAMBusDesktopProjectNavigatorElement element = getElementById(fileId);
-		elementListContainer.remove(element);
+	
+	private boolean isProjectModified(AEMFTMetadataElementComposite projectData) {
+		boolean modified = getElementController().getElementAsBoolean(CRONIODesktopIAppControllerConstants.IS_MODIFIED, projectData);
+//		modified = modified || getElementController().getElementAsBoolean(
+		
+		return false;
 	}
 
 }

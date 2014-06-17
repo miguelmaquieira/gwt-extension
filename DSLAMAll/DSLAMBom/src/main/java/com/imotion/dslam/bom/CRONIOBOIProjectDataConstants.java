@@ -19,7 +19,7 @@ public interface CRONIOBOIProjectDataConstants {
 	String PROJECT_DATA					= "projectData";
 	
 	//Project TYPES
-	int 	PROJECT_MACHINE_TYPE_DSLAM = 0;
+	int PROJECT_MACHINE_TYPE_DSLAM = 0;
 	
 	String MAIN_SCRIPT_ID 		= "mainScriptId";
 	String ROLLBACK_SCRIPT_ID 	= "rollBackScriptId";
