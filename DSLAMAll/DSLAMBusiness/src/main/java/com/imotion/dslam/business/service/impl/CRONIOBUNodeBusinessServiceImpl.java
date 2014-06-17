@@ -17,7 +17,7 @@ import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElem
 
 public class CRONIOBUNodeBusinessServiceImpl extends DSLAMBUBusinessServiceBase implements CRONIOBUINodeBusinessService, CRONIOBUINodeBusinessServiceConstants, CRONIOBUIBusinessNodeServiceTrace {
 
-
+	private static final long serialVersionUID = 1058333803900162439L;
 
 	@Override
 	public void addNode() {
