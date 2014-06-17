@@ -1,18 +1,18 @@
 /**************************************
-*			PROJECTS
+*			LAYOUT
 ***************************************/
 
-.dslam_studio-projectWorkZone {
-	height: 100%;
-	padding: 0px;
-}
-
-.dslam_studio-projectsView {
+.dslam_studio-projectsLayout {
 	height: 100%;
 	position: relative;
 }
 
-.dslam_studio-projectsView-bottomZone {
+.dslam_studio-projectsLayout-projectWorkZone {
+	height: 100%;
+	padding: 0px;
+}
+
+.dslam_studio-projectsLayout-bottomZone {
 	position: absolute;
 	top: 40px;
 	width: 100%;
@@ -20,21 +20,7 @@
 	height: auto;
 }
 
-.dslam_studio-projectConfigureZone {
-	height: 100%;
-}
-
-.dslam_studio-projectConfigureDeckPanel {
-	height: 100%;
-}
-
-.nav-list {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-bottom: 0;
-}
-
-.dslam_studio-projectlist-zone {
+.dslam_studio-projectsLayout-listZone {
 	padding-right: 0px;
 	padding-left: 0px;
 	height: 100%;
@@ -52,69 +38,9 @@
 	float: right;
 }
 
-.dslam_studio-processConfigureVariablesHeader>button {
-	margin-top: -3px;
-	height: 30px;
-	border-width: 0px;
-	background-color: rgb(242, 241, 240);
-	width: 50px;
-	float: right;
-}
-
-.dslam_studio-processConfigureScheduleHeader>button {
-	margin-top: -3px;
-	height: 30px;
-	border-width: 0px;
-	background-color: rgb(242, 241, 240);
-	width: 50px;
-	float: right;
-}
-
-.dslam_studio-list-header {
-	height: 35px;
-	background-color: #F2F1F0;
-	border-bottom: 1px solid #CCCCCC;
-	padding: 5px;
-	font-weight: bold;
-	margin-bottom: 10px;
-}
-
-.dslam_studio-editorView {
-	height: 100%;
-	position: relative;
-}
-
-.dslam_studio-editorView-bottomZone {
-	position: absolute;
-	top: 40px;
-	width: 100%;
-	bottom: 0px;
-	height: auto;
-}
-
-.dslam_studio-processConfigureZone {
-	padding-right: 0px;
-	padding-left: 0px;
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	top: 0px;
-}
-.dslam_studio-processConfigure {
-	position: absolute;
-	width: 100%;
-	bottom: 0px;
-	top: 0px;
-}
-
-.dslam_studio-processConfigureNodesZone {
-	bottom: 0px;
-	height: auto;
-	top: 298px;
-	position: absolute;
-	width: 100%;
-	right: 0px;
-}
+/*********************************
+*	TOOLBAR
+*********************************/
 
 .dslam_studio-toolbar {
 	height: 40px;
@@ -191,19 +117,14 @@
 	border-width: 0px;
 }
 
-.dslam_studio-list-zone {
-	padding-right: 0px;
-	padding-left: 0px;
-	height: 100%;
-}
-
-.dslam_studio-list-container-zone {
+.dslam_studio-container-zone {
 	width: 100%;
 }
 
-.dslam_studio-processConfigureVariablesHeader .gwt-Label {
-	padding-left: 0px;
-}
+
+/********************************************
+*		LIST
+********************************************/
 
 .dslam_studio-list {
 	height: 100%;
@@ -211,46 +132,22 @@
 	border-right: 1px solid #CCC;
 }
 
-.dslam_studio-container-zone {
+.dslam_studio-list-container-zone {
 	width: 100%;
 }
 
-.dslam_studio-list-element {
-	width: 100%;
+.dslam_studio-list-header {
+	height: 35px;
+	background-color: #F2F1F0;
 	border-bottom: 1px solid #CCCCCC;
+	padding: 5px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
-.dslam_studio-list-element button {
-	width: 75%;
-	border-radius: 0px;
-	border-top-width: 0px;
-	border-bottom-width: 0px;
-}
-
-.dslam_studio-list-element .dropdown-toggle {
-	width: 25%;
-	border-right-width: 0px;
-}
-
-.dslam_studio-list-element .dropdown-toggle:HOVER,.dslam_studio-list-element .dropdown-toggle:ACTIVE,.dslam_studio-list-element .dropdown-toggle:FOCUS
-	{
-	z-index: 0;
-}
-
-.dslam_studio-list-element .dropdown-menu {
-	left: auto;
-	right: 0px;
-	float: right;
-}
-
-.dslam_studio-fileListElement .aegwt-actionButton {
-	text-align: right;
-}
-
-/*******************************************************
-*			SCRIPTS EDITOR
-********************************************************/
-
+/************************
+*	SCRIPTS EDITOR
+*************************/
 .dslam_studio-scriptsEditorContainer {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -264,14 +161,6 @@
 /********************************************************
 *			PROCESS
 *********************************************************/
-
-.dslam_studio-newProcessForm {
-	background-color: #FFFFFF;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0px 0px 10px #888888;
-	width: 380px;
-}
 
 .dslam_studio-processConfigureVariablesHeader {
 	height: 35px;
@@ -320,10 +209,30 @@
 	border-right: 1px solid #CCCCCC;
 }
 
-
-
 .dslam_studio-processConfigureVariablesFormSubmitButton {
 	margin-left: 15px;
+}
+
+.dslam_studio-processConfigureVariablesHeader .gwt-Label {
+	padding-left: 0px;
+}
+
+.dslam_studio-processConfigureVariablesHeader>button {
+	margin-top: -3px;
+	height: 30px;
+	border-width: 0px;
+	background-color: rgb(242, 241, 240);
+	width: 50px;
+	float: right;
+}
+
+.dslam_studio-processConfigureScheduleHeader>button {
+	margin-top: -3px;
+	height: 30px;
+	border-width: 0px;
+	background-color: rgb(242, 241, 240);
+	width: 50px;
+	float: right;
 }
 
 .dslam_studio-processConfigureVariablesHeader>.btn:hover {
@@ -355,45 +264,6 @@
 
 .dslam_studio-processConfigureScheduleHeader>.col-xs-10 {
 	padding-left: 0px;
-}
-
-.gwt-Label {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.gwt-Button {
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.dslam_studio-server-textbox {
-	margin-top: 10px;
-	margin-left: -35px;
-}
-
-.dslam_studio-server-label {
-	margin-top: 17px;
-}
-
-.dslam_studio-user-textbox {
-	margin-top: 10px;
-	margin-left: -39px;
-}
-
-.dslam_studio-user-label {
-	margin-top: 17px;
-}
-
-.dslam_studio-password-textbox {
-	margin-top: 10px;
-	margin-left: -117px;
-}
-
-.dslam_studio-password-label {
-	margin-top: 17px;
 }
 
 .dslam_studio-processConfigureNodesSelectionHeader {
@@ -455,5 +325,78 @@
 
 .dslam_studio-processConfigureScheduleFormContainer .form-control {
 	margin-bottom: 15px;
+}
+
+.dslam_studio-processConfigureZone {
+	padding-right: 0px;
+	padding-left: 0px;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	top: 0px;
+}
+.dslam_studio-processConfigure {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	top: 0px;
+}
+
+.dslam_studio-processConfigureNodesZone {
+	bottom: 0px;
+	height: auto;
+	top: 298px;
+	position: absolute;
+	width: 100%;
+	right: 0px;
+}
+
+/*****************************************
+*			COMMON
+******************************************/
+
+.gwt-Label {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.gwt-Button {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.dslam_studio-server-textbox {
+	margin-top: 10px;
+	margin-left: -35px;
+}
+
+.dslam_studio-server-label {
+	margin-top: 17px;
+}
+
+.dslam_studio-user-textbox {
+	margin-top: 10px;
+	margin-left: -39px;
+}
+
+.dslam_studio-user-label {
+	margin-top: 17px;
+}
+
+.dslam_studio-password-textbox {
+	margin-top: 10px;
+	margin-left: -117px;
+}
+
+.dslam_studio-password-label {
+	margin-top: 17px;
+}
+
+.nav-list {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 0;
 }
 

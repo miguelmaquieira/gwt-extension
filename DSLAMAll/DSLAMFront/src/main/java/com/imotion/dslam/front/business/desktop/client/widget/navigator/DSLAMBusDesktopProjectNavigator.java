@@ -7,7 +7,6 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -63,8 +62,6 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	public void addElement(AEMFTMetadataElementComposite elementData) {
 		String		projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
 		String		projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
-		boolean		modified	= isProjectModified(elementData);
-		
 		
 		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
 		elementListContainer.add(element);
@@ -75,40 +72,16 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
-			Long elementId = getItemIdAsLong(elementData);
-			DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(String.valueOf(elementId));
+			
+			String projectId = getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID, elementData);
+			DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(String.valueOf(projectId));
 			elementWidget.setData(elementData);
 			sort(null, false);
 		}
 	}
 	
-	public AEMFTMetadataElementComposite getElementData(String elementId) {
-		AEMFTMetadataElementComposite elementData = null;
-		DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(elementId);
-		if (elementWidget != null) {
-			elementData = elementWidget.getData();
-		}
-		return elementData;
-	}
-	
-	public AEMFTMetadataElementComposite getElementDataByName(String elementName) {
-		AEMFTMetadataElementComposite elementData = null;
-		int elementCount = elementListContainer.getWidgetCount();
-		for (int i = 0; i < elementCount; i++) {
-			DSLAMBusDesktopProjectNavigatorElement elementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
-			elementData = elementWidget.getData();
-			String currentItemName = getItemNameFromData(elementData);
-			if (elementName.equals(currentItemName)) {
-				break;
-			} else {
-				elementData = null;	
-			}
-		}
-		return elementData;
-	}
-	
-	public void removeElement(String fileId) {
-		DSLAMBusDesktopProjectNavigatorElement element = getElementById(fileId);
+	public void removeElement(String projectId) {
+		DSLAMBusDesktopProjectNavigatorElement element = getElementById(projectId);
 		elementListContainer.remove(element);
 	}
 
@@ -190,24 +163,9 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	 * PROTECTED
 	 */
 	
-	
 	protected DSLAMBusDesktopProjectNavigatorElement createElement(String projectId, String name) {
 		return new DSLAMBusDesktopProjectNavigatorElement(projectId, name);
 	}
-	
-	
-	protected String getItemNameFromData(AEMFTMetadataElementComposite elementData) {
-		String projectName = getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME, elementData);
-		return projectName;
-	}
-
-	
-	protected Long getItemIdAsLong(AEMFTMetadataElementComposite elementData) {
-		Long projectId = getElementController().getElementAsLong(DSLAMBOIProject.PROJECT_ID, elementData);;
-		return projectId;
-	}
-	
-
 	
 	/**
 	 * PRIVATE
@@ -232,13 +190,6 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			}
 		}
 		return elementWidget;
-	}
-	
-	private boolean isProjectModified(AEMFTMetadataElementComposite projectData) {
-		boolean modified = getElementController().getElementAsBoolean(DSLAMBOIProcess.IS_MODIFIED, projectData);
-//		modified = modified || getElementController().getElementAsBoolean(
-		
-		return false;
 	}
 
 }
