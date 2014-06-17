@@ -94,7 +94,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite scheduleData) {
 		if (scheduleData != null) {
-			String 	schedule 		= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleData);
+			String 	schedule 		= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA			, scheduleData);
 			scheduleTextBox.setDateText(schedule);
 			lastEditSchedule = schedule;	
 		}

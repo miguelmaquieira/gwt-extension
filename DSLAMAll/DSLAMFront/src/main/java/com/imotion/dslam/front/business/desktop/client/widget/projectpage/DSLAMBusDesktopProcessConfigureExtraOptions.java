@@ -1,8 +1,11 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -10,6 +13,8 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositePanel {
 
@@ -39,6 +44,20 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 		synchroCheckBox 	= new CheckBox(TEXTS.synchronous());
 		propertiesZone.add(synchroCheckBox);
 		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_PROPERTIES_CHECKBOX);
+		
+		synchroCheckBox.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+				AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+				getElementController().setElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, data, synchroCheckBox.getValue());
+				saveEvt.addElementAsComposite(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS, data);
+				getLogicalEventHandlerManager().fireEvent(saveEvt);
+			}
+		});
+		
 	}
 	
 	/**
@@ -51,7 +70,7 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS, data);
+		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNC_OPTION, data);
 		synchroCheckBox.setValue(synchronous);
 	}
 	

@@ -1,6 +1,5 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
@@ -14,7 +13,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
-import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
@@ -127,14 +125,11 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			String schedule  		= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
 			String removeLastEdit 	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_LAST_EDIT); 
 			
-			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-
-			getElementController().setElement(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, data	, schedule);
+			AEMFTMetadataElementSingle data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement();
+			data.setValueAs(schedule);
 			
-			if (getSchedulePopup().getEditMode()) {
+			if (getSchedulePopup().getEditMode() || !schedulesData.contains(schedule)) {
 				addSchedules(schedule,removeLastEdit ,data);
-			} else if (!schedulesData.contains(schedule)) {
-				addSchedules(schedule, removeLastEdit,data);
 			} else {
 				getSchedulePopup().setErrorScheduleExist();
 			}
@@ -145,8 +140,10 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 		} else if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
-			AEMFTMetadataElement scheduleData = schedulesData.getElement(evt.getSourceWidgetId());
-			getSchedulePopup().setData((AEMFTMetadataElementComposite) scheduleData);
+			AEMFTMetadataElement scheduleDataSingle = schedulesData.getElement(evt.getSourceWidgetId());
+			AEMFTMetadataElementComposite scheduleDataComposite = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			getElementController().setElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, scheduleDataComposite, scheduleDataSingle);
+			getSchedulePopup().setData(scheduleDataComposite);
 			getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
 			getSchedulePopup().center();
 		} else 	if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
@@ -174,7 +171,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	 * PRIVATE
 	 */
 	
-	private void addSchedules(String id, String removeLastEdit, AEMFTMetadataElementComposite data) {
+	private void addSchedules(String id, String removeLastEdit, AEMFTMetadataElement data) {
 		scheduleList.clearList();
 		if (removeLastEdit != null){
 			schedulesData.removeElement(removeLastEdit);
@@ -182,43 +179,6 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		schedulesData.addElement(id,data);
 		scheduleList.setData(schedulesData);
 		getSchedulePopup().resetForm();	
-	}
-
-//	private DSLAMBusDesktopProcessConfigureScheduleLine addDateTimeBox(int numberAddDateTimePicker) {
-//
-//		DSLAMBusDesktopProcessConfigureScheduleLine line = new DSLAMBusDesktopProcessConfigureScheduleLine(null);
-//		scheduleListZone.add(line);
-//		line.setId(String.valueOf(numberAddDateTimePicker));
-//		line.postDisplay();
-//		return line;
-//	}
-
-	private List<String> dateTimePickersEmpty() {
-		
-		List<String> emptyList = null;
-		boolean errors = false;
-		
-		int count = scheduleListZone.getWidgetCount();
-		if (count > 0) {
-			for (int i = 0; i < count; i++) {
-				DSLAMBusDesktopProcessConfigureScheduleLine lineDateWidget = (DSLAMBusDesktopProcessConfigureScheduleLine) scheduleListZone.getWidget(i);
-				String lineDate = lineDateWidget.getDateText();
-				if (AEMFTCommonUtilsBase.isEmptyString(lineDate)) {
-					if (errors == false) {
-						emptyList = new ArrayList<>();
-						errors = true;
-					}
-					emptyList.add(String.valueOf(i));	
-				} else {
-					lineDateWidget.resetErrorLabel();
-				}
-			}
-		}
-		if (errors == true) {
-			return emptyList;
-		} else {
-			return null;
-		}
 	}
 	
 	private DSLAMBusDesktopProcessConfigureScheduleForm getSchedulePopup() {
