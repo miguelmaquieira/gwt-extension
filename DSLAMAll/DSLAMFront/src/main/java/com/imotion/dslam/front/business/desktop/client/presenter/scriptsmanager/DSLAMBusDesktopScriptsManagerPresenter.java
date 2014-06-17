@@ -27,10 +27,7 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-//		if () {
-//			
-//		}
-//		getView().setData(finalSectionData);
+		getView().setData(finalSectionData);
 	}
 	
 	@Override
