@@ -5,7 +5,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String APP_ID_PREFFIX = "dslam_studio-";
 
 	//TOOLBAR
-
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 			//dslam_studio-toolbar
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";			//dslam_studio-toolbar-actions
 	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";				//dslam_studio-toolbar-actions-zone
@@ -18,13 +17,11 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR_INFO_TITLE_ZONE_SEPARATOR 			= TOOLBAR_INFO_TITLE_ZONE + "-separator";		//dslam_studio-toolbar-info-titleZone-separator
 	String TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE 		= TOOLBAR_INFO_TITLE_ZONE + "-secondaryTitle";	//dslam_studio-toolbar-info-titleZone-secondaryTitle
 
-	//LIST
+	//Project Navigator
 	String LIST											= APP_ID_PREFFIX 		+ "list";				//dslam_studio-list
 	String LIST_CONTAINER								= LIST		 			+ "-container";			//dslam_studio-list-container
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";				//dslam_studio-list-container-zone
 	String LIST_HEADER 									= LIST					+ "-header";			//dslam_studio-list-header
-	String LIST_ELEMENT 								= LIST					+ "-element";			//dslam_studio-list-element
-	String LIST_ZONE 									= LIST					+ "-zone";				//dslam_studio-list-zone
 
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
@@ -32,40 +29,34 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NEW_PROJECT_FORM_INPUT_ZONE 					= NEW_PROJECT_FORM			+ "-inputZone";		//dslam_studio-newProjectForm-inputZone
 	String NEW_PROJECT_FORM_SAVE_ZONE 					= NEW_PROJECT_FORM			+ "-saveZone";		//dslam_studio-newProjectForm-saveZone
 
-	//PROJECTS VIEW
-	String PROJECTS_VIEW 								= APP_ID_PREFFIX		+ "projectsView";	//dslam_studio-projectsView
-	String PROJECTS_VIEW_BOTTOM_ZONE 					= PROJECTS_VIEW			+ "-bottomZone";	//dslam_studio-projectsView-bottomZone
-	String PROJECTS_VIEW_PROCESS_NAME 					= PROJECTS_VIEW			+ "-projectName";	//dslam_studio-projectsView-projectName
-	String PROJECTS_VIEW_SECTION_NAME 					= PROJECTS_VIEW			+ "-sectionName";	//dslam_studio-projectsView-sectionName	
-	String PROJECT_LIST									= APP_ID_PREFFIX 		+ "projectlist";	//dslam_studio-projectlist
-	String PROJECT_LIST_ZONE 							= PROJECT_LIST			+ "-zone";			//dslam_studio-projectlist-zone
-	String PROJECT_WORK_ZONE 							= APP_ID_PREFFIX		+ "projectWorkZone"; 			//dslam_studio-projectWorkZone
-	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX		+ "projectConfigureDeckPanel"; 	//dslam_studio-projectConfigureDeckPanel
-
+	//PROJECT LAYOUT
+	String PROJECTS_LAYOUT 											= APP_ID_PREFFIX								+ "projectsLayout";		//dslam_studio-projectsLayout
+	String PROJECTS_LAYOUT_BOTTOM_ZONE 								= PROJECTS_LAYOUT								+ "-bottomZone";		//dslam_studio-projectsLayout-bottomZone
+	String PROJECTS_LAYOUT_LIST_ZONE 								= PROJECTS_LAYOUT								+ "-listZone";			//dslam_studio-projectsLayout-listZone
+	String PROJECTS_LAYOUT_WORK_ZONE 								= PROJECTS_LAYOUT								+ "-projectWorkZone"; 	//dslam_studio-projectsLayout-projectWorkZone
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER							= PROJECTS_LAYOUT_WORK_ZONE						+ "-header";			//dslam_studio-projectsLayout-projectWorkZone-header
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_ACTIONS_ZONE 			= PROJECTS_LAYOUT_WORK_ZONE_HEADER				+ "-actionsZone";		//dslam_studio-projectsLayout-projectWorkZone-header-actionsZone
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE 				= PROJECTS_LAYOUT_WORK_ZONE_HEADER				+ "-infoZone";			//dslam_studio-projectsLayout-projectWorkZone-header-infoZone
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR = PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-modIndicator";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-sectionName";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-sectionName
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-separator";			//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-separator
+	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-projectName";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-projectName
+	
 	//SCRITPS EDITOR
 	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
 	String SCRIPTS_EDITOR_AREA 							= APP_ID_PREFFIX		+ "scriptsEditorArea";		//dslam_studio-scriptsEditorArea
 
-	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 	//dslam_studio-processZone
-
-	//EDITOR VIEW
-	String EDITOR_VIEW 									= APP_ID_PREFFIX			+ "editorView";		//dslam_studio-editorView
-	String EDITOR_VIEW_BOTTOM_ZONE 						= EDITOR_VIEW				+ "-bottomZone";	//dslam_studio-editorView-bottomZone
-	String EDITOR_VIEW_FILE_NAME 						= EDITOR_VIEW				+ "-filename";		//dslam_studio-editorView-filename
-	String EDITOR_VIEW_CONTENT_TYPE						= EDITOR_VIEW				+ "-contentType";	//dslam_studio-editorView-contentType
-
 	//PROCESS VIEW
-	String PROCESS_VIEW 							= APP_ID_PREFFIX			+ "processView";		//dslam_studio-processView
-	
-	//PROCESS OPTIONS
-
-	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 							//dslam_studio-processConfigure
+	String PROCESS_VIEW 								= APP_ID_PREFFIX			+ "processView";						//dslam_studio-processView
+	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 						//dslam_studio-processZone
+	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX			+ "projectConfigureDeckPanel"; 			//dslam_studio-projectConfigureDeckPanel
+	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 					//dslam_studio-processConfigure
 	String PROCESS_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "processConfigureZone";				//dslam_studio-processConfigureZone
 	String PROCESS_CONFIGURE_PROPERTIES_HEADER			= APP_ID_PREFFIX			+ "processConfigurePropertiesHeader";	//dslam_studio-processConfigurePropertiesHeader
 	String PROCESS_CONFIGURE_PROPERTIES_CHECKBOX		= APP_ID_PREFFIX			+ "processConfigurePropertiesCheckBox";	//dslam_studio-processConfigurePropertiesCheckBox
 	String PROCESS_CONFIGURE_VARIABLES_HEADER			= APP_ID_PREFFIX			+ "processConfigureVariablesHeader"; 	//dslam_studio-processConfigureVariablesHeader
 	String PROCESS_CONFIGURE_VARIABLES_LIST				= APP_ID_PREFFIX			+ "processConfigureVariablesList";		//dslam_studio-processConfigureVariablesList
-	String PROCESS_CONFIGURE_SCHEDULE_HEADER			= APP_ID_PREFFIX			+ "processConfigureScheduleHeader"; 		//dslam_studio-processConfigureScheduleHeader
+	String PROCESS_CONFIGURE_SCHEDULE_HEADER			= APP_ID_PREFFIX			+ "processConfigureScheduleHeader"; 	//dslam_studio-processConfigureScheduleHeader
 	String PROCESS_CONFIGURE_SCHEDULE_LIST				= APP_ID_PREFFIX			+ "processConfigureScheduleList";		//dslam_studio-processConfigureScheduleList
 	String PROCESS_CONFIGURE_SCHEDULE_LINE				= APP_ID_PREFFIX			+ "processConfigureScheduleLine";		//dslam_studio-processConfigureScheduleLine
 	String PROCESS_CONFIGURE_NODES_ZONE 				= APP_ID_PREFFIX			+ "processConfigureNodesZone"; 					//dslam_studio-processConfigureNodeZone
@@ -76,7 +67,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_NODES_PROPERTIES_HEADER 	= APP_ID_PREFFIX			+ "processConfigureNodesPropertiesHeader";		//dslam_studio-processConfigureNodesPropertiesHeader
 	String PROCESS_CONFIGURE_NODES_SELECTION 			= APP_ID_PREFFIX			+ "processConfigureNodesSelection";				//dslam_studio-processConfigureNodesSelection
 	String PROCESS_CONFIGURE_NODES_SELECTION_HEADER 	= APP_ID_PREFFIX			+ "processConfigureNodesSelectionHeader";		//dslam_studio-processConfigureNodesSelectionHeader
-
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
 	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton

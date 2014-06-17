@@ -25,7 +25,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public CRONIOBusDesktopProjectsLayout() {
 		root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_VIEW);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT);
 
 		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
@@ -38,13 +38,13 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
 		root.add(bottomZone);
-		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_VIEW_BOTTOM_ZONE);
+		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE);
 
 		//Bottom Zone - Projectlist zone
 		FlowPanel projectListZone = new FlowPanel();
 		bottomZone.add(projectListZone);
 		projectListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
-		projectListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_LIST_ZONE);
+		projectListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_LIST_ZONE);
 		
 		projectListNavigator = new DSLAMBusDesktopProjectNavigator();
 		projectListZone.add(projectListNavigator);
@@ -53,7 +53,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		projectWorkZone = new FlowPanel();
 		bottomZone.add(projectWorkZone);
 		projectWorkZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_WORK_ZONE);
+		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
 	
 	public void setLayoutContent(Widget content) {
