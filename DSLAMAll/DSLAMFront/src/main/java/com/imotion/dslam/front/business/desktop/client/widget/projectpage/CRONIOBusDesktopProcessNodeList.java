@@ -40,7 +40,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		//Header
 		FlowPanel headerZone = new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER);
 		
 		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.nodes());
 		headerZone.add(headerLabel);
