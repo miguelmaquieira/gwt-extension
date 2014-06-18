@@ -54,7 +54,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 				
 				resetErrors();
 				
-				if (AEMFTCommonUtilsBase.isEmptyString(scheduleTextBox.getDateText())) {
+				if (AEMFTCommonUtilsBase.isEmptyString(scheduleTextBox.getDateText()) || "__/__/____ __:__".equals(scheduleTextBox.getDateText())) {
 					errors = true;
 					scheduleTextBox.setEmptyError(TEXTS.empty_textbox());
 				}
