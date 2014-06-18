@@ -28,7 +28,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private AEGWTBootstrapTreeMenuFinalItem 	propertiesProcess;
 	private AEGWTBootstrapTreeMenuFinalItem 	nodesProcess;
 	
-	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String name) {
+	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		
@@ -37,7 +37,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		root.add(menu);
 		
 		//MENU -> Project
-		menuProject 		= new AEGWTBootstrapTreeMenuItem(name);
+		menuProject 		= new AEGWTBootstrapTreeMenuItem(projectName);
 		menuProject.setCloseMenu();
 		menu.addWidget(menuProject);
 		
@@ -105,8 +105,6 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-		
-	}
-		
+		// TODO Auto-generated method stub	
+	}		
 }

@@ -20,7 +20,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureSchedule			scheduleProcessConfigure;
 	private DSLAMBusDesktopProcessConfigureExtraOptions		extraOptionsConfigure;
-	//private DSLAMBusDesktopProcessConfigureNodes		nodeZone;
+	private CRONIOBusDesktopProcessConfigureNodes			nodesConfigure;
 
 	public CRONIOBusDesktopProcessSectionsDeckPanel() {
 
@@ -31,15 +31,15 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
 		extraOptionsConfigure 		= new DSLAMBusDesktopProcessConfigureExtraOptions();
+		nodesConfigure				= new CRONIOBusDesktopProcessConfigureNodes();
 
 		rootDeckPanel.add(variablesProcessConfigure);
 		rootDeckPanel.add(scheduleProcessConfigure);
 		rootDeckPanel.add(extraOptionsConfigure);
+		rootDeckPanel.add(nodesConfigure);
 	}
 
 	public void reset() {
-		//optionsZone.reset();
-		this.setVisibility(Visibility.HIDDEN);
 	}
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
@@ -55,8 +55,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 			extraOptionsConfigure.setData(sectionData);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
 			rootDeckPanel.showWidget(3);
-//			nodes.setData(sectionData);
-
+			nodesConfigure.setData(sectionData);
 		}
 		this.setVisibility(Visibility.VISIBLE);
 	}
@@ -70,7 +69,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		variablesProcessConfigure.postDisplay();
 		scheduleProcessConfigure.postDisplay();
 		extraOptionsConfigure.postDisplay();
-		//variablesProcessConfigure.postDisplay();
+		nodesConfigure.postDisplay();
 	}
 
 	@Override

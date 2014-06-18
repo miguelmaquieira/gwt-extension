@@ -22,6 +22,10 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST_CONTAINER								= LIST		 			+ "-container";			//dslam_studio-list-container
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";				//dslam_studio-list-container-zone
 
+	String NODE_LIST									= APP_ID_PREFFIX 		+ "nodeList";			//dslam_studio-nodeList		
+	String NODE_LIST_CONTAINER							= NODE_LIST		 		+ "-container";			//dslam_studio-nodeList-container
+	String NODE_LIST_CONTAINER_ZONE 					= LIST_CONTAINER		+ "-zone";				//dslam_studio-nodeList-container-zone
+	
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
 	String NEW_PROJECT_FORM_ERROR_ZONE 					= NEW_PROJECT_FORM			+ "-errorZone";		//dslam_studio-newProjectForm-errorZone
@@ -62,14 +66,15 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_SCHEDULE_LINE				= APP_ID_PREFFIX			+ "processConfigureScheduleLine";		//dslam_studio-processConfigureScheduleLine
 	String PROCESS_CONFIGURE_NODES_ZONE 				= APP_ID_PREFFIX			+ "processConfigureNodesZone"; 					//dslam_studio-processConfigureNodeZone
 	String PROCESS_CONFIGURE_NODES 						= APP_ID_PREFFIX			+ "processConfigureNodes"; 						//dslam_studio-processConfigureNode
-	String PROCESS_CONFIGURE_NODES_SELECTION_ZONE 		= APP_ID_PREFFIX			+ "processConfigureNodesSelectionZone";			//dslam_studio-processConfigureNodesSelectionZone
-	String PROCESS_CONFIGURE_NODES_PROPERTIES_ZONE 		= APP_ID_PREFFIX			+ "processConfigureNodesPropertiesZone";		//dslam_studio-processConfigureNodesPropertiesZone
-	String PROCESS_CONFIGURE_NODES_PROPERTIES 			= APP_ID_PREFFIX			+ "processConfigureNodesProperties";			//dslam_studio-processConfigureNodesProperties
-	String PROCESS_CONFIGURE_NODES_PROPERTIES_HEADER 	= APP_ID_PREFFIX			+ "processConfigureNodesPropertiesHeader";		//dslam_studio-processConfigureNodesPropertiesHeader
-	String PROCESS_CONFIGURE_NODES_SELECTION 			= APP_ID_PREFFIX			+ "processConfigureNodesSelection";				//dslam_studio-processConfigureNodesSelection
-	String PROCESS_CONFIGURE_NODES_SELECTION_HEADER 	= APP_ID_PREFFIX			+ "processConfigureNodesSelectionHeader";		//dslam_studio-processConfigureNodesSelectionHeader
+	String PROCESS_CONFIGURE_NODES_LIST_ZONE 			= APP_ID_PREFFIX			+ "processConfigureNodesListZone";			//dslam_studio-processConfigureNodesListZone
+	String PROCESS_CONFIGURE_NODES_INFO_ZONE 			= APP_ID_PREFFIX			+ "processConfigureNodesInfoZone";		//dslam_studio-processConfigureNodesInfoZone
+	String PROCESS_CONFIGURE_NODES_INFO 				= APP_ID_PREFFIX			+ "processConfigureNodesInfo";			//dslam_studio-processConfigureNodesInfo
+	String PROCESS_CONFIGURE_NODES_INFO_HEADER 			= APP_ID_PREFFIX			+ "processConfigureNodesInfoHeader";		//dslam_studio-processConfigureNodesInfoHeader
+	String PROCESS_CONFIGURE_NODES_LIST 				= APP_ID_PREFFIX			+ "processConfigureNodesList";				//dslam_studio-processConfigureNodesList
+	String PROCESS_CONFIGURE_NODES_LIST_HEADER 			= APP_ID_PREFFIX			+ "processConfigureNodesListHeader";		//dslam_studio-processConfigureNodesListHeader
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
 	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer
+	String POPUP_SCHEDULE_FORM_SAVE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleFormSaveZone";		//dslam_studio-processConfigureScheduleFormSaveZone
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
 }

@@ -154,4 +154,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("DSLAM")
 	String project_type_dslam();
 	
+	@DefaultStringValue("Información Nodo")
+	String node_information();
+	
 }

@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.navigator;
+package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -22,10 +22,8 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEvent;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 
-public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
-
-	public static final String NAME = "DSLAMBusDesktopNavigator";
-	
+public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
+	public static final String NAME = "CRONIOBusDesktopProcessNodeList";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel elementListContainerZone;
@@ -34,36 +32,45 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 
 	private AEGWTComparator nameComparatorAsc;
 
-	public DSLAMBusDesktopProjectNavigator() {
+	public CRONIOBusDesktopProcessNodeList() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		addStyleName(DSLAMBusDesktopIStyleConstants.LIST);
+		addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST);
 		
 		//Header
 		FlowPanel headerZone = new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_ZONE_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_HEADER);
 		
-		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.navigator());
+		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.nodes());
 		headerZone.add(headerLabel);
 		
 		//Container
 		elementListContainerZone = new FlowPanel();
 		root.add(elementListContainerZone);
-		elementListContainerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER_ZONE);
+		elementListContainerZone.addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST_CONTAINER_ZONE);
 		
 		elementListContainer = new FlowPanel();
 		elementListContainerZone.add(elementListContainer);
-		elementListContainer.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_CONTAINER);
+		elementListContainer.addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST_CONTAINER);
 		
 		initComparators();
 	}
 	
+	public void builder() {
+		CRONIOBusDesktopProcessNodeListElement element1 = createElement("1", "mario");
+//		CRONIOBusDesktopProcessNodeListElement element2 = createElement("2", "gael");
+//		CRONIOBusDesktopProcessNodeListElement element3 = createElement("3", "luski");
+		elementListContainer.add(element1);
+//		elementListContainer.add(element2);
+//		elementListContainer.add(element3);
+	}
+	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		String		projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
-		String		projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
+		String		nodeId		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_ID	, elementData);
+		String		nodeName	= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_NAME, elementData);
 		
-		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
+		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName);
 		elementListContainer.add(element);
 		element.setData(elementData);
 		sort(null, false);
@@ -73,15 +80,15 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
 			
-			String projectId = getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID, elementData);
-			DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(String.valueOf(projectId));
+			String nodeId = getElementController().getElementAsString(CRONIOBOINode.NODE_ID, elementData);
+			CRONIOBusDesktopProcessNodeListElement elementWidget = getElementById(String.valueOf(nodeId));
 			elementWidget.setData(elementData);
 			sort(null, false);
 		}
 	}
 	
-	public void removeElement(String projectId) {
-		DSLAMBusDesktopProjectNavigatorElement element = getElementById(projectId);
+	public void removeElement(String nodeId) {
+		CRONIOBusDesktopProcessNodeListElement element = getElementById(nodeId);
 		elementListContainer.remove(element);
 	}
 
@@ -128,11 +135,11 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 
 	@Override
 	public void sort(String comparatorKey, boolean ascendent) {
-		List<DSLAMBusDesktopProjectNavigatorElement> widgetList = getElementWidgetList();
+		List<CRONIOBusDesktopProcessNodeListElement> widgetList = getElementWidgetList();
 		if (widgetList != null && widgetList.size() > 0) {
 			Collections.sort(widgetList, getComparator(null, false));
 			elementListContainer.clear();
-			for (DSLAMBusDesktopProjectNavigatorElement item : widgetList) {
+			for (CRONIOBusDesktopProcessNodeListElement item : widgetList) {
 				elementListContainer.add(item);
 			}
 		}
@@ -152,8 +159,8 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 
 			@Override
 			public int compare(AEGWTICompositePanel o1, AEGWTICompositePanel o2) {
-				DSLAMBusDesktopProjectNavigatorElement o1Element = (DSLAMBusDesktopProjectNavigatorElement) o1;
-				DSLAMBusDesktopProjectNavigatorElement o2Element = (DSLAMBusDesktopProjectNavigatorElement) o2;
+				CRONIOBusDesktopProcessNodeListElement o1Element = (CRONIOBusDesktopProcessNodeListElement) o1;
+				CRONIOBusDesktopProcessNodeListElement o2Element = (CRONIOBusDesktopProcessNodeListElement) o2;
 				return o1Element.getElementName().compareTo(o2Element.getElementName());
 			}
 		};
@@ -163,27 +170,27 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	 * PROTECTED
 	 */
 	
-	protected DSLAMBusDesktopProjectNavigatorElement createElement(String projectId, String name) {
-		return new DSLAMBusDesktopProjectNavigatorElement(projectId, name);
+	protected CRONIOBusDesktopProcessNodeListElement createElement(String nodeId, String nodeName) {
+		return new CRONIOBusDesktopProcessNodeListElement(nodeId, nodeName, this);
 	}
 	
 	/**
 	 * PRIVATE
 	 */
-	private List<DSLAMBusDesktopProjectNavigatorElement> getElementWidgetList() {
-		List<DSLAMBusDesktopProjectNavigatorElement> widgetList = new ArrayList<>();
+	private List<CRONIOBusDesktopProcessNodeListElement> getElementWidgetList() {
+		List<CRONIOBusDesktopProcessNodeListElement> widgetList = new ArrayList<>();
 		for (int i = 0; i < elementListContainer.getWidgetCount(); i++) {
-			DSLAMBusDesktopProjectNavigatorElement elementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
+			CRONIOBusDesktopProcessNodeListElement elementWidget = (CRONIOBusDesktopProcessNodeListElement) elementListContainer.getWidget(i);
 			widgetList.add(elementWidget);
 		}
 		return widgetList;
 	}
 	
-	private DSLAMBusDesktopProjectNavigatorElement getElementById(String elementId) {
-		DSLAMBusDesktopProjectNavigatorElement elementWidget = null;
+	private CRONIOBusDesktopProcessNodeListElement getElementById(String elementId) {
+		CRONIOBusDesktopProcessNodeListElement elementWidget = null;
 		int itemCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < itemCount; i++) {
-			DSLAMBusDesktopProjectNavigatorElement currentElementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
+			CRONIOBusDesktopProcessNodeListElement currentElementWidget = (CRONIOBusDesktopProcessNodeListElement) elementListContainer.getWidget(i);
 			if (elementId.equals(currentElementWidget.getId())) {
 				elementWidget = currentElementWidget;
 				break;
@@ -191,5 +198,5 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		}
 		return elementWidget;
 	}
-
 }
+

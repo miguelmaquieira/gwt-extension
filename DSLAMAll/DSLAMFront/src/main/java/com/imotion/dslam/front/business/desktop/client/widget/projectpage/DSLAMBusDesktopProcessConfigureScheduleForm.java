@@ -40,6 +40,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 		
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
+		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_SCHEDULE_FORM_SAVE_ZONE);
 		
 		saveButton = new AEGWTButton(TEXTS.save());
 		saveButtonZone.add(saveButton);
