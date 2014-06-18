@@ -17,10 +17,11 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
 	
 	
-	private FlowPanel 							root;
-	private DSLAMBusDesktopToolbar				toolbar;
-	private DSLAMBusDesktopProjectNavigator		projectListNavigator;
-	private FlowPanel projectWorkZone;
+	private FlowPanel 									root;
+	private DSLAMBusDesktopToolbar						toolbar;
+	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
+	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
+	private FlowPanel									projectWorkZone;
 	
 	public CRONIOBusDesktopProjectsLayout() {
 		root = new FlowPanel();
@@ -49,9 +50,16 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		projectListNavigator = new DSLAMBusDesktopProjectNavigator();
 		projectListZone.add(projectListNavigator);
 
-		//Bottom Zone - Project configure zone
+		//Bottom Zone - Right
+		FlowPanel bottomRightZone = new FlowPanel();
+		bottomZone.add(bottomRightZone);
+		bottomRightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT);
+		
+		sectionHeader = new CRONIOBusDesktopProjectsLayoutItemHeader();
+		bottomRightZone.add(sectionHeader);
+		
 		projectWorkZone = new FlowPanel();
-		bottomZone.add(projectWorkZone);
+		bottomRightZone.add(projectWorkZone);
 		projectWorkZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
 		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
@@ -59,6 +67,18 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public void setLayoutContent(Widget content) {
 		projectWorkZone.clear();
 		projectWorkZone.add(content);
+	}
+	
+	public void setProyectName(String projectNameValue) {
+		sectionHeader.setProyectName(projectNameValue);
+	}
+	
+	public void setSectionNameFromId(String sectionId) {
+		sectionHeader.setSectionNameFromId(sectionId);
+	}
+	
+	public void setModified(boolean modified) {
+		sectionHeader.setModified(modified);
 	}
 
 	/**
@@ -82,7 +102,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		super.postDisplay();
 		setHeightToDecrease(90);
 		projectListNavigator.postDisplay();
-		toolbar.postDisplay();
+		sectionHeader.postDisplay();
 	}
 
 }

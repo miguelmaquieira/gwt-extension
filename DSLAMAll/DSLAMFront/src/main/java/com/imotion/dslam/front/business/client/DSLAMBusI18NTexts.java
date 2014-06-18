@@ -146,7 +146,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	String main_script_label();
 	
 	@DefaultStringValue("Rollback Script")
-	String roolback_script_label();
+	String rollback_script_label();
 	
 	@DefaultStringValue("Nombre del Proyecto")
 	String projectame_input_placeholder();

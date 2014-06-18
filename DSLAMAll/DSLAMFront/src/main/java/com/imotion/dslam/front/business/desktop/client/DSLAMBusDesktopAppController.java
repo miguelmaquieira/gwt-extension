@@ -131,6 +131,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		CRONIOBusDesktopLayoutContainer deckPanelLayout = new CRONIOBusDesktopLayoutContainer();
 		container.add(deckPanelLayout);
 		super.container = deckPanelLayout;
+		deckPanelLayout.setCurrentPresenter(this);
 
 		CRONIOBusDesktopProjectsLayout projectsLayout = new CRONIOBusDesktopProjectsLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsLayout);

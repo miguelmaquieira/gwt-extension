@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -42,7 +42,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 		for (AEMFTMetadataElement variable : variableList) {
 			String itemKey = variable.getKey();
-			if (!DSLAMBOIProcess.IS_MODIFIED.equals(itemKey)) {
+			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
 				String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
 				String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
 

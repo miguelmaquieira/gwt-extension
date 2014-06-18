@@ -25,6 +25,5 @@ public interface DSLAMBOIProcessDataConstants {
 	String PROCESS_VARIABLES_DATA	= "variablesData";
 	String PROCESS_SCHEDULE_DATA	= "scheduleData";
 	String PROCESS_EXTRA_OPTIONS 	= "extraOptions";
-	String IS_MODIFIED 				= "IS_MODIFIED";
 
 }

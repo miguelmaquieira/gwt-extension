@@ -1,7 +1,10 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -10,12 +13,13 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
 public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePanel {
 	
-	public static final String NAME  = "CRONIOBusDesktopProjectsLayoutItemHeader";
+	public		static final String			 NAME	= "CRONIOBusDesktopProjectsLayoutItemHeader";
+	private		static final DSLAMBusI18NTexts TEXTS	= GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel		actionsZone;
 	private AEGWTLabel		sectionName;
-
-	private AEGWTLabel projectName;
+	private AEGWTLabel 		projectName;
+	private AEGWTLabel 		modifiedIndicator;
 
 	public CRONIOBusDesktopProjectsLayoutItemHeader() {
 		FlowPanel root = new FlowPanel();
@@ -28,7 +32,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		infoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE);
 		infoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
-		AEGWTLabel modifiedIndicator = new AEGWTLabel("");
+		modifiedIndicator = new AEGWTLabel("");
 		infoZone.add(modifiedIndicator);
 		modifiedIndicator.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR);
 		
@@ -56,6 +60,36 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		actionsZone.add(container);
 		container.addStyleName(containerStyle);
 		container.add(actionWidget);
+	}
+	
+	public void setProyectName(String projectNameValue) {
+		projectName.setText(projectNameValue);
+	}
+	
+	public void setSectionNameFromId(String sectionId) {
+		String sectionNameValue = "";
+		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+			sectionNameValue = TEXTS.main_script_label();
+		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
+			sectionNameValue = TEXTS.rollback_script_label();
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+			sectionNameValue = TEXTS.variables();
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+			sectionNameValue = TEXTS.schedule();
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+			sectionNameValue = TEXTS.properties();
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
+			sectionNameValue = TEXTS.nodes();
+		}
+		sectionName.setText(sectionNameValue);
+	}
+	
+	public void setModified(boolean modified) {
+		String txt = "";
+		if (modified) {
+			txt = "*";
+		}
+		modifiedIndicator.setText(txt);
 	}
 
 	/**

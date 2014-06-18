@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -41,7 +41,7 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 		for (AEMFTMetadataElement schedule : scheduleList) {
 			
 			String itemKey = schedule.getKey();
-			if (!DSLAMBOIProcess.IS_MODIFIED.equals(itemKey)) {
+			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
 
 				String scheduleValue = ((AEMFTMetadataElementSingle) schedule).getValueAsString();
 
