@@ -20,7 +20,7 @@ import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEventType
 
 public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePanelLoggedViewDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, CRONIOBusProjectBasePresenterConstants {
 
-	private CRONIOBusDesktopProjectsLayout projectLayout;
+	private CRONIOBusDesktopProjectsLayout projectsLayout;
 
 	public CRONIOBusProjectBasePresenter(T view) {
 		super(view);
@@ -94,13 +94,15 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		layoutContainer.showLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID);
 		Widget viewAsWidget = getView().asWidget();
 		layoutContainer.setLayoutContent(viewAsWidget);
-		projectLayout = (CRONIOBusDesktopProjectsLayout) layoutContainer.getCurrentLayout();
+		projectsLayout = (CRONIOBusDesktopProjectsLayout) layoutContainer.getCurrentLayout();
 	}
 
 	@Override
 	protected void viewAdded() {
 		super.viewAdded();
 		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, getProjectsLayout());
+		
 		String currentProjectId			= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 		String currentFinalSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
 		openFinalSection(true, currentProjectId, currentFinalSectionId);
@@ -163,16 +165,21 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			
 			boolean sectionIsModified = getElementDataController().getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED, finalSectionData);
 			
-			getProjectsLayout().setModified(sectionIsModified);
-			getProjectsLayout().setSectionNameFromId(projectFinalSectionId);
-			getProjectsLayout().setProyectName(projectName);
+			//SHOW HEADER INFO
+			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+			showInfoEvent.addElementAsString(DSLAMBOIProject.PROJECT_NAME	, projectName);
+			showInfoEvent.addElementAsBoolean(DSLAMBOIProject.IS_MODIFIED	, sectionIsModified);
+			showInfoEvent.setFinalSectionId(projectFinalSectionId);
+			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
+			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
 			
+			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
 		}
 	}
 	
 	private CRONIOBusDesktopProjectsLayout getProjectsLayout() {
-		return projectLayout;
+		return projectsLayout;
 	}
 
 }

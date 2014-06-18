@@ -138,7 +138,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		projectsLayout.postDisplay();
 	}
 
-	//DELETE WHEN LOGIN WORKS!!
+	//TODO:DELETE WHEN LOGIN WORKS!!
 	@Override
 	protected void validateSession(final AsyncCallback<Boolean> callback) {
 		getClientServerConnection().executeComm(null, AEMFTIBusinessServiceIdConstant.CTE_MTF_AE_BUS_SERVICE_LOGIN_IS_VALID_SESION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {

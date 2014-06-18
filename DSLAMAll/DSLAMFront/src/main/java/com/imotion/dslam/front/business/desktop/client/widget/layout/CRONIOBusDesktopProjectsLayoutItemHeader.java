@@ -24,6 +24,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 	public CRONIOBusDesktopProjectsLayoutItemHeader() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_ZONE_HEADER);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER);
 		
 		//INFO
@@ -46,7 +47,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		
 		projectName = new AEGWTLabel("Project");
 		infoZone.add(projectName);
-		infoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME);
+		projectName.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME);
 		
 		//ACTIONS
 		actionsZone = new FlowPanel();

@@ -42,7 +42,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		//Header
 		FlowPanel headerZone = new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.LIST_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_ZONE_HEADER);
 		
 		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.navigator());
 		headerZone.add(headerLabel);

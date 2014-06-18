@@ -21,7 +21,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST											= APP_ID_PREFFIX 		+ "list";				//dslam_studio-list
 	String LIST_CONTAINER								= LIST		 			+ "-container";			//dslam_studio-list-container
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";				//dslam_studio-list-container-zone
-	String LIST_HEADER 									= LIST					+ "-header";			//dslam_studio-list-header
 
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
@@ -42,6 +41,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-projectName";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-projectName
 	String PROJECTS_LAYOUT_BOTTOM_ZONE 								= PROJECTS_LAYOUT								+ "-bottomZone";		//dslam_studio-projectsLayout-bottomZone
 	String PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT 						= PROJECTS_LAYOUT_BOTTOM_ZONE					+ "-right";				//dslam_studio-projectsLayout-bottomZone-right
+	String PROJECTS_LAYOUT_ZONE_HEADER 								= PROJECTS_LAYOUT								+ "-zoneHeader";		//dslam_studio-projectsLayout-zoneHeader
 	
 	//SCRITPS EDITOR
 	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
