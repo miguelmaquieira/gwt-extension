@@ -2,12 +2,11 @@ package com.imotion.dslam.backend.persistence.jpa;
 
 import java.io.Serializable;
 
+import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
-import com.selene.arch.exe.back.persistence.module.AEMFTIPersistenceModule;
-import com.selene.arch.exe.core.AEMFTICoreProxyService;
 
 public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extends Serializable> extends DSLAMBKPersistenceServiceBase<T, Q, Id> {
 
@@ -17,6 +16,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	
 	private DSLAMBKFilePersistenceServiceJPA 		filePersistence;
 	private DSLAMBKProcessPersistenceServiceJPA 	processPersistence;
+	private CRONIOBKNodePersistenceServiceJPA 		nodePersistence;
 	
 	
 	@Override
@@ -62,6 +62,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) processPersistence);
 			processPersistence = null;
 		}
+		if (nodePersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
+			nodePersistence = null;
+		}
 	}
 	
 	/**************************************************************
@@ -80,5 +84,12 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			processPersistence = (DSLAMBKProcessPersistenceServiceJPA) getFactoryPersistence().newProcessPersistence();
 		}
 		return processPersistence;
+	}
+	
+	protected CRONIOBKNodePersistenceServiceJPA getNodePersistence() {
+		if (nodePersistence == null) {
+			nodePersistence = (CRONIOBKNodePersistenceServiceJPA) getFactoryPersistence().newNodePersistence();
+		}
+		return nodePersistence;
 	}
 }

@@ -38,10 +38,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		
 		//MENU -> Project
 		menuProject 		= new AEGWTBootstrapTreeMenuItem(name);
+		menuProject.setCloseMenu();
 		menu.addWidget(menuProject);
 		
 		//MENU -> Project -> Script
 		menuScript 			= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
+		menuScript.setCloseMenu();
 		menuProject.addWidget(menuScript);
 		
 		//MENU -> Project -> Script -> MainScript
@@ -54,6 +56,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		
 		//MENU -> Project  -> Process
 		menuProcess 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
+		menuProcess.setCloseMenu();
 		menuProject.addWidget(menuProcess);
 		
 		//MENU -> Project  -> Process -> Variables

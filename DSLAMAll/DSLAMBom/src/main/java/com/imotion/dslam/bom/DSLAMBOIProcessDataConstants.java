@@ -1,11 +1,13 @@
 package com.imotion.dslam.bom;
 
+
 public interface DSLAMBOIProcessDataConstants {
 	
 	String PROCESS_ID 				= "processId";
 	String PROCESS_NAME				= "processName";	
 	String PROCESS_SCHEDULE_LIST	= "processScheduleList";	
 	String PROCESS_VARIABLE_LIST	= "processVariableList";
+	String PROCESS_NODE_LIST		= "processNodeList";
 	String SAVED_TIME				= "savedTime";
 	String CREATION_TIME			= "creationTime";
 	String PROCESS_SYNC_OPTION		= "processSyncOption";
@@ -24,6 +26,7 @@ public interface DSLAMBOIProcessDataConstants {
 	String PROCESS_PROPERTIES_DATA	= "propertiesData";
 	String PROCESS_VARIABLES_DATA	= "variablesData";
 	String PROCESS_SCHEDULE_DATA	= "scheduleData";
+	String PROCESS_NODES_DATA		= "nodesData";
 	String PROCESS_EXTRA_OPTIONS 	= "extraOptions";
 
 }

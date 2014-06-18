@@ -3,7 +3,7 @@ package com.imotion.dslam;
 public interface DSLAMIConstants {
 	
 	// Application Name
-	public final static String CTE_SNDO_APPLI_NAME = "DSLAM";
+	public final static String CTE_DSLAM_APPLI_NAME = "DSLAM";
 	
 	// DSLAM Module
 	public final static String CTE_DSLAM_MODULE_NAME = "DSLAM_MOD";

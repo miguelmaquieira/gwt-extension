@@ -1,5 +1,6 @@
 package com.imotion.dslam.business.service;
 
+import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
@@ -15,6 +16,7 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 	private DSLAMBKIFilePersistenceService		filePersistence;
 	private DSLAMBKIProcessPersistenceService	processPersistence;
 	private DSLAMBKIProjectPersistenceService	projectPersistence;
+	private CRONIOBKINodePersistenceService		nodePersistence;
 
 	@Override
 	public String getName() {
@@ -48,6 +50,13 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 		return projectPersistence;
 	}
 	
+	protected CRONIOBKINodePersistenceService getNodePersistence() {
+		if (nodePersistence == null) {
+			nodePersistence =  getPersistence().getAppFactoryPersistence().newNodePersistence();
+		}
+		return nodePersistence;
+	}
+	
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -71,6 +80,10 @@ public abstract class DSLAMBUBusinessServiceBase extends AEMFTBusinessServiceBas
 		if (projectPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) projectPersistence);
 			projectPersistence = null;
+		}
+		if (nodePersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
+			nodePersistence = null;
 		}
 	}
 	

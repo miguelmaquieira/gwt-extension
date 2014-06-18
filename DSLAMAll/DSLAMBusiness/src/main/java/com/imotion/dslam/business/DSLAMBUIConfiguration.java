@@ -9,5 +9,5 @@ public interface DSLAMBUIConfiguration {
 	 //CFG.DSLAM
 	 public static String CTE_DSLAM_CONFIG_PREFIX = AEMFTIConfigurationConstant.CTE_MFT_AE_CORE_ENTO_CONFIGURACION_PREFIJO_VARIABLES_CONFIGURACION
 			  							+ AEMFTICommonConstants.CTE_MFT_AE_CORE_COMM_ELEMENT_SEPARATOR 
-			  							+ DSLAMIConstants.CTE_SNDO_APPLI_NAME;
+			  							+ DSLAMIConstants.CTE_DSLAM_APPLI_NAME;
 }

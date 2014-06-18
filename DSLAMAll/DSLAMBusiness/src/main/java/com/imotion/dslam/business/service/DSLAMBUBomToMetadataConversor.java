@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -182,6 +183,51 @@ public class DSLAMBUBomToMetadataConversor {
 			}
 		}
 		return dataProjectList;
+	}
+	
+	/**
+	 * NODE
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromNode(CRONIOBOINode node) {
+		AEMFTMetadataElementComposite data = null;
+		if (node != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			List<DSLAMBOIVariable> 			variableList = node.getVariableList();
+			for (int i = 0; i < variableList.size(); i++) {
+				
+				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+				DSLAMBOIVariable 				variable 		= variableList.get(i);
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
+				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
+				variableListData.addElement(variable.getVariableName()	, variableData);
+			}
+			
+			data.addElement(CRONIOBOINode.NODE_ID				, node.getNodeId());
+			data.addElement(CRONIOBOINode.NODE_NAME				, node.getNodeName());
+			data.addElement(CRONIOBOINode.NODE_IP				, node.getNodeIp());
+			data.addElement(CRONIOBOINode.NODE_MACHINE_TYPE		, node.getNodeType());
+			data.addElement(CRONIOBOINode.NODE_VARIABLE_LIST	, variableListData);
+			data.addElement(DSLAMBOIProcess.CREATION_TIME		, node.getCreationTime());
+			data.addElement(DSLAMBOIProcess.SAVED_TIME			, node.getSavedTime());
+		}
+		return data;
+	}
+
+	public  static AEMFTMetadataElementComposite fromNodeList(List<CRONIOBOINode> nodeList) {
+		AEMFTMetadataElementComposite data = null;
+		data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
+			AEMFTMetadataElementComposite dataNodeList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			for (CRONIOBOINode node : nodeList) {
+				dataNodeList.addElement(node.getNodeName(), fromNode(node));
+			}
+			data.addElement(CRONIOBUINodeBusinessServiceConstants.NODE_DATA_LIST,dataNodeList);
+		}
+		return data;
 	}
 	
 
