@@ -13,23 +13,24 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 									root;
-	private CRONIOBusDesktopProcessConfigureNodesList	NodeListZone;
-	private CRONIOBusDesktopProcessConfigureNodesInfo	NodeInfoZone;
+	private CRONIOBusDesktopProcessNodeList				nodeListZone;
+	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
 	
 
 	public CRONIOBusDesktopProcessConfigureNodes() {
 		root = new FlowPanel();
 		initWidget(root);
 
-		NodeListZone = new CRONIOBusDesktopProcessConfigureNodesList();
-		root.add(NodeListZone);
-		NodeListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
-		NodeListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		nodeListZone = new CRONIOBusDesktopProcessNodeList();
+		root.add(nodeListZone);
+		nodeListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
+		nodeListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
-		NodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
-		root.add(NodeInfoZone);
-		NodeInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
-		NodeInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		
+		nodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
+		root.add(nodeInfoZone);
+		nodeInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
+		nodeInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 	}
 
 	@Override
@@ -40,5 +41,11 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+		//nodeListZone.builder();
 	}
 }

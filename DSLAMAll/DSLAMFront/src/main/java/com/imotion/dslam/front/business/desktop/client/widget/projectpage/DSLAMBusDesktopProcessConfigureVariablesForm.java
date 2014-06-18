@@ -107,11 +107,6 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
 			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
 			String 	variableType 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableData);
-
-			//			if (!AEGWTStringUtils.isEmptyString(variableId)) {
-//				super.setEditMode(true);
-//			}
-			
 			
 			variableIdTextBox.setEnabled(false);
 			variableIdTextBox.setDropdownEnabled(true);

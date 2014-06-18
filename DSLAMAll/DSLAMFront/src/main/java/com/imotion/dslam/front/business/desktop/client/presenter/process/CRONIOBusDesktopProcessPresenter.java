@@ -36,8 +36,6 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
  		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		//String			sectionId		= evt.getSourceWidgetId();
-		//String			projectId		= evt.getSourceContainerId();
 
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {

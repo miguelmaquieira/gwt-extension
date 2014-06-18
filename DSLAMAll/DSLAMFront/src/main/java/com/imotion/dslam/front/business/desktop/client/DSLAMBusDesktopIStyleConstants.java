@@ -23,6 +23,10 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String LIST_CONTAINER_ZONE 							= LIST_CONTAINER		+ "-zone";				//dslam_studio-list-container-zone
 	String LIST_HEADER 									= LIST					+ "-header";			//dslam_studio-list-header
 
+	String NODE_LIST									= APP_ID_PREFFIX 		+ "nodeList";			//dslam_studio-nodeList		
+	String NODE_LIST_CONTAINER							= NODE_LIST		 		+ "-container";			//dslam_studio-nodeList-container
+	String NODE_LIST_CONTAINER_ZONE 					= LIST_CONTAINER		+ "-zone";				//dslam_studio-nodeList-container-zone
+	
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
 	String NEW_PROJECT_FORM_ERROR_ZONE 					= NEW_PROJECT_FORM			+ "-errorZone";		//dslam_studio-newProjectForm-errorZone

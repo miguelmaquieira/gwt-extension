@@ -30,20 +30,11 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		root.add(processSectionsDeckPanel);
 		processSectionsDeckPanel.setVisibility(Visibility.HIDDEN);	
 	}
-	
-	@Override
-	public void updateProcess(AEMFTMetadataElementComposite processData) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void openProcessSection(String sectionId ,AEMFTMetadataElementComposite processData) {
-		//Long		processId			= getElementController().getElementAsLong(DSLAMBOIProcess.PROCESS_ID, processData);
-		//AEMFTMetadataElementComposite sectionData = getElementController().getElementAsComposite(sectionId, processData);
 		processSectionsDeckPanel.showSection(sectionId, processData);
-		processSectionsDeckPanel.setVisibility(Visibility.VISIBLE);
-		
+		processSectionsDeckPanel.setVisibility(Visibility.VISIBLE);	
 	}
 	
 	/**
@@ -66,20 +57,25 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		
 	}
 
+	@Override
+	public void updateProcess(AEMFTMetadataElementComposite processData) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/****************************************************************************
 	 *                      AEGWTHasLogicalEventHandlers
 	 ****************************************************************************/
-
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		LOGICAL_TYPE	type			= evt.getEventType();
-		String 			srcWidget 		= evt.getSourceWidget();
-		String 			srcWidgetId 	= evt.getSourceWidgetId();
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type);
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	/************************************************************************
@@ -90,50 +86,4 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/
-//	private boolean isValidEvent(AEGWTLogicalEvent evt) {
-//		if (DSLAMBusDesktopProjectPagePresenter.NAME.equals(evt.getSourceWidget())) {
-//			return true;
-//		} else return false;
-//	}
-//	
-//	private void reset() {
-//		processSectionsDeckPanel.reset();
-//	}
-//	
-//	
-//	private void fireSaveChanges(String projectId, AEMFTMetadataElementComposite optionsData) {
-//		AEMFTMetadataElementComposite updateProjectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-//		updateProjectData.addElement(DSLAMBOIProject.PROJECT_ID, projectId);
-//		updateProjectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_CONFIGURE_DATA , optionsData);
-//
-//		AEGWTLogicalEvent updateEvent = new AEGWTLogicalEvent(getWindowName(), getName());
-//		updateEvent.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-//		updateEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA ,updateProjectData);
-//		getLogicalEventHandlerManager().fireEvent(updateEvent);
-//	}
-//
-//
-//
-//	
-//	private void fireSaveVariablesDataEvent(AEGWTLogicalEvent saveVariablesEvt) {
-//		saveVariablesEvt.stopPropagation();
-//		LOGICAL_TYPE	type		= saveVariablesEvt.getEventType();
-//		String 			projectName			= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_NAME);
-//		String 			projectMachineType	= saveVariablesEvt.getElementAsString(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
-//		AEMFTMetadataElementComposite existentProjectData = projectListNavigator.getElementDataByName(projectName);
-//		
-//		if (existentProjectData != null && !LOGICAL_TYPE.SELECT_EVENT.equals(type)) {
-//			newProjectPopup.setError(TEXTS.projectname_exists());
-//		} else {
-//			AEMFTMetadataElementComposite projectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-//			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_NAME			, projectName);
-//			projectData.addElement(DSLAMBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectMachineType);
-//			
-//			AEGWTLogicalEvent saveFileEvent = new AEGWTLogicalEvent(getWindowName(), getName());
-//			saveFileEvent.setEventType(saveVariablesEvt.getEventType());
-//			saveFileEvent.addElementAsComposite(DSLAMBOIProjectDataConstants.PROJECT_DATA , projectData);
-//			saveFileEvent.setSourceWidgetId(saveVariablesEvt.getSourceWidgetId());
-//			getLogicalEventHandlerManager().fireEvent(saveFileEvent);
-//		}
-//	}
 }

@@ -78,9 +78,6 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 					if (mode == MODE_NEW_PROJECT) {
 						evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
 					} 
-//					else if (mode == MODE_RENAME_PROJECT) {
-//						evt.setEventType(LOGICAL_TYPE.CHANGE_EVENT);
-//					}
 					evt.setSourceWidgetId(getId());
 					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
 					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
@@ -122,10 +119,6 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 			setContentTypeEnabled(true);
 			saveButton.setText(TEXTS.create());
 		} 
-//		else if (mode == MODE_RENAME_FILE) {
-//			setContentTypeEnabled(false);
-//			saveButton.setText(COMMON_TEXTS.rename());
-//		} 
 		super.center();
 		projectNameField.setFocus(true);
 	}
@@ -152,5 +145,4 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 			projectNameField.setText(projectName);
 		}
 	}
-
 }
