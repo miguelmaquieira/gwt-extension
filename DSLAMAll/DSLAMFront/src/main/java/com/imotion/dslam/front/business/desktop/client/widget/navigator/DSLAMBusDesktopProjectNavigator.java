@@ -59,6 +59,20 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		initComparators();
 	}
 	
+	public void setProjectSectionModified(String projectId, String sectionId) {
+		DSLAMBusDesktopProjectNavigatorElement projectElement = getElementById(projectId);
+		if (projectElement != null) {
+			projectElement.setProjectSectionModified(sectionId);
+		}
+	}
+	
+	public void setProjectSaved(String projectId) {
+		DSLAMBusDesktopProjectNavigatorElement projectElement = getElementById(projectId);
+		if (projectElement != null) {
+			projectElement.setProjectSaved();
+		}
+	}
+	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
 		String		projectId	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, elementData);
 		String		projectName	= getElementController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME, elementData);
@@ -66,6 +80,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		DSLAMBusDesktopProjectNavigatorElement element = createElement(projectId, projectName);
 		elementListContainer.add(element);
 		element.setData(elementData);
+		element.postDisplay();
 		sort(null, false);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}

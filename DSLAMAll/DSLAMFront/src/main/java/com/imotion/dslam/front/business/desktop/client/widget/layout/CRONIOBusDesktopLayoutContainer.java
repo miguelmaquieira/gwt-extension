@@ -13,7 +13,7 @@ import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenter;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.mvp.event.AEGWTIEventHandlerManager;
 
-public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel implements CRONOIOBusDesktopIsLayoutContainer {
+public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayoutContainer {
 
 	public static final String NAME = "CRONIOBusDesktopLayoutContainer";
 	
@@ -21,8 +21,7 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 
 	private DeckLayoutPanel			rootSwitcher;
 	private AEGWTBasePresenter<?>	currentPresenter;
-
-	private Map<String, Integer> layoutIndexMap;
+	private Map<String, Integer>	layoutIndexMap;
 	
 	public CRONIOBusDesktopLayoutContainer() {
 		rootSwitcher = new DeckLayoutPanel();

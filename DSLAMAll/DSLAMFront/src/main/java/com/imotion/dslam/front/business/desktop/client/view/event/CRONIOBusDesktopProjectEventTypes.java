@@ -5,7 +5,9 @@ public interface CRONIOBusDesktopProjectEventTypes {
 	public enum EVENT_TYPE {
 		OPEN_FINAL_SECTION_EVENT,
 		PRE_SAVE_SECTION_EVENT,
-		SHOW_PROJECT_INFO;
+		SHOW_PROJECT_INFO,
+		SECTION_MODIFIED,
+		PROJECT_SAVED
 	}
 	
 }

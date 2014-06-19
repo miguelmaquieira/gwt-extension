@@ -20,14 +20,14 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
-	
-	
+
+
 	private FlowPanel 									root;
 	private DSLAMBusDesktopToolbar						toolbar;
 	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
 	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
 	private FlowPanel									projectWorkZone;
-	
+
 	public CRONIOBusDesktopProjectsLayout() {
 		root = new FlowPanel();
 		initWidget(root);
@@ -51,7 +51,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		bottomZone.add(projectListZone);
 		projectListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		projectListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_LIST_ZONE);
-		
+
 		projectListNavigator = new DSLAMBusDesktopProjectNavigator();
 		projectListZone.add(projectListNavigator);
 
@@ -60,21 +60,21 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		bottomZone.add(bottomRightZone);
 		bottomRightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
 		bottomRightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT);
-		
+
 		sectionHeader = new CRONIOBusDesktopProjectsLayoutItemHeader();
 		bottomRightZone.add(sectionHeader);
 		sectionHeader.setVisible(false);
-		
+
 		projectWorkZone = new FlowPanel();
 		bottomRightZone.add(projectWorkZone);
 		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
-	
-	
+
+
 	/**
 	 * CRONIOBusDesktopIsLayout
 	 */
-	
+
 	@Override
 	public void setLayoutContent(Widget content) {
 		projectWorkZone.clear();
@@ -84,7 +84,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	/**
 	 * AEGWTCompositePanel
 	 */
-	
+
 	@Override
 	public String getName() {
 		return NAME;
@@ -96,7 +96,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 			projectListNavigator.setData(data);
 		}
 	}
-	
+
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
@@ -109,38 +109,36 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	 */
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		String srcWindow = evt.getSourceWindow();
+		String srcWindow 	= evt.getSourceWindow();
+		EVENT_TYPE type		= evt.getEventType();
 		if (CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER.equals(srcWindow)) {
-			String		projectName		= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
-			String		finalSectionId	= evt.getFinalSectionId();
-			boolean		modified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
-			
-			setProyectName(projectName);
-			setSectionNameFromId(finalSectionId);
-			setModified(modified);
-			sectionHeader.setVisible(true);
+			String projectId		= evt.getProjectId();
+			String sectionId	= evt.getFinalSectionId();
+			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
+				String		projectName		= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
+				boolean		modified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
+				sectionHeader.setProyectName(projectName);
+				sectionHeader.setSectionNameFromId(sectionId);
+				sectionHeader.setModified(modified);
+				sectionHeader.setVisible(true);
+			} else if (EVENT_TYPE.SECTION_MODIFIED.equals(type)) {
+				projectListNavigator.setProjectSectionModified(projectId, sectionId);
+				sectionHeader.setModified(true);
+			} else if (EVENT_TYPE.PROJECT_SAVED.equals(type)) {
+				sectionHeader.setModified(false);
+				projectListNavigator.setProjectSaved(projectId);
+			}
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		return EVENT_TYPE.SHOW_PROJECT_INFO.equals(type);
+		return EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)
+				||
+				EVENT_TYPE.PROJECT_SAVED.equals(type)
+				||
+				EVENT_TYPE.SECTION_MODIFIED.equals(type);
 	}
-	
-	/**
-	 * PRIVATE
-	 */
-	
-	private void setProyectName(String projectNameValue) {
-		sectionHeader.setProyectName(projectNameValue);
-	}
-	
-	private void setSectionNameFromId(String sectionId) {
-		sectionHeader.setSectionNameFromId(sectionId);
-	}
-	
-	private void setModified(boolean modified) {
-		sectionHeader.setModified(modified);
-	}
+
 
 }
