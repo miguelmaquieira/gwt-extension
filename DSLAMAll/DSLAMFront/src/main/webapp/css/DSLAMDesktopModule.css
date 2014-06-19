@@ -15,8 +15,8 @@
 	border-radius: 3px;
 	box-shadow: 0px 0px 3px #B8B8B8;
 	margin: 10px;
-	width: auto;
-	height: auto;
+	width: auto !important;
+	height: auto !important;
 }
 
 .dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator {

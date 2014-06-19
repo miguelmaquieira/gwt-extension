@@ -76,16 +76,6 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		variableList = new DSLAMBusDesktopVariablesList(deleteVariablesButton);
 		variableListZone.add(variableList);
 	}
-	
-	@Override
-	public void setSize(String width, String height) {
-		String lala = "";
-	}
-	
-	@Override
-	public void setWidth(String width) {
-		String lala = "";
-	}
 
 	public void reset() {
 		variableList.reset();
