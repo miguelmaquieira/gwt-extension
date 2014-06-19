@@ -29,6 +29,7 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	public DSLAMBusDesktopProcessConfigureExtraOptions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
 
 		//Header
 		headerZone 		= new FlowPanel();

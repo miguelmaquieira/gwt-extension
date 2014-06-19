@@ -40,6 +40,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public DSLAMBusDesktopProcessConfigureVariables() {
 		root = new FlowPanel();
 		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
 
 		//Header
 		headerZone 		= new FlowPanel();
@@ -74,6 +75,16 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		root.add(variableListZone);
 		variableList = new DSLAMBusDesktopVariablesList(deleteVariablesButton);
 		variableListZone.add(variableList);
+	}
+	
+	@Override
+	public void setSize(String width, String height) {
+		String lala = "";
+	}
+	
+	@Override
+	public void setWidth(String width) {
+		String lala = "";
 	}
 
 	public void reset() {

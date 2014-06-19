@@ -41,6 +41,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		schedulesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
 		root = new FlowPanel();
 		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
 		
 		addJS = false;
 
