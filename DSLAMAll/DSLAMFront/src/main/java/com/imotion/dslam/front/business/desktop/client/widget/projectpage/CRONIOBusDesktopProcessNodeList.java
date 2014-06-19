@@ -40,9 +40,9 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		//Header
 		FlowPanel headerZone = new FlowPanel();
 		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODE_LIST_HEADER);
 		
-		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.nodes());
+		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.node_list());
 		headerZone.add(headerLabel);
 		
 		//Container
@@ -58,12 +58,12 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	}
 	
 	public void builder() {
-		CRONIOBusDesktopProcessNodeListElement element1 = createElement("1", "mario");
-//		CRONIOBusDesktopProcessNodeListElement element2 = createElement("2", "gael");
-//		CRONIOBusDesktopProcessNodeListElement element3 = createElement("3", "luski");
+		CRONIOBusDesktopProcessNodeListElement element1 = createElement("1", "Mario");
+		CRONIOBusDesktopProcessNodeListElement element2 = createElement("2", "Gael");
+		CRONIOBusDesktopProcessNodeListElement element3 = createElement("3", "Luski");
 		elementListContainer.add(element1);
-//		elementListContainer.add(element2);
-//		elementListContainer.add(element3);
+		elementListContainer.add(element2);
+		elementListContainer.add(element3);
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {

@@ -69,6 +69,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_NODES_ZONE 				= APP_ID_PREFFIX			+ "processConfigureNodesZone"; 					//dslam_studio-processConfigureNodeZone
 	String PROCESS_CONFIGURE_NODES 						= APP_ID_PREFFIX			+ "processConfigureNodes"; 						//dslam_studio-processConfigureNode
 	String PROCESS_CONFIGURE_NODES_LIST_ZONE 			= APP_ID_PREFFIX			+ "processConfigureNodesListZone";			//dslam_studio-processConfigureNodesListZone
+	String PROCESS_CONFIGURE_NODE_LIST_HEADER 			= APP_ID_PREFFIX			+ "processConfigureNodeListHeader";			//dslam_studio-processConfigureNodeListHeader
 	String PROCESS_CONFIGURE_NODES_INFO_ZONE 			= APP_ID_PREFFIX			+ "processConfigureNodesInfoZone";		//dslam_studio-processConfigureNodesInfoZone
 	String PROCESS_CONFIGURE_NODES_INFO 				= APP_ID_PREFFIX			+ "processConfigureNodesInfo";			//dslam_studio-processConfigureNodesInfo
 	String PROCESS_CONFIGURE_NODES_INFO_HEADER 			= APP_ID_PREFFIX			+ "processConfigureNodesInfoHeader";		//dslam_studio-processConfigureNodesInfoHeader

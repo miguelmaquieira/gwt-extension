@@ -157,4 +157,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Información Nodo")
 	String node_information();
 	
+	@DefaultStringValue("Lista de Nodos")
+	String node_list();
+	
 }

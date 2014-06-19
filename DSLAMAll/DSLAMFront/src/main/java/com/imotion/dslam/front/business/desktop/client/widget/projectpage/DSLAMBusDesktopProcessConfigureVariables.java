@@ -17,7 +17,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadata
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
-import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -47,19 +46,15 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		root.add(headerZone);
 		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_HEADER);
 
-		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.variables());
-		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
-		headerZone.add(headerLabel);
+		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
+		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+		headerZone.add(addVariableButton);
 		
 		deleteVariablesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
 		deleteVariablesButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		deleteVariablesButton.setVisible(false);
 		headerZone.add(deleteVariablesButton);
-		
-		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		headerZone.add(addVariableButton);
-		
+	
 		addVariableButton.addClickHandler(new ClickHandler() {
 
 			@Override

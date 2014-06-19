@@ -17,7 +17,6 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
-import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -49,19 +48,15 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		headerZone 		= new FlowPanel();
 		root.add(headerZone);
 		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_HEADER);
-
-		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.schedule());
-		headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
-		headerZone.add(headerLabel);
+		
+		addDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
+		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+		headerZone.add(addDateTimeButton);
 
 		deleteDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
 		deleteDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		deleteDateTimeButton.setVisible(false);
 		headerZone.add(deleteDateTimeButton);
-
-		addDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		headerZone.add(addDateTimeButton);
 
 		addDateTimeButton.addClickHandler(new ClickHandler() {
 
