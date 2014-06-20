@@ -42,8 +42,22 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		projectInfoZone.add(projectInfo);
 	}
 	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+	}
+	
+	public void setSaveProjectEnabled(boolean enabled) {
+		projectActions.setSaveEnabled(enabled);
+	}
+
+	public void setSaveAllProjectsEnabled(boolean enabled) {
+		projectActions.setSaveAllEnabled(enabled);
+	}
+	
 	public void setModified(boolean modified) {
 		projectActions.setSaveEnabled(modified);
+		projectActions.setSaveAllEnabled(modified);
 		projectInfo.setModified(modified);
 	}
 	
