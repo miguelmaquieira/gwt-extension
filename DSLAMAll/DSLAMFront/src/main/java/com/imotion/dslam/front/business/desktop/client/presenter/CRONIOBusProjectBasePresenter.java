@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasProjectEventHandlers;

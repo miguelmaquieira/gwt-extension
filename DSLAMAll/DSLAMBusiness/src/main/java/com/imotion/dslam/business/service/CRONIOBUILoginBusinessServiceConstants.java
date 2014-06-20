@@ -4,7 +4,7 @@ import com.imotion.dslam.business.DSLAMBUIConstant;
 import com.imotion.dslam.business.DSLAMBUIServiceConstant;
 import com.selene.arch.base.MFTIConstant;
 
-public interface CRONIOBUIBusinessLoginServiceConstants {
+public interface CRONIOBUILoginBusinessServiceConstants {
 
 	// BusinessLoginService types
 	public static long 		CTE_BUSINESS_LOGIN_SERVICE_TYPE 	= DSLAMBUIServiceConstant.CTE_DSLAM_APP_BUS_LOGIN_SERVICE_SUBTYPE | DSLAMBUIConstant.CTE_DSLAM_APP_BUSINESS_SERVICE_TYPE;

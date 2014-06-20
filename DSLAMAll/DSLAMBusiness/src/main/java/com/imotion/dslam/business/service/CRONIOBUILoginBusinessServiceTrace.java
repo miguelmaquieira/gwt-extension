@@ -2,7 +2,7 @@ package com.imotion.dslam.business.service;
 
 import com.selene.arch.exe.core.envi.trace.AEMFTITraceConstant;
 
-public interface CRONIOBUIBusinessLoginServiceTrace {
+public interface CRONIOBUILoginBusinessServiceTrace {
 
 
 	/***********************************************************************
@@ -13,7 +13,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: The LoginSrv is not found and when asked for it, null is returned 
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_LOGIN_SESSION_SERVICE_IS_NULL_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_1  
 			| 0x0000000000000001L;
 
@@ -26,14 +26,14 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: Login attempt for username/email: {0}  
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_PROCESS_LOGIN_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE  
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE  
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000001L;
 	/**
 	 * Message: Login result for credentials {0} : {1}
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_RESULT_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE  
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE  
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000002L;
 
@@ -42,7 +42,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: "New user registered: email {0}, firstname  {1}, lastname {2}, registrationId {3} - State: {4} 
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_NEW_USER_REGISTERED_ACCEPT_PENDING_TRACE= 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000003L;
 
@@ -52,7 +52,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: "New user registered: email {0} - State: {1}
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_NEW_USER_REGISTERED_ACCEPT_SUCCESS_TRACE= 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000004L;
 
@@ -60,7 +60,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: Session validation for session ID: {0}  
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_IS_VALID_SESSION_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000005L;
 
@@ -68,7 +68,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: Validation result for Session ID {0} : {1}
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_IS_VALID_SESSION_RESULT_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000006L;
 
@@ -78,7 +78,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 */
 
 	public static long CTE_LOGIN_BUSINESS_SERVICE_NEW_USER_REGISTRATION_PROCESS_TRACE = 
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3  
 			| 0x0000000000000007L;
 
@@ -90,7 +90,7 @@ public interface CRONIOBUIBusinessLoginServiceTrace {
 	 * Message: The flow is going to ask for the srvSession for the application {0}
 	 */
 	public static long CTE_LOGIN_BUSINESS_SERVICE_GET_LOGIN_SESSION_TRACE =
-			CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
+			CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4  
 			| 0x0000000000000001L;
 

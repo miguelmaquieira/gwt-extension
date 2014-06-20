@@ -1,5 +1,7 @@
 package com.imotion.dslam.business.service;
 
+import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
+
 
 
 public interface DSLAMBUIProjectBusinessService extends DSLAMBUIBusinessService {
@@ -11,5 +13,13 @@ public interface DSLAMBUIProjectBusinessService extends DSLAMBUIBusinessService 
 	void updateProject();
 
 	void removeProject();
+
+	void addProcess();
+
+	void getAllProcesses();
+
+	void removeProcess();
+
+	void updateProcess();
 
 }

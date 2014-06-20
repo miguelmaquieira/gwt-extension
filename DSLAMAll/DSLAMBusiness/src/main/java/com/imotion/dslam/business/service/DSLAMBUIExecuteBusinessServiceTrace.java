@@ -1,7 +1,7 @@
 package com.imotion.dslam.business.service;
 
 
-public interface DSLAMBUIBusinessExecuteServiceTrace {
+public interface DSLAMBUIExecuteBusinessServiceTrace {
 
 
 	/***********************************************************************

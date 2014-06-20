@@ -101,7 +101,7 @@
 			<Description>Utilities class for business common functions
 			</Description>
 			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUBusinessLoginServiceImpl
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBULoginBusinessServiceImpl
 			</Descriptor>
 			<SubServiceList>
 				<SubService Name="IS_VALID_SESSION">
@@ -144,44 +144,6 @@
 				</SubService>
 			</SubServiceList>
 		</Service>
-			<Service Name="SRV_BUS_PROCESS">
-			<Description>Process business service</Description>
-			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUProcessBusinessServiceImpl</Descriptor>
-			<SubServiceList>
-				<SubService Name="ADD_PROCESS">
-					<Descriptor>addProcess</Descriptor>
-				</SubService>
-				<SubService Name="UPDATE_PROCESS">
-					<Descriptor>updateProcess</Descriptor>
-				</SubService>
-				<SubService Name="GET_ALL_PROCESSES">
-					<Descriptor>getAllProcesses</Descriptor>
-				</SubService>
-				<SubService Name="REMOVE_PROCESS">
-					<Descriptor>removeProcess</Descriptor>
-				</SubService>
-			</SubServiceList>
-		</Service>
-		<Service Name="SRV_BUS_FILE">
-			<Description>Cron business service</Description>
-			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUFileBusinessServiceImpl</Descriptor>
-			<SubServiceList>
-				<SubService Name="ADD_FILE">
-					<Descriptor>addFile</Descriptor>
-				</SubService>
-				<SubService Name="UPDATE_FILE">
-					<Descriptor>updateFile</Descriptor>
-				</SubService>
-				<SubService Name="GET_ALL_FILES">
-					<Descriptor>getAllFiles</Descriptor>
-				</SubService>
-				<SubService Name="REMOVE_FILE">
-					<Descriptor>removeFile</Descriptor>
-				</SubService>
-			</SubServiceList>
-		</Service>
 		<Service Name="SRV_BUS_PROJECT">
 			<Description>Cron business service</Description>
 			<Type>300171153899520</Type>
@@ -198,6 +160,18 @@
 				</SubService>
 				<SubService Name="REMOVE_PROJECT">
 					<Descriptor>removeProject</Descriptor>
+				</SubService>
+				<SubService Name="ADD_PROCESS">
+					<Descriptor>addProcess</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PROCESS">
+					<Descriptor>updateProcess</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_PROCESSES">
+					<Descriptor>getAllProcesses</Descriptor>
+				</SubService>
+				<SubService Name="REMOVE_PROCESS">
+					<Descriptor>removeProcess</Descriptor>
 				</SubService>
 			</SubServiceList>
 		</Service>
