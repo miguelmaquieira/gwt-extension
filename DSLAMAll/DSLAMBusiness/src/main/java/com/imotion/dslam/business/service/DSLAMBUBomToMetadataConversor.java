@@ -50,7 +50,7 @@ public class DSLAMBUBomToMetadataConversor {
 				Date date = scheduleList.get(i);
 				String formatDate = "dd/MM/yyyy HH:mm";
 				String dateString = AEMFTCommonUtils.formatDate(date, formatDate, locale);
-				scheduleListData.addElement(String.valueOf(i), dateString);	
+				scheduleListData.addElement(dateString, dateString);	
 			}
 			
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();

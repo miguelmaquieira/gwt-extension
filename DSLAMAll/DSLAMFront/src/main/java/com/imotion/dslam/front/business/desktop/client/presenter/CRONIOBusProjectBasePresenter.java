@@ -159,8 +159,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			String finalSectionKey = sbKey.toString();
 
 			AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(finalSectionKey);
-			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
-			
+			if (finalSectionData != null) {
+			 finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+			}
 			boolean sectionIsModified = getElementDataController().getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED, finalSectionData);
 			
 			getProjectsLayout().setModified(sectionIsModified);

@@ -40,6 +40,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 		
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
+		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_SCHEDULE_FORM_SAVE_ZONE);
 		
 		saveButton = new AEGWTButton(TEXTS.save());
 		saveButtonZone.add(saveButton);
@@ -54,7 +55,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 				
 				resetErrors();
 				
-				if (AEMFTCommonUtilsBase.isEmptyString(scheduleTextBox.getDateText()) || "__/__/____ __:__".equals(scheduleTextBox.getDateText())) {
+				if (AEMFTCommonUtilsBase.isEmptyString(scheduleTextBox.getDateText())) {
 					errors = true;
 					scheduleTextBox.setEmptyError(TEXTS.empty_textbox());
 				}
