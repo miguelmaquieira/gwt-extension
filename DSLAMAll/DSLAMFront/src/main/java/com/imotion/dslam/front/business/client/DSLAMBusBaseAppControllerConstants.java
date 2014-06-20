@@ -28,5 +28,6 @@ public interface DSLAMBusBaseAppControllerConstants {
 	public static final String JQUERY_TABLESORTER 				= "js/jquery.tablesorter.min.js";
 	public static final String JQUERY_TABLESORTER_PAGER			= "js/jquery.tablesorter.pager.min.js";
 	public static final String JQUERY_TABLESORTER_WIDGETS			= "js/jquery.tablesorter.widgets.min.js";
+	public static final String BOOTSTRAP_FILESTYLE_JS				= "js/bootstrap-filestyle.min.js";
 	
 }

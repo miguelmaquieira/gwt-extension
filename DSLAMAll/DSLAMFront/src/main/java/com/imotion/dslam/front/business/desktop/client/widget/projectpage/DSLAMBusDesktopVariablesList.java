@@ -36,19 +36,25 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-
-
 		List<AEMFTMetadataElement> variableList = data.getSortedElementList();
 
 		for (AEMFTMetadataElement variable : variableList) {
 			String itemKey = variable.getKey();
 			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
 				String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
-				String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
-
+				String value 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+				String type 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variable);
+				
+				if (String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE).equals(type)) {
+					type = TEXTS.process_variable();
+				} else {
+					type = TEXTS.external_variable();
+				}
+				
 				Map<String,String> variableRow = new HashMap<String, String>();
 				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableId);
-				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, type);
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, value);
 
 				addRowItem(variableRow, variableId, true, true,false);
 			}
@@ -62,9 +68,11 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	@Override
 	protected void setupHeader() {
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
+		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, TEXTS.variable());
+		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, TEXTS.type());
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
 
 	}

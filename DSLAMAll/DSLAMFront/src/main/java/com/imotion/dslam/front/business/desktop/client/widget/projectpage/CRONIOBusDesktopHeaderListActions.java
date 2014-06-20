@@ -18,6 +18,7 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel											headerZone;
+	private FlowPanel											actionsZone;
 	private AEGWTBootstrapGlyphiconButton 						addButton;
 	private AEGWTBootstrapGlyphiconButton 						deleteButton;
 	
@@ -28,29 +29,35 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 		
 		if (!AEMFTCommonUtilsBase.isEmptyString(text)) {
 			AEGWTLabel headerLabel = new AEGWTLabel(text);
-			headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
+			headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
 			headerZone.add(headerLabel);
+			
+			actionsZone = new FlowPanel();
+			headerZone.add(actionsZone);
 			
 			deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
 			deleteButton.addStyleName(DSLAMBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
 			deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 			deleteButton.setVisible(false);
-			headerZone.add(deleteButton);
+			actionsZone.add(deleteButton);
 			
 			addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
 			addButton.addStyleName(DSLAMBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
 			addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			headerZone.add(addButton);
+			actionsZone.add(addButton);
 			
 		} else {
+			actionsZone = new FlowPanel();
+			headerZone.add(actionsZone);
+			
 			addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
 			addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			headerZone.add(addButton);
+			actionsZone.add(addButton);
 			
 			deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
 			deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 			deleteButton.setVisible(false);
-			headerZone.add(deleteButton);
+			actionsZone.add(deleteButton);
 		}
 	}
 	
@@ -61,6 +68,19 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 	public AEGWTBootstrapGlyphiconButton getDeleteButton() {
 		return deleteButton;
 	}
+	
+	public AEGWTBootstrapGlyphiconButton getAddButton() {
+		return addButton;
+	}
+	
+	public void setVisibleAddButton(boolean visible) {
+		addButton.setVisible(visible);
+	}
+	
+	public void setVisibleDeleteButton(boolean visible) {
+		deleteButton.setVisible(visible);
+	}
+	
 	
 	/**
 	 * AEGWTCompositePanel
