@@ -3,6 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasProjectEventHandlers;
@@ -12,6 +13,7 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelLoggedViewDisplay;
 import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
@@ -201,7 +203,31 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	}
 	
 	private void saveCurrentProjectInDB() {
-		// TODO Auto-generated method stub
+
+		String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+
+		StringBuilder sbKey = new StringBuilder();
+		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(currentProjectId);
+		String projectDataKey = sbKey.toString();
+
+		AEMFTMetadataElementComposite projectData = getContextDataController().getElementAsComposite(projectDataKey);
+		getClientServerConnection().executeComm(projectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 	}
 	

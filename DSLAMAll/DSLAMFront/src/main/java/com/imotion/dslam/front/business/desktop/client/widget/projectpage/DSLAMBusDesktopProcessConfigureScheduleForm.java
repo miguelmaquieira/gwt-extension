@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.Date;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -11,6 +13,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
+import com.selene.arch.exe.gwt.client.business.ui.utils.AEGWTBusinessUtils;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
@@ -20,14 +23,16 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureScheduleForm";
+	public static final String NAME			= "DSLAMBusDesktopProcessConfigureScheduleForm";
+	public static final String DATE_FORMAT_PICKER	= "d/m/Y H:i";
+	public static final String DATE_FORMAT		= "d/MM/yyyy H:mm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapDateTimePickerTextBox  	scheduleTextBox; 
 	private AEGWTButton 							saveButton;
 	private AEGWTButton								cancelButton;
 	private boolean								editMode;
-	private String									lastEditSchedule;
+	private String									originalSchedule;
 
 	public DSLAMBusDesktopProcessConfigureScheduleForm(AEGWTICompositePanel parent) {
 		super(false, false, true, parent);
@@ -66,7 +71,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 					evt.setSourceWidgetId(getId());
 					evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleTextBox.getDateText());
 					if (editMode) {
-						evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_LAST_EDIT	, lastEditSchedule);
+						evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE	, originalSchedule);
 					}
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
@@ -95,9 +100,9 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite scheduleData) {
 		if (scheduleData != null) {
-			String 	schedule 		= getElementController().getElementAsString(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA			, scheduleData);
-			scheduleTextBox.setDateText(schedule);
-			lastEditSchedule = schedule;	
+			Date schedule			= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA			, scheduleData);
+			originalSchedule		= AEGWTBusinessUtils.getFormattedTimeMessage(schedule, DATE_FORMAT);
+			scheduleTextBox.setDateText(originalSchedule);
 		}
 	}
 
@@ -138,6 +143,6 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	
 	@Override
 	public void postDisplay() {
-		scheduleTextBox.addJS(getId());
+		scheduleTextBox.addJS(getId(), DATE_FORMAT_PICKER);
 	}
 }

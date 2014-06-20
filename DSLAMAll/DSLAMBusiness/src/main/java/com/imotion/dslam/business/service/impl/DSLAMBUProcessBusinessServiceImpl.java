@@ -21,7 +21,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
-import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBase implements DSLAMBUIProcessBusinessService, DSLAMBUIProcessBusinessServiceConstants, DSLAMBUIBusinessProcessServiceTrace {
 
@@ -68,10 +67,9 @@ public class DSLAMBUProcessBusinessServiceImpl extends DSLAMBUBusinessServiceBas
 
 		if (AEMFTCommonUtilsBase.isEmptyString(processName)) {
 			List<Date> scheduleList= new ArrayList<>();
-			String formatDate = "dd/MM/yyyy HH:mm";
 			for (int i= 0; i < scheduleData.getElementList().size(); i++) {
 				AEMFTMetadataElementSingle schedule = (AEMFTMetadataElementSingle) scheduleData.getElement(String.valueOf(i));
-				Date date = AEMFTCommonUtils.getDateFromFormattedString(schedule.getValueAsString(), formatDate);
+				Date date = (Date) schedule.getValueAsSerializable();
 				scheduleList.add(date);
 			}
 

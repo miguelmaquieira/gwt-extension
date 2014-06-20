@@ -15,7 +15,7 @@ public interface DSLAMBOIProcessDataConstants {
 
 	String SCHEDULE_ID				= "SCHEDULE_ID";
 	String SCHEDULE_VALUE			= "SCHEDULE_VALUE";
-	String SCHEDULE_LAST_EDIT		= "SCHEDULE_LAST_EDIT";
+	String SCHEDULE_ORIGINAL_VALUE	= "SCHEDULE_ORIGINAL_VALUE";
 	
 	String EDIT_MODE				= "EditMode";
 	String SAVE_MODE				= "SaveMode";

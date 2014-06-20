@@ -16,7 +16,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMeta
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
-import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class DSLAMBUBomToMetadataConversor {
 
@@ -48,9 +47,7 @@ public class DSLAMBUBomToMetadataConversor {
 			List<Date> 						scheduleList = process.getScheduleList();
 			for (int i = 0; i < scheduleList.size(); i++) {
 				Date date = scheduleList.get(i);
-				String formatDate = "dd/MM/yyyy HH:mm";
-				String dateString = AEMFTCommonUtils.formatDate(date, formatDate, locale);
-				scheduleListData.addElement(dateString, dateString);	
+				scheduleListData.addElement(date.toString(), date);	
 			}
 			
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();

@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.exe.gwt.client.business.ui.utils.AEGWTBusinessUtils;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTable;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
@@ -38,18 +40,17 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
-		for (AEMFTMetadataElement schedule : scheduleList) {
-			
-			String itemKey = schedule.getKey();
+		for (AEMFTMetadataElement scheduleData : scheduleList) {
+			String itemKey = scheduleData.getKey();
 			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
-
-				String scheduleValue = ((AEMFTMetadataElementSingle) schedule).getValueAsString();
+				AEMFTMetadataElementSingle 	scheduleDataSingle 	= (AEMFTMetadataElementSingle) scheduleData;
+				Date 						scheduleValue 		= (Date) scheduleDataSingle.getValueAsSerializable();
+				String 						formattedDate 		= AEGWTBusinessUtils.getFormattedTimeMessage(scheduleValue, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);
 
 				Map<String,String> scheduleRow = new HashMap<String, String>();
+				scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE, formattedDate);
 
-				scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, scheduleValue);
-
-				addRowItem(scheduleRow, scheduleValue, true, true,false);
+				addRowItem(scheduleRow, formattedDate, true, true,false);
 			}
 		}	
 	}
