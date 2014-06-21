@@ -12,7 +12,6 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
@@ -21,7 +20,6 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureExtraOptions";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private FlowPanel 	headerZone;
 	private FlowPanel 	propertiesZone;
 	private CheckBox 	synchroCheckBox;
 
@@ -30,14 +28,6 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
-
-		//Header
-		headerZone 		= new FlowPanel();
-		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_PROPERTIES_HEADER);
-
-		AEGWTLabel headerLabel 		= new AEGWTLabel(TEXTS.properties());
-		headerZone.add(headerLabel);
 
 		//PropertiesZone
 		propertiesZone 	= new FlowPanel();
