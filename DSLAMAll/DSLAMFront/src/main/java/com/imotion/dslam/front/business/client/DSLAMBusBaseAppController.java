@@ -7,7 +7,7 @@ import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.common.AEGWTMessageWrapper;
 import com.selene.arch.exe.gwt.client.phonegap.AEGWTBasePhoneGapConstants;
 import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenter;
-import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTControllerPresenter;
+import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTIControllerPresenter;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTLoginAppController;
 import com.selene.arch.exe.gwt.client.presenter.flow.AEGWTIFlowController;
 import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelViewDisplay;
@@ -70,7 +70,7 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 	}
 
 	@Override
-	protected AEGWTControllerPresenter<?> getControllerPresenter() {
+	protected AEGWTIControllerPresenter<?> getControllerPresenter() {
 		return createPresenterController();
 	}
 

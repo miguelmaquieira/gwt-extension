@@ -28,7 +28,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
-import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTControllerPresenter;
+import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTIControllerPresenter;
 import com.selene.arch.exe.gwt.client.presenter.error.AEGWTErrorDisplay;
 import com.selene.arch.exe.gwt.client.presenter.flow.AEGWTIFlowController;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
@@ -112,7 +112,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	}
 
 	@Override
-	protected AEGWTControllerPresenter<?> createPresenterController() {
+	protected AEGWTIControllerPresenter<?> createPresenterController() {
 		return new DSLAMBusControllerPresenter<DSLAMBusControllerDisplay>(new DSLAMBusDesktopControllerScreenView());
 	}
 
