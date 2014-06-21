@@ -20,18 +20,25 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 	public CRONIOBusDesktopProcessConfigureNodes() {
 		root = new FlowPanel();
 		initWidget(root);
-
+		
+		FlowPanel leftZone 	= new FlowPanel();
+		root.add(leftZone);
+		leftZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LEFT_ZONE);
+		leftZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		
+		FlowPanel rightZone = new FlowPanel();
+		root.add(rightZone);
+		rightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_RIGHT_ZONE);
+		rightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		
 		nodeListZone = new CRONIOBusDesktopProcessNodeList();
-		root.add(nodeListZone);
+		leftZone.add(nodeListZone);
 		nodeListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
-		nodeListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		nodeListZone.builder();
 		
-		
 		nodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
-		root.add(nodeInfoZone);
+		rightZone.add(nodeInfoZone);
 		nodeInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
-		nodeInfoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 	}
 
 	@Override

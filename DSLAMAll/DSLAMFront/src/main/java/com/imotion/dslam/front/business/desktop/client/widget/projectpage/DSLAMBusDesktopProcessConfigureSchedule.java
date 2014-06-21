@@ -13,10 +13,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
-import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -27,10 +24,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 										root;
-	private FlowPanel										headerZone;
 	private FlowPanel 										scheduleListZone;
-	private AEGWTBootstrapGlyphiconButton					addDateTimeButton;
-	private AEGWTBootstrapGlyphiconButton 					deleteDateTimeButton;
 	private	 DSLAMBusDesktopScheduleList    				scheduleList;
 	private DSLAMBusDesktopProcessConfigureScheduleForm		scheduleForm;
 	private	 AEMFTMetadataElementComposite					schedulesData;
@@ -44,22 +38,11 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		
 		addJS = false;
 
-		//Header
-		headerZone 		= new FlowPanel();
-		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_HEADER);
+		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
+		root.add(header);
 		
-		addDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-		addDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		headerZone.add(addDateTimeButton);
-
-		deleteDateTimeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
-		deleteDateTimeButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		deleteDateTimeButton.setVisible(false);
-		headerZone.add(deleteDateTimeButton);
-
-		addDateTimeButton.addClickHandler(new ClickHandler() {
-
+		header.addClickHandler(new ClickHandler() {
+			
 			@Override
 			public void onClick(ClickEvent event) {
 				
@@ -76,7 +59,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 		scheduleListZone = new FlowPanel();
 		scheduleListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_SCHEDULE_LIST);
 		root.add(scheduleListZone);
-		scheduleList = new DSLAMBusDesktopScheduleList( (AEGWTButton) deleteDateTimeButton);
+		scheduleList = new DSLAMBusDesktopScheduleList(header.getDeleteButton());
 		scheduleListZone.add(scheduleList);
 	}
 	

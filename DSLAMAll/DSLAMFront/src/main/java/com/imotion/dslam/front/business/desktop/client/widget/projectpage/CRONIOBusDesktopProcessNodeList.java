@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
@@ -18,7 +20,6 @@ import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTComparator;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
-import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEvent;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 
@@ -37,13 +38,19 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		initWidget(root);
 		addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST);
 		
-		//Header
-		FlowPanel headerZone = new FlowPanel();
-		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODE_LIST_HEADER);
+		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(TEXTS.node_list());
+		root.add(header);
 		
-		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.node_list());
-		headerZone.add(headerLabel);
+		header.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		});
 		
 		//Container
 		elementListContainerZone = new FlowPanel();

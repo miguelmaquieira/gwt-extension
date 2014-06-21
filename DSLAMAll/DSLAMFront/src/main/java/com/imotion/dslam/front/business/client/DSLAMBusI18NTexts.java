@@ -160,4 +160,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Lista de Nodos")
 	String node_list();
 	
+	@DefaultStringValue("Variables del Nodo")
+	String node_variable_list();
+	
 }

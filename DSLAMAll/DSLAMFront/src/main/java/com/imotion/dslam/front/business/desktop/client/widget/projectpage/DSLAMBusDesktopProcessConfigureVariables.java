@@ -14,9 +14,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -27,48 +25,60 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 											root;
-	private FlowPanel											headerZone;
+	//private FlowPanel											headerZone;
 	private FlowPanel											variableListZone;
-	private AEGWTBootstrapGlyphiconButton 						addVariableButton;
-	private AEGWTBootstrapGlyphiconButton 						deleteVariablesButton;
+//	private AEGWTBootstrapGlyphiconButton 						addVariableButton;
+//	private AEGWTBootstrapGlyphiconButton 						deleteVariablesButton;
 	private	 DSLAMBusDesktopVariablesList   					variableList;
 	private DSLAMBusDesktopProcessConfigureVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite						variablesData;
-	//private int												numberVariablesData;
 
 	public DSLAMBusDesktopProcessConfigureVariables() {
 		root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
 
-		//Header
-		headerZone 		= new FlowPanel();
-		root.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_HEADER);
-
-		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		headerZone.add(addVariableButton);
+		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
+		root.add(header);
 		
-		deleteVariablesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, null, TEXTS.delete());
-		deleteVariablesButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-		deleteVariablesButton.setVisible(false);
-		headerZone.add(deleteVariablesButton);
-	
-		addVariableButton.addClickHandler(new ClickHandler() {
-
+		header.addClickHandler(new ClickHandler() {
+			
 			@Override
 			public void onClick(ClickEvent event) {
 				variablesForm.resetForm();
 				variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
-				variablesForm.center();
+				variablesForm.center();	
 			}
-		});	
+		});
+		
+////		//Header
+//		headerZone 		= new FlowPanel();
+//		root.add(headerZone);
+//		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_HEADER);
+//
+//		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
+//		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+//		headerZone.add(addVariableButton);
+//		
+//		deleteVariablesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
+//		deleteVariablesButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+//		deleteVariablesButton.setVisible(false);
+//		headerZone.add(deleteVariablesButton);
+//	
+//		addVariableButton.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				variablesForm.resetForm();
+//				variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
+//				variablesForm.center();
+//			}
+//		});	
 		
 		variableListZone = new FlowPanel();
 		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_LIST);
 		root.add(variableListZone);
-		variableList = new DSLAMBusDesktopVariablesList(deleteVariablesButton);
+		variableList = new DSLAMBusDesktopVariablesList(header.getDeleteButton());
 		variableListZone.add(variableList);
 	}
 
