@@ -54,6 +54,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		//nodeListZone.builder();
+		nodeListZone.postDisplay();
+		nodeInfoZone.postDisplay();
 	}
 }

@@ -78,6 +78,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Valor")
 	String value();
+	
+	@DefaultStringValue("Tipo")
+	String type();
 
 	@DefaultStringValue("Cancelar")
 	String cancel();

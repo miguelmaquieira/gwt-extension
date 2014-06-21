@@ -46,10 +46,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 			@Override
 			public void onClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				
 			}
-			
-			
 		});
 		
 		//Container
@@ -122,7 +119,6 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAME, elementListContainerZone, getCurrentHeight(), true);
 	}
 
 	/**

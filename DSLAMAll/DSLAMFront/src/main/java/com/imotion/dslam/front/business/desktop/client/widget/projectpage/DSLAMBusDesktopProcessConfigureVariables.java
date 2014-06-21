@@ -25,10 +25,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 											root;
-	//private FlowPanel											headerZone;
 	private FlowPanel											variableListZone;
-//	private AEGWTBootstrapGlyphiconButton 						addVariableButton;
-//	private AEGWTBootstrapGlyphiconButton 						deleteVariablesButton;
 	private	 DSLAMBusDesktopVariablesList   					variableList;
 	private DSLAMBusDesktopProcessConfigureVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite						variablesData;
@@ -50,30 +47,6 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 				variablesForm.center();	
 			}
 		});
-		
-////		//Header
-//		headerZone 		= new FlowPanel();
-//		root.add(headerZone);
-//		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_HEADER);
-//
-//		addVariableButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-//		addVariableButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-//		headerZone.add(addVariableButton);
-//		
-//		deleteVariablesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
-//		deleteVariablesButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-//		deleteVariablesButton.setVisible(false);
-//		headerZone.add(deleteVariablesButton);
-//	
-//		addVariableButton.addClickHandler(new ClickHandler() {
-//
-//			@Override
-//			public void onClick(ClickEvent event) {
-//				variablesForm.resetForm();
-//				variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
-//				variablesForm.center();
-//			}
-//		});	
 		
 		variableListZone = new FlowPanel();
 		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_LIST);

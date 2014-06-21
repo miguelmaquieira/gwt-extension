@@ -47,6 +47,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_PERFECT_SCROLLBAR_JS_URL);
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_JS_URL);
 		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.JQUERY_DATETIMEPICKER_JS);
+		bootstrapLibraries.add(DSLAMBusBaseAppControllerConstants.BOOTSTRAP_FILESTYLE_JS);
 		AEGWTJSLoader.fromUrl(bootstrapLibraries.iterator(), callback);
 	}
 

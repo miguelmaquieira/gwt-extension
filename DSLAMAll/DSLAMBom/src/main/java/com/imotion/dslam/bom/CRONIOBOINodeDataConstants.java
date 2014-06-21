@@ -12,6 +12,7 @@ public interface CRONIOBOINodeDataConstants {
 	String SAVED_TIME			= "savedTime";
 	String CREATION_TIME		= "creationTime";
 
-	String NODE_DATA				= "nodeData";
+	String NODE_DATA			= "nodeData";
+	String NODE_VARIABLES_DATA	= "nodeVariablesData";
 
 }
