@@ -132,10 +132,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		storageEvent.addElementAsDataValue(finalSectionData);
 		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 		getLogicalEventHandlerManager().fireEvent(storageEvent);
-
 		
 		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 		getContextDataController().setElement(finalSectionKey, finalSectionData);
+		
+		fireSectionModified(currentProjectId, currentSectionId);
 	}
 
 	protected abstract String getSectionType();
@@ -181,6 +182,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	
 	private CRONIOBusDesktopProjectsLayout getProjectsLayout() {
 		return projectsLayout;
+	}
+	
+	private void fireSectionModified(String projectId, String currentSectionId) {
+		CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
+		sectionModifiedEvt.setProjectId(projectId);
+		sectionModifiedEvt.setFinalSectionId(currentSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
 	}
 
 }

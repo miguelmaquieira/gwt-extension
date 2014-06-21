@@ -29,6 +29,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTIControllerPresenter;
+import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTILoginAppControllerConstants;
 import com.selene.arch.exe.gwt.client.presenter.error.AEGWTErrorDisplay;
 import com.selene.arch.exe.gwt.client.presenter.flow.AEGWTIFlowController;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
@@ -58,6 +59,11 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	@Override
 	public AEMFTMetadataElementComposite saveUserDataInClientStorage(AEMFTMetadataElementComposite result) {
 		super.saveUserDataInClientStorage(result);
+		
+		//TODO: REMOVE WHEN LOGIN DONE
+		getContextDataController().setElement(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID, "noSessionId");
+		
+		
 		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
 		
