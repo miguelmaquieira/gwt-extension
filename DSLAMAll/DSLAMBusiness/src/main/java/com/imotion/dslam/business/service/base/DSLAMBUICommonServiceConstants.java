@@ -1,10 +1,10 @@
-package com.imotion.dslam.business.service;
+package com.imotion.dslam.business.service.base;
 
 import com.imotion.dslam.business.DSLAMBUIConstant;
 import com.imotion.dslam.business.DSLAMBUIServiceConstant;
 import com.selene.arch.base.MFTIConstant;
 
-public interface DSLAMBUIBusinessCommonServiceConstants {
+public interface DSLAMBUICommonServiceConstants {
 
 	// BusinessServiceCommonConstant
 	public static long	CTE_BUSINESS_SERVICE_COMMON_TYPE			= DSLAMBUIServiceConstant.CTE_DSLAM_APP_BUS_COMMON_SERVICE_SUBTYPE | DSLAMBUIConstant.CTE_DSLAM_APP_BUSINESS_SERVICE_TYPE;

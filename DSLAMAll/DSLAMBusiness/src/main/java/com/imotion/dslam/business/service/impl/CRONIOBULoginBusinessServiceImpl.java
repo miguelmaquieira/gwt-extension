@@ -3,13 +3,13 @@ package com.imotion.dslam.business.service.impl;
 
 import java.util.Locale;
 
-import com.imotion.dslam.business.service.CRONIOBUIBusinessLoginService;
-import com.imotion.dslam.business.service.CRONIOBUIBusinessLoginServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUBusinessWrapperPersistence;
-import com.imotion.dslam.business.service.DSLAMBUIBusinessCommonServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIBusinessCommonServiceTrace;
+import com.imotion.dslam.business.service.CRONIOBUILoginBusinessService;
+import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceConstants;
+import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceTrace;
+import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.DSLAMBUWrapperPersistence;
 import com.selene.arch.base.bom.AEMFTILoginData;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.login.AEMFTIBusinessLoginServiceConstants;
@@ -20,7 +20,7 @@ import com.selene.arch.exe.bus.login.impl.AEMFTBusinessLoginServiceImpl;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 
 @SuppressWarnings("serial")
-public class CRONIOBUBusinessLoginServiceImpl extends AEMFTBusinessLoginServiceImpl<DSLAMBUBusinessWrapperPersistence> implements CRONIOBUIBusinessLoginService, CRONIOBUIBusinessLoginServiceConstants, DSLAMBUIBusinessCommonServiceConstants {
+public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceImpl<DSLAMBUWrapperPersistence> implements CRONIOBUILoginBusinessService, CRONIOBUILoginBusinessServiceConstants, DSLAMBUICommonServiceConstants {
 
 	/**
 	 * AEMFTBusinessLoginServiceImpl
@@ -98,7 +98,7 @@ public class CRONIOBUBusinessLoginServiceImpl extends AEMFTBusinessLoginServiceI
 	 */
 	@Override
 	public String getName() {
-		return CRONIOBUIBusinessLoginServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_NAME;
+		return CRONIOBUILoginBusinessServiceConstants.CTE_BUSINESS_LOGIN_SERVICE_NAME;
 	}
 
 
@@ -115,7 +115,7 @@ public class CRONIOBUBusinessLoginServiceImpl extends AEMFTBusinessLoginServiceI
 		params[0] = serviceName;
 		params[1] = methodName;
 		params[2] = elementType;
-		getTrace().trace(DSLAMBUIBusinessCommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE, params);
+		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE, params);
 	}
 
 	/**
@@ -150,8 +150,8 @@ public class CRONIOBUBusinessLoginServiceImpl extends AEMFTBusinessLoginServiceI
 	}
 
 	@Override
-	protected DSLAMBUBusinessWrapperPersistence createPersistenceWrapper() {
-		return new DSLAMBUBusinessWrapperPersistence();
+	protected DSLAMBUWrapperPersistence createPersistenceWrapper() {
+		return new DSLAMBUWrapperPersistence();
 	}
 
 	@Override

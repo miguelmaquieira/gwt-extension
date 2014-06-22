@@ -1,4 +1,4 @@
-package com.imotion.dslam.business.service;
+package com.imotion.dslam.business.service.utils;
 
 import java.util.Date;
 import java.util.List;
@@ -7,16 +7,17 @@ import java.util.Locale;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
-import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class DSLAMBUBomToMetadataConversor {
 
@@ -48,9 +49,7 @@ public class DSLAMBUBomToMetadataConversor {
 			List<Date> 						scheduleList = process.getScheduleList();
 			for (int i = 0; i < scheduleList.size(); i++) {
 				Date date = scheduleList.get(i);
-				String formatDate = "dd/MM/yyyy HH:mm";
-				String dateString = AEMFTCommonUtils.formatDate(date, formatDate, locale);
-				scheduleListData.addElement(dateString, dateString);	
+				scheduleListData.addElement(date.toString(), date);	
 			}
 			
 			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -82,7 +81,7 @@ public class DSLAMBUBomToMetadataConversor {
 			for (DSLAMBOIProcess process : processList) {
 				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process,locale));
 			}
-			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
+			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
 		
 		if (!AEMFTCommonUtilsBase.isEmptyList(fileList)) {
@@ -91,7 +90,7 @@ public class DSLAMBUBomToMetadataConversor {
 			for (DSLAMBOIFile file : fileList) {
 				dataFilesList.addElement(file.getFilename(),fromFileIdName(file));
 			}
-			data.addElement(DSLAMBUIProcessBusinessServiceConstants.PROCESS_FILE_DATA_LIST,dataFilesList);
+			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_FILE_DATA_LIST,dataFilesList);
 		}
 		
 		return data;
@@ -225,7 +224,7 @@ public class DSLAMBUBomToMetadataConversor {
 			for (CRONIOBOINode node : nodeList) {
 				dataNodeList.addElement(node.getNodeName(), fromNode(node));
 			}
-			data.addElement(CRONIOBUINodeBusinessServiceConstants.NODE_DATA_LIST,dataNodeList);
+			data.addElement(DSLAMBOIProcessDataConstants.PROCESS_NODE_LIST,dataNodeList);
 		}
 		return data;
 	}

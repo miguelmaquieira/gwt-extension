@@ -1,19 +1,20 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.Date;
 import java.util.List;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.exe.gwt.client.business.ui.utils.AEGWTBusinessUtils;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -21,7 +22,6 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureSchedule";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 										root;
 	private FlowPanel 										scheduleListZone;
@@ -98,17 +98,16 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	 * AEGWTHasLogicalEventHandlers
 	 */
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (DSLAMBusDesktopProcessConfigureScheduleForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String schedule  		= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
-			String removeLastEdit 	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_LAST_EDIT); 
+			String newSchedule  	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
+			String originalSchedule	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE); 
 			
-			AEMFTMetadataElementSingle data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement();
-			data.setValueAs(schedule);
-			
-			if (getSchedulePopup().getEditMode() || !schedulesData.contains(schedule)) {
-				addSchedules(schedule,removeLastEdit ,data);
+			boolean validSchedule = getSchedulePopup().getEditMode() || !schedulesData.contains(newSchedule);
+			if (validSchedule) {
+				addSchedules(originalSchedule, newSchedule);
 			} else {
 				getSchedulePopup().setErrorScheduleExist();
 			}
@@ -150,12 +149,14 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	 * PRIVATE
 	 */
 	
-	private void addSchedules(String id, String removeLastEdit, AEMFTMetadataElement data) {
+	private void addSchedules(String originalSchedule, String newSchedule) {
 		scheduleList.clearList();
-		if (removeLastEdit != null){
-			schedulesData.removeElement(removeLastEdit);
+		if (!AEGWTStringUtils.isEmptyString(originalSchedule)){
+			schedulesData.removeElement(originalSchedule);
 		}
-		schedulesData.addElement(id,data);
+		
+		Date scheduleDate = AEGWTBusinessUtils.getDateFromFormattedTime(newSchedule, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);
+		schedulesData.addElement(newSchedule, scheduleDate);
 		scheduleList.setData(schedulesData);
 		getSchedulePopup().resetForm();	
 	}
