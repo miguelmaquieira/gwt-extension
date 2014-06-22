@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
@@ -29,7 +30,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	
 	private FlowPanel elementListContainerZone;
 	private FlowPanel elementListContainer;
-	
+	private CRONIOBusDesktopHeaderListFileActions header;
 
 	private AEGWTComparator nameComparatorAsc;
 
@@ -38,7 +39,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		initWidget(root);
 		addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST);
 		
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListFileActions(TEXTS.node_list());
+		header = new CRONIOBusDesktopHeaderListFileActions(TEXTS.node_list());
 		root.add(header);
 		
 		header.addClickHandler(new ClickHandler() {
@@ -120,6 +121,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	public void postDisplay() {
 		super.postDisplay();
 		addFileInputJS();
+		addJS(this);
 	}
 
 	/**
@@ -174,9 +176,15 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	 * JS
 	 ************************************************************************/
 
-	protected static native void addFileInputJS() /*-{
+	private native void addFileInputJS() /*-{
 		$wnd.jQuery(":file").filestyle({input: false,buttonText: "  "}); 
 	}-*/;
+	
+	private native void addJS(CRONIOBusDesktopProcessNodeList nodeListSelf) /*-{
+	$wnd.jQuery("input[type='file']").bind("change",function() {
+		 nodeListSelf.@com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessNodeList::uploadFile()();
+		});
+}-*/;
 	
 	/**
 	 * PROTECTED
@@ -185,7 +193,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	protected CRONIOBusDesktopProcessNodeListElement createElement(String nodeId, String nodeName) {
 		return new CRONIOBusDesktopProcessNodeListElement(nodeId, nodeName, this);
 	}
-	
+		 
 	/**
 	 * PRIVATE
 	 */
@@ -209,6 +217,11 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 			}
 		}
 		return elementWidget;
+	}
+	
+	public void uploadFile() {
+		Window.alert("UPLOAD!");
+		header.getForm();
 	}
 }
 
