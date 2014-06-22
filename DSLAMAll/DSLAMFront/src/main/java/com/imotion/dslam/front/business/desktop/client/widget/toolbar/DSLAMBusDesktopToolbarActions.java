@@ -7,12 +7,12 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
-import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
-import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
@@ -57,9 +57,9 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
-				getLogicalEventHandlerManager().fireEvent(evt);
+				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				saveProjectEvent.setEventType(EVENT_TYPE.NEW_PROJECT);
+				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
 
@@ -67,10 +67,9 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-				evt.setSourceWidgetId(getId());
-				getLogicalEventHandlerManager().fireEvent(evt);
+				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				saveProjectEvent.setEventType(EVENT_TYPE.SAVE_PROJECT);
+				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
 		
@@ -78,10 +77,9 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
-				evt.setEventType(LOGICAL_TYPE.SAVE_ALL_EVENT);
-				evt.setSourceWidgetId(getId());
-				getLogicalEventHandlerManager().fireEvent(evt);
+				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				saveProjectEvent.setEventType(EVENT_TYPE.SAVE_ALL_PROJECTS);
+				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
 		

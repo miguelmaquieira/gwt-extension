@@ -2,8 +2,10 @@ package com.imotion.dslam.front.business.desktop.client.view.scriptsmanager;
 
 import java.util.Date;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -14,16 +16,18 @@ import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDeskt
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
+import edu.ycp.cs.dh.acegwt.client.ace.AceEditorCallback;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorMode;
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditorTheme;
 
 public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopScriptsManagerDisplay {
 
-	public static final String NAME = "DSLAMBusDesktopScriptsManagerScreenView";
+	public		static final String 	NAME			= "DSLAMBusDesktopScriptsManagerScreenView";
+	private		static final int		MILIS_TO_SAVE 	= 1000;
 
-	private AceEditor	editor;
-	
-	private AEMFTMetadataElementComposite fileData;
+	private AceEditor						editor;
+	private AEMFTMetadataElementComposite 	fileData;
+	private Timer 							timer;
 
 	public DSLAMBusDesktopScriptsManagerScreenView() {
 		//Editor zone
@@ -43,23 +47,26 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 		editor.setShowPrintMargin(false);
 		editor.setFontSize(14);
 		editor.setVisible(false);
-		
-		editor.addBlurHandler(new BlurHandler() {
+
+		editor.addOnChangeHandler(new AceEditorCallback() {
 			
 			@Override
+			public void invokeAceCallback(JavaScriptObject obj) {
+				handleChanges(false);
+			}
+			
+		});
+
+		editor.addBlurHandler(new BlurHandler() {
+
+			@Override
 			public void onBlur(BlurEvent event) {
-				fileData.addElement(DSLAMBOIFile.CONTENT, editor.getText());
-				fileData.addElement(DSLAMBOIFile.SAVED_TIME, new Date());
-				
-				CRONIOBusDesktopProjectEvent saveEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-				saveEvt.setEventType(EVENT_TYPE.PRE_SAVE_SECTION_EVENT);
-				saveEvt.addElementAsDataValue(fileData);
-				getLogicalEventHandlerManager().fireEvent(saveEvt);
+				handleChanges(true);
 			}
 		});
 	}
 
-	
+
 	/**
 	 * AEGWTICompositePanel
 	 */
@@ -75,13 +82,17 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
+			if (timer != null) {
+				timer.cancel();
+				timer = null;
+			}
 			editor.setVisible(true);
 			fileData = data;
 			String content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
 			String contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE, data);
-			
+
 			editor.setText(content);
-			
+
 			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM.equals(contentType)) {
 				editor.setMode(AceEditorMode.DSLAM);
 			} else {
@@ -89,7 +100,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 			}
 		}
 	}
-	
+
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
@@ -99,5 +110,40 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/
 
+	private void handleChanges(boolean now) {
+		String originalContent 			= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, fileData);
+		final String currentContent		= editor.getText();
+		if (!originalContent.equals(currentContent)) {
+			if (now) {
+				if (timer != null) {
+					timer.cancel();
+					timer = null;
+				}
+				fireChangeEvent(currentContent);
+			} else {
+				if (timer == null) {
+					timer = new Timer() {
+
+						@Override
+						public void run() {
+							fireChangeEvent(currentContent);
+						}
+
+					};
+				}
+				timer.schedule(MILIS_TO_SAVE);
+			}
+		}
+	}
+
+	private void fireChangeEvent(String currentContent) {
+		fileData.addElement(DSLAMBOIFile.CONTENT, currentContent);
+		fileData.addElement(DSLAMBOIFile.SAVED_TIME, new Date());
+
+		CRONIOBusDesktopProjectEvent saveEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+		saveEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+		saveEvt.addElementAsDataValue(fileData);
+		getLogicalEventHandlerManager().fireEvent(saveEvt);
+	}
 
 }

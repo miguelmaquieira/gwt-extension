@@ -112,7 +112,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		String srcWindow 	= evt.getSourceWindow();
 		EVENT_TYPE type		= evt.getEventType();
 		if (CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER.equals(srcWindow)) {
-			String projectId		= evt.getProjectId();
+			String projectId	= evt.getProjectId();
 			String sectionId	= evt.getFinalSectionId();
 			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
 				String		projectName		= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
@@ -121,12 +121,19 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setSectionNameFromId(sectionId);
 				sectionHeader.setModified(modified);
 				sectionHeader.setVisible(true);
+				setId(projectId);
+				toolbar.setId(projectId);
 			} else if (EVENT_TYPE.SECTION_MODIFIED.equals(type)) {
 				projectListNavigator.setProjectSectionModified(projectId, sectionId);
-				sectionHeader.setModified(true);
+				if (projectId.equals(getId())) {
+					sectionHeader.setModified(true);
+					toolbar.setSaveProjectEnabled(true);
+				}
+				toolbar.setSaveAllProjectsEnabled(true);
 			} else if (EVENT_TYPE.PROJECT_SAVED.equals(type)) {
 				sectionHeader.setModified(false);
 				projectListNavigator.setProjectSaved(projectId);
+				toolbar.setSaveProjectEnabled(false);
 			}
 		}
 	}

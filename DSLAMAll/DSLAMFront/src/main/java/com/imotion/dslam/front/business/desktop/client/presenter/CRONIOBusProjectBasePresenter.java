@@ -38,7 +38,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
 		EVENT_TYPE evtTyp = evt.getEventType();
-
 		if (EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(evtTyp)) {
 			String projectId		= evt.getProjectId();
 			String mainSectionId	= evt.getMainSectionId();
@@ -70,9 +69,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			} else {
 				openFinalSection(projectChange, projectId, finalSectionId);
 			}
-		} else if (EVENT_TYPE.PRE_SAVE_SECTION_EVENT.equals(evtTyp)) {
+		} else if (EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(evtTyp)) {
 			AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 			updateFinalSectionInContext(finalSectionData);
+		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp)) {
+			saveCurrentProjectInDB();
+		} else if (EVENT_TYPE.SAVE_ALL_PROJECTS.equals(evtTyp)) {
+			saveModifiedProjectsInDB();
 		}
 	}
 
@@ -80,7 +83,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		return EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(type)
 				||
-				EVENT_TYPE.PRE_SAVE_SECTION_EVENT.equals(type);
+				EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(type)
+				||
+				EVENT_TYPE.SAVE_PROJECT.equals(type)
+				||
+				EVENT_TYPE.SAVE_ALL_PROJECTS.equals(type);
 	}
 
 	/**
@@ -171,6 +178,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 			showInfoEvent.addElementAsString(DSLAMBOIProject.PROJECT_NAME	, projectName);
 			showInfoEvent.addElementAsBoolean(DSLAMBOIProject.IS_MODIFIED	, sectionIsModified);
+			showInfoEvent.setProjectId(projectId);
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
 			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
@@ -190,6 +198,16 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		sectionModifiedEvt.setProjectId(projectId);
 		sectionModifiedEvt.setFinalSectionId(currentSectionId);
 		getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
+	}
+	
+	private void saveCurrentProjectInDB() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void saveModifiedProjectsInDB() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

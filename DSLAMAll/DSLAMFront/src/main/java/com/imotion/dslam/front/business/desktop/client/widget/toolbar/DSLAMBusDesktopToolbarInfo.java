@@ -90,6 +90,11 @@ public class DSLAMBusDesktopToolbarInfo extends AEGWTCompositePanel {
 		});
 	}
 	
+	@Override
+	public void setVisible(boolean visible) {
+		super.setVisible(visible);
+	}
+	
 	public void reset() {
 		modified = false;
 		setVisibility(Visibility.HIDDEN);
