@@ -166,4 +166,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Variables del Nodo")
 	String node_variable_list();
 	
+	@DefaultStringValue("Subir")
+	String upload();
+	
 }

@@ -1,6 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -29,7 +31,7 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 		
 		if (!AEMFTCommonUtilsBase.isEmptyString(text)) {
 			AEGWTLabel headerLabel = new AEGWTLabel(text);
-			headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+			headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 			headerZone.add(headerLabel);
 			
 			actionsZone = new FlowPanel();
@@ -73,12 +75,26 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 		return addButton;
 	}
 	
-	public void setVisibleAddButton(boolean visible) {
+	public void setAddButtonVisible(boolean visible) {
 		addButton.setVisible(visible);
 	}
 	
-	public void setVisibleDeleteButton(boolean visible) {
+	public void setDeleteButtonVisible(boolean visible) {
 		deleteButton.setVisible(visible);
+	}
+	
+	public AEGWTBootstrapGlyphiconButton addButton(String glyphIcon, String text, String title) {
+		AEGWTBootstrapGlyphiconButton button = new AEGWTBootstrapGlyphiconButton(glyphIcon, text, title);
+		actionsZone.add(button);
+		return button;
+	}
+	
+	public void addFileInput() {
+		InputElement fileInput = Document.get().createFileInputElement();
+		fileInput.addClassName("filestyle");
+		fileInput.setAttribute("data-input", "false");
+		fileInput.setAttribute("data-buttonText", TEXTS.add());
+		actionsZone.getElement().appendChild(fileInput);
 	}
 	
 	

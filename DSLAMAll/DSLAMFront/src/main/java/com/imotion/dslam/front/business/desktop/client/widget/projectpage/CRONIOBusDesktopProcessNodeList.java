@@ -38,7 +38,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		initWidget(root);
 		addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST);
 		
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(TEXTS.node_list());
+		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListFileActions(TEXTS.node_list());
 		root.add(header);
 		
 		header.addClickHandler(new ClickHandler() {
