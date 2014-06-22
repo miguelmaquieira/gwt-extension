@@ -91,10 +91,12 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 	
 	public void addFileInput() {
 		InputElement fileInput = Document.get().createFileInputElement();
-		fileInput.addClassName("filestyle");
-		fileInput.setAttribute("data-input", "false");
-		fileInput.setAttribute("data-buttonText", TEXTS.add());
+		fileInput.setId("inputFile");
 		actionsZone.getElement().appendChild(fileInput);
+	}
+	
+public void probando() {
+		int i = 0;
 	}
 	
 	

@@ -284,24 +284,45 @@
 	padding-left: 0px;
 }
 
-.dslam_studio-header-actions > button {
+.dslam_studio-header-actions button {
 	margin-top: -3px;
 	height: 30px;
 	border-width: 0px;
 	background-color: rgb(242, 241, 240);
-	width: 50px;
+	width: 60px;
+	float: right;
 }
 
-.dslam_studio-header-actions > .btn:hover {
+.dslam_studio-header-actions .btn:hover {
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-header-actions > .btn:focus {
+.dslam_studio-header-actions .btn:focus {
 	background-color: rgb(184, 184, 184);
 }
 
 .dslam_studio-header-actions > .col-xs-10 {
 	padding-left: 0px;
+}
+
+.bootstrap-filestyle label {
+	margin-top: -3px;
+	height: 30px;
+	border-width: 0px;
+	background-color: rgb(242, 241, 240);
+	width: 60px;
+}
+
+.bootstrap-filestyle .btn:focus {
+	background-color: rgb(184, 184, 184);
+}
+
+.bootstrap-filestyle .btn:hover {
+	background-color: rgb(184, 184, 184);
+}
+
+.bootstrap-filestyle {
+	float: right;
 }
 
 .dslam_studio-header-actions-with-label-button {

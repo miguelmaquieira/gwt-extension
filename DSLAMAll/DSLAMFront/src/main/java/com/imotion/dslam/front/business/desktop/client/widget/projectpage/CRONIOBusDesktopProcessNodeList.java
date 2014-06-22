@@ -119,6 +119,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		addFileInputJS();
 	}
 
 	/**
@@ -168,6 +169,14 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 			}
 		};
 	}
+	
+	/************************************************************************
+	 * JS
+	 ************************************************************************/
+
+	protected static native void addFileInputJS() /*-{
+		$wnd.jQuery(":file").filestyle({input: false,buttonText: "  "}); 
+	}-*/;
 	
 	/**
 	 * PROTECTED

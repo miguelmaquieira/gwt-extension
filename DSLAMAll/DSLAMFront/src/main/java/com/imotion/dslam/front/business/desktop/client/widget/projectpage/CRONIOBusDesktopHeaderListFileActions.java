@@ -21,8 +21,13 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 		super(text);
 		setAddButtonVisible(false);
 		setDeleteButtonVisible(false);
-		uploadButton = addButton(AEGWTIBoostrapConstants.GLYPHICON_UPLOAD, null, TEXTS.upload());
 		addFileInput();
+		uploadButton = addButton(AEGWTIBoostrapConstants.GLYPHICON_UPLOAD, TEXTS.upload(), TEXTS.upload());
+		
+	}
+	
+	public void probando() {
+		int i = 0;
 	}
 	
 	/**
