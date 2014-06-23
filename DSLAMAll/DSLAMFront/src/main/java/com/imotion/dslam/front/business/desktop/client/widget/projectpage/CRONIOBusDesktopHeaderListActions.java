@@ -1,11 +1,10 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -89,16 +88,9 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 		return button;
 	}
 	
-	public void addFileInput() {
-		InputElement fileInput = Document.get().createFileInputElement();
-		fileInput.setId("inputFile");
-		actionsZone.getElement().appendChild(fileInput);
+	public void addWidget(Widget widget) {
+		actionsZone.add(widget);
 	}
-	
-public void probando() {
-		int i = 0;
-	}
-	
 	
 	/**
 	 * AEGWTCompositePanel
