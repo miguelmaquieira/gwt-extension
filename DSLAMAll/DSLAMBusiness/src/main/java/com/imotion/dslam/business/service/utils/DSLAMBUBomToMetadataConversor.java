@@ -32,7 +32,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (process != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			
-			data.addElement(DSLAMBOIProcess.PROCESS_ID				, process.getProcessId());
+			data.addElement(DSLAMBOIProcess.PROCESS_ID				, String.valueOf(process.getProcessId()));
 			data.addElement(DSLAMBOIProcess.PROCESS_NAME			, process.getProcessName());
 			data.addElement(DSLAMBOIProcess.CREATION_TIME			, process.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME				, process.getSavedTime());
@@ -105,7 +105,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (file != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 
-			data.addElement(DSLAMBOIFile.FILE_ID				, file.getFileId());
+			data.addElement(DSLAMBOIFile.FILE_ID				, String.valueOf(file.getFileId()));
 			data.addElement(DSLAMBOIFile.FILE_NAME				, file.getFilename());
 			data.addElement(DSLAMBOIFile.CONTENT_TYPE			, file.getContentType());
 			data.addElement(DSLAMBOIFile.CONTENT				, file.getContent());
