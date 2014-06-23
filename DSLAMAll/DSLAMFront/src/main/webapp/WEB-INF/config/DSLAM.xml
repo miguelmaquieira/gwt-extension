@@ -161,18 +161,6 @@
 				<SubService Name="REMOVE_PROJECT">
 					<Descriptor>removeProject</Descriptor>
 				</SubService>
-				<SubService Name="ADD_PROCESS">
-					<Descriptor>addProcess</Descriptor>
-				</SubService>
-				<SubService Name="UPDATE_PROCESS">
-					<Descriptor>updateProcess</Descriptor>
-				</SubService>
-				<SubService Name="GET_ALL_PROCESSES">
-					<Descriptor>getAllProcesses</Descriptor>
-				</SubService>
-				<SubService Name="REMOVE_PROCESS">
-					<Descriptor>removeProcess</Descriptor>
-				</SubService>
 			</SubServiceList>
 		</Service>
 	</ServiceList>

@@ -14,12 +14,4 @@ public interface DSLAMBUIProjectBusinessService extends DSLAMBUIBusinessService 
 
 	void removeProject();
 
-	void addProcess();
-
-	void getAllProcesses();
-
-	void removeProcess();
-
-	void updateProcess();
-
 }

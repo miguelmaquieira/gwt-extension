@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -21,39 +20,16 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcessSynchronous(Long processId, boolean synchronous) {
-		DSLAMBOProcess process = getPersistenceModule().get(processId);
-		process.setSynchronous(synchronous);
-		process.setSavedTime(new Date());
-		process = getPersistenceModule().update(process);
-		return process;
-	}
-	
-	@Override
-	public DSLAMBOIProcess updateProcessScheduleList(Long processId, List<Date> scheduleList) {
-		DSLAMBOProcess process = getPersistenceModule().get(processId);
-		process.setScheduleList(scheduleList);
-		process.setSavedTime(new Date());
-		process = getPersistenceModule().update(process);
-		return process;
-	}
-	
-	@Override
-	public DSLAMBOIProcess updateProcessVariableList(Long processId, List<DSLAMBOIVariable> variableList) {
-		DSLAMBOProcess process = getPersistenceModule().get(processId);
-		process.setVariableList(variableList);
-		process.setSavedTime(new Date());
-		process = getPersistenceModule().update(process);
-		return process;
-	}
-	
-	@Override
-	public DSLAMBOIProcess updateProcessName(Long processId, String processName) {
-		DSLAMBOProcess process = getPersistenceModule().get(processId);
-		process.setProcessName(processName);
-		process.setSavedTime(new Date());
-		process = getPersistenceModule().update(process);
-		return process;
+	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process) {
+		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
+		if (originalProcess != null) {
+			originalProcess.setSynchronous(process.isSynchronous());
+			originalProcess.setScheduleList(process.getScheduleList());
+			originalProcess.setVariableList(process.getVariableList());
+			originalProcess.setNodeList(process.getNodeList());
+			originalProcess.setSavedTime(new Date());
+		}
+		return originalProcess;
 	}
 	
 	@Override
