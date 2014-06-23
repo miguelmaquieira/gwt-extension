@@ -18,6 +18,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMeta
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class DSLAMBUBomToMetadataConversor {
 
@@ -51,19 +52,9 @@ public class DSLAMBUBomToMetadataConversor {
 				Date date = scheduleList.get(i);
 				scheduleListData.addElement(date.toString(), date);	
 			}
-			
-			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-			List<DSLAMBOIVariable> 			variableList = process.getVariableList();
-			for (int i = 0; i < variableList.size(); i++) {
 				
-				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-				DSLAMBOIVariable 				variable 		= variableList.get(i);
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
-				variableListData.addElement(variable.getVariableName()	, variableData);
-			}
-			AEMFTMetadataElementComposite extraOptions = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			AEMFTMetadataElementComposite variableListData	= fromVariableList(process.getVariableList());
+			AEMFTMetadataElementComposite extraOptions		= AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			extraOptions.addElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, process.isSynchronous());
 			
 			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, extraOptions);
@@ -138,6 +129,33 @@ public class DSLAMBUBomToMetadataConversor {
 	}
 	
 	/**
+	 * Variable
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromVariable(DSLAMBOIVariable variable) {
+		AEMFTMetadataElementComposite data = null;
+		if (variable != null) {
+			AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromVariableList(List<DSLAMBOIVariable> variableList) {
+		AEMFTMetadataElementComposite 	variableListData = null;
+		if (!AEMFTCommonUtils.isEmptyList(variableList)) {
+			variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			for (DSLAMBOIVariable variable : variableList) {
+				AEMFTMetadataElementComposite variableData = fromVariable(variable);
+				variableListData.addElement(variable.getVariableName()	, variableData);
+			}
+		}
+		return variableListData;
+	}
+	
+	/**
 	 * PROJECT
 	 */
 	
@@ -193,25 +211,15 @@ public class DSLAMBUBomToMetadataConversor {
 		if (node != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			
-			AEMFTMetadataElementComposite 	variableListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-			List<DSLAMBOIVariable> 			variableList = node.getVariableList();
-			for (int i = 0; i < variableList.size(); i++) {
-				
-				AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-				DSLAMBOIVariable 				variable 		= variableList.get(i);
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
-				variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
-				variableListData.addElement(variable.getVariableName()	, variableData);
-			}
-			
-			data.addElement(CRONIOBOINode.NODE_ID				, node.getNodeId());
+			data.addElement(CRONIOBOINode.NODE_ID				, String.valueOf(node.getNodeId()));
 			data.addElement(CRONIOBOINode.NODE_NAME				, node.getNodeName());
 			data.addElement(CRONIOBOINode.NODE_IP				, node.getNodeIp());
 			data.addElement(CRONIOBOINode.NODE_MACHINE_TYPE		, node.getNodeType());
-			data.addElement(CRONIOBOINode.NODE_VARIABLE_LIST	, variableListData);
 			data.addElement(DSLAMBOIProcess.CREATION_TIME		, node.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME			, node.getSavedTime());
+			
+			AEMFTMetadataElementComposite variableListData	= fromVariableList(node.getVariableList());
+			data.addElement(CRONIOBOINode.NODE_VARIABLE_LIST	, variableListData);
 		}
 		return data;
 	}
