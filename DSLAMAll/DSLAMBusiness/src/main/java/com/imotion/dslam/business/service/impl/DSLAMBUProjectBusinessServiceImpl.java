@@ -19,6 +19,7 @@ import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessService;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
+import com.imotion.dslam.business.service.utils.CRONIOMetadataToBom;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -66,10 +67,14 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	public void updateProject() {
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
-		
-		String lala = "";
-		
-		//	contextOut.addElement(PROCESS_DATA, processDataElement);
+
+		DSLAMBOIProject project = CRONIOMetadataToBom.fromProjectData(contextIn);
+		getProjectPersistence().updateProject(project.getProjectId(), project);
+
+		//ContextOut
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProject(project);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(PROJECT_DATA, projectDataElement);
 	}
 
 	@Override
