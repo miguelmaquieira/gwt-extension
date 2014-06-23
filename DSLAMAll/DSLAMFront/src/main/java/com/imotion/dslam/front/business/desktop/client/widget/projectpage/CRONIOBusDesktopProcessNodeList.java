@@ -221,7 +221,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	
 	public void uploadFile() {
 		Window.alert("UPLOAD!");
-		header.getForm();
+		header.getForm().submit();
 	}
 }
 
