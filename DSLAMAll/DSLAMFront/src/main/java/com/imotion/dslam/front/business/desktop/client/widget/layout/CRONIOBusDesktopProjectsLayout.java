@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import java.util.Date;
+import java.util.List;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -70,6 +71,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
 
+	public List<String> getModifiedProjetIds() {
+		return projectListNavigator.getModifiedProjectIds();
+	}
 
 	/**
 	 * CRONIOBusDesktopIsLayout

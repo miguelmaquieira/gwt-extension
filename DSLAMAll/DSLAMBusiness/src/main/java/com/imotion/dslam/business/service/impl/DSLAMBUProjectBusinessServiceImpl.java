@@ -20,6 +20,7 @@ import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOMetadataToBom;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
@@ -66,29 +67,32 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
 
-		DSLAMBOIProject project = CRONIOMetadataToBom.fromProjectData(contextIn);
-		
-		//MainScript
-		DSLAMBOIFile mainScript = project.getMainScript();
-		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
-		project.setMainScript(mainScript);
-		
-		//RollbackScript
-		DSLAMBOIFile rollbackScript = project.getRollBackScript();
-		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
-		project.setRollBackScript(rollbackScript);
-		
-		//Process
-		DSLAMBOIProcess process = project.getProcess();
-		process = getProcessPersistence().updateProcess(process.getProcessId(), process);
-		project.setProcess(process);
-		
-		getProjectPersistence().updateProject(project.getProjectId(), project);
+		AEMFTMetadataElementComposite projectData = updateProject(contextIn);
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(PROJECT_DATA, projectDataElement);
+		contextOut.addElement(PROJECT_DATA, projectData);
+	}
+
+	
+
+	@Override
+	public void updateProjects() {
+		//ContextIn
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
+		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(PROJECTS_DATA, contextIn);
+		List<AEMFTMetadataElement> projectsDataList = projectsData.getElementList();
+		
+		AEMFTMetadataElementComposite updatedProjectsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		for (AEMFTMetadataElement projectData : projectsDataList) {
+			AEMFTMetadataElementComposite updatedProjectData = updateProject((AEMFTMetadataElementComposite) projectData);
+			String projectId = getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, updatedProjectData);
+			updatedProjectsData.addElement(projectId, updatedProjectData);
+		}
+		
+		//ContextOut
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(PROJECTS_DATA, updatedProjectsData);
 	}
 
 	@Override
@@ -130,13 +134,13 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA_LIST, projectDataElement);
 	}
-	
+
 	@Override
 	public void getCsvNodes() {
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		byte[] 	fileByte 	= (byte[]) getElementDataController().getElementAsSerializable(AEMFTIFileUploadServerCommConstants.CTE_MFT_AE_BUS_COMM_FILE_DATA, contextIn);
 		String 	fileString 	= new String(fileByte, Charset.forName(AEMFTIIOConstant.CTE_MFT_AE_CORE_ENTO_IO_DEFAULT_ENCODING));
-		
+
 		List<CRONIOBOINode> nodeList = CRONIOBUCSVToBomConversor.convertCsvToNode(fileString,";");
 
 		//trace-init
@@ -152,7 +156,34 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(NODES_DATA_LIST, nodesData);
 	}
-	
 
+	
+	/**
+	 * PRIVATE
+	 */
+
+	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
+		DSLAMBOIProject project = CRONIOMetadataToBom.fromProjectData(projectData);
+
+		//MainScript
+		DSLAMBOIFile mainScript = project.getMainScript();
+		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
+		project.setMainScript(mainScript);
+
+		//RollbackScript
+		DSLAMBOIFile rollbackScript = project.getRollBackScript();
+		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
+		project.setRollBackScript(rollbackScript);
+
+		//Process
+		DSLAMBOIProcess process = project.getProcess();
+		process = getProcessPersistence().updateProcess(process.getProcessId(), process);
+		project.setProcess(process);
+
+		getProjectPersistence().updateProject(project.getProjectId(), project);
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
+
+		return projectDataElement;
+	}
 
 }

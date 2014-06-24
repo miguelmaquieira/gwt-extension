@@ -102,6 +102,10 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		}
 	}
 	
+	public boolean isModified() {
+		return menuProject.isModified();
+	}
+	
 	public void setProjectSaved() {
 		menuProject.setModified(false);
 		menuScript.setModified(false);

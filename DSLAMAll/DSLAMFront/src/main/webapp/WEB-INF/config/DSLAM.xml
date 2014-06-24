@@ -155,6 +155,9 @@
 				<SubService Name="UPDATE_PROJECT">
 					<Descriptor>updateProject</Descriptor>
 				</SubService>
+				<SubService Name="UPDATE_PROJECTS">
+					<Descriptor>updateProjects</Descriptor>
+				</SubService>
 				<SubService Name="GET_ALL_PROJECTS">
 					<Descriptor>getAllProjects</Descriptor>
 				</SubService>
