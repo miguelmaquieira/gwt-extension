@@ -92,12 +92,12 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (CRONIOBusDesktopProcessNodeVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
+			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
 			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 			
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data	, id);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, id);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
 			
 			if (nodeVariablesForm.getEditMode()) {

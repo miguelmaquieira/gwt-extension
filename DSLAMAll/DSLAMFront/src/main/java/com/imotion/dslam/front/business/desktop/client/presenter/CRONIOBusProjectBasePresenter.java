@@ -3,6 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
@@ -194,17 +195,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		return projectsLayout;
 	}
 	
-	private void fireSectionModified(String projectId, String currentSectionId) {
-		CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-		sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
-		sectionModifiedEvt.setProjectId(projectId);
-		sectionModifiedEvt.setFinalSectionId(currentSectionId);
-		getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
-	}
-	
 	private void saveCurrentProjectInDB() {
 
-		String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+		final String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
@@ -216,13 +209,33 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		getClientServerConnection().executeComm(projectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
-			public void onError(Throwable th) {
-				// TODO Auto-generated method stub
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				if (dataResult != null) {
+					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+					if (projectData != null) {
+						StringBuilder sbKey = new StringBuilder();
+						sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(currentProjectId);
+						String projectKey = sbKey.toString();
+
+						AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+						storageEvent.setFullKey(projectKey);
+						storageEvent.addElementAsDataValue(projectData);
+						storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+						getLogicalEventHandlerManager().fireEvent(storageEvent);
+						
+						projectData = (AEMFTMetadataElementComposite) projectData.cloneObject();
+						getContextDataController().setElement(projectKey, projectData);
+						
+						fireProjectSaved(currentProjectId);
+					}
+				}
 				
 			}
-
+			
 			@Override
-			public void onResult(AEMFTMetadataElementComposite dataResult) {
+			public void onError(Throwable th) {
 				// TODO Auto-generated method stub
 				
 			}
@@ -234,6 +247,21 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 	private void saveModifiedProjectsInDB() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private void fireProjectSaved(String projectId) {
+		CRONIOBusDesktopProjectEvent projectSavedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		projectSavedEvt.setEventType(EVENT_TYPE.PROJECT_SAVED);
+		projectSavedEvt.setProjectId(projectId);
+		getLogicalEventHandlerManager().fireEvent(projectSavedEvt);
+	}
+	
+	private void fireSectionModified(String projectId, String currentSectionId) {
+		CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
+		sectionModifiedEvt.setProjectId(projectId);
+		sectionModifiedEvt.setFinalSectionId(currentSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
 	}
 
 }

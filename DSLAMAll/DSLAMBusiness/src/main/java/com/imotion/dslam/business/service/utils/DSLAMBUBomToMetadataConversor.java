@@ -41,7 +41,7 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process, Locale locale) {
+	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
 			data =fromProcess(process);
@@ -70,7 +70,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
 			AEMFTMetadataElementComposite dataProcessList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (DSLAMBOIProcess process : processList) {
-				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process,locale));
+				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process));
 			}
 			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
@@ -133,14 +133,14 @@ public class DSLAMBUBomToMetadataConversor {
 	 */
 	
 	public  static AEMFTMetadataElementComposite fromVariable(DSLAMBOIVariable variable) {
-		AEMFTMetadataElementComposite data = null;
+		AEMFTMetadataElementComposite variableData = null;
 		if (variable != null) {
-			AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
+			variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable.getVariableName());
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
-			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variable.getVariableType());
 		}
-		return data;
+		return variableData;
 	}
 	
 	public  static AEMFTMetadataElementComposite fromVariableList(List<DSLAMBOIVariable> variableList) {
@@ -173,7 +173,7 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project, Locale locale) {
+	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project) {
 		AEMFTMetadataElementComposite data = null;
 		if (project != null) {
 			data = fromProject(project);
@@ -183,7 +183,7 @@ public class DSLAMBUBomToMetadataConversor {
 			DSLAMBOIProcess process 		= project.getProcess();
 			AEMFTMetadataElementComposite mainScriptData 		= DSLAMBUBomToMetadataConversor.fromFile(mainScript);
 			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
-			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process, locale);
+			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process);
 			
 			data.addElement(DSLAMBOIProject.PROJECT_MAIN_SCRIPT			, mainScriptData);
 			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT		, rollBackScriptData);
@@ -192,11 +192,11 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProjectList(List<DSLAMBOIProject> projectList,Locale locale) {
+	public  static AEMFTMetadataElementComposite fromProjectList(List<DSLAMBOIProject> projectList) {
 		AEMFTMetadataElementComposite dataProjectList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			for (DSLAMBOIProject project : projectList) {
-				dataProjectList.addElement(String.valueOf(project.getProjectId()), fromProjectFull(project,locale));
+				dataProjectList.addElement(String.valueOf(project.getProjectId()), fromProjectFull(project));
 			}
 		}
 		return dataProjectList;
