@@ -113,7 +113,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	private void handleChanges(boolean now) {
 		String originalContent 			= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, fileData);
 		final String currentContent		= editor.getText();
-		if (!originalContent.equals(currentContent)) {
+		if (!currentContent.equals(originalContent)) {
 			if (now) {
 				if (timer != null) {
 					timer.cancel();

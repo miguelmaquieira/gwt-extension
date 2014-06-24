@@ -24,6 +24,11 @@ public interface CRONIOBOIProjectDataConstants {
 	String MAIN_SCRIPT_ID 		= "mainScriptId";
 	String ROLLBACK_SCRIPT_ID 	= "rollBackScriptId";
 	
+	//DEFAULTS
+	String PROJECT_MAIN_SCRIPT_DEFAULT_NAME		= "Main Script";
+	String PROJECT_ROLLBACK_SCRIPT_DEFAULT_NAME = "Rollback Script";
+	String PROJECT_PROCESS_DEFAULT_NAME 		= "Process";
+	
 	//CONTEXT
 	String CURRENT_SECTION					= "CURRENT_SECTION";
 	String PROJECT_PROCESS_PREFFIX			= PROJECT_PROCESS + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;

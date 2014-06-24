@@ -9,6 +9,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -20,9 +21,10 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTBootstrapGlyphiconButton newButton;
-	private AEGWTBootstrapGlyphiconButton saveButton;
-	private AEGWTBootstrapGlyphiconButton saveAllButton;
+	private AEGWTBootstrapGlyphiconButton 		newButton;
+	private AEGWTBootstrapGlyphiconButton 		saveButton;
+	private AEGWTBootstrapGlyphiconButton 		saveAllButton;
+	private	 DSLAMBusDesktopNewProjectPopupForm	projectPopupForm;
 
 	public DSLAMBusDesktopToolbarActions() {
 		FlowPanel root = new FlowPanel();
@@ -57,9 +59,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-				saveProjectEvent.setEventType(EVENT_TYPE.NEW_PROJECT);
-				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
+				getProjectPopup().center();
 			}
 		});
 
@@ -83,6 +83,10 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 			}
 		});
 		
+	}
+	
+	public void hideProjectForm() {
+		getProjectPopup().hide();
 	}
 
 	public void reset() {
@@ -113,4 +117,16 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		// TODO Auto-generated method stub
 
 	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private DSLAMBusDesktopNewProjectPopupForm getProjectPopup() {
+		if (projectPopupForm == null) {
+			projectPopupForm = new DSLAMBusDesktopNewProjectPopupForm(this);
+		}
+		return projectPopupForm;
+	}
+	
 }

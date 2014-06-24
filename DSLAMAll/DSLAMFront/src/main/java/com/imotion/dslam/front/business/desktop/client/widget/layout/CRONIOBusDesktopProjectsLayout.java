@@ -138,6 +138,10 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setModified(false);
 				projectListNavigator.setProjectSaved(projectId);
 				toolbar.setSaveProjectEnabled(false);
+			} else if (EVENT_TYPE.PROJECT_CREATED.equals(type)) {
+				AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+				projectListNavigator.addElement(projectData);
+				toolbar.hideProjectForm();
 			}
 		}
 	}
@@ -148,7 +152,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				||
 				EVENT_TYPE.PROJECT_SAVED.equals(type)
 				||
-				EVENT_TYPE.SECTION_MODIFIED.equals(type);
+				EVENT_TYPE.SECTION_MODIFIED.equals(type)
+				||
+				EVENT_TYPE.PROJECT_CREATED.equals(type);
 	}
 
 

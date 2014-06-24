@@ -32,19 +32,35 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	@Override
 	public void addProject() {
 		//ContextIn
-		AEMFTMetadataElementComposite 	contextIn 	= getContext().getContextDataIN();
-		String 							projectName	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
-		String 							machineType	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
+		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
+		String 							projectName		= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
+		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
+		Date 							creationTime 	= new Date();
+		
+		//MainScript
+		DSLAMBOIFile mainScript = new DSLAMBOFile();
+		mainScript.setContentType(machineType);
+		mainScript.setSavedTime(creationTime);
+		mainScript.setCreationTime(creationTime);
+		mainScript.setFilename(DSLAMBOIProject.PROJECT_MAIN_SCRIPT_DEFAULT_NAME);
+		
+		//RollbackScript
+		DSLAMBOIFile rollBackScript = new DSLAMBOFile();
+		rollBackScript.setContentType(machineType);
+		rollBackScript.setSavedTime(creationTime);
+		rollBackScript.setCreationTime(creationTime);
+		rollBackScript.setFilename(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT_DEFAULT_NAME);
+		
+		//Process
+		DSLAMBOIProcess process = new DSLAMBOProcess();
+		process.setProcessName(DSLAMBOIProject.PROJECT_PROCESS_DEFAULT_NAME);
+		process.setCreationTime(creationTime);
+		process.setSavedTime(creationTime);
 
-		DSLAMBOIFile 	mainScript 		= new DSLAMBOFile();
-		DSLAMBOIFile 	rollBackScript 	= new DSLAMBOFile();
-		DSLAMBOIProcess process 		= new DSLAMBOProcess();
-
-		int machineTypeInt = Integer.parseInt(machineType);
-		Date creationTime = new Date();
+		//Project
 		DSLAMBOIProject project = new DSLAMBOProject();
 		project.setProjectName(projectName);
-		project.setMachineType(machineTypeInt);
+		project.setMachineType(machineType);
 		project.setMainScript(mainScript);
 		project.setRollBackScript(rollBackScript);
 		project.setProcess(process);
