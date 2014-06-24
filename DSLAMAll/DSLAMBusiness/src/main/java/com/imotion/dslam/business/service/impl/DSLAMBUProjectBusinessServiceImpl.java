@@ -1,5 +1,6 @@
 package com.imotion.dslam.business.service.impl;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
+import com.selene.arch.exe.core.envi.io.AEMFTIIOConstant;
 
 public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIProjectBusinessService, DSLAMBUIProjectBusinessServiceConstants, DSLAMBUIProjectBusinessServiceTrace {
 
@@ -133,7 +135,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	public void getCsvNodes() {
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		byte[] 	fileByte 	= (byte[]) getElementDataController().getElementAsSerializable(AEMFTIFileUploadServerCommConstants.CTE_MFT_AE_BUS_COMM_FILE_DATA, contextIn);
-		String 	fileString 	= new String(fileByte);
+		String 	fileString 	= new String(fileByte, Charset.forName(AEMFTIIOConstant.CTE_MFT_AE_CORE_ENTO_IO_DEFAULT_ENCODING));
 		
 		List<CRONIOBOINode> nodeList = CRONIOBUCSVToBomConversor.convertCsvToNode(fileString,";");
 

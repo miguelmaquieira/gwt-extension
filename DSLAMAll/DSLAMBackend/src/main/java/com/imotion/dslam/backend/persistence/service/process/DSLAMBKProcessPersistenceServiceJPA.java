@@ -28,6 +28,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 			originalProcess.setVariableList(process.getVariableList());
 			originalProcess.setNodeList(process.getNodeList());
 			originalProcess.setSavedTime(new Date());
+			getPersistenceModule().update(originalProcess);
 		}
 		return originalProcess;
 	}
