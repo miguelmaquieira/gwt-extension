@@ -74,8 +74,6 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		contextOut.addElement(PROJECT_DATA, projectData);
 	}
 
-	
-
 	@Override
 	public void updateProjects() {
 		//ContextIn
