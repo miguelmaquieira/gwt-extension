@@ -3,6 +3,7 @@ package com.imotion.dslam.business.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -14,8 +15,10 @@ import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessService;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
+import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOMetadataToBom;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
@@ -28,7 +31,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 	= getContext().getContextDataIN();
 		String 							projectName	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
-		String 							machineType	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
+		String 							machineType	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
 
 		DSLAMBOIFile 	mainScript 		= new DSLAMBOFile();
 		DSLAMBOIFile 	rollBackScript 	= new DSLAMBOFile();
@@ -125,6 +128,29 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA_LIST, projectDataElement);
 	}
+	
+	@Override
+	public void getCsvNodes() {
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
+		byte[] 	fileByte 	= (byte[]) getElementDataController().getElementAsSerializable(AEMFTIFileUploadServerCommConstants.CTE_MFT_AE_BUS_COMM_FILE_DATA, contextIn);
+		String 	fileString 	= new String(fileByte);
+		
+		List<CRONIOBOINode> nodeList = CRONIOBUCSVToBomConversor.convertCsvToNode(fileString,";");
+
+		//trace-init
+		int resultsNumber = 0;
+		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
+			resultsNumber = nodeList.size();
+		}
+		traceNumberOfResults(METHOD_GET_CSV_NODES, CRONIOBOINode.class.getSimpleName(), resultsNumber);
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite nodesData = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(NODES_DATA_LIST, nodesData);
+	}
+	
 
 
 }
