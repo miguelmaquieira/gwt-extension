@@ -31,6 +31,16 @@
 			<artifactId>antlr4</artifactId>
 			<version>${antlr.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.imotion</groupId>
+			<artifactId>DSLAMBom</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.selene</groupId>
+			<artifactId>SeleneBase</artifactId>
+			<version>Beta_Selene_2600</version>
+		</dependency>
 	</dependencies>
 
 	<build>

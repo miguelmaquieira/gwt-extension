@@ -19,6 +19,9 @@
         <dependent-module archiveName="DSLAMBackend-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/DSLAMBackend/DSLAMBackend">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="DSLAMExecute-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/DSLAMExecute/DSLAMExecute">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="Selene4GWT-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Selene4GWT/Selene4GWT">
             <dependency-type>uses</dependency-type>
         </dependent-module>
