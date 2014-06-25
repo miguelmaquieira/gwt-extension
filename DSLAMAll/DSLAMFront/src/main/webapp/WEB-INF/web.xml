@@ -47,16 +47,28 @@
 
 	<!-- Server Connection -->
 	<!-- GWT-RPC -->
-		<servlet>
-			<servlet-name>serverConnectionRPC</servlet-name>
-			<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTCommServerServletRPC</servlet-class>
-			<load-on-startup>0</load-on-startup>
-		</servlet>
+	<servlet>
+		<servlet-name>serverConnectionRPC</servlet-name>
+		<servlet-class>com.selene.arch.exe.gwt.server.comm.AEGWTCommServerServletRPC</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>serverConnectionRPC</servlet-name>
+		<url-pattern>/dslamBusDesktop/serverConnectionRPC</url-pattern>
+	</servlet-mapping>
 	
-		<servlet-mapping>
-			<servlet-name>serverConnectionRPC</servlet-name>
-			<url-pattern>/dslamBusDesktop/serverConnectionRPC</url-pattern>
-		</servlet-mapping>
+	<!-- FILE UPLOAD SERVLET -->
+	<servlet>
+		<servlet-name>fileUpload</servlet-name>
+		<servlet-class>com.selene.arch.exe.bus.comm.AEMFTFileUploadServerCommServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fileUpload</servlet-name>
+		<url-pattern>/dslamBusDesktop/fileUpload</url-pattern>
+	</servlet-mapping>
+	
 		
 		<!-- Generic-GWT -->
 		<!-- <servlet-mapping> -->

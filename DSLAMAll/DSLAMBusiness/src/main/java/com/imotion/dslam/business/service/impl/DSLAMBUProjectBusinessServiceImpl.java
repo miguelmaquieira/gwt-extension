@@ -65,7 +65,10 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	@Override
 	public void updateProject() {
 		//ContextIn
-		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();	
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
+		
+		String lala = "";
+		
 		//	contextOut.addElement(PROCESS_DATA, processDataElement);
 	}
 

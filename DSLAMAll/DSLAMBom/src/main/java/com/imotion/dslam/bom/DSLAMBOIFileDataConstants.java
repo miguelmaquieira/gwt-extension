@@ -12,6 +12,6 @@ public interface DSLAMBOIFileDataConstants {
 	String CREATION_TIME	= "creationTime";
 	
 	//FILE TYPES
-	String CONTENT_TYPE_DSLAM = "DSLAM";
+	int CONTENT_TYPE_DSLAM = 1;
 
 }

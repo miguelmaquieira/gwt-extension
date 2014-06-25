@@ -88,12 +88,12 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 			}
 			editor.setVisible(true);
 			fileData = data;
-			String content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
-			String contentType	= getElementController().getElementAsString(DSLAMBOIFile.CONTENT_TYPE, data);
+			String 	content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
+			int		contentType	= getElementController().getElementAsInt(DSLAMBOIFile.CONTENT_TYPE, data);
 
 			editor.setText(content);
 
-			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM.equals(contentType)) {
+			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM == contentType) {
 				editor.setMode(AceEditorMode.DSLAM);
 			} else {
 				editor.setMode(AceEditorMode.TEXT);

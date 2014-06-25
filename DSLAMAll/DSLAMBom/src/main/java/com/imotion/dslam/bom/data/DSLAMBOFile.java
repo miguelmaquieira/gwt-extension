@@ -23,7 +23,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	private Long 	fileId;
 	private String 	filename;
 	private String 	content;
-	private String 	contentType;
+	private int 	contentType;
 	private Date 	savedTime;
 	private Date 	creationTime;
 	private Long	version; 
@@ -66,12 +66,12 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	}
 
 	@Override
-	public String getContentType() {
+	public int getContentType() {
 		return contentType;
 	}
 
 	@Override
-	public void setContentType(String contentType) {
+	public void setContentType(int contentType) {
 		this.contentType = contentType;
 	}
 
