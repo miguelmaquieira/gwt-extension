@@ -1,9 +1,9 @@
 package com.imotion.dslam.business.service.utils;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.CRONIOBONode;
@@ -15,11 +15,11 @@ public class CRONIOBUCSVToBomConversor {
 	 * NODE
 	 */
 
-	public List<CRONIOBONode> convertCsvToNode(String content, String splitBy) throws IOException {     
+	public static List<CRONIOBOINode> convertCsvToNode(String content, String splitBy) {     
 		String splitByToken = splitBy;
 		String splitBySpace = " ";
 		String splitNewLine = "\n";
-		List<CRONIOBONode> nodeList = new ArrayList<>();  
+		List<CRONIOBOINode> nodeList = new ArrayList<>();  
 
 		String[] lines = content.split(splitNewLine);
 		

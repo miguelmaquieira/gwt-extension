@@ -7,7 +7,6 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
@@ -120,8 +119,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		addFileInputJS();
-		addJS(this);
+		header.postDisplay();
 	}
 
 	/**
@@ -172,19 +170,6 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		};
 	}
 	
-	/************************************************************************
-	 * JS
-	 ************************************************************************/
-
-	private native void addFileInputJS() /*-{
-		$wnd.jQuery(":file").filestyle({input: false,buttonText: "  "}); 
-	}-*/;
-	
-	private native void addJS(CRONIOBusDesktopProcessNodeList nodeListSelf) /*-{
-	$wnd.jQuery("input[type='file']").bind("change",function() {
-		 nodeListSelf.@com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessNodeList::uploadFile()();
-		});
-}-*/;
 	
 	/**
 	 * PROTECTED
@@ -217,11 +202,6 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 			}
 		}
 		return elementWidget;
-	}
-	
-	public void uploadFile() {
-		Window.alert("UPLOAD!");
-		header.getForm().submit();
 	}
 }
 

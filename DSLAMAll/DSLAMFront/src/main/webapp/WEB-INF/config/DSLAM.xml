@@ -173,6 +173,9 @@
 				<SubService Name="REMOVE_PROCESS">
 					<Descriptor>removeProcess</Descriptor>
 				</SubService>
+				<SubService Name="GET_CSV_NODES">
+					<Descriptor>getCsvNodes</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 	</ServiceList>
