@@ -1,20 +1,30 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
+public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 	public static final String NAME = "CRONIOBusDesktopProcessConfigureNodes";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProcessNodeList				nodeListZone;
 	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
+	private	 AEMFTMetadataElementComposite				nodesData;
 	
 
 	public CRONIOBusDesktopProcessConfigureNodes() {
@@ -34,7 +44,6 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 		nodeListZone = new CRONIOBusDesktopProcessNodeList();
 		leftZone.add(nodeListZone);
 		nodeListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
-		//nodeListZone.builder();
 		
 		nodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
 		rightZone.add(nodeInfoZone);
@@ -48,14 +57,68 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel {
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
+		
+		if (data != null) {
+			nodesData = data;
+			nodeListZone.getElementListContainer().clear();
+			
+			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
+			for (AEMFTMetadataElement elementData : elementDataList) {
+				if (!DSLAMBOIProject.IS_MODIFIED.equals(elementData.getKey()))
+				nodeListZone.addElement((AEMFTMetadataElementComposite) elementData);
+			}
+		} else {
+			nodesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		}
 
 	}
 	
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		nodeListZone.postDisplay();
 		nodeInfoZone.postDisplay();
+	}
+	
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		String			srcWidget		= evt.getSourceWidget();
+		LOGICAL_TYPE	type			= evt.getEventType();
+		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
+				AEMFTMetadataElementComposite nodesDataList = nodesData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_NODE_LIST);
+				setData(nodesDataList);
+			}	
+		} else if (CRONIOBusDesktopProcessNodeFinalItem.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				String srcWidgetId = evt.getSourceWidgetId();
+				AEMFTMetadataElementComposite nodeData = getElementController().getElementAsComposite(srcWidgetId, nodesData);
+				AEMFTMetadataElementComposite cloneNodeData = (AEMFTMetadataElementComposite) nodeData.cloneObject();
+				cloneNodeData.setKey(srcWidgetId);
+				nodeInfoZone.setData(cloneNodeData);
+				nodeInfoZone.setVisible(true);
+			}	
+		} else if (CRONIOBusDesktopProcessConfigureNodesInfo.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
+				AEMFTMetadataElementComposite nodeData = evt.getElementAsComposite(evt.getSourceWidgetId());
+				nodesData.addElement(evt.getSourceWidgetId(), nodeData);
+				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+				saveEvt.setSourceWidget(getName());
+				saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodesData);
+				getLogicalEventHandlerManager().fireEvent(saveEvt);
+			}	
+		}	
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.OPEN_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
 	}
 }
