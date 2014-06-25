@@ -8,6 +8,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
 
 public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePanel  {
@@ -58,6 +59,8 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 			nodesConfigure.setData(sectionData);
 		}
 		this.setVisibility(Visibility.VISIBLE);
+		AEGWTJQueryPerfectScrollBar.updateScroll(getName());
+		AEGWTJQueryPerfectScrollBar.top(getName());
 	}
 
 	/**
@@ -70,6 +73,8 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		scheduleProcessConfigure.postDisplay();
 		extraOptionsConfigure.postDisplay();
 		nodesConfigure.postDisplay();
+		setHeightToDecrease(78);
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(getName(), this, getCurrentHeight(), true);
 	}
 
 	@Override

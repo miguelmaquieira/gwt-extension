@@ -1,1 +1,7 @@
-define("ace/snippets/cirru",["require","exports","module"],function(e,t,n){t.snippetText="",t.scope="cirru"})
+define('ace/snippets/cirru', ['require', 'exports', 'module' ], function(require, exports, module) {
+
+
+exports.snippetText = "";
+exports.scope = "cirru";
+
+});

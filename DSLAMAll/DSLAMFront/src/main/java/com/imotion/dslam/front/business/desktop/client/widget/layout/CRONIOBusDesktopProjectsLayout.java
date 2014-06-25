@@ -22,7 +22,6 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
 
-
 	private FlowPanel 									root;
 	private DSLAMBusDesktopToolbar						toolbar;
 	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
@@ -104,7 +103,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		setHeightToDecrease(90);
+		setHeightToDecrease(75);
 		projectListNavigator.postDisplay();
 	}
 
