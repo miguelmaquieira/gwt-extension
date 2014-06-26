@@ -2,18 +2,17 @@ package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import java.util.List;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -22,7 +21,6 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureVariables";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 											root;
 	private FlowPanel											variableListZone;
@@ -78,9 +76,13 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		variablesData = data;
 		variableList.clearList();
-		variableList.setData(data);	
+		if (data != null) {
+			variablesData = data;
+			variableList.setData(data);
+		} else {
+			variablesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		}
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
@@ -91,21 +93,24 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	 * AEGWTHasLogicalEventHandlers
 	 */
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (DSLAMBusDesktopProcessConfigureVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
+			String name		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
 			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 			String type 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
+			
+			int typeAsInt = AEMFTCommonUtilsBase.getIntegerFromString(type);
+			
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, data	, id);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, name);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, type);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, typeAsInt);
 			if (variablesForm.getEditMode()) {
-				addVariables(id,data);
-			} else if (!variablesData.contains(id)) {
-				addVariables(id,data);
+				addVariables(name, data);
+			} else if (!variablesData.contains(name)) {
+				addVariables(name, data);
 			} else {
 				variablesForm.setErrorVariableExist();
 			}

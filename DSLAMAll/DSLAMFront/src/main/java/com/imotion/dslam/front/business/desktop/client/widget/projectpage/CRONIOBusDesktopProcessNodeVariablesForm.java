@@ -72,7 +72,7 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, nodeVariableIdTextBox.getText());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, nodeVariableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, nodeVariableValueTextBox.getText());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
@@ -101,7 +101,7 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
 		if (variableData != null) {
-			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
+			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
 			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
 			
 			nodeVariableIdTextBox.setEnabled(false);
@@ -116,7 +116,7 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends AEGWTPopup {
 
 		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, formData	, nodeVariableIdTextBox.getText());
+		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, formData	, nodeVariableIdTextBox.getText());
 		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, formData	, nodeVariableValueTextBox.getText());
 		
 		return formData;

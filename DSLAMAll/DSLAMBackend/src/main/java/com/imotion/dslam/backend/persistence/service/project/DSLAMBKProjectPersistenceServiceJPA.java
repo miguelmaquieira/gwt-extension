@@ -23,8 +23,8 @@ public class DSLAMBKProjectPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	public DSLAMBOIProject updateProject(Long projectId, DSLAMBOIProject updatedProject) {
 		DSLAMBOProject originalProject = getPersistenceModule().get(projectId);
 		if (originalProject != null) {
-			updatedProject.setProjectId(originalProject.getProjectId());
-			getPersistenceModule().update((DSLAMBOProject) updatedProject);
+			originalProject.setSavedTime(new Date());
+			getPersistenceModule().update(originalProject);
 		}
 		return originalProject;
 	}

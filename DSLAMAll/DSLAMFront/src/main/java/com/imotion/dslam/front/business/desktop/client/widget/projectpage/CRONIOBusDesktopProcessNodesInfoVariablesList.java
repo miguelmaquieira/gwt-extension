@@ -39,14 +39,14 @@ public class CRONIOBusDesktopProcessNodesInfoVariablesList extends DSLAMBusDeskt
 		for (AEMFTMetadataElement variable : variableList) {
 			String itemKey = variable.getKey();
 			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
-				String variableId 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable);
+				String variableName 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variable);
 				String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
 
 				Map<String,String> variableRow = new HashMap<String, String>();
-				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableId);
-				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, valor);
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableName);
+				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, valor);
 
-				addRowItem(variableRow, variableId, true, true,false);
+				addRowItem(variableRow, variableName, true, true,false);
 			}
 		}	
 	}
@@ -57,10 +57,10 @@ public class CRONIOBusDesktopProcessNodesInfoVariablesList extends DSLAMBusDeskt
 
 	@Override
 	protected void setupHeader() {
-		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_ID);
+		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, TEXTS.variable());
+		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, TEXTS.variable());
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
 
 	}

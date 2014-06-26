@@ -6,11 +6,6 @@ import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
 
 public interface DSLAMBUIServiceIdConstant extends AEMFTIBusinessServiceIdConstant {
 
-	//PROCESS
-	String CTE_DSLAM_BU_SRV_PROCESS_ID					= "SRV_BUS_PROCESS";
-	String CTE_DSLAM_BU_SRV_PROCESS_PREFIX				= CTE_DSLAM_BU_SRV_PROCESS_ID 		+ AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
-	
-	
 	//PROJECT
 	String CTE_DSLAM_BU_SRV_PROJECT_ID					= "SRV_BUS_PROJECT";
 	String CTE_DSLAM_BU_SRV_PROJECT_PREFIX				= CTE_DSLAM_BU_SRV_PROJECT_ID 		+ AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;

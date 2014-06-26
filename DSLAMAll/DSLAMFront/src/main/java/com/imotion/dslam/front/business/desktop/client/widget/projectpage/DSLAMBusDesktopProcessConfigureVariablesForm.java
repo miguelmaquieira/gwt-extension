@@ -74,7 +74,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableIdTextBox.getText());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableIdTextBox.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
@@ -104,15 +104,15 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
 		if (variableData != null) {
-			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variableData);
-			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
-			String 	variableType 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableData);
+			String 	variableName 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
+			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, variableData);
+			String 	variableType 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableData);
 			
 			variableIdTextBox.setEnabled(false);
 			variableIdTextBox.setDropdownEnabled(true);
 			variableIdTextBox.setItemSelected(variableType);	
 
-			variableIdTextBox.setText(variableId);
+			variableIdTextBox.setText(variableName);
 			variableValueTextBox.setText(variableValue);
 		}
 	}
@@ -122,7 +122,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 
 		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, formData	, variableIdTextBox.getText());
+		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, formData	, variableIdTextBox.getText());
 		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, formData	, variableValueTextBox.getText());
 		
 		return formData;
