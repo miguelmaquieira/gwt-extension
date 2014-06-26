@@ -5,11 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -20,10 +19,13 @@ import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTComparator;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEvent;
 import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 
-public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
+public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator, AEGWTHasLogicalEventHandlers {
 	public static final String NAME = "CRONIOBusDesktopProcessNodeList";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
@@ -41,13 +43,13 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		header = new CRONIOBusDesktopHeaderListFileActions(TEXTS.node_list());
 		root.add(header);
 		
-		header.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-			}
-		});
+//		header.addClickHandler(new ClickHandler() {
+//
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				// TODO Auto-generated method stub
+//			}
+//		});
 		
 		//Container
 		elementListContainerZone = new FlowPanel();
@@ -119,7 +121,31 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 		header.postDisplay();
+	}
+	
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		String			srcWidget		= evt.getSourceWidget();
+		LOGICAL_TYPE	type			= evt.getEventType();
+		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
+				AEMFTMetadataElementComposite nodesDataList = nodesData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_NODE_LIST);
+				setData(nodesDataList);
+			}	
+		} 
+		
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.OPEN_EVENT.equals(type);
 	}
 
 	/**

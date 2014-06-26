@@ -133,14 +133,15 @@ public class DSLAMBUBomToMetadataConversor {
 	 */
 	
 	public  static AEMFTMetadataElementComposite fromVariable(DSLAMBOIVariable variable) {
-		AEMFTMetadataElementComposite data = null;
+		AEMFTMetadataElementComposite variableData = null;
+		
 		if (variable != null) {
-			AEMFTMetadataElementComposite 	variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_ID		, variable.getVariableName());
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, String.valueOf(variable.getVariableType()));
 		}
-		return data;
+		return variableData;
 	}
 	
 	public  static AEMFTMetadataElementComposite fromVariableList(List<DSLAMBOIVariable> variableList) {

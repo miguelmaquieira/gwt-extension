@@ -10,6 +10,8 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.Hidden;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.client.DSLAMBusPresenterBaseConstants;
@@ -17,14 +19,15 @@ import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIGenericServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.utils.AEGWTJSONUtils;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeaderListActions {
 	public static final String NAME = "CRONIOBusDesktopHeaderListActions";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	private AEGWTBootstrapGlyphiconButton      uploadButton;
+	//private AEGWTBootstrapGlyphiconButton      uploadButton;
 	private FormPanel							form;
 	
 	public CRONIOBusDesktopHeaderListFileActions(String text) {
@@ -62,12 +65,19 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 		
 		form.addSubmitCompleteHandler(new SubmitCompleteHandler() {
 			
-			@Override
 			public void onSubmitComplete(SubmitCompleteEvent event) {
 				String jsonResponse = event.getResults();
-				if (!AEMFTCommonUtilsBase.isEmptyString(jsonResponse)) {
-					JSONObject jsonValue = (JSONObject) JSONParser.parseStrict(jsonResponse);
+				String jsonResponseNoPreTag = jsonResponse.replaceAll("<pre>", "");
+				jsonResponseNoPreTag = jsonResponseNoPreTag.replaceAll("</pre>", "");
+				if (!AEMFTCommonUtilsBase.isEmptyString(jsonResponseNoPreTag)) {
+					JSONObject jsonValue = (JSONObject) JSONParser.parseStrict(jsonResponseNoPreTag);
 					AEMFTMetadataElementComposite nodeListData = AEGWTJSONUtils.fromJSONToMetadataElement(jsonValue);
+					nodeListData = getElementController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.NODES_DATA_LIST, nodeListData);
+					AEGWTLogicalEvent openEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+					openEvt.setEventType(LOGICAL_TYPE.OPEN_EVENT);
+					openEvt.setSourceWidget(getName());
+					openEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodeListData);
+					getLogicalEventHandlerManager().fireEvent(openEvt);
 				}
 			}
 		});

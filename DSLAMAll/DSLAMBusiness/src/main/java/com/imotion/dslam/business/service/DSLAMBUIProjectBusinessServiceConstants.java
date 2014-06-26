@@ -27,6 +27,6 @@ public interface DSLAMBUIProjectBusinessServiceConstants {
 	String 	PROCESS_DATA 				= "PROCESS_DATA";
 	String 	PROCESS_DATA_LIST 			= "PROCESS_DATA_LIST";
 	String 	PROCESS_FILE_DATA_LIST 		= "PROCESS_FILE_DATA_LIST";
-	String 	NODES_DATA_LIST 			= "<NODES_DATA_LIST";
+	String 	NODES_DATA_LIST 			= "NODES_DATA_LIST";
 
 }

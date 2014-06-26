@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.CRONIOBONode;
@@ -18,7 +19,7 @@ public class CRONIOBUCSVToBomConversor {
 	public static List<CRONIOBOINode> convertCsvToNode(String content, String splitBy) {     
 		String splitByToken = splitBy;
 		String splitBySpace = " ";
-		String splitNewLine = "\n";
+		String splitNewLine = "\\r?\\n";
 		List<CRONIOBOINode> nodeList = new ArrayList<>();  
 
 		String[] lines = content.split(splitNewLine);
@@ -29,11 +30,19 @@ public class CRONIOBUCSVToBomConversor {
 
 			CRONIOBONode node = new CRONIOBONode();  
 
-			int 					nodeTypeInt 		= Integer.parseInt(nodes[1]);
 			String[]				variableListString	= nodes[3].split(splitBySpace);
 			List<DSLAMBOIVariable>	variableList 		= new ArrayList<>();
 
-
+			node.setNodeName(nodes[0]);
+			
+			if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_FD.equals(nodes[1])){
+				node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_FD);
+			} else if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_XD.equals(nodes[1])){
+				node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_XD);
+			}
+			
+			node.setNodeIp(nodes[2]); 
+			
 			for (int i = 0; i < variableListString.length; i++) {
 				DSLAMBOIVariable variable = new DSLAMBOVariable();
 				variable.setVariableName(variableListString[i]);
@@ -41,10 +50,7 @@ public class CRONIOBUCSVToBomConversor {
 				variable.setVariableValue(variableListString[i]);
 				variableList.add(variable);
 			}
-
-			node.setNodeName(nodes[0]);
-			node.setNodeType(nodeTypeInt); 
-			node.setNodeIp(nodes[2]);  
+ 
 			node.setVariableList(variableList);  
 
 			nodeList.add(node);  
