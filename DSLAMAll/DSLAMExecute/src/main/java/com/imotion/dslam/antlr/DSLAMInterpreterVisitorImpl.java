@@ -39,7 +39,6 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 	
 	/**
 	 * CRONIOILangVisitor
-	 * @throws InterruptedException 
 	 */
 	
 	@Override

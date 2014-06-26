@@ -1,36 +1,40 @@
 package com.imotion.dslam.logger;
 
-import java.util.Date;
+import java.io.IOException;
+
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 
 public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
-	private static CRONIOIExecutionLogger logger;
-	
-	private CRONIOExecutionLoggerImpl() {
-		// TODO initialize Log4J and Atmosphere
-	}
-	
-	public static CRONIOIExecutionLogger getLogger() {
-		if (logger == null) {
-			logger = new CRONIOExecutionLoggerImpl();
-		}
-		return logger;
+	private Logger 			slf4jLogger;
+
+	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
+		// TODO initialize  Atmosphere
+		
+		String targetLog = project.getProjectName() + ".log";
+		slf4jLogger = Logger.getLogger(CRONIOExecutionLoggerImpl.class);
+		FileAppender apndr = new FileAppender(new PatternLayout("%d %-5p [%c{1}] %m%n"), targetLog, true);    
+		slf4jLogger.addAppender(apndr);
+		slf4jLogger.setLevel((Level) Level.ALL);
 	}
 
 	@Override
 	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data) {
-		Date	timeStamp 		= new Date();
 		String	nodeIp			= node.getNodeIp();
 		String	nodeName		= node.getNodeName();
 		String	request			= data.getSourceCommand();
 		String	response		= data.getResponse();
 		String	prompt			= data.getPrompt();
-		
+
 		StringBuilder logValueSB = new StringBuilder();
-		logValueSB.append(timeStamp);
+		logValueSB.append(connectionId);
 		logValueSB.append("\t");
 		logValueSB.append(nodeIp);
 		logValueSB.append("\t");
@@ -42,9 +46,10 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		logValueSB.append("\n\n");
 		logValueSB.append(prompt);
 		logValueSB.append("\n\n\n");
-		
+
 		String logValueStr = logValueSB.toString();
-		//TODO: atmosphere and log4j
+		//TODO: atmosphere
+		slf4jLogger.debug(logValueStr);
 	}
 
 }

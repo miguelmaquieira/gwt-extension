@@ -13,6 +13,12 @@ public class DSLAMBKProjectPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	private static final long serialVersionUID = -1754757807591412638L;
 
 	@Override
+	public DSLAMBOIProject getProject(long projectId) {
+		DSLAMBOIProject project = getPersistenceModule().get(projectId);
+		return project;
+	}
+	
+	@Override
 	public DSLAMBOIProject addProject(DSLAMBOIProject project) {
 		DSLAMBOProject projectJPA = (DSLAMBOProject) project;
 		projectJPA = getPersistenceModule().create(projectJPA);

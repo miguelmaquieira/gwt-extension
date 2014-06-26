@@ -8,14 +8,24 @@ import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.logger.CRONIOExecutionLoggerImpl;
+import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 
 public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
+	
+	private CRONIOIExecutionLogger logger;
+	private DSLAMBOIProject			project;
+
+	public CRONIOExecutorBase(DSLAMBOIProject project) throws Exception {
+		this.project	= project;
+		this.logger		= new CRONIOExecutionLoggerImpl(project);
+	}
 
 	@Override
-	public void execute(DSLAMBOIProject project) {
-		String 				scriptCode		= project.getMainScript().getContent();
+	public void execute() {
+		String 				scriptCode	= project.getMainScript().getContent();
 		Map<String, Object> variables 	= getVariablesFromProject(project);
 		
 		DSLAMBOIProcess		process		= project.getProcess();
@@ -31,6 +41,10 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	 */
 
 	protected abstract void executeInNode(long processId, CRONIOBOINode node, String scriptCode, Map<String, Object> variables);
+	
+	protected CRONIOIExecutionLogger getLogger() {
+		return logger;
+	}
 	
 	/**
 	 * PRIVATE
