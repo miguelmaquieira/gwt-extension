@@ -6,6 +6,6 @@ public interface CRONIOIExecutor {
 	
 	String VARIABLE_PREFFIX_PROCESS 	= "#";
 	
-	void execute(DSLAMBOIProject project, String executionId);
+	void execute(DSLAMBOIProject project);
 	
 }

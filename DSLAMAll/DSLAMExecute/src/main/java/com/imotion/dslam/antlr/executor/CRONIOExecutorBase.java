@@ -4,63 +4,67 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-
-import com.imotion.antlr.DSLAMLexer;
-import com.imotion.antlr.DSLAMParser;
-import com.imotion.antlr.DSLAMParser.ProgramContext;
-import com.imotion.dslam.antlr.DSLAMInterpreterVisitorImpl;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
-import com.imotion.dslam.comm.DSLAMConnectionImpl;
-import com.imotion.dslam.comm.DSLAMIConnection;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 
-public class CRONIOExecutorBase implements CRONIOIExecutor {
+public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 
 	@Override
-	public void execute(DSLAMBOIProject project, String executionId) {
+	public void execute(DSLAMBOIProject project) {
 		String 				scriptCode		= project.getMainScript().getContent();
 		Map<String, Object> variables 	= getVariablesFromProject(project);
 		
 		DSLAMBOIProcess		process		= project.getProcess();
 		List<CRONIOBOINode> nodeList	= process.getNodeList();
 		boolean				sync		= process.isSynchronous();
+		long				processId	= process.getProcessId();
 		
-		executeInNodes(scriptCode, variables, nodeList, sync);
+		executeInNodes(processId, scriptCode, variables, nodeList, sync);
 	}
 	
 	/**
 	 * PROTECTED 
 	 */
 
-	protected void executeInNode(String scriptCode, Map<String, Object> variables) {
-		DSLAMLexer			lexer	= new DSLAMLexer(new ANTLRInputStream(scriptCode));
-		CommonTokenStream	tokens	= new CommonTokenStream(lexer);
-		
-		DSLAMParser parser = new DSLAMParser(tokens);
-		ProgramContext tree = parser.program();
-		
-		DSLAMIConnection connection = new DSLAMConnectionImpl();
-		
-		
-		DSLAMInterpreterVisitorImpl visitor = new DSLAMInterpreterVisitorImpl(connection, variables);
-		visitor.visit(tree);
-	}
+	protected abstract void executeInNode(long processId, CRONIOBOINode node, String scriptCode, Map<String, Object> variables);
 	
 	/**
 	 * PRIVATE
 	 */
-	private void executeInNodes(String scriptCode, Map<String, Object> variables, List<CRONIOBOINode> nodeList, boolean sync) {
-		Map<String, Object> allVariables = new HashMap<>();
+	private void executeInNodes(long processId, String scriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
+		Map<Long, Thread> threads = new HashMap<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = getNodeVariables(node);
+			Map<String, Object> allVariables = new HashMap<>();
 			allVariables.putAll(nodeVariables);
+			allVariables.putAll(processVariables);
+			if (sync) {
+				executeInNode(processId, node, scriptCode, allVariables);
+			} else {
+				Thread thread = executeInNodeAsync(processId, node, scriptCode, allVariables);
+				threads.put(node.getNodeId(), thread);
+			}
 		}
+	}
+
+	private Thread executeInNodeAsync(final long processId, final CRONIOBOINode node, final String scriptCode, final Map<String, Object> allVariables) {
+		 Runnable task = new Runnable() {
+			
+			@Override
+			public void run() {
+				executeInNode(processId, node, scriptCode, allVariables);
+				
+			}
+		};
+		
+		Thread thread = new Thread(task);
+		thread.start();
+		
+		return thread;
 	}
 
 	private Map<String, Object> getNodeVariables(CRONIOBOINode node) {
