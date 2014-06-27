@@ -13,16 +13,18 @@ import com.imotion.dslam.conn.CRONIOIExecutionData;
 
 public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
-	private Logger 			slf4jLogger;
+	private static Logger	log4jLogger;
 
 	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
 		// TODO initialize  Atmosphere
-		
+		Logger logger = getLog4JLogger();
 		String targetLog = "logs/" + project.getProjectName() + ".log";
-		slf4jLogger = Logger.getLogger(CRONIOExecutionLoggerImpl.class);
-		FileAppender apndr = new FileAppender(new PatternLayout("%d %-5p %m%n"), targetLog, true);    
-		slf4jLogger.addAppender(apndr);
-		slf4jLogger.setLevel((Level) Level.ALL);
+		if (logger.getAppender(targetLog) == null) {
+			PatternLayout layout = new PatternLayout("%d %-5p %m%n");
+			FileAppender apndr = new FileAppender(layout, targetLog, true);
+			apndr.setName(targetLog);
+			logger.addAppender(apndr);
+		}
 	}
 
 	@Override
@@ -49,7 +51,19 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 		String logValueStr = logValueSB.toString();
 		//TODO: atmosphere
-		slf4jLogger.debug(logValueStr);
+		log4jLogger.debug(logValueStr);
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private Logger getLog4JLogger() {
+		if (log4jLogger == null) {
+			log4jLogger = Logger.getLogger(CRONIOExecutionLoggerImpl.class);
+			log4jLogger.setLevel((Level) Level.ALL);
+		}
+		return log4jLogger;
 	}
 
 }

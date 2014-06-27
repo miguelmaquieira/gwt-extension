@@ -33,7 +33,8 @@ public class DSLAMBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implem
 			//init-trace
 			traceItemNotFound(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
 			//end-trace
-		}	
+		}
+		String lala = "";
 	}
 
 	/**

@@ -71,7 +71,6 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 			@Override
 			public void run() {
 				executeInNode(processId, node, scriptCode, allVariables);
-				
 			}
 		};
 		
