@@ -18,9 +18,9 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
 		// TODO initialize  Atmosphere
 		
-		String targetLog = project.getProjectName() + ".log";
+		String targetLog = "logs/" + project.getProjectName() + ".log";
 		slf4jLogger = Logger.getLogger(CRONIOExecutionLoggerImpl.class);
-		FileAppender apndr = new FileAppender(new PatternLayout("%d %-5p [%c{1}] %m%n"), targetLog, true);    
+		FileAppender apndr = new FileAppender(new PatternLayout("%d %-5p %m%n"), targetLog, true);    
 		slf4jLogger.addAppender(apndr);
 		slf4jLogger.setLevel((Level) Level.ALL);
 	}
@@ -41,11 +41,11 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		logValueSB.append(nodeName);
 		logValueSB.append("\t");
 		logValueSB.append(request);
-		logValueSB.append("\n\n");
+		logValueSB.append("\n");
 		logValueSB.append(response);
-		logValueSB.append("\n\n");
+		logValueSB.append("\n");
 		logValueSB.append(prompt);
-		logValueSB.append("\n\n\n");
+		logValueSB.append("\n");
 
 		String logValueStr = logValueSB.toString();
 		//TODO: atmosphere

@@ -89,6 +89,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			String	machineTypeStr 	= evt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE);
 			int		machinetTypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(machineTypeStr);
 			createProject(projectName, machinetTypeInt);
+		} else if (EVENT_TYPE.EXECUTE.equals(evtTyp)) {
+			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+			executeProject(currentProjectId);
 		}
 	}
 
@@ -102,7 +105,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 				||
 				EVENT_TYPE.SAVE_ALL_PROJECTS.equals(type)
 				||
-				EVENT_TYPE.NEW_PROJECT.equals(type);
+				EVENT_TYPE.NEW_PROJECT.equals(type)
+				||
+				EVENT_TYPE.EXECUTE.equals(type);
 	}
 
 	/**
@@ -340,6 +345,23 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 		sectionModifiedEvt.setProjectId(projectId);
 		sectionModifiedEvt.setFinalSectionId(currentSectionId);
 		getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
+	}
+	
+	private void executeProject(String projectId) {
+		AEMFTMetadataElementComposite contextIn = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		contextIn.addElement(DSLAMBOIProject.PROJECT_ID, projectId);
+		getClientServerConnection().executeComm(contextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_EXECUTE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+			}
+
+		});
 	}
 
 }

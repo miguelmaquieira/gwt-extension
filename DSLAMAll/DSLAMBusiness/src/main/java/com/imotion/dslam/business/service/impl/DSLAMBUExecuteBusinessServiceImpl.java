@@ -16,7 +16,7 @@ public class DSLAMBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implem
 	private static final long serialVersionUID = 7761400309777540451L;
 
 	@Override
-	public void executeProcess() {
+	public void executeProject() {
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		String	projectIdStr 	= getElementDataController().getElementAsString(DSLAMBOProject.PROJECT_ID, contextIn);
 		long	projectId		= AEMFTCommonUtilsBase.getLongFromString(projectIdStr);
@@ -24,14 +24,14 @@ public class DSLAMBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implem
 		DSLAMBOIProject project = getProjectPersistence().getProject(projectId);
 		if (project != null) {
 			//init-trace
-			traceItemRecoveredFromPersistence(METHOD_EXECUTE, DSLAMBOIProject.class, projectIdStr);
+			traceItemRecoveredFromPersistence(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
 			//end-trace
 
 			CRONIOIExecutor executor = getExecutor(project);
 			executor.execute();
 		} else {
 			//init-trace
-			traceItemNotFound(METHOD_EXECUTE, DSLAMBOIProject.class, projectIdStr);
+			traceItemNotFound(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
 			//end-trace
 		}	
 	}

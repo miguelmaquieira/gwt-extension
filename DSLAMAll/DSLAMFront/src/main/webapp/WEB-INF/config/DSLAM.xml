@@ -145,7 +145,7 @@
 			</SubServiceList>
 		</Service>
 		<Service Name="SRV_BUS_PROJECT">
-			<Description>Cron business service</Description>
+			<Description>Project business service</Description>
 			<Type>300171153899520</Type>
 			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUProjectBusinessServiceImpl</Descriptor>
 			<SubServiceList>
@@ -166,6 +166,16 @@
 				</SubService>
 				<SubService Name="GET_CSV_NODES">
 					<Descriptor>getCsvNodes</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_EXECUTE">
+			<Description>Execute business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUExecuteBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="EXECUTE_PROJECT">
+					<Descriptor>executeProject</Descriptor>
 				</SubService>
 			</SubServiceList>
 		</Service>
