@@ -1,13 +1,13 @@
-package com.imotion.dslam.front.business.desktop.client.presenter.projectpage;
+package com.imotion.dslam.front.business.desktop.client.presenter.execution;
 
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
-public class DSLAMBusDesktopProjectPagePresenter extends CRONIOBusProjectBasePresenter<DSLAMBusDesktopProjectPageDisplay> {
+public class DSLAMBusDesktopExecutionPresenter extends CRONIOBusProjectBasePresenter<DSLAMBusDesktopExecutionDisplay> {
 
-	public static final String NAME = "DSLAMBusDesktopProjectPagePresenter";
+	public static final String NAME = "DSLAMBusDesktopExecutionPresenter";
 
-	public DSLAMBusDesktopProjectPagePresenter(DSLAMBusDesktopProjectPageDisplay view) {
+	public DSLAMBusDesktopExecutionPresenter(DSLAMBusDesktopExecutionDisplay view) {
 		super(view);
 	}
 

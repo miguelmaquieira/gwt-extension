@@ -6,19 +6,24 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+import org.atmosphere.cpr.Broadcaster;
+import org.atmosphere.cpr.DefaultBroadcasterFactory;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
+import com.imotion.dslam.logger.amosphere.CRONIOLoggerEvent;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
-	private static Logger	log4jLogger;
-
+	private static Logger	log4jLogger;;
+	private String projectName	;
+	
 	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
-		// TODO initialize  Atmosphere
+		projectName = project.getProjectName();
 		Logger logger = getLog4JLogger();
-		String targetLog = "logs/" + project.getProjectName() + ".log";
+		String targetLog = "logs/" + projectName + ".log";
 		if (logger.getAppender(targetLog) == null) {
 			PatternLayout layout = new PatternLayout("%d %-5p %m%n");
 			FileAppender apndr = new FileAppender(layout, targetLog, true);
@@ -48,10 +53,20 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		logValueSB.append("\n");
 		logValueSB.append(prompt);
 		logValueSB.append("\n");
-
 		String logValueStr = logValueSB.toString();
-		//TODO: atmosphere
+		
+		//Log file
 		log4jLogger.debug(logValueStr);
+		
+		//ClientConsole
+		CRONIOLoggerEvent loggerEvent = new CRONIOLoggerEvent();
+		loggerEvent.setConnectionId(connectionId);
+		loggerEvent.setNodeName(nodeName);
+		loggerEvent.setRequest(request);
+		loggerEvent.setResponse(response);
+		loggerEvent.setPrompt(prompt);
+		loggerEvent.setFullTrace(logValueStr);
+		getClientComm(connectionId).broadcast(loggerEvent);
 	}
 	
 	/**
@@ -64,6 +79,15 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 			log4jLogger.setLevel((Level) Level.ALL);
 		}
 		return log4jLogger;
+	}
+	
+	private Broadcaster getClientComm(String connectionId) {
+		String commId = connectionId;
+		if (AEMFTCommonUtilsBase.isEmptyString(connectionId)) {
+			commId = projectName;
+		}
+		Broadcaster b = DefaultBroadcasterFactory.getDefault().lookup(commId, true);
+		return b;
 	}
 
 }

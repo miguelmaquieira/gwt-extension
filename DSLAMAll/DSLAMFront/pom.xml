@@ -166,6 +166,11 @@
 			<artifactId>Selene4GWT</artifactId>
 			<version>${selene.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.imotion</groupId>
+			<artifactId>DSLAMExecute</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

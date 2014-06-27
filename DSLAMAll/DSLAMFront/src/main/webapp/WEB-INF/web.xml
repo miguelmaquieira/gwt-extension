@@ -78,6 +78,27 @@
 		<url-pattern>/dslamBusDesktop/fileUpload</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Atmosphere -->
+	<servlet>
+		<description>AtmosphereServlet</description>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<servlet-class>org.atmosphere.cpr.AtmosphereServlet</servlet-class>
+		<init-param>
+			<param-name>org.atmosphere.cpr.AtmosphereInterceptor</param-name>
+			<param-value>org.atmosphere.gwt20.server.GwtRpcInterceptor</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.atmosphere.cpr.broadcasterCacheClass</param-name>
+			<param-value>org.atmosphere.cache.UUIDBroadcasterCache</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AtmosphereServlet</servlet-name>
+		<url-pattern>/dslamBusDesktop/atmosphere/*</url-pattern>
+	</servlet-mapping>
+	
 		<!-- Generic-GWT -->
 		<!-- <servlet-mapping> -->
 		<!-- <servlet-name>genericServerConnectionGWT</servlet-name> -->
