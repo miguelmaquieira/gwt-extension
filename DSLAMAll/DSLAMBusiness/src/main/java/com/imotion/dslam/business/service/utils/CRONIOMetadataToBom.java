@@ -96,15 +96,18 @@ public class CRONIOMetadataToBom {
 			String		processIdStr 	= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID					, processData);
 			long		processId		= AEMFTCommonUtils.getLongFromString(processIdStr);
 			String		processName		= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_NAME				, processData);
-			boolean		synchronous		= getElementController().getElementAsBoolean(DSLAMBOIProcess.PROCESS_SYNC_OPTION		, processData);
 			Date		creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcess.CREATION_TIME	, processData);
 			Date		savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcess.SAVED_TIME		, processData);
 			process.setProcessId(processId);
 			process.setProcessName(processName);
-			process.setSynchronous(synchronous);
 			process.setCreationTime(creationTime);
 			process.setSavedTime(savedTime);
-
+			
+			//extra options
+			AEMFTMetadataElementComposite extraOptions = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_EXTRA_OPTIONS, processData);
+			boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOProcess.PROCESS_SYNC_OPTION, extraOptions);
+			process.setSynchronous(synchronous);
+			
 			//process variables
 			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_VARIABLE_LIST, processData);
 			List<DSLAMBOIVariable> variableList = fromVariableDataList(variablesData);

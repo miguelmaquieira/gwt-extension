@@ -35,9 +35,8 @@
 		<script src="dslamBusDesktop/ace/mode-java.js" type="text/javascript" charset="utf-8"></script>
 		<script src="dslamBusDesktop/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
 		<script src="dslamBusDesktop/ace/mode-dslam.js" type="text/javascript" charset="utf-8"></script>
+		<script src="dslamBusDesktop/ace/snippets/dslam.js" type="text/javascript" charset="utf-8"></script>
 		<script src="dslamBusDesktop/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
-		
-		
 		
 		<!-- GWT-MODULE -->
 		<script type="text/javascript" src="dslamBusDesktop/dslamBusDesktop.nocache.js"></script>

@@ -1,64 +1,30 @@
-##
 ## Commands
-##snippet cli
-##	cli
-##snippet environment
-##	environment
-##snippet configure
-##	configure
-##snippet show
-##	show
-##snippet admin
-##	admin
-##snippet equipment
-##	equipment
-##snippet interface
-##	interface
-##snippet vlan
-##	vlan
-##snippet pppox-relay
-##	pppox-relay
-##snippet software-mngt
-##	software-mngt
-##snippet slot
-##	slot
-##snippet protection-group
-##	protection-group
-##snippet protection-element
-##	protection-element
-##snippet admin-status
-##	admin-status
-##snippet id
-##	id
-##snippet mode
-##	mode
-##snippet name
-##	name
-##snippet protocol-filter
-##	protocol-filter
-##snippet pppoe
-##	pppoe
-##snippet circuit-id-pppoe
-##	circuit-id-pppoe
-##snippet remote-id-pppoe
-##	remote-id-pppoe
-##snippet customer-id
-##	customer-id
-##snippet shub
-##	shub
-##snippet port
-##	port
-##snippet egress-port
-##	egress-port
-##snippet cross-connect
-##	cross-connect
-##snippet engine
-##	engine
-##snippet mac-addr-conc
-##	mac-addr-conc
-##snippet unlock
-##	unlock
-##snippet database
-##	database
-##snippet save
-##	save
+snippet if
+	if (${1}) {
+		${2}//TODO:
+	}
+
+snippet else {
+	else {
+		${1}//TODO:
+	}
+
+snippet else if
+	else if (${1}) {
+		${2}//TODO:
+	}
+
+snippet for
+	for ${1} in (${2} .. ${3}) {
+		${4}//TODO:
+	}
+
+snippet foreach
+	foreach (${1} : ${2}) {
+		${3}//TODO:
+	}
+
+snippet while
+	while (${1}) {
+		${2}//TODO:
+	}

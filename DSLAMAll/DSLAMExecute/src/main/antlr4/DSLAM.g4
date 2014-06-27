@@ -55,8 +55,6 @@ dslamCommands : 	'cli'|'environment'|'configure'|'show'|'admin'|'equipment'
 
 //LEXER
 INTEGER: ('-')?(DIGIT)+;
-WS  :  [ \t\r\n\u000C]+ -> skip
-    ;
 VARIABLE_SCRIPT : 	'$' VARIABLE_NAME;
 VARIABLE_PROCESS : 	'%' VARIABLE_NAME;
 VARIABLE_EXTERNAL : '#' VARIABLE_NAME;
@@ -68,6 +66,21 @@ LOGICAL_COMPARATOR :   '=='
 					 | '>'
 					 | '>=';
 STRING_LITERAL:   '"' STRING_CHARACTERS? '"';
+
+//
+// Whitespace and comments
+//
+
+WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
+
+COMMENT
+    :   '/*' .*? '*/' -> skip
+    ;
+
+LINE_COMMENT
+    :   '//' ~[\r\n]* -> skip
+    ;
 
 fragment	DIGIT 				: '0'..'9' ;
 fragment	IDENT_CHAR 			: ('a'..'z'|'A'..'Z');

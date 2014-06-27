@@ -1,13 +1,13 @@
-define('ace/mode/dslam', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/mode/dslam_highlight_rules', 'ace/mode/folding/cstyle'], function(require, exports, module) {
+define('ace/mode/imolang', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text', 'ace/mode/imolang_highlight_rules', 'ace/mode/folding/cstyle'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var TextMode = require("./text").Mode;
-var DslamHighlightRules = require("./dslam_highlight_rules").DslamHighlightRules;
+var ImolangHighlightRules = require("./imolang_highlight_rules").ImolangHighlightRules;
 var FoldMode = require("./folding/cstyle").FoldMode;
 
 var Mode = function() {
-    this.HighlightRules = DslamHighlightRules;
+    this.HighlightRules = ImolangHighlightRules;
     this.foldingRules = new FoldMode();
 };
 oop.inherits(Mode, TextMode);
@@ -15,72 +15,46 @@ oop.inherits(Mode, TextMode);
 (function() {
     this.lineCommentStart = "//";
     this.blockComment = "";
-    this.$id = "ace/mode/dslam";
+    this.$id = "ace/mode/imolang";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
 });
-define('ace/mode/dslam_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
+define('ace/mode/imolang_highlight_rules', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/mode/text_highlight_rules'], function(require, exports, module) {
 
 
 var oop = require("../lib/oop");
 var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
-var DslamHighlightRules = function() {
+var ImolangHighlightRules = function() {
 	
-	var levelone = ("cli|environment|configure|show|admin");
-
-    var leveltwo = ("equipment|interface|vlan|pppox-relay|software-mngt");
-
-
-    var levelthree = ("slot|protection-group|protection-element|admin-status|" +
-    		"id|mode|name|protocol-filter|pppoe-relay-tag|circuit-id-pppoe|remote-id-pppoe|" +
-    		"customer-id|shub|port|egress-port|cross-connect|engine|mac-addr-conc|unlock|database|save"
-    );
+	var keywords = ("IN|IF|ELSE|FOR|WHILE|EQU|NEQ|LSS|LEQ|GTR|GEQ");
 
     var keywordMapper = this.createKeywordMapper({
-        "keyword.levelone": levelone,
-        "keyword.leveltwo": leveltwo,
-        "keyword.levelthree": levelthree
+        "keyword": keywords,
     }, "default");
 
     this.$rules = { 
-    
-    start: [
-    	 { token: 'keyword.control',
-           regex: '\\bin\\b',
-         },
-         { token: 'keyword.control.conditional',
-           regex: '\\b(?:if|else)\\b',
-         },
-         { token: 'keyword.control.repeat',
-           regex: '\\b(for|while|foreach)\\b',
-         },
-         { token: 'keyword.operator',
-           regex: '\\b(?:==|!=|<|<=|>|>=)\\b' },
-         { token: 'comment.line.colons',
-           regex: '//.*$' },
-         { token: 'variable-local', regex: '\\$[a-zA-Z][a-zA-Z0-9_]*\\w*'},
-         { token: 'variable-process', regex: '#[a-zA-Z][a-zA-Z0-9_]*\\w*'},
-         { token: 'variable-extern', regex: '%[a-zA-Z][a-zA-Z0-9_]*\\w*'},
-         { token: keywordMapper,
-            regex: '[a-zA-Z_$][a-zA-Z0-9-]*\\b',
-            caseInsensitive: true 
-         }
- 	]
+	    start: [
+	         { token: 'comment.line.colons', 	regex: '//.*$' },
+	         { token: 'variable-local', 	 	regex: '\\$[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
+	         { token: 'variable-process',		regex: '#[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
+	         { token: 'variable-extern', 		regex: '%[a-zA-Z_$][a-zA-Z0-9-]*\\w*'},
+	         { token: keywordMapper}
+	 	]
     };
     
     this.normalizeRules();
 };
 
-DslamHighlightRules.metaData = { name: 'DSLAM',
-      scopeName: 'source.dslam',
-      fileTypes: [ 'dslam' ] }
+ImolangHighlightRules.metaData = { name: 'IMOLANG',
+      scopeName: 'source.imolang',
+      fileTypes: [ 'imolang' ] }
 
 
-oop.inherits(DslamHighlightRules, TextHighlightRules);
+oop.inherits(ImolangHighlightRules, TextHighlightRules);
 
-exports.DslamHighlightRules = DslamHighlightRules;
+exports.ImolangHighlightRules = ImolangHighlightRules;
 });
 
 define('ace/mode/folding/cstyle', ['require', 'exports', 'module' , 'ace/lib/oop', 'ace/range', 'ace/mode/folding/fold_mode'], function(require, exports, module) {

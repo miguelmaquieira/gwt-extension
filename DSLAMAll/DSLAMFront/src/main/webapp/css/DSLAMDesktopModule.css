@@ -1,26 +1,9 @@
 /**************************************
 *			LAYOUT
 ***************************************/
-
 .dslam_studio-projectsLayout {
 	height: 100%;
 	position: relative;
-}
-
-.dslam_studio-projectsLayout-projectWorkZone {
-	height: 100%;
-}
-
-.dslam_studio-projectsLayout-projectWorkZone .dslam_studio-projectsLayout-contentInBox {
-	border-radius: 3px;
-	box-shadow: 0px 0px 3px #B8B8B8;
-	margin: 10px;
-	width: auto !important;
-	height: auto !important;
-}
-
-.dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator {
-	margin-right: -8px;
 }
 
 .dslam_studio-projectsLayout-bottomZone {
@@ -34,6 +17,33 @@
 .dslam_studio-projectsLayout-bottomZone-right {
 	height: 100%;
 	padding: 0px;
+	position: relative;
+}
+
+.dslam_studio-projectsLayout-projectWorkZone-header {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+
+.dslam_studio-projectsLayout-projectWorkZone {
+	position: absolute;
+	top: 35px;
+	width: 100%;
+	bottom: 0px;
+}
+
+.dslam_studio-projectsLayout-projectWorkZone .dslam_studio-projectsLayout-contentInBox
+	{
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px #B8B8B8;
+	margin: 10px;
+	width: auto !important;
+	height: auto !important;
+}
+
+.dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator {
+	margin-right: -8px;
 }
 
 .dslam_studio-projectsLayout-listZone {
@@ -48,7 +58,8 @@
 	padding: 5px;
 }
 
-.dslam_studio-projectsLayout-listZone .nav-list label:ACTIVE, .dslam_studio-projectsLayout-listZone .nav-list label:FOCUS {
+.dslam_studio-projectsLayout-listZone .nav-list label:ACTIVE,.dslam_studio-projectsLayout-listZone .nav-list label:FOCUS
+	{
 	background-color: #EEEEEE;
 }
 
@@ -72,7 +83,8 @@
 	padding: 0px;
 }
 
-.dslam_studio-projectsLayout-zoneHeader > .gwt-Label , .dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label {
+.dslam_studio-projectsLayout-zoneHeader>.gwt-Label,.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label
+	{
 	float: left;
 	margin-left: 10px;
 }
@@ -80,7 +92,6 @@
 /*********************************
 *	TOOLBAR
 *********************************/
-
 .dslam_studio-toolbar {
 	height: 40px;
 	border: 1px solid #CCCCCC;
@@ -164,11 +175,9 @@
 	width: 100%;
 }
 
-
 /********************************************
 *		LIST
 ********************************************/
-
 .dslam_studio-list {
 	height: 100%;
 	position: relative;
@@ -195,6 +204,9 @@
 /********************************************************
 *			PROCESS
 *********************************************************/
+.dslam_studio-projectConfigureDeckPanel {
+	width: 100%;
+}
 
 .dslam_studio-header-actions {
 	height: 35px;
@@ -212,7 +224,7 @@
 	margin: 10px;
 }
 
-.dslam_studio-processConfigureNodesInfoZone > .panel {
+.dslam_studio-processConfigureNodesInfoZone>.panel {
 	border-radius: 3px;
 	box-shadow: 0px 0px 3px rgb(184, 184, 184);
 	margin: 10px;
@@ -224,7 +236,8 @@
 	margin: 10px;
 }
 
-.dslam_studio-processConfigureNodesInfoZone > .panel-default > .panel-heading {
+.dslam_studio-processConfigureNodesInfoZone>.panel-default>.panel-heading
+	{
 	height: 35px;
 	background-color: rgb(242, 241, 240);
 	border-bottom: 1px solid rgb(204, 204, 204);
@@ -232,7 +245,8 @@
 	font-weight: bold;
 }
 
-.dslam_studio-processConfigureNodesInfoZone > .panel-default > .panel-heading > .panel-title {
+.dslam_studio-processConfigureNodesInfoZone>.panel-default>.panel-heading>.panel-title
+	{
 	font-weight: bold;
 	font-size: 14px;
 	line-height: 20px;
@@ -301,7 +315,7 @@
 	background-color: rgb(184, 184, 184);
 }
 
-.dslam_studio-header-actions > .col-xs-10 {
+.dslam_studio-header-actions>.col-xs-10 {
 	padding-left: 0px;
 }
 
@@ -373,6 +387,7 @@
 	right: 0px;
 	top: 0px;
 }
+
 .dslam_studio-processConfigure {
 	position: absolute;
 	width: 100%;
@@ -396,7 +411,6 @@
 /*****************************************
 *			COMMON
 ******************************************/
-
 .gwt-Label {
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -437,8 +451,7 @@
 }
 
 .nav-list {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-bottom: 0;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-bottom: 0;
 }
-

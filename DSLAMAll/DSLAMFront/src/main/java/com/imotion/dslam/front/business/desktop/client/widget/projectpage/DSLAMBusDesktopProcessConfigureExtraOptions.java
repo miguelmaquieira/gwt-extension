@@ -43,7 +43,7 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 				AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-				getElementController().setElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, data, synchroCheckBox.getValue());
+				getElementController().setElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, data, (boolean) synchroCheckBox.getValue());
 				saveEvt.addElementAsComposite(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS, data);
 				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}

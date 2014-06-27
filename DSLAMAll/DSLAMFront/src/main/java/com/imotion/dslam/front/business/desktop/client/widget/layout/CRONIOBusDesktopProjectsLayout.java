@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import java.util.Date;
+import java.util.List;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -20,7 +21,6 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
-
 
 	private FlowPanel 									root;
 	private DSLAMBusDesktopToolbar						toolbar;
@@ -70,6 +70,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
 
+	public List<String> getModifiedProjetIds() {
+		return projectListNavigator.getModifiedProjectIds();
+	}
 
 	/**
 	 * CRONIOBusDesktopIsLayout
@@ -100,7 +103,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		setHeightToDecrease(90);
+		setHeightToDecrease(75);
 		projectListNavigator.postDisplay();
 	}
 
@@ -134,6 +137,10 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setModified(false);
 				projectListNavigator.setProjectSaved(projectId);
 				toolbar.setSaveProjectEnabled(false);
+			} else if (EVENT_TYPE.PROJECT_CREATED.equals(type)) {
+				AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+				projectListNavigator.addElement(projectData);
+				toolbar.hideProjectForm();
 			}
 		}
 	}
@@ -144,7 +151,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				||
 				EVENT_TYPE.PROJECT_SAVED.equals(type)
 				||
-				EVENT_TYPE.SECTION_MODIFIED.equals(type);
+				EVENT_TYPE.SECTION_MODIFIED.equals(type)
+				||
+				EVENT_TYPE.PROJECT_CREATED.equals(type);
 	}
 
 

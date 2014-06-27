@@ -11,6 +11,8 @@ import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -18,8 +20,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdown
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
-import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
-import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 
@@ -74,14 +74,17 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 				if (AEGWTStringUtils.isEmptyString(projectNameField.getText())) {
 					projectNameField.setErrorLabelText(TEXTS.empty_textbox());
 				} else {
-					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
+					
+					CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
 					if (mode == MODE_NEW_PROJECT) {
-						evt.setEventType(LOGICAL_TYPE.NEW_EVENT);
-					} 
-					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
-					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
-					getLogicalEventHandlerManager().fireEvent(evt);
+						saveProjectEvent.setEventType(EVENT_TYPE.NEW_PROJECT);
+					} else {
+						saveProjectEvent.setEventType(EVENT_TYPE.EDIT_PROJECT_PROPERTIES);
+						saveProjectEvent.setProjectId(getId());
+					}
+					saveProjectEvent.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
+					saveProjectEvent.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
+					getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 				}
 			}
 		});
@@ -139,9 +142,9 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			Long 	projectId 		= getElementController().getElementAsLong(DSLAMBOIProject.PROJECT_ID		, data);
+			String 	projectId 		= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID		, data);
 			String 	projectName 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME	, data);
-			setId(String.valueOf(projectId));
+			setId(projectId);
 			projectNameField.setText(projectName);
 		}
 	}

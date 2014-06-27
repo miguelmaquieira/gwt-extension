@@ -11,6 +11,8 @@ public interface DSLAMBUIProjectBusinessService extends DSLAMBUIBusinessService 
 	void getAllProjects();
 
 	void updateProject();
+	
+	void updateProjects();
 
 	void removeProject();
 	

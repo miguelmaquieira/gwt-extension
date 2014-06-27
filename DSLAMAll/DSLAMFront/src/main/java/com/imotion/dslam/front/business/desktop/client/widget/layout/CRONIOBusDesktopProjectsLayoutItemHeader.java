@@ -2,12 +2,10 @@ package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
@@ -16,7 +14,6 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 	public		static final String			 NAME	= "CRONIOBusDesktopProjectsLayoutItemHeader";
 	private		static final DSLAMBusI18NTexts TEXTS	= GWT.create(DSLAMBusI18NTexts.class);
 	
-	private FlowPanel		actionsZone;
 	private AEGWTLabel		sectionName;
 	private AEGWTLabel 		projectName;
 	private AEGWTLabel 		modifiedIndicator;
@@ -31,7 +28,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		FlowPanel infoZone = new FlowPanel();
 		root.add(infoZone);
 		infoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE);
-		infoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+//		infoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
 		modifiedIndicator = new AEGWTLabel("");
 		infoZone.add(modifiedIndicator);
@@ -48,19 +45,6 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		projectName = new AEGWTLabel("Project");
 		infoZone.add(projectName);
 		projectName.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME);
-		
-		//ACTIONS
-		actionsZone = new FlowPanel();
-		root.add(actionsZone);
-		actionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_ACTIONS_ZONE);
-		actionsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-	}
-	
-	public void addActionWidget(Widget actionWidget, String containerStyle) {
-		FlowPanel container = new FlowPanel();
-		actionsZone.add(container);
-		container.addStyleName(containerStyle);
-		container.add(actionWidget);
 	}
 	
 	public void setProyectName(String projectNameValue) {

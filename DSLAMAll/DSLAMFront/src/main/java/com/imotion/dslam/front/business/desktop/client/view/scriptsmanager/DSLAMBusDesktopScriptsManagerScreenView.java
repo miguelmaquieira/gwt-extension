@@ -8,6 +8,7 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
@@ -93,7 +94,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 
 			editor.setText(content);
 
-			if (DSLAMBOIFile.CONTENT_TYPE_DSLAM == contentType) {
+			if (DSLAMBOIProject.PROJECT_MACHINE_TYPE_DSLAM == contentType) {
 				editor.setMode(AceEditorMode.DSLAM);
 			} else {
 				editor.setMode(AceEditorMode.TEXT);
@@ -113,7 +114,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	private void handleChanges(boolean now) {
 		String originalContent 			= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, fileData);
 		final String currentContent		= editor.getText();
-		if (!originalContent.equals(currentContent)) {
+		if (!currentContent.equals(originalContent)) {
 			if (now) {
 				if (timer != null) {
 					timer.cancel();

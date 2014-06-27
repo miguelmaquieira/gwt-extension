@@ -42,6 +42,10 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		projectInfoZone.add(projectInfo);
 	}
 	
+	public void hideProjectForm() {
+		projectActions.hideProjectForm();
+	}
+	
 	@Override
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
