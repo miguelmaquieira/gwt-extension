@@ -10,7 +10,8 @@ public interface CRONIOBusDesktopProjectEventTypes {
 		PROJECT_SAVED, 
 		NEW_PROJECT,
 		SAVE_PROJECT,
-		SAVE_ALL_PROJECTS
+		SAVE_ALL_PROJECTS, 
+		OPEN_EVENT
 	}
 	
 }

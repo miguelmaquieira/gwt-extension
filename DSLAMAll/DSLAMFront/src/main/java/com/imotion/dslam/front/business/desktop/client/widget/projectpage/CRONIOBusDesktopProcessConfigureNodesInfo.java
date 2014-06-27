@@ -6,16 +6,17 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapPanelWithHeading;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -26,16 +27,16 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	
 	private FlowPanel 										root;
 	private FlowPanel 										nodeVariableListZone;
-	private AEGWTBootstrapPanelWithHeading					nodeInfoPanel;
+	private CRONIOBusDesktopNodeInfoPanel					nodeInfoPanel;
 	private CRONIOBusDesktopProcessNodesInfoVariablesList 	nodeVariableList;
 	private CRONIOBusDesktopProcessNodeVariablesForm		nodeVariablesForm;
-	private	 AEMFTMetadataElementComposite					nodeVariablesData;
+	private	 AEMFTMetadataElementComposite					nodeData;
 	
 	public CRONIOBusDesktopProcessConfigureNodesInfo() {
 		root = new FlowPanel();
 		initWidget(root);
 
-		nodeInfoPanel 		= new AEGWTBootstrapPanelWithHeading(TEXTS.node_information(),"");
+		nodeInfoPanel 		= new CRONIOBusDesktopNodeInfoPanel(TEXTS.node_information());
 		root.add(nodeInfoPanel);
 		
 		nodeVariableListZone = new FlowPanel();
@@ -76,13 +77,16 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		nodeVariablesData = data;
+		nodeData = data;
 		nodeVariableList.clearList();
-		nodeVariableList.setData(data);	
+		
+		AEMFTMetadataElementComposite nodeVariableData = getElementController().getElementAsComposite(CRONIOBOINode.NODE_VARIABLE_LIST, data);
+		nodeVariableList.setData(nodeVariableData);
+		nodeInfoPanel.setData(data);
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
-		 return nodeVariablesData;
+		 return nodeData;
 	}
 	
 	/**
@@ -102,7 +106,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 			
 			if (nodeVariablesForm.getEditMode()) {
 				addVariables(id,data);
-			} else if (!nodeVariablesData.contains(id)) {
+			} else if (!nodeData.contains(id)) {
 				addVariables(id,data);
 			} else {
 				nodeVariablesForm.setErrorVariableExist();
@@ -110,12 +114,12 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.setSourceWidget(getName());
-			saveEvt.addElementAsComposite(CRONIOBOINodeDataConstants.NODE_VARIABLES_DATA, nodeVariablesData);
+			saveEvt.setSourceWidgetId(nodeData.getKey());
+			saveEvt.addElementAsComposite(nodeData.getKey(), nodeData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 			
 		} else if(CRONIOBusDesktopProcessNodesInfoVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
-			
-			AEMFTMetadataElement nodeVariableData = nodeVariablesData.getElement(evt.getSourceWidgetId());
+			AEMFTMetadataElement nodeVariableData 	= evt.getElementAsDataValue();
 			nodeVariablesForm.setData((AEMFTMetadataElementComposite) nodeVariableData);
 			nodeVariablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
 			nodeVariablesForm.center();
@@ -125,14 +129,17 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();
 		
 			for (String rowId : rowIds) {
-				nodeVariablesData.removeElement(rowId);
+				String key =  CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR + rowId;
+				getElementController().removeElement(key, nodeData);
 			}	
 			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			deleteEvt.setSourceWidget(getName());
-			deleteEvt.addElementAsComposite(CRONIOBOINodeDataConstants.NODE_VARIABLES_DATA, nodeVariablesData);
+			deleteEvt.setSourceWidgetId(nodeData.getKey());
+			deleteEvt.addElementAsComposite(nodeData.getKey(), nodeData);
 			getLogicalEventHandlerManager().fireEvent(deleteEvt);
-		}	
+			
+		} 
 	}
 
 	@Override
@@ -146,8 +153,12 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	
 	private void addVariables(String id, AEMFTMetadataElementComposite data) {
 		nodeVariableList.clearList();
-		nodeVariablesData.addElement(id,data);
-		nodeVariableList.setData(nodeVariablesData);
+		String key = CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR + id;
+		getElementController().setElement(key, nodeData, data);
+		AEMFTMetadataElementComposite variablesNodeData = getElementController().getElementAsComposite(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST, nodeData);
+		AEMFTMetadataElementComposite cloneVariablesNodeData = (AEMFTMetadataElementComposite) variablesNodeData.cloneObject();
+		cloneVariablesNodeData.setKey(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST);
+		nodeVariableList.setData(cloneVariablesNodeData);
 		nodeVariablesForm.resetForm();	
 	}
 }

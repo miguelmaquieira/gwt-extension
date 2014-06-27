@@ -40,7 +40,7 @@ public class CRONIOBusDesktopProcessNodesInfoVariablesList extends DSLAMBusDeskt
 			String itemKey = variable.getKey();
 			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
 				String variableName 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variable);
-				String valor 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+				String valor 			= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
 
 				Map<String,String> variableRow = new HashMap<String, String>();
 				variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableName);
