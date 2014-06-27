@@ -78,6 +78,10 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	public FlowPanel getElementListContainer() {
 		return elementListContainer;
 	}
+	
+	public void reset() {
+		elementListContainer.clear();
+	}
 
 	/**
 	 * AEGWTCompositePanel

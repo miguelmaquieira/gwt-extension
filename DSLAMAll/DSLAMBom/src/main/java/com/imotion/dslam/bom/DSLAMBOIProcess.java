@@ -36,6 +36,8 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 	
 	void addNode(CRONIOBOINode node);
 	
+	void removeNode(CRONIOBOINode node);
+	
 	Date getSavedTime();
 
 	void setSavedTime(Date savedTime);

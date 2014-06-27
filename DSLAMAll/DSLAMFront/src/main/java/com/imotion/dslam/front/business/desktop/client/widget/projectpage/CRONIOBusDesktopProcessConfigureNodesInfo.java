@@ -59,6 +59,11 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		nodeVariableList 	= new CRONIOBusDesktopProcessNodesInfoVariablesList(header.getDeleteButton());
 		nodeVariableListZone.add(nodeVariableList);
 	}
+	
+	public void reset() {
+		nodeInfoPanel.reset();
+		nodeVariableList.reset();
+	}
 
 	/**
 	 * AEGWTICompositePanel

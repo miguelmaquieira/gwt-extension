@@ -50,6 +50,16 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		nodeInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
 		nodeInfoZone.setVisible(false);
 	}
+	
+	public void reset() {
+		nodeListZone.reset();
+		nodeInfoZone.reset();
+		nodeInfoZone.setVisible(false);
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
@@ -57,6 +67,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
+		reset();
 		if (data != null) {
 			nodesData = data;
 			nodeListZone.getElementListContainer().clear();

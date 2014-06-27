@@ -149,13 +149,17 @@ public class CRONIOMetadataToBom {
 			Date actualDate = new Date();
 
 			String	nodeId			= getElementController().getElementAsString(CRONIOBOINode.NODE_ID						, nodeDataElement);
-			long	nodeIdAsLong	= AEMFTCommonUtils.getLongFromString(nodeId);
+			Long	nodeIdAsLong	= AEMFTCommonUtils.getLongFromString(nodeId);
 			String	nodeName		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME						, nodeDataElement);
 			String	nodeIp			= getElementController().getElementAsString(CRONIOBOINode.NODE_IP						, nodeDataElement);
 			int		nodeType		= getElementController().getElementAsInt(CRONIOBOINode.NODE_MACHINE_TYPE				, nodeDataElement);
 			//Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.SAVED_TIME		, nodeDataElement);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.CREATION_TIME	, nodeDataElement);
 
+			if (nodeIdAsLong < 0) {
+				nodeIdAsLong = null;
+			}
+			
 			node.setNodeId(nodeIdAsLong);
 			node.setNodeName(nodeName);
 			node.setNodeIp(nodeIp);
