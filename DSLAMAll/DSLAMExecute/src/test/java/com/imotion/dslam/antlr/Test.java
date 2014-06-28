@@ -1,16 +1,5 @@
 package com.imotion.dslam.antlr;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.CommonTokenStream;
-
-import com.imotion.antlr.DSLAMLexer;
-import com.imotion.antlr.DSLAMParser;
-import com.imotion.antlr.DSLAMParser.ProgramContext;
-import com.imotion.dslam.comm.DSLAMConnectionImpl;
-import com.imotion.dslam.comm.DSLAMIConnection;
 
 
 /**
@@ -64,16 +53,16 @@ public class Test {
 														+ "}";
 	
 	public static void main( String[] args ) {
-		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(FOR_EACH_EXAMPLE));
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		
-		DSLAMParser parser = new DSLAMParser(tokens);
-		ProgramContext tree = parser.program();
-		
-		DSLAMIConnection connection = new DSLAMConnectionImpl();
-		
-		Map<String, Object> variables = new HashMap<>();
-		DSLAMInterpreterVisitorImpl visitor = new DSLAMInterpreterVisitorImpl(connection, variables);
-		visitor.visit(tree);
+//		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(FOR_EACH_EXAMPLE));
+//		CommonTokenStream tokens = new CommonTokenStream(lexer);
+//		
+//		DSLAMParser parser = new DSLAMParser(tokens);
+//		ProgramContext tree = parser.program();
+//		
+//		CRONIOIConnection connection = new CRONIOConnectionDSLAM();
+//		
+//		Map<String, Object> variables = new HashMap<>();
+//		DSLAMInterpreterVisitorImpl visitor = new DSLAMInterpreterVisitorImpl(connection, variables);
+//		visitor.visit(tree);
 	}
 }

@@ -1,12 +1,12 @@
-package com.imotion.dslam.comm;
+package com.imotion.dslam.conn;
 
-public class DSLAMResponse implements DSLAMIResponse {
+public class CRONIOExecutionData implements CRONIOIExecutionData {
 
 	private String sourceCommand;
 	private String prompt;
 	private String response;
 	
-	public DSLAMResponse(String sourceCommand, String prompt, String response) {
+	public CRONIOExecutionData(String sourceCommand, String prompt, String response) {
 		this.sourceCommand	= sourceCommand;
 		this.prompt			= prompt;
 		this.response		= response;

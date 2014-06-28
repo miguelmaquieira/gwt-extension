@@ -2,7 +2,7 @@ package com.imotion.dslam.antlr;
 
 import java.util.List;
 
-import com.imotion.dslam.comm.DSLAMIResponse;
+import com.imotion.dslam.conn.CRONIOIExecutionData;
 
 public class DSLAMInterpreterVisitorValue {
 
@@ -27,8 +27,8 @@ public class DSLAMInterpreterVisitorValue {
 		return (List<Object>) value;
 	}
 
-	public DSLAMIResponse asResponse() {
-		return (DSLAMIResponse) value;
+	public CRONIOIExecutionData asResponse() {
+		return (CRONIOIExecutionData) value;
 	}
 
 	public Boolean asBoolean() {
@@ -52,7 +52,7 @@ public class DSLAMInterpreterVisitorValue {
 	}
 
 	public boolean isResponse() {
-		return value instanceof DSLAMIResponse;
+		return value instanceof CRONIOIExecutionData;
 	}
 
 	@Override

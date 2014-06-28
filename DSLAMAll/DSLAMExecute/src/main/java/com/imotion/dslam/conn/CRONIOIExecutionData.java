@@ -1,6 +1,6 @@
-package com.imotion.dslam.comm;
+package com.imotion.dslam.conn;
 
-public interface DSLAMIResponse {
+public interface CRONIOIExecutionData {
 
 	String getSourceCommand();
 	

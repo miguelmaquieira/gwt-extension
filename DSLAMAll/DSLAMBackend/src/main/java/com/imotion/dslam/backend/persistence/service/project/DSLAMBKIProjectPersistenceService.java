@@ -6,6 +6,8 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 
 public interface DSLAMBKIProjectPersistenceService {
 	
+	DSLAMBOIProject getProject(long projectId);
+	
 	DSLAMBOIProject addProject(DSLAMBOIProject project);
 	
 	DSLAMBOIProject updateProject(Long projectId, DSLAMBOIProject updatedProject);

@@ -21,21 +21,51 @@ import com.imotion.antlr.DSLAMParser.StatementContext;
 import com.imotion.antlr.DSLAMParser.StringExprContext;
 import com.imotion.antlr.DSLAMParser.ValueContext;
 import com.imotion.antlr.DSLAMParser.VariableContext;
-import com.imotion.dslam.comm.DSLAMIConnection;
-import com.imotion.dslam.comm.DSLAMIResponse;
+import com.imotion.dslam.conn.CRONIOIConnection;
+import com.imotion.dslam.conn.CRONIOIExecutionData;
 
-public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpreterVisitorValue> {
+public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpreterVisitorValue> implements CRONIOILangVisitor {
 
-	private DSLAMIConnection		connection;
+	private CRONIOIConnection		connection;
 	private Map<String, Object>		allVariables;
 
-	public DSLAMInterpreterVisitorImpl(DSLAMIConnection connection, Map<String, Object> variables) {
+	public DSLAMInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables) {
 		this.connection = connection;
 		this.allVariables = new HashMap<>();
 		if (variables != null) {
 			allVariables.putAll(variables);
 		}
 	}
+	
+	/**
+	 * CRONIOILangVisitor
+	 */
+	
+	@Override
+	public void pause() throws InterruptedException {
+		
+	}
+
+	@Override
+	public void next() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void stop() {
+		
+	}
+
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * Visitor methods
+	 */
 
 	@Override
 	public DSLAMInterpreterVisitorValue visitExecution(@NotNull DSLAMParser.ExecutionContext ctx) {
@@ -57,7 +87,7 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			}
 		}
 
-		DSLAMIResponse response = connection.executeCommand(finalCommand);
+		CRONIOIExecutionData response = connection.executeCommand(finalCommand);
 		DSLAMInterpreterVisitorValue responseValue = new DSLAMInterpreterVisitorValue(response);
 
 		return responseValue;
