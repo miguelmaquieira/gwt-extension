@@ -19,6 +19,7 @@ import com.imotion.dslam.bom.DSLAMBOIVariable;
 @Entity(name="Node")
 public class CRONIOBONode implements CRONIOBOINode {
 	
+	private static final long serialVersionUID = 4048739124870495341L;
 	
 	private Long 					nodeId;
 	private String 					nodeName;

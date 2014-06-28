@@ -63,7 +63,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 			sectionNameValue = TEXTS.schedule();
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			sectionNameValue = TEXTS.properties();
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
 			sectionNameValue = TEXTS.nodes();
 		}
 		sectionName.setText(sectionNameValue);

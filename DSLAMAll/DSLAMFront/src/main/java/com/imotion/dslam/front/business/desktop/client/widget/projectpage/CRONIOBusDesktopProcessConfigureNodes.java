@@ -57,7 +57,6 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		
 		if (data != null) {
 			nodesData = data;
 			nodeListZone.getElementListContainer().clear();
@@ -92,8 +91,8 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
-				AEMFTMetadataElementComposite nodesDataList = nodesData.getCompositeElement(DSLAMBOIProcessDataConstants.PROCESS_NODE_LIST);
-				setData(nodesDataList);
+				AEMFTMetadataElementComposite cloneNodesData = (AEMFTMetadataElementComposite) nodesData.cloneObject();
+				setData(cloneNodesData);
 			}	
 		} else if (CRONIOBusDesktopProcessNodeFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
@@ -107,7 +106,8 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		} else if (CRONIOBusDesktopProcessConfigureNodesInfo.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				AEMFTMetadataElementComposite nodeData = evt.getElementAsComposite(evt.getSourceWidgetId());
-				nodesData.addElement(evt.getSourceWidgetId(), nodeData);
+				AEMFTMetadataElementComposite cloneNodeData = (AEMFTMetadataElementComposite) nodeData.cloneObject();
+				nodesData.addElement(evt.getSourceWidgetId(), cloneNodeData);
 				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 				saveEvt.setSourceWidget(getName());

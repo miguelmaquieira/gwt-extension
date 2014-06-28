@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,9 +24,9 @@ import com.imotion.dslam.bom.DSLAMBOIVariable;
 
 @Entity(name="Process")
 public class DSLAMBOProcess implements DSLAMBOIProcess {
-	
+
 	private static final long serialVersionUID = 7636685992356098248L;
-	
+
 	private Long 					processId;
 	private String 					processName;
 	private boolean 				synchronous;
@@ -68,7 +72,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.synchronous = synchronous;
 	}
 
-	
+
 	@ElementCollection
 	@Temporal(TemporalType.TIMESTAMP)
 	@Override
@@ -80,7 +84,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public void setScheduleList(List<Date> scheduleList) {
 		this.scheduleList = scheduleList;
 	}
-	
+
 	@Override
 	public void addSchedule(Date schedule) {
 		if (scheduleList == null) {
@@ -94,12 +98,12 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public List<DSLAMBOIVariable> getVariableList() {
 		return variableList;
 	}
-	
+
 	@Override
 	public void setVariableList(List<DSLAMBOIVariable> variableList) {
 		this.variableList = variableList;
 	}
-	
+
 	@Override
 	public void addVariable(DSLAMBOIVariable variable) {
 		if (variableList == null) {
@@ -107,18 +111,19 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		}
 		variableList.add(variable);
 	}
-	
-	@ElementCollection(targetClass=CRONIOBONode.class)
+
+	@OneToMany(cascade=CascadeType.ALL, targetEntity=CRONIOBONode.class)
+	@JoinTable(name = "ProcessHasNodes", joinColumns = @JoinColumn(name = "processId"), inverseJoinColumns = @JoinColumn(name = "nodeId"))
 	@Override
 	public List<CRONIOBOINode> getNodeList() {
 		return nodeList;
 	}
-	
+
 	@Override
 	public void setNodeList(List<CRONIOBOINode> nodeList) {
 		this.nodeList = nodeList;
 	}
-	
+
 	@Override
 	public void addNode(CRONIOBOINode node) {
 		if (nodeList == null) {

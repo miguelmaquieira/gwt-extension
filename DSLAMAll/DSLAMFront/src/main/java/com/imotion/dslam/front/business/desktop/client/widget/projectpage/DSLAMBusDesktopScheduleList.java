@@ -24,7 +24,7 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 	public DSLAMBusDesktopScheduleList(AEGWTButton deleteButton) {
 		super(true,true,false, deleteButton);
 	}
-	
+
 	public void reset () {
 		clearUpdateList();
 	}
@@ -39,36 +39,39 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
-		for (AEMFTMetadataElement scheduleData : scheduleList) {
-			String itemKey = scheduleData.getKey();
-			if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
-				AEMFTMetadataElementSingle 	scheduleDataSingle 	= (AEMFTMetadataElementSingle) scheduleData;
-				Date 						scheduleValue 		= (Date) scheduleDataSingle.getValueAsSerializable();
-				String 						formattedDate 		= AEGWTBusinessUtils.getFormattedTimeMessage(scheduleValue, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);
+		if (data != null) {
+			List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
+			for (AEMFTMetadataElement scheduleData : scheduleList) {
+				String itemKey = scheduleData.getKey();
+				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
+					AEMFTMetadataElementSingle 	scheduleDataSingle 	= (AEMFTMetadataElementSingle) scheduleData;
+					Date 						scheduleValue 		= (Date) scheduleDataSingle.getValueAsSerializable();
+					String 						formattedDate 		= AEGWTBusinessUtils.getFormattedTimeMessage(scheduleValue, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);
 
-				Map<String,String> scheduleRow = new HashMap<String, String>();
-				scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE, formattedDate);
+					Map<String,String> scheduleRow = new HashMap<String, String>();
+					scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE, formattedDate);
 
-				addRowItem(scheduleRow, formattedDate, true, true,false);
+					addRowItem(scheduleRow, formattedDate, true, true,false);
+				}
 			}
-		}	
+		}
 	}
+
 
 	/*
 	 * AEGWTBootstrapTable
 	 */
-	
+
 	@Override
 	protected void setupHeader() {
 		super.headerDataFields.add(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
-		
+
 		super.headerMapFieldText.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, TEXTS.schedule());
 	}
 
 	@Override
 	protected String getEventName() {
-		
+
 		return NAME;
 	}
 
@@ -79,4 +82,4 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 
 
 }
-	
+

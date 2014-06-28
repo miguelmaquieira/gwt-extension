@@ -73,7 +73,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.addWidget(propertiesProcess);
 
 		//MENU -> Project  -> Process -> Nodes
-		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODES				,TEXTS.nodes(), this);
+		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST				,TEXTS.nodes(), this);
 		menuProcess.addWidget(nodesProcess);
 
 		menu.addSeparator();
@@ -96,7 +96,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			menuProcess.setModified(true);
 			propertiesProcess.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODES.equals(sectionId)) {
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
 			menuProcess.setModified(true);
 			nodesProcess.setModified(true);
 		}

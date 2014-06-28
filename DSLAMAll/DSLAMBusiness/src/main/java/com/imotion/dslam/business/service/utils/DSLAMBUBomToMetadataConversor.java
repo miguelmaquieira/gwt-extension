@@ -7,7 +7,6 @@ import java.util.Locale;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
@@ -56,10 +55,12 @@ public class DSLAMBUBomToMetadataConversor {
 			AEMFTMetadataElementComposite variableListData	= fromVariableList(process.getVariableList());
 			AEMFTMetadataElementComposite extraOptions		= AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			extraOptions.addElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, process.isSynchronous());
+			AEMFTMetadataElementComposite nodeListData		= fromNodeList(process.getNodeList());
 			
 			data.addElement(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS	, extraOptions);
 			data.addElement(DSLAMBOIProcess.PROCESS_SCHEDULE_LIST	, scheduleListData);
 			data.addElement(DSLAMBOIProcess.PROCESS_VARIABLE_LIST	, variableListData);
+			data.addElement(DSLAMBOIProcess.PROCESS_NODE_LIST		, nodeListData);
 		}
 		return data;
 	}
@@ -225,16 +226,13 @@ public class DSLAMBUBomToMetadataConversor {
 	}
 
 	public  static AEMFTMetadataElementComposite fromNodeList(List<CRONIOBOINode> nodeList) {
-		AEMFTMetadataElementComposite data = null;
-		data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		AEMFTMetadataElementComposite dataNodeList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
-			AEMFTMetadataElementComposite dataNodeList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (CRONIOBOINode node : nodeList) {
 				dataNodeList.addElement(node.getNodeName(), fromNode(node));
 			}
-			data.addElement(DSLAMBOIProcessDataConstants.PROCESS_NODE_LIST,dataNodeList);
 		}
-		return data;
+		return dataNodeList;
 	}
 	
 

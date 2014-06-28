@@ -103,6 +103,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, id);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, 2);
 			
 			if (nodeVariablesForm.getEditMode()) {
 				addVariables(id,data);
@@ -156,9 +157,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		String key = CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR + id;
 		getElementController().setElement(key, nodeData, data);
 		AEMFTMetadataElementComposite variablesNodeData = getElementController().getElementAsComposite(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST, nodeData);
-		AEMFTMetadataElementComposite cloneVariablesNodeData = (AEMFTMetadataElementComposite) variablesNodeData.cloneObject();
-		cloneVariablesNodeData.setKey(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST);
-		nodeVariableList.setData(cloneVariablesNodeData);
+		nodeVariableList.setData(variablesNodeData);
 		nodeVariablesForm.resetForm();	
 	}
 }

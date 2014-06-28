@@ -133,8 +133,10 @@ public class CRONIOMetadataToBom {
 			nodeList =  new ArrayList<>();
 			List<AEMFTMetadataElement> nodeDataElementList = nodeDataList.getElementList();
 			for (AEMFTMetadataElement nodeDataElement: nodeDataElementList) {
-				CRONIOBOINode node = fromNodeData((AEMFTMetadataElementComposite) nodeDataElement);
-				nodeList.add(node);
+				if (!DSLAMBOIProject.IS_MODIFIED.equals(nodeDataElement.getKey())) {
+					CRONIOBOINode node = fromNodeData((AEMFTMetadataElementComposite) nodeDataElement);
+					nodeList.add(node);
+				}
 			}
 		}
 		return nodeList;
@@ -144,21 +146,24 @@ public class CRONIOMetadataToBom {
 		CRONIOBOINode node = null;
 		if (nodeDataElement != null) {
 			node = new CRONIOBONode();
+			Date actualDate = new Date();
 
 			String	nodeId			= getElementController().getElementAsString(CRONIOBOINode.NODE_ID						, nodeDataElement);
 			long	nodeIdAsLong	= AEMFTCommonUtils.getLongFromString(nodeId);
 			String	nodeName		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME						, nodeDataElement);
 			String	nodeIp			= getElementController().getElementAsString(CRONIOBOINode.NODE_IP						, nodeDataElement);
-			int		nodeType		= getElementController().getElementAsInt(CRONIOBOINode.NODE_TYPE						, nodeDataElement);
-			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.SAVED_TIME		, nodeDataElement);
+			int		nodeType		= getElementController().getElementAsInt(CRONIOBOINode.NODE_MACHINE_TYPE				, nodeDataElement);
+			//Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.SAVED_TIME		, nodeDataElement);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.CREATION_TIME	, nodeDataElement);
 
 			node.setNodeId(nodeIdAsLong);
 			node.setNodeName(nodeName);
 			node.setNodeIp(nodeIp);
 			node.setNodeType(nodeType);
-			node.setSavedTime(savedTime);
-			node.setCreationTime(creationTime);
+			node.setSavedTime(actualDate);
+			if (creationTime == null) {
+				node.setCreationTime(actualDate);
+			}
 
 			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(CRONIOBOINode.NODE_VARIABLE_LIST, nodeDataElement);
 			List<DSLAMBOIVariable> nodeVariables = fromVariableDataList(variablesData);
