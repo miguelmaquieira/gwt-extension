@@ -24,6 +24,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 	private AEGWTBootstrapGlyphiconButton 		newButton;
 	private AEGWTBootstrapGlyphiconButton 		saveButton;
 	private AEGWTBootstrapGlyphiconButton 		saveAllButton;
+	private AEGWTBootstrapGlyphiconButton 		executeButton;
 	private	 DSLAMBusDesktopNewProjectPopupForm	projectPopupForm;
 
 	public DSLAMBusDesktopToolbarActions() {
@@ -34,7 +35,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//NEW
 		SimplePanel newButtonZone = new SimplePanel();
 		root.add(newButtonZone);
-		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 
 		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
 		newButtonZone.add(newButton);
@@ -42,7 +43,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//SAVE
 		SimplePanel saveButtonZone = new SimplePanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		saveButtonZone.add(saveButton);
@@ -51,9 +52,16 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//SAVE ALL
 		SimplePanel saveAllButtonZone = new SimplePanel();
 		root.add(saveAllButtonZone);
-		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
 		saveAllButtonZone.add(saveAllButton);
+
+		//SAVE ALL
+		SimplePanel executeButtonZone = new SimplePanel();
+		root.add(executeButtonZone);
+		executeButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, texts.run(), texts.run());
+		executeButtonZone.add(executeButton);
 
 		newButton.addClickHandler(new ClickHandler() {
 
@@ -72,7 +80,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
-		
+
 		saveAllButton.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -83,8 +91,18 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 			}
 		});
 		
+		executeButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				saveProjectEvent.setEventType(EVENT_TYPE.EXECUTE);
+				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
+			}
+		});
+
 	}
-	
+
 	public void hideProjectForm() {
 		getProjectPopup().hide();
 	}
@@ -98,7 +116,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 	public void setSaveEnabled(boolean enabled) {
 		saveButton.setEnabled(enabled);
 	}
-	
+
 	public void setSaveAllEnabled(boolean enabled) {
 		saveAllButton.setEnabled(enabled);
 	}
@@ -117,16 +135,16 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	/**
 	 * PRIVATE
 	 */
-	
+
 	private DSLAMBusDesktopNewProjectPopupForm getProjectPopup() {
 		if (projectPopupForm == null) {
 			projectPopupForm = new DSLAMBusDesktopNewProjectPopupForm(this);
 		}
 		return projectPopupForm;
 	}
-	
+
 }

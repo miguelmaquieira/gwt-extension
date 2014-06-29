@@ -47,6 +47,7 @@ public abstract class CRONIOConnectionBase implements CRONIOIConnection {
 	private String generateConnectionId(long processId, long nodeId) {
 		StringBuilder connectionIdSB = new StringBuilder();
 		connectionIdSB.append(processId);
+		connectionIdSB.append(CONNECTION_ID_SEP);
 		connectionIdSB.append(nodeId);
 		return connectionIdSB.toString();
 	}

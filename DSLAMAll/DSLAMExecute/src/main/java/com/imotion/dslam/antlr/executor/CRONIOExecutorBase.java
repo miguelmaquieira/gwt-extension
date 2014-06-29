@@ -71,7 +71,6 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 			@Override
 			public void run() {
 				executeInNode(processId, node, scriptCode, allVariables);
-				
 			}
 		};
 		
@@ -84,7 +83,7 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	private Map<String, Object> getNodeVariables(CRONIOBOINode node) {
 		Map<String, Object> 	nodeVariablesMap 	= new HashMap<>();
 		List<DSLAMBOIVariable> 	nodeVariables 		= node.getVariableList();
-		if (AEMFTCommonUtilsBase.isEmptyList(nodeVariables)) {
+		if (!AEMFTCommonUtilsBase.isEmptyList(nodeVariables)) {
 			for (DSLAMBOIVariable variable : nodeVariables) {
 				addVariableToMap(nodeVariablesMap, variable);
 			}

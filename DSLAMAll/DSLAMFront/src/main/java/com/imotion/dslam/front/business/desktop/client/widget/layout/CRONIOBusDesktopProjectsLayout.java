@@ -1,6 +1,5 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -35,10 +34,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 		toolbar = new DSLAMBusDesktopToolbar();
 		root.add(toolbar);
-		toolbar.setMainTitleText("script1");
 		toolbar.setModified(false);
-		toolbar.setLastSaved(new Date());
-		toolbar.getInfo().setVisible(false);
 		toolbar.setId(NO_PROJECT_ID);
 
 		//Bottom Zone

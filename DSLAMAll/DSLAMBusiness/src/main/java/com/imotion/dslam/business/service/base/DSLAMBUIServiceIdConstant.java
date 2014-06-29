@@ -1,5 +1,6 @@
 package com.imotion.dslam.business.service.base;
 
+import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
@@ -15,4 +16,10 @@ public interface DSLAMBUIServiceIdConstant extends AEMFTIBusinessServiceIdConsta
 	String CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECTS_ID	= CTE_DSLAM_BU_SRV_PROJECT_PREFIX	+ DSLAMBUIProjectBusinessServiceConstants.METHOD_UPDATE_PROJECTS;
 	String CTE_DSLAM_BU_SRV_PROJECT_REMOVE_PROJECT_ID	= CTE_DSLAM_BU_SRV_PROJECT_PREFIX	+ DSLAMBUIProjectBusinessServiceConstants.METHOD_REMOVE_PROJECT;
 	String CTE_DSLAM_BU_SRV_PROJECT_GET_CSV_NODES_ID	= CTE_DSLAM_BU_SRV_PROJECT_PREFIX	+ DSLAMBUIProjectBusinessServiceConstants.METHOD_GET_CSV_NODES;
+	
+	
+	//EXECUTE
+	String CTE_DSLAM_BU_SRV_EXECUTE_ID					= "SRV_BUS_EXECUTE";
+	String CTE_DSLAM_BU_SRV_EXECUTE_PREFFIX				= CTE_DSLAM_BU_SRV_EXECUTE_ID 		+ AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
+	String CTE_DSLAM_BU_SRV_EXECUTE_EXECUTE_PROJECT_ID	= CTE_DSLAM_BU_SRV_EXECUTE_PREFFIX	+ DSLAMBUIExecuteBusinessServiceConstants.METHOD_EXECUTE_PROJECT;
 }	
