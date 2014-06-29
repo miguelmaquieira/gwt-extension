@@ -112,7 +112,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		variableList.add(variable);
 	}
 
-	@OneToMany(cascade=CascadeType.ALL, targetEntity=CRONIOBONode.class)
+	@OneToMany(targetEntity=CRONIOBONode.class, cascade = CascadeType.ALL)
 	@JoinTable(name = "ProcessHasNodes", joinColumns = @JoinColumn(name = "processId"), inverseJoinColumns = @JoinColumn(name = "nodeId"))
 	@Override
 	public List<CRONIOBOINode> getNodeList() {
@@ -121,7 +121,14 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 
 	@Override
 	public void setNodeList(List<CRONIOBOINode> nodeList) {
-		this.nodeList = nodeList;
+		if (this.nodeList != null) {
+			this.nodeList.clear();
+			if (nodeList != null) {
+				this.nodeList.addAll(nodeList);
+			}
+		} else {
+			this.nodeList = nodeList;
+		}
 	}
 
 	@Override
@@ -131,6 +138,14 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		}
 		nodeList.add(node);
 	}
+	
+	@Override
+	public void removeNode(CRONIOBOINode node) {
+		if (nodeList != null) {
+			nodeList.remove(node);
+		}
+		
+	}	
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Override
@@ -163,5 +178,6 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	@Override
 	public void setVersion(Long version) {
 		this.version = version;
-	}	
+	}
+
 }

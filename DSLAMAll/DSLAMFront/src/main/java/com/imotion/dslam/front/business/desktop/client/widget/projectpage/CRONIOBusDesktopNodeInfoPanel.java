@@ -11,6 +11,10 @@ public class CRONIOBusDesktopNodeInfoPanel extends AEGWTBootstrapPanelWithHeadin
 	public CRONIOBusDesktopNodeInfoPanel(String title) {
 		super(title);
 	}
+	
+	public void reset() {
+		getBody().clear();
+	}
 
 	/****************************************************************************
 	 *                        AEGWTICompositePanel
