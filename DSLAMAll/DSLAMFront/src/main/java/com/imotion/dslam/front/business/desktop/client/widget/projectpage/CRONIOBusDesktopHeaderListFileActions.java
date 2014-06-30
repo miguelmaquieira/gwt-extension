@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.InputElement;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -85,9 +86,10 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 	}
 	
 	public void uploadFile() {
-		form.submit();
+		if (Window.confirm(getMsgDeleteText())) {
+			form.submit();
+		}
 	}
-	
 
 	/**
 	 * AEGWTCompositePanel
@@ -127,6 +129,11 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 	/**
 	 * PRIVATE
 	 */
+	
+	private String getMsgDeleteText() {
+		return TEXTS.delete_nodes_confirm();
+	}
+
 	
 	
 }
