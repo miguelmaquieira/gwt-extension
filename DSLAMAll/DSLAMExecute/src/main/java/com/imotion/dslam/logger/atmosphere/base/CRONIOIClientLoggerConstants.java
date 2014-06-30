@@ -1,4 +1,4 @@
-package com.imotion.dslam.logger.amosphere;
+package com.imotion.dslam.logger.atmosphere.base;
 
 public interface CRONIOIClientLoggerConstants {
 	

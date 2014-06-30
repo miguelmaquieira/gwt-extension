@@ -79,12 +79,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.addWidget(nodesProcess);
 
 		//MENU -> Project  -> Execution
-		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
+		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.execution());
 		menuExecution.setCloseMenu();
 		menuProject.addWidget(menuExecution);
 		
 		//MENU -> Project -> Execution -> Logs
-		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST		,TEXTS.logs_label(), this);
+		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_PROCESS					,TEXTS.logs_label(), this);
 		menuExecution.addWidget(nodesLog);
 
 		menu.addSeparator();

@@ -1,4 +1,4 @@
-package com.imotion.dslam.logger.amosphere;
+package com.imotion.dslam.logger.atmosphere;
 
 import java.io.IOException;
 
@@ -6,6 +6,8 @@ import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 import org.atmosphere.handler.AbstractReflectorAtmosphereHandler;
+
+import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 
 public class CRONIOLoggerAtmosphereHandler extends AbstractReflectorAtmosphereHandler {
 
