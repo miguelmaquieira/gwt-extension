@@ -169,4 +169,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Subir")
 	String upload();
 	
+	@DefaultStringValue("Logs")
+	String logs_label();
+	
 }

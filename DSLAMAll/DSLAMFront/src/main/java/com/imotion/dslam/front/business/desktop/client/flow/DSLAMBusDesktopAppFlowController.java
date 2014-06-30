@@ -79,6 +79,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE);
 		} else if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_SCRIPT.equals(mainSectionId)) {
 			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER);
+		} else if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_EXECUTION.equals(mainSectionId)) {
+			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXECUTION);
 		} else {
 			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE);
 		}

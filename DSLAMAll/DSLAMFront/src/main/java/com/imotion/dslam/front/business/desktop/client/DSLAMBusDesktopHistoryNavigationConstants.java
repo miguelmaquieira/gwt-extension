@@ -6,6 +6,6 @@ public interface DSLAMBusDesktopHistoryNavigationConstants {
 	public final static String TOKEN_SCRIPTS_MANAGER 	= "scriptsManager";
 	public final static String TOKEN_PROJECT_PAGE 	= "projectPage";
 	public final static String TOKEN_PROCESS_PAGE 	= "processPage";
-	
+	public final static String TOKEN_EXECUTION 		= "execution";
 
 }

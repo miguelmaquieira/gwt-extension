@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.navigator;
+package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -31,8 +31,7 @@ public class DSLAMBusDesktopExecutionPresenter extends CRONIOBusProjectBasePrese
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		// TODO Auto-generated method stub
-		
+		getView().setData(finalSectionData);
 	}
 	
 	@Override

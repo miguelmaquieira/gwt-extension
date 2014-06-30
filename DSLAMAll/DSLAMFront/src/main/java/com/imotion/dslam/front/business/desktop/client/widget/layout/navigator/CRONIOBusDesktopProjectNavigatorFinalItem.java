@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.navigator;
+package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
