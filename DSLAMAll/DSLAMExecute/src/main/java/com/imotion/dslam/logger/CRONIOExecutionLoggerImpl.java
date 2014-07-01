@@ -1,6 +1,7 @@
 package com.imotion.dslam.logger;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
@@ -64,12 +65,14 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		//ClientConsole
 		CRONIOLoggerEvent loggerEvent = new CRONIOLoggerEvent();
 		loggerEvent.setConnectionId(connectionId);
+		loggerEvent.setNodeIp(nodeIp);
 		loggerEvent.setNodeName(nodeName);
 		loggerEvent.setRequest(request);
 		loggerEvent.setResponse(response);
 		loggerEvent.setPrompt(prompt);
 		loggerEvent.setFullTrace(logValueStr);
-		getClientComm(connectionId).broadcast(loggerEvent);
+		loggerEvent.setTimestamp(new Date());
+//		getClientComm(connectionId).broadcast(loggerEvent);
 		getClientComm(processId).broadcast(loggerEvent);
 	}
 

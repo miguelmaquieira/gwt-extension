@@ -85,5 +85,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	//EXECUTION
 	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";
 	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";
+	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION					+ "-loggerContainer";
 
 }
