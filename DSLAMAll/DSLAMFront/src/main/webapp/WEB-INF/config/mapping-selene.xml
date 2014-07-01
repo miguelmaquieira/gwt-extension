@@ -30,6 +30,9 @@
 		<field name="serviceDescriptor" type="java.lang.String">
 			<bind-xml name="Descriptor" node="element" />
 		</field>
+		<field name="async" type="java.lang.Boolean">
+			<bind-xml name="Async" node="element" />
+		</field>
 		<field name="parametersMap" collection="map" container="false">
 			<bind-xml name="ParametersMap">
 				<class name="org.exolab.castor.mapping.MapItem">

@@ -18,16 +18,11 @@
 			<Description>Literal service for app controller</Description>
 			<Type>300171053236224</Type>
 			<Descriptor></Descriptor>
+			<Async>true</Async>
 			<ParametersMap>
 				<Parameter id="LOCALE">
 					<Param>
 						<value>es_ES;en_EN</value>
-						<type>STATIC</type>
-					</Param>
-				</Parameter>
-				<Parameter id="EXEC_MODE">
-					<Param>
-						<value>1</value>
 						<type>STATIC</type>
 					</Param>
 				</Parameter>
@@ -176,6 +171,7 @@
 			<SubServiceList>
 				<SubService Name="EXECUTE_PROJECT">
 					<Descriptor>executeProject</Descriptor>
+					<Async>true</Async>
 				</SubService>
 			</SubServiceList>
 		</Service>
