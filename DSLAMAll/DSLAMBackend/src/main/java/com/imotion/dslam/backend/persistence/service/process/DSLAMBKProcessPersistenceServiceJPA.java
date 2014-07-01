@@ -25,9 +25,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process) {
 		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
-			//Begin transaction
-//			EntityTransaction tx = getPersistenceModule().beginTransaction();
-			
+
 			originalProcess.setSynchronous(process.isSynchronous());
 			originalProcess.setScheduleList(process.getScheduleList());
 			originalProcess.setVariableList(process.getVariableList());
@@ -43,18 +41,23 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 				originalProcess.removeNode(node);
 			}
 			
-			originalProcess.setNodeList(process.getNodeList());
-			
+			List<CRONIOBOINode> newNodeList			= process.getNodeList();
+			List<CRONIOBOINode> persistedNodeList	= new ArrayList<>();
+			if (!AEMFTCommonUtilsBase.isEmptyList(newNodeList)) {
+				for (CRONIOBOINode node : newNodeList) {
+					node = getNodePersistence().addNode(node);
+					persistedNodeList.add(node);
+				}
+			}
+			originalProcess.setNodeList(persistedNodeList);
 			originalProcess.setSavedTime(new Date());
-			
-			//Commit transaction
-//			getPersistenceModule().commit(tx);
+
 			getPersistenceModule().update(originalProcess);
 			
-//			//orphan nodes
-//			for (CRONIOBOINode node : nodesToRemove) {
-//				getNodePersistence().removeNode(node.getNodeId());
-//			}
+			//orphan nodes
+			for (CRONIOBOINode node : nodesToRemove) {
+				getNodePersistence().removeNode(node.getNodeId());
+			}
 		}
 		return originalProcess;
 	}

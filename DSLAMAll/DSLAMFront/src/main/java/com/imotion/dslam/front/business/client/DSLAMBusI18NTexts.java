@@ -169,7 +169,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Subir")
 	String upload();
 	
-	@DefaultStringValue("Se eliminarán todos los nodos introducidos anteriormente, si carga un nuevo fichero. ¿Deseas eliminarlos?")
+	@DefaultStringValue("Si ha introducido nodos anteriormente, estos se eliminarán ¿Deseas continuar?")
 	String delete_nodes_confirm();
 
 	@DefaultStringValue("Logs")

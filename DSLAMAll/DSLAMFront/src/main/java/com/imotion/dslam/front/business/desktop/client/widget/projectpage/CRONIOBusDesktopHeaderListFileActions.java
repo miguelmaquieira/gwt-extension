@@ -117,7 +117,7 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 	 ************************************************************************/
 
 	private native void addFileInputJS() /*-{
-		$wnd.jQuery(":file").filestyle({input: false,buttonText: "  "}); 
+		$wnd.jQuery(":file").filestyle({input: false,buttonText: "Cargar csv",iconName: "glyphicon-upload"}); 
 	}-*/;
 	
 	private native void addJS(CRONIOBusDesktopHeaderListFileActions headerSelf) /*-{
