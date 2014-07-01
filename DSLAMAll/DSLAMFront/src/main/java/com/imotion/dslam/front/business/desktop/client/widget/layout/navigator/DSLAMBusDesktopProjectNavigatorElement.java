@@ -83,7 +83,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.addWidget(menuExecution);
 		
 		//MENU -> Project -> Execution -> Logs
-		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.logs_label(), this);
+		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
 		menuExecution.addWidget(nodesLog);
 
 		menu.addSeparator();
