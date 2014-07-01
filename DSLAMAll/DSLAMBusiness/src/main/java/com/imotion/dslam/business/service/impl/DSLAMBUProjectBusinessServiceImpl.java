@@ -192,6 +192,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//Process
 		DSLAMBOIProcess process = project.getProcess();
 		process = getProcessPersistence().updateProcess(process.getProcessId(), process);
+		project.setProcess(process);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);
 		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);

@@ -35,7 +35,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//NEW
 		SimplePanel newButtonZone = new SimplePanel();
 		root.add(newButtonZone);
-		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 
 		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
 		newButtonZone.add(newButton);
@@ -43,7 +43,7 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//SAVE
 		SimplePanel saveButtonZone = new SimplePanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		saveButtonZone.add(saveButton);
@@ -52,14 +52,15 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//SAVE ALL
 		SimplePanel saveAllButtonZone = new SimplePanel();
 		root.add(saveAllButtonZone);
-		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
 		saveAllButtonZone.add(saveAllButton);
+		saveAllButtonZone.setVisible(false);
 
-		//SAVE ALL
+		//EXECUTE
 		SimplePanel executeButtonZone = new SimplePanel();
 		root.add(executeButtonZone);
-		executeButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		executeButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, texts.run(), texts.run());
 		executeButtonZone.add(executeButton);
 
