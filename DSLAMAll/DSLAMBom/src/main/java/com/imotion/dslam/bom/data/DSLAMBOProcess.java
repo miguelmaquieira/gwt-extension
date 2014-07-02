@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
@@ -112,8 +110,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		variableList.add(variable);
 	}
 
-	@OneToMany(targetEntity=CRONIOBONode.class, cascade = CascadeType.ALL)
-	@JoinTable(name = "ProcessHasNodes", joinColumns = @JoinColumn(name = "processId"), inverseJoinColumns = @JoinColumn(name = "nodeId"))
+	@OneToMany(mappedBy=CRONIOBOINode.NODE_PROCESS, targetEntity=CRONIOBONode.class, cascade = CascadeType.ALL)
 	@Override
 	public List<CRONIOBOINode> getNodeList() {
 		return nodeList;
@@ -121,13 +118,11 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 
 	@Override
 	public void setNodeList(List<CRONIOBOINode> nodeList) {
-		if (this.nodeList != null) {
-			this.nodeList.clear();
-			if (nodeList != null) {
-				this.nodeList.addAll(nodeList);
+		this.nodeList = null;
+		if (nodeList != null) {
+			for (CRONIOBOINode node : nodeList) {
+				addNode(node);
 			}
-		} else {
-			this.nodeList = nodeList;
 		}
 	}
 
@@ -137,14 +132,15 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 			nodeList = new ArrayList<>();
 		}
 		nodeList.add(node);
+		node.setProcess(this);
 	}
-	
+
 	@Override
 	public void removeNode(CRONIOBOINode node) {
 		if (nodeList != null) {
 			nodeList.remove(node);
 		}
-		
+
 	}	
 
 	@Temporal(TemporalType.TIMESTAMP)

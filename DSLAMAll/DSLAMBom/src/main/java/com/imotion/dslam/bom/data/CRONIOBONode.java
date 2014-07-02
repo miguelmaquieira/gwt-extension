@@ -8,12 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 
 @Entity(name="Node")
@@ -26,6 +29,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 	private String 					nodeIp;
 	private int 					nodeType;
 	private List<DSLAMBOIVariable> variableList;
+	private DSLAMBOIProcess			process;
 	private Date 					savedTime;
 	private Date 					creationTime;
 	private Long					version;
@@ -84,6 +88,18 @@ public class CRONIOBONode implements CRONIOBOINode {
 	@Override
 	public void setVariableList(List<DSLAMBOIVariable> variableList) {
 		this.variableList = variableList;
+	}
+
+	@ManyToOne(targetEntity=DSLAMBOProcess.class)
+	@JoinColumn(name=DSLAMBOIProcess.PROCESS_ID)
+	@Override
+	public DSLAMBOIProcess getProcess() {
+		return process;
+	}
+
+	@Override
+	public void setProcess(DSLAMBOIProcess process) {
+		this.process = process;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

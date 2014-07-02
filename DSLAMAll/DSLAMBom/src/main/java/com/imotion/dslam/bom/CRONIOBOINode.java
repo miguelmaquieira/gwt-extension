@@ -38,6 +38,8 @@ public interface CRONIOBOINode extends Serializable, CRONIOBOINodeDataConstants 
 
 	void setVersion(Long version);
 
+	void setProcess(DSLAMBOIProcess process);
 
+	DSLAMBOIProcess getProcess();
 
 }

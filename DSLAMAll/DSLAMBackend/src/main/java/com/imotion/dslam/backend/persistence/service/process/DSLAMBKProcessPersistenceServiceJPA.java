@@ -41,14 +41,15 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 			}
 			
 			originalProcess.setNodeList(process.getNodeList());
+			
 			originalProcess.setSavedTime(new Date());
 			
 			getPersistenceModule().update(originalProcess);
 			
-			//orphan nodes
-			for (CRONIOBOINode node : nodesToRemove) {
-				getNodePersistence().removeNode(node.getNodeId());
-			}
+//			//orphan nodes
+//			for (CRONIOBOINode node : nodesToRemove) {
+//				getNodePersistence().removeNode(node.getNodeId());
+//			}
 		}
 		return originalProcess;
 	}
