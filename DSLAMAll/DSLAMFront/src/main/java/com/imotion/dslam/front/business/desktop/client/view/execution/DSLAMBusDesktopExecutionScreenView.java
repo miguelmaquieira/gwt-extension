@@ -45,9 +45,9 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 			logger.setSize("100%", "100%");
 			
 			AEMFTMetadataElementComposite logData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_EXECUTION_LOG, data);
+			logger.postDisplay();
 			if (logData != null) {
 				logger.setData(logData);
-				logger.postDisplay();
 			}
 		}
 	}

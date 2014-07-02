@@ -24,7 +24,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 
 	public static final String NAME = "CRONIOBusDesktopProjectExecutionLogger";
 
-	private Atmosphere 			atmosphere ;
+	private Atmosphere 			atmosphere;
 	private AtmosphereRequest 	rpcRequest;
 	private AEMFTMetadataElementCompositeRecordSetListRegroup logDataList;
 
