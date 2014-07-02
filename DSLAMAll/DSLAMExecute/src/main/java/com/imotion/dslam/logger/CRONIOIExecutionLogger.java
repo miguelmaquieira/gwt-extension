@@ -7,4 +7,6 @@ public interface CRONIOIExecutionLogger {
 
 	void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data);
 	
+	void flush();
+	
 }
