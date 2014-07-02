@@ -11,7 +11,7 @@ import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class DSLAMBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIExecuteBusinessService, DSLAMBUIExecuteBusinessServiceConstants, DSLAMBUIExecuteBusinessServiceTrace {
+public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIExecuteBusinessService, DSLAMBUIExecuteBusinessServiceConstants, DSLAMBUIExecuteBusinessServiceTrace {
 
 	private static final long serialVersionUID = 7761400309777540451L;
 

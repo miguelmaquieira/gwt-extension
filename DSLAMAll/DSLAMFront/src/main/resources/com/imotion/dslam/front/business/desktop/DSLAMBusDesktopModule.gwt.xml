@@ -5,6 +5,8 @@
 	<inherits name="com.imotion.dslam.front.business.DSLAMBusModule" />
 	<inherits name='org.goda.Goda'/>
 	<inherits name='edu.ycp.cs.dh.acegwt.AceGWT'/>
+	<inherits name="com.imotion.dslam.logger.atmosphere.ExecuteModule"/>
+	<inherits name="org.atmosphere.gwt20.AtmosphereGwt20"/>
 	
 	<entry-point class="com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppEntryPoint" />
 

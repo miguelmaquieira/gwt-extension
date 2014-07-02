@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.view.execution;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
@@ -18,9 +19,12 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 		root = new FlowPanel();
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION);
+		root.setSize("100%", "100%");
 		
 		loggersContainer = new CRONIOBusDesktopLoggersContainer();
+		loggersContainer.setSize("100%", "100%");
 		root.add(loggersContainer);
+		setHeightToDecrease(78);
 	}
 
 	/**
@@ -39,7 +43,8 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 	public void setData(AEMFTMetadataElementComposite data) {
 		loggersContainer.clear();
 		if (data != null) {
-			
+			String processId = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, data);
+			loggersContainer.addLogger("ALL_NODES", processId);
 		}
 	}
 

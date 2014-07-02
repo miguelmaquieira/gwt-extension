@@ -22,6 +22,7 @@ public class CRONIOBusDesktopLoggersContainer extends AEGWTCompositePanel {
 	public void addLogger(String nodeName, String loggerId) {
 		CRONIOBusDesktopProjectNodeLog nodeLog = new CRONIOBusDesktopProjectNodeLog(loggerId);
 		tabsContainer.add(nodeLog, nodeName);
+		nodeLog.postDisplay();
 	}
 	
 	public void clear() {

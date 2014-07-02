@@ -33,6 +33,10 @@
 	bottom: 0px;
 }
 
+
+.dslam_studio-projectsLayout-projectWorkZone > div {
+	height: 100%;
+}
 .dslam_studio-projectsLayout-projectWorkZone .dslam_studio-projectsLayout-contentInBox
 	{
 	border-radius: 3px;

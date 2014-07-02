@@ -175,4 +175,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Logs")
 	String logs_label();
 
+	@DefaultStringValue("Ejecución")
+	String execution();
+	
 }
