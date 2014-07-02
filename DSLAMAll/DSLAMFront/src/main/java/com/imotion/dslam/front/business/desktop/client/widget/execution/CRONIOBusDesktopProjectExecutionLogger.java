@@ -28,15 +28,19 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 	private AtmosphereRequest 	rpcRequest;
 	private AEMFTMetadataElementCompositeRecordSetListRegroup logDataList;
 
-	private FlowPanel root;
+	private FlowPanel loggerContaniner;
 
 	public CRONIOBusDesktopProjectExecutionLogger(String loggerId) {
 		setId(loggerId);
 		logDataList = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getCompositeListRegroup();
 		
-		root = new FlowPanel();
+		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER);
+		
+		loggerContaniner = new FlowPanel();
+		root.add(loggerContaniner);
+		loggerContaniner.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
 		
 		CRONIOLoggerRPCSerializer rpc_serializer = GWT.create(CRONIOLoggerRPCSerializer.class);
 		AtmosphereRequestConfig rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
@@ -153,8 +157,8 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 	
 	protected abstract void addLogItem(AEMFTMetadataElementComposite logData);
 	
-	protected FlowPanel getRoot() {
-		return root;
+	protected FlowPanel getLoggerContainer() {
+		return loggerContaniner;
 	}
 
 	/**

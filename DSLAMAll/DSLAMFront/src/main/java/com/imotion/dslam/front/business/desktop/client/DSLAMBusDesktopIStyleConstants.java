@@ -83,8 +83,9 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
 	//EXECUTION
-	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";
-	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";
-	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION					+ "-loggerContainer";
+	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";			//dslam_studio-execution
+	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";		//dslam_studio-execution-loggerTabs
+	String EXECUTION_LOGGER 							= EXECUTION					+ "-logger";			//dslam_studio-execution-logger
+	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION_LOGGER			+ "Container";			//dslam_studio-execution-loggerContainer
 
 }

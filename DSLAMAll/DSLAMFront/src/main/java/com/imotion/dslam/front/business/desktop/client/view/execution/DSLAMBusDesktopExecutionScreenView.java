@@ -13,13 +13,12 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 
 	public static final String NAME = "DSLAMBusDesktopExecutionScreenView";
 	
-	private FlowPanel									root;
+	private FlowPanel	root;
 	
 	public DSLAMBusDesktopExecutionScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION);
-		root.setSize("100%", "100%");
 		setHeightToDecrease(78);
 	}
 
@@ -48,6 +47,7 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 			AEMFTMetadataElementComposite logData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_EXECUTION_LOG, data);
 			if (logData != null) {
 				logger.setData(logData);
+				logger.postDisplay();
 			}
 		}
 	}
