@@ -70,7 +70,6 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		reset();
 		if (data != null) {
 			nodesData = data;
-			nodeListZone.getElementListContainer().clear();
 			
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
