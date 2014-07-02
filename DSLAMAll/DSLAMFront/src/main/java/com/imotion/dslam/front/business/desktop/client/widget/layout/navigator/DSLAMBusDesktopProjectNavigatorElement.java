@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.widget.navigator;
+package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -21,12 +21,14 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private AEGWTBootstrapTreeMenuItem 			menuProject;
 	private AEGWTBootstrapTreeMenuItem		 	menuScript;
 	private AEGWTBootstrapTreeMenuItem 			menuProcess;
+	private AEGWTBootstrapTreeMenuItem 			menuExecution;
 	private AEGWTBootstrapTreeMenuFinalItem 	mainScript;
 	private AEGWTBootstrapTreeMenuFinalItem 	rollbackScript;
 	private AEGWTBootstrapTreeMenuFinalItem 	variableProcess;
 	private AEGWTBootstrapTreeMenuFinalItem 	scheduleProcess;
 	private AEGWTBootstrapTreeMenuFinalItem 	propertiesProcess;
 	private AEGWTBootstrapTreeMenuFinalItem 	nodesProcess;
+	private AEGWTBootstrapTreeMenuFinalItem 	nodesLog;
 
 	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
 		FlowPanel root = new FlowPanel();
@@ -73,12 +75,21 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.addWidget(propertiesProcess);
 
 		//MENU -> Project  -> Process -> Nodes
-		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST				,TEXTS.nodes(), this);
+		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST			,TEXTS.nodes(), this);
 		menuProcess.addWidget(nodesProcess);
+
+		//MENU -> Project  -> Execution
+		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
+		menuExecution.setCloseMenu();
+		menuProject.addWidget(menuExecution);
+		
+		//MENU -> Project -> Execution -> Logs
+		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST		,TEXTS.logs_label(), this);
+		menuExecution.addWidget(nodesLog);
 
 		menu.addSeparator();
 	}
-	
+
 	public void setProjectSectionModified(String sectionId) {
 		menuProject.setModified(true);
 		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
@@ -101,11 +112,11 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			nodesProcess.setModified(true);
 		}
 	}
-	
+
 	public boolean isModified() {
 		return menuProject.isModified();
 	}
-	
+
 	public void setProjectSaved() {
 		menuProject.setModified(false);
 		menuScript.setModified(false);

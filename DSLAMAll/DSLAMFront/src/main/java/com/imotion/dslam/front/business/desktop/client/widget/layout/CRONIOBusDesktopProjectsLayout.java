@@ -10,7 +10,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjec
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
-import com.imotion.dslam.front.business.desktop.client.widget.navigator.DSLAMBusDesktopProjectNavigator;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.DSLAMBusDesktopProjectNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;

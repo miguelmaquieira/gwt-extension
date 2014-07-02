@@ -82,4 +82,8 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String POPUP_SCHEDULE_FORM_SAVE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleFormSaveZone";		//dslam_studio-processConfigureScheduleFormSaveZone
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
+	//EXECUTION
+	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";
+	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";
+
 }
