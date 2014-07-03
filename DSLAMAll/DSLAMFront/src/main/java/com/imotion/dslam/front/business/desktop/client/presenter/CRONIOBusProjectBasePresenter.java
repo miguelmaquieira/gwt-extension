@@ -52,7 +52,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			String finalSectionId	= evt.getFinalSectionId();
 
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-
+			
 			boolean navigate 		= !getSectionType().equals(mainSectionId);
 			boolean	 projectChange	= !projectId.equals(currentProjectId);
 
@@ -60,7 +60,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			navigationData.addElement(CURRENT_PROJECT_ID		, projectId);
 			navigationData.addElement(CURRENT_MAIN_SECTION_ID	, mainSectionId);
 			navigationData.addElement(CURRENT_FINAL_SECTION_ID	, finalSectionId);
-
 
 			AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
 			storageEvent.setFullKey(PROJECT_NAVIGATION_DATA);
