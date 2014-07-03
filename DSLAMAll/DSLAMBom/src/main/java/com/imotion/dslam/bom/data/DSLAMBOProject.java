@@ -84,7 +84,7 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.rollBackScript = rollBackScript;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOProcess.class)
+	@OneToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOProcess.class)
 	@JoinColumn(name=DSLAMBOProcess.PROCESS_ID)
 	public DSLAMBOIProcess getProcess() {
 		return process;

@@ -110,7 +110,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		variableList.add(variable);
 	}
 
-	@OneToMany(mappedBy=CRONIOBOINode.NODE_PROCESS, targetEntity=CRONIOBONode.class, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy=CRONIOBOINode.NODE_PROCESS, targetEntity=CRONIOBONode.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@Override
 	public List<CRONIOBOINode> getNodeList() {
 		return nodeList;
@@ -139,6 +139,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	public void removeNode(CRONIOBOINode node) {
 		if (nodeList != null) {
 			nodeList.remove(node);
+			node.setProcess(null);
 		}
 
 	}	

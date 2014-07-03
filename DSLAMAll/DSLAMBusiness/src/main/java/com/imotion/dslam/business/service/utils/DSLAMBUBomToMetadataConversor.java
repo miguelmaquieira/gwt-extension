@@ -47,9 +47,12 @@ public class DSLAMBUBomToMetadataConversor {
 
 			AEMFTMetadataElementComposite 	scheduleListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			List<Date> 						scheduleList = process.getScheduleList();
-			for (int i = 0; i < scheduleList.size(); i++) {
-				Date date = scheduleList.get(i);
-				scheduleListData.addElement(date.toString(), date);	
+			
+			if (scheduleList != null) {
+				for (int i = 0; i < scheduleList.size(); i++) {
+					Date date = scheduleList.get(i);
+					scheduleListData.addElement(date.toString(), date);	
+				}
 			}
 				
 			AEMFTMetadataElementComposite variableListData	= fromVariableList(process.getVariableList());
