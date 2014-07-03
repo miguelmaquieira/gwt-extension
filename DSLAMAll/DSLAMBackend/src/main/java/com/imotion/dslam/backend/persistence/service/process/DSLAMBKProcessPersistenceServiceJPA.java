@@ -25,6 +25,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process) {
 		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
+
 			originalProcess.setSynchronous(process.isSynchronous());
 			originalProcess.setScheduleList(process.getScheduleList());
 			originalProcess.setVariableList(process.getVariableList());
@@ -50,6 +51,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 			}
 			originalProcess.setNodeList(persistedNodeList);
 			originalProcess.setSavedTime(new Date());
+
 			getPersistenceModule().update(originalProcess);
 			
 			//orphan nodes
