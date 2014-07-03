@@ -20,40 +20,45 @@ public class CRONIOBUCSVToBomConversor {
 		String splitByToken = splitBy;
 		String splitBySpace = " ";
 		String splitNewLine = "\\r?\\n";
+		String[]			variableNameList	= null;
 		List<CRONIOBOINode> nodeList = new ArrayList<>();  
 
 		String[] lines = content.split(splitNewLine);
-		
+
 		for (int line = 0; line < lines.length; line++) {  
 
 			String[] nodes = lines[line].split(splitByToken);  
 
-			CRONIOBONode node = new CRONIOBONode();  
-
 			String[]				variableListString	= nodes[3].split(splitBySpace);
 			List<DSLAMBOIVariable>	variableList 		= new ArrayList<>();
 
-			node.setNodeName(nodes[0]);
-			
-			if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_FD.equals(nodes[1])){
-				node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_FD);
-			} else if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_XD.equals(nodes[1])){
-				node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_XD);
-			}
-			
-			node.setNodeIp(nodes[2]); 
-			
-			for (int i = 0; i < variableListString.length; i++) {
-				DSLAMBOIVariable variable = new DSLAMBOVariable();
-				variable.setVariableName(variableListString[i]);
-				variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_NODE_TYPE);
-				variable.setVariableValue(variableListString[i]);
-				variableList.add(variable);
-			}
- 
-			node.setVariableList(variableList);  
+			if (line == 0) {
+				variableNameList = variableListString;
+			} else {
+				CRONIOBONode node = new CRONIOBONode();  
 
-			nodeList.add(node);  
+				node.setNodeName(nodes[0]);
+
+				if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_FD.equals(nodes[1])){
+					node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_FD);
+				} else if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_XD.equals(nodes[1])){
+					node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_XD);
+				}
+
+				node.setNodeIp(nodes[2]); 
+
+				for (int i = 0; i < variableListString.length; i++) {
+					DSLAMBOIVariable variable = new DSLAMBOVariable();
+					variable.setVariableName(variableNameList[i]);
+					variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_NODE_TYPE);
+					variable.setVariableValue(variableListString[i]);
+					variableList.add(variable);
+				}
+
+				node.setVariableList(variableList);  
+
+				nodeList.add(node);  
+			}
 		}
 		return nodeList;
 	}
