@@ -114,19 +114,21 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 			String projectId	= evt.getProjectId();
 			String sectionId	= evt.getFinalSectionId();
 			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
-				String		projectName		= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
-				boolean		modified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
+				String		projectName			= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
+				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
+				List<String> modifiedProjects	= getModifiedProjetIds();
+				boolean projectModified = modifiedProjects.contains(projectId);
+				toolbar.setSaveProjectEnabled(projectModified);
 				sectionHeader.setProyectName(projectName);
 				sectionHeader.setSectionNameFromId(sectionId);
-				sectionHeader.setModified(modified);
+				sectionHeader.setModified(sectionModified);
 				sectionHeader.setVisible(true);
 				setId(projectId);
 				toolbar.setId(projectId);
-				toolbar.setSaveProjectEnabled(modified);
 				if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
-					toolbar.getActions().setExecuteEnabled(true);
+					toolbar.setExecuteEnabled(true);
 				} else {
-					toolbar.getActions().setExecuteEnabled(false);
+					toolbar.setExecuteEnabled(false);
 				}	
 			} else if (EVENT_TYPE.SECTION_MODIFIED.equals(type)) {
 				projectListNavigator.setProjectSectionModified(projectId, sectionId);

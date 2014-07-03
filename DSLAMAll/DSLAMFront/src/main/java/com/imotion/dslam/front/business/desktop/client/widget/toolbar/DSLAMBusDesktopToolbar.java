@@ -47,9 +47,12 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 	public void setModified(boolean modified) {
 		projectActions.setSaveEnabled(modified);
 		projectActions.setSaveAllEnabled(modified);
-		projectActions.setExecuteEnabled(modified);
+		setExecuteEnabled(modified);
 	}
 	
+	public void setExecuteEnabled(boolean enabled) {
+		projectActions.setExecuteEnabled(enabled);
+	}
 	
 	public DSLAMBusDesktopToolbarActions getActions() {
 		return projectActions;	
