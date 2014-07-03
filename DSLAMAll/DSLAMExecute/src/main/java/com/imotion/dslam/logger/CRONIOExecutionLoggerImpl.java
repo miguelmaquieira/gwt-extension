@@ -79,11 +79,11 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		loggerEvent.setFullTrace(logValueStr);
 		loggerEvent.setTimestamp(new Date());
 		
-		logToClient(loggerEvent);
+//		logToClient(loggerEvent);
 		
-//		CRONIOLoggerEventCollection	broadcastBuffer = new CRONIOLoggerEventCollection();
-//		broadcastBuffer.add(loggerEvent);
-//		getBroadcaster(processId).broadcast(broadcastBuffer.cloneObject());
+		CRONIOLoggerEventCollection	broadcastBuffer = new CRONIOLoggerEventCollection();
+		broadcastBuffer.add(loggerEvent);
+		getBroadcaster(processId).broadcast(broadcastBuffer.cloneObject());
 	}
 	
 	@Override

@@ -14,6 +14,10 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIExecuteBusinessService, DSLAMBUIExecuteBusinessServiceConstants, DSLAMBUIExecuteBusinessServiceTrace {
 
 	private static final long serialVersionUID = 7761400309777540451L;
+	
+	public CRONIOBUExecuteBusinessServiceImpl() {
+		super();
+	}
 
 	@Override
 	public void executeProject() {
