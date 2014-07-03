@@ -83,9 +83,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
 	//EXECUTION
-	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";			//dslam_studio-execution
-	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";		//dslam_studio-execution-loggerTabs
-	String EXECUTION_LOGGER 							= EXECUTION					+ "-logger";			//dslam_studio-execution-logger
-	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION_LOGGER			+ "Container";			//dslam_studio-execution-loggerContainer
-
+	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
+	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";			//dslam_studio-execution-loggerTabs
+	String EXECUTION_LOGGER_TABS_CONTAINER 				= EXECUTION					+ "-loggerTabsContainer";	//dslam_studio-execution-loggerTabsContainer
+	String EXECUTION_LOGGER 							= EXECUTION					+ "-logger";				//dslam_studio-execution-logger
+	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION_LOGGER			+ "Container";				//dslam_studio-execution-loggerContainer
+	String EXECUTION_LOGGER_TABS_CONTENT_ZONE 			= EXECUTION					+ "-loggerTabsContentZone";	//dslam_studio-execution-loggerTabsContentZone
+	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 			= EXECUTION					+ "-loggerTabsResponseZone";//dslam_studio-execution-loggerTabsResponseZone
+	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 			= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
 }

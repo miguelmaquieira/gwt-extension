@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.execution;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
@@ -22,6 +23,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		super(loggerId);
 		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
 		getLoggerContainer().add(accordionPanelContainer);
+		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 	}
 	
 
@@ -47,23 +49,27 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	@Override
 	protected void addLogItem(AEMFTMetadataElementComposite logData) {
 		
-		AEMFTMetadataElementSingle 	date 		= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOIClientLoggerConstants.TIMESTAMP	, logData);
-		String 						dateStr 	= date.toString().replace("TIMESTAMP: ", "");
-		String 						nodeIp 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_IP						, logData);
-		String 						nodeName 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_NAME						, logData);
-		String 						nodeRequest = getElementController().getElementAsString(CRONIOIClientLoggerConstants.REQUEST_DATA					, logData);
+		AEMFTMetadataElementSingle 	date 			= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOIClientLoggerConstants.TIMESTAMP	, logData);
+		String 						dateStr 		= date.toString().replace("TIMESTAMP: ", "");
+		String 						nodeIp 			= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_IP						, logData);
+		String 						nodeName 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_NAME						, logData);
+		String 						nodeRequest 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.REQUEST_DATA					, logData);
+		String 						nodeResponse 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.RESPONSE_DATA					, logData);
+		String 						nodePrompt 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.PROMPT_DATA					, logData);
 		
 		String header = dateStr + " " + nodeIp + " " + nodeName + "\t";
 		
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header);
 		accordionPanelContainer.addWiget(accordionPanel);
+		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
 		Label label = new Label(nodeRequest);
 		accordionPanel.addHeaderWidget(label);
 		
 		FlowPanel panelContent = new FlowPanel();
 		accordionPanel.addContentWidget(panelContent);
 		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
-		panelContent.getElement().setInnerText("content");
+		CRONIOBusDesktopAccordionLoggerItemContent content = new CRONIOBusDesktopAccordionLoggerItemContent(nodeResponse, nodePrompt);
+		panelContent.add(content);
 	}
 
 	/**

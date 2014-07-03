@@ -433,6 +433,28 @@
 	color: #999999;
 }
 
+.dslam_studio-execution-loggerTabsResponseZone .gwt-Label {
+	color: #000000;
+	font-size: 14px;
+}
+
+.dslam_studio-execution-loggerTabsPromptZone .gwt-Label {
+	color: #000000;
+	font-size: 14px;
+}
+
+.dslam_studio-execution-loggerTabsContentZone >.gwt-Label {
+	margin-top: 10px;
+}
+
+.dslam_studio-execution-loggerTabs .panel-body {
+	padding: 10px;
+}
+
+.dslam_studio-execution-loggerTabs .panel-heading {
+	padding: 10px;
+}
+
 /*****************************************
 *			COMMON
 ******************************************/

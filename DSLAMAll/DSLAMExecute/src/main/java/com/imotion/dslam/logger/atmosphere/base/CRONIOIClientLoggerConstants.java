@@ -11,4 +11,8 @@ public interface CRONIOIClientLoggerConstants {
 	String PROMPT_DATA		= "PROMPT_DATA";
 	String TIMESTAMP		= "TIMESTAMP";
 	String FULLTRACE		= "FULLTRACE";
+	
+	//Labels
+	String RESPONSE_LABEL	= "Response:";
+	String PROMPT_LABEL		= "Prompt:";
 }
