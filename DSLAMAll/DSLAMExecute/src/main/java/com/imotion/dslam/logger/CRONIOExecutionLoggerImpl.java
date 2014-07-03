@@ -1,5 +1,6 @@
 package com.imotion.dslam.logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
@@ -33,7 +34,11 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		processId	= String.valueOf(process.getProcessId());
 		projectName = project.getProjectName();
 		Logger logger = getLog4JLogger();
-		String targetLog = "logs/" + projectName + ".log";
+		String 	classpathDir	= getClass().getClassLoader().getResource(".").getPath();
+		File 	logDirFile		= new File(classpathDir + "../logs/");
+		String 	logsDir			= logDirFile.getAbsolutePath();
+		
+		String targetLog = logsDir + "/" + projectName + ".log";
 		if (logger.getAppender(targetLog) == null) {
 			PatternLayout layout = new PatternLayout("%d %-5p %m%n");
 			FileAppender apndr = new FileAppender(layout, targetLog, true);
