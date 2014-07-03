@@ -8,7 +8,6 @@ import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjec
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuItem;
 
 public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
@@ -22,13 +21,13 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private AEGWTBootstrapTreeMenuItem		 	menuScript;
 	private AEGWTBootstrapTreeMenuItem 			menuProcess;
 	private AEGWTBootstrapTreeMenuItem 			menuExecution;
-	private AEGWTBootstrapTreeMenuFinalItem 	mainScript;
-	private AEGWTBootstrapTreeMenuFinalItem 	rollbackScript;
-	private AEGWTBootstrapTreeMenuFinalItem 	variableProcess;
-	private AEGWTBootstrapTreeMenuFinalItem 	scheduleProcess;
-	private AEGWTBootstrapTreeMenuFinalItem 	propertiesProcess;
-	private AEGWTBootstrapTreeMenuFinalItem 	nodesProcess;
-	private AEGWTBootstrapTreeMenuFinalItem 	nodesLog;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	mainScript;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	rollbackScript;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	variableProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	scheduleProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	propertiesProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesLog;
 
 	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
 		FlowPanel root = new FlowPanel();
@@ -84,7 +83,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.addWidget(menuExecution);
 		
 		//MENU -> Project -> Execution -> Logs
-		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_PROCESS					,TEXTS.logs_label(), this);
+		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.logs_label(), this);
 		menuExecution.addWidget(nodesLog);
 
 		menu.addSeparator();

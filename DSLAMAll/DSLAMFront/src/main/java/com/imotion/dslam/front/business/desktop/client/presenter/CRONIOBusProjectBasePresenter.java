@@ -205,6 +205,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 
 	private void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId) {
 		if (!AEGWTStringUtils.isEmptyString(projectId) && !AEGWTStringUtils.isEmptyString(projectFinalSectionId)) {
+			
+			String dataKeySuffix = projectFinalSectionId;
+			if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(projectFinalSectionId)) {
+				dataKeySuffix = DSLAMBOIProject.PROJECT_PROCESS;
+			}
+			
+			
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
@@ -216,7 +223,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 			String projectName = getContextDataController().getElementAsString(projectNameKey);
 
 			//Final Section Data
-			sbKey.append(projectFinalSectionId);
+			sbKey.append(dataKeySuffix);
 			String finalSectionKey = sbKey.toString();
 
 			AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(finalSectionKey);
@@ -236,6 +243,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends AEGWTCompositePane
 
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
+			
+			
 		}
 	}
 

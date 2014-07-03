@@ -122,6 +122,10 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setVisible(true);
 				setId(projectId);
 				toolbar.setId(projectId);
+				toolbar.setSaveProjectEnabled(modified);
+				if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
+					toolbar.getActions().setExecuteEnabled(true);
+				}	
 			} else if (EVENT_TYPE.SECTION_MODIFIED.equals(type)) {
 				projectListNavigator.setProjectSectionModified(projectId, sectionId);
 				if (projectId.equals(getId())) {

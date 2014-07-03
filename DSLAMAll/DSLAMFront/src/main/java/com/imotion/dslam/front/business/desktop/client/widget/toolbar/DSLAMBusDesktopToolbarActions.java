@@ -4,7 +4,6 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
@@ -33,36 +32,21 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);
 
 		//NEW
-		SimplePanel newButtonZone = new SimplePanel();
-		root.add(newButtonZone);
-		newButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
-
 		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
-		newButtonZone.add(newButton);
+		root.add(newButton);
 
 		//SAVE
-		SimplePanel saveButtonZone = new SimplePanel();
-		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
-
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
-		saveButtonZone.add(saveButton);
+		root.add(saveButton);
 
 
 		//SAVE ALL
-		SimplePanel saveAllButtonZone = new SimplePanel();
-		root.add(saveAllButtonZone);
-		saveAllButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
-		saveAllButtonZone.add(saveAllButton);
-		saveAllButtonZone.setVisible(false);
+		root.add(saveAllButton);
 
 		//EXECUTE
-		SimplePanel executeButtonZone = new SimplePanel();
-		root.add(executeButtonZone);
-		executeButtonZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_1);
 		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, texts.run(), texts.run());
-		executeButtonZone.add(executeButton);
+		root.add(executeButton);
 
 		newButton.addClickHandler(new ClickHandler() {
 
@@ -120,6 +104,10 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 
 	public void setSaveAllEnabled(boolean enabled) {
 		saveAllButton.setEnabled(enabled);
+	}
+	
+	public void setExecuteEnabled(boolean enabled) {
+		executeButton.setEnabled(enabled);
 	}
 
 	/**

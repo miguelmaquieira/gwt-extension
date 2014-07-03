@@ -105,17 +105,13 @@
 	width: 100%;
 }
 
-.dslam_studio-toolbar-info-close button {
-	float: right;
-}
-
 .dslam_studio-toolbar div {
 	height: 100%;
 }
 
 .dslam_studio-toolbar-actions button {
-	width: 100%;
-	border-width: 0px;
+	width: 110px;
+	border-width: 0px;	
 }
 
 .dslam_studio-toolbar-info-zone {
