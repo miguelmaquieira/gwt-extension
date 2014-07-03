@@ -57,18 +57,21 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		String 						nodeResponse 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.RESPONSE_DATA					, logData);
 		String 						nodePrompt 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.PROMPT_DATA					, logData);
 		
-		String header = dateStr + " " + nodeIp + " " + nodeName + "\t";
+		String header = dateStr + " " + nodeName + " " + nodeIp;
 		
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header);
 		accordionPanelContainer.addWiget(accordionPanel);
 		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
-		Label label = new Label(nodeRequest);
-		accordionPanel.addHeaderWidget(label);
+		
+		Label subElementHeader = new Label(nodeRequest);
+		subElementHeader.addStyleName("subElementHeader");
+		subElementHeader.setTitle(nodeRequest);
+		accordionPanel.addHeaderWidgetToAnchor(subElementHeader);
 		
 		FlowPanel panelContent = new FlowPanel();
 		accordionPanel.addContentWidget(panelContent);
 		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
-		CRONIOBusDesktopAccordionLoggerItemContent content = new CRONIOBusDesktopAccordionLoggerItemContent(nodeResponse, nodePrompt);
+		CRONIOBusDesktopAccordionLoggerItemContent content = new CRONIOBusDesktopAccordionLoggerItemContent(nodeResponse, nodePrompt, nodeRequest);
 		panelContent.add(content);
 	}
 
