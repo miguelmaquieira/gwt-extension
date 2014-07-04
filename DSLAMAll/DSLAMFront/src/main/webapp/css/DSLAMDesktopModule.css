@@ -413,6 +413,27 @@
 }
 
 /*****************************************
+*			EXECUTE
+******************************************/
+
+.dslam_studio-execution-loggerContainer .panel-heading {
+	height: 42px;
+}
+
+.dslam_studio-execution-loggerContainer {
+	margin-top: 10px;
+}
+
+.dslam_studio-execution-loggerContainer .panel-heading a {
+	font-size: 13px;	
+}
+
+.dslam_studio-execution-loggerContainer .gwt-Label {
+	font-size: 11px;
+	color: #999999;
+}
+
+/*****************************************
 *			COMMON
 ******************************************/
 .gwt-Label {
