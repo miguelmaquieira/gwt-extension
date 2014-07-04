@@ -13,7 +13,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopProjectExecutionLogger implements AEGWTHasLogicalEventHandlers  {
+public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopProjectExecutionLoggerBase implements AEGWTHasLogicalEventHandlers  {
 
 	public static final String NAME = "CRONIOBusDesktopAccordionLoggerContainer";
 	
