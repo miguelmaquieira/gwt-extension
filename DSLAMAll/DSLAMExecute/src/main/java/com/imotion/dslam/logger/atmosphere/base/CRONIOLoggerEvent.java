@@ -1,16 +1,19 @@
 package com.imotion.dslam.logger.atmosphere.base;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class CRONIOLoggerEvent implements Serializable {
 
 	private static final long serialVersionUID = 6796892836560128260L;
 
 	private String connectionId;
+	private String nodeIp;
 	private String nodeName;
 	private String request;
 	private String response;
 	private String prompt;
+	private Date	timestamp;
 	private String	fullTrace;
 	
 	public CRONIOLoggerEvent() {}
@@ -21,6 +24,14 @@ public class CRONIOLoggerEvent implements Serializable {
 
 	public void setConnectionId(String connectionId) {
 		this.connectionId = connectionId;
+	}
+	
+	public String getNodeIp() {
+		return nodeIp;
+	}
+
+	public void setNodeIp(String nodeIp) {
+		this.nodeIp = nodeIp;
 	}
 
 	public String getNodeName() {
@@ -53,6 +64,14 @@ public class CRONIOLoggerEvent implements Serializable {
 
 	public void setPrompt(String prompt) {
 		this.prompt = prompt;
+	}
+
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public String getFullTrace() {

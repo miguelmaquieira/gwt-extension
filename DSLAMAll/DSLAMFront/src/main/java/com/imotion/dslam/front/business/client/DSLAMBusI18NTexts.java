@@ -172,8 +172,8 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Si ha introducido nodos anteriormente, estos se eliminarán ¿Deseas continuar?")
 	String delete_nodes_confirm();
 
-	@DefaultStringValue("Logs")
-	String logs_label();
+	@DefaultStringValue("Consola")
+	String console_label();
 
 	@DefaultStringValue("Ejecución")
 	String execution();
