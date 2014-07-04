@@ -46,10 +46,10 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		CRONIOLoggerRPCSerializer rpc_serializer = GWT.create(CRONIOLoggerRPCSerializer.class);
 		AtmosphereRequestConfig rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
 		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?" + CRONIOIClientLoggerConstants.LOGGER_ID + "=" + loggerId);			
-		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
-		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
-		rpcRequestConfig.setReconnectInterval(3000);
-		rpcRequestConfig.setConnectTimeout(100000);
+		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.STREAMING);
+		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
+		rpcRequestConfig.setReconnectInterval(1000);
+		rpcRequestConfig.setConnectTimeout(10000);
 		
 		
 		atmosphere = Atmosphere.create();
