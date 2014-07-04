@@ -110,9 +110,14 @@
 	padding: 0px;
 }
 
-.dslam_studio-projectsLayout-zoneHeader>.gwt-Label,.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label {
+.dslam_studio-projectsLayout-zoneHeader>.gwt-Label {
 	float: left;
 	margin-left: 5px;
+}
+
+.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label {
+	float: left;
+	margin-left: 10px;
 }
 
 /*********************************
@@ -132,7 +137,7 @@
 }
 
 .dslam_studio-toolbar-actions button {
-	width: 110px;
+	width: auto;
 	border-width: 0px;	
 }
 
