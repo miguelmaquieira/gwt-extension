@@ -26,6 +26,9 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 	}
 	
+	public void beforeExitSection() {
+		super.beforeExitSection();
+	}
 
 	/**
 	 * AEGWTICompositePanel
@@ -104,5 +107,4 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.CHANGE_EVENT.equals(type);
 	}
-
 }

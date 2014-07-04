@@ -11,6 +11,8 @@ import org.atmosphere.gwt20.client.AtmosphereResponse;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEvent;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
@@ -166,12 +168,12 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		return loggerContaniner;
 	}
 	
-	/**
-	 * Widget
-	 */
-	@Override
-	public void onUnload() {
+	public void beforeExitSection() {
 		atmosphere.unsubscribe();
+		CRONIOBusDesktopProjectEvent saveContextEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+		saveContextEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+		saveContextEvt.addElementAsDataValue(logDataList);
+		getLogicalEventHandlerManager().fireEvent(saveContextEvt);
 	}
 
 	/**

@@ -78,6 +78,16 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 		return false;
 	}
 	
+	/**
+	 * CRONIOBusProjectBaseDisplay
+	 */
+	
+	@Override
+	public void beforeExitSection() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/

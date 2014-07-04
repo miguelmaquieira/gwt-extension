@@ -17,9 +17,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 		
 	}
 	
-	
-	
-
 	/**
 	 * AEGWTICompositePanel
 	 */
@@ -36,5 +33,13 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	public void setData(AEMFTMetadataElementComposite data) {
 	}
 
-
+	/**
+	 * CRONIOBusProjectBaseDisplay
+	 */
+	
+	@Override
+	public void beforeExitSection() {
+		// TODO Auto-generated method stub
+		
+	}
 }

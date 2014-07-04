@@ -1,3 +1,4 @@
+
 package com.imotion.dslam.front.business.desktop.client.view.scriptsmanager;
 
 import java.util.Date;
@@ -100,6 +101,16 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 				editor.setMode(AceEditorMode.TEXT);
 			}
 		}
+	}
+	
+	/**
+	 * CRONIOBusProjectBaseDisplay
+	 */
+	
+	@Override
+	public void beforeExitSection() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/************************************************************************

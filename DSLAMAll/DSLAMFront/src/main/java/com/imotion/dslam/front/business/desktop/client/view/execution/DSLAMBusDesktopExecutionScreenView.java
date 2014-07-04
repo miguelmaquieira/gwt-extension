@@ -14,6 +14,7 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 	public static final String NAME = "DSLAMBusDesktopExecutionScreenView";
 	
 	private FlowPanel	root;
+	private CRONIOBusDesktopAccordionLoggerContainer logger;
 	
 	public DSLAMBusDesktopExecutionScreenView() {
 		root = new FlowPanel();
@@ -39,8 +40,9 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 		if (data != null) {
 			root.clear();
 		
-			String processId = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, data);
-			CRONIOBusDesktopAccordionLoggerContainer logger = new CRONIOBusDesktopAccordionLoggerContainer(processId);
+			AEMFTMetadataElementComposite processData = data.getCompositeElement(DSLAMBOIProject.PROJECT_PROCESS);
+			String processId = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, processData);
+			logger = new CRONIOBusDesktopAccordionLoggerContainer(processId);
 			root.add(logger);
 			logger.postDisplay();
 			logger.setSize("100%", "100%");
@@ -49,6 +51,17 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 			if (logData != null) {
 				logger.setData(logData);
 			}
+		}
+	}
+
+	/**
+	 * CRONIOBusProjectBaseDisplay
+	 */
+	
+	@Override
+	public void beforeExitSection() {
+		if (logger != null) {
+			logger.beforeExitSection();	
 		}
 	}
 }
