@@ -6,7 +6,7 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopProjectExecutionJavaLogger;
+import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
 public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopExecutionDisplay {
@@ -40,7 +40,7 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 			root.clear();
 			
 			String processId = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, data);
-			CRONIOBusDesktopProjectExecutionJavaLogger logger = new CRONIOBusDesktopProjectExecutionJavaLogger(processId);
+			CRONIOBusDesktopAccordionLoggerContainer logger = new CRONIOBusDesktopAccordionLoggerContainer(processId);
 			root.add(logger);
 			logger.setSize("100%", "100%");
 			
