@@ -11,7 +11,6 @@ public class CRONIOConnectionFactory {
 	}
 	
 	public static void releaseConnection(CRONIOIConnection connection) {
-		//TODO:
 	}
 	
 }

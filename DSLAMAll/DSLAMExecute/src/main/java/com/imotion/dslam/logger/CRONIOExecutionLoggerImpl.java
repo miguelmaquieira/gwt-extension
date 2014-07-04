@@ -15,14 +15,20 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEvent;
+import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
 
 public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
-	private static Logger	log4jLogger;;
-	private String projectName	;
-	private String processId;
+	private static final long MAX_TIME_OUT = 300;
+	
+	private static Logger					log4jLogger;;
+	private String 							projectName	;
+	private String 							processId;
+	private long							lastBroadcastTime;
+	private CRONIOLoggerEventCollection		broadcastBuffer;
 
 	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
+		broadcastBuffer = new CRONIOLoggerEventCollection();
 		DSLAMBOIProcess process = project.getProcess();
 		processId	= String.valueOf(process.getProcessId());
 		projectName = project.getProjectName();
@@ -72,8 +78,19 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		loggerEvent.setPrompt(prompt);
 		loggerEvent.setFullTrace(logValueStr);
 		loggerEvent.setTimestamp(new Date());
-//		getClientComm(connectionId).broadcast(loggerEvent);
-		getClientComm(processId).broadcast(loggerEvent);
+		
+		logToClient(loggerEvent);
+		
+//		CRONIOLoggerEventCollection	broadcastBuffer = new CRONIOLoggerEventCollection();
+//		broadcastBuffer.add(loggerEvent);
+//		getBroadcaster(processId).broadcast(broadcastBuffer.cloneObject());
+	}
+	
+	@Override
+	public synchronized void flush() {
+		lastBroadcastTime = System.currentTimeMillis();
+		getBroadcaster(processId).broadcast(broadcastBuffer.cloneObject());
+		broadcastBuffer.clear();
 	}
 
 	/**
@@ -88,9 +105,23 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		return log4jLogger;
 	}
 
-	private Broadcaster getClientComm(String loggerId) {
+	private Broadcaster getBroadcaster(String loggerId) {
 		Broadcaster b = DefaultBroadcasterFactory.getDefault().lookup(loggerId, true);
 		return b;
+	}
+	
+	private synchronized void logToClient(CRONIOLoggerEvent loggerEvent) {
+		long timeDiff 			= System.currentTimeMillis() - lastBroadcastTime;
+		long timeToBroadCast 	= MAX_TIME_OUT - timeDiff;
+		if (lastBroadcastTime <= 0) {
+			lastBroadcastTime	= System.currentTimeMillis();
+			timeToBroadCast		= MAX_TIME_OUT;
+		}
+		if (timeToBroadCast <= 0) {
+			flush();
+		} else {
+			broadcastBuffer.add(loggerEvent);
+		}
 	}
 
 }

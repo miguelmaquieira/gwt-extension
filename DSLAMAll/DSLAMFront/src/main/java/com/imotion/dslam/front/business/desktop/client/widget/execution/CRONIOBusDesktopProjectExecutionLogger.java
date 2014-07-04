@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEvent;
+import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
@@ -50,16 +51,20 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 		rpcRequestConfig.setReconnectInterval(3000);
 		rpcRequestConfig.setConnectTimeout(100000);
 		
+		
 		atmosphere = Atmosphere.create();
 		rpcRequest = atmosphere.subscribe(rpcRequestConfig);
 
 		rpcRequestConfig.setMessageHandler(new AtmosphereMessageHandler() {
 			@Override
 			public void onMessage(AtmosphereResponse response) {
-				List<CRONIOLoggerEvent> messages = response.getMessages();
-				for (CRONIOLoggerEvent logEvent : messages) {
-					AEMFTMetadataElementComposite logData = getDataFromEvent(logEvent);
-					logEventData(logData);
+				List<CRONIOLoggerEventCollection> logEventCollectionList = response.getMessages();
+				for (CRONIOLoggerEventCollection logEventCollection : logEventCollectionList) {
+					List<CRONIOLoggerEvent> logEventList = logEventCollection.getList();
+					for (CRONIOLoggerEvent logEvent : logEventList) {
+						AEMFTMetadataElementComposite logData = getDataFromEvent(logEvent);
+						logEventData(logData);
+					}
 				}
 			}
 		});
@@ -159,6 +164,14 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 	
 	protected FlowPanel getLoggerContainer() {
 		return loggerContaniner;
+	}
+	
+	/**
+	 * Widget
+	 */
+	@Override
+	public void onUnload() {
+		atmosphere.unsubscribe();
 	}
 
 	/**

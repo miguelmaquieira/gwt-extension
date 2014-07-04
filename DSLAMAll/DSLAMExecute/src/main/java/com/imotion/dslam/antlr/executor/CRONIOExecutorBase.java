@@ -17,6 +17,7 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	
 	private CRONIOIExecutionLogger logger;
 	private DSLAMBOIProject			project;
+	private HashMap<Long, Thread> 	threads;
 
 	public CRONIOExecutorBase(DSLAMBOIProject project) throws Exception {
 		this.project	= project;
@@ -34,6 +35,7 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 		long				processId	= process.getProcessId();
 		
 		executeInNodes(processId, scriptCode, variables, nodeList, sync);
+		
 	}
 	
 	/**
@@ -50,7 +52,7 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	 * PRIVATE
 	 */
 	private void executeInNodes(long processId, String scriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
-		Map<Long, Thread> threads = new HashMap<>();
+		threads = new HashMap<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = getNodeVariables(node);
 			Map<String, Object> allVariables = new HashMap<>();
@@ -71,6 +73,7 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 			@Override
 			public void run() {
 				executeInNode(processId, node, scriptCode, allVariables);
+				checkEnd(node.getNodeId());
 			}
 		};
 		
@@ -78,6 +81,13 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 		thread.start();
 		
 		return thread;
+	}
+
+	private synchronized void checkEnd(long nodeId) {
+		threads.remove(nodeId);
+		if (threads.isEmpty()) {
+			getLogger().flush();
+		}
 	}
 
 	private Map<String, Object> getNodeVariables(CRONIOBOINode node) {
