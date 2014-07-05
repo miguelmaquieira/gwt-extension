@@ -174,6 +174,15 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 
 	@DefaultStringValue("Consola")
 	String console_label();
+	
+	@DefaultStringValue("Respuesta:")
+	String response_label();
+	
+	@DefaultStringValue("Prompt:")
+	String prompt_label();
+	
+	@DefaultStringValue("Petición:")
+	String request_label();
 
 	@DefaultStringValue("Ejecución")
 	String execution();

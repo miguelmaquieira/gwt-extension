@@ -214,6 +214,7 @@
 	padding: 5px;
 	font-weight: bold;
 	border-bottom: 1px solid #CCCCCC;
+	margin-bottom:5px;
 }
 
 .dslam_studio-processConfigureNodesListZone {
@@ -412,6 +413,19 @@
 	margin-top: 5px;
 }
 
+.dslam_studio-nodeList-container .nav-list {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.dslam_studio-nodeList-container .nav > li > a {
+	padding: 0px;
+}
+
+.dslam_studio-nodeList-container .nav .nav-divider {
+	margin: 5px 0px;
+}
+
 /*****************************************
 *			EXECUTE
 ******************************************/
@@ -424,13 +438,17 @@
 	margin-top: 10px;
 }
 
-.dslam_studio-execution-loggerContainer .panel-heading a {
-	font-size: 13px;	
+.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle >.header {
+	font-size: 13px;
+	float: left;
+	width: 48%;	
 }
 
-.dslam_studio-execution-loggerContainer .gwt-Label {
-	font-size: 11px;
-	color: #999999;
+.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle >.subElementHeader {
+	font-size: 13px;
+	color: #999999;	
+	float: left;
+	width: 48%;
 }
 
 .dslam_studio-execution-loggerTabsResponseZone .gwt-Label {
@@ -443,8 +461,15 @@
 	font-size: 14px;
 }
 
+.dslam_studio-execution-loggerTabsRequestZone .gwt-Label {
+	color: #000000;
+	font-size: 14px;
+}
+
 .dslam_studio-execution-loggerTabsContentZone >.gwt-Label {
 	margin-top: 10px;
+	font-size: 13px;
+	color: #999999;
 }
 
 .dslam_studio-execution-loggerTabs .panel-body {

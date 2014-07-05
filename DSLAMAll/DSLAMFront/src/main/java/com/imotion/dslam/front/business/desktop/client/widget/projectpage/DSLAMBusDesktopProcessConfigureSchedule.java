@@ -8,7 +8,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
-import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
@@ -118,7 +117,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 		} else if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
-			AEMFTMetadataElement scheduleDataSingle = schedulesData.getElement(evt.getSourceWidgetId());
+			AEMFTMetadataElementSingle scheduleDataSingle = (AEMFTMetadataElementSingle) schedulesData.getElement(evt.getSourceWidgetId());
 			AEMFTMetadataElementComposite scheduleDataComposite = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			getElementController().setElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, scheduleDataComposite, scheduleDataSingle);
 			getSchedulePopup().setData(scheduleDataComposite);

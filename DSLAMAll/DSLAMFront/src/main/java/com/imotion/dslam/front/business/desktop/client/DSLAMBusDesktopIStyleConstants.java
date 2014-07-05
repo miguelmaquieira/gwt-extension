@@ -90,5 +90,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION_LOGGER			+ "Container";				//dslam_studio-execution-loggerContainer
 	String EXECUTION_LOGGER_TABS_CONTENT_ZONE 			= EXECUTION					+ "-loggerTabsContentZone";	//dslam_studio-execution-loggerTabsContentZone
 	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 			= EXECUTION					+ "-loggerTabsResponseZone";//dslam_studio-execution-loggerTabsResponseZone
+	String EXECUTION_LOGGER_TABS_REQUEST_ZONE 			= EXECUTION					+ "-loggerTabsRequestZone";//dslam_studio-execution-loggerTabsRequestZone
 	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 			= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
 }
