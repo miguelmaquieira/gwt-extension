@@ -59,7 +59,25 @@
 .dslam_studio-projectsLayout-listZone .nav-list label {
 	width: 100%;
 	height: 30px;
-	padding: 5px;
+	padding: 6px 10px;
+}
+
+.dslam_studio-projectsLayout-listZone .nav-list .tree label {
+	padding-left: 20px;
+}
+
+.dslam_studio-projectsLayout-listZone .nav-list .tree a {
+	padding-left: 30px;
+}
+
+.dslam_studio-list-container .nav-divider {
+	margin: 5px 0px;
+}
+
+
+.dslam_studio-list-container .nav-list {
+	padding-right: 0px;
+	padding-left:0px;
 }
 
 .dslam_studio-projectsLayout-listZone .nav-list label:ACTIVE,.dslam_studio-projectsLayout-listZone .nav-list label:FOCUS
@@ -81,16 +99,16 @@
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .dslam_studio-projectsLayout-projectWorkZone-header-infoZone {
 	padding: 0px;
 }
 
-.dslam_studio-projectsLayout-zoneHeader>.gwt-Label,.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label
-	{
+.dslam_studio-projectsLayout-zoneHeader>.gwt-Label,.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label {
 	float: left;
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 /*********************************
