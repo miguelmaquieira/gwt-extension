@@ -10,6 +10,16 @@
 		<applicationConfig>
 			<param-name>org.atmosphere.cpr.CometSupport.maxInactiveActivity</param-name>
 			<param-value>600000</param-value>
+		</applicationConfig><applicationConfig>
+			<param-name>org.atmosphere.cpr.broadcaster.maxProcessingThreads</param-name>
+			<param-value>5</param-value>
+		</applicationConfig><applicationConfig>
+			<param-name>>org.atmosphere.cpr.broadcaster.maxAsyncWriteThreads</param-name>
+			<param-value>5</param-value>
+		</applicationConfig>
+		<applicationConfig>
+			<param-name>org.atmosphere.cpr.Broadcaster.supportOutOfOrderBroadcast</param-name>
+			<param-value>true</param-value>
 		</applicationConfig>
     </atmosphere-handler>
 </atmosphere-handlers>
