@@ -187,4 +187,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Ejecución")
 	String execution();
 	
+	@DefaultStringValue("Guardar Proyecto")
+	String save_project();
+	
 }
