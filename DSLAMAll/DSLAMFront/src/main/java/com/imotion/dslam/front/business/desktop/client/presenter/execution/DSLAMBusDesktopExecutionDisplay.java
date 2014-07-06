@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.execution;
 
-import com.selene.arch.exe.gwt.mvp.AEGWTCompositePanelLoggedViewDisplay;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBaseDisplay;
 
-public interface DSLAMBusDesktopExecutionDisplay extends AEGWTCompositePanelLoggedViewDisplay {
+public interface DSLAMBusDesktopExecutionDisplay extends CRONIOBusProjectBaseDisplay  {
 
 }	
