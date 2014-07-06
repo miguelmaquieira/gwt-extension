@@ -30,6 +30,8 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	private Atmosphere 			atmosphere;
 	private AtmosphereRequest 	rpcRequest;
 	private AEMFTMetadataElementCompositeRecordSetListRegroup logDataList;
+	
+	private int totalScroll; 
 
 	private FlowPanel loggerContaniner;
 
@@ -158,10 +160,15 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		logDataList.addElement(logData);
 		
 		addLogItem(logData);
+		
+		totalScroll += getItemHeight();
+		
+		AEGWTJQueryPerfectScrollBar.top(getName(), totalScroll);
 		AEGWTJQueryPerfectScrollBar.updateScroll(getName());
-		AEGWTJQueryPerfectScrollBar.bottom(getId());
 	}
 	
+	protected abstract int getItemHeight(); 
+
 	protected abstract void addLogItem(AEMFTMetadataElementComposite logData);
 	
 	protected FlowPanel getLoggerContainer() {

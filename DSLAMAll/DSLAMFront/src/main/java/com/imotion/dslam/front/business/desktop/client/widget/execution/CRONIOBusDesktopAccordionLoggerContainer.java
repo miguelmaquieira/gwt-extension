@@ -16,8 +16,9 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopProjectExecutionLoggerBase implements AEGWTHasLogicalEventHandlers  {
 
 	public static final String NAME = "CRONIOBusDesktopAccordionLoggerContainer";
+	private int HEIGHT = 50;
 	
-	AEGWTBootstrapAccordionPanelContainer accordionPanelContainer;
+	private AEGWTBootstrapAccordionPanelContainer accordionPanelContainer;
 	
 	public CRONIOBusDesktopAccordionLoggerContainer(String loggerId) {
 		super(loggerId);
@@ -106,5 +107,10 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.CHANGE_EVENT.equals(type);
+	}
+
+	@Override
+	protected int getItemHeight() {
+		return HEIGHT;
 	}
 }
