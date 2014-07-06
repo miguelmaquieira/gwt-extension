@@ -23,7 +23,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
-public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompositePanel {
+public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCompositePanel {
 
 	public static final String NAME = "CRONIOBusDesktopProjectExecutionLogger";
 
@@ -33,7 +33,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 
 	private FlowPanel loggerContaniner;
 
-	public CRONIOBusDesktopProjectExecutionLogger(String loggerId) {
+	public CRONIOBusDesktopProjectExecutionLoggerBase(String loggerId) {
 		setId(loggerId);
 		logDataList = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getCompositeListRegroup();
 		
@@ -48,8 +48,8 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 		CRONIOLoggerRPCSerializer rpc_serializer = GWT.create(CRONIOLoggerRPCSerializer.class);
 		AtmosphereRequestConfig rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
 		rpcRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/rpc?" + CRONIOIClientLoggerConstants.LOGGER_ID + "=" + loggerId);			
-		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
-		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
+		rpcRequestConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
+		rpcRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.WEBSOCKET);
 		rpcRequestConfig.setReconnectInterval(3000);
 		rpcRequestConfig.setConnectTimeout(100000);
 		
@@ -70,7 +70,6 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 				}
 			}
 		});
-		
 
 		//		desconectRPC.addClickHandler(new ClickHandler() {
 		//
@@ -176,7 +175,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLogger extends AEGWTCompos
 		saveContextEvt.addElementAsDataValue(logDataList);
 		getLogicalEventHandlerManager().fireEvent(saveContextEvt);
 	}
-	
+
 	/**
 	 * AEGWTICompositePanel
 	 */

@@ -7,7 +7,7 @@ import com.google.gwt.logging.client.HasWidgetsLogHandler;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
-public class CRONIOBusDesktopProjectExecutionJavaLogger extends CRONIOBusDesktopProjectExecutionLogger {
+public class CRONIOBusDesktopProjectExecutionJavaLogger extends CRONIOBusDesktopProjectExecutionLoggerBase {
 
 	private Logger 		logger;
 	
