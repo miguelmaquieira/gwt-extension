@@ -1,17 +1,19 @@
 package com.imotion.dslam.bom.data;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.selene.arch.base.bom.data.AEMFTLoginData;
 
+@Entity(name="User")
 public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 
 	private static final long serialVersionUID = -2126490379134310701L;
@@ -32,7 +34,7 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 		this.userId = userId;
 	}
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
 	@JoinColumn(name=PREFERENCES_ID)
 	@Override
 	public CRONIOBOIPreferences getPreferences() {
