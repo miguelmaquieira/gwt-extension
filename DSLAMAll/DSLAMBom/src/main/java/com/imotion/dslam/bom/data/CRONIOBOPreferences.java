@@ -43,7 +43,7 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 		this.preferencesId = preferencesId;
 	}
 
-	@OneToMany(mappedBy=CRONIOBOIMachineProperties.PREFERENCES_ID, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(mappedBy=CRONIOBOIMachineProperties.PREFERENCES, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@Override
 	public List<CRONIOBOIMachineProperties> getMachinePropertiesList() {
 		return machinePropertiesList;
