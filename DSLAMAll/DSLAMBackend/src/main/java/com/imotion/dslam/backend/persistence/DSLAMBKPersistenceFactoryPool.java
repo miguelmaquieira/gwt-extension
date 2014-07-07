@@ -1,7 +1,9 @@
 package com.imotion.dslam.backend.persistence;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
+import com.imotion.dslam.backend.persistence.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTPersistenceFactoryPool;
@@ -58,10 +60,33 @@ public class DSLAMBKPersistenceFactoryPool extends AEMFTPersistenceFactoryPool i
 		return (CRONIOBKINodePersistenceService) newPersistenceModule(impl);
 	}
 	
+	@Override
+	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence() {
+		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL;
+		if (getConfigSrv() != null) {
+			impl = getConfigSrv().getProperty(
+					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_IMPL,
+					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL);
+		}
+		return (CRONIOBKIPreferencesPersistenceService) newPersistenceModule(impl);
+	}
+	
+	@Override
+	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence() {
+		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_DEFAULT_IMPL;
+		if (getConfigSrv() != null) {
+			impl = getConfigSrv().getProperty(
+					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_IMPL,
+					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_DEFAULT_IMPL);
+		}
+		return (CRONIOBKIMachinePropertiesPersistenceService) newPersistenceModule(impl);
+	}
+	
 	/***********************************************************************
 	 * 					      PRIVATE FUNCTION                             *
 	 ***********************************************************************/
 	private AEMFTIConfigurationService getConfigSrv() {
 		return getCoreProxy().getConfigurationService();
 	}
+	
 }
