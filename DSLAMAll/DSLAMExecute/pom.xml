@@ -52,6 +52,12 @@
 			<artifactId>atmosphere-runtime</artifactId>
 			<version>2.1.6</version>
 		</dependency>
+		<!-- SSH -->
+		<dependency>
+			<groupId>jsch</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.29</version>
+		</dependency>
 	</dependencies>
 
 	<build>
