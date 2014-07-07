@@ -1,11 +1,14 @@
 package com.imotion.dslam.backend.persistence.service.machineproperties;
 
 import java.util.Date;
+import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.back.persistence.AEMFTPersistenceParamsContainer;
 
 public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOIMachineProperties, CRONIOBOMachineProperties, Long> implements CRONIOBKIMachinePropertiesPersistenceService {
 
@@ -48,6 +51,23 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 			getPersistenceModule().update(machinePropertiesFromDb);
 		}
 		return machinePropertiesFromDb;
+	}
+	
+	@Override
+	public CRONIOBOIMachineProperties getMachineProperties(Long preferencesId, int machineType) {
+		CRONIOBOMachineProperties machineProperties = null;
+		
+		CRONIOBOIPreferences preferences = getPreferencesPersistence().getPreferences(preferencesId);
+		AEMFTPersistenceParamsContainer params = new AEMFTPersistenceParamsContainer();
+		params.addQueryParam(CRONIOBOIMachineProperties.PREFERENCES, preferences);
+		params.addQueryParam(CRONIOBOIMachineProperties.MACHINE_TYPE, machineType);
+		
+		List<CRONIOBOMachineProperties> machinePropertiesList = getPersistenceModule().query(params.getQueryParams());
+		if (!AEMFTCommonUtilsBase.isEmptyList(machinePropertiesList)) {
+			machineProperties = machinePropertiesList.get(0);
+		}
+		
+		return machineProperties;
 	}
 
 	/**
