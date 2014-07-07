@@ -2,9 +2,9 @@ package com.imotion.dslam.backend.persistence;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
 import com.imotion.dslam.backend.DSLAMBKIConstants;
-import com.imotion.dslam.backend.persistence.preferences.CRONIOBKPreferencesPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKMachinePropertiesPersistenceServiceJPA;
+import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKPreferencesPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKProjectPersistenceServiceJPA;
 import com.selene.arch.base.MFTIConstant;

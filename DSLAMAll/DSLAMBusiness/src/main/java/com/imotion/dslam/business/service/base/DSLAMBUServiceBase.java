@@ -2,6 +2,7 @@ package com.imotion.dslam.business.service.base;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
@@ -14,11 +15,12 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 
 	private static final long serialVersionUID = -8777397730307974465L;
 	
-	private DSLAMBKIFilePersistenceService			filePersistence;
-	private DSLAMBKIProcessPersistenceService		processPersistence;
-	private DSLAMBKIProjectPersistenceService		projectPersistence;
-	private CRONIOBKINodePersistenceService			nodePersistence;
-	private CRONIOBKIPreferencesPersistenceService	preferencesPersistence;
+	private DSLAMBKIFilePersistenceService					filePersistence;
+	private DSLAMBKIProcessPersistenceService				processPersistence;
+	private DSLAMBKIProjectPersistenceService				projectPersistence;
+	private CRONIOBKINodePersistenceService					nodePersistence;
+	private CRONIOBKIPreferencesPersistenceService			preferencesPersistence;
+	private CRONIOBKIMachinePropertiesPersistenceService	machinePropertiesPersistence;
 
 	@Override
 	public String getName() {
@@ -66,6 +68,12 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		return preferencesPersistence;
 	}
 	
+	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
+		if (machinePropertiesPersistence == null) {
+			machinePropertiesPersistence =  getPersistence().getAppFactoryPersistence().newMachinePropertiesPersistence();
+		}
+		return machinePropertiesPersistence;
+	}
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -97,6 +105,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (preferencesPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) preferencesPersistence);
 			preferencesPersistence = null;
+		}
+		if (machinePropertiesPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
+			machinePropertiesPersistence = null;
 		}
 	}
 	
