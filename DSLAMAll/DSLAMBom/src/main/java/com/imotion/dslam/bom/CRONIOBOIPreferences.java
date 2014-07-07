@@ -22,8 +22,4 @@ public interface CRONIOBOIPreferences extends Serializable, CRONIOBOIPreferences
 
 	void setCreationTime(Date creationTime);
 
-	Long getVersion();
-
-	void setVersion(Long version);
-
 }

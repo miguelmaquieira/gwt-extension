@@ -117,13 +117,11 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 	}
 
 	@Version
-	@Override
-	public Long getVersion() {
+	protected Long getVersion() {
 		return version;
 	}
 
-	@Override
-	public void setVersion(Long version) {
+	protected void setVersion(Long version) {
 		this.version = version;
 	}
 

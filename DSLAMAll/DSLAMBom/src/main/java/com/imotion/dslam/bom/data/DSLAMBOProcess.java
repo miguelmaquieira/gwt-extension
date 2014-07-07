@@ -167,13 +167,11 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	}
 
 	@Version
-	@Override
-	public Long getVersion() {
+	protected Long getVersion() {
 		return version;
 	}
 
-	@Override
-	public void setVersion(Long version) {
+	protected void setVersion(Long version) {
 		this.version = version;
 	}
 

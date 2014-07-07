@@ -20,6 +20,7 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 @Entity(name="Preferences")
 public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 	
+	private static final long serialVersionUID = 773641344063751034L;
 	
 	private Long 								preferencesId;
 	private List<CRONIOBOIMachineProperties> 	machinePropertiesList;
@@ -76,13 +77,11 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 	}
 
 	@Version
-	@Override
-	public Long getVersion() {
+	protected Long getVersion() {
 		return version;
 	}
 
-	@Override
-	public void setVersion(Long version) {
+	protected void setVersion(Long version) {
 		this.version = version;
 	}
 }

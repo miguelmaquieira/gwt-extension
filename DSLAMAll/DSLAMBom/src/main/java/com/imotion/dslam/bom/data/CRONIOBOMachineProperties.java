@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
@@ -41,6 +42,7 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private Date					saveTime;
 	private Date					creationTime;
 	private CRONIOBOIPreferences	preferences;
+	private Long					version;
 
 	public CRONIOBOMachineProperties() {}
 	
@@ -277,6 +279,15 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public Date getCreationTime() {
 		return creationTime;
+	}
+
+	@Version
+	protected Long getVersion() {
+		return version;
+	}
+
+	protected void setVersion(Long version) {
+		this.version = version;
 	}
 
 }
