@@ -6,17 +6,19 @@ public interface DSLAMBusDesktopIStyleConstants {
 
 	
 	//TOOLBAR
-	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 			//dslam_studio-toolbar
-	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";			//dslam_studio-toolbar-actions
-	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";				//dslam_studio-toolbar-actions-zone
-	String TOOLBAR_INFO 								= TOOLBAR				+ "-info";				//dslam_studio-toolbar-info
-	String TOOLBAR_INFO_ZONE 							= TOOLBAR_INFO			+ "-zone";				//dslam_studio-toolbar-info-zone
-	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";			//dslam_studio-toolbar-info-lastsaved
-	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";				//dslam_studio-toolbar-info-close 
-	String TOOLBAR_INFO_TITLE_ZONE 						= TOOLBAR_INFO			+ "-titleZone";			//dslam_studio-toolbar-info-titleZone
-	String TOOLBAR_INFO_TITLE_ZONE_MAIN_TITLE 			= TOOLBAR_INFO_TITLE_ZONE + "-mainTitle";		//dslam_studio-toolbar-info-titleZone-mainTitle
-	String TOOLBAR_INFO_TITLE_ZONE_SEPARATOR 			= TOOLBAR_INFO_TITLE_ZONE + "-separator";		//dslam_studio-toolbar-info-titleZone-separator
-	String TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE 		= TOOLBAR_INFO_TITLE_ZONE + "-secondaryTitle";	//dslam_studio-toolbar-info-titleZone-secondaryTitle
+	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 					//dslam_studio-toolbar
+	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";					//dslam_studio-toolbar-actions
+	String TOOLBAR_ACTIONS_PREFERENCES_BUTTON			= TOOLBAR				+ "-actions-preferencesButton";	//dslam_studio-toolbar-actions-preferencesButton
+	String TOOLBAR_ACTIONS_CLOSE_BUTTON					= TOOLBAR				+ "-actions-closeButton";		//dslam_studio-toolbar-actions-closeButton
+	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";						//dslam_studio-toolbar-actions-zone
+	String TOOLBAR_INFO 								= TOOLBAR				+ "-info";						//dslam_studio-toolbar-info
+	String TOOLBAR_INFO_ZONE 							= TOOLBAR_INFO			+ "-zone";						//dslam_studio-toolbar-info-zone
+	String TOOLBAR_INFO_LAST_SAVED_ZONE 				= TOOLBAR_INFO			+ "-lastsaved";					//dslam_studio-toolbar-info-lastsaved
+	String TOOLBAR_INFO_CLOSE_ZONE 						= TOOLBAR_INFO			+ "-close";						//dslam_studio-toolbar-info-close 
+	String TOOLBAR_INFO_TITLE_ZONE 						= TOOLBAR_INFO			+ "-titleZone";					//dslam_studio-toolbar-info-titleZone
+	String TOOLBAR_INFO_TITLE_ZONE_MAIN_TITLE 			= TOOLBAR_INFO_TITLE_ZONE + "-mainTitle";				//dslam_studio-toolbar-info-titleZone-mainTitle
+	String TOOLBAR_INFO_TITLE_ZONE_SEPARATOR 			= TOOLBAR_INFO_TITLE_ZONE + "-separator";				//dslam_studio-toolbar-info-titleZone-separator
+	String TOOLBAR_INFO_TITLE_ZONE_SECONDARY_TITLE 		= TOOLBAR_INFO_TITLE_ZONE + "-secondaryTitle";			//dslam_studio-toolbar-info-titleZone-secondaryTitle
 
 	//Project Navigator
 	String LIST											= APP_ID_PREFFIX 		+ "list";				//dslam_studio-list
@@ -48,6 +50,23 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT 						= PROJECTS_LAYOUT_BOTTOM_ZONE					+ "-right";				//dslam_studio-projectsLayout-bottomZone-right
 	String PROJECTS_LAYOUT_ZONE_HEADER 								= PROJECTS_LAYOUT								+ "-zoneHeader";		//dslam_studio-projectsLayout-zoneHeader
 	String PROJECTS_LAYOUT_CONTENT_IN_BOX							= PROJECTS_LAYOUT								+ "-contentInBox ";		//dslam_studio-projectsLayout-contentInBox 
+	
+	//PREFERENCES LAYOUT
+		String PREFERENCES_LAYOUT 											= APP_ID_PREFFIX								+ "preferencesLayout";	//dslam_studio-preferencesLayout
+		String PREFERENCES_LAYOUT_MENU_ZONE 								= PREFERENCES_LAYOUT							+ "-menuZone";			//dslam_studio-preferencesLayout-menuZone
+		String PREFERENCES_LAYOUT_WORK_ZONE  								= PREFERENCES_LAYOUT							+ "-workZone";			//dslam_studio-preferencesLayout-workZone
+		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER							= PREFERENCES_LAYOUT_WORK_ZONE					+ "-header";			//dslam_studio-preferencesLayout-preferencesWorkZone-header
+//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_ACTIONS_ZONE 				= PROJECTS_LAYOUT_WORK_ZONE_HEADER				+ "-actionsZone";		//dslam_studio-projectsLayout-projectWorkZone-header-actionsZone
+		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE 				= PREFERENCES_LAYOUT_WORK_ZONE_HEADER			+ "-infoZone";			//dslam_studio-preferencesLayout-preferencesWorkZone-header-infoZone
+//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-modIndicator";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator
+		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME 	= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-sectionName";		//dslam_studio-preferencesLayout-preferencesWorkZone-header-infoZone-sectionName
+//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR 		= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-separator";			//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-separator
+//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME 		= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-projectName";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-projectName
+		String PREFERENCES_LAYOUT_BOTTOM_ZONE 								= PREFERENCES_LAYOUT							+ "-bottomZone";		//dslam_studio-preferencesLayout-bottomZone
+		String PREFERENCES_LAYOUT_BOTTOM_ZONE_RIGHT  						= PREFERENCES_LAYOUT_BOTTOM_ZONE				+ "-right";				//dslam_studio-preferencesLayout-bottomZone-right
+		String PREFERENCES_LAYOUT_ZONE_HEADER 								= PREFERENCES_LAYOUT							+ "-zoneHeader";		//dslam_studio-preferencesLayout-zoneHeader
+//		String PROJECTS_LAYOUT_CONTENT_IN_BOX								= PROJECTS_LAYOUT								+ "-contentInBox ";		//dslam_studio-projectsLayout-contentInBox 
+		
 	
 	
 	//SCRITPS EDITOR

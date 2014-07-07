@@ -104,13 +104,6 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 		return nodePersistence;
 	}
 	
-	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
-		if (preferencesPersistence == null) {
-//			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence();
-		}
-		return preferencesPersistence;
-	}
-	
 	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
 		if (machinePropertiesPersistence == null) {
 			machinePropertiesPersistence = (CRONIOBKIMachinePropertiesPersistenceService) getFactoryPersistence().newMachinePropertiesPersistence();
@@ -118,4 +111,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 		return machinePropertiesPersistence;
 	}
 	
+	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
+		if (preferencesPersistence == null) {
+			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence();
+		}
+		return preferencesPersistence;
+	}
 }

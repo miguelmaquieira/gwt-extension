@@ -2,6 +2,7 @@ package com.imotion.dslam.business.service.base;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
@@ -13,10 +14,11 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 
 	private static final long serialVersionUID = -8777397730307974465L;
 	
-	private DSLAMBKIFilePersistenceService		filePersistence;
-	private DSLAMBKIProcessPersistenceService	processPersistence;
-	private DSLAMBKIProjectPersistenceService	projectPersistence;
-	private CRONIOBKINodePersistenceService		nodePersistence;
+	private DSLAMBKIFilePersistenceService			filePersistence;
+	private DSLAMBKIProcessPersistenceService		processPersistence;
+	private DSLAMBKIProjectPersistenceService		projectPersistence;
+	private CRONIOBKINodePersistenceService			nodePersistence;
+	private CRONIOBKIPreferencesPersistenceService	preferencesPersistence;
 
 	@Override
 	public String getName() {
@@ -57,6 +59,13 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		return nodePersistence;
 	}
 	
+	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
+		if (preferencesPersistence == null) {
+			preferencesPersistence =  getPersistence().getAppFactoryPersistence().newPreferencesPersistence();
+		}
+		return preferencesPersistence;
+	}
+	
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -84,6 +93,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (nodePersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
 			nodePersistence = null;
+		}
+		if (preferencesPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) preferencesPersistence);
+			preferencesPersistence = null;
 		}
 	}
 	

@@ -14,9 +14,9 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 
-public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 
-	public static final String NAME = "DSLAMBusDesktopToolbarFileActions";
+	public static final String NAME = "DSLAMBusDesktopProjectsToolbarActions";
 
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
@@ -24,9 +24,10 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 	private AEGWTBootstrapGlyphiconButton 		saveButton;
 	private AEGWTBootstrapGlyphiconButton 		saveAllButton;
 	private AEGWTBootstrapGlyphiconButton 		executeButton;
+	private AEGWTBootstrapGlyphiconButton 		preferencesButton;
 	private	 DSLAMBusDesktopNewProjectPopupForm	projectPopupForm;
 
-	public DSLAMBusDesktopToolbarActions() {
+	public DSLAMBusDesktopProjectsToolbarActions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);
@@ -48,6 +49,11 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 		//EXECUTE
 		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, texts.run(), texts.run());
 		root.add(executeButton);
+		
+		//PREFERENCES
+		preferencesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_COG, "", texts.preferences());
+		preferencesButton.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_PREFERENCES_BUTTON);
+		root.add(preferencesButton);
 
 		newButton.addClickHandler(new ClickHandler() {
 
@@ -84,6 +90,14 @@ public class DSLAMBusDesktopToolbarActions extends AEGWTCompositePanel {
 				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
 				saveProjectEvent.setEventType(EVENT_TYPE.EXECUTE);
 				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
+			}
+		});
+		
+		preferencesButton.addClickHandler(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				
 			}
 		});
 

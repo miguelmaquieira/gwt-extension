@@ -81,8 +81,8 @@ public class DSLAMBKPersistenceFactoryPool extends AEMFTPersistenceFactoryPool i
 		}
 		return (CRONIOBKIMachinePropertiesPersistenceService) newPersistenceModule(impl);
 	}
-	
-	/***********************************************************************
+
+/***********************************************************************
 	 * 					      PRIVATE FUNCTION                             *
 	 ***********************************************************************/
 	private AEMFTIConfigurationService getConfigSrv() {

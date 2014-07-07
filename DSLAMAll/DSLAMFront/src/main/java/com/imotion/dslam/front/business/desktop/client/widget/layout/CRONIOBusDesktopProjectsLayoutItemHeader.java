@@ -28,7 +28,6 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 		FlowPanel infoZone = new FlowPanel();
 		root.add(infoZone);
 		infoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE);
-//		infoZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
 		modifiedIndicator = new AEGWTLabel("");
 		infoZone.add(modifiedIndicator);
