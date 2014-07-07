@@ -1,5 +1,7 @@
 package com.imotion.dslam.backend.persistence.service.machineproperties;
 
+import java.util.Date;
+
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
@@ -11,9 +13,12 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 
 	@Override
 	public CRONIOBOIMachineProperties addMachineProperties(CRONIOBOIMachineProperties machineProperties, Long preferencesId) {
+		Date						currentDate				= new Date();
 		CRONIOBOIPreferences		preferences				= getPreferencesPersistence().getPreferences(preferencesId);
 		CRONIOBOMachineProperties	machinePropertiesJPA	= (CRONIOBOMachineProperties) machineProperties;
 		machinePropertiesJPA.setPreferences(preferences);
+		machinePropertiesJPA.setSaveTime(currentDate);
+		machinePropertiesJPA.setCreationTime(currentDate);
 		getPersistenceModule().create(machinePropertiesJPA);
 		return machinePropertiesJPA;
 	}
@@ -39,6 +44,7 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 			machinePropertiesFromDb.setSetupTerminalScript(machineProperties.getSetupTerminalScript());
 			machinePropertiesFromDb.setUsername(machineProperties.getUsername());
 			machinePropertiesFromDb.setUserPrompt(machineProperties.getUserPrompt());
+			machinePropertiesFromDb.setSaveTime(new Date());
 			getPersistenceModule().update(machinePropertiesFromDb);
 		}
 		return machinePropertiesFromDb;

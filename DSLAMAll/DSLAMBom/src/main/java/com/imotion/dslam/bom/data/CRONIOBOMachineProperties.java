@@ -1,5 +1,7 @@
 package com.imotion.dslam.bom.data;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,8 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private String					setupTerminalScript;
 	private String 					finishConnectionScript;
 	private String 					finishedResponse;
+	private Date					saveTime;
+	private Date					creationTime;
 	private CRONIOBOIPreferences	preferences;
 
 	public CRONIOBOMachineProperties() {}
@@ -253,6 +257,26 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public void setPreferences(CRONIOBOIPreferences preferences) {
 		this.preferences = preferences;
+	}
+
+	@Override
+	public void setSaveTime(Date saveTime) {
+		this.saveTime = saveTime;
+	}
+
+	@Override
+	public Date getSaveTime() {
+		return saveTime;
+	}
+
+	@Override
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	@Override
+	public Date getCreationTime() {
+		return creationTime;
 	}
 
 }
