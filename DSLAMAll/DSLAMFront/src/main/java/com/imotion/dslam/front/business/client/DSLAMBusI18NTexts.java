@@ -94,12 +94,6 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Ya existe un proyecto con ese nombre")
 	String projectname_exists();
 	
-	@DefaultStringValue("Protocolo1")
-	String protocol1();
-
-	@DefaultStringValue("Protocolo2")
-	String protocol2();
-	
 	@DefaultStringValue("Dirección Ip")
 	String ip();
 	
@@ -193,17 +187,17 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Preferencias")
 	String preferences();
 	
-	@DefaultStringValue("Conexiones")
-	String connections();
-	
-	@DefaultStringValue("Conexión")
-	String connection();
-	
-	@DefaultStringValue("Desconexión")
-	String disconection();
+	@DefaultStringValue("Máquinas")
+	String machines();
 	
 	@DefaultStringValue("DSLAM")
 	String dslam();
+	
+	@DefaultStringValue("Script de conexión")
+	String connection_script();
+	
+	@DefaultStringValue("Script de desconexión")
+	String disconnection_script();
 	
 	
 	

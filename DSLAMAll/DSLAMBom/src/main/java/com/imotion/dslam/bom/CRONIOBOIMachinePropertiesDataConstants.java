@@ -11,4 +11,5 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String INIT_CONNECTION_SCRIPT_ID	= "initConnectionScriptId";
 	String CLOSE_CONNECTION_SCRIPT_ID	= "closeConnectionScriptId"; 
 
+
 }

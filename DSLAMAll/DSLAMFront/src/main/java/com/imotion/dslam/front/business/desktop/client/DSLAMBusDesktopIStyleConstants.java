@@ -111,4 +111,8 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 			= EXECUTION					+ "-loggerTabsResponseZone";//dslam_studio-execution-loggerTabsResponseZone
 	String EXECUTION_LOGGER_TABS_REQUEST_ZONE 			= EXECUTION					+ "-loggerTabsRequestZone";//dslam_studio-execution-loggerTabsRequestZone
 	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 			= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
+
+	//PREFERENCES
+	
+	String PREFERENCES_CONNECTION_VIEW 					= APP_ID_PREFFIX			+ "preferencesConnectionView";						//dslam_studio-preferencesConnectionView
 }
