@@ -28,7 +28,7 @@ public class CRONIOExecutorDSLAM extends CRONIOExecutorBase {
 		DSLAMParser 	parser 	= new DSLAMParser(tokens);
 		ProgramContext 	tree 	= parser.program();
 		
-		CRONIOIConnection 			connection 	= CRONIOConnectionFactory.getDSLAMConnection(processId, node, getLogger());
+		CRONIOIConnection 			connection 	= CRONIOConnectionFactory.getConnection(processId, node, getLogger());
 		DSLAMInterpreterVisitorImpl visitor 	= new DSLAMInterpreterVisitorImpl(connection, allVariables);
 		visitor.visit(tree);
 		CRONIOConnectionFactory.releaseConnection(connection);

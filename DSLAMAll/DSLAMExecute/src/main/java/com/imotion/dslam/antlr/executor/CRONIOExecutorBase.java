@@ -12,16 +12,15 @@ import com.imotion.dslam.logger.CRONIOExecutionLoggerImpl;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-
 public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	
-	private CRONIOIExecutionLogger logger;
-	private DSLAMBOIProject			project;
-	private HashMap<Long, Thread> 	threads;
+	private CRONIOIExecutionLogger 		logger;
+	private DSLAMBOIProject				project;
+	private HashMap<Long, Thread> 		threads;
 
 	public CRONIOExecutorBase(DSLAMBOIProject project) throws Exception {
-		this.project	= project;
-		this.logger		= new CRONIOExecutionLoggerImpl(project);
+		this.project			= project;
+		this.logger				= new CRONIOExecutionLoggerImpl(project);
 	}
 
 	@Override
@@ -35,7 +34,6 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 		long				processId	= process.getProcessId();
 		
 		executeInNodes(processId, scriptCode, variables, nodeList, sync);
-		
 	}
 	
 	/**

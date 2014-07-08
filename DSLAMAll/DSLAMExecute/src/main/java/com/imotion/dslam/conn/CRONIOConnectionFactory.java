@@ -5,9 +5,9 @@ import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 
 public class CRONIOConnectionFactory {
 
-	public static CRONIOIConnection getDSLAMConnection(long processId, CRONIOBOINode node, CRONIOIExecutionLogger logger) {
+	public static CRONIOIConnection getConnection(long processId, CRONIOBOINode node, CRONIOIExecutionLogger logger) {
 		//TODO:
-		return new CRONIOConnectionDSLAM(processId, node, logger);
+		return new CRONIOConnectionImpl(processId, node, logger);
 	}
 	
 	public static void releaseConnection(CRONIOIConnection connection) {

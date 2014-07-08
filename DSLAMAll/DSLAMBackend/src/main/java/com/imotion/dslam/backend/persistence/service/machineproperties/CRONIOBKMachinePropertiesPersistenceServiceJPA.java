@@ -30,23 +30,11 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 	public CRONIOBOIMachineProperties updateMachineProperties(Long machinePropertiesId, CRONIOBOIMachineProperties machineProperties) {
 		CRONIOBOMachineProperties machinePropertiesFromDb = getPersistenceModule().get(machinePropertiesId);
 		if (machinePropertiesFromDb != null) {
-			machinePropertiesFromDb.setEnableCommandScript(machineProperties.getEnableCommandScript());
-			machinePropertiesFromDb.setEnablePasswordPrompt(machineProperties.getEnablePasswordPrompt());
-			machinePropertiesFromDb.setEnablePasswordScript(machineProperties.getEnablePasswordScript());
-			machinePropertiesFromDb.setEnablePrompt(machineProperties.getEnablePrompt());
-			machinePropertiesFromDb.setFinishConnectionScript(machineProperties.getFinishConnectionScript());
-			machinePropertiesFromDb.setGeneralTimeout(machineProperties.getGeneralTimeout());
-			machinePropertiesFromDb.setInitConnectionScript(machineProperties.getInitConnectionScript());
-			machinePropertiesFromDb.setInitConnectionTimeout(machineProperties.getInitConnectionTimeout());
-			machinePropertiesFromDb.setMachineDescription(machineProperties.getMachineDescription());
-			machinePropertiesFromDb.setMachineName(machineProperties.getMachineName());
-			machinePropertiesFromDb.setPassword(machineProperties.getPassword());
-			machinePropertiesFromDb.setPasswordPrompt(machineProperties.getPasswordPrompt());
-			machinePropertiesFromDb.setPrompt(machineProperties.getPrompt());
 			machinePropertiesFromDb.setProtocolType(machineProperties.getProtocolType());
-			machinePropertiesFromDb.setSetupTerminalScript(machineProperties.getSetupTerminalScript());
 			machinePropertiesFromDb.setUsername(machineProperties.getUsername());
-			machinePropertiesFromDb.setUserPrompt(machineProperties.getUserPrompt());
+			machinePropertiesFromDb.setPassword(machineProperties.getPassword());
+			machinePropertiesFromDb.setTimeout(machineProperties.getTimeout());
+			machinePropertiesFromDb.setConnectionVariables(machineProperties.getConnectionVariables());
 			machinePropertiesFromDb.setSaveTime(new Date());
 			getPersistenceModule().update(machinePropertiesFromDb);
 		}
@@ -54,13 +42,13 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 	}
 	
 	@Override
-	public CRONIOBOIMachineProperties getMachineProperties(Long preferencesId, int machineType) {
+	public CRONIOBOIMachineProperties getMachineProperties(Long preferencesId, String machineName) {
 		CRONIOBOMachineProperties machineProperties = null;
 		
 		CRONIOBOIPreferences preferences = getPreferencesPersistence().getPreferences(preferencesId);
 		AEMFTPersistenceParamsContainer params = new AEMFTPersistenceParamsContainer();
 		params.addQueryParam(CRONIOBOIMachineProperties.PREFERENCES, preferences);
-		params.addQueryParam(CRONIOBOIMachineProperties.MACHINE_TYPE, machineType);
+		params.addQueryParam(CRONIOBOIMachineProperties.MACHINE_NAME, machineName);
 		
 		List<CRONIOBOMachineProperties> machinePropertiesList = getPersistenceModule().query(params.getQueryParams());
 		if (!AEMFTCommonUtilsBase.isEmptyList(machinePropertiesList)) {
