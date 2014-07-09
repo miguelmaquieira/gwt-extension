@@ -45,7 +45,9 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 			String prompt 	= getLastPrompt(fullResponse);
 			String response	= fullResponse.replace(prompt, "");
 			executionData	= new CRONIOExecutionData(command, prompt, response);
-			getLogger().log(getConnectionId(), getNode(), executionData);
+			if (getLogger() != null) {
+				getLogger().log(getConnectionId(), getNode(), executionData);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
