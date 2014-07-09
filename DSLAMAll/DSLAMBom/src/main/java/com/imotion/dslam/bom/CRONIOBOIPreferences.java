@@ -26,8 +26,4 @@ public interface CRONIOBOIPreferences extends Serializable, CRONIOBOIPreferences
 
 	void setVersion(Long version);
 
-	void setProcess(DSLAMBOIProcess process);
-
-	CRONIOBOIPreferences getPreferences();
-
 }

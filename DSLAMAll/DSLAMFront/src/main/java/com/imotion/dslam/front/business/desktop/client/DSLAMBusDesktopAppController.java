@@ -71,9 +71,14 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
 		
-		AEMFTMetadataElementComposite projectLayoutData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		projectLayoutData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
-		setLayoutData(projectLayoutData);
+//		AEMFTMetadataElementComposite preferencesData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PREFERENCES_DATA, result);
+//		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, projectsData);
+		
+		AEMFTMetadataElementComposite layoutsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
+//		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
+		
+		setLayoutData(layoutsData);
 		return getContextDataController().getContext();
 	}
 

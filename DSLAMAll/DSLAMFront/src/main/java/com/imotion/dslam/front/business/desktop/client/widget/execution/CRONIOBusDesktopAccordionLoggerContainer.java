@@ -15,8 +15,8 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopProjectExecutionLoggerBase implements AEGWTHasLogicalEventHandlers  {
 
-	public static final String NAME = "CRONIOBusDesktopAccordionLoggerContainer";
-	private int HEIGHT = 50;
+	public		static		final 	String 	NAME 	= "CRONIOBusDesktopAccordionLoggerContainer";
+	private		static		final	int 	HEIGHT 	= 50;
 	
 	private AEGWTBootstrapAccordionPanelContainer accordionPanelContainer;
 	

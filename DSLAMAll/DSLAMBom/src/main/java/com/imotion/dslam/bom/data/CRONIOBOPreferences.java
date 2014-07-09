@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 
 @Entity(name="Preferences")
@@ -41,7 +42,7 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 		this.preferencesId = preferencesId;
 	}
 
-	@OneToMany(mappedBy=CRONIOBOIMachineProperties.NODE_PROCESS, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(mappedBy=CRONIOBOIMachineProperties.PREFERENCES_ID, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@Override
 	public List<CRONIOBOIMachineProperties> getMachinePropertiesList() {
 		return machinePropertiesList;
@@ -84,6 +85,4 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 	public void setVersion(Long version) {
 		this.version = version;
 	}
-	
-	
 }

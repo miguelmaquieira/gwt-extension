@@ -1,5 +1,8 @@
 package com.imotion.dslam.business.service.impl;
 
+import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessService;
+import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 
 public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase implements CRONIOBUIPreferencesBusinessService, CRONIOBUIPreferencesBusinessServiceConstants, CRONIOBUIPreferencesBusinessServiceTrace {
