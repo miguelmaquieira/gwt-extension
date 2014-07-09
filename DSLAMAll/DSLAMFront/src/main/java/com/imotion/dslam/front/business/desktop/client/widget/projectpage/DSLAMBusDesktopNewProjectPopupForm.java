@@ -47,7 +47,7 @@ public class DSLAMBusDesktopNewProjectPopupForm extends AEGWTPopup {
 		root.add(inputZone);
 		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_PROJECT_FORM_INPUT_ZONE);
 
-		projectNameField = new AEGWTBootstrapDropdownAndLabelTextBox(TEXTS.projectame_input_placeholder());
+		projectNameField = new AEGWTBootstrapDropdownAndLabelTextBox(TEXTS.projectname_input_placeholder());
 		inputZone.add(projectNameField);
 		projectNameField.addElement(String.valueOf(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE_DSLAM), TEXTS.project_type_dslam());
 

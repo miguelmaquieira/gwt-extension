@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.flow;
 
 import com.google.gwt.user.client.History;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopHistoryNavigationConstants;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.exe.gwt.client.AEGWTHistoryNavigationConstants;
 import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenterConstants;
@@ -46,6 +47,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					controllerProcessFlowEvent(evt);
 				} else if (CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER.equals(sourceWindow)) {
 					projectProcessFlowEvent(evt);
+				} else if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(sourceWindow)) {
+					preferencesFlowEvent();
 				}
 			}
 		}
@@ -71,6 +74,10 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 	 **********************************************************************/
 	private void controllerProcessFlowEvent(AEGWTFlowEvent evt) {
 
+	}
+	
+	private void preferencesFlowEvent() {
+		History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES);
 	}
 	
 	private void projectProcessFlowEvent(AEGWTFlowEvent evt) {

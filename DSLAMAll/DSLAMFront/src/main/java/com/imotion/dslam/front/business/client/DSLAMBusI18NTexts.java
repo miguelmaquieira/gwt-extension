@@ -146,7 +146,10 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	String rollback_script_label();
 	
 	@DefaultStringValue("Nombre del Proyecto")
-	String projectame_input_placeholder();
+	String projectname_input_placeholder();
+	
+	@DefaultStringValue("Nombre de la conexión")
+	String connectionname_input_placeholder();
 	
 	@DefaultStringValue("DSLAM")
 	String project_type_dslam();
@@ -198,6 +201,12 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Script de desconexión")
 	String disconnection_script();
+	
+	@DefaultStringValue("Configuración")
+	String config();
+	
+	@DefaultStringValue("Nueva Conexión")
+	String create_connection();
 	
 	
 	

@@ -9,11 +9,16 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	//relations
 	String PREFERENCES_ID				= "preferencesId";
 	String INIT_CONNECTION_SCRIPT_ID	= "initConnectionScriptId";
-	String CLOSE_CONNECTION_SCRIPT_ID	= "closeConnectionScriptId"; 
+	String CLOSE_CONNECTION_SCRIPT_ID	= "closeConnectionScriptId";
 	
 	//PROTOCOL TYPES
 	int PROTOCOL_TYPE_SSH		= 1;
 	int PROTOCOL_TYPE_TELNET	= 2;
 
+	//Context
+	String MACHINE_CONNECTION_SCRIPT 	= "MACHINE_CONNECTION_SCRIPT";
+	String MACHINE_DISCONNECTION_SCRIPT = "MACHINE_DISCONNECTION_SCRIPT";
+	String MACHINE_VARIABLES 			= "MACHINE_VARIABLES";
+	String MACHINE_CONNECTION_CONFIG 	= "MACHINE_CONNECTION_CONFIG";
 
 }
