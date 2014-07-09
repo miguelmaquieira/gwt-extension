@@ -1,6 +1,8 @@
 package com.imotion.dslam.conn;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
@@ -15,12 +17,16 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	private CRONIOBOINode				node;
 	private CRONIOIExecutionLogger		logger;
 	private CRONIOConnectionIWrapper	connectionWrapper;
+	private Pattern 					patternPrompt;
+	private String						promptRegEx;
 
 	public CRONIOConnectionImpl(long processId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
+		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
 		this.connectionId	= generateConnectionId(processId, node.getNodeId());
 		this.node 			= node;
 		this.logger			= logger;
-		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
+		this.promptRegEx 	= machineProperties.getPromptRegEx();
+		this.patternPrompt 	= Pattern.compile(promptRegEx);
 		int protocolType = machineProperties.getProtocolType();
 		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
 			connectionWrapper = new CRONIOConnectionWrapperSSH();
@@ -32,14 +38,13 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	@Override
 	public CRONIOIExecutionData executeCommand(String command) {
 		CRONIOIExecutionData executionData = null;
-		connectionWrapper.sendCommand(command);
 		try {
-			String fullRespose	= connectionWrapper.getResponse();
-			//EXAMPLE BEGIN
-			String prompt		= "#prompt ";
-			String response		= "reponse";
-			executionData		= new CRONIOExecutionData(command, prompt, response);
-			//EXAMPLE END
+			connectionWrapper.sendCommand(command);
+			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
+			
+			String prompt 	= getLastPrompt(fullResponse);
+			String response	= fullResponse.replace(prompt, "");
+			executionData	= new CRONIOExecutionData(command, prompt, response);
 			getLogger().log(getConnectionId(), getNode(), executionData);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -74,6 +79,15 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		connectionIdSB.append(CONNECTION_ID_SEP);
 		connectionIdSB.append(nodeId);
 		return connectionIdSB.toString();
+	}
+	
+	private String getLastPrompt(String fullResponse) {
+		String prompt = null;
+		Matcher	matcher = patternPrompt.matcher(fullResponse);
+		if (matcher.find()) {
+			prompt = matcher.group();
+		}
+		return prompt;
 	}
 
 }

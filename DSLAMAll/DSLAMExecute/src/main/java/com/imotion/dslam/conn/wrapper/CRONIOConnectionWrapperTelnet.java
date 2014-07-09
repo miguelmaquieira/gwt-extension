@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.conn.CRONIOConnectionCheckedException;
+import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 
 public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
 
@@ -15,7 +15,7 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 
 	@SuppressWarnings("resource")
 	@Override
-	public void connect(CRONIOBOINode node) throws CRONIOConnectionCheckedException {
+	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
 		super.connect(node);
 
 		telnet = new TelnetClient();
@@ -33,14 +33,13 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 			connectionStreams.readUntil("password: ");
 			sendCommand(getPassword());
 		} catch (IOException e) {
-			throw new CRONIOConnectionCheckedException(e);
+			throw new CRONIOConnectionUncheckedException(e);
 		}
 	}
 
 	@Override
 	public void disconnect() {
 		super.disconnect();
-		getConnectionStreams().closeStreams();
 	}
 
 }

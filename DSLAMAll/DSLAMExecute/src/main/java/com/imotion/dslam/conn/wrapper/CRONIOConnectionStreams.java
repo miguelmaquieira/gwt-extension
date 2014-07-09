@@ -1,59 +1,54 @@
 package com.imotion.dslam.conn.wrapper;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
-
-import org.apache.commons.io.IOUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 
 public class CRONIOConnectionStreams {
 
-	private InputStream		responseStream;
-	private PrintStream		executeStream;
+	private PrintStream		toServer;
+	private BufferedReader fromServer;
 
 	public CRONIOConnectionStreams(InputStream responseStream, PrintStream executeStream) {
 		super();
-		this.responseStream		= responseStream;
-		this.executeStream		= executeStream;
+		this.toServer				= executeStream;
+		this.fromServer 	= new BufferedReader(new InputStreamReader(responseStream));
 	}
 
-	public void sendCommand(String cmd) {
-		executeStream.println(cmd);
-		executeStream.flush();
+	public String sendCommand(String cmd) throws IOException {
+		toServer.println(cmd);
+		toServer.flush();
+		return readUntil(cmd);
 	}
 
-	public String getResponse() throws IOException {
-		String response = IOUtils.toString(responseStream);
-		return response;
-	}
-
-	public String readUntil(String pattern) {
-		char lastChar = pattern.charAt(pattern.length() - 1);
-		StringBuffer sb = new StringBuffer();
-		try {
-			char ch = (char) responseStream.read();
-			while (true) {
-				sb.append(ch);
-				if (ch == lastChar) {
-					if (sb.toString().endsWith(pattern)) {
-						break;
-					}
-				}
-				ch = (char) responseStream.read();
+	public String readUntil(String patternStr) throws IOException {
+		Pattern	pattern = Pattern.compile(patternStr);
+		Matcher	matcher = pattern.matcher("");
+		
+		char cChar = 0;
+		StringBuilder sbFullResponse				= new StringBuilder();
+		StringBuilder sbResponseWithoutIsoControl	= new StringBuilder();
+		while (!matcher.find() && !matcher.matches() && (byte) cChar != -1) {
+			cChar = (char) fromServer.read();
+			sbFullResponse.append(cChar);
+			if (!Character.isISOControl(cChar)) {
+				sbResponseWithoutIsoControl.append(cChar);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			matcher = pattern.matcher(sbResponseWithoutIsoControl.toString());
 		}
-		return sb.toString();
+		return sbFullResponse.toString();
 	}
 
 	public void closeStreams() throws CRONIOConnectionUncheckedException {
-		executeStream.close();
+		toServer.close();
 		try {
-			responseStream.close();
+			fromServer.close();
 		} catch (IOException e) {
 			throw new CRONIOConnectionUncheckedException(e);
 		}

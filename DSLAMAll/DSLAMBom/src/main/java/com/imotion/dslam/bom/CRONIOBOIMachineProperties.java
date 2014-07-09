@@ -33,6 +33,10 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 	int getTimeout();
 
 	void setTimeout(int timeout);
+	
+	String getPromptRegEx();
+
+	void setPromptRegEx(String promptRegEx);
 
 	DSLAMBOIFile getInitConnectionScript();
 
