@@ -158,7 +158,7 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 		this.closeConnectionScript = finishConnectionScript;
 	}
 
-	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
+	@ManyToOne(targetEntity=CRONIOBOPreferences.class)
 	@JoinColumn(name=PREFERENCES_ID)
 	@Override
 	public CRONIOBOIPreferences getPreferences() {
@@ -168,6 +168,7 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public void setPreferences(CRONIOBOIPreferences preferences) {
 		this.preferences = preferences;
+		preferences.getMachinePropertiesList().add(this);
 	}
 	
 	@ElementCollection(targetClass=DSLAMBOVariable.class)

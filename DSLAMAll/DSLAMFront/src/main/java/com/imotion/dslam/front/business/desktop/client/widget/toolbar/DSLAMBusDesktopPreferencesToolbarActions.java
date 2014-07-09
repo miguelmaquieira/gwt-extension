@@ -3,9 +3,12 @@ package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopNewConnectionPopupForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -63,7 +66,11 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 
 			@Override
 			public void onClick(ClickEvent event) {
-
+				if (!saveButton.isEnabled() || Window.confirm("Hay cambios sin guardar, seguro que quieres salir?")){
+					CRONIOBusDesktopPreferencesEvent openProjectsEvent = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
+					openProjectsEvent.setEventType(EVENT_TYPE.OPEN_PROJECTS_PAGE);
+					getLogicalEventHandlerManager().fireEvent(openProjectsEvent);
+				}
 			}
 		});
 	}

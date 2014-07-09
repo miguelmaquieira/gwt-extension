@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -297,12 +298,32 @@ public class DSLAMBUBomToMetadataConversor {
 		AEMFTMetadataElementComposite dataConnectionList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(connectionList)) {
 			for (CRONIOBOIMachineProperties connection : connectionList) {
-				dataConnectionList.addElement(connection.getMachineName(), fromMachineProperties(connection));
+				dataConnectionList.addElement(connection.getMachineName(), fromMachinePropertiesFull(connection));
 			}
 		}
 		return dataConnectionList;
 	}
 	
+	/**
+	 * PREFERENCES
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromPreferences(CRONIOBOIPreferences preferences) {
+		AEMFTMetadataElementComposite data = null;
+		if (preferences != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(CRONIOBOIPreferences.PREFERENCES_ID	, preferences.getPreferencesId());
+			data.addElement(CRONIOBOIPreferences.CREATION_TIME	, preferences.getCreationTime());
+			data.addElement(CRONIOBOIPreferences.SAVED_TIME		, preferences.getSavedTime());
+			
+			List<CRONIOBOIMachineProperties> machinePropertiesList 	= preferences.getMachinePropertiesList();
+			AEMFTMetadataElementComposite machinePropertiesListData = fromMachinePropertiesList(machinePropertiesList);
+			
+			data.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST		, machinePropertiesListData);	
+		}
+		return data;
+	}
 
 	/**
 	 * PRIVATE
