@@ -30,9 +30,9 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 
 	void setPassword(String password);
 
-	long getTimeout();
+	int getTimeout();
 
-	void setTimeout(long generalTimeout);
+	void setTimeout(int timeout);
 
 	DSLAMBOIFile getInitConnectionScript();
 
