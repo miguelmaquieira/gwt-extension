@@ -15,6 +15,7 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
+import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEventTypes;
 
@@ -36,12 +37,17 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		if (EVENT_TYPE.NEW_CONNECTION.equals(evtTyp)) {
 			String	connectionName 	= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
 			createConnection(connectionName);
+		} else if (EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(evtTyp)) {
+			AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+			getFlowEventHandlerManager().fireEvent(flowEvent);
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		return EVENT_TYPE.NEW_CONNECTION.equals(type);
+		return EVENT_TYPE.NEW_CONNECTION.equals(type)
+				||
+				EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(type);
 	}
 
 

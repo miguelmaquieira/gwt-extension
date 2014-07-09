@@ -11,6 +11,7 @@ public interface CRONIOBOIPreferencesDataConstants {
 
 	String PREFERENCES_DATA						= "preferencesData";
 	
+	long PREFERENCES_DEFAULT_ID				= 1;
 	
 	String PREFERENCES_CONNECTION_DSLAM			= "preferencesConnectionDslam";
 	

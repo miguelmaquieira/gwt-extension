@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceTrace;
@@ -200,9 +201,16 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_ID);
 		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
 		
+		AEMFTMetadataElementComposite preferencesDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		elementController.setElement(AEMFTILoginDataConstants.USER_ID, preferencesDataContextIn, userId);
+		
+		AEMFTMetadataElementComposite 	preferencesDataContextOut 	= getController().executeService(preferencesDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_GET_PREFERENCES_ID);
+		AEMFTMetadataElementComposite	preferencesData				= elementController.getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, preferencesDataContextOut);
+		
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsData);
+		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST	, projectsData);
+		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
 	}
 
 	private String getError() {

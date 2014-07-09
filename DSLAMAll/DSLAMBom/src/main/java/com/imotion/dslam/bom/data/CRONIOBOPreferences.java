@@ -1,10 +1,12 @@
 package com.imotion.dslam.bom.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 @Entity(name="Preferences")
 public class CRONIOBOPreferences implements CRONIOBOIPreferences {
@@ -43,9 +46,12 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 		this.preferencesId = preferencesId;
 	}
 
-	@OneToMany(mappedBy=CRONIOBOIMachineProperties.PREFERENCES, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.EAGER ,mappedBy=CRONIOBOIMachineProperties.PREFERENCES, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@Override
 	public List<CRONIOBOIMachineProperties> getMachinePropertiesList() {
+		if (AEMFTCommonUtilsBase.isEmptyList(machinePropertiesList)) {
+			machinePropertiesList = new ArrayList<>();
+		}
 		return machinePropertiesList;
 	}
 	

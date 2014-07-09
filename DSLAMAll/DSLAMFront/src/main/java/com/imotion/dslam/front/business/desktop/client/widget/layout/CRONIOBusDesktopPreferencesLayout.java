@@ -1,9 +1,12 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
@@ -12,6 +15,7 @@ import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDeskt
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences.DSLAMBusDesktopPreferencesMenu;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopPreferencesToolbar;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -98,9 +102,14 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-//		if (data != null) {
-//			projectListNavigator.setData(data);
-//		}
+		if (data != null) {
+			AEMFTMetadataElementComposite machinePropertiesListData = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, data);
+			List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
+			for (AEMFTMetadataElement machineProperties : machinePropertiesList) {
+				String connectionName = machineProperties.getKey();
+				preferencesMenu.addConnection(connectionName);	
+			}
+		}
 	}
 
 	@Override
