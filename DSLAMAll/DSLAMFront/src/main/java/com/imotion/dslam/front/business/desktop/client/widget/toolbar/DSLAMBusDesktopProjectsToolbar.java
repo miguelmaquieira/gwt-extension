@@ -7,13 +7,13 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
+public class DSLAMBusDesktopProjectsToolbar extends AEGWTCompositePanel {
 	
-	public static final String NAME = "DSLAMBusDesktopToolbar";
+	public static final String NAME = "DSLAMBusDesktopProjectsToolbar";
 	
-	private DSLAMBusDesktopToolbarActions 	projectActions;
+	private DSLAMBusDesktopProjectsToolbarActions 	projectActions;
 
-	public DSLAMBusDesktopToolbar() {
+	public DSLAMBusDesktopProjectsToolbar() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR);
@@ -23,7 +23,7 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		root.add(projectActionsZone);
 		projectActionsZone.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_ZONE);
 	
-		projectActions = new DSLAMBusDesktopToolbarActions();
+		projectActions = new DSLAMBusDesktopProjectsToolbarActions();
 		projectActionsZone.add(projectActions);
 	}
 	
@@ -54,7 +54,7 @@ public class DSLAMBusDesktopToolbar extends AEGWTCompositePanel {
 		projectActions.setExecuteEnabled(enabled);
 	}
 	
-	public DSLAMBusDesktopToolbarActions getActions() {
+	public DSLAMBusDesktopProjectsToolbarActions getActions() {
 		return projectActions;	
 	}
 	

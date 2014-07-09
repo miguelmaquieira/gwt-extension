@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
+import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKPreferencesPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 
@@ -14,9 +15,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 
 	private DSLAMBKPersistenceModuleJPA<Q, Id> persistenceModule;
 	
-	private DSLAMBKFilePersistenceServiceJPA 		filePersistence;
-	private DSLAMBKProcessPersistenceServiceJPA 	processPersistence;
-	private CRONIOBKNodePersistenceServiceJPA 		nodePersistence;
+	private DSLAMBKFilePersistenceServiceJPA 			filePersistence;
+	private DSLAMBKProcessPersistenceServiceJPA 		processPersistence;
+	private CRONIOBKNodePersistenceServiceJPA 			nodePersistence;
+	private CRONIOBKPreferencesPersistenceServiceJPA 	preferencesPersistence;
 	
 	
 	@Override
@@ -66,6 +68,11 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
 			nodePersistence = null;
 		}
+		
+		if (preferencesPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) preferencesPersistence);
+			preferencesPersistence = null;
+		}
 	}
 	
 	/**************************************************************
@@ -91,5 +98,12 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			nodePersistence = (CRONIOBKNodePersistenceServiceJPA) getFactoryPersistence().newNodePersistence();
 		}
 		return nodePersistence;
+	}
+	
+	protected CRONIOBKPreferencesPersistenceServiceJPA getPreferencesPersistence() {
+		if (preferencesPersistence == null) {
+			preferencesPersistence = (CRONIOBKPreferencesPersistenceServiceJPA) getFactoryPersistence().newPreferencesPersistence();
+		}
+		return preferencesPersistence;
 	}
 }

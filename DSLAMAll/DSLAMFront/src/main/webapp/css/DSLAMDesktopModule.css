@@ -190,16 +190,12 @@
 	margin-left: 10px;
 }
 
-.dslam_studio-toolbar-info-lastsaved {
-	text-align: center;
-}
-
-.dslam_studio-toolbar-info-close button {
-	border-width: 0px;
-}
-
 .dslam_studio-container-zone {
 	width: 100%;
+}
+
+.dslam_studio-toolbar-actions-preferencesButton {
+	float: right;
 }
 
 /********************************************

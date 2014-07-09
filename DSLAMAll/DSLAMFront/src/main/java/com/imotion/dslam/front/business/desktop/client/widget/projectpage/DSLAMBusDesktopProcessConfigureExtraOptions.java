@@ -3,7 +3,6 @@ package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
@@ -12,6 +11,7 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.common.AEGWTCheckBox;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
@@ -20,8 +20,8 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	public static final String NAME = "DSLAMBusDesktopProcessConfigureExtraOptions";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private FlowPanel 	propertiesZone;
-	private CheckBox 	synchroCheckBox;
+	private FlowPanel 		propertiesZone;
+	private AEGWTCheckBox 	synchroCheckBox;
 
 
 	public DSLAMBusDesktopProcessConfigureExtraOptions() {
@@ -32,7 +32,20 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 		//PropertiesZone
 		propertiesZone 	= new FlowPanel();
 		root.add(propertiesZone);
-		synchroCheckBox 	= new CheckBox(TEXTS.synchronous());
+		synchroCheckBox 	= new AEGWTCheckBox(TEXTS.synchronous()) {
+			
+			@Override
+			protected String getLabelZoneStyleName() {
+				// TODO Auto-generated method stub
+				return "";
+			}
+			
+			@Override
+			protected String getCheckBoxZoneStyleName() {
+				// TODO Auto-generated method stub
+				return "";
+			}
+		};
 		propertiesZone.add(synchroCheckBox);
 		propertiesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_PROPERTIES_CHECKBOX);
 		

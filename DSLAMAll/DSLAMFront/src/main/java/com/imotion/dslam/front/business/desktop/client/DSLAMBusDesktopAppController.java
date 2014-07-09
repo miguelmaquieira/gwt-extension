@@ -23,6 +23,7 @@ import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDes
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopPreferencesLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -147,6 +148,10 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		CRONIOBusDesktopProjectsLayout projectsLayout = new CRONIOBusDesktopProjectsLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsLayout);
 		projectsLayout.postDisplay();
+		
+		CRONIOBusDesktopPreferencesLayout preferencesLayout = new CRONIOBusDesktopPreferencesLayout();
+		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesLayout);
+		preferencesLayout.postDisplay();
 	}
 
 	//TODO:DELETE WHEN LOGIN WORKS!!

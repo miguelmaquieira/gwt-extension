@@ -17,7 +17,8 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 
 	public static final String NAME = "CRONIOBusDesktopLayoutContainer";
 	
-	public static final String LAYOUT_PROJECT_ID = "PROJECT_LAYOUT_ID";
+	public static final String LAYOUT_PROJECT_ID 		= "PROJECT_LAYOUT_ID";
+	public static final String LAYOUT_PREFERENCES_ID 	= "PREFERENCES_LAYOUT_ID";
 
 	private DeckLayoutPanel			rootSwitcher;
 	private AEGWTBasePresenter<?>	currentPresenter;

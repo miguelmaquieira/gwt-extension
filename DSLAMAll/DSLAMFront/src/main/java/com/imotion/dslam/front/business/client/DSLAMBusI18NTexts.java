@@ -190,4 +190,21 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Guardar Proyecto")
 	String save_project();
 	
+	@DefaultStringValue("Preferencias")
+	String preferences();
+	
+	@DefaultStringValue("Conexiones")
+	String connections();
+	
+	@DefaultStringValue("Conexión")
+	String connection();
+	
+	@DefaultStringValue("Desconexión")
+	String disconection();
+	
+	@DefaultStringValue("DSLAM")
+	String dslam();
+	
+	
+	
 }

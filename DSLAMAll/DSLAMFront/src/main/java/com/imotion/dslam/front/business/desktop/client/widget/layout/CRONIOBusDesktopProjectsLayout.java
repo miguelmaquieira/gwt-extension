@@ -11,7 +11,7 @@ import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDeskt
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.DSLAMBusDesktopProjectNavigator;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -22,7 +22,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
 
 	private FlowPanel 									root;
-	private DSLAMBusDesktopToolbar						toolbar;
+	private DSLAMBusDesktopProjectsToolbar				toolbar;
 	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
 	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
 	private FlowPanel									projectWorkZone;
@@ -32,7 +32,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT);
 
-		toolbar = new DSLAMBusDesktopToolbar();
+		toolbar = new DSLAMBusDesktopProjectsToolbar();
 		root.add(toolbar);
 		toolbar.setModified(false);
 		toolbar.setId(NO_PROJECT_ID);

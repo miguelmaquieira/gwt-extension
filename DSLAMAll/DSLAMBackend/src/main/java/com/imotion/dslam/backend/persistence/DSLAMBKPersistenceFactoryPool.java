@@ -2,6 +2,7 @@ package com.imotion.dslam.backend.persistence;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTPersistenceFactoryPool;
@@ -56,6 +57,17 @@ public class DSLAMBKPersistenceFactoryPool extends AEMFTPersistenceFactoryPool i
 					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_NODE_PERSISTENCE_DEFAULT_IMPL);
 		}
 		return (CRONIOBKINodePersistenceService) newPersistenceModule(impl);
+	}
+	
+	@Override
+	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence() {
+		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL;
+		if (getConfigSrv() != null) {
+			impl = getConfigSrv().getProperty(
+					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_IMPL,
+					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL);
+		}
+		return (CRONIOBKIPreferencesPersistenceService) newPersistenceModule(impl);
 	}
 	
 	/***********************************************************************
