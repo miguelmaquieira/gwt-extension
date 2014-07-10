@@ -1,6 +1,7 @@
 package com.imotion.dslam.bom;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachinePropertiesDataConstants {
 
@@ -83,5 +84,11 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 	CRONIOBOIPreferences getPreferences();
 
 	void setPreferences(CRONIOBOIPreferences preferences);
+	
+	void setSaveTime(Date savedTime);
+	Date getSaveTime();
+	
+	void setCreationTime(Date createdTime);
+	Date getCreationTime();
 
 }

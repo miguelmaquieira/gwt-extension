@@ -46,8 +46,4 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 
 	void setCreationTime(Date creationTime);
 
-	Long getVersion();
-
-	void setVersion(Long version);
-
 }

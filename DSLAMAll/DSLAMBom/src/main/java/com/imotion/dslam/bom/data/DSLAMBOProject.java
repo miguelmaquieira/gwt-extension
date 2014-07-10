@@ -64,8 +64,8 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.machineType = machineType;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
-    @JoinColumn(name=CRONIOBOIProjectDataConstants.MAIN_SCRIPT_ID)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@JoinColumn(name=CRONIOBOIProjectDataConstants.MAIN_SCRIPT_ID)
 	public DSLAMBOIFile getMainScript() {
 		return mainScript;
 	}
@@ -74,7 +74,7 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.mainScript = mainScript;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL, targetEntity=DSLAMBOFile.class)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
 	@JoinColumn(name=CRONIOBOIProjectDataConstants.ROLLBACK_SCRIPT_ID)
 	public DSLAMBOIFile getRollBackScript() {
 		return rollBackScript;
@@ -117,13 +117,11 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 	}
 
 	@Version
-	@Override
-	public Long getVersion() {
+	protected Long getVersion() {
 		return version;
 	}
 
-	@Override
-	public void setVersion(Long version) {
+	protected void setVersion(Long version) {
 		this.version = version;
 	}
 

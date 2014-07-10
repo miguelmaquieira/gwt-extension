@@ -29,8 +29,4 @@ public interface DSLAMBOIFile extends Serializable, DSLAMBOIFileDataConstants {
 
 	void setCreationTime(Date creationTime);
 
-	Long getVersion();
-
-	void setVersion(Long version);
-
 }

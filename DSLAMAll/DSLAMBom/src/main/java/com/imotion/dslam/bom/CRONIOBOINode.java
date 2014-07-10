@@ -34,10 +34,6 @@ public interface CRONIOBOINode extends Serializable, CRONIOBOINodeDataConstants 
 
 	void setCreationTime(Date creationTime);
 
-	Long getVersion();
-
-	void setVersion(Long version);
-
 	void setProcess(DSLAMBOIProcess process);
 
 	DSLAMBOIProcess getProcess();

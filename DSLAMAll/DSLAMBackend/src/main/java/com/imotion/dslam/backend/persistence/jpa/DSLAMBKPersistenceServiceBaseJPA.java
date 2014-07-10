@@ -2,11 +2,12 @@ package com.imotion.dslam.backend.persistence.jpa;
 
 import java.io.Serializable;
 
-import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
+import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
-import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
-import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKPreferencesPersistenceServiceJPA;
-import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
+import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
+import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
+import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 
 public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extends Serializable> extends DSLAMBKPersistenceServiceBase<T, Q, Id> {
@@ -15,11 +16,11 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 
 	private DSLAMBKPersistenceModuleJPA<Q, Id> persistenceModule;
 	
-	private DSLAMBKFilePersistenceServiceJPA 			filePersistence;
-	private DSLAMBKProcessPersistenceServiceJPA 		processPersistence;
-	private CRONIOBKNodePersistenceServiceJPA 			nodePersistence;
-	private CRONIOBKPreferencesPersistenceServiceJPA 	preferencesPersistence;
-	
+	private DSLAMBKIFilePersistenceService 						filePersistence;
+	private DSLAMBKIProcessPersistenceService 					processPersistence;
+	private CRONIOBKINodePersistenceService						nodePersistence;
+	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
+	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
 	
 	@Override
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
@@ -68,10 +69,13 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
 			nodePersistence = null;
 		}
-		
 		if (preferencesPersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) preferencesPersistence);
 			preferencesPersistence = null;
+		}
+		if (machinePropertiesPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
+			machinePropertiesPersistence = null;
 		}
 	}
 	
@@ -79,30 +83,37 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
      *                   PROTECTED FUNCTIONS                      *
      **************************************************************/
 	
-	protected DSLAMBKFilePersistenceServiceJPA getFilePersistence() {
+	protected DSLAMBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
-			filePersistence = (DSLAMBKFilePersistenceServiceJPA) getFactoryPersistence().newFilePersistence();
+			filePersistence = (DSLAMBKIFilePersistenceService) getFactoryPersistence().newFilePersistence();
 		}
 		return filePersistence;
 	}
 
-	protected DSLAMBKProcessPersistenceServiceJPA getProcessPersistence() {
+	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
-			processPersistence = (DSLAMBKProcessPersistenceServiceJPA) getFactoryPersistence().newProcessPersistence();
+			processPersistence = (DSLAMBKIProcessPersistenceService) getFactoryPersistence().newProcessPersistence();
 		}
 		return processPersistence;
 	}
 	
-	protected CRONIOBKNodePersistenceServiceJPA getNodePersistence() {
+	protected CRONIOBKINodePersistenceService getNodePersistence() {
 		if (nodePersistence == null) {
-			nodePersistence = (CRONIOBKNodePersistenceServiceJPA) getFactoryPersistence().newNodePersistence();
+			nodePersistence = (CRONIOBKINodePersistenceService) getFactoryPersistence().newNodePersistence();
 		}
 		return nodePersistence;
 	}
 	
-	protected CRONIOBKPreferencesPersistenceServiceJPA getPreferencesPersistence() {
+	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
+		if (machinePropertiesPersistence == null) {
+			machinePropertiesPersistence = (CRONIOBKIMachinePropertiesPersistenceService) getFactoryPersistence().newMachinePropertiesPersistence();
+		}
+		return machinePropertiesPersistence;
+	}
+	
+	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
 		if (preferencesPersistence == null) {
-			preferencesPersistence = (CRONIOBKPreferencesPersistenceServiceJPA) getFactoryPersistence().newPreferencesPersistence();
+			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence();
 		}
 		return preferencesPersistence;
 	}
