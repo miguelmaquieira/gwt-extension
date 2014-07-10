@@ -43,7 +43,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	}
 
 	@Override
-	public CRONIOIExecutionData executeCommand(String command) {
+	public CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData = null;
 		try {
 			connectionWrapper.sendCommand(command);
@@ -56,7 +56,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 					getLogger().log(getConnectionId(), getNode(), executionData);
 				}
 			} else {
-				throw new CRONIOConnectionUncheckedException("No response received");
+				throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

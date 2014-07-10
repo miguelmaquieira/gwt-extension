@@ -8,7 +8,7 @@ public interface CRONIOIConnection {
 	
 	void openConnection() throws IOException;
 	
-	CRONIOIExecutionData executeCommand(String command);
+	CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException;
 	
 	void closeConnection();
 

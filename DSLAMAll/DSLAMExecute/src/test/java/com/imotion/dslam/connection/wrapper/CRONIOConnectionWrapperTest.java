@@ -7,37 +7,44 @@ import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.imotion.dslam.conn.CRONIOConnectionImpl;
+import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 
 public class CRONIOConnectionWrapperTest {
 
 	public static void main(String[] args) throws IOException {
-		
 		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(1, getNodeData(), null);
 		connection.openConnection();
-		
-		CRONIOIExecutionData responseData = connection.executeCommand("ls");
-		System.out.println(responseData.getSourceCommand());
-		System.out.println(responseData.getResponse());
-		System.out.println(responseData.getPrompt());
-		
+		try {
+			CRONIOIExecutionData responseData = connection.executeCommand("ls -al");
+			System.out.println(responseData.getSourceCommand());
+			System.out.println(responseData.getResponse());
+			System.out.println(responseData.getPrompt());
+
+			responseData = connection.executeCommand("ls");
+			System.out.println(responseData.getSourceCommand());
+			System.out.println(responseData.getResponse());
+			System.out.println(responseData.getPrompt());
+		} catch (NullPointerException | CRONIOConnectionUncheckedException e) {
+			e.printStackTrace();
+		}
 		connection.closeConnection();
 	}
-	
+
 	private static CRONIOBOINode getNodeData() {
 		CRONIOBOIMachineProperties machineProperties = new CRONIOBOMachineProperties();
-		machineProperties.setUsername("gaelhosteneo");
-		machineProperties.setPassword(".o7ws5mb");
+		machineProperties.setUsername("imotion");
+		machineProperties.setPassword("123456");
 		machineProperties.setTimeout(3000);
 		machineProperties.setProtocolType(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH);
 		machineProperties.setPromptRegEx("\\S+@\\S+:~\\$\\s");
-		
+
 		CRONIOBOINode node = new CRONIOBONode();
 		node.setNodeId(34l);
-		node.setNodeIp("127.0.0.1");
+		node.setNodeIp("192.168.1.137");
 		node.setMachineProperties(machineProperties);
-		
+
 		return node;
 	}
-	
+
 }

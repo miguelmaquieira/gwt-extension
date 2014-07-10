@@ -20,27 +20,29 @@ public class CRONIOConnectionStreams {
 	}
 
 	public String sendCommand(String cmd) throws IOException {
+		sendCommandBase(cmd);
+		return readUntil(cmd);
+	}
+	
+	public void sendCommandBase(String cmd) throws IOException {
 		toServer.println(cmd);
 		toServer.flush();
-		return readUntil(cmd);
 	}
 
 	public String readUntil(String patternStr) throws IOException {
 		Pattern	pattern = Pattern.compile(patternStr);
 		Matcher	matcher = pattern.matcher("");
 
-		StringBuilder sbFullResponse				= new StringBuilder();
 		StringBuilder sbResponseWithoutIsoControl	= new StringBuilder();
 		char cChar = 0;
 		while (fromServer.available() > 0 && !matcher.find() && !matcher.matches() && (byte) cChar != -1) {
 			cChar = (char) fromServer.read();
-			sbFullResponse.append(cChar);
 			if (!Character.isISOControl(cChar)) {
 				sbResponseWithoutIsoControl.append(cChar);
 			}
 			matcher = pattern.matcher(sbResponseWithoutIsoControl.toString());
 		}
-		return sbFullResponse.toString();
+		return sbResponseWithoutIsoControl.toString();
 	}
 
 	public void closeStreams() throws CRONIOConnectionUncheckedException {
