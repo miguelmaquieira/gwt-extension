@@ -2,7 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIMachinePropertiesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -49,19 +49,19 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		menuMachines.addWidget(dslamMachine);
 
 		//MENU -> Machines -> DSLAM --> Connection Script
-		connectionDslamScript 		= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_CONNECTION_SCRIPT, CRONIOBOIPreferences.PREFERENCES_CONNECTION_DSLAM		,TEXTS.connection_script(), this);
+		connectionDslamScript 		= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_SCRIPT		,TEXTS.connection_script(), this);
 		dslamMachine.addWidget(connectionDslamScript);
 
 		//MENU -> Machines -> DSLAM --> Disconnection Script
-	//	disconnectionDslamScript 	= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_DISCONNECTION_SCRIPT, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.disconnection_script(),this);
+		disconnectionDslamScript 	= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_DISCONNECTION_SCRIPT	,TEXTS.disconnection_script(), this);
 		dslamMachine.addWidget(disconnectionDslamScript);
 		
 		//MENU -> Machines -> DSLAM --> Machine Variables
-	//	variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_MACHINE_VARIABLES, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.variables(),this);
+		variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_VARIABLES	,TEXTS.variables(), this);
 		dslamMachine.addWidget(variablesMachine);
 		
-		//MENU -> Machines -> DSLAM --> Connection Protocol
-	//	variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_MACHINE_VARIABLES, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.variables(),this);
+		//MENU -> Machines -> DSLAM --> Connection Config
+		variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_CONFIG	,TEXTS.config(), this);
 		dslamMachine.addWidget(variablesMachine);
 		
 	}

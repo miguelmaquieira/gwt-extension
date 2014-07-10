@@ -35,6 +35,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NEW_PROJECT_FORM_INPUT_ZONE 					= NEW_PROJECT_FORM			+ "-inputZone";		//dslam_studio-newProjectForm-inputZone
 	String NEW_PROJECT_FORM_SAVE_ZONE 					= NEW_PROJECT_FORM			+ "-saveZone";		//dslam_studio-newProjectForm-saveZone
 
+	//CONNECTION FORM
+	String NEW_CONNECTION_FORM 							= APP_ID_PREFFIX			+ "newConnectionForm";	//dslam_studio-newConnectionForm
+	String NEW_CONNECTION_FORM_ERROR_ZONE 				= NEW_CONNECTION_FORM		+ "-errorZone";			//dslam_studio-newConnectionForm-errorZone
+	String NEW_CONNECTION_FORM_INPUT_ZONE 				= NEW_CONNECTION_FORM		+ "-inputZone";			//dslam_studio-newConnectionForm-inputZone
+	String NEW_CONNECTION_FORM_SAVE_ZONE 				= NEW_CONNECTION_FORM		+ "-saveZone";			//dslam_studio-newConnectionForm-saveZone
+	
 	//PROJECT LAYOUT
 	String PROJECTS_LAYOUT 											= APP_ID_PREFFIX								+ "projectsLayout";		//dslam_studio-projectsLayout
 	String PROJECTS_LAYOUT_LIST_ZONE 								= PROJECTS_LAYOUT								+ "-listZone";			//dslam_studio-projectsLayout-listZone
