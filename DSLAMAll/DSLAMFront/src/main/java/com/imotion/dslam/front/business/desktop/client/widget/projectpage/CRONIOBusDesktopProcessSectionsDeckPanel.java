@@ -27,7 +27,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
-		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECT_CONFIGURE_DECKPANEL);
+		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_DECKPANEL);
 
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();

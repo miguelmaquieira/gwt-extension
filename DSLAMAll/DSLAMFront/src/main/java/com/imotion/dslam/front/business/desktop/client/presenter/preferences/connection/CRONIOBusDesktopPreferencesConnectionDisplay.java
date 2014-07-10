@@ -5,5 +5,5 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 
 public interface CRONIOBusDesktopPreferencesConnectionDisplay extends CRONIOBusPreferencesBaseDisplay {
 	void updatePreferences(AEMFTMetadataElementComposite preferencesData);
-	//void openProcessSection(String sectionId, AEMFTMetadataElementComposite processData);
+	void openMachinesSection(String sectionId, AEMFTMetadataElementComposite finalSectionData);
 }	

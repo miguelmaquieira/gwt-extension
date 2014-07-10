@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.preferences;
 
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenter;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -74,15 +75,15 @@ public class CRONIOBusDesktopPreferencesPresenter extends CRONIOBusPreferencesBa
 	 * PROTECTED
 	 */
 	
-//	@Override
-//	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-//		getView().openProcessSection(projectFinalSectionId, finalSectionData);
-//	}
+	@Override
+	protected void openFinalSection(String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
+		
+	}
 	
-//	@Override
-//	protected String getSectionType() {
-//		return SECTION_TYPE_CONNECTION;
-//	}
+	@Override
+	protected String getSectionType() {
+		return SECTION_TYPE_ROOT;
+	}
 	
 	/**
 	 * PRIVATE

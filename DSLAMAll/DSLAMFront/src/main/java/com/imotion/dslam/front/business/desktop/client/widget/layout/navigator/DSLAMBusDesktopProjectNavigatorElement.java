@@ -136,13 +136,6 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		return menuProject.getLabelText();
 	}
 
-	//	protected static native void addJS() /*-{
-	//	$wnd.jQuery('label.tree-toggler').click(function () {
-	//			$wnd.jQuery(this).parent().children('ul.tree').toggle(300);
-	//	});
-	//	}-*/;
-
-
 	@Override
 	public String getName() {
 		return NAME;

@@ -70,6 +70,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Contraseña")
 	String password_placeholder();
 	
+	@DefaultStringValue("Timeout")
+	String timeout_placeholder();
+	
 	@DefaultStringValue("Nodos")
 	String nodes();
 	
@@ -177,6 +180,15 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Prompt:")
 	String prompt_label();
+	
+	@DefaultStringValue("Telnet")
+	String telnet();
+	
+	@DefaultStringValue("SSH")
+	String ssh();
+	
+	@DefaultStringValue("Prompt")
+	String prompt_placeholder();
 	
 	@DefaultStringValue("Petición:")
 	String request_label();

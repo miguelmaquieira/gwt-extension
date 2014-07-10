@@ -1,13 +1,16 @@
-package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
+package com.imotion.dslam.front.business.desktop.client.widget.preferences;
 
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariablesForm;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopVariablesList;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -18,20 +21,20 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
+public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
-	public static final String NAME = "DSLAMBusDesktopPreferencesMachineVariables";
+	public static final String NAME = "DSLAMBusDesktopProcessConfigureVariables";
 
 	private FlowPanel 											root;
 	private FlowPanel											variableListZone;
-	private	 DSLAMBusDesktopVariablesList   					variableList;
-	private DSLAMBusDesktopProcessConfigureVariablesForm		variablesForm;
+	private	 CRONIOBusDesktopPreferencesMachineVariablesList   	variableList;
+	private CRONIOBusDesktopPreferencesMachineVariablesForm		variablesForm;
 	private	 AEMFTMetadataElementComposite						variablesData;
 
-	public DSLAMBusDesktopProcessConfigureVariables() {
+	public CRONIOBusDesktopPreferencesMachineVariables() {
 		root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_CONTENT_IN_BOX);
 
 		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
 		root.add(header);
@@ -47,9 +50,9 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		});
 		
 		variableListZone = new FlowPanel();
-		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_VARIABLES_LIST);
+		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_VARIABLES_LIST);
 		root.add(variableListZone);
-		variableList = new DSLAMBusDesktopVariablesList(header.getDeleteButton());
+		variableList = new CRONIOBusDesktopPreferencesMachineVariablesList(header.getDeleteButton());
 		variableListZone.add(variableList);
 	}
 
@@ -66,7 +69,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-		variablesForm = new DSLAMBusDesktopProcessConfigureVariablesForm(this);
+		variablesForm = new CRONIOBusDesktopPreferencesMachineVariablesForm(this);
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 	
@@ -117,7 +120,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.setSourceWidget(getName());
-			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
+			saveEvt.addElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES, variablesData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 			
 		} else if(DSLAMBusDesktopVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
@@ -137,7 +140,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			deleteEvt.setSourceWidget(getName());
-			deleteEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, variablesData);
+			deleteEvt.addElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES, variablesData);
 			getLogicalEventHandlerManager().fireEvent(deleteEvt);
 		}	
 	}

@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.view.event;
 public interface CRONIOBusDesktopPreferencesEventTypes {
 	
 	public enum EVENT_TYPE {
-		//OPEN_FINAL_SECTION_EVENT,
+		OPEN_FINAL_SECTION_EVENT,
 		//SAVE_SECTION_TEMPORARILY_EVENT,
 		//SHOW_PROJECT_INFO,
 		//SECTION_MODIFIED,

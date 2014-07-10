@@ -11,6 +11,7 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String USERNAME				= "username";
 	String PASSWORD				= "password";
 	String TIMEOUT				= "timeout";
+	String PROMPT				= "prompt";
 	String SAVED_TIME			= "savedTime";
 	String CREATION_TIME		= "creationTime";
 	
@@ -28,6 +29,8 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String MACHINE_DISCONNECTION_SCRIPT = "MACHINE_DISCONNECTION_SCRIPT";
 	String MACHINE_VARIABLES 			= "MACHINE_VARIABLES";
 	String MACHINE_CONNECTION_CONFIG 	= "MACHINE_CONNECTION_CONFIG";
+	
+	String IS_MODIFIED 					= "IS_MODIFIED";
 	
 	//DEFAULTS
 	String CONNECTION_SCRIPT_DEFAULT_NAME			= "Connection Script";

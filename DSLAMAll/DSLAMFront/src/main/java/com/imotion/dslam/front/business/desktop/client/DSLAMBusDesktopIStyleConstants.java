@@ -70,7 +70,8 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PREFERENCES_LAYOUT_BOTTOM_ZONE 								= PREFERENCES_LAYOUT							+ "-bottomZone";		//dslam_studio-preferencesLayout-bottomZone
 	String PREFERENCES_LAYOUT_BOTTOM_ZONE_RIGHT  						= PREFERENCES_LAYOUT_BOTTOM_ZONE				+ "-right";				//dslam_studio-preferencesLayout-bottomZone-right
 	String PREFERENCES_LAYOUT_ZONE_HEADER 								= PREFERENCES_LAYOUT							+ "-zoneHeader";		//dslam_studio-preferencesLayout-zoneHeader
-		
+	String PREFERENCES_LAYOUT_CONTENT_IN_BOX							= PREFERENCES_LAYOUT							+ "-contentInBox ";		//dslam_studio-preferencesLayout-contentInBox 	
+	
 	//SCRITPS EDITOR
 	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
 	String SCRIPTS_EDITOR_AREA 							= APP_ID_PREFFIX		+ "scriptsEditorArea";		//dslam_studio-scriptsEditorArea
@@ -82,7 +83,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	//PROCESS VIEW
 	String PROCESS_VIEW 								= APP_ID_PREFFIX			+ "processView";						//dslam_studio-processView
 	String PROCESS_ZONE 								= APP_ID_PREFFIX			+ "processZone"; 						//dslam_studio-processZone
-	String PROJECT_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX			+ "projectConfigureDeckPanel"; 			//dslam_studio-projectConfigureDeckPanel
+	String PROCESS_CONFIGURE_DECKPANEL 					= APP_ID_PREFFIX			+ "processConfigureDeckPanel"; 			//dslam_studio-processConfigureDeckPanel
 	String PROCESS_CONFIGURE 							= APP_ID_PREFFIX			+ "processConfigure"; 					//dslam_studio-processConfigure
 	String PROCESS_CONFIGURE_ZONE 						= APP_ID_PREFFIX			+ "processConfigureZone";				//dslam_studio-processConfigureZone
 	String PROCESS_CONFIGURE_PROPERTIES_CHECKBOX		= APP_ID_PREFFIX			+ "processConfigurePropertiesCheckBox";	//dslam_studio-processConfigurePropertiesCheckBox
@@ -103,6 +104,11 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String POPUP_SCHEDULE_FORM_SAVE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleFormSaveZone";		//dslam_studio-processConfigureScheduleFormSaveZone
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton
 
+	//PREFERENCES --> MACHINES VIEW
+	String PREFERENCES_MACHINE_DECKPANEL 				= APP_ID_PREFFIX			+ "preferencesMachineDeckPanel"; 			//dslam_studio-preferencesMachineDeckPanel
+	String PREFERENCES_MACHINE_VARIABLES_LIST			= APP_ID_PREFFIX			+ "preferencesMachineVariablesList";		//dslam_studio-preferencesMachineVariablesList
+	
+	
 	//EXECUTION
 	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
 	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";			//dslam_studio-execution-loggerTabs
