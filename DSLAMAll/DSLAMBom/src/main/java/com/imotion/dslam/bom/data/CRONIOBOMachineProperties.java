@@ -1,21 +1,23 @@
 package com.imotion.dslam.bom.data;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
 
 @Entity(name="MachineProperties")
 public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
@@ -28,21 +30,12 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private int					protocolType;
 	private String 					username;
 	private String 					password;
-	private String 					prompt;
-	private String 					userPrompt;
-	private String 					passwordPrompt;
-	private String 					enablePrompt;
-	private String 					enablePasswordPrompt;
-	private long					initConnectionTimeout;
-	private long					generalTimeout;
-	private String 					initConnectionScript;
-	private String 					enableCommandScript;
-	private String 					enablePasswordScript;
-	private String					setupTerminalScript;
-	private String 					finishConnectionScript;
-	private String 					finishedResponse;
+	private long					timeout;
 	private Date					saveTime;
 	private Date					creationTime;
+	private List<DSLAMBOIVariable>	connectionVariables;
+	private DSLAMBOIFile 			initConnectionScript;
+	private DSLAMBOIFile 			closeConnectionScript;
 	private CRONIOBOIPreferences	preferences;
 	private Long					version;
 
@@ -112,157 +105,15 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	}
 
 	@Override
-	public String getPrompt() {
-		return prompt;
+	public long getTimeout() {
+		return timeout;
 	}
 
 	@Override
-	public void setPrompt(String prompt) {
-		this.prompt = prompt;
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
 	}
-
-	@Override
-	public String getUserPrompt() {
-		return userPrompt;
-	}
-
-	@Override
-	public void setUserPrompt(String userPrompt) {
-		this.userPrompt = userPrompt;
-	}
-
-	@Override
-	public String getPasswordPrompt() {
-		return passwordPrompt;
-	}
-
-	@Override
-	public void setPasswordPrompt(String passwordPrompt) {
-		this.passwordPrompt = passwordPrompt;
-	}
-
-	@Override
-	public String getEnablePrompt() {
-		return enablePrompt;
-	}
-
-	@Override
-	public void setEnablePrompt(String enablePrompt) {
-		this.enablePrompt = enablePrompt;
-	}
-
-	@Override
-	public String getEnablePasswordPrompt() {
-		return enablePasswordPrompt;
-	}
-
-	@Override
-	public void setEnablePasswordPrompt(String enablePasswordPrompt) {
-		this.enablePasswordPrompt = enablePasswordPrompt;
-	}
-
-	@Override
-	public long getInitConnectionTimeout() {
-		return initConnectionTimeout;
-	}
-
-	@Override
-	public void setInitConnectionTimeout(long initConnectionTimeout) {
-		this.initConnectionTimeout = initConnectionTimeout;
-	}
-
-	@Override
-	public long getGeneralTimeout() {
-		return generalTimeout;
-	}
-
-	@Override
-	public void setGeneralTimeout(long generalTimeout) {
-		this.generalTimeout = generalTimeout;
-	}
-
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	@Override
-	public String getInitConnectionScript() {
-		return initConnectionScript;
-	}
-
-	@Override
-	public void setInitConnectionScript(String initConnectionScript) {
-		this.initConnectionScript = initConnectionScript;
-	}
-
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	@Override
-	public String getEnableCommandScript() {
-		return enableCommandScript;
-	}
-
-	@Override
-	public void setEnableCommandScript(String enableCommandScript) {
-		this.enableCommandScript = enableCommandScript;
-	}
-
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	@Override
-	public String getEnablePasswordScript() {
-		return enablePasswordScript;
-	}
-
-	@Override
-	public void setEnablePasswordScript(String enablePasswordScript) {
-		this.enablePasswordScript = enablePasswordScript;
-	}
-
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	@Override
-	public String getSetupTerminalScript() {
-		return setupTerminalScript;
-	}
-
-	@Override
-	public void setSetupTerminalScript(String setupTerminalScript) {
-		this.setupTerminalScript = setupTerminalScript;
-	}
-
-	@Lob 
-	@Column(columnDefinition="TEXT")
-	@Override
-	public String getFinishConnectionScript() {
-		return finishConnectionScript;
-	}
-
-	@Override
-	public void setFinishConnectionScript(String finishConnectionScript) {
-		this.finishConnectionScript = finishConnectionScript;
-	}
-
-	@Override
-	public String getFinishedResponse() {
-		return finishedResponse;
-	}
-
-	@Override
-	public void setFinishedResponse(String finishedResponse) {
-		this.finishedResponse = finishedResponse;
-	}
-
-	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
-	@JoinColumn(name=PREFERENCES_ID)
-	@Override
-	public CRONIOBOIPreferences getPreferences() {
-		return preferences;
-	}
-
-	@Override
-	public void setPreferences(CRONIOBOIPreferences preferences) {
-		this.preferences = preferences;
-	}
-
+	
 	@Override
 	public void setSaveTime(Date saveTime) {
 		this.saveTime = saveTime;
@@ -281,6 +132,53 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public Date getCreationTime() {
 		return creationTime;
+	}
+	
+	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@JoinColumn(name=INIT_CONNECTION_SCRIPT_ID)
+	@Override
+	public DSLAMBOIFile getInitConnectionScript() {
+		return initConnectionScript;
+	}
+
+	@Override
+	public void setInitConnectionScript(DSLAMBOIFile initConnectionScript) {
+		this.initConnectionScript = initConnectionScript;
+	}
+
+	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@JoinColumn(name=CLOSE_CONNECTION_SCRIPT_ID)
+	@Override
+	public DSLAMBOIFile getCloseConnectionScript() {
+		return closeConnectionScript;
+	}
+
+	@Override
+	public void setCloseConnectionScript(DSLAMBOIFile finishConnectionScript) {
+		this.closeConnectionScript = finishConnectionScript;
+	}
+
+	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
+	@JoinColumn(name=PREFERENCES_ID)
+	@Override
+	public CRONIOBOIPreferences getPreferences() {
+		return preferences;
+	}
+
+	@Override
+	public void setPreferences(CRONIOBOIPreferences preferences) {
+		this.preferences = preferences;
+	}
+	
+	@ElementCollection(targetClass=DSLAMBOVariable.class)
+	@Override
+	public List<DSLAMBOIVariable> getConnectionVariables() {
+		return connectionVariables;
+	}
+
+	@Override
+	public void setConnectionVariables(List<DSLAMBOIVariable> connectionVariables) {
+		this.connectionVariables = connectionVariables;
 	}
 
 	@Version

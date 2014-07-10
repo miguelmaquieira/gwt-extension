@@ -33,9 +33,13 @@ public interface CRONIOBOINode extends Serializable, CRONIOBOINodeDataConstants 
 	Date getCreationTime();
 
 	void setCreationTime(Date creationTime);
+	
+	DSLAMBOIProcess getProcess();
 
 	void setProcess(DSLAMBOIProcess process);
-
-	DSLAMBOIProcess getProcess();
+	
+	CRONIOBOIMachineProperties getMachineProperties();
+	
+	void setMachineProperties(CRONIOBOIMachineProperties machineProperties);
 
 }

@@ -9,6 +9,6 @@ public interface CRONIOBKIMachinePropertiesPersistenceService {
 
 	CRONIOBOIMachineProperties updateMachineProperties(Long machinePropertiesId, CRONIOBOIMachineProperties machineProperties);
 	
-	CRONIOBOIMachineProperties getMachineProperties(Long preferencesId, int machineType);
+	CRONIOBOIMachineProperties getMachineProperties(Long preferencesId, String machineName);
 
 }

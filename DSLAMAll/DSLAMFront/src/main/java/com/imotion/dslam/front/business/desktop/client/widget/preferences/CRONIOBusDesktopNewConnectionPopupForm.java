@@ -8,9 +8,10 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -72,16 +73,16 @@ public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 					connectionNameField.setErrorLabelText(TEXTS.empty_textbox());
 				} else {
 					
-//					CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-//					if (mode == MODE_NEW_CONNECTION) {
-//						saveProjectEvent.setEventType(EVENT_TYPE.NEW_CONNECTION);
-//					} else {
-//						saveProjectEvent.setEventType(EVENT_TYPE.EDIT_PROJECT_PROPERTIES);
-//						saveProjectEvent.setProjectId(getId());
-//					}
-//					saveProjectEvent.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, projectNameField.getText());
-//					saveProjectEvent.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, projectNameField.getSelectedId());
-//					getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
+					CRONIOBusDesktopPreferencesEvent saveConnectionEvent = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
+					if (mode == MODE_NEW_CONNECTION) {
+						saveConnectionEvent.setEventType(EVENT_TYPE.NEW_CONNECTION);
+					} else {
+						saveConnectionEvent.setEventType(EVENT_TYPE.EDIT_CONNECTION);
+						saveConnectionEvent.setConnectionName(getId());
+					}
+					saveConnectionEvent.addElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME			, connectionNameField.getText());
+					
+					getLogicalEventHandlerManager().fireEvent(saveConnectionEvent);
 				}
 			}
 		});
@@ -135,10 +136,9 @@ public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			String 	connectionId 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROJECT_ID		, data);
-			String 	connectionName 	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME	, data);
-			setId(projectId);
-			projectNameField.setText(projectName);
+			String 	connectionName 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME	, data);
+			setId(connectionName);
+			connectionNameField.setText(connectionName);
 		}
 	}
 }

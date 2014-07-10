@@ -2,14 +2,19 @@ package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasPreferencesEventHandlers;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences.DSLAMBusDesktopPreferencesMenu;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopPreferencesToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout {
+public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout, CRONIOBusDesktopHasPreferencesEventHandlers {
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopPreferencesLayout";
 	
@@ -88,17 +93,17 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 	public void postDisplay() {
 		super.postDisplay();
 //		setHeightToDecrease(75);
-//		projectListNavigator.postDisplay();
+//		DSLAMBusDesktopPreferencesMenu.postDisplay();
 	}
 
-//	/**
-//	 * CRONIOBusDesktopHasProjectEventHandlers
-//	 */
-//	@Override
-//	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-//		String srcWindow 	= evt.getSourceWindow();
-//		EVENT_TYPE type		= evt.getEventType();
-//		if (CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER.equals(srcWindow)) {
+	/**
+	 * CRONIOBusDesktopHasPreferencesEventHandlers
+	 */
+	@Override
+	public void dispatchEvent(CRONIOBusDesktopPreferencesEvent evt) {
+		String srcWindow 	= evt.getSourceWindow();
+		EVENT_TYPE type		= evt.getEventType();
+		if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(srcWindow)) {
 //			String projectId	= evt.getProjectId();
 //			String sectionId	= evt.getFinalSectionId();
 //			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
@@ -125,28 +130,31 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 //					toolbar.setSaveProjectEnabled(true);
 //				}
 //				toolbar.setSaveAllProjectsEnabled(true);
-//			} else if (EVENT_TYPE.PROJECT_SAVED.equals(type)) {
-//				sectionHeader.setModified(false);
-//				projectListNavigator.setProjectSaved(projectId);
-//				toolbar.setSaveProjectEnabled(false);
-//			} else if (EVENT_TYPE.PROJECT_CREATED.equals(type)) {
-//				AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
-//				projectListNavigator.addElement(projectData);
-//				toolbar.hideProjectForm();
-//			}
-//		}
-//	}
-//
-//	@Override
-//	public boolean isDispatchEventType(EVENT_TYPE type) {
-//		return EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)
+//			} else 
+			if (EVENT_TYPE.CONNECTION_SAVED.equals(type)) {
+				sectionHeader.setModified(false);
+			//	DSLAMBusDesktopPreferencesMenu.setConnectionSaved();
+				toolbar.setSaveConnectionEnabled(false);
+			} else if (EVENT_TYPE.CONNECTION_CREATED.equals(type)) {
+				AEMFTMetadataElementComposite connectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+				String connectionName = getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, connectionData);
+				preferencesMenu.addConnection(connectionName);
+			//	toolbar.hideProjectForm();
+			}
+		}
+	}
+
+	@Override
+	public boolean isDispatchEventType(EVENT_TYPE type) {
+		return 
+//				EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)
 //				||
-//				EVENT_TYPE.PROJECT_SAVED.equals(type)
+				EVENT_TYPE.CONNECTION_SAVED.equals(type)
 //				||
 //				EVENT_TYPE.SECTION_MODIFIED.equals(type)
-//				||
-//				EVENT_TYPE.PROJECT_CREATED.equals(type);
-//	}
+				||
+				EVENT_TYPE.CONNECTION_CREATED.equals(type);
+	}
 
 
 }

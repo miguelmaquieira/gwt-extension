@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 
 public interface CRONIOBusPreferencesBasePresenterConstants {
 	
-//	public static final String PROJECT_PRESENTER  = "PROJECT_PRESENTER";
+	public static final String PREFERENCES_PRESENTER  = "PREFERENCES_PRESENTER";
 //	
 //	String PROJECT_NAVIGATION_DATA							= "PROJECT_NAVIGATION_DATA";
 //	String PROJECT_NAVIGATION_DATA_PREFFIX					= PROJECT_NAVIGATION_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR;

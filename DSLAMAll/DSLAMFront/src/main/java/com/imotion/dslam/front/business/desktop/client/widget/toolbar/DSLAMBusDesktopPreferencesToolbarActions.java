@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopNewConnectionPopupForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -49,7 +50,7 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 
 			@Override
 			public void onClick(ClickEvent event) {
-				getConecctionPopup().center();
+				getConnectionPopup().center();
 			}
 		});
 		

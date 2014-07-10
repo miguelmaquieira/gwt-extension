@@ -3,6 +3,7 @@ package com.imotion.dslam.bom.data;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
@@ -24,15 +27,16 @@ public class CRONIOBONode implements CRONIOBOINode {
 	
 	private static final long serialVersionUID = 4048739124870495341L;
 	
-	private Long 					nodeId;
-	private String 					nodeName;
-	private String 					nodeIp;
-	private int 					nodeType;
-	private List<DSLAMBOIVariable> variableList;
-	private DSLAMBOIProcess			process;
-	private Date 					savedTime;
-	private Date 					creationTime;
-	private Long					version;
+	private Long 							nodeId;
+	private String 							nodeName;
+	private String 							nodeIp;
+	private int 							nodeType;
+	private List<DSLAMBOIVariable> 			variableList;
+	private DSLAMBOIProcess					process;
+	private CRONIOBOIMachineProperties		machineProperties;
+	private Date 							savedTime;
+	private Date 							creationTime;
+	private Long							version;
 
 	public CRONIOBONode() {}
 	
@@ -122,6 +126,18 @@ public class CRONIOBONode implements CRONIOBOINode {
 	@Override
 	public void setCreationTime(Date creationTime) {
 		this.creationTime = creationTime;
+	}
+	
+	@OneToOne(targetEntity = CRONIOBOMachineProperties.class, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name=MACHINE_PROPERTIES_ID)
+	@Override
+	public CRONIOBOIMachineProperties getMachineProperties() {
+		return machineProperties;
+	}
+
+	@Override
+	public void setMachineProperties(CRONIOBOIMachineProperties machineProperties) {
+		this.machineProperties = machineProperties;
 	}
 
 	@Version

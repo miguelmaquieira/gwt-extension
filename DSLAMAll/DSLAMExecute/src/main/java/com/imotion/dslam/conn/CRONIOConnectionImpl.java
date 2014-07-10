@@ -3,9 +3,9 @@ package com.imotion.dslam.conn;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 
-public class CRONIOConnectionDSLAM extends CRONIOConnectionBase {
+public class CRONIOConnectionImpl extends CRONIOConnectionBase {
 
-	public CRONIOConnectionDSLAM(long processId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
+	public CRONIOConnectionImpl(long processId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
 		super(processId, node, logger);
 		//TODO SSH etc
 	}

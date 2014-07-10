@@ -2,6 +2,7 @@ package com.imotion.dslam.bom;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachinePropertiesDataConstants {
 
@@ -29,58 +30,18 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 
 	void setPassword(String password);
 
-	String getPrompt();
+	long getTimeout();
 
-	void setPrompt(String prompt);
+	void setTimeout(long generalTimeout);
 
-	String getUserPrompt();
+	DSLAMBOIFile getInitConnectionScript();
 
-	void setUserPrompt(String userPrompt);
+	void setInitConnectionScript(DSLAMBOIFile initConnectionScript);
 
-	String getPasswordPrompt();
+	DSLAMBOIFile getCloseConnectionScript();
 
-	void setPasswordPrompt(String passwordPrompt);
+	void setCloseConnectionScript(DSLAMBOIFile finishConnectionScript);
 
-	String getEnablePrompt();
-
-	void setEnablePrompt(String enablePrompt);
-
-	String getEnablePasswordPrompt();
-
-	void setEnablePasswordPrompt(String enablePasswordPrompt);
-
-	long getInitConnectionTimeout();
-
-	void setInitConnectionTimeout(long initConnectionTimeout);
-
-	long getGeneralTimeout();
-
-	void setGeneralTimeout(long generalTimeout);
-
-	String getInitConnectionScript();
-
-	void setInitConnectionScript(String initConnectionScript);
-
-	String getEnableCommandScript();
-
-	void setEnableCommandScript(String enableCommandScript);
-
-	String getEnablePasswordScript();
-
-	void setEnablePasswordScript(String enablePasswordScript);
-
-	String getSetupTerminalScript();
-
-	void setSetupTerminalScript(String setupTerminalScript);
-
-	String getFinishConnectionScript();
-
-	void setFinishConnectionScript(String finishConnectionScript);
-
-	String getFinishedResponse();
-
-	void setFinishedResponse(String finishedResponse);
-	
 	CRONIOBOIPreferences getPreferences();
 
 	void setPreferences(CRONIOBOIPreferences preferences);
@@ -90,5 +51,9 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 	
 	void setCreationTime(Date createdTime);
 	Date getCreationTime();
+
+	List<DSLAMBOIVariable> getConnectionVariables();
+
+	void setConnectionVariables(List<DSLAMBOIVariable> connectionVariables);
 
 }

@@ -96,8 +96,10 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 		preferencesButton.addClickHandler(new ClickHandler() {
 
 			@Override
-			public void onClick(ClickEvent event) {
-				
+			public void onClick(ClickEvent event) {	
+				CRONIOBusDesktopProjectEvent openPreferencesEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+				openPreferencesEvent.setEventType(EVENT_TYPE.OPEN_PREFERENCES_EVENT);
+				getLogicalEventHandlerManager().fireEvent(openPreferencesEvent);
 			}
 		});
 
