@@ -40,7 +40,6 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save_project(), texts.save());
 		root.add(saveButton);
 
-
 		//SAVE ALL
 		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
 		root.add(saveAllButton);

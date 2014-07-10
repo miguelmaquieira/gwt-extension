@@ -49,6 +49,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					projectProcessFlowEvent(evt);
 				} else if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(sourceWindow)) {
 					preferencesFlowEvent();
+				} else if (CRONIOBusPreferencesBasePresenterConstants.SECTION_TYPE_MACHINE_PROPERTIES.equals(sourceWindow)) {
+					machinesFlowEvent();
 				}
 			}
 		}
@@ -78,6 +80,10 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 	
 	private void preferencesFlowEvent() {
 		History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES);
+	}
+	
+	private void machinesFlowEvent() {
+		History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES);
 	}
 	
 	private void projectProcessFlowEvent(AEGWTFlowEvent evt) {
