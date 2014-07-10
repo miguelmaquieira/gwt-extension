@@ -40,7 +40,6 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 
 		//MENU -> Machines
 		menuMachines 		= new AEGWTBootstrapTreeMenuItem(TEXTS.machines());
-		menuMachines.setId(SECTION_TYPE_MACHINE_PROPERTIES);
 		menuMachines.setCloseMenu();
 		menu.addWidget(menuMachines);
 	}
@@ -48,27 +47,23 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 	public void addConnection(String connectionName) {
 		//MENU -> Machines -> DSLAM
 		AEGWTBootstrapTreeMenuItem connection = new AEGWTBootstrapTreeMenuItem(connectionName);
-		connection.setContainerId(menuMachines.getId());
-		connection.setId(connectionName);
 		connection.setCloseMenu();
 		menuMachines.addWidget(connection);
-		
-		String section = connection.getContainerId() + "." + connection.getId(); 
 
 		//MENU -> Machines -> DSLAM --> Connection Script
-		CRONIOBusDesktopPreferencesMenuFinalItem connectionDslamScript 		= new CRONIOBusDesktopPreferencesMenuFinalItem(section, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_SCRIPT		,TEXTS.connection_script(), this);
+		CRONIOBusDesktopPreferencesMenuFinalItem connectionDslamScript 		= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_SCRIPT		,TEXTS.connection_script(), this);
 		connection.addWidget(connectionDslamScript);
 
 		//MENU -> Machines -> DSLAM --> Disconnection Script
-		CRONIOBusDesktopPreferencesMenuFinalItem disconnectionDslamScript 	= new CRONIOBusDesktopPreferencesMenuFinalItem(section, CRONIOBOIMachinePropertiesDataConstants.MACHINE_DISCONNECTION_SCRIPT	,TEXTS.disconnection_script(), this);
+		CRONIOBusDesktopPreferencesMenuFinalItem disconnectionDslamScript 	= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_DISCONNECTION_SCRIPT	,TEXTS.disconnection_script(), this);
 		connection.addWidget(disconnectionDslamScript);
 
 		//MENU -> Machines -> DSLAM --> Machine Variables
-		CRONIOBusDesktopPreferencesMenuFinalItem variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(section, CRONIOBOIMachinePropertiesDataConstants.MACHINE_VARIABLES	,TEXTS.variables(), this);
+		CRONIOBusDesktopPreferencesMenuFinalItem variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_VARIABLES	,TEXTS.variables(), this);
 		connection.addWidget(variablesMachine);
 
 		//MENU -> Machines -> DSLAM --> Connection Config
-		CRONIOBusDesktopPreferencesMenuFinalItem connectionConfig 			= new CRONIOBusDesktopPreferencesMenuFinalItem(section, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_CONFIG	,TEXTS.config(), this);
+		CRONIOBusDesktopPreferencesMenuFinalItem connectionConfig 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIMachinePropertiesDataConstants.MACHINE_CONNECTION_CONFIG	,TEXTS.config(), this);
 		connection.addWidget(connectionConfig);
 	}
 
