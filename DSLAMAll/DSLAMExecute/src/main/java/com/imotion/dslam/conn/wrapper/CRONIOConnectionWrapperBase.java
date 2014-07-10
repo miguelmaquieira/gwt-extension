@@ -4,19 +4,21 @@ import java.io.IOException;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.conn.CRONIOConnectionCheckedException;
+import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 
 
 public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
 
-	private CRONIOConnectionStreams connectionStreams;
-	private String 		user;
-	private String 		password;
-	private int		timeout;
-	private String		ip;
+	private CRONIOConnectionStreams 	connectionStreams;
+	private CRONIOBOINode 				node;
+	private String 						user;
+	private String 						password;
+	private int						timeout;
+	private String						ip;
 	
 	@Override
-	public void connect(CRONIOBOINode node) throws CRONIOConnectionCheckedException {
+	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
+		this.node 	= node;
 		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
 		user		= machineProperties.getUsername();
 		password	= machineProperties.getPassword();
@@ -26,18 +28,18 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	
 	@Override
 	public void disconnect() {
-		// TODO Auto-generated method stub
-
+		runDisconnectScript();
+		connectionStreams.closeStreams();
 	}
 	
 	@Override
-	public void sendCommand(String command) {
-		connectionStreams.sendCommand(command);
+	public String sendCommand(String command) throws IOException {
+		return connectionStreams.sendCommand(command);
 	}
-
+	
 	@Override
-	public String getResponse() throws IOException {
-		return connectionStreams.getResponse();
+	public String readResponseUntil(String pattern) throws IOException {
+		return connectionStreams.readUntil(pattern);
 	}
 	
 	/**
@@ -67,6 +69,18 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 
 	protected String getIp() {
 		return ip;
+	}
+	
+	protected void runConnectScript() throws IOException {
+		//TODO:
+	}
+	
+	protected void runDisconnectScript() {
+		//TODO:
+	}
+
+	protected CRONIOBOINode getNode() {
+		return node;
 	}
 
 }

@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import org.apache.commons.net.telnet.TelnetClient;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.conn.CRONIOConnectionCheckedException;
+import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 
 public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
 
@@ -15,32 +15,40 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 
 	@SuppressWarnings("resource")
 	@Override
-	public void connect(CRONIOBOINode node) throws CRONIOConnectionCheckedException {
+	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
 		super.connect(node);
 
 		telnet = new TelnetClient();
 		try {
 			telnet.connect(getIp());
 
-
 			InputStream isIn	= telnet.getInputStream();
 			PrintStream osOut	= new PrintStream(telnet.getOutputStream());
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
 
-			connectionStreams.readUntil("login: ");
-			sendCommand(getUser());
-			connectionStreams.readUntil("password: ");
-			sendCommand(getPassword());
+			runConnectScript();
 		} catch (IOException e) {
-			throw new CRONIOConnectionCheckedException(e);
+			throw new CRONIOConnectionUncheckedException(e);
 		}
 	}
 
 	@Override
 	public void disconnect() {
 		super.disconnect();
-		getConnectionStreams().closeStreams();
+	}
+	
+	/**
+	 * PROTECTED
+	 */
+	
+	@Override
+	protected void runConnectScript() throws IOException {
+		getConnectionStreams().readUntil("login: ");
+		sendCommand(getUser());
+		getConnectionStreams().readUntil("password: ");
+		sendCommand(getPassword());
+		super.runConnectScript();
 	}
 
 }

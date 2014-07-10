@@ -5,8 +5,9 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Properties;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.conn.CRONIOConnectionCheckedException;
+import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -20,7 +21,7 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 	
 	@SuppressWarnings("resource")
 	@Override
-	public void connect(CRONIOBOINode node) throws CRONIOConnectionCheckedException {
+	public void connect(CRONIOBOINode node) {
 		super.connect(node);
 		Properties	sessionProperties 	= new Properties();
 		sessionProperties.put("StrictHostKeyChecking", "no");
@@ -39,17 +40,27 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 			
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
+			
+			runConnectScript();
 		} catch (JSchException | IOException e) {
-			throw new CRONIOConnectionCheckedException(e);
+			throw new CRONIOConnectionUncheckedException(e);
 		}
 	}
 
 	@Override
 	public void disconnect() {
 		super.disconnect();
-		getConnectionStreams().closeStreams();
 		channel.disconnect();
 		session.disconnect();
 	}
-
+	/**
+	 * PROTECTED
+	 */
+	@Override
+	protected void runConnectScript() throws IOException {
+		CRONIOBOIMachineProperties machineProperties = getNode().getMachineProperties();
+		String promptRegEx 	= machineProperties.getPromptRegEx();
+		readResponseUntil(promptRegEx);
+		super.runConnectScript();
+	}
 }
