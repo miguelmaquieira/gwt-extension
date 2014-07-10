@@ -14,11 +14,14 @@ public class CRONIOConnectionWrapperTest {
 	public static void main(String[] args) throws IOException {
 		
 		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(1, getNodeData(), null);
-		CRONIOIExecutionData responseData = connection.executeCommand("ls");
+		connection.openConnection();
 		
+		CRONIOIExecutionData responseData = connection.executeCommand("ls");
 		System.out.println(responseData.getSourceCommand());
 		System.out.println(responseData.getResponse());
 		System.out.println(responseData.getPrompt());
+		
+		connection.closeConnection();
 	}
 	
 	private static CRONIOBOINode getNodeData() {
@@ -27,9 +30,10 @@ public class CRONIOConnectionWrapperTest {
 		machineProperties.setPassword(".o7ws5mb");
 		machineProperties.setTimeout(3000);
 		machineProperties.setProtocolType(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH);
-		machineProperties.setPromptRegEx("~\\$");
+		machineProperties.setPromptRegEx("\\S+@\\S+:~\\$\\s");
 		
 		CRONIOBOINode node = new CRONIOBONode();
+		node.setNodeId(34l);
 		node.setNodeIp("127.0.0.1");
 		node.setMachineProperties(machineProperties);
 		

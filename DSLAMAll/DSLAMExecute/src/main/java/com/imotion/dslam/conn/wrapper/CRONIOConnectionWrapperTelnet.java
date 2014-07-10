@@ -22,16 +22,12 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 		try {
 			telnet.connect(getIp());
 
-
 			InputStream isIn	= telnet.getInputStream();
 			PrintStream osOut	= new PrintStream(telnet.getOutputStream());
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
 
-			connectionStreams.readUntil("login: ");
-			sendCommand(getUser());
-			connectionStreams.readUntil("password: ");
-			sendCommand(getPassword());
+			runConnectScript();
 		} catch (IOException e) {
 			throw new CRONIOConnectionUncheckedException(e);
 		}
@@ -40,6 +36,19 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 	@Override
 	public void disconnect() {
 		super.disconnect();
+	}
+	
+	/**
+	 * PROTECTED
+	 */
+	
+	@Override
+	protected void runConnectScript() throws IOException {
+		getConnectionStreams().readUntil("login: ");
+		sendCommand(getUser());
+		getConnectionStreams().readUntil("password: ");
+		sendCommand(getPassword());
+		super.runConnectScript();
 	}
 
 }

@@ -9,14 +9,16 @@ import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 
 public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
 
-	private CRONIOConnectionStreams connectionStreams;
-	private String 		user;
-	private String 		password;
-	private int		timeout;
-	private String		ip;
+	private CRONIOConnectionStreams 	connectionStreams;
+	private CRONIOBOINode 				node;
+	private String 						user;
+	private String 						password;
+	private int						timeout;
+	private String						ip;
 	
 	@Override
 	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
+		this.node 	= node;
 		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
 		user		= machineProperties.getUsername();
 		password	= machineProperties.getPassword();
@@ -26,6 +28,7 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	
 	@Override
 	public void disconnect() {
+		runDisconnectScript();
 		connectionStreams.closeStreams();
 	}
 	
@@ -66,6 +69,18 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 
 	protected String getIp() {
 		return ip;
+	}
+	
+	protected void runConnectScript() throws IOException {
+		//TODO:
+	}
+	
+	protected void runDisconnectScript() {
+		//TODO:
+	}
+
+	protected CRONIOBOINode getNode() {
+		return node;
 	}
 
 }

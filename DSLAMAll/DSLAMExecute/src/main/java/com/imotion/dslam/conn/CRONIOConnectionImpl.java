@@ -10,15 +10,17 @@ import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperTelnet;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOConnectionImpl implements CRONIOIConnection {
-	
+
 	private String						connectionId;
 	private CRONIOBOINode				node;
 	private CRONIOIExecutionLogger		logger;
 	private CRONIOConnectionIWrapper	connectionWrapper;
 	private Pattern 					patternPrompt;
 	private String						promptRegEx;
+	private int 						protocolType;
 
 	public CRONIOConnectionImpl(long processId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
 		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
@@ -27,7 +29,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		this.logger			= logger;
 		this.promptRegEx 	= machineProperties.getPromptRegEx();
 		this.patternPrompt 	= Pattern.compile(promptRegEx);
-		int protocolType = machineProperties.getProtocolType();
+		this.protocolType 	= machineProperties.getProtocolType();
 		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
 			connectionWrapper = new CRONIOConnectionWrapperSSH();
 		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
@@ -36,45 +38,53 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	}
 	
 	@Override
+	public void openConnection() throws IOException {
+		connectionWrapper.connect(node);
+	}
+
+	@Override
 	public CRONIOIExecutionData executeCommand(String command) {
 		CRONIOIExecutionData executionData = null;
 		try {
 			connectionWrapper.sendCommand(command);
 			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
-			
-			String prompt 	= getLastPrompt(fullResponse);
-			String response	= fullResponse.replace(prompt, "");
-			executionData	= new CRONIOExecutionData(command, prompt, response);
-			if (getLogger() != null) {
-				getLogger().log(getConnectionId(), getNode(), executionData);
+			if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
+				String prompt 	= getLastPrompt(fullResponse);
+				String response	= fullResponse.replace(prompt, "");
+				executionData	= new CRONIOExecutionData(command, prompt, response);
+				if (getLogger() != null) {
+					getLogger().log(getConnectionId(), getNode(), executionData);
+				}
+			} else {
+				throw new CRONIOConnectionUncheckedException("No response received");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return executionData;
 	}
-	
+
 	@Override
 	public void closeConnection() {
 		connectionWrapper.disconnect();
 	}
-	
+
 	/**
 	 *	PRIVATE 
 	 */
-	
+
 	private String getConnectionId() {
 		return connectionId;
 	}
-	
+
 	private CRONIOBOINode getNode() {
 		return node;
 	}
-	
+
 	private CRONIOIExecutionLogger getLogger() {
 		return logger;
 	}
-	
+
 	private String generateConnectionId(long processId, long nodeId) {
 		StringBuilder connectionIdSB = new StringBuilder();
 		connectionIdSB.append(processId);
@@ -82,7 +92,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		connectionIdSB.append(nodeId);
 		return connectionIdSB.toString();
 	}
-	
+
 	private String getLastPrompt(String fullResponse) {
 		String prompt = null;
 		Matcher	matcher = patternPrompt.matcher(fullResponse);

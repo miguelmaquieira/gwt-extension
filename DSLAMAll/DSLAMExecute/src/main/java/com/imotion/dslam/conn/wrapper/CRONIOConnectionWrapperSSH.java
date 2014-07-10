@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Properties;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.conn.CRONIOConnectionUncheckedException;
 import com.jcraft.jsch.Channel;
@@ -39,6 +40,8 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 			
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
+			
+			runConnectScript();
 		} catch (JSchException | IOException e) {
 			throw new CRONIOConnectionUncheckedException(e);
 		}
@@ -50,5 +53,14 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 		channel.disconnect();
 		session.disconnect();
 	}
-
+	/**
+	 * PROTECTED
+	 */
+	@Override
+	protected void runConnectScript() throws IOException {
+		CRONIOBOIMachineProperties machineProperties = getNode().getMachineProperties();
+		String promptRegEx 	= machineProperties.getPromptRegEx();
+		readResponseUntil(promptRegEx);
+		super.runConnectScript();
+	}
 }
