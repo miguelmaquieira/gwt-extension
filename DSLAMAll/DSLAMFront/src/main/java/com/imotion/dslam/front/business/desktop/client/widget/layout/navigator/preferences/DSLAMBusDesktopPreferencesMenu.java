@@ -17,13 +17,13 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapTreeMenu 				menu;
-	private AEGWTBootstrapTreeMenuItem 			menuConnection;
-//	private AEGWTBootstrapTreeMenuItem		 	menuScript;
+	private AEGWTBootstrapTreeMenuItem 			menuMachines;
+	private AEGWTBootstrapTreeMenuItem		 	dslamMachine;
 //	private AEGWTBootstrapTreeMenuItem 			menuProcess;
 //	private AEGWTBootstrapTreeMenuItem 			menuExecution;
-	private CRONIOBusDesktopPreferencesMenuFinalItem 	connectionDslam;
-//	private CRONIOBusDesktopPreferencesMenuFinalItem 	disconnection;
-//	private CRONIOBusDesktopProjectNavigatorFinalItem 	variableProcess;
+	private CRONIOBusDesktopPreferencesMenuFinalItem 	connectionDslamScript;
+	private CRONIOBusDesktopPreferencesMenuFinalItem 	disconnectionDslamScript;
+	private CRONIOBusDesktopPreferencesMenuFinalItem 	variablesMachine;
 //	private CRONIOBusDesktopProjectNavigatorFinalItem 	scheduleProcess;
 //	private CRONIOBusDesktopProjectNavigatorFinalItem 	propertiesProcess;
 //	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesProcess;
@@ -38,55 +38,32 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		menu 				= new AEGWTBootstrapTreeMenu();
 		root.add(menu);
 
-		//MENU -> Connection
-		menuConnection 		= new AEGWTBootstrapTreeMenuItem(TEXTS.connection());
-		menuConnection.setCloseMenu();
-		menu.addWidget(menuConnection);
+		//MENU -> Machines
+		menuMachines 		= new AEGWTBootstrapTreeMenuItem(TEXTS.machines());
+		menuMachines.setCloseMenu();
+		menu.addWidget(menuMachines);
 
-//		//MENU -> Project -> Script
-//		menuScript 			= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
-//		menuScript.setCloseMenu();
-//		menuProject.addWidget(menuScript);
+		//MENU -> Machines -> DSLAM
+		dslamMachine 			= new AEGWTBootstrapTreeMenuItem(TEXTS.dslam());
+		dslamMachine.setCloseMenu();
+		menuMachines.addWidget(dslamMachine);
 
-		//MENU -> Connection -> DSLAM
-		connectionDslam 	= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_CONNECTION, CRONIOBOIPreferences.PREFERENCES_CONNECTION_DSLAM		,TEXTS.dslam(), this);
-		menuConnection.addWidget(connectionDslam);
+		//MENU -> Machines -> DSLAM --> Connection Script
+		connectionDslamScript 		= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_CONNECTION_SCRIPT, CRONIOBOIPreferences.PREFERENCES_CONNECTION_DSLAM		,TEXTS.connection_script(), this);
+		dslamMachine.addWidget(connectionDslamScript);
 
-//		//MENU -> Connections -> Disconnection
-//		disconnection 		= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_TYPE_CONNECTIONS, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.disconection(),this);
-//		menuConnections.addWidget(disconnection);
-
+		//MENU -> Machines -> DSLAM --> Disconnection Script
+	//	disconnectionDslamScript 	= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_DISCONNECTION_SCRIPT, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.disconnection_script(),this);
+		dslamMachine.addWidget(disconnectionDslamScript);
 		
-//		menuProcess 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
-//		menuProcess.setCloseMenu();
-//		menuProject.addWidget(menuProcess);
-//
-//		//MENU -> Project  -> Process -> Variables
-//		variableProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
-//		menuProcess.addWidget(variableProcess);
-//
-//		//MENU -> Project  -> Process -> Schedule
-//		scheduleProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
-//		menuProcess.addWidget(scheduleProcess);
-//
-//		//MENU -> Project  -> Process -> Properties
-//		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
-//		menuProcess.addWidget(propertiesProcess);
-//
-//		//MENU -> Project  -> Process -> Nodes
-//		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST			,TEXTS.nodes(), this);
-//		menuProcess.addWidget(nodesProcess);
-//
-//		//MENU -> Project  -> Execution
-//		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.execution());
-//		menuExecution.setCloseMenu();
-//		menuProject.addWidget(menuExecution);
-//		
-//		//MENU -> Project -> Execution -> Logs
-//		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
-//		menuExecution.addWidget(nodesLog);
-//
-//		menu.addSeparator();
+		//MENU -> Machines -> DSLAM --> Machine Variables
+	//	variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_MACHINE_VARIABLES, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.variables(),this);
+		dslamMachine.addWidget(variablesMachine);
+		
+		//MENU -> Machines -> DSLAM --> Connection Protocol
+	//	variablesMachine 			= new CRONIOBusDesktopPreferencesMenuFinalItem(SECTION_MACHINE_VARIABLES, CRONIOBOIPreferences.PROJECT_ROLLBACK_SCRIPT	,TEXTS.variables(),this);
+		dslamMachine.addWidget(variablesMachine);
+		
 	}
 
 //	public void setProjectSectionModified(String sectionId) {

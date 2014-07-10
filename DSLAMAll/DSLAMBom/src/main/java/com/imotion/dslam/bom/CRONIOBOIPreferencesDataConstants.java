@@ -6,13 +6,13 @@ public interface CRONIOBOIPreferencesDataConstants {
 	
 	String PREFERENCES_ID 						= "preferencesId";
 	String PREFERENCES_MACHINE_PROPERTIES_LIST	= "machinePropertiesList";
-	String SAVED_TIME			= "savedTime";
-	String CREATION_TIME		= "creationTime";
+	String SAVED_TIME							= "savedTime";
+	String CREATION_TIME						= "creationTime";
 
-	String PREFERENCES_DATA		= "preferencesData";
+	String PREFERENCES_DATA						= "preferencesData";
 	
 	
-	String PREFERENCES_CONNECTION_DSLAM		= "preferencesConnectionDslam";
+	String PREFERENCES_CONNECTION_DSLAM			= "preferencesConnectionDslam";
 	
 	
 }
