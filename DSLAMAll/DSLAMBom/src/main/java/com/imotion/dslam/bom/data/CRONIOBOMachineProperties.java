@@ -30,7 +30,7 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private int					protocolType;
 	private String 					username;
 	private String 					password;
-	private long					timeout;
+	private int					timeout;
 	private Date					saveTime;
 	private Date					creationTime;
 	private List<DSLAMBOIVariable>	connectionVariables;
@@ -105,12 +105,12 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	}
 
 	@Override
-	public long getTimeout() {
+	public int getTimeout() {
 		return timeout;
 	}
 
 	@Override
-	public void setTimeout(long timeout) {
+	public void setTimeout(int timeout) {
 		this.timeout = timeout;
 	}
 	
