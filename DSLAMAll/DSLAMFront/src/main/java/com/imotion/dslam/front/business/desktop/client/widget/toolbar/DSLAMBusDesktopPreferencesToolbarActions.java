@@ -35,17 +35,14 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 		root.add(newConnectionButton); 
 
 		//SAVE
-		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save_project(), texts.save());
+		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		root.add(saveButton);
-
 
 		//EXIT
 		closeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, texts.exit(), texts.exit());
 		root.add(closeButton);
 		closeButton.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_CLOSE_BUTTON);
-		closeButton.setVisible(false);
 		
-
 		newConnectionButton.addClickHandler(new ClickHandler() {
 
 			@Override

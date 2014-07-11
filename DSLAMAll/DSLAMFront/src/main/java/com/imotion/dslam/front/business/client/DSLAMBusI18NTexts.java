@@ -209,5 +209,4 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	String create_connection();
 	
 	
-	
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -133,7 +134,7 @@ public class DSLAMBUBomToMetadataConversor {
 	}
 	
 	/**
-	 * Variable
+	 * VARIABLE
 	 */
 	
 	public  static AEMFTMetadataElementComposite fromVariable(DSLAMBOIVariable variable) {
@@ -236,6 +237,70 @@ public class DSLAMBUBomToMetadataConversor {
 			}
 		}
 		return dataNodeList;
+	}
+	
+	/**
+	 * MACHINE PROPERTIES
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromMachineProperties(CRONIOBOIMachineProperties connection) {
+		AEMFTMetadataElementComposite data = null;
+		if (connection != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_ID		, connection.getMachinePropertiesId());
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connection.getMachineName());
+			data.addElement(CRONIOBOIMachineProperties.CREATION_TIME	, connection.getCreationTime());
+			data.addElement(CRONIOBOIMachineProperties.SAVED_TIME		, connection.getSaveTime());
+			
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromConnectionConfig(CRONIOBOIMachineProperties connection) {
+		AEMFTMetadataElementComposite data = null;
+		if (connection != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_DESCRIPTION				, connection.getMachineDescription());
+			data.addElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE					, connection.getProtocolType());
+			data.addElement(CRONIOBOIMachineProperties.USERNAME							, connection.getUsername());
+			data.addElement(CRONIOBOIMachineProperties.PASSWORD							, connection.getPassword());
+			data.addElement(CRONIOBOIMachineProperties.TIMEOUT							, connection.getTimeout());
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromMachinePropertiesFull(CRONIOBOIMachineProperties connection) {
+		AEMFTMetadataElementComposite data = null;
+		if (connection != null) {
+			data = fromMachineProperties(connection);
+			
+			DSLAMBOIFile 	connectionScript 		= connection.getInitConnectionScript();
+			DSLAMBOIFile 	disconnectionScript 	= connection.getCloseConnectionScript();
+			List<DSLAMBOIVariable> variableList 	= connection.getConnectionVariables();
+			AEMFTMetadataElementComposite connectionScriptData 		= fromFile(connectionScript);
+			AEMFTMetadataElementComposite disconnectionScriptData 	= fromFile(disconnectionScript);
+			AEMFTMetadataElementComposite variableListData			= fromVariableList(variableList);
+			AEMFTMetadataElementComposite connectionConfigData		= fromConnectionConfig(connection);
+			
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT		, connectionScriptData);
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT		, disconnectionScriptData);
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_VARIABLES				, variableListData);
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG		, connectionConfigData);
+			
+		}
+		return data;
+	}
+
+	public  static AEMFTMetadataElementComposite fromMachinePropertiesList(List<CRONIOBOIMachineProperties> connectionList) {
+		AEMFTMetadataElementComposite dataConnectionList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(connectionList)) {
+			for (CRONIOBOIMachineProperties connection : connectionList) {
+				dataConnectionList.addElement(connection.getMachineName(), fromMachineProperties(connection));
+			}
+		}
+		return dataConnectionList;
 	}
 	
 

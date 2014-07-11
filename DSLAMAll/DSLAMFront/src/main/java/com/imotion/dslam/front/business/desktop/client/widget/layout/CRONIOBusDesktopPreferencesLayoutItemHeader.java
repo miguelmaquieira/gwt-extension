@@ -31,7 +31,7 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 		
 		modifiedIndicator = new AEGWTLabel("");
 		infoZone.add(modifiedIndicator);
-		modifiedIndicator.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR);
+		modifiedIndicator.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR);
 		
 		sectionName = new AEGWTLabel("Section");
 		infoZone.add(sectionName);
@@ -39,11 +39,11 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 		
 		AEGWTLabel separator = new AEGWTLabel("-");
 		infoZone.add(separator);
-		separator.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR);
+		separator.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR);
 		
 		finalSectionName = new AEGWTLabel("FinalSection");
 		infoZone.add(finalSectionName);
-		finalSectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME);
+		finalSectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME);
 	}
 	
 	public void setProyectName(String finalSectionNameStr) {

@@ -6,7 +6,7 @@ import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
 
 public interface CRONIOBUIPreferencesBusinessService extends DSLAMBUIBusinessService {
 
-	void addPreferences();
+	void addConnection();
 
 	void updatePreferences();
 

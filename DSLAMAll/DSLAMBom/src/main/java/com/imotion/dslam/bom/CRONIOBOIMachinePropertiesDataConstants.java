@@ -3,8 +3,16 @@ package com.imotion.dslam.bom;
 public interface CRONIOBOIMachinePropertiesDataConstants {
 	
 	//attributes
-	String PREFERENCES	= "preferences";
-	String MACHINE_NAME = "machineName";
+	String PREFERENCES			= "preferences";
+	String MACHINE_ID 			= "machineId";
+	String MACHINE_NAME 		= "machineName";
+	String MACHINE_DESCRIPTION 	= "machineDescription";
+	String PROTOCOL_TYPE		= "protocolType";
+	String USERNAME				= "username";
+	String PASSWORD				= "password";
+	String TIMEOUT				= "timeout";
+	String SAVED_TIME			= "savedTime";
+	String CREATION_TIME		= "creationTime";
 	
 	//relations
 	String PREFERENCES_ID				= "preferencesId";
@@ -16,5 +24,9 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String MACHINE_DISCONNECTION_SCRIPT = "MACHINE_DISCONNECTION_SCRIPT";
 	String MACHINE_VARIABLES 			= "MACHINE_VARIABLES";
 	String MACHINE_CONNECTION_CONFIG 	= "MACHINE_CONNECTION_CONFIG";
-
+	
+	//DEFAULTS
+	String CONNECTION_SCRIPT_DEFAULT_NAME			= "Connection Script";
+	String DISCONNECTION_SCRIPT_DEFAULT_NAME 		= "Disconnection Script";
+	String CONNECTION_VARIABLE_LIST_DEFAULT_NAME 	= "Connection Variable List";
 }

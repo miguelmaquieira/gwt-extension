@@ -175,5 +175,15 @@
 				</SubService>
 			</SubServiceList>
 		</Service>
+		<Service Name="SRV_BUS_PREFERENCES">
+			<Description>Preferences business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUPreferencesBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="ADD_CONNECTION">
+					<Descriptor>addConnection</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
 	</ServiceList>
 </Application>

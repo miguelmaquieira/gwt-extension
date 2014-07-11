@@ -1,61 +1,68 @@
 package com.imotion.dslam.business.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
+import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
+import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
+import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
 public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase implements CRONIOBUIPreferencesBusinessService, CRONIOBUIPreferencesBusinessServiceConstants, CRONIOBUIPreferencesBusinessServiceTrace {
 
 	private static final long serialVersionUID = -5226864913741297047L;
 
 	@Override
-	public void addPreferences() {
-//		//ContextIn
-//		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
-//		String 							projectName		= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
-//		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
-//		Date 							creationTime 	= new Date();
-//		
-//		//MainScript
-//		DSLAMBOIFile mainScript = new DSLAMBOFile();
-//		mainScript.setContentType(machineType);
-//		mainScript.setSavedTime(creationTime);
-//		mainScript.setCreationTime(creationTime);
-//		mainScript.setFilename(DSLAMBOIProject.PROJECT_MAIN_SCRIPT_DEFAULT_NAME);
-//		
-//		//RollbackScript
-//		DSLAMBOIFile rollBackScript = new DSLAMBOFile();
-//		rollBackScript.setContentType(machineType);
-//		rollBackScript.setSavedTime(creationTime);
-//		rollBackScript.setCreationTime(creationTime);
-//		rollBackScript.setFilename(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT_DEFAULT_NAME);
-//		
-//		//Process
-//		DSLAMBOIProcess process = new DSLAMBOProcess();
-//		process.setProcessName(DSLAMBOIProject.PROJECT_PROCESS_DEFAULT_NAME);
-//		process.setCreationTime(creationTime);
-//		process.setSavedTime(creationTime);
-//
-//		//Project
-//		DSLAMBOIProject project = new DSLAMBOProject();
-//		project.setProjectName(projectName);
-//		project.setMachineType(machineType);
-//		project.setMainScript(mainScript);
-//		project.setRollBackScript(rollBackScript);
-//		project.setProcess(process);
-//		project.setCreationTime(creationTime);
-//		project.setSavedTime(creationTime);
-//		project = getProjectPersistence().addProject(project);
-//
-//		//init-trace
-//		traceNewItemPersistent(METHOD_ADD_PROJECT, DSLAMBOIProject.class.getSimpleName(), String.valueOf(project.getProjectId()));
-//		//end-trace
-//
-//		//ContextOut
-//		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
-//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-//		contextOut.addElement(PROJECT_DATA, projectDataElement);
+	public void addConnection() {
+		//ContextIn
+		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
+		String 							connectionName	= getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME			, contextIn);
+		Date 							creationTime 	= new Date();
+		
+		//Debemos conseguir el preferences Id del usuario, de momento puesto a pelo
+		long preferencesId = (Long) null;
+		
+		//InitScript
+		DSLAMBOIFile connectionScript = new DSLAMBOFile();
+		connectionScript.setSavedTime(creationTime);
+		connectionScript.setCreationTime(creationTime);
+		connectionScript.setFilename(CRONIOBOIMachineProperties.CONNECTION_SCRIPT_DEFAULT_NAME);
+		
+		//disconnectionScript
+		DSLAMBOIFile disconnectionScript = new DSLAMBOFile();
+		disconnectionScript.setSavedTime(creationTime);
+		disconnectionScript.setCreationTime(creationTime);
+		disconnectionScript.setFilename(CRONIOBOIMachineProperties.DISCONNECTION_SCRIPT_DEFAULT_NAME);
+		
+		//VariableList
+		List<DSLAMBOIVariable> variableList = new ArrayList<>();
+
+		//MachineProperties
+		CRONIOBOIMachineProperties connection = new CRONIOBOMachineProperties();
+		connection.setMachineName(connectionName);
+		connection.setInitConnectionScript(connectionScript);
+		connection.setCloseConnectionScript(disconnectionScript);
+		connection.setConnectionVariables(variableList);
+		connection.setCreationTime(creationTime);
+		connection.setSaveTime(creationTime);
+		connection = getMachinePropertiesPersistence().addMachineProperties(connection, preferencesId);
+
+		//init-trace
+		traceNewItemPersistent(METHOD_ADD_CONNECTION, CRONIOBOIMachineProperties.class.getSimpleName(), connection.getMachineName());
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite connectionDataElement = DSLAMBUBomToMetadataConversor.fromMachineProperties(connection);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(CONNECTION_DATA, connectionDataElement);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -35,7 +34,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	public void dispatchEvent(CRONIOBusDesktopPreferencesEvent evt) {
 		EVENT_TYPE evtTyp = evt.getEventType();
 		if (EVENT_TYPE.NEW_CONNECTION.equals(evtTyp)) {
-			String	connectionName 	= evt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME);
+			String	connectionName 	= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
 			createConnection(connectionName);
 		}
 	}
@@ -58,6 +57,17 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		Widget viewAsWidget = getView().asWidget();
 		layoutContainer.setLayoutContent(viewAsWidget);
 		preferencesLayout = (CRONIOBusDesktopPreferencesLayout) layoutContainer.getCurrentLayout();
+	}
+	
+	@Override
+	protected void viewAdded() {
+		super.viewAdded();
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasPreferencesEventHandlers.TYPE, this);
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasPreferencesEventHandlers.TYPE, getPreferencesLayout());
+
+//		String currentProjectId			= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+//		String currentFinalSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
+//		openFinalSection(true, currentProjectId, currentFinalSectionId);
 	}
 	
 	/**
@@ -120,5 +130,9 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		connectionSavedEvt.setEventType(EVENT_TYPE.CONNECTION_SAVED);
 		connectionSavedEvt.setConnectionName(connectionName);
 		getLogicalEventHandlerManager().fireEvent(connectionSavedEvt);
+	}
+	
+	private CRONIOBusDesktopPreferencesLayout getPreferencesLayout() {
+		return preferencesLayout;
 	}
 }

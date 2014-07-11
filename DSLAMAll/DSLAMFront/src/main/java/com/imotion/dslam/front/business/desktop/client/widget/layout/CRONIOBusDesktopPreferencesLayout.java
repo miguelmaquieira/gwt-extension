@@ -1,8 +1,10 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasPreferencesEventHandlers;
@@ -13,10 +15,12 @@ import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDe
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
 public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout, CRONIOBusDesktopHasPreferencesEventHandlers {
 
-	public 		final static String 	NAME 			= "CRONIOBusDesktopPreferencesLayout";
+	public 	final static String 	NAME 		= "CRONIOBusDesktopPreferencesLayout";
+	private static DSLAMBusI18NTexts TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 										root;
 	private DSLAMBusDesktopPreferencesToolbar				toolbar;
@@ -32,21 +36,31 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		toolbar = new DSLAMBusDesktopPreferencesToolbar();
 		root.add(toolbar);
 		
-		
-
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
 		root.add(bottomZone);
 		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_BOTTOM_ZONE);
 
-		//Bottom Zone - Projectlist zone
+		//Bottom Zone - PreferencesMenu zone
 		FlowPanel preferencesMenuZone = new FlowPanel();
 		bottomZone.add(preferencesMenuZone);
 		preferencesMenuZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
 		preferencesMenuZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_MENU_ZONE);
+		
+		FlowPanel menu = new FlowPanel();
+		menu.addStyleName(DSLAMBusDesktopIStyleConstants.LIST);
+		preferencesMenuZone.add(menu);
+		
+		//Header
+		FlowPanel headerZone = new FlowPanel();
+		menu.add(headerZone);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_ZONE_HEADER);
+				
+		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.preferences());
+		headerZone.add(headerLabel);
 
 		preferencesMenu = new DSLAMBusDesktopPreferencesMenu();
-		preferencesMenuZone.add(preferencesMenu);
+		menu.add(preferencesMenu);
 
 		//Bottom Zone - Right
 		FlowPanel bottomRightZone = new FlowPanel();

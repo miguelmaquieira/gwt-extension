@@ -58,23 +58,19 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECTS_LAYOUT_CONTENT_IN_BOX							= PROJECTS_LAYOUT								+ "-contentInBox ";		//dslam_studio-projectsLayout-contentInBox 
 	
 	//PREFERENCES LAYOUT
-		String PREFERENCES_LAYOUT 											= APP_ID_PREFFIX								+ "preferencesLayout";	//dslam_studio-preferencesLayout
-		String PREFERENCES_LAYOUT_MENU_ZONE 								= PREFERENCES_LAYOUT							+ "-menuZone";			//dslam_studio-preferencesLayout-menuZone
-		String PREFERENCES_LAYOUT_WORK_ZONE  								= PREFERENCES_LAYOUT							+ "-workZone";			//dslam_studio-preferencesLayout-workZone
-		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER							= PREFERENCES_LAYOUT_WORK_ZONE					+ "-header";			//dslam_studio-preferencesLayout-preferencesWorkZone-header
-//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_ACTIONS_ZONE 				= PROJECTS_LAYOUT_WORK_ZONE_HEADER				+ "-actionsZone";		//dslam_studio-projectsLayout-projectWorkZone-header-actionsZone
-		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE 				= PREFERENCES_LAYOUT_WORK_ZONE_HEADER			+ "-infoZone";			//dslam_studio-preferencesLayout-preferencesWorkZone-header-infoZone
-//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR 	= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-modIndicator";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator
-		String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME 	= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-sectionName";		//dslam_studio-preferencesLayout-preferencesWorkZone-header-infoZone-sectionName
-//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR 		= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-separator";			//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-separator
-//		String PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PROJECT_NAME 		= PROJECTS_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-projectName";		//dslam_studio-projectsLayout-projectWorkZone-header-infoZone-projectName
-		String PREFERENCES_LAYOUT_BOTTOM_ZONE 								= PREFERENCES_LAYOUT							+ "-bottomZone";		//dslam_studio-preferencesLayout-bottomZone
-		String PREFERENCES_LAYOUT_BOTTOM_ZONE_RIGHT  						= PREFERENCES_LAYOUT_BOTTOM_ZONE				+ "-right";				//dslam_studio-preferencesLayout-bottomZone-right
-		String PREFERENCES_LAYOUT_ZONE_HEADER 								= PREFERENCES_LAYOUT							+ "-zoneHeader";		//dslam_studio-preferencesLayout-zoneHeader
-//		String PROJECTS_LAYOUT_CONTENT_IN_BOX								= PROJECTS_LAYOUT								+ "-contentInBox ";		//dslam_studio-projectsLayout-contentInBox 
+	String PREFERENCES_LAYOUT 											= APP_ID_PREFFIX								+ "preferencesLayout";	//dslam_studio-preferencesLayout
+	String PREFERENCES_LAYOUT_MENU_ZONE 								= PREFERENCES_LAYOUT							+ "-menuZone";			//dslam_studio-preferencesLayout-menuZone
+	String PREFERENCES_LAYOUT_WORK_ZONE  								= PREFERENCES_LAYOUT							+ "-workZone";			//dslam_studio-preferencesLayout-workZone
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER							= PREFERENCES_LAYOUT_WORK_ZONE					+ "-header";			//dslam_studio-preferencesLayout-workZone-header
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE 				= PREFERENCES_LAYOUT_WORK_ZONE_HEADER			+ "-infoZone";			//dslam_studio-preferencesLayout-workZone-header-infoZone
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR 	= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-modIndicator";		//dslam_studio-preferencesLayout-workZone-header-infoZone-modIndicator
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME 	= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-sectionName";		//dslam_studio-preferencesLayout-workZone-header-infoZone-sectionName
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR 		= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-separator";			//dslam_studio-preferencesLayout-workZone-header-infoZone-separator
+	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME 	= PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE	+ "-preferencesName";		//dslam_studio-preferencesLayout-workZone-header-infoZone-preferencesName
+	String PREFERENCES_LAYOUT_BOTTOM_ZONE 								= PREFERENCES_LAYOUT							+ "-bottomZone";		//dslam_studio-preferencesLayout-bottomZone
+	String PREFERENCES_LAYOUT_BOTTOM_ZONE_RIGHT  						= PREFERENCES_LAYOUT_BOTTOM_ZONE				+ "-right";				//dslam_studio-preferencesLayout-bottomZone-right
+	String PREFERENCES_LAYOUT_ZONE_HEADER 								= PREFERENCES_LAYOUT							+ "-zoneHeader";		//dslam_studio-preferencesLayout-zoneHeader
 		
-	
-	
 	//SCRITPS EDITOR
 	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
 	String SCRIPTS_EDITOR_AREA 							= APP_ID_PREFFIX		+ "scriptsEditorArea";		//dslam_studio-scriptsEditorArea
@@ -121,4 +117,5 @@ public interface DSLAMBusDesktopIStyleConstants {
 	//PREFERENCES
 	
 	String PREFERENCES_CONNECTION_VIEW 					= APP_ID_PREFFIX			+ "preferencesConnectionView";						//dslam_studio-preferencesConnectionView
+	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";						//dslam_studio-preferencesView
 }

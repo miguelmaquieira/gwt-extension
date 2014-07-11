@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
@@ -14,12 +13,14 @@ import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusCont
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.execution.DSLAMBusDesktopExecutionScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.preferences.CRONIOBusDesktopPreferencesScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDesktopProcessScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
@@ -72,12 +73,12 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
 		
-		AEMFTMetadataElementComposite preferencesData = getElementDataController().getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, result);
-		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, projectsData);
+//		AEMFTMetadataElementComposite preferencesData = getElementDataController().getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, result);
+//		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, projectsData);
 		
 		AEMFTMetadataElementComposite layoutsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
-		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
+//		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
 		
 		setLayoutData(layoutsData);
 		return getContextDataController().getContext();
@@ -115,6 +116,8 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			presenter = new CRONIOBusDesktopProcessPresenter(new CRONIOBusDesktopProcessScreenView());
 		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXECUTION.equals(token1) ) {
 			presenter = new DSLAMBusDesktopExecutionPresenter(new DSLAMBusDesktopExecutionScreenView());
+		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES.equals(token1) ) {
+			presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
 		}
 		return presenter;
 	}

@@ -89,6 +89,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		return EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(type)
 				||
+				EVENT_TYPE.OPEN_PREFERENCES_EVENT.equals(type)
+				||
 				EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(type)
 				||
 				EVENT_TYPE.SAVE_PROJECT.equals(type)

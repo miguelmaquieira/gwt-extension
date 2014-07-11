@@ -41,7 +41,7 @@ public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 		setWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_CONNECTION_FORM);
 
-		//PROJECTNAME
+		//CONNECTIONNAME
 		SimplePanel inputZone = new SimplePanel();
 		root.add(inputZone);
 		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_CONNECTION_FORM_INPUT_ZONE);

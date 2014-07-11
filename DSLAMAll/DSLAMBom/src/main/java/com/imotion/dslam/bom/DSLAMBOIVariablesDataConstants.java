@@ -6,6 +6,7 @@ public interface DSLAMBOIVariablesDataConstants {
 	String VARIABLE_VALUE	= "variableValue";
 	String VARIABLE_TYPE	= "variableType";
 	
+	int		VARIABLE_CONNECTION_TYPE	= 3;
 	int		VARIABLE_NODE_TYPE			= 2;
 	int		VARIABLE_EXTERNAL_TYPE		= 1;
 	int		VARIABLE_PROCESS_TYPE		= 0;
