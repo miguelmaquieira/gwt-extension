@@ -1,17 +1,25 @@
-grammar imolang;
+grammar ImoLang;
 
 @header {
 	package com.imotion.antlr;
 }
 
 //PARSER
-program :	statement+;
+program :	statement+; 
 statement   :	assignStatement
 			|   ifStatement
 			|	whileStatement
 			|	forStatement
-			|	forEachStatement;
-assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp) ';'));
+			|	forEachStatement
+			| 	function;
+			
+assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | function) ';'));
+
+function : 		execution
+			|	readUntil;
+		 
+execution : 'sendCommand(' stringExpr ');';
+readUntil : 'readUntil(' stringExpr ');';
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
 ifBlock: statement+;
