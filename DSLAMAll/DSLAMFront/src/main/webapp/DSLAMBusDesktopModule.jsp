@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<!-- IEXPLORER -->
 		<meta http-equiv="X-UA-Compatible" content="IE=8">
-		<title>Cronio</title>
+		<title>Chronium</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		
 		<link type="text/css" rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
@@ -45,7 +45,7 @@
 	</head>
 	<body>
 		<div id="progressIcon" style="margin: 30px;">
-				<h2>Loading Cronio, please wait ...</h2>
+				<h2>Loading Chronium, please wait ...</h2>
 		</div>
 		<iframe id="__gwt_historyFrame" style="width:0;height:0;border:0;display:none"></iframe>
 		<!--[if IE]>

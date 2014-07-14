@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,6 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 @Entity(name="Preferences")
 public class CRONIOBOPreferences implements CRONIOBOIPreferences {
@@ -46,18 +44,30 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 		this.preferencesId = preferencesId;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER ,mappedBy=CRONIOBOIMachineProperties.PREFERENCES, targetEntity=CRONIOBOMachineProperties.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(fetch = FetchType.EAGER ,mappedBy=CRONIOBOIMachineProperties.PREFERENCES, targetEntity=CRONIOBOMachineProperties.class)
 	@Override
 	public List<CRONIOBOIMachineProperties> getMachinePropertiesList() {
-		if (AEMFTCommonUtilsBase.isEmptyList(machinePropertiesList)) {
-			machinePropertiesList = new ArrayList<>();
-		}
 		return machinePropertiesList;
 	}
 	
 	@Override
 	public void setMachinePropertiesList(List<CRONIOBOIMachineProperties> machinePropertiesList) {
 		this.machinePropertiesList = machinePropertiesList;
+	}
+	
+	@Override
+	public void addMachineProperties(CRONIOBOIMachineProperties machineProperties) {
+		if (machinePropertiesList == null) {
+			machinePropertiesList = new ArrayList<>();
+		}
+		if (!machinePropertiesList.contains(machineProperties)) {
+			machinePropertiesList.add(machineProperties);
+		}
+	}
+	
+	@Override
+	public void removeMachineProperties(CRONIOBOIMachineProperties machineProperties) {
+		machinePropertiesList.remove(machineProperties);
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

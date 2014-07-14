@@ -1,6 +1,6 @@
 package com.imotion.dslam.backend.persistence.service.preferences;
 
-import java.util.Date;
+import javax.persistence.EntityTransaction;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
@@ -25,10 +25,11 @@ public class CRONIOBKPreferencesPersistenceServiceJPA extends DSLAMBKPersistence
 	
 	@Override
 	public CRONIOBOIPreferences updatePreferences(Long preferencesId, CRONIOBOIPreferences updatedPreferences) {
-		CRONIOBOPreferences originalPreferences = getPersistenceModule().get(preferencesId);
+		CRONIOBOPreferences originalPreferences  = getPersistenceModule().get(preferencesId);
 		if (originalPreferences != null) {
-			originalPreferences.setSavedTime(new Date());
-			getPersistenceModule().update(originalPreferences);
+			EntityTransaction tx = getPersistenceModule().beginTransaction();
+			originalPreferences.setSavedTime(updatedPreferences.getSavedTime());
+			getPersistenceModule().commit(tx);
 		}
 		return originalPreferences;
 	}
