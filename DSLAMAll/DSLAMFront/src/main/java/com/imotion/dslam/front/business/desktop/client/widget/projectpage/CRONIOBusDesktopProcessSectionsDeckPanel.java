@@ -7,6 +7,7 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
@@ -28,6 +29,7 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
 		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_DECKPANEL);
+		rootDeckPanel.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 
 		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
 		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
