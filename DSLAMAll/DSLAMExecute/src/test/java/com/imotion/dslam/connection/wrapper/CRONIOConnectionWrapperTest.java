@@ -33,15 +33,15 @@ public class CRONIOConnectionWrapperTest {
 
 	private static CRONIOBOINode getNodeData() {
 		CRONIOBOIMachineProperties machineProperties = new CRONIOBOMachineProperties();
-		machineProperties.setUsername("imotion");
-		machineProperties.setPassword("123456");
+		machineProperties.setUsername("gaelhosteneo");
+		machineProperties.setPassword(".o7ws5mb");
 		machineProperties.setTimeout(3000);
 		machineProperties.setProtocolType(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH);
-		machineProperties.setPromptRegEx("\\S+@\\S+:~\\$\\s");
+		machineProperties.setPromptRegEx("\\S+@\\S+\\$\\s");
 
 		CRONIOBOINode node = new CRONIOBONode();
 		node.setNodeId(34l);
-		node.setNodeIp("192.168.1.137");
+		node.setNodeIp("127.0.0.1");
 		node.setMachineProperties(machineProperties);
 
 		return node;

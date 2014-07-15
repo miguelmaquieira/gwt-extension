@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences;
 
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEvent;
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 

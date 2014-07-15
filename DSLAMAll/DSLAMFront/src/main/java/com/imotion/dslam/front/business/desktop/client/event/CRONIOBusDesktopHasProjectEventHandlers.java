@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.view.event;
+package com.imotion.dslam.front.business.desktop.client.event;
 
 import com.google.gwt.event.shared.GwtEvent.Type;
 import com.selene.arch.exe.gwt.mvp.event.AEGWTHasEventHandler;

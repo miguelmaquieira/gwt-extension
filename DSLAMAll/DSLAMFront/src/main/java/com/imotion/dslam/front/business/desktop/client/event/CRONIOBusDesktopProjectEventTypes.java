@@ -1,4 +1,4 @@
-package com.imotion.dslam.front.business.desktop.client.view.event;
+package com.imotion.dslam.front.business.desktop.client.event;
 
 public interface CRONIOBusDesktopProjectEventTypes {
 	

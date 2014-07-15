@@ -45,25 +45,25 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	@Override
 	public CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData = null;
-		//		try {
-		//connectionWrapper.sendCommand(command);
-		//String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
-		//BEGIN EXAMPLE
-		String fullResponse		= "Response with data " + promptRegEx;
-		//END EXAMPLE
-		if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
-			String prompt 	= getLastPrompt(fullResponse);
-			String response	= fullResponse.replace(prompt, "");
-			executionData	= new CRONIOExecutionData(command, prompt, response);
-			if (getLogger() != null) {
-				getLogger().log(getConnectionId(), getNode(), executionData);
+		try {
+			connectionWrapper.sendCommand(command);
+			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
+			//BEGIN EXAMPLE
+			//		String fullResponse		= "Response with data " + promptRegEx;
+			//END EXAMPLE
+			if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
+				String prompt 	= getLastPrompt(fullResponse);
+				String response	= fullResponse.replace(prompt, "");
+				executionData	= new CRONIOExecutionData(command, prompt, response);
+				if (getLogger() != null) {
+					getLogger().log(getConnectionId(), getNode(), executionData);
+				}
+			} else {
+				throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
 			}
-		} else {
-			throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		//		} catch (IOException e) {
-		//			e.printStackTrace();
-		//		}
 		return executionData;
 	}
 
