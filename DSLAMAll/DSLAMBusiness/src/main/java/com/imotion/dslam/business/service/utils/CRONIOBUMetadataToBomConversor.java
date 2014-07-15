@@ -11,6 +11,7 @@ import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
@@ -21,6 +22,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBUMetadataToBomConversor {
@@ -230,17 +232,29 @@ public class CRONIOBUMetadataToBomConversor {
 	public static CRONIOBOIMachineProperties fromMachineConfigData(AEMFTMetadataElementComposite machineConfigData) {
 		CRONIOBOIMachineProperties machine = null;
 		if (machineConfigData != null) {
+			machine = new CRONIOBOMachineProperties();
+			
 			String 	user 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME, machineConfigData);
 			String 	password 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD, machineConfigData);
-			int 	timeout 		= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT, machineConfigData);
+			String 	timeout 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.TIMEOUT, machineConfigData);
 			String 	prompt 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT, machineConfigData);
-			int 	protocolType 	= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE, machineConfigData);
+			String 	protocolType 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROTOCOL_TYPE, machineConfigData);
+			
+			if(!AEMFTCommonUtilsBase.isEmptyString(timeout)) {
+				int protocolTypeInt = 	Integer.parseInt(protocolType);
+				machine.setProtocolType(protocolTypeInt);
+			}
+			
+			if(!AEMFTCommonUtilsBase.isEmptyString(timeout)) {
+				int timeoutInt		= 	Integer.parseInt(timeout);
+				machine.setTimeout(timeoutInt);
+			}
+			
 			
 			machine.setUsername(user);
 			machine.setPassword(password);
-			machine.setTimeout(timeout);
 			machine.setPromptRegEx(prompt);
-			machine.setProtocolType(protocolType);
+			
 			
 		}
 		

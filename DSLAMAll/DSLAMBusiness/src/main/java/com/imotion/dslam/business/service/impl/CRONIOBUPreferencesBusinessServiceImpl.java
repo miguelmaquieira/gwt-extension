@@ -18,7 +18,6 @@ import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
-import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -55,8 +54,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		Date 							creationTime 	= new Date();
 
 		//Debemos conseguir el preferences Id del usuario, de momento puesto a pelo
-		Integer i = 1;
-		long preferencesId = i.longValue();
+		long preferencesId = 1L;
 
 		//InitScript
 		DSLAMBOIFile connectionScript = new DSLAMBOFile();
@@ -97,9 +95,13 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 	public void updateMachineConfig() {
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
-		List<AEMFTMetadataElement> contextInList = contextIn.getElementList();
 		
-		AEMFTMetadataElementComposite machineConfigData = updateMachineConfigFull((AEMFTMetadataElementComposite)contextInList.get(0));
+		String machineName = getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, contextIn);
+		CRONIOBOIMachineProperties currentMachineDB = getMachinePropertiesPersistence().getMachineProperties(CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID, machineName);
+		CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(contextIn);
+		long currentMachineDBId = currentMachineDB.getMachinePropertiesId();
+		//preferencesId sustituir cuando usuarios
+		getMachinePropertiesPersistence().updateMachineProperties(currentMachineDBId, machineConfig);
 		
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
@@ -202,30 +204,27 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 	 * PRIVATE
 	 */
 
-		private AEMFTMetadataElementComposite updateMachineConfigFull(AEMFTMetadataElementComposite machineData) {
-			AEMFTMetadataElementComposite machineConfigData = getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG, machineData);
-			long machineId = getElementDataController().getElementAsLong(CRONIOBOIMachineProperties.MACHINE_ID, machineData);
-			CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(machineConfigData);
-			getMachinePropertiesPersistence().updateMachineProperties(machineId, machineConfig);
-//			//MainScript
-//			DSLAMBOIFile mainScript = project.getMainScript();
-//			mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
-//			project.setMainScript(mainScript);
+//		private AEMFTMetadataElementComposite updateMachineConfigFull(AEMFTMetadataElementComposite machineData) {
+//		
+////			//MainScript
+////			DSLAMBOIFile mainScript = project.getMainScript();
+////			mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
+////			project.setMainScript(mainScript);
+////	
+////			//RollbackScript
+////			DSLAMBOIFile rollbackScript = project.getRollBackScript();
+////			rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
+////			project.setRollBackScript(rollbackScript);
+////	
+////			//Process
+////			DSLAMBOIProcess process = project.getProcess();
+////			process = getProcessPersistence().updateProcess(process.getProcessId(), process);
+////			project.setProcess(process);
+////	
+////			getProjectPersistence().updateProject(project.getProjectId(), project);
+////			AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
 //	
-//			//RollbackScript
-//			DSLAMBOIFile rollbackScript = project.getRollBackScript();
-//			rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
-//			project.setRollBackScript(rollbackScript);
-//	
-//			//Process
-//			DSLAMBOIProcess process = project.getProcess();
-//			process = getProcessPersistence().updateProcess(process.getProcessId(), process);
-//			project.setProcess(process);
-//	
-//			getProjectPersistence().updateProject(project.getProjectId(), project);
-//			AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
-	
-			return machineConfigData;
-		}
+//			return machineConfigData;
+//		}
 
 }
