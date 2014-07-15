@@ -2,17 +2,23 @@ package com.imotion.dslam.bom;
 
 public interface DSLAMBOIVariablesDataConstants {
 	
-	String VARIABLE_NAME 	= "variableName";
-	String VARIABLE_VALUE	= "variableValue";
-	String VARIABLE_TYPE	= "variableType";
+	//ATTRIBUTES
+	String 	VARIABLE_NAME 	= "variableName";
+	String 	VARIABLE_VALUE	= "variableValue";
+	String 	VARIABLE_SCOPE	= "variableScope";
+	String 	VARIABLE_TYPE	= "variableType";
 	
-	int		VARIABLE_CONNECTION_TYPE	= 3;
-	int		VARIABLE_NODE_TYPE			= 2;
-	int		VARIABLE_EXTERNAL_TYPE		= 1;
-	int		VARIABLE_PROCESS_TYPE		= 0;
+	//SCOPES
+	int		VARIABLE_SCOPE_CONNECTION	= 3;
+	int		VARIABLE_SCOPE_NODE			= 2;
+	int		VARIABLE_SCOPE_EXTERNAL		= 1;
+	int		VARIABLE_SCOPE_PROCESS		= 0;
 	
-	String PROTOCOL_ID		= "Protocolo";
-	
-	String EDIT_MODE			= "EditMode";
-	String SAVE_MODE			= "SaveMode";
+	//TYPES
+	int		VARIABLE_TYPE_NUMERIC		= 1;
+	int		VARIABLE_TYPE_TEXT			= 2;
+
+	//CONTEXT
+	String EDIT_MODE					=	"EditMode";
+	String SAVE_MODE					=	"SaveMode";
 }

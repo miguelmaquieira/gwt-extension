@@ -15,7 +15,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 
-public class CRONIOBusDesktopPreferencesMachineConfirureForm extends AEGWTBootstrapForm {
+public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
 
 	public static final String NAME = "CRONIOBusDesktopPreferencesMachineConfirureForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -26,7 +26,7 @@ public class CRONIOBusDesktopPreferencesMachineConfirureForm extends AEGWTBootst
 	private AEGWTBootstrapFormFieldTextBox  		promptTextBox; 
 	private AEGWTBootstrapDropdownButton  			protocolTypeDropdownButton; 
 
-	public CRONIOBusDesktopPreferencesMachineConfirureForm() {
+	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
 		addContainerStyle(AEGWTIBoostrapConstants.COL_XS_12);
 

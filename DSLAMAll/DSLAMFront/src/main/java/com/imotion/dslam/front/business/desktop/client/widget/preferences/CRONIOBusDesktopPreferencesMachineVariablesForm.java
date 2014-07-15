@@ -8,11 +8,10 @@ import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -23,11 +22,11 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 	public static final String NAME = "CRONIOBusDesktopPreferencesMachineVariablesForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTBootstrapFormFieldTextBox  	machineVariableIdTextBox;
-	private AEGWTBootstrapFormFieldTextBox  	machineVariableValueTextBox; 
-	private AEGWTButton 						saveButton;
-	private AEGWTButton							cancelButton;
-	private boolean							editMode;
+	private AEGWTBootstrapDropdownAndLabelTextBox  	machineVariableIdTextBox;
+	private AEGWTBootstrapDropdownAndLabelTextBox  	machineVariableValueTextBox; 
+	private AEGWTButton 							saveButton;
+	private AEGWTButton								cancelButton;
+	private boolean								editMode;
 
 	public CRONIOBusDesktopPreferencesMachineVariablesForm(AEGWTICompositePanel parent) {
 		super(true, parent);
@@ -35,12 +34,15 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 		setWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_VARIABLES_FORM_CONTAINER);
 
-
-		machineVariableIdTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.variable());
-		machineVariableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.value());
-		
+		machineVariableIdTextBox 			= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.variable());
 		root.add(machineVariableIdTextBox);
+		machineVariableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION)	, TEXTS.process_variable());
+		machineVariableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL)		, TEXTS.external_variable());
+		
+		machineVariableValueTextBox 		= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.value());
 		root.add(machineVariableValueTextBox);
+		machineVariableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT)		, TEXTS.text_variable());
+		machineVariableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_NUMERIC)		, TEXTS.numeric_variable());
 		
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
@@ -65,7 +67,7 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 				
 				if (AEMFTCommonUtilsBase.isEmptyString(machineVariableValueTextBox.getTextBox().getValue())) {
 					errors = true;
-					machineVariableValueTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
+					machineVariableValueTextBox.setErrorLabelText(TEXTS.empty_textbox());
 				}
 				
 				if (errors == false) {
@@ -74,6 +76,8 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 					evt.setSourceWidgetId(getId());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, machineVariableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, machineVariableValueTextBox.getText());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, machineVariableIdTextBox.getSelectedId());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, machineVariableValueTextBox.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -92,6 +96,35 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 			}
 		});
 	}
+	
+	public void resetForm() {
+		machineVariableIdTextBox.setText("");
+		machineVariableValueTextBox.setText("");
+		machineVariableIdTextBox.setEnabled(true);
+		resetErrors();
+		hide();
+	}
+	
+	public void setEditMode(String mode) {
+		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
+			editMode = true;
+		} else {
+			editMode = false;
+		}
+	}
+	
+	public void setErrorVariableExist() {
+		machineVariableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
+		machineVariableIdTextBox.setErrorLabelVisible(true);
+	}
+	
+	public boolean getEditMode() {
+		return editMode;
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
@@ -103,60 +136,27 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 		if (variableData != null) {
 			String 	variableId 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
 			String 	variableValue 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
+			int 	variableScope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, variableData);
+			int 	variableType 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variableData);
+			String	variableScopeStr	= String.valueOf(variableScope);
+			String	variableTypeStr		= String.valueOf(variableType);
 			
 			machineVariableIdTextBox.setEnabled(false);
-	
+			machineVariableIdTextBox.setItemSelected(variableScopeStr);	
 			machineVariableIdTextBox.setText(variableId);
+			
+			machineVariableValueTextBox.setItemSelected(variableTypeStr);	
 			machineVariableValueTextBox.setText(variableValue);
 		}
 	}
-
 	
-	public AEMFTMetadataElementComposite getData() {
-
-		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, formData	, machineVariableIdTextBox.getText());
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, formData	, machineVariableValueTextBox.getText());
-		
-		return formData;
-	}
-
-	protected void resetForm() {
-		machineVariableIdTextBox.setText("");
-		machineVariableValueTextBox.setText("");
-		machineVariableIdTextBox.setEnabled(true);
-		resetErrors();
-		hide();
-	}
+	/**
+	 * PRIVATE
+	 */
 	
-	protected void resetErrors() {
+	private void resetErrors() {
 		machineVariableIdTextBox.setErrorLabelVisible(false);
 		machineVariableValueTextBox.setErrorLabelVisible(false); 
 	}
 	
-	protected void setErrorVariableExist() {
-		machineVariableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
-		machineVariableIdTextBox.setErrorLabelVisible(true);
-	}
-	
-	protected void setEditMode(String mode) {
-		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
-			editMode = true;
-		} else {
-			editMode = false;
-		}
-	}
-	
-	protected boolean getEditMode() {
-		return editMode;
-	}
-	
-	protected void setVariableIdTextBoxEnable(boolean enable) {
-		if (enable) {
-			machineVariableIdTextBox.setEnabled(true);
-		} else {
-			machineVariableIdTextBox.setEnabled(false);
-		}
-	}
 }

@@ -144,6 +144,7 @@ public class DSLAMBUBomToMetadataConversor {
 			variableData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable.getVariableName());
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable.getVariableValue());
+			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, variable.getVariableScope());
 			variableData.addElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, variable.getVariableType());
 		}
 		return variableData;

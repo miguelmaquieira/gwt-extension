@@ -12,6 +12,10 @@ public interface DSLAMBOIVariable extends Serializable, DSLAMBOIVariablesDataCon
 
 	void setVariableValue(String variableValue);
 	
+	int getVariableScope();
+
+	void setVariableScope(int variableType);
+
 	int getVariableType();
 
 	void setVariableType(int variableType);

@@ -99,9 +99,9 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 				varValue = this.visit(expression);
 			}
 		} else if (stringExpression != null) {
-			varValue =this.visit(stringExpression);
+			varValue = this.visit(stringExpression);
 		} else if (listExpContext != null) {
-			varValue =this.visit(listExpContext);
+			varValue = this.visit(listExpContext);
 		} else if (function != null) {
 			varValue = this.visit(function);
 		}

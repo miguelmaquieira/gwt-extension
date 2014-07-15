@@ -97,16 +97,19 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (DSLAMBusDesktopProcessConfigureVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String name		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
-			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
-			String type 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
-			
-			int typeAsInt = AEMFTCommonUtilsBase.getIntegerFromString(type);
+			String 	name		= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
+			String 	value 		= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+			String 	scope 		= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
+			String 	type 		= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
+			int 	scopeAsInt 	= AEMFTCommonUtilsBase.getIntegerFromString(scope);
+			int 	typeAsInt 	= AEMFTCommonUtilsBase.getIntegerFromString(type);
 			
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, name);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, data	, scopeAsInt);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, typeAsInt);
+			
 			if (variablesForm.getEditMode()) {
 				addVariables(name, data);
 			} else if (!variablesData.contains(name)) {
@@ -133,7 +136,8 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		
 			for (String rowId : rowIds) {
 				variablesData.removeElement(rowId);
-			}	
+			}
+			
 			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			deleteEvt.setSourceWidget(getName());
@@ -144,7 +148,11 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.EDIT_EVENT.equals(type) || LOGICAL_TYPE.DELETE_EVENT.equals(type);	
+		return LOGICAL_TYPE.SAVE_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.EDIT_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.DELETE_EVENT.equals(type);	
 	}
 	
 	/**

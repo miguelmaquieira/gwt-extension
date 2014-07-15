@@ -8,11 +8,9 @@ import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownAndLabelTextBox;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -24,7 +22,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapDropdownAndLabelTextBox  	variableIdTextBox;
-	private AEGWTBootstrapFormFieldTextBox  		variableValueTextBox; 
+	private AEGWTBootstrapDropdownAndLabelTextBox	variableValueTextBox; 
 	private AEGWTButton 							saveButton;
 	private AEGWTButton								cancelButton;
 	private boolean								editMode;
@@ -36,13 +34,15 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_VARIABLES_FORM_CONTAINER);
 
 
-		variableIdTextBox 			= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.variable());
-		variableValueTextBox 		= new AEGWTBootstrapFormFieldTextBox(null			, TEXTS.value());
-		
+		variableIdTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.variable());
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE), TEXTS.process_variable());
-		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_EXTERNAL_TYPE), TEXTS.external_variable());
+		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS)	, TEXTS.process_variable());
+		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL)	, TEXTS.external_variable());
+		
+		variableValueTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.value());
 		root.add(variableValueTextBox);
+		variableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT)		, TEXTS.text_variable());
+		variableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_NUMERIC)	, TEXTS.numeric_variable());
 		
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
@@ -67,7 +67,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 				
 				if (variableValueTextBox.getTextBox().getValue() == null || variableValueTextBox.getTextBox().getValue() == "") {
 					errors = true;
-					variableValueTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
+					variableValueTextBox.setErrorLabelText(TEXTS.empty_textbox());
 				}
 				
 				if (errors == false) {
@@ -76,7 +76,8 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 					evt.setSourceWidgetId(getId());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableIdTextBox.getText());
 					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableIdTextBox.getSelectedId());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, variableIdTextBox.getSelectedId());
+					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableValueTextBox.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -95,6 +96,35 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 			}
 		});
 	}
+	
+	public void resetForm() {
+		variableIdTextBox.setText("");
+		variableValueTextBox.setText("");
+		variableIdTextBox.setEnabled(true);
+		resetErrors();
+		hide();
+	}
+	
+	public void setEditMode(String mode) {
+		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
+			editMode = true;
+		} else {
+			editMode = false;
+		}
+	}
+	
+	public boolean getEditMode() {
+		return editMode;
+	}
+	
+	public void setErrorVariableExist() {
+		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
+		variableIdTextBox.setErrorLabelVisible(true);
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
@@ -106,65 +136,27 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		if (variableData != null) {
 			String 	variableName 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
 			String 	variableValue 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
+			int 	variableScope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData);
 			int 	variableType 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableData);
+			String	variableScopeStr	= String.valueOf(variableScope);
 			String	variableTypeStr		= String.valueOf(variableType);
-
 			
 			variableIdTextBox.setEnabled(false);
 			variableIdTextBox.setDropdownEnabled(true);
-			variableIdTextBox.setItemSelected(variableTypeStr);	
-
+			variableIdTextBox.setItemSelected(variableScopeStr);	
 			variableIdTextBox.setText(variableName);
+			
+			variableValueTextBox.setItemSelected(variableTypeStr);	
 			variableValueTextBox.setText(variableValue);
 		}
 	}
-
 	
-	public AEMFTMetadataElementComposite getData() {
-
-		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, formData	, variableIdTextBox.getText());
-		getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, formData	, variableValueTextBox.getText());
-		
-		return formData;
-	}
-
-	protected void resetForm() {
-		variableIdTextBox.setText("");
-		variableValueTextBox.setText("");
-		variableIdTextBox.setEnabled(true);
-		resetErrors();
-		hide();
-	}
+	/**
+	 * PRIVATE
+	 */
 	
-	protected void resetErrors() {
+	private void resetErrors() {
 		variableIdTextBox.setErrorLabelVisible(false);
 		variableValueTextBox.setErrorLabelVisible(false); 
-	}
-	
-	protected void setErrorVariableExist() {
-		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
-		variableIdTextBox.setErrorLabelVisible(true);
-	}
-	
-	protected void setEditMode(String mode) {
-		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
-			editMode = true;
-		} else {
-			editMode = false;
-		}
-	}
-	
-	protected boolean getEditMode() {
-		return editMode;
-	}
-	
-	protected void setVariableIdTextBoxEnable(boolean enable) {
-		if (enable) {
-			variableIdTextBox.setEnabled(true);
-		} else {
-			variableIdTextBox.setEnabled(false);
-		}
 	}
 }

@@ -50,7 +50,8 @@ public class CRONIOBUCSVToBomConversor {
 				for (int i = 0; i < variableListString.length; i++) {
 					DSLAMBOIVariable variable = new DSLAMBOVariable();
 					variable.setVariableName(variableNameList[i]);
-					variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_NODE_TYPE);
+					variable.setVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
+					variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 					variable.setVariableValue(variableListString[i]);
 					variableList.add(variable);
 				}
