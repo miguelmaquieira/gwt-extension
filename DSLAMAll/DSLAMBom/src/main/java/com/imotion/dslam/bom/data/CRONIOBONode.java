@@ -3,7 +3,6 @@ package com.imotion.dslam.bom.data;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -128,7 +127,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 		this.creationTime = creationTime;
 	}
 	
-	@OneToOne(targetEntity = CRONIOBOMachineProperties.class, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(targetEntity = CRONIOBOMachineProperties.class)
 	@JoinColumn(name=MACHINE_PROPERTIES_ID)
 	@Override
 	public CRONIOBOIMachineProperties getMachineProperties() {

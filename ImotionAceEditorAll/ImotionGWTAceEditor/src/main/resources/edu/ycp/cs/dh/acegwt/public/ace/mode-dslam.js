@@ -28,8 +28,6 @@ var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
 var DslamHighlightRules = function() {
 	
-	var imolang = ("execute");
-	
 	var levelone = ("cli|environment|configure|show|admin");
 
     var leveltwo = ("equipment|interface|vlan|pppox-relay|software-mngt");
@@ -41,7 +39,6 @@ var DslamHighlightRules = function() {
     );
 
     var keywordMapper = this.createKeywordMapper({
-    	"keyword"			: imolang,
         "keyword.levelone"	: levelone,
         "keyword.leveltwo"	: leveltwo,
         "keyword.levelthree": levelthree

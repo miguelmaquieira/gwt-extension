@@ -1,6 +1,6 @@
-package com.imotion.dslam.front.business.desktop.client.view.event;
+package com.imotion.dslam.front.business.desktop.client.event;
 
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.mvp.event.AEGWTEvent;
 
 public class CRONIOBusDesktopProjectEvent extends AEGWTEvent<CRONIOBusDesktopHasProjectEventHandlers> {

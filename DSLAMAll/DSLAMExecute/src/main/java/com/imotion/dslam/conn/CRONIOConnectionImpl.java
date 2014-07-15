@@ -36,7 +36,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 			connectionWrapper = new CRONIOConnectionWrapperTelnet();
 		}
 	}
-	
+
 	@Override
 	public void openConnection() throws IOException {
 		connectionWrapper.connect(node);
@@ -48,6 +48,9 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		try {
 			connectionWrapper.sendCommand(command);
 			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
+			//BEGIN EXAMPLE
+			//		String fullResponse		= "Response with data " + promptRegEx;
+			//END EXAMPLE
 			if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
 				String prompt 	= getLastPrompt(fullResponse);
 				String response	= fullResponse.replace(prompt, "");
@@ -63,7 +66,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		}
 		return executionData;
 	}
-	
+
 	@Override
 	public String readUntil(String regExp) throws CRONIOConnectionUncheckedException {
 		String read = null;

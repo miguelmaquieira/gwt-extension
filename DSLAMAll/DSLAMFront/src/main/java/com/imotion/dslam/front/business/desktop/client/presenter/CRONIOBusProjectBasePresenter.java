@@ -10,9 +10,9 @@ import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstant
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopHasProjectEventHandlers;
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEvent;
-import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;

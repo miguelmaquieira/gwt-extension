@@ -59,7 +59,8 @@ public interface DSLAMBusDesktopIStyleConstants {
 	
 	//PREFERENCES LAYOUT
 	String PREFERENCES_LAYOUT 											= APP_ID_PREFFIX								+ "preferencesLayout";	//dslam_studio-preferencesLayout
-	String PREFERENCES_LAYOUT_MENU_ZONE 								= PREFERENCES_LAYOUT							+ "-menuZone";			//dslam_studio-preferencesLayout-menuZone
+	String PREFERENCES_LAYOUT_MENU		 								= PREFERENCES_LAYOUT							+ "-menu";				//dslam_studio-preferencesLayout-menu
+	String PREFERENCES_LAYOUT_MENU_ZONE 								= PREFERENCES_LAYOUT_MENU						+ "Zone";				//dslam_studio-preferencesLayout-menuZone
 	String PREFERENCES_LAYOUT_WORK_ZONE  								= PREFERENCES_LAYOUT							+ "-workZone";			//dslam_studio-preferencesLayout-workZone
 	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER							= PREFERENCES_LAYOUT_WORK_ZONE					+ "-header";			//dslam_studio-preferencesLayout-workZone-header
 	String PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE 				= PREFERENCES_LAYOUT_WORK_ZONE_HEADER			+ "-infoZone";			//dslam_studio-preferencesLayout-workZone-header-infoZone

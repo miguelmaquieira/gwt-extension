@@ -25,6 +25,7 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 		machinePropertiesJPA.setCreationTime(currentDate);
 		machinePropertiesJPA = getPersistenceModule().create(machinePropertiesJPA);
 		
+		preferences.addMachineProperties(machinePropertiesJPA);
 		preferences.setSavedTime(currentDate);
 		preferences = getPreferencesPersistence().updatePreferences(preferencesId, preferences);
 		return machinePropertiesJPA;

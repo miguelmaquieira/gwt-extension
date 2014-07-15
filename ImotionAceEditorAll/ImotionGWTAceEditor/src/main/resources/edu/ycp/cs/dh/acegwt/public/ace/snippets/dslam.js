@@ -31,7 +31,11 @@ snippet while\n\
 	while (${1}) {\n\
 		${2}//TODO:\n\
 	}\n\
-";
+snippet sendCommand\n\
+	sendCommand(\"${1}\");\n\
+	\n\
+snippet readUntil\n\
+	readUntil(\"${1}\");";
 exports.scope = "dslam";
 
 });
