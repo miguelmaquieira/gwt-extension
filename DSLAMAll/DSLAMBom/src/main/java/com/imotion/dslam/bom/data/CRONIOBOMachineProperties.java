@@ -179,9 +179,6 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public void setPreferences(CRONIOBOIPreferences preferences) {
 		this.preferences = preferences;
-		if (preferences != null) {
-			preferences.addMachineProperties(this);
-		}
 	}
 	
 	@ElementCollection(targetClass=DSLAMBOVariable.class)

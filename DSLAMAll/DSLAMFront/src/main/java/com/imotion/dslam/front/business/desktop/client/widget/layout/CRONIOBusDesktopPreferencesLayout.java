@@ -19,11 +19,14 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
 public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout, CRONIOBusDesktopHasPreferencesEventHandlers {
 
-	public 	final static String 	NAME 		= "CRONIOBusDesktopPreferencesLayout";
+	public 		final	static String NAME 		= "CRONIOBusDesktopPreferencesLayout";
+	private 	final	static String NAVIGATOR_ID	= "NAVIGATOR_ID";
+
 	private static DSLAMBusI18NTexts TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 										root;
@@ -115,8 +118,8 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-//		setHeightToDecrease(75);
-//		DSLAMBusDesktopPreferencesMenu.postDisplay();
+		setHeightToDecrease(75);
+		AEGWTJQueryPerfectScrollBar.addScrollToWidget(NAVIGATOR_ID, preferencesMenu, getCurrentHeight(), true);
 	}
 
 	/**

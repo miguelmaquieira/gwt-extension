@@ -4,6 +4,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachinePropertiesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -32,6 +33,7 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 	public DSLAMBusDesktopPreferencesMenu() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_MENU);
 		//setId(projectId);
 
 		//MENU
