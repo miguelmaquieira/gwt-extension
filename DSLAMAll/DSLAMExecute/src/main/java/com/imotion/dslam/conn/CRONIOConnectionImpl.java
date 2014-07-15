@@ -36,7 +36,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 			connectionWrapper = new CRONIOConnectionWrapperTelnet();
 		}
 	}
-	
+
 	@Override
 	public void openConnection() throws IOException {
 		connectionWrapper.connect(node);
@@ -45,25 +45,28 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	@Override
 	public CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData = null;
-		try {
-			connectionWrapper.sendCommand(command);
-			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
-			if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
-				String prompt 	= getLastPrompt(fullResponse);
-				String response	= fullResponse.replace(prompt, "");
-				executionData	= new CRONIOExecutionData(command, prompt, response);
-				if (getLogger() != null) {
-					getLogger().log(getConnectionId(), getNode(), executionData);
-				}
-			} else {
-				throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
+		//		try {
+		//connectionWrapper.sendCommand(command);
+		//String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
+		//BEGIN EXAMPLE
+		String fullResponse		= "Response with data " + promptRegEx;
+		//END EXAMPLE
+		if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
+			String prompt 	= getLastPrompt(fullResponse);
+			String response	= fullResponse.replace(prompt, "");
+			executionData	= new CRONIOExecutionData(command, prompt, response);
+			if (getLogger() != null) {
+				getLogger().log(getConnectionId(), getNode(), executionData);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} else {
+			throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
 		}
+		//		} catch (IOException e) {
+		//			e.printStackTrace();
+		//		}
 		return executionData;
 	}
-	
+
 	@Override
 	public String readUntil(String regExp) throws CRONIOConnectionUncheckedException {
 		String read = null;

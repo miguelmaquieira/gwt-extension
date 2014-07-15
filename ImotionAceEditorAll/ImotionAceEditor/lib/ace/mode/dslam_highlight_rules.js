@@ -8,8 +8,6 @@ var DslamHighlightRules = function() {
     // regexp must not have capturing parentheses. Use (?:) instead.
     // regexps are ordered -> the first match is used
 	
-	var imolang = ("execute");
-	
 	var levelone = ("cli|environment|configure|show|admin");
 
     var leveltwo = ("equipment|interface|vlan|pppox-relay|software-mngt");
@@ -21,7 +19,6 @@ var DslamHighlightRules = function() {
     );
 
     var keywordMapper = this.createKeywordMapper({
-    	"keyword"			: imolang,
         "keyword.levelone"	: levelone,
         "keyword.leveltwo"	: leveltwo,
         "keyword.levelthree": levelthree
