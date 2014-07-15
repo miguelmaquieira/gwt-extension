@@ -22,7 +22,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 	private DeckPanel 											rootDeckPanel;
 	private AceEditor											editor;
 	private CRONIOBusDesktopPreferencesMachineVariables			variablesPreferencesMachine;
-	private CRONIOBusDesktopPreferencesMachineConfirureForm		preferencesMachineConfigureForm;
+	private CRONIOBusDesktopPreferencesMachineConfigureForm		preferencesMachineConfigureForm;
 
 	public CRONIOBusDesktopPreferencesMachineSectionsDeckPanel() {
 
@@ -31,7 +31,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_DECKPANEL);
 
 		variablesPreferencesMachine 		= new CRONIOBusDesktopPreferencesMachineVariables();
-		preferencesMachineConfigureForm 	= new CRONIOBusDesktopPreferencesMachineConfirureForm();
+		preferencesMachineConfigureForm 	= new CRONIOBusDesktopPreferencesMachineConfigureForm();
 	
 		rootDeckPanel.add(variablesPreferencesMachine);
 		rootDeckPanel.add(preferencesMachineConfigureForm);
@@ -52,6 +52,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 			variablesPreferencesMachine.setData(sectionData);
 		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(1);
+			preferencesMachineConfigureForm.setId(sectionIdSplit[1]);
 			preferencesMachineConfigureForm.setData(sectionData);
 		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(2);

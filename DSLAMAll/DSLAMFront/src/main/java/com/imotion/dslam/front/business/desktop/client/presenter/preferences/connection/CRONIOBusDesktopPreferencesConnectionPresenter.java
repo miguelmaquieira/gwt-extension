@@ -1,7 +1,14 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection;
 
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenter;
+import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesMachineConfigureForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -30,15 +37,13 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-// 		String			srcWidget		= evt.getSourceWidget();
-//		LOGICAL_TYPE	type			= evt.getEventType();
-//
-//		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
+		String			srcWidget		= evt.getSourceWidget();
+		LOGICAL_TYPE	type			= evt.getEventType();
+			if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget) && LOGICAL_TYPE.SUBMIT_EVENT.equals(type)) {
+				evt.stopPropagation();
+				AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+				saveCurrentMachineConfigureInDB();
+			}	
 //		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
 //			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 //				evt.stopPropagation();
@@ -67,8 +72,8 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-	//	return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type);
-		return false;
+		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type) ;
+	
 	}
 	
 	/**
@@ -88,4 +93,35 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 	/**
 	 * PRIVATE
 	 */
+	
+	private void saveCurrentMachineConfigureInDB() {
+
+		//final String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+
+		StringBuilder sbKey = new StringBuilder();
+		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
+		String machineConfigureDataKey = sbKey.toString();
+
+		AEMFTMetadataElementComposite machineConfigureData = getContextDataController().getElementAsComposite(machineConfigureDataKey);
+		getClientServerConnection().executeComm(machineConfigureData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_UPDATE_MACHINE_CONFIG_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				if (dataResult != null) {
+					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+					if (projectData != null) {
+						//updateProjectClientData(currentProjectId, projectData, true);
+					}
+				}
+
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+			}
+		});
+	}
 }

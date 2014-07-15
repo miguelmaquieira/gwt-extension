@@ -561,6 +561,15 @@
 	margin: 5px 0px;
 }
 
+.dslam_studio-processConfigurePropertiesCheckBox .gwt-Label {
+	margin-left: 20px;
+	font-weight: bold;
+}
+
+.dslam_studio-processConfigurePropertiesCheckBox .aegwt-checkbox-checkZone {
+	float:	left;
+}
+
 /*****************************************
 *			EXECUTE
 ******************************************/
@@ -614,6 +623,27 @@
 .dslam_studio-execution-loggerTabs .panel-heading {
 	padding: 10px;
 }
+
+/*****************************************
+*			PREFERENCES
+******************************************/
+.dropdown .dropdown-toggle {
+	margin-bottom: 15px;
+}
+
+.dropdown .dropdown-menu {
+	margin-top: -15px;
+}
+
+.dslam_studio-preferencesMachineDeckPanel .aegwt-bootstrapForm-buttonsZone .btn {
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+}
+
+.dslam_studio-preferencesMachineDeckPanel .aegwt-bootstrapForm-buttonsZone .btn:hover {
+	background-color: #F2F1F0;
+}
+
 
 /*****************************************
 *			COMMON

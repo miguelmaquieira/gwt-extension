@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
@@ -222,6 +223,26 @@ public class CRONIOMetadataToBom {
 			variable.setVariableType(variableType);
 		}
 		return variable;
+	}
+	
+	public static CRONIOBOIMachineProperties fromMachineConfigData(AEMFTMetadataElementComposite machineConfigData) {
+		CRONIOBOIMachineProperties machine = null;
+		if (machineConfigData != null) {
+			String 	user 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME, machineConfigData);
+			String 	password 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD, machineConfigData);
+			int 	timeout 		= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT, machineConfigData);
+			String 	prompt 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT, machineConfigData);
+			int 	protocolType 	= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE, machineConfigData);
+			
+			machine.setUsername(user);
+			machine.setPassword(password);
+			machine.setTimeout(timeout);
+			machine.setPromptRegEx(prompt);
+			machine.setProtocolType(protocolType);
+			
+		}
+		
+		return machine;
 	}
 
 	/**

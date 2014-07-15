@@ -3,6 +3,8 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -12,6 +14,7 @@ import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDeskt
 import com.imotion.dslam.front.business.desktop.client.view.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopPreferencesLayout;
+import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesMachineConfigureForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
@@ -60,7 +63,15 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		} else if (EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(evtTyp)) {
 			AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
 			getFlowEventHandlerManager().fireEvent(flowEvent);
-		}
+		} else if (EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(evtTyp)) {
+			String srcWidget = evt.getSourceWidget();
+			if(CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget)) {
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(evt.getConnectionName());
+				String machineConnection = evt.getConnectionName();
+				updateFinalSectionInContext(finalSectionData, machineConnection, srcWidget);
+			}
+			
+		} 
 	}
 
 	@Override
@@ -68,6 +79,8 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		return EVENT_TYPE.NEW_CONNECTION.equals(type)
 				||
 				EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(type)
+				||
+				EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(type)
 				||
 				EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(type);
 	}
@@ -180,6 +193,49 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		}
 	}
 	
+	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData, String machineConnection, String srcWidget) {
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		
+		if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget)) {
+			StringBuilder sbKey = new StringBuilder();
+			sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
+			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBOMachineProperties.MACHINE_CONNECTION_CONFIG);
+			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(machineConnection);
+			String sectionKey = sbKey.toString();
+			
+//			if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(currentSectionId)) {
+//			finalSectionData.addElement(DSLAMBOIProject.IS_MODIFIED, true);
+//		}
+
+		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PREFERENCES_PRESENTER, getName());
+		storageEvent.setFullKey(sectionKey);
+		storageEvent.addElementAsComposite(sectionKey, finalSectionData);
+		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+		getLogicalEventHandlerManager().fireEvent(storageEvent);
+
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		getContextDataController().setElement(sectionKey, finalSectionData);
+	//	fireSectionModified(currentProjectId, currentSectionId);
+		}
+	
+
+	}
+	
+//	private void fireSectionModified(String projectId, String currentSectionId) {
+//		if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(currentSectionId)) {
+//			CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+//			sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
+//			sectionModifiedEvt.setProjectId(projectId);
+//			sectionModifiedEvt.setFinalSectionId(currentSectionId);
+//			getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
+//		}	
+//	}
+
+	
 	private void fireConnectionSaved(String connectionName) {
 		CRONIOBusDesktopPreferencesEvent connectionSavedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
 		connectionSavedEvt.setEventType(EVENT_TYPE.CONNECTION_SAVED);
@@ -190,4 +246,5 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	private CRONIOBusDesktopPreferencesLayout getPreferencesLayout() {
 		return preferencesLayout;
 	}
+	
 }

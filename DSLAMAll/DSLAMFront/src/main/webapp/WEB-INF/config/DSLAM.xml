@@ -186,6 +186,9 @@
 				<SubService Name="ADD_CONNECTION">
 					<Descriptor>addConnection</Descriptor>
 				</SubService>
+				<SubService Name="UPDATE_MACHINE_CONFIG">
+					<Descriptor>updateMachineConfig</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 	</ServiceList>
