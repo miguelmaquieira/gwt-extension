@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection;
 
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
@@ -41,7 +41,6 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 		LOGICAL_TYPE	type			= evt.getEventType();
 			if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget) && LOGICAL_TYPE.SUBMIT_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 				saveCurrentMachineConfigureInDB();
 			}	
 //		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
@@ -95,26 +94,32 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 	 */
 	
 	private void saveCurrentMachineConfigureInDB() {
-
-		//final String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-
+		AEMFTMetadataElementComposite navigationData = getContextDataController().getElementAsComposite(PREFERENCES_NAVIGATION_DATA);
+		String currentSectionId = getElementDataController().getElementAsString(CURRENT_FINAL_SECTION_ID, navigationData);
+		String[] currentSectionIdSplit = currentSectionId.split("\\.");
+		String machine = currentSectionIdSplit[1];
+		
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(machine);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG);
 		String machineConfigureDataKey = sbKey.toString();
-
+		
 		AEMFTMetadataElementComposite machineConfigureData = getContextDataController().getElementAsComposite(machineConfigureDataKey);
 		getClientServerConnection().executeComm(machineConfigureData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_UPDATE_MACHINE_CONFIG_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				if (dataResult != null) {
-					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
-					if (projectData != null) {
-						//updateProjectClientData(currentProjectId, projectData, true);
-					}
-				}
+//				if (dataResult != null) {
+//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+//					if (projectData != null) {
+//						//updateProjectClientData(currentProjectId, projectData, true);
+//					}
+//				}
 
 			}
 
