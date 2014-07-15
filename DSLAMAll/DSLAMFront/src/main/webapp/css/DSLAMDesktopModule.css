@@ -33,10 +33,10 @@
 	bottom: 0px;
 }
 
-
-.dslam_studio-projectsLayout-projectWorkZone > div {
+.dslam_studio-projectsLayout-projectWorkZone>div {
 	height: 100%;
 }
+
 .dslam_studio-projectsLayout-projectWorkZone .dslam_studio-projectsLayout-contentInBox
 	{
 	border-radius: 3px;
@@ -46,7 +46,8 @@
 	height: auto !important;
 }
 
-.dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator {
+.dslam_studio-projectsLayout-projectWorkZone-header-infoZone-modIndicator
+	{
 	margin-right: -8px;
 }
 
@@ -76,12 +77,11 @@
 
 .dslam_studio-list-container .nav-list {
 	padding-right: 0px;
-	padding-left:0px;
+	padding-left: 0px;
 }
 
-.dslam_studio-list-container label{
+.dslam_studio-list-container label {
 	margin-bottom: 0px;
-
 }
 
 .dslam_studio-projectsLayout-listZone .nav-list label:ACTIVE,.dslam_studio-projectsLayout-listZone .nav-list label:FOCUS
@@ -115,7 +115,8 @@
 	margin-left: 5px;
 }
 
-.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label {
+.dslam_studio-projectsLayout-projectWorkZone-header-infoZone .gwt-Label
+	{
 	float: left;
 	margin-left: 10px;
 }
@@ -155,10 +156,10 @@
 	bottom: 0px;
 }
 
-
-.dslam_studio-preferencesLayout-workZone > div {
+.dslam_studio-preferencesLayout-workZone>div {
 	height: 100%;
 }
+
 .dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox
 	{
 	border-radius: 3px;
@@ -246,7 +247,7 @@
 
 .dslam_studio-toolbar-actions button {
 	width: auto;
-	border-width: 0px;	
+	border-width: 0px;
 }
 
 .dslam_studio-toolbar-info-zone {
@@ -349,7 +350,7 @@
 	padding: 5px;
 	font-weight: bold;
 	border-bottom: 1px solid #CCCCCC;
-	margin-bottom:5px;
+	margin-bottom: 5px;
 }
 
 .dslam_studio-processConfigureNodesListZone {
@@ -419,6 +420,20 @@
 	padding: 15px;
 }
 
+.dslam_studio-processConfigurePropertiesCheckBox .aegwt-checkbox {
+	height: 20px;	
+}
+
+.dslam_studio-processConfigurePropertiesCheckBox .aegwt-checkbox-checkZone {
+	float: left;
+}
+
+.dslam_studio-processConfigurePropertiesCheckBox .aegwt-checkbox-labelZone {
+	float: left;
+	line-height: 1.5;
+	margin-left: 5px;
+}
+
 .dslam_studio-processConfigureScheduleZone {
 	padding-left: 0px;
 	padding-right: 0px;
@@ -464,7 +479,7 @@
 }
 
 .bootstrap-filestyle .btn .badge {
-	display: none;	
+	display: none;
 }
 
 .bootstrap-filestyle .btn:focus {
@@ -553,7 +568,7 @@
 	padding-right: 5px;
 }
 
-.dslam_studio-nodeList-container .nav > li > a {
+.dslam_studio-nodeList-container .nav>li>a {
 	padding: 0px;
 }
 
@@ -564,7 +579,6 @@
 /*****************************************
 *			EXECUTE
 ******************************************/
-
 .dslam_studio-execution-loggerContainer .panel-heading {
 	height: 42px;
 }
@@ -573,15 +587,17 @@
 	margin-top: 10px;
 }
 
-.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle >.header {
+.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle>.header
+	{
 	font-size: 13px;
 	float: left;
-	width: 48%;	
+	width: 48%;
 }
 
-.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle >.subElementHeader {
+.dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle>.subElementHeader
+	{
 	font-size: 13px;
-	color: #999999;	
+	color: #999999;
 	float: left;
 	width: 48%;
 }
@@ -601,7 +617,7 @@
 	font-size: 14px;
 }
 
-.dslam_studio-execution-loggerTabsContentZone >.gwt-Label {
+.dslam_studio-execution-loggerTabsContentZone>.gwt-Label {
 	margin-top: 10px;
 	font-size: 13px;
 	color: #999999;
