@@ -63,6 +63,17 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		}
 		return executionData;
 	}
+	
+	@Override
+	public String readUntil(String regExp) throws CRONIOConnectionUncheckedException {
+		String read = null;
+		try {
+			read = connectionWrapper.readResponseUntil(regExp);
+		} catch (IOException e) {
+			throw new CRONIOConnectionUncheckedException(e);
+		}
+		return read;
+	}
 
 	@Override
 	public void closeConnection() {

@@ -17,7 +17,7 @@ import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstant
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
-import com.imotion.dslam.business.service.utils.CRONIOMetadataToBom;
+import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -177,7 +177,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	 */
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
-		DSLAMBOIProject project = CRONIOMetadataToBom.fromProjectData(projectData);
+		DSLAMBOIProject project = CRONIOBUMetadataToBomConversor.fromProjectData(projectData);
 
 		//MainScript
 		DSLAMBOIFile mainScript = project.getMainScript();

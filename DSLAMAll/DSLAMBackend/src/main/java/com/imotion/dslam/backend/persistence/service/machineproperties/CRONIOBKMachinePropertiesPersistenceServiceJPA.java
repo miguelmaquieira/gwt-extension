@@ -18,13 +18,15 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 	public CRONIOBOIMachineProperties addMachineProperties(CRONIOBOIMachineProperties machineProperties, Long preferencesId) {
 		Date						currentDate				= new Date();
 		CRONIOBOIPreferences		preferences				= getPreferencesPersistence().getPreferences(preferencesId);
+		
 		CRONIOBOMachineProperties	machinePropertiesJPA	= (CRONIOBOMachineProperties) machineProperties;
 		machinePropertiesJPA.setPreferences(preferences);
 		machinePropertiesJPA.setSaveTime(currentDate);
 		machinePropertiesJPA.setCreationTime(currentDate);
-		getPersistenceModule().create(machinePropertiesJPA);
+		machinePropertiesJPA = getPersistenceModule().create(machinePropertiesJPA);
+		
 		preferences.setSavedTime(currentDate);
-		getPreferencesPersistence().updatePreferences(preferencesId, preferences);
+		preferences = getPreferencesPersistence().updatePreferences(preferencesId, preferences);
 		return machinePropertiesJPA;
 	}
 	
@@ -39,7 +41,7 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 			machinePropertiesFromDb.setPromptRegEx(machineProperties.getPromptRegEx());
 			machinePropertiesFromDb.setConnectionVariables(machineProperties.getConnectionVariables());
 			machinePropertiesFromDb.setSaveTime(new Date());
-			getPersistenceModule().update(machinePropertiesFromDb);
+			machinePropertiesFromDb = getPersistenceModule().update(machinePropertiesFromDb);
 		}
 		return machinePropertiesFromDb;
 	}

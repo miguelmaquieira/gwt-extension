@@ -1,6 +1,6 @@
 package com.imotion.dslam.business.service.impl;
 
-import com.imotion.dslam.antlr.executor.CRONIOExecutorDSLAM;
+import com.imotion.dslam.antlr.executor.CRONIOExecutorImpl;
 import com.imotion.dslam.antlr.executor.CRONIOIExecutor;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
@@ -44,14 +44,10 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 	 * PRIVATE 
 	 */
 	private CRONIOIExecutor getExecutor(DSLAMBOIProject project) {
-		int machineType = project.getMachineType();
 		CRONIOIExecutor executor = null;
 		try {
-			if (machineType == DSLAMBOIProject.PROJECT_MACHINE_TYPE_DSLAM) {
-				executor = new CRONIOExecutorDSLAM(project);
-			}
+			executor = new CRONIOExecutorImpl(project);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return executor;

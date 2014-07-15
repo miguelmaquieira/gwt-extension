@@ -9,13 +9,14 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
-import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -98,22 +99,25 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	 * AEGWTHasLogicalEventHandlers
 	 */
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (CRONIOBusDesktopProcessNodeVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String id 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
-			String value 	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+			String	id 				=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
+			String	value 			=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+			String	variableTypeStr	=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
+			int		variableType	= AEMFTCommonUtilsBase.getIntegerFromString(variableTypeStr);
 			
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, id);
 			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, 2);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, data	, DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
+			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, variableType);
 			
 			if (nodeVariablesForm.getEditMode()) {
-				addVariables(id,data);
+				addVariables(id, data);
 			} else if (!nodeData.contains(id)) {
-				addVariables(id,data);
+				addVariables(id, data);
 			} else {
 				nodeVariablesForm.setErrorVariableExist();
 			}
@@ -125,8 +129,11 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 			
 		} else if(CRONIOBusDesktopProcessNodesInfoVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
-			AEMFTMetadataElement nodeVariableData 	= evt.getElementAsDataValue();
-			nodeVariablesForm.setData((AEMFTMetadataElementComposite) nodeVariableData);
+			String variableId	= evt.getSourceWidgetId();
+			String variableKey	= CRONIOBOINode.NODE_VARIABLE_LIST + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + variableId; 
+			AEMFTMetadataElementComposite variableData = getElementController().getElementAsComposite(variableKey, nodeData);
+			
+			nodeVariablesForm.setData(variableData);
 			nodeVariablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
 			nodeVariablesForm.center();
 			

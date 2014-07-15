@@ -82,6 +82,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Valor")
 	String value();
 	
+	@DefaultStringValue("Ámbito")
+	String scope();
+	
 	@DefaultStringValue("Tipo")
 	String type();
 
@@ -135,6 +138,12 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Variable externa")
 	String external_variable();
+	
+	@DefaultStringValue("Texto")
+	String text_variable();
+
+	@DefaultStringValue("Numérica")
+	String numeric_variable();
 	
 	@DefaultStringValue("Scripts")
 	String scripts_label();

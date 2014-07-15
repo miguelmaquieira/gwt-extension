@@ -4,6 +4,5 @@
         <wb-resource deploy-path="/" source-path="/target/generated-sources/antlr4"/>
         <wb-resource deploy-path="/" source-path="/src/main/antlr4"/>
         <wb-resource deploy-path="/" source-path="/src/main/resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/antlr4/imports"/>
     </wb-module>
 </project-modules>

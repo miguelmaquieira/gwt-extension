@@ -23,7 +23,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMeta
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
-public class CRONIOMetadataToBom {
+public class CRONIOBUMetadataToBomConversor {
 
 	private static AEMFTIMetadataElementController elementController = null;
 
@@ -213,13 +213,15 @@ public class CRONIOMetadataToBom {
 	public static DSLAMBOIVariable fromVariableData(AEMFTMetadataElementComposite variableData) {
 		DSLAMBOIVariable variable = null;
 		if (variableData != null) {
-			String 	variableName	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_NAME	, variableData);
-			String 	variableValue	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_VALUE	, variableData);
-			int		variableType	= getElementController().getElementAsInt(DSLAMBOIVariable.VARIABLE_TYPE		, variableData);
+			String 	variableName	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_NAME		, variableData);
+			String 	variableValue	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_VALUE		, variableData);
+			int		variableScope	= getElementController().getElementAsInt(DSLAMBOIVariable.VARIABLE_SCOPE		, variableData);
+			int		variableType	= getElementController().getElementAsInt(DSLAMBOIVariable.VARIABLE_TYPE			, variableData);
 
 			variable = new DSLAMBOVariable();
 			variable.setVariableName(variableName);
 			variable.setVariableValue(variableValue);
+			variable.setVariableScope(variableScope);
 			variable.setVariableType(variableType);
 		}
 		return variable;

@@ -9,27 +9,26 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import com.imotion.antlr.DSLAMBaseVisitor;
-import com.imotion.antlr.DSLAMParser;
-import com.imotion.antlr.DSLAMParser.ConditionContext;
-import com.imotion.antlr.DSLAMParser.DslamCommandsContext;
-import com.imotion.antlr.DSLAMParser.ExecutionContext;
-import com.imotion.antlr.DSLAMParser.ExpressionContext;
-import com.imotion.antlr.DSLAMParser.ListExpContext;
-import com.imotion.antlr.DSLAMParser.ListItemContext;
-import com.imotion.antlr.DSLAMParser.StatementContext;
-import com.imotion.antlr.DSLAMParser.StringExprContext;
-import com.imotion.antlr.DSLAMParser.ValueContext;
-import com.imotion.antlr.DSLAMParser.VariableContext;
+import com.imotion.antlr.ImoLangBaseVisitor;
+import com.imotion.antlr.ImoLangParser;
+import com.imotion.antlr.ImoLangParser.ConditionContext;
+import com.imotion.antlr.ImoLangParser.ExpressionContext;
+import com.imotion.antlr.ImoLangParser.FunctionContext;
+import com.imotion.antlr.ImoLangParser.ListExpContext;
+import com.imotion.antlr.ImoLangParser.ListItemContext;
+import com.imotion.antlr.ImoLangParser.StatementContext;
+import com.imotion.antlr.ImoLangParser.StringExprContext;
+import com.imotion.antlr.ImoLangParser.ValueContext;
+import com.imotion.antlr.ImoLangParser.VariableContext;
 import com.imotion.dslam.conn.CRONIOIConnection;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 
-public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpreterVisitorValue> implements CRONIOILangVisitor {
+public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInterpreterVisitorValue> implements CRONIOILangVisitor {
 
 	private CRONIOIConnection		connection;
 	private Map<String, Object>		allVariables;
 
-	public DSLAMInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables) {
+	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables) {
 		this.connection = connection;
 		this.allVariables = new HashMap<>();
 		if (variables != null) {
@@ -68,40 +67,30 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 	 */
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitExecution(@NotNull DSLAMParser.ExecutionContext ctx) {
-		String finalCommand = "";
-
-		int statementMembersSize = ctx.getChildCount();
-		for (int i = 1; i < statementMembersSize; i++) {
-			if (i > 1) {
-				finalCommand += " ";
-			}
-			
-			ParseTree member = ctx.getChild(i);
-			if (member instanceof DslamCommandsContext) {
-				finalCommand += member.getText();
-			} else if (member instanceof VariableContext) {
-				String variableName = member.getText();
-				Object value = allVariables.get(variableName);
-				finalCommand += value.toString();
-			}
-		}
-
-		CRONIOIExecutionData response = connection.executeCommand(finalCommand);
-		DSLAMInterpreterVisitorValue responseValue = new DSLAMInterpreterVisitorValue(response);
-
+	public CRONIOInterpreterVisitorValue visitExecution(@NotNull ImoLangParser.ExecutionContext ctx) {
+		CRONIOInterpreterVisitorValue	commandValue 	= this.visit(ctx.stringExpr());
+		CRONIOIExecutionData			response 		= connection.executeCommand(commandValue.asString());
+		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
 		return responseValue;
+	}
+	
+	@Override
+	public CRONIOInterpreterVisitorValue visitReadUntil(@NotNull ImoLangParser.ReadUntilContext ctx) {
+		CRONIOInterpreterVisitorValue	regExValue		= this.visit(ctx.stringExpr());
+		String							read	 		= connection.readUntil(regExValue.asString());
+		CRONIOInterpreterVisitorValue	readValue 		= new CRONIOInterpreterVisitorValue(read);
+		return readValue;
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitAssignStatement(@NotNull DSLAMParser.AssignStatementContext ctx) {
+	public CRONIOInterpreterVisitorValue visitAssignStatement(@NotNull ImoLangParser.AssignStatementContext ctx) {
 		String varName = ctx.VARIABLE_SCRIPT().getText();
-		DSLAMInterpreterVisitorValue varValue = null;
+		CRONIOInterpreterVisitorValue varValue = null;
 
 		ExpressionContext			expression			= ctx.expression();
 		StringExprContext			stringExpression	= ctx.stringExpr();
 		ListExpContext				listExpContext 		= ctx.listExp();
-		ExecutionContext			execution			= ctx.execution();
+		FunctionContext				function			= ctx.function();
 		if (expression != null) {
 			if (expression.getChildCount() == 1) {
 				ParseTree firstChild = expression.getChild(0);
@@ -110,11 +99,11 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 				varValue = this.visit(expression);
 			}
 		} else if (stringExpression != null) {
-			varValue =this.visit(stringExpression);
+			varValue = this.visit(stringExpression);
 		} else if (listExpContext != null) {
-			varValue =this.visit(listExpContext);
-		} else if (execution != null) {
-			varValue = this.visit(execution);
+			varValue = this.visit(listExpContext);
+		} else if (function != null) {
+			varValue = this.visit(function);
 		}
 
 		allVariables.put(varName, varValue.asObject());
@@ -123,8 +112,8 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitIfStatement(@NotNull DSLAMParser.IfStatementContext ctx) {
-		DSLAMInterpreterVisitorValue conditionValueResult = this.visit(ctx.condition());
+	public CRONIOInterpreterVisitorValue visitIfStatement(@NotNull ImoLangParser.IfStatementContext ctx) {
+		CRONIOInterpreterVisitorValue conditionValueResult = this.visit(ctx.condition());
 		boolean conditionResult = conditionValueResult.asBoolean();
 
 		if (conditionResult) {
@@ -133,14 +122,14 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			this.visit(ctx.elseBlock());
 		}
 
-		return DSLAMInterpreterVisitorValue.VOID;
+		return CRONIOInterpreterVisitorValue.VOID;
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitForStatement(@NotNull DSLAMParser.ForStatementContext ctx) {
+	public CRONIOInterpreterVisitorValue visitForStatement(@NotNull ImoLangParser.ForStatementContext ctx) {
 		String iterVarName = ctx.VARIABLE_SCRIPT().getText();
-		DSLAMInterpreterVisitorValue start = this.visit(ctx.value(0));
-		DSLAMInterpreterVisitorValue end = this.visit(ctx.value(1));
+		CRONIOInterpreterVisitorValue start = this.visit(ctx.value(0));
+		CRONIOInterpreterVisitorValue end = this.visit(ctx.value(1));
 
 		List<StatementContext> statementContextList = ctx.statement();
 		allVariables.put(iterVarName, start.asInteger());
@@ -150,12 +139,12 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			i = (int) allVariables.get(iterVarName);
 		}
 		allVariables.remove(iterVarName);
-		return DSLAMInterpreterVisitorValue.VOID;
+		return CRONIOInterpreterVisitorValue.VOID;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public DSLAMInterpreterVisitorValue visitForEachStatement(@NotNull DSLAMParser.ForEachStatementContext ctx) {
+	public CRONIOInterpreterVisitorValue visitForEachStatement(@NotNull ImoLangParser.ForEachStatementContext ctx) {
 		String							listVarName				= ctx.variable().getText();
 		String							itemListVarName			= ctx.VARIABLE_SCRIPT().getText();
 		List<StatementContext>			statementContextList	= ctx.statement();
@@ -165,26 +154,26 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			visitStamentContextList(statementContextList);
 		}
 		allVariables.remove(itemListVarName);
-		return DSLAMInterpreterVisitorValue.VOID;
+		return CRONIOInterpreterVisitorValue.VOID;
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitWhileStatement(@NotNull DSLAMParser.WhileStatementContext ctx) {
+	public CRONIOInterpreterVisitorValue visitWhileStatement(@NotNull ImoLangParser.WhileStatementContext ctx) {
 		ConditionContext conditionContext = ctx.condition();
 		List<StatementContext> statementContextList = ctx.statement();
 		while (checkCondition(conditionContext)) {
 			visitStamentContextList(statementContextList);
 		}
-		return DSLAMInterpreterVisitorValue.VOID;
+		return CRONIOInterpreterVisitorValue.VOID;
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitCondition(@NotNull DSLAMParser.ConditionContext ctx) {
+	public CRONIOInterpreterVisitorValue visitCondition(@NotNull ImoLangParser.ConditionContext ctx) {
 		boolean result = false;
 
 		String	logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
-		DSLAMInterpreterVisitorValue	leftSideValue		= this.visit(ctx.value(0));
-		DSLAMInterpreterVisitorValue	rightSideValue		= this.visit(ctx.value(1));
+		CRONIOInterpreterVisitorValue	leftSideValue		= this.visit(ctx.value(0));
+		CRONIOInterpreterVisitorValue	rightSideValue		= this.visit(ctx.value(1));
 		int		leftSideInt			= leftSideValue.asInteger();
 		int		rightSideInt		= rightSideValue.asInteger();
 
@@ -201,13 +190,13 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		} else if (logicalComparator.equals("!=")) {
 			result = leftSideInt != rightSideInt;
 		}
-		DSLAMInterpreterVisitorValue resultValue = new DSLAMInterpreterVisitorValue(result);
+		CRONIOInterpreterVisitorValue resultValue = new CRONIOInterpreterVisitorValue(result);
 		return resultValue;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public DSLAMInterpreterVisitorValue visitValue(@NotNull DSLAMParser.ValueContext ctx) {
+	public CRONIOInterpreterVisitorValue visitValue(@NotNull ImoLangParser.ValueContext ctx) {
 		TerminalNode 			integerNode				= ctx.INTEGER();
 		TerminalNode 			stringNode				= ctx.STRING_LITERAL();
 		VariableContext 		variableContext			= ctx.variable();
@@ -227,7 +216,7 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			ValueContext					indexValueContext	= listItemContext.value();
 			String							variableName		= variableListContext.getText();
 			List<Object>					list				= (List<Object>) allVariables.get(variableName);
-			DSLAMInterpreterVisitorValue	indexValue			= this.visit(indexValueContext);
+			CRONIOInterpreterVisitorValue	indexValue			= this.visit(indexValueContext);
 			object	= list.get(indexValue.asInteger());
 		}
 		
@@ -237,37 +226,37 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 			object = objectAsString;
 		}
 
-		DSLAMInterpreterVisitorValue value = new DSLAMInterpreterVisitorValue(object);
+		CRONIOInterpreterVisitorValue value = new CRONIOInterpreterVisitorValue(object);
 		return value; 
 	}
 	
 	@Override 
-	public DSLAMInterpreterVisitorValue visitStringExpr(@NotNull DSLAMParser.StringExprContext ctx) {
+	public CRONIOInterpreterVisitorValue visitStringExpr(@NotNull ImoLangParser.StringExprContext ctx) {
 		List<ValueContext> stringValueContextList = ctx.value();
 		StringBuilder sb = new StringBuilder();
 		for (ValueContext stringValueContext : stringValueContextList) {
-			DSLAMInterpreterVisitorValue stringValue = this.visit(stringValueContext);
+			CRONIOInterpreterVisitorValue stringValue = this.visit(stringValueContext);
 			String string = stringValue.asString(); 
 			sb.append(string);
 		}
 		String result = sb.toString();
-		DSLAMInterpreterVisitorValue returnValue = new DSLAMInterpreterVisitorValue(result);
+		CRONIOInterpreterVisitorValue returnValue = new CRONIOInterpreterVisitorValue(result);
 		return returnValue; 
 	}
 
 	@Override
-	public DSLAMInterpreterVisitorValue visitParExp(@NotNull DSLAMParser.ParExpContext ctx) {
+	public CRONIOInterpreterVisitorValue visitParExp(@NotNull ImoLangParser.ParExpContext ctx) {
 		return this.visit(ctx.expression());
 	}
 
 	@Override 
-	public DSLAMInterpreterVisitorValue visitAritOp(@NotNull DSLAMParser.AritOpContext ctx) {
+	public CRONIOInterpreterVisitorValue visitAritOp(@NotNull ImoLangParser.AritOpContext ctx) {
 		ExpressionContext 	leftExpresion	= ctx.left;
 		ExpressionContext 	rightExpresion	= ctx.right;
 		String 				operator 		= ctx.op.getText();
 
-		DSLAMInterpreterVisitorValue 	leftValue 	= this.visit(leftExpresion);
-		DSLAMInterpreterVisitorValue	rightValue	= this.visit(rightExpresion);
+		CRONIOInterpreterVisitorValue 	leftValue 	= this.visit(leftExpresion);
+		CRONIOInterpreterVisitorValue	rightValue	= this.visit(rightExpresion);
 		Integer result		= -1;
 		if (operator.equals("*")) {
 			result = leftValue.asInteger() * rightValue.asInteger();
@@ -278,24 +267,24 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 		} else if (operator.equals("-")) {
 			result = leftValue.asInteger() - rightValue.asInteger();
 		}
-		DSLAMInterpreterVisitorValue valueResult = new DSLAMInterpreterVisitorValue(result);
+		CRONIOInterpreterVisitorValue valueResult = new CRONIOInterpreterVisitorValue(result);
 		return valueResult; 
 	}
 
 	@Override 
-	public DSLAMInterpreterVisitorValue visitAtomExpr(@NotNull DSLAMParser.AtomExprContext ctx) { 
+	public CRONIOInterpreterVisitorValue visitAtomExpr(@NotNull ImoLangParser.AtomExprContext ctx) { 
 		return this.visit(ctx.value());
 	}
 	
 	@Override
-	public DSLAMInterpreterVisitorValue visitListExp(@NotNull DSLAMParser.ListExpContext ctx) {
+	public CRONIOInterpreterVisitorValue visitListExp(@NotNull ImoLangParser.ListExpContext ctx) {
 		List<ValueContext> valueContextList = ctx.value();
 		List<Object> list = new ArrayList<>();
 		for (ValueContext valueContext : valueContextList) {
-			DSLAMInterpreterVisitorValue value = this.visit(valueContext);
+			CRONIOInterpreterVisitorValue value = this.visit(valueContext);
 			list.add(value.asObject());
 		}
-		DSLAMInterpreterVisitorValue listValue = new DSLAMInterpreterVisitorValue(list);
+		CRONIOInterpreterVisitorValue listValue = new CRONIOInterpreterVisitorValue(list);
 		return listValue; 
 	}
 	
@@ -304,7 +293,7 @@ public class DSLAMInterpreterVisitorImpl extends DSLAMBaseVisitor<DSLAMInterpret
 	 */
 
 	private boolean checkCondition(ConditionContext conditionContext) {
-		DSLAMInterpreterVisitorValue conditionValueResult = this.visit(conditionContext);
+		CRONIOInterpreterVisitorValue conditionValueResult = this.visit(conditionContext);
 		boolean conditionResult = conditionValueResult.asBoolean();
 		return conditionResult;
 	}

@@ -4,21 +4,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+
+import com.imotion.antlr.ImoLangLexer;
+import com.imotion.antlr.ImoLangParser;
+import com.imotion.antlr.ImoLangParser.ProgramContext;
+import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.conn.CRONIOConnectionFactory;
+import com.imotion.dslam.conn.CRONIOIConnection;
 import com.imotion.dslam.logger.CRONIOExecutionLoggerImpl;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
+public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	
 	private CRONIOIExecutionLogger 		logger;
 	private DSLAMBOIProject				project;
 	private HashMap<Long, Thread> 		threads;
 
-	public CRONIOExecutorBase(DSLAMBOIProject project) throws Exception {
+	public CRONIOExecutorImpl(DSLAMBOIProject project) throws Exception {
 		this.project			= project;
 		this.logger				= new CRONIOExecutionLoggerImpl(project);
 	}
@@ -37,18 +46,22 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 	}
 	
 	/**
-	 * PROTECTED 
-	 */
-
-	protected abstract void executeInNode(long processId, CRONIOBOINode node, String scriptCode, Map<String, Object> variables);
-	
-	protected CRONIOIExecutionLogger getLogger() {
-		return logger;
-	}
-	
-	/**
 	 * PRIVATE
 	 */
+	
+	private void executeInNode(long processId, CRONIOBOINode node, String scriptCode, Map<String, Object> allVariables) {
+		ImoLangLexer		lexer	= new ImoLangLexer(new ANTLRInputStream(scriptCode));
+		CommonTokenStream	tokens	= new CommonTokenStream(lexer);
+		
+		ImoLangParser 	parser 	= new ImoLangParser(tokens);
+		ProgramContext 	tree 	= parser.program();
+		
+		CRONIOIConnection 			connection 	= CRONIOConnectionFactory.getConnection(processId, node, getLogger());
+		CRONIOInterpreterVisitorImpl visitor 	= new CRONIOInterpreterVisitorImpl(connection, allVariables);
+		visitor.visit(tree);
+		CRONIOConnectionFactory.releaseConnection(connection);
+	}
+	
 	private void executeInNodes(long processId, String scriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
 		threads = new HashMap<>();
 		for (CRONIOBOINode node : nodeList) {
@@ -132,6 +145,10 @@ public abstract class CRONIOExecutorBase implements CRONIOIExecutor {
 			}
 		}
 		return variableValue;
+	}
+	
+	private CRONIOIExecutionLogger getLogger() {
+		return logger;
 	}
 
 }

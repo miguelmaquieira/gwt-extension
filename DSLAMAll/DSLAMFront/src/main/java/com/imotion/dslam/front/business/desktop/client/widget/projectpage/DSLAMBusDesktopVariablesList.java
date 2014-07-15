@@ -15,8 +15,8 @@ import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
 public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
-	public static final String NAME = "DSLAMBusDesktopVariablesList";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	public 		static final String NAME = "DSLAMBusDesktopVariablesList";
+	protected 	static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	public DSLAMBusDesktopVariablesList(AEGWTButton deleteButton) {
 		super(true,true,false, deleteButton);
@@ -44,17 +44,26 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
 					String 	name	 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable);
 					String 	value 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+					int		scope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variable);
 					int		type 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variable);
-
-					String typeStr = "";
-					if (DSLAMBOIVariablesDataConstants.VARIABLE_PROCESS_TYPE == type) {
-						typeStr = TEXTS.process_variable();
+					
+					String scopeStr = "";
+					if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS == scope) {
+						scopeStr = TEXTS.process_variable();
 					} else {
-						typeStr = TEXTS.external_variable();
+						scopeStr = TEXTS.external_variable();
+					}
+					
+					String typeStr = "";
+					if (DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT == type) {
+						typeStr = TEXTS.text_variable();
+					} else {
+						typeStr = TEXTS.numeric_variable();
 					}
 
 					Map<String,String> variableRow = new HashMap<String, String>();
 					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, name);
+					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, scopeStr);
 					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, typeStr);
 					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, value);
 
@@ -71,10 +80,12 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	@Override
 	protected void setupHeader() {
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
+		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
 		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, TEXTS.variable());
+		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, TEXTS.variable());
+		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, TEXTS.scope());
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, TEXTS.type());
 		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
 
@@ -82,7 +93,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	protected String getEventName() {
-		return NAME;
+		return getName();
 	}
 
 	@Override

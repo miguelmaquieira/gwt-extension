@@ -11,30 +11,47 @@ public class DSLAMBOVariable implements DSLAMBOIVariable {
 	
 	private String variableName;
 	private String 	variableValue;
-	private int 	variableType;
+	private int 	variableScope;
+	private int	variableType;
 
 	public DSLAMBOVariable() {}
 
+	@Override
 	public String getVariableName() {
 		return variableName;
 	}
 
+	@Override
 	public void setVariableName(String variableName) {
 		this.variableName = variableName;
 	}
 
+	@Override
 	public String getVariableValue() {
 		return variableValue;
 	}
 
+	@Override
 	public void setVariableValue(String variableValue) {
 		this.variableValue = variableValue;
 	}
 
+	@Override
+	public int getVariableScope() {
+		return variableScope;
+	}
+
+	@Override
+	public void setVariableScope(int variableScope) {
+		this.variableScope = variableScope;
+	}
+
+	@Override
 	public int getVariableType() {
 		return variableType;
 	}
 
+	@Override
 	public void setVariableType(int variableType) {
 		this.variableType = variableType;
 	}

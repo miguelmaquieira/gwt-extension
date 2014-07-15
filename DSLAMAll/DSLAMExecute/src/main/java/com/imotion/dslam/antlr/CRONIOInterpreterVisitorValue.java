@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 
-public class DSLAMInterpreterVisitorValue {
+public class CRONIOInterpreterVisitorValue {
 
-	public static DSLAMInterpreterVisitorValue VOID = new DSLAMInterpreterVisitorValue(new Object());
+	public static CRONIOInterpreterVisitorValue VOID = new CRONIOInterpreterVisitorValue(new Object());
 
 	private final Object value;
 
-	public DSLAMInterpreterVisitorValue(Object value) {
+	public CRONIOInterpreterVisitorValue(Object value) {
 		this.value = value;
 	}
 
@@ -76,7 +76,7 @@ public class DSLAMInterpreterVisitorValue {
 			return false;
 		}
 
-		DSLAMInterpreterVisitorValue that = (DSLAMInterpreterVisitorValue)o;
+		CRONIOInterpreterVisitorValue that = (CRONIOInterpreterVisitorValue)o;
 
 		return this.value.equals(that.value);
 	}

@@ -109,20 +109,6 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	
 	public boolean showValidateClientErrors() {
 		boolean showErrors = false;
-//		if (AEMFTCommonUtilsBase.isEmptyString(authorIdTextBox.getText())) {
-//			authorIdTextBox.setErrorLabelTextAndShow(TEXTS.common_error_required());
-//			showErrors = true;
-//		} else {
-//			authorIdTextBox.setErrorLabelVisible(false);
-//		}
-//
-//		if (AEMFTCommonUtilsBase.isEmptyString(authorNameTextBox.getText())) {
-//			authorNameTextBox.setErrorLabelTextAndShow(TEXTS.common_error_required());
-//			showErrors = true;
-//		} else {
-//			authorNameTextBox.setErrorLabelVisible(false);
-//		}
-		
 		return showErrors;
 	}
 
@@ -178,7 +164,6 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT			, formData	, promptTextBox.getText());
 			getElementController().setElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE	, formData	, protocolTypeDropdownButton.getSelectedId());
 			//formData.setKey(getId());
-					
 			return formData;
 		} else {
 			return null;
@@ -217,27 +202,5 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	@Override
 	protected void showErrors(AEMFTMetadataElementComposite dataErrors) {
 
-//		AEMFTMetadataElementComposite authorErrors = getElementController().getElementAsComposite(SNDOBUIManagementBusinessServiceConstants.KEY_ERRORS_AUTHOR_DATA	, dataErrors);
-//
-//		String sellableListErrors 		= getElementController().getElementAsString(SNDOBUIManagementBusinessServiceConstants.KEY_SELLABLE_LIST_ERROR	, authorErrors);
-//		String featuredSellableError 	= getElementController().getElementAsString(SNDOBUIManagementBusinessServiceConstants.KEY_FEATUREDITEM_ERROR	, authorErrors);
-//		String weekOfferSellableError 	= getElementController().getElementAsString(SNDOBUIManagementBusinessServiceConstants.KEY_WEEKOFFERITEM_ERROR	, authorErrors);
-//		String authorIdExist			= getElementController().getElementAsString(SNDOBUIManagementBusinessServiceConstants.KEY_EXIST_ERROR			, authorErrors);
-//
-//		if (!AEMFTCommonUtilsBase.isEmptyString(authorIdExist)) {
-//			authorIdTextBox.setErrorLabelTextAndShow(TEXTS.common_error_author_exist());
-//		}
-//
-//		if (!AEMFTCommonUtilsBase.isEmptyString(sellableListErrors)) {
-//			sellableListTextBox.setErrorLabelTextAndShow(TEXTS.common_error_no_exist() + sellableListErrors);
-//		}
-//
-//		if (!AEMFTCommonUtilsBase.isEmptyString(featuredSellableError)) {
-//			featuredItemTextBox.setErrorLabelTextAndShow(TEXTS.common_error_featured_no_exist() + featuredSellableError);
-//		}
-//
-//		if (!AEMFTCommonUtilsBase.isEmptyString(weekOfferSellableError)) {
-//			weekOfferTextBox.setErrorLabelTextAndShow(TEXTS.common_error_weekoffer_no_exist() + weekOfferSellableError);
-//		}
 	}
 }

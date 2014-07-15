@@ -22,4 +22,8 @@ public interface CRONIOBOIPreferences extends Serializable, CRONIOBOIPreferences
 
 	void setCreationTime(Date creationTime);
 
+	void addMachineProperties(CRONIOBOIMachineProperties machineProperties);
+
+	void removeMachineProperties(CRONIOBOIMachineProperties machineProperties);
+
 }
