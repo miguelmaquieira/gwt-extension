@@ -1,10 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.preferences;
 
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditor;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditorChangeHandler;
@@ -16,8 +14,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollB
 public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCompositePanel  {
 
 	public static final String NAME = "CRONIOBusDesktopPreferencesMachineSectionsDeckPanel";
-
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private DeckPanel 											rootDeckPanel;
 	private CRONIOBusDesktopEditor								editor;
@@ -50,23 +46,19 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 	}
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
-
-		String[] 	sectionIdSplit 		= sectionId.split("\\.");
-		int			sectionIdSplitSize	= sectionIdSplit.length;
-		String		finalSectionId 		= sectionIdSplit[sectionIdSplitSize-1];
-
-		if (CRONIOBOIMachineProperties.MACHINE_VARIABLES.equals(finalSectionId)) {
+		if (sectionId.endsWith(CRONIOBOIMachineProperties.MACHINE_VARIABLES)) {
 			rootDeckPanel.showWidget(0);
 			variablesPreferencesMachine.setData(sectionData);
-		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG.equals(finalSectionId)) {
+		} else if (sectionId.endsWith(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG)) {
+			String machineName = getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, sectionData);
 			preferencesMachineConfigureForm.resetForm();
 			rootDeckPanel.showWidget(1);
-			preferencesMachineConfigureForm.setId(sectionIdSplit[2]);
+			preferencesMachineConfigureForm.setId(machineName);
 			preferencesMachineConfigureForm.setData(sectionData);
-		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT.equals(finalSectionId)) {
+		} else if (sectionId.endsWith(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT)) {
 			rootDeckPanel.showWidget(2);
 			editor.setData(sectionData);
-		} else if (CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT.equals(finalSectionId)) {
+		} else if (sectionId.endsWith(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT)) {
 			rootDeckPanel.showWidget(2);
 			editor.setData(sectionData);
 		}
