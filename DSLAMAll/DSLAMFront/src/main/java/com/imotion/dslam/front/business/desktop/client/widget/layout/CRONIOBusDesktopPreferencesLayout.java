@@ -73,7 +73,7 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		FlowPanel bottomRightZone = new FlowPanel();
 		bottomZone.add(bottomRightZone);
 		bottomRightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		bottomRightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE);
+		bottomRightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT);
 
 		sectionHeader = new CRONIOBusDesktopPreferencesLayoutItemHeader();
 		bottomRightZone.add(sectionHeader);

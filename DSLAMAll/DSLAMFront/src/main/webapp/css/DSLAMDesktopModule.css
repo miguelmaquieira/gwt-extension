@@ -18,6 +18,7 @@
 	height: 100%;
 	padding: 0px;
 	position: relative;
+/* 	background: no-repeat url('../images/chroniumIDE-logo400-transparent.png') center center; */
 }
 
 .dslam_studio-projectsLayout-projectWorkZone-header {
@@ -33,7 +34,7 @@
 	bottom: 0px;
 }
 
-.dslam_studio-projectsLayout-projectWorkZone>div {
+.dslam_studio-projectsLayout-projectWorkZone > div {
 	height: 100%;
 }
 
@@ -150,11 +151,16 @@
 }
 
 .dslam_studio-preferencesLayout-workZone {
+	height: 100%;
 	padding: 0px;
 }
 
 .dslam_studio-preferencesLayout-workZone>div {
 	height: 100%;
+}
+
+.dslam_studio-preferencesLayout-workZone > div > div {
+	background-color: #ffffff;
 }
 
 .dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox
