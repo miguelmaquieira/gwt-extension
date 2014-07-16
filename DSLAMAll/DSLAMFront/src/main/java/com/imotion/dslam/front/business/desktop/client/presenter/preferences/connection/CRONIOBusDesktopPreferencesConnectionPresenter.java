@@ -90,7 +90,7 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 	
 	@Override
 	protected String getSectionType() {
-		return SECTION_TYPE_MACHINE_PROPERTIES;
+		return CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST;
 	}
 	
 	/**

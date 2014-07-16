@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.flow;
 
 import com.google.gwt.user.client.History;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopHistoryNavigationConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
@@ -49,7 +50,7 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					projectProcessFlowEvent(evt);
 				} else if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(sourceWindow)) {
 					preferencesFlowEvent();
-				} else if (CRONIOBusPreferencesBasePresenterConstants.SECTION_TYPE_MACHINE_PROPERTIES.equals(sourceWindow)) {
+				} else if (CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST.equals(sourceWindow)) {
 					machinesFlowEvent();
 				}
 			}

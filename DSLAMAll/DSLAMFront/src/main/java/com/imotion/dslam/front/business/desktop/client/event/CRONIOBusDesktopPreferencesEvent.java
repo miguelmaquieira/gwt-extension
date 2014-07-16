@@ -12,6 +12,7 @@ public class CRONIOBusDesktopPreferencesEvent extends AEGWTEvent<CRONIOBusDeskto
 	private String		connectionName;
 	private String		mainSectionId;
 	private String		finalSectionId;
+	private String		finalSectionPath;
 	
 	public CRONIOBusDesktopPreferencesEvent(String sourceWindow, String sourceWidget) {
 		super(sourceWindow, sourceWidget, null);
@@ -47,6 +48,14 @@ public class CRONIOBusDesktopPreferencesEvent extends AEGWTEvent<CRONIOBusDeskto
 
 	public void setFinalSectionId(String finalSectionId) {
 		this.finalSectionId = finalSectionId;
+	}
+	
+	public String getFinalSectionPath() {
+		return finalSectionPath;
+	}
+	
+	public void setFinalSectionPath(String finalSectionId) {
+		this.finalSectionPath = finalSectionId;
 	}
 
 	@Override

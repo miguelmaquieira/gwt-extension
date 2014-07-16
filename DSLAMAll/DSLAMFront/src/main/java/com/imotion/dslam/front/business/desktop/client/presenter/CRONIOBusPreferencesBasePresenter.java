@@ -44,19 +44,16 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	public void dispatchEvent(CRONIOBusDesktopPreferencesEvent evt) {
 		EVENT_TYPE evtTyp = evt.getEventType();
 		if (EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(evtTyp)) {
-			String		mainSectionId		= evt.getMainSectionId();
-			String 		finalSectionId		= evt.getFinalSectionId();
-			String 		finalSectionKey 	= mainSectionId + "." + finalSectionId;
-			String[] 	mainSectionIdSplit 	= mainSectionId.split("\\.");
-			String 		sectionMenu 		= mainSectionIdSplit[0];
-			boolean 	navigate 			= !getSectionType().equals(sectionMenu);
+			String 		mainSectionId 		= evt.getMainSectionId();
+			String 		finalSectionPath 	= evt.getFinalSectionPath();
+			boolean 	navigate 			= !getSectionType().equals(mainSectionId);
 
-			updateNavigationData(sectionMenu, finalSectionKey);
+			updateNavigationData(mainSectionId, finalSectionPath);
 			if (navigate) {
-				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(sectionMenu, getName());
+				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(mainSectionId, getName());
 				getFlowEventHandlerManager().fireEvent(flowEvent);
 			} else {
-				openFinalSection(mainSectionId, finalSectionId);
+				openFinalSection(finalSectionPath);
 			}
 		} else if (EVENT_TYPE.NEW_CONNECTION.equals(evtTyp)) {
 			String	connectionName 	= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
@@ -113,8 +110,8 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasPreferencesEventHandlers.TYPE, getPreferencesLayout());
 
 		String sectionKey = getContextDataController().getElementAsString(PREFERENCES_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
-		AEMFTMetadataElementComposite preferencesData = getContextDataController().getElementAsComposite(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-		openFinalSection(sectionKey, preferencesData);
+		AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA_PREFFIX + sectionKey);
+		openFinalSection(sectionKey, finalSectionData);
 	}
 
 	protected abstract void openFinalSection(String machineFinalSectionId, AEMFTMetadataElementComposite finalSectionData);
@@ -134,27 +131,14 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		storageEvent.addElementAsDataValue(navigationData);
 		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 		getLogicalEventHandlerManager().fireEvent(storageEvent);
-
 	}
 
-	private void openFinalSection(String mainSectionId, String finalSectionId) {
-
-		String 		finalSectionKey 		= mainSectionId + "." + finalSectionId;
-		String[] 	finalSectionKeySplit 	= finalSectionKey.split("\\.");
-		String 		finalSectionDataKey 	= "";
-		
-		if (CRONIOBusPreferencesBasePresenterConstants.SECTION_TYPE_MACHINE_PROPERTIES.equals(finalSectionKeySplit[0])) {
-			String finalSectionKeyModify = finalSectionKey.replace(CRONIOBusPreferencesBasePresenterConstants.SECTION_TYPE_MACHINE_PROPERTIES, CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-			finalSectionDataKey 	= CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + "." + finalSectionKeyModify;
-		} else {
-			finalSectionDataKey 	= CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + "." + finalSectionKey;
-		}
-	
-		AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(finalSectionDataKey);
+	private void openFinalSection(String finalSectionPath) {
+		String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
+		AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
 		if (finalSectionData != null) {
 			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 		}
-
 		openFinalSection(finalSectionDataKey, finalSectionData);
 	}
 

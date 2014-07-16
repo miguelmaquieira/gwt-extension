@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences;
 
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -9,13 +10,14 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 	
 	public static final String NAME  = "CRONIOBusDesktopPreferencesMenuFinalItem";
 	
-	private String mainSectionId;
-	private String finalSectionId;
+	private String finalSectionPath;
 
-	public CRONIOBusDesktopPreferencesMenuFinalItem(String mainSectionId, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
-		super(mainSectionId, finalSectionId, text, parentWidget);
-		this.mainSectionId 		= mainSectionId;
-		this.finalSectionId 	= finalSectionId;
+	public CRONIOBusDesktopPreferencesMenuFinalItem(String parentPath, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
+		super(null, finalSectionId, text, parentWidget);
+		this.finalSectionPath	= parentPath + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionId;
+		String[] mainSectionIdSplit = parentPath.split("\\.");
+		String mainSectionId 	= mainSectionIdSplit[0];
+		setContainerId(mainSectionId);
 	}
 	
 	/**
@@ -34,8 +36,9 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 	protected void fireClick() {
 		CRONIOBusDesktopPreferencesEvent openFinalSectionEvent = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
 		openFinalSectionEvent.setEventType(EVENT_TYPE.OPEN_FINAL_SECTION_EVENT);
-		openFinalSectionEvent.setMainSectionId(mainSectionId);
-		openFinalSectionEvent.setFinalSectionId(finalSectionId);
+		openFinalSectionEvent.setMainSectionId(getContainerId());
+		openFinalSectionEvent.setFinalSectionId(getId());
+		openFinalSectionEvent.setFinalSectionPath(finalSectionPath);
 		getLogicalEventHandlerManager().fireEvent(openFinalSectionEvent);
 	}
 

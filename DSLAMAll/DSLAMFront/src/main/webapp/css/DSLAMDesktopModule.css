@@ -644,12 +644,16 @@
 /*****************************************
 *			PREFERENCES
 ******************************************/
-.dropdown .dropdown-toggle {
-	margin-bottom: 15px;
+.dslam_studio-preferencesLayout-workZone {
+	height: 100%;
 }
 
-.dropdown .dropdown-menu {
-	margin-top: -15px;
+.dslam_studio-preferencesConnectionView {
+	height: 100%;
+}
+
+.dslam_studio-preferencesMachineDeckPanel {
+	height: 100%;
 }
 
 .dslam_studio-preferencesMachineDeckPanel .aegwt-bootstrapForm-buttonsZone .btn {
@@ -665,6 +669,15 @@
 /*****************************************
 *			COMMON
 ******************************************/
+
+.dropdown .dropdown-toggle {
+	margin-bottom: 15px;
+}
+
+.dropdown .dropdown-menu {
+	margin-top: -15px;
+}
+
 .gwt-Label {
 	white-space: nowrap;
 	text-overflow: ellipsis;
