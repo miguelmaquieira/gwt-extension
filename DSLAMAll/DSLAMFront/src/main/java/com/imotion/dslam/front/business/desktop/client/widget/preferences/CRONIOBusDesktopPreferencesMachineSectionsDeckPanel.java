@@ -53,7 +53,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG.equals(finalSectionId)) {
 			preferencesMachineConfigureForm.resetForm();
 			rootDeckPanel.showWidget(1);
-			preferencesMachineConfigureForm.setId(sectionIdSplit[1]);
+			preferencesMachineConfigureForm.setId(sectionIdSplit[2]);
 			preferencesMachineConfigureForm.setData(sectionData);
 		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(2);

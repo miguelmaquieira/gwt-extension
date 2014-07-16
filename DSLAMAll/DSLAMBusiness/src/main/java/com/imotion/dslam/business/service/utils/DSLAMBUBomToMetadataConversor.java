@@ -269,6 +269,7 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIMachineProperties.USERNAME							, connection.getUsername());
 			data.addElement(CRONIOBOIMachineProperties.PASSWORD							, connection.getPassword());
 			data.addElement(CRONIOBOIMachineProperties.TIMEOUT							, connection.getTimeout());
+			data.addElement(CRONIOBOIMachineProperties.PROMPT							, connection.getPromptRegEx());
 		}
 		return data;
 	}
