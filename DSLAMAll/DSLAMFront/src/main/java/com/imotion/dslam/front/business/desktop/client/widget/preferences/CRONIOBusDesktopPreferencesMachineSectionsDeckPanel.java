@@ -6,11 +6,11 @@ import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditor;
+import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditorChangeHandler;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
-
-import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
 
 
 public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCompositePanel  {
@@ -20,22 +20,30 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private DeckPanel 											rootDeckPanel;
-	private AceEditor											editor;
+	private CRONIOBusDesktopEditor								editor;
 	private CRONIOBusDesktopPreferencesMachineVariables			variablesPreferencesMachine;
 	private CRONIOBusDesktopPreferencesMachineConfigureForm		preferencesMachineConfigureForm;
 
 	public CRONIOBusDesktopPreferencesMachineSectionsDeckPanel() {
-
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
 		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_DECKPANEL);
 
 		variablesPreferencesMachine 		= new CRONIOBusDesktopPreferencesMachineVariables();
-		preferencesMachineConfigureForm 	= new CRONIOBusDesktopPreferencesMachineConfigureForm();
-	
 		rootDeckPanel.add(variablesPreferencesMachine);
+
+		preferencesMachineConfigureForm 	= new CRONIOBusDesktopPreferencesMachineConfigureForm();
 		rootDeckPanel.add(preferencesMachineConfigureForm);
-		//rootDeckPanel.add(editor);
+
+		editor = new CRONIOBusDesktopEditor(new CRONIOBusDesktopEditorChangeHandler() {
+
+			@Override
+			public void fireEvent(AEMFTMetadataElementComposite fileData) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		rootDeckPanel.add(editor);
 	}
 
 	public void reset() {
@@ -46,7 +54,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		String[] 	sectionIdSplit 		= sectionId.split("\\.");
 		int			sectionIdSplitSize	= sectionIdSplit.length;
 		String		finalSectionId 		= sectionIdSplit[sectionIdSplitSize-1];
-		
+
 		if (CRONIOBOIMachineProperties.MACHINE_VARIABLES.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(0);
 			variablesPreferencesMachine.setData(sectionData);
@@ -57,10 +65,10 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 			preferencesMachineConfigureForm.setData(sectionData);
 		} else if (CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(2);
-			//editor.setData(sectionData);
+			editor.setData(sectionData);
 		} else if (CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT.equals(finalSectionId)) {
 			rootDeckPanel.showWidget(2);
-			//editor.setData(sectionData);
+			editor.setData(sectionData);
 		}
 		this.setVisibility(Visibility.VISIBLE);
 		AEGWTJQueryPerfectScrollBar.updateScroll(getName());
@@ -75,7 +83,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		super.postDisplay();
 		variablesPreferencesMachine.postDisplay();
 		preferencesMachineConfigureForm.postDisplay();
-	//	editor.postDisplay();
+		//	editor.postDisplay();
 		setHeightToDecrease(78);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(getName(), this, getCurrentHeight(), true);
 	}

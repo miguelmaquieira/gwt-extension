@@ -35,8 +35,8 @@ public class CRONIOConnectionStreams {
 
 		StringBuilder sbResponseWithoutIsoControl	= new StringBuilder();
 		char cChar = 0;
-		//		while (fromServer.available() > 0 && !matcher.find() && !matcher.matches() && (byte) cChar != -1) {
-		while (!matcher.find() && !matcher.matches() && (byte) cChar != -1) {
+				while (fromServer.available() > 0 && !matcher.find() && !matcher.matches() && (byte) cChar != -1) {
+//		while (!matcher.find() && !matcher.matches() && (byte) cChar != -1) {
 			cChar = (char) fromServer.read();
 			if (!Character.isISOControl(cChar)) {
 				sbResponseWithoutIsoControl.append(cChar);

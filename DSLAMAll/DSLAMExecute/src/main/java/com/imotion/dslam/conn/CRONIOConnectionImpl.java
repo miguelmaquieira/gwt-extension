@@ -7,8 +7,7 @@ import java.util.regex.Pattern;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
-import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH;
-import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperTelnet;
+import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperDummy;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -30,11 +29,12 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		this.promptRegEx 	= machineProperties.getPromptRegEx();
 		this.patternPrompt 	= Pattern.compile(promptRegEx);
 		this.protocolType 	= machineProperties.getProtocolType();
-		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
-			connectionWrapper = new CRONIOConnectionWrapperSSH();
-		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
-			connectionWrapper = new CRONIOConnectionWrapperTelnet();
-		}
+//		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
+//			connectionWrapper = new CRONIOConnectionWrapperSSH();
+//		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
+//			connectionWrapper = new CRONIOConnectionWrapperTelnet();
+//		}
+		connectionWrapper = new CRONIOConnectionWrapperDummy();
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	}
 
 	private String getLastPrompt(String fullResponse) {
-		String prompt = null;
+		String prompt = "";
 		Matcher	matcher = patternPrompt.matcher(fullResponse);
 		if (matcher.find()) {
 			prompt = matcher.group();
