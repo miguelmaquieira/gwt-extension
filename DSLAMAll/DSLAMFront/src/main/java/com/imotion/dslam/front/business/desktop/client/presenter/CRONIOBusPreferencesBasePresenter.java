@@ -67,9 +67,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(evt.getConnectionName());
 				String machineConnection = evt.getConnectionName();
 				updateFinalSectionInContext(finalSectionData, machineConnection, srcWidget);
-			}
-
-			if(CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
+			} else if(CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
 				AEMFTMetadataElementComposite navigationData = getContextDataController().getElementAsComposite(PREFERENCES_NAVIGATION_DATA);
 				String currentSectionId = getElementDataController().getElementAsString(CURRENT_FINAL_SECTION_ID, navigationData);
 				String[] currentSectionIdSplit = currentSectionId.split("\\.");
@@ -130,6 +128,8 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	private void updateNavigationData(String sectionMenu, String finalSectionId) {
 		AEMFTMetadataElementComposite navigationData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		navigationData.addElement(CURRENT_FINAL_SECTION_ID	, finalSectionId);
+		
+		getContextDataController().setElement(PREFERENCES_NAVIGATION_DATA, navigationData.cloneObject());
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(sectionMenu, getName());
 		storageEvent.setFullKey(PREFERENCES_NAVIGATION_DATA);
@@ -200,51 +200,30 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData, String machineConnection, String srcWidget) {
 		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 
+		StringBuilder sbKey = new StringBuilder();
+		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(machineConnection);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget)) {
-			StringBuilder sbKey = new StringBuilder();
-			sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			sbKey.append(machineConnection);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(CRONIOBOMachineProperties.MACHINE_CONNECTION_CONFIG);
-			String sectionKey = sbKey.toString();
-
-			AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PREFERENCES_PRESENTER, getName());
-			storageEvent.setFullKey(sectionKey);
-			storageEvent.addElementAsDataValue(finalSectionData);
-			storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
-			getLogicalEventHandlerManager().fireEvent(storageEvent);
-
-			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
-			getContextDataController().setElement(sectionKey, finalSectionData);
-			//	fireSectionModified(currentProjectId, currentSectionId);
-		}
-		
-		if (CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
-			StringBuilder sbKey = new StringBuilder();
-			sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			sbKey.append(machineConnection);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		} else if (CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
 			sbKey.append(CRONIOBOMachineProperties.MACHINE_VARIABLES);
-			String sectionKey = sbKey.toString();
-
-			AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PREFERENCES_PRESENTER, getName());
-			storageEvent.setFullKey(sectionKey);
-			storageEvent.addElementAsDataValue(finalSectionData);
-			storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
-			getLogicalEventHandlerManager().fireEvent(storageEvent);
-
-			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
-			getContextDataController().setElement(sectionKey, finalSectionData);
-			//	fireSectionModified(currentProjectId, currentSectionId);
 		}
+		String sectionKey = sbKey.toString();
 
+		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PREFERENCES_PRESENTER, getName());
+		storageEvent.setFullKey(sectionKey);
+		storageEvent.addElementAsDataValue(finalSectionData);
+		storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+		getLogicalEventHandlerManager().fireEvent(storageEvent);
 
+		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+		getContextDataController().setElement(sectionKey, finalSectionData);
+		
+		//fireSectionModified(currentProjectId, currentSectionId);
 	}
 
 	//	private void fireSectionModified(String projectId, String currentSectionId) {
