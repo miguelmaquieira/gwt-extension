@@ -38,6 +38,10 @@ public class DSLAMBusDesktopPreferencesToolbar extends AEGWTCompositePanel {
 	public void setSaveConnectionEnabled(boolean enabled) {
 		preferencesActions.setSaveEnabled(enabled);
 	}
+	
+	public void hideConnectionForm() {
+		preferencesActions.hideConnectionForm();
+	}
 
 	/**
 	 *	AEGWTICompositePanel 

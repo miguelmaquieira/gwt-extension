@@ -165,7 +165,7 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 				AEMFTMetadataElementComposite connectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 				String connectionName = getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, connectionData);
 				preferencesMenu.addConnection(connectionName);
-			//	toolbar.hideProjectForm();
+				toolbar.hideConnectionForm();
 			}
 		}
 	}
