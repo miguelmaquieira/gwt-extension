@@ -56,7 +56,7 @@ public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDes
 	public void postDisplay() {
 		super.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
-		//machinesSectionsDeckPanel.postDisplay();
+		machinesSectionsDeckPanel.postDisplay();
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPre
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopPreferencesLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesMachineConfigureForm;
+import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesMachineVariablesForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
@@ -67,6 +68,11 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 			String srcWidget = evt.getSourceWidget();
 			if(CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget)) {
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(evt.getConnectionName());
+				String machineConnection = evt.getConnectionName();
+				updateFinalSectionInContext(finalSectionData, machineConnection, srcWidget);
+			}
+			if(CRONIOBusDesktopPreferencesMachineVariablesForm.NAME.equals(srcWidget)) {
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES);
 				String machineConnection = evt.getConnectionName();
 				updateFinalSectionInContext(finalSectionData, machineConnection, srcWidget);
 			}

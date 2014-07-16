@@ -21,4 +21,5 @@ public interface DSLAMBOIVariablesDataConstants {
 	//CONTEXT
 	String EDIT_MODE					=	"EditMode";
 	String SAVE_MODE					=	"SaveMode";
+	String VARIABLE_DATA				= "VARIABLE_DATA";
 }

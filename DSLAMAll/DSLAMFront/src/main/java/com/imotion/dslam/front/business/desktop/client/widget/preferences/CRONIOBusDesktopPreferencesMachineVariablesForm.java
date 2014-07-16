@@ -36,7 +36,7 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends AEGWTPopup 
 
 		machineVariableIdTextBox 			= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.variable());
 		root.add(machineVariableIdTextBox);
-		machineVariableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION)	, TEXTS.process_variable());
+		machineVariableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION)	, TEXTS.connection_variable());
 		machineVariableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL)		, TEXTS.external_variable());
 		
 		machineVariableValueTextBox 		= new AEGWTBootstrapDropdownAndLabelTextBox(null	, TEXTS.value());
