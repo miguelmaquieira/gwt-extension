@@ -7,6 +7,7 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditor;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditorChangeHandler;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
@@ -24,6 +25,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
 		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_DECKPANEL);
+		rootDeckPanel.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 
 		variablesPreferencesMachine 		= new CRONIOBusDesktopPreferencesMachineVariables();
 		rootDeckPanel.add(variablesPreferencesMachine);

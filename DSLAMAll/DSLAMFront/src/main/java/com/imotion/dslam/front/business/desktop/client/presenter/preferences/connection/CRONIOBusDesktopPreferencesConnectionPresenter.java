@@ -39,17 +39,19 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-			if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget) && LOGICAL_TYPE.SUBMIT_EVENT.equals(type)) {
-				evt.stopPropagation();
-				saveCurrentMachineConfigureInDB();
-			}	
-//		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
+		if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget) && LOGICAL_TYPE.SUBMIT_EVENT.equals(type)) {
+			evt.stopPropagation();
+			saveCurrentMachineConfigureInDB();
+		} 
+//		else if (CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
 //			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 //				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
+//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES);
+//				int i = 0;
 //				updateFinalSectionInContext(finalSectionData);
 //			}	
-//		} else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
+//		} 
+//			else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
 //			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 //				evt.stopPropagation();
 //				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
@@ -71,7 +73,9 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type) ;
+		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.SAVE_EVENT.equals(type);
 	
 	}
 	

@@ -8,8 +8,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessNodeVariablesForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -98,7 +99,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 	@SuppressWarnings("unchecked")
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		if (CRONIOBusDesktopProcessNodeVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
+		if (CRONIOBusDesktopPreferencesMachineVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
 			String 	name		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
 			String 	value 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
 			String 	scope 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
@@ -118,8 +119,8 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 			} else {
 				variablesForm.setErrorVariableExist();
 			}
-			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			CRONIOBusDesktopPreferencesEvent saveEvt = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
+			saveEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
 			saveEvt.setSourceWidget(getName());
 			saveEvt.addElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES, variablesData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
