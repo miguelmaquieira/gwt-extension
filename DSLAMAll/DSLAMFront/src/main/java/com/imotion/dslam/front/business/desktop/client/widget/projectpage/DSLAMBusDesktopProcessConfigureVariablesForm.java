@@ -36,7 +36,6 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 
 		variableIdTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.variable());
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS)	, TEXTS.process_variable());
 		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL)	, TEXTS.external_variable());
 		
 		variableValueTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.value());
@@ -120,6 +119,10 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	public void setErrorVariableExist() {
 		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
 		variableIdTextBox.setErrorLabelVisible(true);
+	}
+	
+	public void addvariableScope(int variableScope , String text) {
+		variableIdTextBox.addElement(String.valueOf(variableScope)	, text);
 	}
 	
 	/**
