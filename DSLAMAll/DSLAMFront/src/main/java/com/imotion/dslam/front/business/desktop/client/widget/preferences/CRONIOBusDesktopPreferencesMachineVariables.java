@@ -23,7 +23,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
-	public static final String NAME = "DSLAMBusDesktopProcessConfigureVariables";
+	public static final String NAME = "CRONIOBusDesktopPreferencesMachineVariables";
 
 	private FlowPanel 											root;
 	private FlowPanel											variableListZone;

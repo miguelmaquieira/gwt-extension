@@ -654,6 +654,8 @@
 
 .dslam_studio-preferencesMachineDeckPanel {
 	height: 100%;
+	padding-left:0px;
+	padding-right: 0px;
 }
 
 .dslam_studio-preferencesMachineDeckPanel .aegwt-bootstrapForm-buttonsZone .btn {
