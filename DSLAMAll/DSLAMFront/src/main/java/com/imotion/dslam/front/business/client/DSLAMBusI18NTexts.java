@@ -142,6 +142,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Variable de conexión")
 	String connection_variable();
 	
+	@DefaultStringValue("Variable de nodo")
+	String node_variable();
+	
 	@DefaultStringValue("Texto")
 	String text_variable();
 

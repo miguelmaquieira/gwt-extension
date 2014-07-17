@@ -2,11 +2,13 @@ package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import java.util.List;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -21,7 +23,8 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopPreferencesMachineVariables";
-
+	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	
 	private FlowPanel 											root;
 	private FlowPanel											variableListZone;
 	private	 DSLAMBusDesktopVariablesList   					variableList;
@@ -67,6 +70,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public void postDisplay() {
 		super.postDisplay();
 		variablesForm = new DSLAMBusDesktopProcessConfigureVariablesForm(this);
+		variablesForm.addvariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, TEXTS.process_variable());
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 	

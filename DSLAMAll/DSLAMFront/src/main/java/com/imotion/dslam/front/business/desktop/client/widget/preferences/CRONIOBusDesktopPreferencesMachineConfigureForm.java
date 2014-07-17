@@ -122,15 +122,15 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		if (connectionConfigureData != null) {
 			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME			, connectionConfigureData);
 			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD			, connectionConfigureData);
-			int 			timeout 			= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT				, connectionConfigureData);
+			String 			timeout 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.TIMEOUT			, connectionConfigureData);
 			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT			, connectionConfigureData);
-			int 			protocolType 		= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE		, connectionConfigureData);
+			String 			protocolType 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROTOCOL_TYPE	, connectionConfigureData);
 
 			userNameTextBox.setText(userName);
 			passwordTextBox.setText(password);
-			timeOutTextBox.setText(String.valueOf(timeout));
+			timeOutTextBox.setText(timeout);
 			promptTextBox.setText(prompt);
-			protocolTypeDropdownButton.setItemSelected(String.valueOf(protocolType));	
+			protocolTypeDropdownButton.setItemSelected(protocolType);	
 		}
 	}
 
