@@ -22,7 +22,7 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process) {
+	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process, Date date) {
 		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 
@@ -50,7 +50,11 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 				}
 			}
 			originalProcess.setNodeList(persistedNodeList);
-			originalProcess.setSavedTime(new Date());
+			
+			if (date == null) {
+				date = new Date();
+			}
+			originalProcess.setSavedTime(date);
 
 			getPersistenceModule().update(originalProcess);
 			

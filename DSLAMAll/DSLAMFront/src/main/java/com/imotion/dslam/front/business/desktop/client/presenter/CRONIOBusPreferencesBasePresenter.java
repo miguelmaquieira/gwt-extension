@@ -58,6 +58,8 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		} else if (EVENT_TYPE.NEW_CONNECTION.equals(evtTyp)) {
 			String	connectionName 	= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
 			createConnection(connectionName);
+		} else if (EVENT_TYPE.SAVE_PREFERENCES.equals(evtTyp)) {
+			saveCurrentPreferencesInDB();
 		} else if (EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(evtTyp)) {
 			AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
 			getFlowEventHandlerManager().fireEvent(flowEvent);
@@ -88,7 +90,9 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 				||
 				EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(type)
 				||
-				EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(type);
+				EVENT_TYPE.OPEN_PROJECTS_PAGE.equals(type)
+				||
+				EVENT_TYPE.SAVE_PREFERENCES.equals(type);
 	}
 
 
@@ -195,6 +199,27 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		if (connectionSaved) {
 			fireConnectionSaved(connectionName);
 		}
+	}
+	
+	private void saveCurrentPreferencesInDB() {
+		AEMFTMetadataElementComposite preferencesData = getContextDataController().getElementAsComposite(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+		getClientServerConnection().executeComm(preferencesData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_UPDATE_PREFERENCES_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+//				if (dataResult != null) {
+//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+//					if (projectData != null) {
+//						updateProjectClientData(currentProjectId, projectData, true);
+//					}
+//				}
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+			}
+		});
 	}
 
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData, String machineConnection, String srcWidget) {

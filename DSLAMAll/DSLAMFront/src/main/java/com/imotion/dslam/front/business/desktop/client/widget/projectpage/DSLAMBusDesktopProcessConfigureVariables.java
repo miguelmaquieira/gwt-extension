@@ -70,7 +70,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public void postDisplay() {
 		super.postDisplay();
 		variablesForm = new DSLAMBusDesktopProcessConfigureVariablesForm(this);
-		variablesForm.addvariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, TEXTS.process_variable());
+		variablesForm.addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, TEXTS.process_variable());
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 	

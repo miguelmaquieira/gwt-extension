@@ -120,10 +120,10 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	@Override
 	public void setData(AEMFTMetadataElementComposite connectionConfigureData) {
 		if (connectionConfigureData != null) {
-			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME			, connectionConfigureData);
-			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD			, connectionConfigureData);
+			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME		, connectionConfigureData);
+			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD		, connectionConfigureData);
 			String 			timeout 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.TIMEOUT			, connectionConfigureData);
-			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT			, connectionConfigureData);
+			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT		, connectionConfigureData);
 			String 			protocolType 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROTOCOL_TYPE	, connectionConfigureData);
 
 			userNameTextBox.setText(userName);

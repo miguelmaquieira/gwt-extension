@@ -121,7 +121,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		variableIdTextBox.setErrorLabelVisible(true);
 	}
 	
-	public void addvariableScope(int variableScope , String text) {
+	public void addVariableScope(int variableScope , String text) {
 		variableIdTextBox.addElement(String.valueOf(variableScope)	, text);
 	}
 	

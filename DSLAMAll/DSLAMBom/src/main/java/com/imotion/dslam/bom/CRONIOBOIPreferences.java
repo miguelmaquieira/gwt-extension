@@ -8,7 +8,7 @@ public interface CRONIOBOIPreferences extends Serializable, CRONIOBOIPreferences
 
 	Long getPreferencesId();
 
-	void setPreferencesId(Long nodeId);
+	void setPreferencesId(Long preferencesId);
 
 	List<CRONIOBOIMachineProperties> getMachinePropertiesList();
 

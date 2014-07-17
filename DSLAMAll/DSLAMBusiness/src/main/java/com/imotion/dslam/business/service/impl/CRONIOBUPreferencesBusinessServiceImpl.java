@@ -18,6 +18,7 @@ import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -32,7 +33,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		String userId			= getElementDataController().getElementAsString(AEMFTILoginDataConstants.USER_ID		, contextIn);
 		long preferencesId   	= CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID;
 		String preferencesIdStr = String.valueOf(preferencesId);
-		
+
 		if (AEMFTCommonUtilsBase.isEmptyString(preferencesIdStr) ) {
 			traceNullParameter(METHOD_GET_PREFERENCES, CRONIOBOIPreferencesDataConstants.PREFERENCES_ID);
 		} else {
@@ -90,141 +91,88 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(CONNECTION_DATA, connectionDataElement);
 	}
-	
+
 	@Override
 	public void updateMachineConfig() {
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
-		
+
 		String machineName = getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, contextIn);
 		CRONIOBOIMachineProperties currentMachineDB = getMachinePropertiesPersistence().getMachineProperties(CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID, machineName);
 		CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(contextIn);
 		long currentMachineDBId = currentMachineDB.getMachinePropertiesId();
 		//preferencesId sustituir cuando usuarios
 		getMachinePropertiesPersistence().updateMachineProperties(currentMachineDBId, machineConfig);
-		
+
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-//		contextOut.addElement(PROJECT_DATA, machineConfigData);
+		//		contextOut.addElement(PROJECT_DATA, machineConfigData);
 	}
-//	@Override
-	public void updatePreferences() {
-		//		//ContextIn
-		//		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
-		//
-		//		AEMFTMetadataElementComposite projectData = updateProject(contextIn);
-		//
-		//		//ContextOut
-		//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		//		contextOut.addElement(PROJECT_DATA, projectData);
-	}
-
 	//	@Override
-	//	public void updateProjects() {
-	//		//ContextIn
-	//		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
-	//		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(PROJECTS_DATA, contextIn);
-	//		List<AEMFTMetadataElement> projectsDataList = projectsData.getElementList();
-	//		
-	//		AEMFTMetadataElementComposite updatedProjectsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-	//		for (AEMFTMetadataElement projectData : projectsDataList) {
-	//			AEMFTMetadataElementComposite updatedProjectData = updateProject((AEMFTMetadataElementComposite) projectData);
-	//			String projectId = getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID, updatedProjectData);
-	//			updatedProjectsData.addElement(projectId, updatedProjectData);
-	//		}
-	//		
-	//		//ContextOut
-	//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-	//		contextOut.addElement(PROJECTS_DATA, updatedProjectsData);
-	//	}
+	public void updatePreferences() {
+		//ContextIn
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
+		AEMFTMetadataElementComposite machinePropertiesListData = getElementDataController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST			, contextIn);
+		List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
+
+		Date 	date 		= new Date();
+		CRONIOBOIPreferences preferences = CRONIOBUMetadataToBomConversor.fromPreferencesData(contextIn);
+		preferences.setSavedTime(date);
+
+
+		for (AEMFTMetadataElement machine : machinePropertiesList) {
+
+			AEMFTMetadataElementComposite connectionScriptData 		= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT		, machine);
+			DSLAMBOIFile connectionScript = CRONIOBUMetadataToBomConversor.fromFileData(connectionScriptData);
+			connectionScript.setSavedTime(date);
+
+			AEMFTMetadataElementComposite disconnectionScriptData 	= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT	, machine);
+			DSLAMBOIFile disconnectionScript = CRONIOBUMetadataToBomConversor.fromFileData(disconnectionScriptData);
+			disconnectionScript.setSavedTime(date);
+
+			AEMFTMetadataElementComposite variableListData 	= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES						, machine);
+			List<DSLAMBOIVariable> variableList = CRONIOBUMetadataToBomConversor.fromVariableDataList(variableListData);
+
+			AEMFTMetadataElementComposite machinePropertiesData = getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG			, machine);
+			CRONIOBOIMachineProperties machineProperties = CRONIOBUMetadataToBomConversor.fromMachineConfigData(machinePropertiesData);
+
+			String 	machineName = getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME		, machine);
+			long 	machineId 	= getElementDataController().getElementAsLong(CRONIOBOIMachineProperties.MACHINE_ID			, machine);
+
+			machineProperties.setMachineName(machineName);
+			machineProperties.setMachinePropertiesId(machineId);
+			machineProperties.setSaveTime(date);
+			machineProperties.setInitConnectionScript(connectionScript);
+			machineProperties.setCloseConnectionScript(disconnectionScript);
+			machineProperties.setConnectionVariables(variableList);
+			machineProperties.setPreferences(preferences);
+
+			
+			connectionScript	= getFilePersistence().updateFileContent(connectionScript.getFileId(), connectionScript.getContent(), date);
+			disconnectionScript	= getFilePersistence().updateFileContent(disconnectionScript.getFileId(), disconnectionScript.getContent(), date);
+			machineProperties 	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machineProperties);
+		}
+		
+		getPreferencesPersistence().updatePreferences(preferences.getPreferencesId(), preferences);
+		//init-trace
+		traceItemModifiedInPersistence(METHOD_UPDATE_PREFERENCES, CRONIOBOIPreferences.class.getSimpleName(), String.valueOf(preferences.getPreferencesId()));
+		//end-trace
+
+		//ContextOut
+		//			AEMFTMetadataElementComposite preferencesDataElement = DSLAMBUBomToMetadataConversor.fromMachineProperties(machineProperties);
+		//			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		//			contextOut.addElement(PREFERENCES_DATA, connectionDataElement);
+
+
+
+	}
 
 	@Override
 	public void removePreferences() {
-		//		//ContextIn
-		//		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
-		//		String projectId		= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID		, contextIn);
-		//
-		//		Long projectIdAsLong 	= AEMFTCommonUtilsBase.getLongFromString(projectId);
-		//		getProjectPersistence().removeProject(projectIdAsLong);
-		//
-		//		//init-trace
-		//		traceItemRemovedFromPersistence(METHOD_REMOVE_PROJECT, DSLAMBOIProject.class.getSimpleName(), projectId);
-		//		//end-trace
-		//
-		//		//ContextOut
-		//		AEMFTMetadataElementComposite projectDataElement = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-		//		projectDataElement.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, projectIdAsLong);
-		//
-		//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		//		contextOut.addElement(PROJECT_DATA, projectDataElement);
+
 	}
-
-	//	@Override
-	//	public void getAllProjects() {
-	//		List<DSLAMBOIProject> 	projectList = getProjectPersistence().getAllProjects();
-	//
-	//		//trace-init
-	//		int resultsNumber = 0;
-	//		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
-	//			resultsNumber = projectList.size();
-	//		}
-	//		traceNumberOfResults(METHOD_GET_ALL_PROJECTS, DSLAMBOIProject.class.getSimpleName(), resultsNumber);
-	//		//end-trace
-	//
-	//		//ContextOut
-	//		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectList(projectList);
-	//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-	//		contextOut.addElement(PROJECT_DATA_LIST, projectDataElement);
-	//	}
-	//
-	//	@Override
-	//	public void getCsvNodes() {
-	//		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
-	//		byte[] 	fileByte 	= (byte[]) getElementDataController().getElementAsSerializable(AEMFTIFileUploadServerCommConstants.CTE_MFT_AE_BUS_COMM_FILE_DATA, contextIn);
-	//		String 	fileString 	= new String(fileByte, Charset.forName(AEMFTIIOConstant.CTE_MFT_AE_CORE_ENTO_IO_DEFAULT_ENCODING));
-	//
-	//		List<CRONIOBOINode> nodeList = CRONIOBUCSVToBomConversor.convertCsvToNode(fileString,";");
-	//
-	//		//trace-init
-	//		int resultsNumber = 0;
-	//		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
-	//			resultsNumber = nodeList.size();
-	//		}
-	//		traceNumberOfResults(METHOD_GET_CSV_NODES, CRONIOBOINode.class.getSimpleName(), resultsNumber);
-	//		//end-trace
-	//
-	//		//ContextOut
-	//		AEMFTMetadataElementComposite nodesData = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
-	//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-	//		contextOut.addElement(NODES_DATA_LIST, nodesData);
-	//	}
-
-
 	/**
 	 * PRIVATE
 	 */
-
-//		private AEMFTMetadataElementComposite updateMachineConfigFull(AEMFTMetadataElementComposite machineData) {
-//		
-////			//MainScript
-////			DSLAMBOIFile mainScript = project.getMainScript();
-////			mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
-////			project.setMainScript(mainScript);
-////	
-////			//RollbackScript
-////			DSLAMBOIFile rollbackScript = project.getRollBackScript();
-////			rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
-////			project.setRollBackScript(rollbackScript);
-////	
-////			//Process
-////			DSLAMBOIProcess process = project.getProcess();
-////			process = getProcessPersistence().updateProcess(process.getProcessId(), process);
-////			project.setProcess(process);
-////	
-////			getProjectPersistence().updateProject(project.getProjectId(), project);
-////			AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
-//	
-//			return machineConfigData;
-//		}
 
 }

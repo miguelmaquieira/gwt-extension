@@ -183,6 +183,9 @@
 				<SubService Name="GET_PREFERENCES">
 					<Descriptor>getPreferences</Descriptor>
 				</SubService>
+				<SubService Name="UPDATE_PREFERENCES">
+					<Descriptor>updatePreferences</Descriptor>
+				</SubService>
 				<SubService Name="ADD_CONNECTION">
 					<Descriptor>addConnection</Descriptor>
 				</SubService>
