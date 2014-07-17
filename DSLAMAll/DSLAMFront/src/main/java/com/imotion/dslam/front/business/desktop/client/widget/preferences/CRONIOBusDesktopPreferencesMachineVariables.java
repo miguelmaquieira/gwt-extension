@@ -59,7 +59,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 	public void reset() {
 		variableList.reset();
 		variablesData.removeAll();
-		variablesForm.resetForm();
+		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 	}
 	
 	/**
@@ -164,6 +164,6 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 		variableList.clearList();
 		variablesData.addElement(id,data);
 		variableList.setData(variablesData);
-		variablesForm.resetForm();	
+		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
 	}
 }

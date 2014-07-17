@@ -108,6 +108,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	//PREFERENCES --> MACHINES VIEW
 	String PREFERENCES_MACHINE_DECKPANEL 				= APP_ID_PREFFIX			+ "preferencesMachineDeckPanel"; 			//dslam_studio-preferencesMachineDeckPanel
 	String PREFERENCES_MACHINE_VARIABLES_LIST			= APP_ID_PREFFIX			+ "preferencesMachineVariablesList";		//dslam_studio-preferencesMachineVariablesList
+	String PREFERENCES_MACHINE_CONFIGURE_FORM			= APP_ID_PREFFIX			+ "preferencesMachineConfigureForm";		//dslam_studio-preferencesMachineConfigureForm
 	
 	
 	//EXECUTION

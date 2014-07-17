@@ -205,6 +205,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Prompt")
 	String prompt_placeholder();
 	
+	@DefaultStringValue("Protocolo")
+	String protocol_placeholder();
+	
 	@DefaultStringValue("Petición:")
 	String request_label();
 

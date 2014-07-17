@@ -12,7 +12,8 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends DSLAMBusDesktopPro
 	
 	public CRONIOBusDesktopProcessNodeVariablesForm(AEGWTICompositePanel parent) {
 		super(parent);
-		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, TEXTS.node_variable());
+		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE			, TEXTS.node_variable());
+		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL		, TEXTS.external_variable());
 	}	
 
 	
