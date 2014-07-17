@@ -24,7 +24,7 @@
 			<!-- =============================== -->
 
 			<!-- MySQL -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdb" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdb-test" />
 			
 			<!-- CLOUDBEE -->
 			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb" /> -->
@@ -60,11 +60,11 @@
 			<!-- Connection pools Hibernate-C3P0 -->
 			<property name="hibernate.connection.provider_class"
 				value="org.hibernate.connection.C3P0ConnectionProvider" />
-			<property name="hibernate.c3p0.acquire_increment" value="1" />
-			<property name="hibernate.c3p0.idle_test_period" value="100" />
-			<property name="hibernate.c3p0.max_size" value="3" />
-			<property name="hibernate.c3p0.max_statements" value="5" />
+			<property name="hibernate.c3p0.max_statements" value="0" />
+			<property name="hibernate.c3p0.max_size" value="5" />
 			<property name="hibernate.c3p0.min_size" value="1" />
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
+			<property name="hibernate.c3p0.idle_test_period" value="50" />
 			<property name="hibernate.c3p0.timeout" value="100" />
 		</properties>
 	</persistence-unit>
