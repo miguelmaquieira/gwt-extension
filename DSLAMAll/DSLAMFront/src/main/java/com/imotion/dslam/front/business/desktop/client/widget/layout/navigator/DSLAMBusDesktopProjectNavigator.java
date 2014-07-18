@@ -99,6 +99,18 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		DSLAMBusDesktopProjectNavigatorElement element = getElementById(projectId);
 		elementListContainer.remove(element);
 	}
+	
+	public List<String> getModifiedProjectIds() {
+		List<String> projectIds = new ArrayList<>();
+		int itemCount = elementListContainer.getWidgetCount();
+		for (int i = 0; i < itemCount; i++) {
+			DSLAMBusDesktopProjectNavigatorElement currentElementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
+			if (currentElementWidget.isModified()) {
+				projectIds.add(currentElementWidget.getId());
+			}
+		}
+		return projectIds;
+	}
 
 	/**
 	 * AEGWTCompositePanel
@@ -205,18 +217,6 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			}
 		}
 		return elementWidget;
-	}
-
-	public List<String> getModifiedProjectIds() {
-		List<String> projectIds = new ArrayList<>();
-		int itemCount = elementListContainer.getWidgetCount();
-		for (int i = 0; i < itemCount; i++) {
-			DSLAMBusDesktopProjectNavigatorElement currentElementWidget = (DSLAMBusDesktopProjectNavigatorElement) elementListContainer.getWidget(i);
-			if (currentElementWidget.isModified()) {
-				projectIds.add(currentElementWidget.getId());
-			}
-		}
-		return projectIds;
 	}
 
 }

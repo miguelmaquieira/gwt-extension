@@ -86,6 +86,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 
 	@Override
 	public void releaseInstance() {
+		AEMFTPersisteceJPAConnectionUtil.getMonoInstance().destroyEntityManager(getSession().getSessionId());
 		super.releaseInstance();
 		if (filePersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) filePersistence);
@@ -111,7 +112,6 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
 			machinePropertiesPersistence = null;
 		}
-		AEMFTPersisteceJPAConnectionUtil.getMonoInstance().destroyEntityManager(getSession().getSessionId());
 	}
 	
 	/********************************************************************
