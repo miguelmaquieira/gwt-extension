@@ -20,7 +20,7 @@ public class SNDOBKLoginManagerPersistenceJPA extends AEMFTLoginPersistenceBase<
 	public DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long> getPersistenceModule() {
 		if (persistenceModule == null) {
 			persistenceModule = new DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long>();
-			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass() });
+			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(),  getSessionId() });
 		}
 		return persistenceModule;
 	}
@@ -28,7 +28,6 @@ public class SNDOBKLoginManagerPersistenceJPA extends AEMFTLoginPersistenceBase<
 	@Override
 	public void releaseModule() {
 		if (persistenceModule != null) {
-			persistenceModule.destroyCurrentEntityManager();
 			persistenceModule = null;
 		}
 	}

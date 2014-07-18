@@ -17,69 +17,69 @@ public class DSLAMBKPersistenceFactoryPool extends AEMFTPersistenceFactoryPool i
 	}
 	
 	@Override
-	public DSLAMBKIFilePersistenceService newFilePersistence() {
+	public DSLAMBKIFilePersistenceService newFilePersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_FILE_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_DSLAM_PERSISTENCE_FILE_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_FILE_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (DSLAMBKIFilePersistenceService) newPersistenceModule(impl);
+		return (DSLAMBKIFilePersistenceService) newPersistenceService(impl, sessionId);
 	}
 	
 	@Override
-	public DSLAMBKIProcessPersistenceService newProcessPersistence() {
+	public DSLAMBKIProcessPersistenceService newProcessPersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_PROCESS_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_DSLAM_PERSISTENCE_PROCESS_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_PROCESS_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (DSLAMBKIProcessPersistenceService) newPersistenceModule(impl);
+		return (DSLAMBKIProcessPersistenceService) newPersistenceService(impl, sessionId);
 	}
 	
 	@Override
-	public DSLAMBKIProjectPersistenceService newProjectPersistence() {
+	public DSLAMBKIProjectPersistenceService newProjectPersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_PROJECT_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_DSLAM_PERSISTENCE_PROJECT_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_DSLAM_PERSISTENCE_PROJECT_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (DSLAMBKIProjectPersistenceService) newPersistenceModule(impl);
+		return (DSLAMBKIProjectPersistenceService) newPersistenceService(impl, sessionId);
 	}
 	
 	@Override
-	public CRONIOBKINodePersistenceService newNodePersistence() {
+	public CRONIOBKINodePersistenceService newNodePersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_NODE_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_NODE_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_NODE_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (CRONIOBKINodePersistenceService) newPersistenceModule(impl);
+		return (CRONIOBKINodePersistenceService) newPersistenceService(impl, sessionId);
 	}
 	
 	@Override
-	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence() {
+	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_PREFERENCES_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (CRONIOBKIPreferencesPersistenceService) newPersistenceModule(impl);
+		return (CRONIOBKIPreferencesPersistenceService) newPersistenceService(impl, sessionId);
 	}
 	
 	@Override
-	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence() {
+	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence(String sessionId) {
 		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_DEFAULT_IMPL;
 		if (getConfigSrv() != null) {
 			impl = getConfigSrv().getProperty(
 					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_IMPL,
 					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_MACHINE_PROPERTIES_PERSISTENCE_DEFAULT_IMPL);
 		}
-		return (CRONIOBKIMachinePropertiesPersistenceService) newPersistenceModule(impl);
+		return (CRONIOBKIMachinePropertiesPersistenceService) newPersistenceService(impl, sessionId);
 	}
 
 /***********************************************************************

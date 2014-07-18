@@ -73,8 +73,9 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 			
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
-				if (!DSLAMBOIProject.IS_MODIFIED.equals(elementData.getKey()))
-				nodeListZone.addElement((AEMFTMetadataElementComposite) elementData);
+				if (!DSLAMBOIProject.INFO.equals(elementData.getKey())) {
+					nodeListZone.addElement((AEMFTMetadataElementComposite) elementData);
+				}
 			}
 		} else {
 			nodesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();

@@ -4,7 +4,6 @@ import com.imotion.dslam.backend.persistence.DSLAMBKIPersistenceFactory;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
 import com.selene.arch.exe.bus.service.AEMFTBusinessServiceWrapperPersistence;
-import com.selene.arch.exe.core.appli.businesswrapper.AEMFTIBusinessWrapperService;
 
 public class DSLAMBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersistence implements DSLAMBUIWrapperPersistence {
 
@@ -21,9 +20,4 @@ public class DSLAMBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersis
 		return factoryPool;
 	}
 
-	@Override
-	public void setWrapperService(AEMFTIBusinessWrapperService wrapperService) {
-		super.setWrapperService(wrapperService);
-		factoryPool = (DSLAMBKIPersistenceFactory) DSLAMBKPersistenceServiceBase.getFactoryPersistence(wrapperService.getProxyCore());
-	}
 }

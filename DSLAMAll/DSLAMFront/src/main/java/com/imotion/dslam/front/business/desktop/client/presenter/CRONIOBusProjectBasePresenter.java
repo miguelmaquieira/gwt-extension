@@ -145,7 +145,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		String finalSectionKey = sbKey.toString();
 
 		if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(currentSectionId)) {
-			finalSectionData.addElement(DSLAMBOIProject.IS_MODIFIED, true);
+			getElementDataController().setElement(DSLAMBOIProject.INFO_IS_MODIFIED, finalSectionData, true);
 		}
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
@@ -239,7 +239,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			if (finalSectionData != null) {
 				finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 			}
-			boolean sectionIsModified = getElementDataController().getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED, finalSectionData);
+			boolean sectionIsModified = getElementDataController().getElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED, finalSectionData);
 
 			//SHOW HEADER INFO
 			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());

@@ -8,6 +8,7 @@ import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPers
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
+import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersisteceJPAConnectionUtil;
 import com.selene.arch.exe.bus.service.impl.AEMFTBusinessServiceBaseImpl;
 import com.selene.arch.exe.bus.tagsearch.persistence.AEMFTTagIndexPersistence;
 
@@ -35,42 +36,42 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	//PERSISTENCE SERVICES
 	protected DSLAMBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
-			filePersistence =  getPersistence().getAppFactoryPersistence().newFilePersistence();
+			filePersistence =  getPersistence().getAppFactoryPersistence().newFilePersistence(getSessionId());
 		}
 		return filePersistence;
 	}
 	
 	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
-			processPersistence =  getPersistence().getAppFactoryPersistence().newProcessPersistence();
+			processPersistence =  getPersistence().getAppFactoryPersistence().newProcessPersistence(getSessionId());
 		}
 		return processPersistence;
 	}
 	
 	protected DSLAMBKIProjectPersistenceService getProjectPersistence() {
 		if (projectPersistence == null) {
-			projectPersistence =  getPersistence().getAppFactoryPersistence().newProjectPersistence();
+			projectPersistence =  getPersistence().getAppFactoryPersistence().newProjectPersistence(getSessionId());
 		}
 		return projectPersistence;
 	}
 	
 	protected CRONIOBKINodePersistenceService getNodePersistence() {
 		if (nodePersistence == null) {
-			nodePersistence =  getPersistence().getAppFactoryPersistence().newNodePersistence();
+			nodePersistence =  getPersistence().getAppFactoryPersistence().newNodePersistence(getSessionId());
 		}
 		return nodePersistence;
 	}
 	
 	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
 		if (preferencesPersistence == null) {
-			preferencesPersistence =  getPersistence().getAppFactoryPersistence().newPreferencesPersistence();
+			preferencesPersistence =  getPersistence().getAppFactoryPersistence().newPreferencesPersistence(getSessionId());
 		}
 		return preferencesPersistence;
 	}
 	
 	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
 		if (machinePropertiesPersistence == null) {
-			machinePropertiesPersistence =  getPersistence().getAppFactoryPersistence().newMachinePropertiesPersistence();
+			machinePropertiesPersistence =  getPersistence().getAppFactoryPersistence().newMachinePropertiesPersistence(getSessionId());
 		}
 		return machinePropertiesPersistence;
 	}
@@ -110,6 +111,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
 			machinePropertiesPersistence = null;
 		}
+		AEMFTPersisteceJPAConnectionUtil.getMonoInstance().destroyEntityManager(getSession().getSessionId());
 	}
 	
 	/********************************************************************
@@ -283,6 +285,14 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	protected AEMFTTagIndexPersistence getTagIndexPersistence() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private String getSessionId() {
+		return getSession().getSessionId();
 	}
 
 }

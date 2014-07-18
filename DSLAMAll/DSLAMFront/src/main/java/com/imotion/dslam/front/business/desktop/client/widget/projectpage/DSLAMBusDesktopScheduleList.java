@@ -43,7 +43,7 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 			List<AEMFTMetadataElement> scheduleList = data.getSortedElementList();
 			for (AEMFTMetadataElement scheduleData : scheduleList) {
 				String itemKey = scheduleData.getKey();
-				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
+				if (!CRONIOBOIProjectDataConstants.INFO.equals(itemKey)) {
 					AEMFTMetadataElementSingle 	scheduleDataSingle 	= (AEMFTMetadataElementSingle) scheduleData;
 					Date 						scheduleValue 		= (Date) scheduleDataSingle.getValueAsSerializable();
 					String 						formattedDate 		= AEGWTBusinessUtils.getFormattedTimeMessage(scheduleValue, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);

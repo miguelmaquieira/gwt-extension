@@ -37,7 +37,15 @@ public interface CRONIOBOIProjectDataConstants {
 	
 	
 	String CURRENT_SECTION					= "CURRENT_SECTION";
+	String INFO								= "INFO";
+	String INFO_PREFFIX						= INFO + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
 	String IS_MODIFIED 						= "IS_MODIFIED";
+	String INFO_IS_MODIFIED					= INFO_PREFFIX + IS_MODIFIED;
+	String WARNING_CODE						= "WARNING_CODE";
+	String INFO_WARNING_CODE				= INFO_PREFFIX + WARNING_CODE;
+	String ERROR_CODE						= "ERROR_CODE";
+	String INFO_ERROR_CODE					= INFO_PREFFIX + ERROR_CODE;
+	
 	String PROJECT_CONFIGURE_OPTION_ID		= "projectConfigureOptionId";
 	String PROJECT_CONFIGURE_DATA			= "projectConfigureData";
 	String PROJECT_DATA						= "projectData";
