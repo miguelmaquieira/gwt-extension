@@ -1,5 +1,6 @@
 package com.imotion.dslam.backend.persistence.service.process;
 
+import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -16,6 +17,6 @@ public interface DSLAMBKIProcessPersistenceService {
 	
 	DSLAMBOIProcess getProcess(Long processIdAsLong);
 
-	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process);
+	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process, Date date);
 
 }

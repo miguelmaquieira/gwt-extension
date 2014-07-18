@@ -50,6 +50,10 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 					String scopeStr = "";
 					if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS == scope) {
 						scopeStr = TEXTS.process_variable();
+					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE == scope) {
+						scopeStr = TEXTS.node_variable();
+					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION == scope) {
+						scopeStr = TEXTS.connection_variable();
 					} else {
 						scopeStr = TEXTS.external_variable();
 					}

@@ -58,7 +58,9 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 
 			@Override
 			public void onClick(ClickEvent event) {
-				
+				CRONIOBusDesktopPreferencesEvent savePreferencesEvent = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
+				savePreferencesEvent.setEventType(EVENT_TYPE.SAVE_PREFERENCES);
+				getLogicalEventHandlerManager().fireEvent(savePreferencesEvent);
 			}
 		});
 

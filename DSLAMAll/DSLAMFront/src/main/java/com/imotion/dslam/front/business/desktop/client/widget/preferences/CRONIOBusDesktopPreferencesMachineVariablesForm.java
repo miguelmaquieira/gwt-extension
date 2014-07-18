@@ -13,7 +13,8 @@ public class CRONIOBusDesktopPreferencesMachineVariablesForm extends DSLAMBusDes
 
 	public CRONIOBusDesktopPreferencesMachineVariablesForm(AEGWTICompositePanel parent) {
 		super(parent);
-		addvariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, TEXTS.connection_variable());
+		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION	, TEXTS.connection_variable());
+		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL		, TEXTS.external_variable());
 	}
 	
 	/**

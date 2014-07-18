@@ -36,7 +36,6 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 
 		variableIdTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.variable());
 		root.add(variableIdTextBox);
-		variableIdTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL)	, TEXTS.external_variable());
 		
 		variableValueTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.value());
 		root.add(variableValueTextBox);
@@ -104,6 +103,12 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		hide();
 	}
 	
+	public void resetForm(int variableScopeDefault, int variableTypeDefault ) {
+		variableIdTextBox.setItemSelected(String.valueOf(variableScopeDefault));
+		variableValueTextBox.setItemSelected(String.valueOf(variableTypeDefault));
+		resetForm();
+	}
+	
 	public void setEditMode(String mode) {
 		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
 			editMode = true;
@@ -121,7 +126,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		variableIdTextBox.setErrorLabelVisible(true);
 	}
 	
-	public void addvariableScope(int variableScope , String text) {
+	public void addVariableScope(int variableScope , String text) {
 		variableIdTextBox.addElement(String.valueOf(variableScope)	, text);
 	}
 	

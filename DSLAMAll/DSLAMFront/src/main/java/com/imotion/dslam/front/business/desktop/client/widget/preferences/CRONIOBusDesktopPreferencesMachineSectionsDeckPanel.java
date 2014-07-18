@@ -4,6 +4,8 @@ import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditor;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditorChangeHandler;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -37,8 +39,10 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 
 			@Override
 			public void fireEvent(AEMFTMetadataElementComposite fileData) {
-				// TODO Auto-generated method stub
-
+				CRONIOBusDesktopPreferencesEvent saveEvt = new CRONIOBusDesktopPreferencesEvent(getWindowName(), getName());
+				saveEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+				saveEvt.addElementAsDataValue(fileData);
+				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}
 		});
 		rootDeckPanel.add(editor);

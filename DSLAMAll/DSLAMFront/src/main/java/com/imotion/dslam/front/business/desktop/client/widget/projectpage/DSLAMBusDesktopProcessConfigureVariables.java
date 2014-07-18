@@ -59,7 +59,7 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public void reset() {
 		variableList.reset();
 		variablesData.removeAll();
-		variablesForm.resetForm();
+		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 	}
 	
 	/**
@@ -70,7 +70,8 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 	public void postDisplay() {
 		super.postDisplay();
 		variablesForm = new DSLAMBusDesktopProcessConfigureVariablesForm(this);
-		variablesForm.addvariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, TEXTS.process_variable());
+		variablesForm.addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS	, TEXTS.process_variable());
+		variablesForm.addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL	, TEXTS.external_variable());
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 	
@@ -167,6 +168,6 @@ public class DSLAMBusDesktopProcessConfigureVariables extends AEGWTCompositePane
 		variableList.clearList();
 		variablesData.addElement(id,data);
 		variableList.setData(variablesData);
-		variablesForm.resetForm();	
+		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
 	}
 }

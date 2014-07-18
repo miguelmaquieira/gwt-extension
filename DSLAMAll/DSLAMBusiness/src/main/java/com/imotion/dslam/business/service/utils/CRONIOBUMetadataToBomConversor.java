@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -13,6 +14,7 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
+import com.imotion.dslam.bom.data.CRONIOBOPreferences;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
@@ -254,11 +256,27 @@ public class CRONIOBUMetadataToBomConversor {
 			machine.setUsername(user);
 			machine.setPassword(password);
 			machine.setPromptRegEx(prompt);
-			
-			
+	
 		}
 		
 		return machine;
+	}
+	
+	public static CRONIOBOIPreferences fromPreferencesData(AEMFTMetadataElementComposite preferencesData) {
+		CRONIOBOIPreferences preferences = null;
+		if (preferencesData != null) {
+			preferences = new CRONIOBOPreferences();
+
+			Long	preferencesId	= getElementController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID, preferencesData);
+			Date	creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.CREATION_TIME	, preferencesData);
+			Date	savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME	, preferencesData);
+
+			preferences.setPreferencesId(preferencesId);
+			preferences.setCreationTime(creationTime);
+			preferences.setSavedTime(savedTime);
+
+		}
+		return preferences;
 	}
 
 	/**

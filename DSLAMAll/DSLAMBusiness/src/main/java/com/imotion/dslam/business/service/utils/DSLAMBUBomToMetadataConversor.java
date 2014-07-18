@@ -265,10 +265,10 @@ public class DSLAMBUBomToMetadataConversor {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			data.addElement(CRONIOBOIMachineProperties.MACHINE_NAME						, connection.getMachineName());
 			data.addElement(CRONIOBOIMachineProperties.MACHINE_DESCRIPTION				, connection.getMachineDescription());
-			data.addElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE					, connection.getProtocolType());
+			data.addElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE					, String.valueOf(connection.getProtocolType()));
 			data.addElement(CRONIOBOIMachineProperties.USERNAME							, connection.getUsername());
 			data.addElement(CRONIOBOIMachineProperties.PASSWORD							, connection.getPassword());
-			data.addElement(CRONIOBOIMachineProperties.TIMEOUT							, connection.getTimeout());
+			data.addElement(CRONIOBOIMachineProperties.TIMEOUT							, String.valueOf(connection.getTimeout()));
 			data.addElement(CRONIOBOIMachineProperties.PROMPT							, connection.getPromptRegEx());
 		}
 		return data;

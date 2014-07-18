@@ -178,20 +178,21 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
 		DSLAMBOIProject project = CRONIOBUMetadataToBomConversor.fromProjectData(projectData);
+		Date date = new Date();
 
 		//MainScript
 		DSLAMBOIFile mainScript = project.getMainScript();
-		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent());
+		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent(), date);
 		project.setMainScript(mainScript);
 
 		//RollbackScript
 		DSLAMBOIFile rollbackScript = project.getRollBackScript();
-		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent());
+		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent(), date);
 		project.setRollBackScript(rollbackScript);
 
 		//Process
 		DSLAMBOIProcess process = project.getProcess();
-		process = getProcessPersistence().updateProcess(process.getProcessId(), process);
+		process = getProcessPersistence().updateProcess(process.getProcessId(), process, date);
 		project.setProcess(process);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);
