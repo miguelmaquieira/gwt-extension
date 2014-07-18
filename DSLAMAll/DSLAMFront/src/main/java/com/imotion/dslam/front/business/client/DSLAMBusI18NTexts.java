@@ -64,6 +64,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Contraseña: ")
 	String password();
 	
+	@DefaultStringValue("Cambiar contraseña")
+	String change_password();
+	
 	@DefaultStringValue("Usuario")
 	String user_placeholder();
 	

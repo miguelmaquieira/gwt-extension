@@ -19,7 +19,9 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldPasswordTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 
 public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
@@ -28,13 +30,15 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapFormFieldTextBox  		userNameTextBox;
-	private AEGWTBootstrapFormFieldTextBox  		passwordTextBox; 
+	private AEGWTBootstrapFormFieldPasswordTextBox passwordTextBox; 
 	private AEGWTBootstrapFormFieldTextBox  		timeOutTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		promptTextBox; 
 	private AEGWTBootstrapDropdownButton  			protocolTypeDropdownButton;
+	private AEGWTButton								changePasswordButton;
 
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
+		setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
 
 		LabelElement userLabel 		= Document.get().createLabelElement();
 		userLabel.setInnerText(TEXTS.user_placeholder());
@@ -42,7 +46,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		
 		LabelElement passwordLabel 	= Document.get().createLabelElement();
 		passwordLabel.setInnerText(TEXTS.password_placeholder());
-		passwordTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.password_placeholder());
+		passwordTextBox 			= new AEGWTBootstrapFormFieldPasswordTextBox(null	, TEXTS.password_placeholder());
 		
 		LabelElement timeoutLabel 	= Document.get().createLabelElement();
 		timeoutLabel.setInnerText(TEXTS.timeout_placeholder());
@@ -62,7 +66,6 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		FlowPanel textBoxesZone = new FlowPanel();
 		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
 		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
-		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		textBoxesZone.getElement().appendChild(protocolTypeLabel);
 		textBoxesZone.add(protocolTypeDropdownButton);
 		textBoxesZone.getElement().appendChild(userLabel);
