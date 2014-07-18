@@ -4,6 +4,10 @@ public interface DSLAMBusDesktopIStyleConstants {
 
 	String APP_ID_PREFFIX = "dslam_studio-";
 
+	//COMMON
+	String PASSWORD_TEXTBOX 					= APP_ID_PREFFIX	+ "passwordTextBox";			//dslam_studio-passwordTextBox
+	String PASSWORD_CHECKBOX 					= APP_ID_PREFFIX	+ "passwordCheckBox";			//dslam_studio-passwordCheckBox
+	
 	
 	//TOOLBAR
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 					//dslam_studio-toolbar
@@ -110,7 +114,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PREFERENCES_MACHINE_VARIABLES_LIST			= APP_ID_PREFFIX			+ "preferencesMachineVariablesList";		//dslam_studio-preferencesMachineVariablesList
 	String PREFERENCES_MACHINE_CONFIGURE_FORM			= APP_ID_PREFFIX			+ "preferencesMachineConfigureForm";		//dslam_studio-preferencesMachineConfigureForm
 	
-	
 	//EXECUTION
 	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
 	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";			//dslam_studio-execution-loggerTabs
@@ -126,4 +129,25 @@ public interface DSLAMBusDesktopIStyleConstants {
 	
 	String PREFERENCES_CONNECTION_VIEW 					= APP_ID_PREFFIX			+ "preferencesConnectionView";						//dslam_studio-preferencesConnectionView
 	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";						//dslam_studio-preferencesView
+
+	
+	//LOGIN	
+	String LOGIN_VIEW 									= APP_ID_PREFFIX 			+ "loginView";			//dslam_studio-loginView
+	
+	
+	//SIGN_FORM
+	String SIGN_FORM 									= APP_ID_PREFFIX			+ "signForm";			//dslam_studio-signForm
+	
+	//AUTHENTICATION FORM
+	String AUTHENTICATION_FORM 							= APP_ID_PREFFIX			+ "authenticationForm"; //dslam_studio-authenticationForm
+	String AUTHENTICATION_FORM_LOGO 					= AUTHENTICATION_FORM		+ "-logo";				//dslam_studio-authenticationForm-logo
+	String AUTHENTICATION_FORM_DESCRIPTION 				= AUTHENTICATION_FORM		+ "-description";		//dslam_studio-authenticationForm-description
+	String AUTHENTICATION_FORM_ERROR 					= AUTHENTICATION_FORM		+ "-error";				//dslam_studio-authenticationForm-error
+	String AUTHENTICATION_FORM_ACTION_BUTTON 			= AUTHENTICATION_FORM		+ "-actionButton";		//dslam_studio-authenticationForm-actionButton
+	String AUTHENTICATION_FORM_CONTAINER 				= AUTHENTICATION_FORM		+ "-container";			//dslam_studio-authenticationForm-container
+	String AUTHENTICATION_FORM_FIELDS_ZONE 				= AUTHENTICATION_FORM		+ "-fieldsZone";		//dslam_studio-authenticationForm-fieldsZone
+	String AUTHENTICATION_FORM_BOTTOM_ZONE 				= AUTHENTICATION_FORM		+ "-bottomZone";		//dslam_studio-authenticationForm-bottomZone
+
+	// FORM ERROR
+	String FORM_ERROR 									= APP_ID_PREFFIX + "formError";						//dslam_studio-formError				
 }
