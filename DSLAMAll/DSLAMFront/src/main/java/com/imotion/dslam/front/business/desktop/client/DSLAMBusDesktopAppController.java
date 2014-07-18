@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
@@ -14,6 +15,7 @@ import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusCont
 import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
@@ -22,18 +24,22 @@ import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.
 import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.execution.DSLAMBusDesktopExecutionScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.login.CRONIOBusDesktopLoginScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.CRONIOBusDesktopPreferencesScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.connection.CRONIOBusDesktopPreferencesConnectionScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDesktopProcessScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopEmptyLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopPreferencesLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
+import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTIControllerPresenter;
@@ -68,21 +74,21 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	@Override
 	public AEMFTMetadataElementComposite saveUserDataInClientStorage(AEMFTMetadataElementComposite result) {
 		super.saveUserDataInClientStorage(result);
-		
+
 		//TODO: REMOVE WHEN LOGIN DONE
 		getContextDataController().setElement(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID, "noSessionId");
-		
-		
+
+
 		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
-		
+
 		AEMFTMetadataElementComposite preferencesData = getElementDataController().getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, preferencesData);
-		
+
 		AEMFTMetadataElementComposite layoutsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
-		
+
 		setLayoutData(layoutsData);
 		return getContextDataController().getContext();
 	}
@@ -111,18 +117,29 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			token1 = DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE;
 		}
 
-		if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER.equals(token1) ) {
-			presenter = new DSLAMBusDesktopScriptsManagerPresenter(new DSLAMBusDesktopScriptsManagerScreenView());
-		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE.equals(token1) ) {
-			presenter = new DSLAMBusDesktopProjectPagePresenter(new DSLAMBusDesktopProjectPageScreenView());
-		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE.equals(token1) ) {
-			presenter = new CRONIOBusDesktopProcessPresenter(new CRONIOBusDesktopProcessScreenView());
-		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXECUTION.equals(token1) ) {
-			presenter = new DSLAMBusDesktopExecutionPresenter(new DSLAMBusDesktopExecutionScreenView());
-		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES.equals(token1) ) {
-			presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
-		} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES.equals(token1) ) {
-			presenter = new CRONIOBusDesktopPreferencesConnectionPresenter(new CRONIOBusDesktopPreferencesConnectionScreenView());
+		String 	sid 		= getContextDataController().getElementAsString(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID);
+		String	rolTypeStr	= getContextDataController().getElementAsString(AEGWTILoginAppControllerConstants.SESSION_ROL_TYPE);
+		int 	rolType 	= AEMFTCommonUtilsBase.getIntegerFromString(rolTypeStr);
+
+		boolean isProdMode = GWT.isProdMode();
+//		boolean isProdMode = true;		
+		if (isProdMode && (AEGWTStringUtils.isEmptyString(sid) || rolType != AEMFTILoginDataConstants.ROL_TYPE_WEBMASTER)) {
+			presenter = new CRONIOBusDesktopLoginPresenter(new CRONIOBusDesktopLoginScreenView());
+		} else {
+
+			if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER.equals(token1) ) {
+				presenter = new DSLAMBusDesktopScriptsManagerPresenter(new DSLAMBusDesktopScriptsManagerScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE.equals(token1) ) {
+				presenter = new DSLAMBusDesktopProjectPagePresenter(new DSLAMBusDesktopProjectPageScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE.equals(token1) ) {
+				presenter = new CRONIOBusDesktopProcessPresenter(new CRONIOBusDesktopProcessScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXECUTION.equals(token1) ) {
+				presenter = new DSLAMBusDesktopExecutionPresenter(new DSLAMBusDesktopExecutionScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES.equals(token1) ) {
+				presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES.equals(token1) ) {
+				presenter = new CRONIOBusDesktopPreferencesConnectionPresenter(new CRONIOBusDesktopPreferencesConnectionScreenView());
+			}
 		}
 		return presenter;
 	}
@@ -162,10 +179,14 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		CRONIOBusDesktopProjectsLayout projectsLayout = new CRONIOBusDesktopProjectsLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsLayout);
 		projectsLayout.postDisplay();
-		
+
 		CRONIOBusDesktopPreferencesLayout preferencesLayout = new CRONIOBusDesktopPreferencesLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesLayout);
 		preferencesLayout.postDisplay();
+		
+		CRONIOBusDesktopEmptyLayout emptyLayout = new CRONIOBusDesktopEmptyLayout();
+		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_EMPTY_ID, emptyLayout);
+		emptyLayout.postDisplay();
 	}
 
 	//TODO:DELETE WHEN LOGIN WORKS!!
@@ -184,11 +205,11 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			}
 		});
 	}
-	
+
 	/**
 	 * PRIVATE 
 	 */
-	
+
 	private void setLayoutData(AEMFTMetadataElementComposite data) {
 		CRONIOBusDesktopLayoutContainer layoutContainer = (CRONIOBusDesktopLayoutContainer) super.container;
 		layoutContainer.setData(data);
