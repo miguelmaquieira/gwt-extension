@@ -26,7 +26,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
 		if (persistenceModule == null) {
 			persistenceModule = new DSLAMBKPersistenceModuleJPA<Q, Id>();
-			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass()});
+			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(), getSessionId()});
 		}
 		return persistenceModule;
 	}
@@ -34,7 +34,6 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	@Override
 	public void releaseModule() {
 		if (persistenceModule != null) {
-			persistenceModule.destroyCurrentEntityManager();
 			persistenceModule.releaseInstance();
 			persistenceModule = null;
 		}
@@ -51,7 +50,6 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	@Override
 	public void initialize(Object[] args) {
 		super.initialize(args);
-		getPersistenceModule().createEntityManager();
 	}
 
 	@Override
@@ -85,35 +83,35 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	
 	protected DSLAMBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
-			filePersistence = (DSLAMBKIFilePersistenceService) getFactoryPersistence().newFilePersistence();
+			filePersistence = (DSLAMBKIFilePersistenceService) getFactoryPersistence().newFilePersistence(getSessionId());
 		}
 		return filePersistence;
 	}
 
 	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
-			processPersistence = (DSLAMBKIProcessPersistenceService) getFactoryPersistence().newProcessPersistence();
+			processPersistence = (DSLAMBKIProcessPersistenceService) getFactoryPersistence().newProcessPersistence(getSessionId());
 		}
 		return processPersistence;
 	}
 	
 	protected CRONIOBKINodePersistenceService getNodePersistence() {
 		if (nodePersistence == null) {
-			nodePersistence = (CRONIOBKINodePersistenceService) getFactoryPersistence().newNodePersistence();
+			nodePersistence = (CRONIOBKINodePersistenceService) getFactoryPersistence().newNodePersistence(getSessionId());
 		}
 		return nodePersistence;
 	}
 	
 	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
 		if (machinePropertiesPersistence == null) {
-			machinePropertiesPersistence = (CRONIOBKIMachinePropertiesPersistenceService) getFactoryPersistence().newMachinePropertiesPersistence();
+			machinePropertiesPersistence = (CRONIOBKIMachinePropertiesPersistenceService) getFactoryPersistence().newMachinePropertiesPersistence(getSessionId());
 		}
 		return machinePropertiesPersistence;
 	}
 	
 	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
 		if (preferencesPersistence == null) {
-			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence();
+			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence(getSessionId());
 		}
 		return preferencesPersistence;
 	}

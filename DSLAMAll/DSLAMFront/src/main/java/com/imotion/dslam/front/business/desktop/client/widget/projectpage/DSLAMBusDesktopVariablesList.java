@@ -41,7 +41,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 			for (AEMFTMetadataElement variable : variableList) {
 				String itemKey = variable.getKey();
-				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
+				if (!CRONIOBOIProjectDataConstants.INFO.equals(itemKey)) {
 					String 	name	 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable);
 					String 	value 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
 					int		scope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variable);

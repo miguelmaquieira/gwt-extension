@@ -10,16 +10,16 @@ import com.selene.arch.exe.back.persistence.AEMFTIPersistenceFactory;
 
 public interface DSLAMBKIPersistenceFactory extends AEMFTIPersistenceFactory {
 
-	public	DSLAMBKIFilePersistenceService newFilePersistence();
+	public	DSLAMBKIFilePersistenceService newFilePersistence(String sessionId);
 	
-	public	DSLAMBKIProcessPersistenceService newProcessPersistence();
+	public	DSLAMBKIProcessPersistenceService newProcessPersistence(String sessionId);
 	
-	public	DSLAMBKIProjectPersistenceService newProjectPersistence();
+	public	DSLAMBKIProjectPersistenceService newProjectPersistence(String sessionId);
 	
-	public	CRONIOBKINodePersistenceService newNodePersistence();
+	public	CRONIOBKINodePersistenceService newNodePersistence(String sessionId);
 	
-	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence();
+	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence(String sessionId);
 
-	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence();
+	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence(String sessionId);
 	
 }
