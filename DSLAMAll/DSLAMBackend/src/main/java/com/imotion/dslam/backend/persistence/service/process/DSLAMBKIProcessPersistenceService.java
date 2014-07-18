@@ -17,6 +17,6 @@ public interface DSLAMBKIProcessPersistenceService {
 	
 	DSLAMBOIProcess getProcess(Long processIdAsLong);
 
-	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process, Date date);
+	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess processData, Long preferencesId, Date date);
 
 }

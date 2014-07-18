@@ -46,4 +46,8 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 
 	void setCreationTime(Date creationTime);
 
+	DSLAMBOIProject getProject();
+
+	void setProject(DSLAMBOIProject project);
+
 }

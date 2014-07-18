@@ -18,9 +18,9 @@ public interface CRONIOBOINode extends Serializable, CRONIOBOINodeDataConstants 
 
 	void setNodeIp(String nodeIp);
 
-	int getNodeType();
+	String getNodeType();
 
-	void setNodeType(int nodeType);
+	void setNodeType(String nodeType);
 
 	List<DSLAMBOIVariable> getVariableList();
 

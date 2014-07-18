@@ -92,6 +92,7 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 
 	public void setProcess(DSLAMBOIProcess process) {
 		this.process = process;
+		this.process.setProject(this);
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)

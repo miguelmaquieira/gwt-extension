@@ -29,7 +29,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 	private Long 							nodeId;
 	private String 							nodeName;
 	private String 							nodeIp;
-	private int 							nodeType;
+	private String 							nodeType;
 	private List<DSLAMBOIVariable> 			variableList;
 	private DSLAMBOIProcess					process;
 	private CRONIOBOIMachineProperties		machineProperties;
@@ -73,12 +73,12 @@ public class CRONIOBONode implements CRONIOBOINode {
 	}
 
 	@Override
-	public int getNodeType() {
+	public String getNodeType() {
 		return nodeType;
 	}
 
 	@Override
-	public void setNodeType(int nodeType) {
+	public void setNodeType(String nodeType) {
 		this.nodeType = nodeType;
 	}
 

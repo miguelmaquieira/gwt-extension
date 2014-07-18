@@ -10,6 +10,7 @@ import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 import edu.ycp.cs.dh.acegwt.client.ace.AceEditor;
@@ -84,7 +85,6 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 				timer.cancel();
 				timer = null;
 			}
-			editor.setVisible(true);
 			fileData = data;
 			String 	content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
 			int		contentType	= getElementController().getElementAsInt(DSLAMBOIFile.CONTENT_TYPE, data);
@@ -96,7 +96,11 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 			} else {
 				editor.setMode(AceEditorMode.TEXT);
 			}
+		} else {
+			editor.setMode(AceEditorMode.DSLAM);
+			fileData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		}
+		editor.setVisible(true);
 	}
 
 	/************************************************************************

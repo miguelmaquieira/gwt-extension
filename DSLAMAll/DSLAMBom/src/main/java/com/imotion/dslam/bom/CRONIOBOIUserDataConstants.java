@@ -9,4 +9,7 @@ public interface CRONIOBOIUserDataConstants extends AEMFTILoginDataConstants {
 	
 	//relations
 	String PREFERENCES_ID = "preferencesId";
+	String USER_PROJECTS  = "UserProjects";
+	
+	long TEST_USER_ID = 1l;
 }

@@ -7,12 +7,13 @@ public interface CRONIOBOIProjectDataConstants {
 	//Attributes
 	String PROJECT_ID 				= "projectId";
 	String PROJECT_NAME				= "projectName";
-	String PROJECT_MACHINE_TYPE		= "projectMachineType";
-	String PROJECT_MAIN_SCRIPT		= "projectMainScript";
-	String PROJECT_ROLLBACK_SCRIPT	= "projectRollBackScript";	
-	String PROJECT_PROCESS			= "projectProcess";
+	String PROJECT_MACHINE_TYPE		= "machineType";
+	String PROJECT_MAIN_SCRIPT		= "mainScript";
+	String PROJECT_ROLLBACK_SCRIPT	= "rollBackScript";	
+	String PROJECT_PROCESS			= "process";
 	String SAVED_TIME				= "savedTime";
 	String CREATION_TIME			= "creationTime";
+	
 	String MAIN_SCRIPT_ID 			= "mainScriptId";
 	String ROLLBACK_SCRIPT_ID 		= "rollBackScriptId";
 	

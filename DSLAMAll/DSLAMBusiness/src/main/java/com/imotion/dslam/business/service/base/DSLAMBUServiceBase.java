@@ -1,6 +1,7 @@
 package com.imotion.dslam.business.service.base;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
+import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
@@ -22,6 +23,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	private CRONIOBKINodePersistenceService					nodePersistence;
 	private CRONIOBKIPreferencesPersistenceService			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService	machinePropertiesPersistence;
+	private CRONIOBKILoginPersistenceService 				userPersistence;
 
 	@Override
 	public String getName() {
@@ -75,6 +77,14 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		}
 		return machinePropertiesPersistence;
 	}
+	
+	protected CRONIOBKILoginPersistenceService getUserPersistence() {
+		if (userPersistence == null) {
+			userPersistence =  getPersistence().getAppFactoryPersistence().newUserPersistence(getSession().getSessionId());
+		}
+		return userPersistence;
+	}
+	
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -111,6 +121,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (machinePropertiesPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
 			machinePropertiesPersistence = null;
+		}
+		if (userPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPersistence);
+			userPersistence = null;
 		}
 	}
 	
