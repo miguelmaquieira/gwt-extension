@@ -1,21 +1,27 @@
 package com.imotion.dslam.front.business.desktop.client.widget.preferences;
 
 import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIMachinePropertiesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldPasswordTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 
 public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
@@ -24,28 +30,51 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapFormFieldTextBox  		userNameTextBox;
-	private AEGWTBootstrapFormFieldTextBox  		passwordTextBox; 
+	private AEGWTBootstrapFormFieldPasswordTextBox 	passwordTextBox; 
 	private AEGWTBootstrapFormFieldTextBox  		timeOutTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		promptTextBox; 
 	private AEGWTBootstrapDropdownButton  			protocolTypeDropdownButton;
+	private AEGWTButton								changePasswordButton;
 
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
+		setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
 
+		LabelElement userLabel 		= Document.get().createLabelElement();
+		userLabel.setInnerText(TEXTS.user_placeholder());
 		userNameTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.user_placeholder());
-		passwordTextBox 			= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.password_placeholder());
+		
+		LabelElement passwordLabel 	= Document.get().createLabelElement();
+		passwordLabel.setInnerText(TEXTS.password_placeholder());
+		passwordTextBox 			= new AEGWTBootstrapFormFieldPasswordTextBox(null	, TEXTS.password_placeholder());
+		
+		LabelElement timeoutLabel 	= Document.get().createLabelElement();
+		timeoutLabel.setInnerText(TEXTS.timeout_placeholder());
 		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.timeout_placeholder());
+		
+		LabelElement promptLabel 	= Document.get().createLabelElement();
+		promptLabel.setInnerText(TEXTS.prompt_placeholder());
 		promptTextBox 				= new AEGWTBootstrapFormFieldTextBox(null	, TEXTS.prompt_placeholder());
+		
+		LabelElement protocolTypeLabel 	= Document.get().createLabelElement();
+		protocolTypeLabel.setInnerText(TEXTS.protocol_placeholder());
 		protocolTypeDropdownButton 	= new AEGWTBootstrapDropdownButton();
 		
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
 
 		FlowPanel textBoxesZone = new FlowPanel();
+		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
+		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
+		textBoxesZone.getElement().appendChild(protocolTypeLabel);
 		textBoxesZone.add(protocolTypeDropdownButton);
+		textBoxesZone.getElement().appendChild(userLabel);
 		textBoxesZone.add(userNameTextBox);
+		textBoxesZone.getElement().appendChild(passwordLabel);
 		textBoxesZone.add(passwordTextBox);
+		textBoxesZone.getElement().appendChild(timeoutLabel);
 		textBoxesZone.add(timeOutTextBox);
+		textBoxesZone.getElement().appendChild(promptLabel);
 		textBoxesZone.add(promptTextBox);
 		
 		addWidget(textBoxesZone);

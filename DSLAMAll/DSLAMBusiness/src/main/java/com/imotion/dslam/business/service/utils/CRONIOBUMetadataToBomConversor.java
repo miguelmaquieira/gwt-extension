@@ -138,7 +138,7 @@ public class CRONIOBUMetadataToBomConversor {
 			nodeList =  new ArrayList<>();
 			List<AEMFTMetadataElement> nodeDataElementList = nodeDataList.getElementList();
 			for (AEMFTMetadataElement nodeDataElement: nodeDataElementList) {
-				if (!DSLAMBOIProject.IS_MODIFIED.equals(nodeDataElement.getKey())) {
+				if (!DSLAMBOIProject.INFO.equals(nodeDataElement.getKey())) {
 					CRONIOBOINode node = fromNodeData((AEMFTMetadataElementComposite) nodeDataElement);
 					nodeList.add(node);
 				}
@@ -188,7 +188,7 @@ public class CRONIOBUMetadataToBomConversor {
 			List<AEMFTMetadataElement> scheduleDataElementList = scheduleDataList.getElementList();
 			for (AEMFTMetadataElement scheduleData : scheduleDataElementList) {
 				String dataKey = scheduleData.getKey();
-				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(dataKey)) {
+				if (!CRONIOBOIProjectDataConstants.INFO.equals(dataKey)) {
 					AEMFTMetadataElementSingle scheduleDataSingle = (AEMFTMetadataElementSingle) scheduleData;
 					Date schedule = (Date) scheduleDataSingle.getValueAsSerializable();
 					scheduleList.add(schedule);
@@ -205,7 +205,7 @@ public class CRONIOBUMetadataToBomConversor {
 			List<AEMFTMetadataElement> variableDataElementList = variableDataList.getElementList();
 			for (AEMFTMetadataElement variableDataelement : variableDataElementList) {
 				String dataKey = variableDataelement.getKey();
-				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(dataKey)) {
+				if (!CRONIOBOIProjectDataConstants.INFO.equals(dataKey)) {
 					DSLAMBOIVariable variable = fromVariableData((AEMFTMetadataElementComposite) variableDataelement);
 					variableList.add(variable);
 				}

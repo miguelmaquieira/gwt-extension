@@ -41,7 +41,7 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 			for (AEMFTMetadataElement variable : variableList) {
 				String itemKey = variable.getKey();
-				if (!CRONIOBOIProjectDataConstants.IS_MODIFIED.equals(itemKey)) {
+				if (!CRONIOBOIProjectDataConstants.INFO.equals(itemKey)) {
 					String 	name	 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable);
 					String 	value 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
 					int		scope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variable);
@@ -50,6 +50,10 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 					String scopeStr = "";
 					if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS == scope) {
 						scopeStr = TEXTS.process_variable();
+					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE == scope) {
+						scopeStr = TEXTS.node_variable();
+					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION == scope) {
+						scopeStr = TEXTS.connection_variable();
 					} else {
 						scopeStr = TEXTS.external_variable();
 					}

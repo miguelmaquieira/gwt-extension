@@ -64,11 +64,16 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Contraseña: ")
 	String password();
 	
+
 	@DefaultStringValue("Entrar")
 	String enter();
 	
 	@DefaultStringValue("Email")
 	String email_placeholder();
+
+	@DefaultStringValue("Cambiar contraseña")
+	String change_password();
+
 	
 	@DefaultStringValue("Usuario")
 	String user_placeholder();
@@ -210,6 +215,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Prompt")
 	String prompt_placeholder();
+	
+	@DefaultStringValue("Protocolo")
+	String protocol_placeholder();
 	
 	@DefaultStringValue("Petición:")
 	String request_label();
