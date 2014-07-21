@@ -158,6 +158,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 		}
 		
+		//TODO: move to connectionPresenter
 		String[] 	finalSectionPathSplit 	= finalSectionPath.split("\\.");
 		String 		finalSectionName 		= finalSectionPathSplit[finalSectionPathSplit.length-1];
 		String		machineName				= finalSectionPathSplit[1];
@@ -208,7 +209,9 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 	private void updateConnectionClientData(String connectionName, AEMFTMetadataElementComposite connectionData, boolean connectionSaved) {
 		StringBuilder sbKey = new StringBuilder();
-		sbKey.append(CRONIODesktopIAppControllerConstants.CONNECTIONS_DATA);
+		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(connectionName);
 		String connectionKey = sbKey.toString();

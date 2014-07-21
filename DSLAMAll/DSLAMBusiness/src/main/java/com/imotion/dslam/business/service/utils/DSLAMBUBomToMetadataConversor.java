@@ -257,6 +257,8 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connection.getMachineName());
 			data.addElement(CRONIOBOIMachineProperties.CREATION_TIME	, connection.getCreationTime());
 			data.addElement(CRONIOBOIMachineProperties.SAVED_TIME		, connection.getSaveTime());
+			AEMFTMetadataElementComposite connectionConfigData = fromConnectionConfig(connection); 
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG, connectionConfigData);
 			
 		}
 		return data;
