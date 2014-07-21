@@ -131,19 +131,19 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		EVENT_TYPE type		= evt.getEventType();
 		if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(srcWindow)) {
 //			String projectId	= evt.getProjectId();
-//			String sectionId	= evt.getFinalSectionId();
-//			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
-//				String		projectName			= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
-//				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
+			String sectionId	= evt.getFinalSectionId();
+			if (EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)) {
+				String		machineName			= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
+				boolean		sectionModified		= evt.getElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED);
 //				List<String> modifiedProjects	= getModifiedProjetIds();
 //				boolean projectModified = modifiedProjects.contains(projectId);
-//				toolbar.setSaveProjectEnabled(projectModified);
-//				sectionHeader.setProyectName(projectName);
-//				sectionHeader.setSectionNameFromId(sectionId);
-//				sectionHeader.setModified(sectionModified);
-//				sectionHeader.setVisible(true);
-//				setId(projectId);
-//				toolbar.setId(projectId);
+				toolbar.setSavePreferencesEnabled(sectionModified);
+				sectionHeader.setMachineName(machineName);
+				sectionHeader.setSectionNameFromId(sectionId);
+				sectionHeader.setModified(sectionModified);
+				sectionHeader.setVisible(true);
+				setId(machineName);
+				toolbar.setId(machineName);
 //				if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
 //					toolbar.setExecuteEnabled(true);
 //				} else {
@@ -156,11 +156,10 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 //					toolbar.setSaveProjectEnabled(true);
 //				}
 //				toolbar.setSaveAllProjectsEnabled(true);
-//			} else 
-			if (EVENT_TYPE.CONNECTION_SAVED.equals(type)) {
+			} else if (EVENT_TYPE.CONNECTION_SAVED.equals(type)) {
 				sectionHeader.setModified(false);
-			//	DSLAMBusDesktopPreferencesMenu.setConnectionSaved();
-				toolbar.setSaveConnectionEnabled(false);
+				//DSLAMBusDesktopPreferencesMenu.setConnectionSaved();
+				toolbar.setSavePreferencesEnabled(false);
 			} else if (EVENT_TYPE.CONNECTION_CREATED.equals(type)) {
 				AEMFTMetadataElementComposite connectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 				String connectionName = getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, connectionData);
@@ -173,8 +172,8 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		return 
-//				EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)
-//				||
+				EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)
+				||
 				EVENT_TYPE.CONNECTION_SAVED.equals(type)
 //				||
 //				EVENT_TYPE.SECTION_MODIFIED.equals(type)
