@@ -1,17 +1,24 @@
 package com.imotion.dslam.bom.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUser;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.selene.arch.base.bom.data.AEMFTLoginData;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 @Entity(name="User")
 public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
@@ -20,6 +27,7 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 	
 	private Long					userId;
 	private CRONIOBOIPreferences	preferences;
+	private List<DSLAMBOIProject>	projectList;
 
 	@Id
 	@SequenceGenerator(name = "UserIdGenerator", sequenceName = "UserSeq") //It only takes effect for databases providing identifier generators.
@@ -34,7 +42,7 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 		this.userId = userId;
 	}
 	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOPreferences.class)
+	@ManyToOne(cascade={CascadeType.PERSIST}, targetEntity=CRONIOBOPreferences.class)
 	@JoinColumn(name=PREFERENCES_ID)
 	@Override
 	public CRONIOBOIPreferences getPreferences() {
@@ -44,6 +52,31 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 	@Override
 	public void setPreferences(CRONIOBOIPreferences preferences) {
 		this.preferences = preferences;
+	}
+
+	@ManyToMany(cascade={CascadeType.PERSIST}, targetEntity=DSLAMBOProject.class)
+	@JoinTable(name=USER_PROJECTS, joinColumns = @JoinColumn(name = USER_ID), inverseJoinColumns = @JoinColumn(name = DSLAMBOIProject.PROJECT_ID))
+	@Override
+	public List<DSLAMBOIProject> getProjectList() {
+		return projectList;
+	}
+
+	@Override
+	public void setProjectList(List<DSLAMBOIProject> projectList) {
+		this.projectList = projectList;
+	}
+	
+	@Override
+	public void addProject(DSLAMBOIProject project) {
+		if (AEMFTCommonUtilsBase.isEmptyList(projectList)) {
+			projectList = new ArrayList<>();
+		}
+		projectList.add(project);
+	}
+	
+	@Override
+	public void removeProject(DSLAMBOIProject project) {
+		projectList.remove(project);
 	}
 
 }

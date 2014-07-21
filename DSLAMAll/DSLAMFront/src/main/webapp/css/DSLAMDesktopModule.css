@@ -678,9 +678,155 @@
 	background-color: #F2F1F0;
 }
 
+/*****************************************
+*			AUTHENTICATION
+******************************************/
+.dslam_studio-authenticationForm {
+	position: relative;
+	background-color: #f5f5f5;
+	padding: 30px 30px 20px;
+	font-family: "Open Sans", Calibri, Candara, Arial, sans-serif;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #cccccc;
+	width: 460px;;
+	height: 400px;
+	text-align: center;
+	margin: 10% auto;
+}
+
+.dslam_studio-authenticationForm-description {
+	margin-top: 30px;
+	font-size: 15px;
+}
+
+.dslam_studio-authenticationForm-container{
+    position: relative;
+    min-height: 170px;
+    padding: 0px 5px;
+}
+
+
+.dslam_studio-authenticationForm-container .dslam_studio-authenticationForm-error {
+	margin-top: 10px;
+	padding: 5px 5px;
+	min-height: 55px;
+}
+
+
+.dslam_studio-authenticationForm-actionButton {
+    position: absolute;
+    top: 287px;
+    left: 0px;
+    width: 100%;
+    padding: 0px 35px;
+    
+
+}
+
+.dslam_studio-authenticationForm-actionButton button {
+     background: linear-gradient(to bottom, rgb(30, 75, 99) 0%, rgb(0, 30, 45) 100%, rgb(0, 30, 45) 100%) repeat scroll 0% 0% transparent;
+    height: 35px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-width: 0px;
+    border-color: rgb(14, 35, 46);
+    border-radius: 2px;
+    width: 100%;
+}
+
+
+.dslam_studio-authenticationForm-fieldsZone > input, .dslam_studio-authenticationForm-fieldsZone > div {
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+
+.dslam_studio-authenticationForm-fieldsZone .gwt-SuggestBox {
+	padding: 0px 10px;
+}
+
+
+
+.dslam_studio-passwordTextBox .aegwt-passwordBox-textBoxZone input {
+	width: 100%;
+}
+
+
+.dslam_studio-authenticationForm-fieldsZone .gwt-SuggestBox,.dslam_studio-authenticationForm-fieldsZone  .dslam_studio-passwordTextBox {
+	background-color: #ffffff;
+	height: 35px;
+	border-color: #cccccc;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border-width: 1px;
+}
+
+
+.dslam_studio-passwordTextBox .aegwt-passwordBox-checkBoxZone {
+	background-color: #dddddd;
+	height: 100%;
+	color: #777777;
+	font-size: 15px;
+	text-transform: lowercase;
+	cursor: default;
+	padding-top: 6px;
+}
+
+.dslam_studio-passwordTextBox .sndo-passwordCheckBox {
+	height: 100%;
+	width: 100%;
+}
+
+.dslam_studio-passwordTextBox .sndo-passwordCheckBox .aegwt-checkbox-checkZone {
+	margin-top: 7px;
+	padding: 0px;
+	padding-left: 5px;
+}
+
+.dslam_studio-passwordTextBox .sndo-passwordCheckBox .aegwt-checkbox-labelZone {
+	margin-top: 5px;
+	padding: 0px;
+}
+
+.dslam_studio-passwordTextBox .aegwt-passwordBox-checkBoxZone .gwt-CheckBox {
+	width: 100%;
+	line-height: 35px;
+}
+
+.dslam_studio-passwordTextBox .aegwt-passwordBox-checkBoxZone .gwt-CheckBox label
+	{
+	padding-left: 6px;
+	font-weight: normal;
+}
+
+.dslam_studio-passwordTextBox>div {
+	padding: 0px;
+}
+
+/*****************************************
+*			ERROR FORM
+******************************************/
+
+.dslam_studio-formError {
+	background-color: #ffcdcd;
+	padding: 10px 15px;
+	font-size: 14px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border: 1px solid #cccccc;
+}
+
 .dslam_studio-preferencesMachineConfigureForm {
 	width: 400px;
 	margin-top: 20px;
+
 }
 
 /*****************************************

@@ -30,7 +30,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	private String ZERO = "0";
 
 	private AEGWTBootstrapFormFieldTextBox  		userNameTextBox;
-	private AEGWTBootstrapFormFieldPasswordTextBox passwordTextBox; 
+	private AEGWTBootstrapFormFieldPasswordTextBox 	passwordTextBox; 
 	private AEGWTBootstrapFormFieldTextBox  		timeOutTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		promptTextBox; 
 	private AEGWTBootstrapDropdownButton  			protocolTypeDropdownButton;

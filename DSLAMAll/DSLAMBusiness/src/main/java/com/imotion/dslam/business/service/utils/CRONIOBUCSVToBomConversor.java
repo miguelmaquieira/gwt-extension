@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.CRONIOBONode;
@@ -36,15 +35,8 @@ public class CRONIOBUCSVToBomConversor {
 				variableNameList = variableListString;
 			} else {
 				CRONIOBONode node = new CRONIOBONode();  
-
 				node.setNodeName(nodes[0]);
-
-				if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_FD.equals(nodes[1])){
-					node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_FD);
-				} else if (CRONIOBOINodeDataConstants.NODE_MACHINE_TYPE_ISAM_XD.equals(nodes[1])){
-					node.setNodeType(CRONIOBOINodeDataConstants.NODE_TYPE_ISAM_XD);
-				}
-
+				node.setNodeType(nodes[1]);
 				node.setNodeIp(nodes[2]); 
 
 				for (int i = 0; i < variableListString.length; i++) {

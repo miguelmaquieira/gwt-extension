@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
@@ -22,13 +23,13 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess process, Date date) {
+	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess processData, Long preferencesId, Date date) {
 		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 
-			originalProcess.setSynchronous(process.isSynchronous());
-			originalProcess.setScheduleList(process.getScheduleList());
-			originalProcess.setVariableList(process.getVariableList());
+			originalProcess.setSynchronous(processData.isSynchronous());
+			originalProcess.setScheduleList(processData.getScheduleList());
+			originalProcess.setVariableList(processData.getVariableList());
 			List<CRONIOBOINode> originalNodeList 	= originalProcess.getNodeList();
 			List<CRONIOBOINode> nodesToRemove 		= new ArrayList<>(); 
 			if (!AEMFTCommonUtilsBase.isEmptyList(originalNodeList)) {
@@ -41,10 +42,11 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 				originalProcess.removeNode(node);
 			}
 			
-			List<CRONIOBOINode> newNodeList			= process.getNodeList();
+			List<CRONIOBOINode> newNodeList			= processData.getNodeList();
 			List<CRONIOBOINode> persistedNodeList	= new ArrayList<>();
 			if (!AEMFTCommonUtilsBase.isEmptyList(newNodeList)) {
 				for (CRONIOBOINode node : newNodeList) {
+					setMachinePropertiesToNode(preferencesId, node);
 					node = getNodePersistence().addNode(node);
 					persistedNodeList.add(node);
 				}
@@ -90,5 +92,16 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	public Class<DSLAMBOProcess> getPersistenceClass() {
 		return DSLAMBOProcess.class;
 	}
+	
+	/**
+	 * PRIVATE
+	 */
 
+	private CRONIOBOINode setMachinePropertiesToNode(Long preferencesId, CRONIOBOINode node) {
+		String nodeType = node.getNodeType();
+		CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, nodeType);
+		node.setMachineProperties(machineProperties);
+		return node;
+	}
+	
 }

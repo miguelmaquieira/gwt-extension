@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -81,7 +83,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	@Override
 	public void updateProject() {
 		//ContextIn
-		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 
 		AEMFTMetadataElementComposite projectData = updateProject(contextIn);
 
@@ -177,6 +179,14 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	 */
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
+		//TODO: remove when login works
+//		String					userIdStr		= getSession().getUserId();
+//		long					userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
+		long					userId			= CRONIOBOIUser.TEST_USER_ID;
+		CRONIOBOIUser 			user 			= getUserPersistence().getUserById(userId);
+		CRONIOBOIPreferences 	userPreferences = user.getPreferences();
+		long					preferencesId	= userPreferences.getPreferencesId();
+		
 		DSLAMBOIProject project = CRONIOBUMetadataToBomConversor.fromProjectData(projectData);
 		Date date = new Date();
 
@@ -192,7 +202,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 
 		//Process
 		DSLAMBOIProcess process = project.getProcess();
-		process = getProcessPersistence().updateProcess(process.getProcessId(), process, date);
+		process = getProcessPersistence().updateProcess(process.getProcessId(), process, preferencesId, date);
 		project.setProcess(process);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);

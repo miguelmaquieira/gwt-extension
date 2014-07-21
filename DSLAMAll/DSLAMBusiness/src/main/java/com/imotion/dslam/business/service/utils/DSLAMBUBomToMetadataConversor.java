@@ -224,7 +224,7 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOINode.NODE_ID				, String.valueOf(node.getNodeId()));
 			data.addElement(CRONIOBOINode.NODE_NAME				, node.getNodeName());
 			data.addElement(CRONIOBOINode.NODE_IP				, node.getNodeIp());
-			data.addElement(CRONIOBOINode.NODE_MACHINE_TYPE		, node.getNodeType());
+			data.addElement(CRONIOBOINode.NODE_TYPE				, node.getNodeType());
 			data.addElement(DSLAMBOIProcess.CREATION_TIME		, node.getCreationTime());
 			data.addElement(DSLAMBOIProcess.SAVED_TIME			, node.getSavedTime());
 			

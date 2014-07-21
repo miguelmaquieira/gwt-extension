@@ -1,0 +1,121 @@
+package com.imotion.dslam.front.business.desktop.client.widget.authentication;
+
+import com.google.gwt.dom.client.Style.Visibility;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.Image;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonIImageConstants;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.common.CRONIOBusDesktopBootstrapFormErrorWidget;
+import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
+import com.selene.arch.exe.gwt.client.ui.widget.form.AEGWTFormContainerPanelBase;
+import com.selene.arch.exe.gwt.mvp.event.authentication.AEGWTAuthenticationEventTypes.AUTHENTICATION_TYPE;
+
+public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormContainerPanelBase implements AEGWTIValidationChangeHandler{
+
+	
+	private Image 										logoImg;
+	private HTML										descriptionHTML;
+	private CRONIOBusDesktopBootstrapFormErrorWidget 	errorWidget;
+	private FlowPanel									fieldsZone;
+	private Button										actionButton;
+	private FlowPanel									bottomZone;
+	private FlowPanel 									buttonActionZone;
+	private HTMLPanel	 								root;
+	
+	
+	public CRONIOBusDesktopAuthenticationFormBase() {
+		root = new HTMLPanel("");
+		initWidget(root);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM);
+
+		//Logo zone
+		FlowPanel logoZone = new FlowPanel();
+		root.add(logoZone);
+		logoZone.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_LOGO);
+
+		logoImg = new Image(CRONIOBusCommonIImageConstants.LOGO);
+		logoZone.add(logoImg);
+
+		//Description
+		descriptionHTML = new HTML();
+		root.add(descriptionHTML);
+		descriptionHTML.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_DESCRIPTION);
+
+		//Container
+		FlowPanel container = new FlowPanel();
+		root.add(container);
+		container.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_CONTAINER);
+		
+		//Error
+		errorWidget = new CRONIOBusDesktopBootstrapFormErrorWidget();
+		container.add(errorWidget);
+		errorWidget.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_ERROR);
+
+		//Fields zone
+		fieldsZone = new FlowPanel();
+		container.add(fieldsZone);
+		fieldsZone.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_FIELDS_ZONE);
+		setContentPanel(fieldsZone, false);
+
+		//Action Button
+		buttonActionZone = new FlowPanel();
+		root.add(buttonActionZone);
+		buttonActionZone.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_ACTION_BUTTON);
+		
+		actionButton = new Button();
+		buttonActionZone.add(actionButton);
+		
+		//Bottom zone
+		bottomZone = new FlowPanel();
+		root.add(bottomZone);
+		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_BOTTOM_ZONE);
+	}
+	
+	public void setError(String errorText) {
+		errorWidget.setErrorText(errorText);
+		errorWidget.setVisibility(Visibility.VISIBLE);
+		errorWidget.setVisible(true);
+	}
+	
+	/****************************************************************************
+	 *                           PROTECTED FUNCTIONS
+	 ****************************************************************************/
+	protected abstract AUTHENTICATION_TYPE getAuthenticationEventType();
+
+	protected void setDescriptionHTML(String description) {
+		descriptionHTML.setHTML(description);
+	}
+
+	protected void setActionButtonHTML(String html) {
+		actionButton.setHTML(html);
+	}
+	
+
+	protected Button getActionButton() {
+		return actionButton;
+	}
+
+	protected FlowPanel getFieldsZone() {
+		return fieldsZone;
+	}
+
+	protected FlowPanel getActionZone() {
+		return buttonActionZone;
+	}
+
+	protected FlowPanel getBottomZone() {
+		return bottomZone;
+	}
+	
+	protected HTMLPanel getRootPanel() {
+		return root;
+	}
+
+	protected CRONIOBusDesktopBootstrapFormErrorWidget getErrorWidget() {
+		return errorWidget;
+	}
+
+}

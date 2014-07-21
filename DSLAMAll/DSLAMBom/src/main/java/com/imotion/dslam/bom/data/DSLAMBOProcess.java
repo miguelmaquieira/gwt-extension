@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,6 +19,7 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 
 @Entity(name="Process")
@@ -33,6 +35,7 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	private List<CRONIOBOINode>		nodeList;
 	private Date 					savedTime;
 	private Date 					creationTime;
+	private DSLAMBOIProject			project;
 	private Long					version; 
 
 	public DSLAMBOProcess() {}
@@ -164,6 +167,17 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 	@Override
 	public void setCreationTime(Date creationTime) {
 		this.creationTime = creationTime;
+	}
+	
+	@OneToOne(mappedBy = DSLAMBOIProject.PROJECT_PROCESS , targetEntity = DSLAMBOProject.class)
+	@Override
+	public DSLAMBOIProject getProject() {
+		return project;
+	}
+
+	@Override
+	public void setProject(DSLAMBOIProject project) {
+		this.project = project;
 	}
 
 	@Version

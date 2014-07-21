@@ -19,7 +19,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
-	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
+	public	 	final static String		NO_PROJECT_ID 	= "NO_PROJECT_ID";
 
 	private FlowPanel 									root;
 	private DSLAMBusDesktopProjectsToolbar				toolbar;

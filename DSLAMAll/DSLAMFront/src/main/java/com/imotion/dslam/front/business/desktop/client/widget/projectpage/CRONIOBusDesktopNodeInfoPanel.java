@@ -1,12 +1,16 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusI18NProcessTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapPanelWithHeading;
 
 public class CRONIOBusDesktopNodeInfoPanel extends AEGWTBootstrapPanelWithHeading {
 
 	public static final String NAME = "CRONIOBusDesktopNodeInfoPanel";
+	
+	private static CRONIOBusI18NProcessTexts TEXTS = GWT.create(CRONIOBusI18NProcessTexts.class);
 	
 	public CRONIOBusDesktopNodeInfoPanel(String title) {
 		super(title);
@@ -30,21 +34,13 @@ public class CRONIOBusDesktopNodeInfoPanel extends AEGWTBootstrapPanelWithHeadin
 		resetContent();
 		String  nodeName 		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME, data);
 		String  nodeIp	 		= getElementController().getElementAsString(CRONIOBOINode.NODE_IP, data);
-		int		nodeMachineType = getElementController().getElementAsInt(CRONIOBOINode.NODE_MACHINE_TYPE, data);
+		String	nodeMachineType = getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE, data);
 		
-		String  nodeMachineTypeStr = "";	
+		String nodeNameLabelText 	= TEXTS.node_name() + nodeName;
+		String nodeTypeLabelText 	= TEXTS.node_type() + nodeMachineType;
+		String nodeIpLabelText 		= TEXTS.node_ip() 	+ nodeIp;
 		
-		if (nodeMachineType == CRONIOBOINode.NODE_TYPE_ISAM_FD) {
-			nodeMachineTypeStr = CRONIOBOINode.NODE_MACHINE_TYPE_ISAM_FD;
-		} else if (nodeMachineType == CRONIOBOINode.NODE_TYPE_ISAM_XD) {
-			nodeMachineTypeStr = CRONIOBOINode.NODE_MACHINE_TYPE_ISAM_XD;
-				}
-		
-		String NodeNameLabelText 	= "Nombre:" + nodeName;
-		String NodeTypeLabelText 	= "Tipo: " + nodeMachineTypeStr;
-		String NodeIpLabelText 		= "Ip: " + nodeIp;
-		
-		CRONIOBusDesktopNodeInfo nodeInfo = new CRONIOBusDesktopNodeInfo(NodeNameLabelText, NodeTypeLabelText, NodeIpLabelText);
+		CRONIOBusDesktopNodeInfo nodeInfo = new CRONIOBusDesktopNodeInfo(nodeNameLabelText, nodeTypeLabelText, nodeIpLabelText);
 		setContent(nodeInfo);
 	}
 }
