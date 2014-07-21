@@ -7,5 +7,7 @@ import com.selene.arch.exe.core.envi.login.persistence.AEMFTILoginPersistenceSer
 public interface CRONIOBKILoginPersistenceService extends AEMFTILoginPersistenceService {
 		
 	CRONIOBOIUser getUserById(long userId);
+
+	void addProjectToUser(long userId, Long projectId);
 	
 }

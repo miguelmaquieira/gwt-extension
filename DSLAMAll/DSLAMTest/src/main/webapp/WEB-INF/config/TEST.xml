@@ -18,6 +18,7 @@
 			<Description>Literal service for app controller</Description>
 			<Type>300171053236224</Type>
 			<Descriptor></Descriptor>
+			<Async>true</Async>
 			<ParametersMap>
 				<Parameter id="LOCALE">
 					<Param>
@@ -131,20 +132,6 @@
 			<SubServiceList>
 				<SubService Name="IS_VALID_SESSION">
 					<Descriptor>isValidSession</Descriptor>
-					<ParametersMap>
-						<Parameter id="ORDER_DELIVERY_DATE_LIMIT_HOUR">
-							<Param>
-								<value>23</value>
-								<type>STATIC</type>
-							</Param>
-						</Parameter>
-						<Parameter id="ORDER_DELIVERY_DATE_CRITICAL_REGION_OFFSET">
-							<Param>
-								<value>50</value>
-								<type>STATIC</type>
-							</Param>
-						</Parameter>
-					</ParametersMap>
 				</SubService>
 				<SubService Name="PROCESS_NEW_USER">
 					<Descriptor>processNewUser</Descriptor>
@@ -184,14 +171,14 @@
 			</SubServiceList>
 		</Service>
 		
-		<Service Name="SRV_BUS_CRON">
-			<Description>Cron business service</Description>
+		<Service Name="SRV_BUS_ADMIN">
+			<Description>Utilities class for business common functions
+			</Description>
 			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUCronBusinessServiceImpl
-			</Descriptor>
+			<Descriptor>com.imotion.cronio.business.service.impl.CRONIOBUAdminBusinessServiceImpl</Descriptor>
 			<SubServiceList>
-				<SubService Name="STORE_LAST_DATA">
-					<Descriptor>storeLastData</Descriptor>
+				<SubService Name="ADD_DEFAULT_DATA">
+					<Descriptor>addDefaultData</Descriptor>
 				</SubService>
 			</SubServiceList>
 		</Service>

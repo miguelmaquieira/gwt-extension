@@ -39,6 +39,9 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
 		Date 							creationTime 	= new Date();
 		
+		String 							userIdStr		= getSession().getUserId();
+		long							userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
+		
 		//MainScript
 		DSLAMBOIFile mainScript = new DSLAMBOFile();
 		mainScript.setContentType(machineType);
@@ -69,6 +72,8 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		project.setCreationTime(creationTime);
 		project.setSavedTime(creationTime);
 		project = getProjectPersistence().addProject(project);
+		
+		getUserPersistence().addProjectToUser(userId, project.getProjectId());
 
 		//init-trace
 		traceNewItemPersistent(METHOD_ADD_PROJECT, DSLAMBOIProject.class.getSimpleName(), String.valueOf(project.getProjectId()));
