@@ -267,6 +267,8 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		}
 		
 		String sectionKey = sbKey.toString();
+		
+		getElementDataController().setElement(CRONIOBOIPreferences.INFO_IS_MODIFIED, finalSectionData, true);
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PREFERENCES_PRESENTER, getName());
 		storageEvent.setFullKey(sectionKey);
