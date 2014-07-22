@@ -22,7 +22,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel 									root;
-	private CRONIOBusDesktopProcessNodeList				nodeListZone;
+	private CRONIOBusDesktopProcessNodeList				nodeList;
 	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
 	private	 AEMFTMetadataElementComposite				nodesData;
 	
@@ -41,9 +41,9 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		rightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_RIGHT_ZONE);
 		rightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
 		
-		nodeListZone = new CRONIOBusDesktopProcessNodeList();
-		leftZone.add(nodeListZone);
-		nodeListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
+		nodeList = new CRONIOBusDesktopProcessNodeList();
+		leftZone.add(nodeList);
+		nodeList.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
 		
 		nodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
 		rightZone.add(nodeInfoZone);
@@ -52,7 +52,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	}
 	
 	public void reset() {
-		nodeListZone.reset();
+		nodeList.reset();
 		nodeInfoZone.reset();
 		nodeInfoZone.setVisible(false);
 	}
@@ -70,11 +70,10 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		reset();
 		if (data != null) {
 			nodesData = data;
-			
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
 				if (!DSLAMBOIProject.INFO.equals(elementData.getKey())) {
-					nodeListZone.addElement((AEMFTMetadataElementComposite) elementData);
+					nodeList.addElement((AEMFTMetadataElementComposite) elementData);
 				}
 			}
 		} else {
@@ -87,7 +86,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	public void postDisplay() {
 		super.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
-		nodeListZone.postDisplay();
+		nodeList.postDisplay();
 		nodeInfoZone.postDisplay();
 	}
 	

@@ -8,6 +8,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -51,8 +52,13 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	}
 	
 	public void addElement(AEMFTMetadataElementComposite elementData) {
-		String		nodeId		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_ID	, elementData);
-		String		nodeName	= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_NAME, elementData);
+		String		nodeId			= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_ID	, elementData);
+		String		nodeName		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_NAME, elementData);
+		String		machineType		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE, elementData);
+		AEMFTMetadataElementComposite machineTypesDataList = getElementController().getElementAsComposite(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, elementData);
+		boolean		machineExists	= getElementController().contains(machineType, machineTypesDataList);
+		elementData.addElement(CRONIOBOINode.MACHINE_EXISTS, machineExists);
+		//TODO: show error if machine doesn't exist
 		
 		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName);
 		elementListContainer.add(element);

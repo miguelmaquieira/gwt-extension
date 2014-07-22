@@ -20,5 +20,6 @@ public interface CRONIOBOINodeDataConstants {
 	String NODE_DATA			= "nodeData";
 	String NODE_VARIABLES_DATA	= "nodeVariablesData";
 	String NODE_TYPE			= "nodeType";
+	String MACHINE_EXISTS		= "MACHINE_EXISTS";
 	
 }

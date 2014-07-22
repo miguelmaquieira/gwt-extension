@@ -24,7 +24,7 @@
 			<!-- =============================== -->
 
 			<!-- MySQL -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdb-test" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdbtest" />
 			
 			<!-- CLOUDBEE -->
 			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb" /> -->

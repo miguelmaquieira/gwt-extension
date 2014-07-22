@@ -158,6 +158,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 		}
 
+		//TODO: move to connectionPresenter
 		String[] 	finalSectionPathSplit 	= finalSectionPath.split("\\.");
 		String 		finalSectionName 		= finalSectionPathSplit[finalSectionPathSplit.length-1];
 		String		machineName				= finalSectionPathSplit[1];

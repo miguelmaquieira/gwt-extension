@@ -133,4 +133,9 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 			}
 		});
 	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
 }

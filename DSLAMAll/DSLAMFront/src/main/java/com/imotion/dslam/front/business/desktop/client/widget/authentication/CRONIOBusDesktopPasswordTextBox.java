@@ -4,6 +4,7 @@ import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleCons
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.common.AEGWTCheckBox;
 import com.selene.arch.exe.gwt.client.ui.widget.textbox.AEGWTPasswordBox;
+import com.selene.arch.exe.gwt.client.ui.widget.textbox.AEGWTTextBox;
 
 public class CRONIOBusDesktopPasswordTextBox extends AEGWTPasswordBox {
 
@@ -18,4 +19,10 @@ public class CRONIOBusDesktopPasswordTextBox extends AEGWTPasswordBox {
 	protected AEGWTCheckBox createCheckBox(String labelText) {
 		return new CRONIOBusDesktopPasswordCheckBox(labelText);
 	}
+	
+	
+	public AEGWTTextBox getTextBox() {
+		return getPasswordTextBox();
+	}
+	
 }

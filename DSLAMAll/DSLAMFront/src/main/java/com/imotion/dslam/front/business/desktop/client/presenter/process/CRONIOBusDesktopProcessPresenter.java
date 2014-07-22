@@ -1,6 +1,9 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
@@ -82,6 +85,9 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
+		if (projectFinalSectionId.equals(DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST)) {
+			finalSectionData.addElement(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, getMachinesFromPreferences());
+		}
 		getView().openProcessSection(projectFinalSectionId, finalSectionData);
 	}
 	
@@ -93,4 +99,10 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	/**
 	 * PRIVATE
 	 */
+	
+	private AEMFTMetadataElementComposite getMachinesFromPreferences() {
+		AEMFTMetadataElementComposite machinesData = getContextDataController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_DATA_MACHINE_PROPERTIES_LIST);
+		return machinesData;
+	}
+	
 }

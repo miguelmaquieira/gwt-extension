@@ -249,7 +249,13 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Nueva Conexión")
 	String create_connection();
 	
-	@DefaultStringValue("Bienvenido. Por favor, introduce tus datos para entrar")
-	String sign_up_description_text();
+	@DefaultStringValue("Bienvenido. Por favor, introduce tus datos para acceder al sistema")
+	String sign_in_description_text();
+	
+	@DefaultStringValue("El email introducido no existe, por favor vuelva a intentarlo")
+	String sign_in_mail_not_exists();
+	
+	@DefaultStringValue("La contraseña introducida es incorrecta, por favor vuelva a intentarlo")
+	String sign_in_incorrect_password();
 	
 }

@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.Callback;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
-import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerDisplay;
-import com.imotion.dslam.front.business.client.presenter.controller.DSLAMBusControllerPresenter;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
@@ -21,7 +17,6 @@ import com.imotion.dslam.front.business.desktop.client.presenter.preferences.con
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerPresenter;
-import com.imotion.dslam.front.business.desktop.client.view.controller.DSLAMBusDesktopControllerScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.execution.DSLAMBusDesktopExecutionScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.login.CRONIOBusDesktopLoginScreenView;
@@ -34,19 +29,15 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopPreferencesLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
-import com.selene.arch.base.bom.AEMFTILoginDataConstants;
-import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
-import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.jsloaders.AEGWTJSLoader;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTIControllerPresenter;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTILoginAppControllerConstants;
 import com.selene.arch.exe.gwt.client.presenter.error.AEGWTErrorDisplay;
 import com.selene.arch.exe.gwt.client.presenter.flow.AEGWTIFlowController;
-import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.AEGWTIPresenter;
 import com.selene.arch.exe.gwt.mvp.context.ContextRetriever;
@@ -74,10 +65,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	@Override
 	public AEMFTMetadataElementComposite saveUserDataInClientStorage(AEMFTMetadataElementComposite result) {
 		super.saveUserDataInClientStorage(result);
-
-		//TODO: REMOVE WHEN LOGIN DONE
-		getContextDataController().setElement(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID, "noSessionId");
-
 
 		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
@@ -118,12 +105,8 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		}
 
 		String 	sid 		= getContextDataController().getElementAsString(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID);
-		String	rolTypeStr	= getContextDataController().getElementAsString(AEGWTILoginAppControllerConstants.SESSION_ROL_TYPE);
-		int 	rolType 	= AEMFTCommonUtilsBase.getIntegerFromString(rolTypeStr);
-
-		boolean isProdMode = GWT.isProdMode();
-//		boolean isProdMode = true;		
-		if (isProdMode && (AEGWTStringUtils.isEmptyString(sid) || rolType != AEMFTILoginDataConstants.ROL_TYPE_WEBMASTER)) {
+	
+		if (AEGWTStringUtils.isEmptyString(sid)) {
 			presenter = new CRONIOBusDesktopLoginPresenter(new CRONIOBusDesktopLoginScreenView());
 		} else {
 
@@ -139,7 +122,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 				presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES.equals(token1) ) {
 				presenter = new CRONIOBusDesktopPreferencesConnectionPresenter(new CRONIOBusDesktopPreferencesConnectionScreenView());
-			}
+			} 
 		}
 		return presenter;
 	}
@@ -156,7 +139,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 
 	@Override
 	protected AEGWTIControllerPresenter<?> createPresenterController() {
-		return new DSLAMBusControllerPresenter<DSLAMBusControllerDisplay>(new DSLAMBusDesktopControllerScreenView());
+		return null;
 	}
 
 	@Override
@@ -189,22 +172,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		emptyLayout.postDisplay();
 	}
 
-	//TODO:DELETE WHEN LOGIN WORKS!!
-	@Override
-	protected void validateSession(final AsyncCallback<Boolean> callback) {
-		getClientServerConnection().executeComm(null, AEMFTIBusinessServiceIdConstant.CTE_MTF_AE_BUS_SERVICE_LOGIN_IS_VALID_SESION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
-
-			@Override
-			public void onResult(AEMFTMetadataElementComposite result) {
-				saveUserDataInClientStorage(result);
-				callback.onSuccess(true);
-			}
-
-			@Override
-			public void onError(Throwable caught) {
-			}
-		});
-	}
 
 	/**
 	 * PRIVATE 

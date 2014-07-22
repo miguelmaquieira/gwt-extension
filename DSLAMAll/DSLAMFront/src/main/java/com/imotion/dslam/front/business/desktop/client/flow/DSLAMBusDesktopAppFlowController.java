@@ -5,6 +5,7 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopHistoryNavigationConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
+import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
 import com.selene.arch.exe.gwt.client.AEGWTHistoryNavigationConstants;
 import com.selene.arch.exe.gwt.client.presenter.base.AEGWTBasePresenterConstants;
 import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTControllerPresenterConstants;
@@ -52,6 +53,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					preferencesFlowEvent();
 				} else if (CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST.equals(sourceWindow)) {
 					machinesFlowEvent();
+				} else if (CRONIOBusDesktopLoginPresenter.NAME.equals(sourceWindow)) {
+					History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE);
 				}
 			}
 		}

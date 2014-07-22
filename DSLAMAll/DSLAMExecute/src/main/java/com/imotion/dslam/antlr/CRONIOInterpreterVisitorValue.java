@@ -19,7 +19,7 @@ public class CRONIOInterpreterVisitorValue {
 	}
 
 	public String asString() {
-		return (String) value;
+		return value.toString();
 	}
 	
 	@SuppressWarnings("unchecked")

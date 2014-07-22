@@ -36,7 +36,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA};
+		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA};
 	}
 
 	/**
@@ -127,7 +127,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		String currentProjectId			= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 		String currentFinalSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
-		openFinalSection(true, currentProjectId, currentFinalSectionId);
+		if (!AEGWTStringUtils.isEmptyString(currentFinalSectionId)) {
+			openFinalSection(true, currentProjectId, currentFinalSectionId);
+		}
 	}
 
 	protected abstract void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData);
@@ -234,8 +236,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 			projectNamesbKey.append(projectId);
 			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			String projectNamesbKeyStr = projectNamesbKey.toString();
-			String projectNameKey = new StringBuilder(projectNamesbKeyStr).append(DSLAMBOIProject.PROJECT_NAME).toString() ;
+			projectNamesbKey.append(DSLAMBOIProject.PROJECT_NAME);
+			String projectNameKey = projectNamesbKey.toString();
 			String projectName = getContextDataController().getElementAsString(projectNameKey);
 
 			AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(finalSectionKey);
@@ -252,7 +254,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
 			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-
+			
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
 
