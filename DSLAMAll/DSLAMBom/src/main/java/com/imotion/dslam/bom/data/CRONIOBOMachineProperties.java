@@ -31,6 +31,8 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private String 					username;
 	private String 					password;
 	private int					timeout;
+	private String					usernamePromptRegEx;
+	private String					passwordPromptRegEx;
 	private String					promptRegEx;
 	private Date					saveTime;
 	private Date					creationTime;
@@ -115,6 +117,26 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 		this.timeout = timeout;
 	}
 	
+	@Override
+	public String getUsernamePromptRegEx() {
+		return usernamePromptRegEx;
+	}
+
+	@Override
+	public void setUsernamePromptRegEx(String usernamePromptRegEx) {
+		this.usernamePromptRegEx = usernamePromptRegEx;
+	}
+
+	@Override
+	public String getPasswordPromptRegEx() {
+		return passwordPromptRegEx;
+	}
+
+	@Override
+	public void setPasswordPromptRegEx(String passwordPromptRegEx) {
+		this.passwordPromptRegEx = passwordPromptRegEx;
+	}
+
 	@Override
 	public String getPromptRegEx() {
 		return promptRegEx;
