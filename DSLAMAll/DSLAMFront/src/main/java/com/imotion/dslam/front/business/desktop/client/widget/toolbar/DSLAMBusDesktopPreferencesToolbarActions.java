@@ -40,6 +40,7 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 		//SAVE
 		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save(), texts.save());
 		root.add(saveButton);
+		saveButton.setEnabled(false);
 
 		//EXIT
 		closeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_REMOVE, texts.exit(), texts.exit());
@@ -79,6 +80,10 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 
 	public void setSaveEnabled(boolean enabled) {
 		saveButton.setEnabled(enabled);
+	}
+	
+	public void reset() {
+		setSaveEnabled(false);
 	}
 
 	/**

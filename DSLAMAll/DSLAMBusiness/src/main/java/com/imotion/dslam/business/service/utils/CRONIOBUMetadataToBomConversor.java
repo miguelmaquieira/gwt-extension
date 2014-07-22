@@ -7,6 +7,7 @@ import java.util.List;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
@@ -248,10 +249,48 @@ public class CRONIOBUMetadataToBomConversor {
 			machine.setUsername(user);
 			machine.setPassword(password);
 			machine.setPromptRegEx(prompt);
-	
 		}
 		
 		return machine;
+	}
+	
+	public static CRONIOBOIMachineProperties fromMachineProperties(AEMFTMetadataElementComposite machinePropertiesData) {
+		CRONIOBOIMachineProperties machine = null;
+		if (machinePropertiesData != null) {
+			
+			String 	machineName 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME	, machinePropertiesData);
+			long 	machineId 		= getElementController().getElementAsLong(CRONIOBOIMachineProperties.MACHINE_ID		, machinePropertiesData);
+			Date  	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIMachineProperties.CREATION_TIME, machinePropertiesData);
+			
+			machine = fromMachineConfigData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG));
+			machine.setMachineName(machineName);
+			machine.setMachinePropertiesId(machineId);
+			List<DSLAMBOIVariable> variableList = fromVariableDataList(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_VARIABLES));
+			machine.setConnectionVariables(variableList);
+			DSLAMBOIFile initScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT));
+			machine.setInitConnectionScript(initScript);
+			DSLAMBOIFile finishScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT));
+			machine.setCloseConnectionScript(finishScript);
+			machine.setCreationTime(creationTime);
+		}
+		
+		return machine;
+	}
+	
+	public static List<CRONIOBOIMachineProperties> fromMachinePropertiesList(AEMFTMetadataElementComposite machinePropertiesListData) {
+		List<CRONIOBOIMachineProperties> machinePropertiesList = null;
+		if (machinePropertiesListData != null) {
+			machinePropertiesList = new ArrayList<>();
+			List<AEMFTMetadataElement> machinePropertiesDataElementList = machinePropertiesListData.getElementList();
+			for (AEMFTMetadataElement machinePropertiesDataElement : machinePropertiesDataElementList) {
+				String dataKey = machinePropertiesDataElement.getKey();
+				if (!CRONIOBOIPreferencesDataConstants.INFO.equals(dataKey)) {
+					CRONIOBOIMachineProperties machine = fromMachineProperties((AEMFTMetadataElementComposite) machinePropertiesDataElement);
+					machinePropertiesList.add(machine);
+				}
+			}
+		}
+		return machinePropertiesList;
 	}
 	
 	public static CRONIOBOIPreferences fromPreferencesData(AEMFTMetadataElementComposite preferencesData) {
@@ -260,10 +299,13 @@ public class CRONIOBUMetadataToBomConversor {
 			preferences = new CRONIOBOPreferences();
 
 			Long	preferencesId	= getElementController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID, preferencesData);
-			Date	creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.CREATION_TIME	, preferencesData);
-			Date	savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME	, preferencesData);
-
+			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIPreferences.CREATION_TIME	, preferencesData);
+			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIPreferences.SAVED_TIME	, preferencesData);
+			AEMFTMetadataElementComposite machinepropertiesListData = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, preferencesData);
+			
+			List<CRONIOBOIMachineProperties> machinePropertiesList = fromMachinePropertiesList(machinepropertiesListData);
 			preferences.setPreferencesId(preferencesId);
+			preferences.setMachinePropertiesList(machinePropertiesList);
 			preferences.setCreationTime(creationTime);
 			preferences.setSavedTime(savedTime);
 

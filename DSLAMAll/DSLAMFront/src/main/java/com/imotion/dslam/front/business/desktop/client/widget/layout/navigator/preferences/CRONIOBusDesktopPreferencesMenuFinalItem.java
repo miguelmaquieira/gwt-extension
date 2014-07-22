@@ -18,6 +18,7 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 		String[] mainSectionIdSplit = parentPath.split("\\.");
 		String mainSectionId 	= mainSectionIdSplit[0];
 		setContainerId(mainSectionId);
+		setId(finalSectionPath);
 	}
 	
 	/**

@@ -18,7 +18,6 @@ import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
-import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -111,46 +110,29 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 	//	@Override
 	public void updatePreferences() {
 		//ContextIn
-		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
-		AEMFTMetadataElementComposite machinePropertiesListData = getElementDataController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST			, contextIn);
-		List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
+		contextIn.setKey(PREFERENCES_DATA);
+		//AEMFTMetadataElementComposite machinePropertiesListData = getElementDataController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST			, contextIn);
+		//List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
 
 		Date 	date 		= new Date();
 		CRONIOBOIPreferences preferences = CRONIOBUMetadataToBomConversor.fromPreferencesData(contextIn);
 		preferences.setSavedTime(date);
 
+		List<CRONIOBOIMachineProperties> machineProList = preferences.getMachinePropertiesList();
+		
+		for (CRONIOBOIMachineProperties machine : machineProList) {
 
-		for (AEMFTMetadataElement machine : machinePropertiesList) {
-
-			AEMFTMetadataElementComposite connectionScriptData 		= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT		, machine);
-			DSLAMBOIFile connectionScript = CRONIOBUMetadataToBomConversor.fromFileData(connectionScriptData);
-			connectionScript.setSavedTime(date);
-
-			AEMFTMetadataElementComposite disconnectionScriptData 	= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT	, machine);
-			DSLAMBOIFile disconnectionScript = CRONIOBUMetadataToBomConversor.fromFileData(disconnectionScriptData);
-			disconnectionScript.setSavedTime(date);
-
-			AEMFTMetadataElementComposite variableListData 	= getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES						, machine);
-			List<DSLAMBOIVariable> variableList = CRONIOBUMetadataToBomConversor.fromVariableDataList(variableListData);
-
-			AEMFTMetadataElementComposite machinePropertiesData = getElementDataController().getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG			, machine);
-			CRONIOBOIMachineProperties machineProperties = CRONIOBUMetadataToBomConversor.fromMachineConfigData(machinePropertiesData);
-
-			String 	machineName = getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME		, machine);
-			long 	machineId 	= getElementDataController().getElementAsLong(CRONIOBOIMachineProperties.MACHINE_ID			, machine);
-
-			machineProperties.setMachineName(machineName);
-			machineProperties.setMachinePropertiesId(machineId);
-			machineProperties.setSaveTime(date);
-			machineProperties.setInitConnectionScript(connectionScript);
-			machineProperties.setCloseConnectionScript(disconnectionScript);
-			machineProperties.setConnectionVariables(variableList);
-			machineProperties.setPreferences(preferences);
-
+			machine.setSaveTime(date);
+			machine.setPreferences(preferences);
+			
+			long machineId = machine.getMachinePropertiesId();
+			DSLAMBOIFile connectionScript 		= machine.getInitConnectionScript();
+			DSLAMBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
 			
 			connectionScript	= getFilePersistence().updateFileContent(connectionScript.getFileId(), connectionScript.getContent(), date);
 			disconnectionScript	= getFilePersistence().updateFileContent(disconnectionScript.getFileId(), disconnectionScript.getContent(), date);
-			machineProperties 	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machineProperties);
+			machine	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machine);
 		}
 		
 		getPreferencesPersistence().updatePreferences(preferences.getPreferencesId(), preferences);
@@ -159,12 +141,9 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		//end-trace
 
 		//ContextOut
-		//			AEMFTMetadataElementComposite preferencesDataElement = DSLAMBUBomToMetadataConversor.fromMachineProperties(machineProperties);
-		//			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		//			contextOut.addElement(PREFERENCES_DATA, connectionDataElement);
-
-
-
+		AEMFTMetadataElementComposite preferencesDataElement = DSLAMBUBomToMetadataConversor.fromPreferences(preferences);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(PREFERENCES_DATA, preferencesDataElement);
 	}
 
 	@Override
