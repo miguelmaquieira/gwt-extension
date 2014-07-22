@@ -16,16 +16,17 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	private int						timeout;
 	private String						ip;
 	private String						promptRegEx;
+	private CRONIOBOIMachineProperties machineProperties;
 	
 	@Override
 	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
-		this.node 	= node;
-		CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
-		user		= machineProperties.getUsername();
-		password	= machineProperties.getPassword();
-		timeout		= machineProperties.getTimeout();
-		ip			= node.getNodeIp();
-		promptRegEx	= machineProperties.getPromptRegEx();
+		this.node 				= node;
+		this.machineProperties = node.getMachineProperties();
+		user					= machineProperties.getUsername();
+		password				= machineProperties.getPassword();
+		timeout					= machineProperties.getTimeout();
+		ip						= node.getNodeIp();
+		promptRegEx				= machineProperties.getPromptRegEx();
 	}
 	
 	@Override
@@ -92,6 +93,10 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 
 	protected CRONIOBOINode getNode() {
 		return node;
+	}
+	
+	protected CRONIOBOIMachineProperties getMachineProperties() {
+		return machineProperties;
 	}
 
 }

@@ -17,11 +17,14 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldDropDownButtonLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldPasswordBoxLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBoxLabelTop;
+import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
 
@@ -46,6 +49,13 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		addWidget(textBoxesZone);
 		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
 		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
+
+		//protocol
+		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
+		textBoxesZone.add(protocolTypeDropdownButton);
+		protocolTypeDropdownButton.setContainerId(NAME);
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
 
 		//username
 		userNameTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.user_placeholder(), TEXTS.user_placeholder());
@@ -72,12 +82,6 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		passwordPromptTextBox 		= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.passwordPromptLabel(), PREFERENCES_TEXTS.passwordPromptPlaceHolder());
 		textBoxesZone.add(passwordPromptTextBox);
 		passwordPromptTextBox.setVisible(false);
-
-		//protocol
-		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
-		textBoxesZone.add(protocolTypeDropdownButton);
-		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
-		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
 
 		userNameTextBox.addBlurHandler(new BlurHandler(){
 			@Override
@@ -164,16 +168,10 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			}
 			promptTextBox.setText(prompt);
 			if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET) {
-				protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET));
-				userPromptTextBox.setVisible(true);
-				passwordPromptTextBox.setVisible(true);
 				userPromptTextBox.setText(userPrompt);
 				passwordPromptTextBox.setText(passwordPrompt);
-			} else {
-				protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
-				userPromptTextBox.setVisible(false);
-				passwordPromptTextBox.setVisible(false);
-			}	
+			}
+			handleProtocolType(protocolType);
 		}
 	}
 
@@ -207,6 +205,36 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		// TODO Auto-generated method stub
 	}
 
+	/****************************************************************************
+	 *                      AEGWTHasLogicalEventHandlers
+	 ****************************************************************************/
+
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		super.dispatchEvent(evt);
+		LOGICAL_TYPE type = evt.getEventType();
+		String sourceWidget = evt.getSourceWidget();
+		if (AEGWTBootstrapDropdownButton.NAME.equals(sourceWidget) && LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
+			String sourceContainerId = evt.getSourceContainerId();
+			if (NAME.equals(sourceContainerId)) {
+				String selectedId = evt.getSourceWidgetId();
+				int protocolType = AEMFTCommonUtilsBase.getIntegerFromString(selectedId);
+				handleProtocolType(protocolType);
+			}
+		}
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return super.isDispatchEventType(type)
+				||
+				LOGICAL_TYPE.CHANGE_EVENT.equals(type);
+	}
+
+	/**
+	 * PROTECTED
+	 */
+
 	@Override
 	protected void resetForm() {
 		userNameTextBox.setText("");
@@ -236,5 +264,22 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	@Override
 	protected void showErrors(AEMFTMetadataElementComposite dataErrors) {
 
+	}
+
+	/**
+	 * PRIVATE
+	 */
+
+	private void handleProtocolType(int protocolType) {
+		if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET) {
+			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET));
+			userPromptTextBox.setVisible(true);
+			passwordPromptTextBox.setVisible(true);
+		} else {
+			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
+			userPromptTextBox.setVisible(false);
+			passwordPromptTextBox.setVisible(false);
+		}
+		AEGWTJQueryPerfectScrollBar.updateScroll(CRONIOBusDesktopPreferencesMachineSectionsDeckPanel.NAME);
 	}
 }

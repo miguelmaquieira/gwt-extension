@@ -44,9 +44,11 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 	
 	@Override
 	protected void runConnectScript() throws IOException {
-		getConnectionStreams().readUntil("Login: ");
+		String userPrompt 		= getMachineProperties().getUsernamePromptRegEx();
+		String passwordPrompt	= getMachineProperties().getPasswordPromptRegEx();
+		getConnectionStreams().readUntil(userPrompt);
 		sendCommand(getUser());
-		getConnectionStreams().readUntil("Password: ");
+		getConnectionStreams().readUntil(passwordPrompt);
 		sendNoResponseCommand(getPassword());
 		getConnectionStreams().readUntil(getPromptRegEx());
 		super.runConnectScript();

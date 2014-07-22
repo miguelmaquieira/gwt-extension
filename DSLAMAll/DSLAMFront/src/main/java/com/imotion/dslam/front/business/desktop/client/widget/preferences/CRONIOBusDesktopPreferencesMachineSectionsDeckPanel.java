@@ -82,7 +82,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 		variablesPreferencesMachine.postDisplay();
 		preferencesMachineConfigureForm.postDisplay();
 		//	editor.postDisplay();
-		setHeightToDecrease(45);
+		setHeightToDecrease(85);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(getName(), this, getCurrentHeight(), true);
 	}
 
