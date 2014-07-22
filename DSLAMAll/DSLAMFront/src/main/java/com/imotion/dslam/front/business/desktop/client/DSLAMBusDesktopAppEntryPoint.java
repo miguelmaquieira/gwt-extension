@@ -16,5 +16,10 @@ public class DSLAMBusDesktopAppEntryPoint extends SailorEntryPoint {
 		controller.setPhoneGap(getPhoneGap());
 		controller.initController(rootPanel, WEB_VERSION.DESKTOP);
 	}
+	
+	@Override
+	protected void loadApis(Runnable runnable) {
+		runnable.run();
+	}
 
 }
