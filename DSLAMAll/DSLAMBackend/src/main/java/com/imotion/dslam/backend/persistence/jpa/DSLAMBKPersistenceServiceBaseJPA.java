@@ -9,6 +9,7 @@ import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKI
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
+import com.selene.arch.exe.core.AEMFTICoreProxyService;
 
 public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extends Serializable> extends DSLAMBKPersistenceServiceBase<T, Q, Id> {
 
@@ -80,6 +81,11 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	/**************************************************************
      *                   PROTECTED FUNCTIONS                      *
      **************************************************************/
+	
+	@Override
+	protected void initFactoryPersistence(AEMFTICoreProxyService coreProxy) {
+		getFactoryPersistence(coreProxy);
+	}
 	
 	protected DSLAMBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {

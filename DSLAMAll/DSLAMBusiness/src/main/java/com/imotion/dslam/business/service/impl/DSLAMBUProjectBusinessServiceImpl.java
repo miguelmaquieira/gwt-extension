@@ -39,6 +39,9 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
 		Date 							creationTime 	= new Date();
 		
+		String 							userIdStr		= getSession().getUserId();
+		long							userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
+		
 		//MainScript
 		DSLAMBOIFile mainScript = new DSLAMBOFile();
 		mainScript.setContentType(machineType);
@@ -69,13 +72,15 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		project.setCreationTime(creationTime);
 		project.setSavedTime(creationTime);
 		project = getProjectPersistence().addProject(project);
+		
+		getUserPersistence().addProjectToUser(userId, project.getProjectId());
 
 		//init-trace
 		traceNewItemPersistent(METHOD_ADD_PROJECT, DSLAMBOIProject.class.getSimpleName(), String.valueOf(project.getProjectId()));
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA, projectDataElement);
 	}
@@ -146,7 +151,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectList(projectList);
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectList(projectList, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA_LIST, projectDataElement);
 	}
@@ -206,7 +211,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		project.setProcess(process);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project);
+		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
 
 		return projectDataElement;
 	}

@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 
 import java.util.List;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
@@ -35,7 +36,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA};
+		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA};
 	}
 
 	/**
@@ -80,9 +81,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			executeProject(currentProjectId);
 		} else if (EVENT_TYPE.OPEN_PREFERENCES_EVENT.equals(evtTyp)) {
-			AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
-			getFlowEventHandlerManager().fireEvent(flowEvent);
-		}
+			if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (!AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) && Window.confirm("Hay cambios sin guardar, seguro que quieres salir?"))) {
+				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
+				getFlowEventHandlerManager().fireEvent(flowEvent);
+			}
+		}	
 	}
 
 	@Override
@@ -251,7 +254,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
 			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-
+			
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
 

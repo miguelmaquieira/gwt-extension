@@ -35,7 +35,7 @@ public class DSLAMBusDesktopPreferencesToolbar extends AEGWTCompositePanel {
 		return preferencesActions;	
 	}
 	
-	public void setSaveConnectionEnabled(boolean enabled) {
+	public void setSavePreferencesEnabled(boolean enabled) {
 		preferencesActions.setSaveEnabled(enabled);
 	}
 	

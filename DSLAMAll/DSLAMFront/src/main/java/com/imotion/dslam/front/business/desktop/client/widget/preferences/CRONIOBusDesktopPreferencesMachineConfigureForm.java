@@ -21,24 +21,24 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdown
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldPasswordTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
-import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 
 public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
 
 	public static final String NAME = "CRONIOBusDesktopPreferencesMachineConfigureForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private String ZERO = "0";
 
 	private AEGWTBootstrapFormFieldTextBox  		userNameTextBox;
 	private AEGWTBootstrapFormFieldPasswordTextBox 	passwordTextBox; 
 	private AEGWTBootstrapFormFieldTextBox  		timeOutTextBox;
 	private AEGWTBootstrapFormFieldTextBox  		promptTextBox; 
 	private AEGWTBootstrapDropdownButton  			protocolTypeDropdownButton;
-	private AEGWTButton								changePasswordButton;
-
+	
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
 		setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
+		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN);
 
 		LabelElement userLabel 		= Document.get().createLabelElement();
 		userLabel.setInnerText(TEXTS.user_placeholder());
@@ -149,17 +149,23 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	@Override
 	public void setData(AEMFTMetadataElementComposite connectionConfigureData) {
 		if (connectionConfigureData != null) {
-			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME		, connectionConfigureData);
-			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD		, connectionConfigureData);
+			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME			, connectionConfigureData);
+			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD			, connectionConfigureData);
 			String 			timeout 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.TIMEOUT			, connectionConfigureData);
-			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT		, connectionConfigureData);
+			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT			, connectionConfigureData);
 			String 			protocolType 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROTOCOL_TYPE	, connectionConfigureData);
 
 			userNameTextBox.setText(userName);
 			passwordTextBox.setText(password);
-			timeOutTextBox.setText(timeout);
+			if (!ZERO.equals(protocolType)) {
+				timeOutTextBox.setText(timeout);
+			}
 			promptTextBox.setText(prompt);
-			protocolTypeDropdownButton.setItemSelected(protocolType);	
+			if (ZERO.equals(protocolType)) {
+				protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
+			} else {
+				protocolTypeDropdownButton.setItemSelected(protocolType);
+			}	
 		}
 	}
 

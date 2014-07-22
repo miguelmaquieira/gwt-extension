@@ -65,7 +65,6 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 	@Override
 	protected void setupHeader() {
 		super.headerDataFields.add(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
-
 		super.headerMapFieldText.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, TEXTS.schedule());
 	}
 

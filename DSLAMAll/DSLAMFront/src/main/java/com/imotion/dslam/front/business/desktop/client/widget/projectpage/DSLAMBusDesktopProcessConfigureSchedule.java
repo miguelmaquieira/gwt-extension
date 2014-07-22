@@ -123,6 +123,10 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			getSchedulePopup().setData(scheduleDataComposite);
 			getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
 			getSchedulePopup().center();
+			if (addJS == false) {
+				scheduleForm.postDisplay();
+				addJS = true;
+			}
 		} else 	if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElementSingle data = (AEMFTMetadataElementSingle) evt.getElementAsDataValue();
 			List<String> rowIds = (List<String>) data.getValueAsSerializable();

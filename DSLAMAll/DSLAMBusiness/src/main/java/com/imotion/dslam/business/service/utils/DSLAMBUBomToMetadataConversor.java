@@ -9,6 +9,7 @@ import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
@@ -42,7 +43,7 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process) {
+	public  static AEMFTMetadataElementComposite fromProcessFull(DSLAMBOIProcess process, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (process != null) {
 			data =fromProcess(process);
@@ -53,7 +54,9 @@ public class DSLAMBUBomToMetadataConversor {
 			if (scheduleList != null) {
 				for (int i = 0; i < scheduleList.size(); i++) {
 					Date date = scheduleList.get(i);
-					scheduleListData.addElement(date.toString(), date);	
+					
+					String dateFormat = AEMFTCommonUtils.formatDate(date, DSLAMBOIProcessDataConstants.DATE_FORMAT, locale);
+					scheduleListData.addElement(dateFormat, date);	
 				}
 			}
 				
@@ -76,7 +79,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (!AEMFTCommonUtilsBase.isEmptyList(processList)) {
 			AEMFTMetadataElementComposite dataProcessList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			for (DSLAMBOIProcess process : processList) {
-				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process));
+				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process, locale));
 			}
 			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
@@ -180,7 +183,7 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project) {
+	public  static AEMFTMetadataElementComposite fromProjectFull(DSLAMBOIProject project, Locale locale) {
 		AEMFTMetadataElementComposite data = null;
 		if (project != null) {
 			data = fromProject(project);
@@ -190,7 +193,7 @@ public class DSLAMBUBomToMetadataConversor {
 			DSLAMBOIProcess process 		= project.getProcess();
 			AEMFTMetadataElementComposite mainScriptData 		= DSLAMBUBomToMetadataConversor.fromFile(mainScript);
 			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
-			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process);
+			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process, locale);
 			
 			data.addElement(DSLAMBOIProject.PROJECT_MAIN_SCRIPT			, mainScriptData);
 			data.addElement(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT		, rollBackScriptData);
@@ -199,11 +202,11 @@ public class DSLAMBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromProjectList(List<DSLAMBOIProject> projectList) {
+	public  static AEMFTMetadataElementComposite fromProjectList(List<DSLAMBOIProject> projectList, Locale locale) {
 		AEMFTMetadataElementComposite dataProjectList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			for (DSLAMBOIProject project : projectList) {
-				dataProjectList.addElement(String.valueOf(project.getProjectId()), fromProjectFull(project));
+				dataProjectList.addElement(String.valueOf(project.getProjectId()), fromProjectFull(project, locale));
 			}
 		}
 		return dataProjectList;
@@ -254,6 +257,8 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connection.getMachineName());
 			data.addElement(CRONIOBOIMachineProperties.CREATION_TIME	, connection.getCreationTime());
 			data.addElement(CRONIOBOIMachineProperties.SAVED_TIME		, connection.getSaveTime());
+			AEMFTMetadataElementComposite connectionConfigData = fromConnectionConfig(connection); 
+			data.addElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG, connectionConfigData);
 			
 		}
 		return data;
