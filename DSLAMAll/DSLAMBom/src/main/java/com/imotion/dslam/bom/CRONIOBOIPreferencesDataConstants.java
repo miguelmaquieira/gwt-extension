@@ -11,7 +11,10 @@ public interface CRONIOBOIPreferencesDataConstants {
 	String SAVED_TIME							= "savedTime";
 	String CREATION_TIME						= "creationTime";
 
-	String PREFERENCES_DATA						= "preferencesData";
+	//CONTEXT
+	String	PREFERENCES_DATA							= "preferencesData";
+	String	PREFERENCES_DATA_PREFFIX					= PREFERENCES_DATA + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
+	String	PREFERENCES_DATA_MACHINE_PROPERTIES_LIST	= PREFERENCES_DATA_PREFFIX + PREFERENCES_MACHINE_PROPERTIES_LIST;
 	
 	String INFO								= "INFO";
 	String INFO_PREFFIX						= INFO + AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;

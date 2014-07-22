@@ -36,7 +36,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA};
+		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA};
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
 			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-
+			
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
 
