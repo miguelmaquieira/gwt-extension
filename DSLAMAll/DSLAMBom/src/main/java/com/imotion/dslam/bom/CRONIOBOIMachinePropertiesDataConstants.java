@@ -3,17 +3,19 @@ package com.imotion.dslam.bom;
 public interface CRONIOBOIMachinePropertiesDataConstants {
 	
 	//attributes
-	String PREFERENCES			= "preferences";
-	String MACHINE_ID 			= "machineId";
-	String MACHINE_NAME 		= "machineName";
-	String MACHINE_DESCRIPTION 	= "machineDescription";
-	String PROTOCOL_TYPE		= "protocolType";
-	String USERNAME				= "username";
-	String PASSWORD				= "password";
-	String TIMEOUT				= "timeout";
-	String PROMPT				= "prompt";
-	String SAVED_TIME			= "savedTime";
-	String CREATION_TIME		= "creationTime";
+	String PREFERENCES				= "preferences";
+	String MACHINE_ID 				= "machineId";
+	String MACHINE_NAME 			= "machineName";
+	String MACHINE_DESCRIPTION 		= "machineDescription";
+	String PROTOCOL_TYPE			= "protocolType";
+	String USERNAME					= "username";
+	String PASSWORD					= "password";
+	String TIMEOUT					= "timeout";
+	String PROMPT_REGEX				= "promptRegEx";
+	String USERNAME_PROMPT_REGEX	= "usernamePromptRegEx";
+	String PASSWORD_PROMPT_REGEX	= "passwordPromptRegEx";
+	String SAVED_TIME				= "savedTime";
+	String CREATION_TIME			= "creationTime";
 	
 	//relations
 	String PREFERENCES_ID				= "preferencesId";
