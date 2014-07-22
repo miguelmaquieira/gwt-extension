@@ -161,7 +161,7 @@
 	padding: 0px;
 }
 
-.dslam_studio-preferencesLayout-workZone>div {
+.dslam_studio-preferencesLayout-workZone > div {
 	height: 100%;
 }
 
@@ -190,6 +190,11 @@
 	padding-right: 0px;
 	padding-left: 0px;
 	height: 100%;
+}
+
+.dslam_studio-preferencesLayout-menu .nav-list {
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .dslam_studio-preferencesLayout-menuZone .nav-list label {
@@ -225,6 +230,7 @@
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .dslam_studio-preferencesLayout-workZone-header-infoZone {

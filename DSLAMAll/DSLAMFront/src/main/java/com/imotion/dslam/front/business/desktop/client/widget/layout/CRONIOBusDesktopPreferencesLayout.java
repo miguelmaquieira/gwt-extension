@@ -62,7 +62,7 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		//Header
 		FlowPanel headerZone = new FlowPanel();
 		menu.add(headerZone);
-		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_ZONE_HEADER);
+		headerZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_ZONE_HEADER);
 				
 		AEGWTLabel headerLabel = new AEGWTLabel(TEXTS.preferences());
 		headerZone.add(headerLabel);
