@@ -115,7 +115,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 			String sectionId	= evt.getFinalSectionId();
 			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
 				String		projectName			= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
-				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.IS_MODIFIED);
+				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED);
 				List<String> modifiedProjects	= getModifiedProjetIds();
 				boolean projectModified = modifiedProjects.contains(projectId);
 				toolbar.setSaveProjectEnabled(projectModified);

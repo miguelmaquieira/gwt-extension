@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.widget.authentication;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -7,14 +8,15 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.imotion.dslam.front.business.client.CRONIOBusCommonIImageConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.widget.common.CRONIOBusDesktopBootstrapFormErrorWidget;
-import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.form.AEGWTFormContainerPanelBase;
 import com.selene.arch.exe.gwt.mvp.event.authentication.AEGWTAuthenticationEventTypes.AUTHENTICATION_TYPE;
 
-public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormContainerPanelBase implements AEGWTIValidationChangeHandler{
+public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormContainerPanelBase {
 
+	private static final DSLAMBusI18NTexts 	TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
 	
 	private Image 										logoImg;
 	private HTML										descriptionHTML;
@@ -26,7 +28,8 @@ public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormCo
 	private HTMLPanel	 								root;
 	
 	
-	public CRONIOBusDesktopAuthenticationFormBase() {
+	public CRONIOBusDesktopAuthenticationFormBase(String description) {
+		
 		root = new HTMLPanel("");
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM);
@@ -43,6 +46,7 @@ public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormCo
 		descriptionHTML = new HTML();
 		root.add(descriptionHTML);
 		descriptionHTML.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_DESCRIPTION);
+		setDescriptionHTML(description);
 
 		//Container
 		FlowPanel container = new FlowPanel();
@@ -53,6 +57,7 @@ public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormCo
 		errorWidget = new CRONIOBusDesktopBootstrapFormErrorWidget();
 		container.add(errorWidget);
 		errorWidget.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_ERROR);
+		getErrorWidget().setVisibility(Visibility.HIDDEN);
 
 		//Fields zone
 		fieldsZone = new FlowPanel();
@@ -65,7 +70,7 @@ public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormCo
 		root.add(buttonActionZone);
 		buttonActionZone.addStyleName(DSLAMBusDesktopIStyleConstants.AUTHENTICATION_FORM_ACTION_BUTTON);
 		
-		actionButton = new Button();
+		actionButton = new Button(TEXTS.enter());
 		buttonActionZone.add(actionButton);
 		
 		//Bottom zone
@@ -83,7 +88,8 @@ public abstract class CRONIOBusDesktopAuthenticationFormBase extends AEGWTFormCo
 	/****************************************************************************
 	 *                           PROTECTED FUNCTIONS
 	 ****************************************************************************/
-	protected abstract AUTHENTICATION_TYPE getAuthenticationEventType();
+	protected abstract	boolean checkErrors(int errorCode);
+	protected abstract 	AUTHENTICATION_TYPE getAuthenticationEventType();
 
 	protected void setDescriptionHTML(String description) {
 		descriptionHTML.setHTML(description);
