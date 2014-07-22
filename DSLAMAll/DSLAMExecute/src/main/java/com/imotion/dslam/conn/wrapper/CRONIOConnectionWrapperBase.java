@@ -40,6 +40,11 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	}
 	
 	@Override
+	public void sendNoResponseCommand(String command) {
+		connectionStreams.sendCommandBase(command);
+	}
+	
+	@Override
 	public String readResponseUntil(String pattern) throws IOException {
 		return connectionStreams.readUntil(pattern);
 	}

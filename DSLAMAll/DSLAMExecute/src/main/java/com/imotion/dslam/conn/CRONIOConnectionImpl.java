@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
-import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperDummy;
+import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH;
+import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperTelnet;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -29,12 +30,12 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		this.promptRegEx 	= machineProperties.getPromptRegEx();
 		this.patternPrompt 	= Pattern.compile(promptRegEx);
 		this.protocolType 	= machineProperties.getProtocolType();
-//		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
-//			connectionWrapper = new CRONIOConnectionWrapperSSH();
-//		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
-//			connectionWrapper = new CRONIOConnectionWrapperTelnet();
-//		}
-		connectionWrapper = new CRONIOConnectionWrapperDummy();
+		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
+			connectionWrapper = new CRONIOConnectionWrapperSSH();
+		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
+			connectionWrapper = new CRONIOConnectionWrapperTelnet();
+		}
+//		connectionWrapper = new CRONIOConnectionWrapperDummy();
 	}
 
 	@Override
@@ -44,10 +45,18 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 
 	@Override
 	public CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException {
+		return executeCommand(command, null);
+	}
+	
+	@Override
+	public CRONIOIExecutionData executeCommand(String command, String readUntilRegEx) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData = null;
 		try {
 			connectionWrapper.sendCommand(command);
-			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
+			if (AEMFTCommonUtilsBase.isEmptyString(readUntilRegEx)) {
+				readUntilRegEx = promptRegEx;
+			}
+			String fullResponse	= connectionWrapper.readResponseUntil(readUntilRegEx);
 			//BEGIN EXAMPLE
 			//		String fullResponse		= "Response with data " + promptRegEx;
 			//END EXAMPLE

@@ -10,6 +10,8 @@ public interface CRONIOIConnection {
 	
 	CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException;
 	
+	CRONIOIExecutionData executeCommand(String command, String readUntilRegEx) throws CRONIOConnectionUncheckedException;
+	
 	String readUntil(String regExp) throws CRONIOConnectionUncheckedException;
 	
 	void closeConnection();
