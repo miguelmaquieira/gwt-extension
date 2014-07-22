@@ -129,16 +129,16 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		varNameSB.append(VARIABLE_PREFFIX_PROCESS);
 		varNameSB.append(variable.getVariableName());
 		
-		Object variableValue = getVariableValue(variable.getVariableValue());
+		Object variableValue = getVariableValue(variable.getVariableType(), variable.getVariableValue());
 		if (variableValue != null) {
 			variablesMap.put(varNameSB.toString(), variableValue);
 		}
 	}
 
-	private Object getVariableValue(String variableValueStr) {
+	private Object getVariableValue(int type, String variableValueStr) {
 		Object variableValue = null;
 		if (!AEMFTCommonUtilsBase.isEmptyString(variableValueStr)) {
-			if (variableValueStr.contains("\"")) {
+			if (DSLAMBOIVariable.VARIABLE_TYPE_TEXT == type) {
 				variableValue = variableValueStr.replaceAll("\"", "");
 			} else {
 				variableValue = AEMFTCommonUtilsBase.getIntegerFromString(variableValueStr);
