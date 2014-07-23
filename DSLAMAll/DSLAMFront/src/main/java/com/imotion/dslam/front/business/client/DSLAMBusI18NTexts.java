@@ -263,4 +263,6 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("La contraseña introducida es incorrecta, por favor vuelva a intentarlo")
 	String sign_in_incorrect_password();
 	
+	@DefaultStringValue("Su sesión ha expirado por inactividad")
+	String session_timeout();
 }
