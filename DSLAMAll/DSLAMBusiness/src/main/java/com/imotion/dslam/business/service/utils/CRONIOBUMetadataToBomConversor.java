@@ -228,13 +228,14 @@ public class CRONIOBUMetadataToBomConversor {
 		if (machineConfigData != null) {
 			machine = new CRONIOBOMachineProperties();
 			
-			String 	user 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME					, machineConfigData);
-			String 	password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD					, machineConfigData);
-			int 	timeout 			= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT						, machineConfigData);
-			String 	prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT_REGEX				, machineConfigData);
-			String 	usernamePromptRegEx = getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, machineConfigData);
-			String 	passwordPromptRegEx = getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, machineConfigData);
-			int 	protocolType 		= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, machineConfigData);
+			String 	user 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME					, machineConfigData);
+			String 	password 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD					, machineConfigData);
+			int 	timeout 				= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT						, machineConfigData);
+			String 	prompt 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT_REGEX				, machineConfigData);
+			String 	usernamePromptRegEx 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, machineConfigData);
+			String 	passwordPromptRegEx 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, machineConfigData);
+			String 	rollbackConditionRegEx 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, machineConfigData);
+			int 	protocolType 			= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, machineConfigData);
 			
 			machine.setProtocolType(protocolType);
 			machine.setTimeout(timeout);
@@ -243,6 +244,7 @@ public class CRONIOBUMetadataToBomConversor {
 			machine.setPromptRegEx(prompt);
 			machine.setUsernamePromptRegEx(usernamePromptRegEx);
 			machine.setPasswordPromptRegEx(passwordPromptRegEx);
+			machine.setRollbackConditionRegEx(rollbackConditionRegEx);
 		}
 		
 		return machine;

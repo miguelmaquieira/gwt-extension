@@ -100,7 +100,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		CRONIOBOIMachineProperties currentMachineDB = getMachinePropertiesPersistence().getMachineProperties(CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID, machineName);
 		CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(contextIn);
 		long currentMachineDBId = currentMachineDB.getMachinePropertiesId();
-		//preferencesId sustituir cuando usuarios
+		//TODO preferencesId sustituir cuando usuarios
 		getMachinePropertiesPersistence().updateMachineProperties(currentMachineDBId, machineConfig);
 
 		//ContextOut

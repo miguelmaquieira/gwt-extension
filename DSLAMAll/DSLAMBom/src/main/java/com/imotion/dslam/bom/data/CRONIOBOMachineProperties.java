@@ -33,6 +33,7 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private int					timeout;
 	private String					usernamePromptRegEx;
 	private String					passwordPromptRegEx;
+	private String					rollbackConditionRegEx;
 	private String					promptRegEx;
 	private Date					saveTime;
 	private Date					creationTime;
@@ -135,6 +136,16 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	@Override
 	public void setPasswordPromptRegEx(String passwordPromptRegEx) {
 		this.passwordPromptRegEx = passwordPromptRegEx;
+	}
+	
+	@Override
+	public String getRollbackConditionRegEx() {
+		return rollbackConditionRegEx;
+	}
+
+	@Override
+	public void setRollbackConditionRegEx(String rollbackConditionRegEx) {
+		this.rollbackConditionRegEx = rollbackConditionRegEx;
 	}
 
 	@Override

@@ -41,6 +41,7 @@ public class CRONIOBKMachinePropertiesPersistenceServiceJPA extends DSLAMBKPersi
 			machinePropertiesFromDb.setTimeout(machineProperties.getTimeout());
 			machinePropertiesFromDb.setUsernamePromptRegEx(machineProperties.getUsernamePromptRegEx());
 			machinePropertiesFromDb.setPasswordPromptRegEx(machineProperties.getPasswordPromptRegEx());
+			machinePropertiesFromDb.setRollbackConditionRegEx(machineProperties.getRollbackConditionRegEx());
 			machinePropertiesFromDb.setPromptRegEx(machineProperties.getPromptRegEx());
 			machinePropertiesFromDb.setConnectionVariables(machineProperties.getConnectionVariables());
 			machinePropertiesFromDb.setSaveTime(new Date());
