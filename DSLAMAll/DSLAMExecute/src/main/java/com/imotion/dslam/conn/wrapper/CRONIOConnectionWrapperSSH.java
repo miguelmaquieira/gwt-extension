@@ -40,7 +40,7 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
 			
-			runConnectScript();
+			initializeConnection();
 		} catch (JSchException | IOException e) {
 			throw new CRONIOConnectionUncheckedException(e);
 		}
@@ -56,9 +56,9 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 	 * PROTECTED
 	 */
 	@Override
-	protected void runConnectScript() throws IOException {
+	protected void initializeConnection() throws IOException {
 		String promptRegEx 	= getPromptRegEx();
 		readResponseUntil(promptRegEx);
-		super.runConnectScript();
+		super.initializeConnection();
 	}
 }

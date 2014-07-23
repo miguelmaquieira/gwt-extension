@@ -30,6 +30,6 @@ public class CRONIOConnectionWrapperDummy extends CRONIOConnectionWrapperBase im
 	 * PROTECTED
 	 */
 	@Override
-	protected void runConnectScript() throws IOException {
+	protected void initializeConnection() throws IOException {
 	}
 }

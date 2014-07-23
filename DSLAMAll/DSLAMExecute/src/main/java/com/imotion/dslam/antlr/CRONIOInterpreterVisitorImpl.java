@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import com.imotion.antlr.ImoLangBaseVisitor;
@@ -16,6 +20,7 @@ import com.imotion.antlr.ImoLangParser.ExpressionContext;
 import com.imotion.antlr.ImoLangParser.FunctionContext;
 import com.imotion.antlr.ImoLangParser.ListExpContext;
 import com.imotion.antlr.ImoLangParser.ListItemContext;
+import com.imotion.antlr.ImoLangParser.ProgramContext;
 import com.imotion.antlr.ImoLangParser.StatementContext;
 import com.imotion.antlr.ImoLangParser.StringExprContext;
 import com.imotion.antlr.ImoLangParser.ValueContext;
@@ -25,15 +30,26 @@ import com.imotion.dslam.conn.CRONIOIExecutionData;
 
 public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInterpreterVisitorValue> implements CRONIOILangVisitor {
 
-	private CRONIOIConnection		connection;
-	private Map<String, Object>		allVariables;
+	private final String RESPONSE_KEY		= "#RESPONSE";
+	private final String READ_KEY			= "#READ";
+	private final String MATCH_KEY			= "#MATCH";
+	private final String ROLLBACK_TAG_KEY	= "#ROLLBACK_TAG";
+	
+	private CRONIOIConnection				connection;
+	private Map<String, Object>				allVariables;
+	private CRONIOInterpreterVisitorImpl 	rollbackVisitor;
+	private ProgramContext					rollbackTree;
+	
+	private boolean stopExecution;
 
-	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables) {
-		this.connection = connection;
-		this.allVariables = new HashMap<>();
+	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables, CRONIOInterpreterVisitorImpl rollbackVisitor, ProgramContext rollbackTree) {
+		this.connection			= connection;
+		this.allVariables		= new HashMap<>();
 		if (variables != null) {
 			allVariables.putAll(variables);
 		}
+		this.rollbackVisitor	= rollbackVisitor;
+		this.rollbackTree		= rollbackTree;
 	}
 	
 	/**
@@ -41,25 +57,24 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	 */
 	
 	@Override
-	public void pause() throws InterruptedException {
+	public void pauseExecution() throws InterruptedException {
 		
 	}
 
 	@Override
-	public void next() {
+	public void nextInstruction() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void stop() {
-		
+	public void stopExecution() {
+		stopExecution = true;
 	}
 
 	@Override
-	public void play() {
-		// TODO Auto-generated method stub
-		
+	public void continueExecution() {
+		stopExecution = false;
 	}
 	
 	/**
@@ -71,6 +86,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOInterpreterVisitorValue	commandValue 	= this.visit(ctx.stringExpr());
 		CRONIOIExecutionData			response 		= connection.executeCommand(commandValue.asString());
 		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
+		allVariables.put(RESPONSE_KEY, response);
 		return responseValue;
 	}
 	
@@ -78,8 +94,51 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitReadUntil(@NotNull ImoLangParser.ReadUntilContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue		= this.visit(ctx.stringExpr());
 		String							read	 		= connection.readUntil(regExValue.asString());
+		allVariables.put(READ_KEY, read);
 		CRONIOInterpreterVisitorValue	readValue 		= new CRONIOInterpreterVisitorValue(read);
 		return readValue;
+	}
+	
+	@Override
+	public CRONIOInterpreterVisitorValue visitMatch(@NotNull ImoLangParser.MatchContext ctx) {
+		CRONIOInterpreterVisitorValue	regExValue			= this.visit(ctx.stringExpr());
+		String							regExValueStr		= regExValue.asString();
+		CRONIOIExecutionData			lastExecutionData	= (CRONIOIExecutionData) allVariables.get(RESPONSE_KEY);
+		String							lastResponse		= lastExecutionData.getResponse();
+		//TODO read about AWK
+		Pattern	pattern = Pattern.compile(regExValueStr);
+		Matcher	matcher = pattern.matcher(lastResponse);
+		List<String> matchGroups = new ArrayList<>();
+		if (matcher.matches()) {
+			if (matcher.find()) {
+				MatchResult  matchResult = matcher.toMatchResult();
+				for (int i = 0; i < matchResult.groupCount(); i++) {
+					String matchGroupResult = matchResult.group(i);
+					matchGroups.add(matchGroupResult);
+				}
+			}
+			allVariables.put(MATCH_KEY, matchGroups);
+		}
+		CRONIOInterpreterVisitorValue	matchGroupsData = new CRONIOInterpreterVisitorValue(matchGroups);
+		return matchGroupsData;
+	}
+	
+	@Override
+	public CRONIOInterpreterVisitorValue visitRollback(@NotNull ImoLangParser.RollbackContext ctx) {
+		if (rollbackVisitor != null) {
+			CRONIOInterpreterVisitorValue tagValue = this.visit(ctx.stringExpr());
+			allVariables.put(ROLLBACK_TAG_KEY, tagValue.asString());
+			rollbackVisitor.visit(rollbackTree);
+		}
+		stopExecution();
+		return CRONIOInterpreterVisitorValue.VOID;
+	}
+	
+	@Override
+	public CRONIOInterpreterVisitorValue visitTagBlockCode(@NotNull ImoLangParser.TagBlockCodeContext ctx) {
+		CRONIOInterpreterVisitorValue tagValue = this.visit(ctx.stringExpr());
+		allVariables.put(ROLLBACK_TAG_KEY, tagValue.asString());
+		return CRONIOInterpreterVisitorValue.VOID;
 	}
 
 	@Override
@@ -208,7 +267,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 			object = new Integer(integerStr);
 		} else if (stringNode != null) {
 			object = stringNode.getText();
-		}else if (variableContext != null) {
+		} else if (variableContext != null) {
 			String variableName = variableContext.getText();
 			object = allVariables.get(variableName);
 		} else if (listItemContext != null) {
@@ -286,6 +345,14 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		}
 		CRONIOInterpreterVisitorValue listValue = new CRONIOInterpreterVisitorValue(list);
 		return listValue; 
+	}
+	
+	/**
+	 * PROTECTED
+	 */
+	
+	protected boolean shouldVisitNextChild(@NotNull RuleNode node, CRONIOInterpreterVisitorValue currentResult) {
+		return !stopExecution;
 	}
 	
 	/**
