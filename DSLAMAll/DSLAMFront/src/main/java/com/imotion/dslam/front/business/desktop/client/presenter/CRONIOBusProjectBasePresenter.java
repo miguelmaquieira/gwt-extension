@@ -128,6 +128,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 						AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
 						getFlowEventHandlerManager().fireEvent(flowEvent);
 					}
+					
+				} else if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_EXIT == Integer.valueOf(sourceWidgetId)) {
+					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
+						logout();						
+					}
 				}
 			}			
 		}
@@ -140,8 +145,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 	
 	
-	
-	
+		
 	/**
 	 * PROTECTED
 	 */
@@ -208,6 +212,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	/**
 	 *	PRIVATE 
 	 */
+
 
 	private void updateNavigationData(String projectId, String mainSectionId, String finalSectionId) {
 		AEMFTMetadataElementComposite navigationData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
