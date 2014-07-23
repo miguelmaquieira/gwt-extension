@@ -1,8 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.preferences;
 
 import com.google.gwt.core.shared.GWT;
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIMachinePropertiesDataConstants;
@@ -42,7 +42,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
-		setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
+		//setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN);
 		// invisible, no need
 		setButtonVisible(BUTTON_SUBMIT, false);
@@ -50,58 +50,54 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		FlowPanel textBoxesZone = new FlowPanel();
 		addWidget(textBoxesZone);
 		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
-		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
-
+		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
+		
 		//protocol
 		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
 		textBoxesZone.add(protocolTypeDropdownButton);
 		protocolTypeDropdownButton.setContainerId(NAME);
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
+		protocolTypeDropdownButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
+		FlowPanel textBoxesLeftZone = new FlowPanel();
+		textBoxesZone.add(textBoxesLeftZone);
+		textBoxesLeftZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		
+		FlowPanel textBoxesRightZone = new FlowPanel();
+		textBoxesZone.add(textBoxesRightZone);
+		textBoxesRightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+
 		//username
 		userNameTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.user_placeholder(), TEXTS.user_placeholder());
-		textBoxesZone.add(userNameTextBox);
+		textBoxesLeftZone.add(userNameTextBox);
 
 		//password
 		passwordTextBox 			= new AEGWTBootstrapFormFieldPasswordBoxLabelTop(TEXTS.password_placeholder(), TEXTS.password_placeholder());
-		textBoxesZone.add(passwordTextBox);
+		textBoxesRightZone.add(passwordTextBox);
 
 		//timeout
 		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.timeout_placeholder(), TEXTS.timeout_placeholder());
-		textBoxesZone.add(timeOutTextBox);
+		textBoxesLeftZone.add(timeOutTextBox);
 
 		//prompt
 		promptTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.prompt_placeholder(), TEXTS.prompt_placeholder());
-		textBoxesZone.add(promptTextBox);
+		textBoxesRightZone.add(promptTextBox);
 
 		//userPrompt
 		userPromptTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.userPromptLabel(), PREFERENCES_TEXTS.userPromptPlaceHolder());
-		textBoxesZone.add(userPromptTextBox);
+		textBoxesLeftZone.add(userPromptTextBox);
 		userPromptTextBox.setVisible(false);
 
 		//passwordPromt
 		passwordPromptTextBox 		= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.passwordPromptLabel(), PREFERENCES_TEXTS.passwordPromptPlaceHolder());
-		textBoxesZone.add(passwordPromptTextBox);
+		textBoxesRightZone.add(passwordPromptTextBox);
 		passwordPromptTextBox.setVisible(false);
 
-		userNameTextBox.addBlurHandler(new BlurHandler(){
+		userNameTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
 			@Override
-			public void onBlur(BlurEvent event) {
-				AEMFTMetadataElementComposite formData = getData();
-
-				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getName(), getName());
-				connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
-				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
-				connectionConfigureFormEvt.setConnectionName(getId());
-				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
-
-			}
-		});
-
-		passwordTextBox.addBlurHandler(new BlurHandler(){
-			@Override
-			public void onBlur(BlurEvent event) {
+			public void onKeyUp(KeyUpEvent event) {
 				AEMFTMetadataElementComposite formData = getData();
 
 				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
@@ -109,13 +105,13 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
 				connectionConfigureFormEvt.setConnectionName(getId());
 				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
-
 			}
 		});
 
-		timeOutTextBox.addBlurHandler(new BlurHandler(){
+		passwordTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
 			@Override
-			public void onBlur(BlurEvent event) {
+			public void onKeyUp(KeyUpEvent event) {
 				AEMFTMetadataElementComposite formData = getData();
 
 				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
@@ -123,13 +119,13 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
 				connectionConfigureFormEvt.setConnectionName(getId());
 				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
-
 			}
 		});
 
-		promptTextBox.addBlurHandler(new BlurHandler(){
+		timeOutTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
 			@Override
-			public void onBlur(BlurEvent event) {
+			public void onKeyUp(KeyUpEvent event) {
 				AEMFTMetadataElementComposite formData = getData();
 
 				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
@@ -137,9 +133,51 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
 				connectionConfigureFormEvt.setConnectionName(getId());
 				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
-
 			}
 		});
+
+		promptTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				AEMFTMetadataElementComposite formData = getData();
+
+				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
+				connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
+				connectionConfigureFormEvt.setConnectionName(getId());
+				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
+			}
+		});
+		
+		userPromptTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				AEMFTMetadataElementComposite formData = getData();
+
+				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
+				connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
+				connectionConfigureFormEvt.setConnectionName(getId());
+				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
+			}
+		});
+		
+		passwordPromptTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				AEMFTMetadataElementComposite formData = getData();
+
+				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
+				connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
+				connectionConfigureFormEvt.setConnectionName(getId());
+				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
+			}
+		});
+		
 	}
 
 	public boolean showValidateClientErrors() {
