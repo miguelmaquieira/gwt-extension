@@ -141,7 +141,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	private void runScript(String content) {
 		if (!AEMFTCommonUtilsBase.isEmptyString(content)) {
 			ProgramContext 					tree	= CRONIOAntlrUtils.getTreeFromCode(content);
-			CRONIOInterpreterVisitorImpl 	visitor	= new CRONIOInterpreterVisitorImpl(this, variablesMap, null, null);
+			CRONIOInterpreterVisitorImpl 	visitor	= new CRONIOInterpreterVisitorImpl(this, variablesMap, null, null, null);
 			visitor.visit(tree);
 		}
 	}

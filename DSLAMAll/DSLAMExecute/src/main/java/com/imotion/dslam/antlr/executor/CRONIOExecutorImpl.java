@@ -7,6 +7,7 @@ import java.util.Map;
 import com.imotion.antlr.ImoLangParser.ProgramContext;
 import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -47,9 +48,12 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	private void executeInNode(long processId, CRONIOBOINode node, String scriptCode, String rollbackScriptCode, Map<String, Object> allVariables) {
 		//RollbackScript
-		ProgramContext rollbackTree = null;
+		ProgramContext 	rollbackTree 				= null;
+		String			defaultRollbackCondition 	= null;
 		if (!AEMFTCommonUtilsBase.isEmptyString(rollbackScriptCode)) {
-			rollbackTree = CRONIOAntlrUtils.getTreeFromCode(rollbackScriptCode);
+			CRONIOBOIMachineProperties machineProperties = node.getMachineProperties();
+			defaultRollbackCondition	= machineProperties.getRollbackConditionRegEx();
+			rollbackTree				= CRONIOAntlrUtils.getTreeFromCode(rollbackScriptCode);
 		}
 
 		//MainScript
@@ -59,10 +63,10 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		CRONIOIConnection connection = CRONIOConnectionFactory.getConnection(processId, node, getLogger());
 
 		//RollbackVisitor
-		CRONIOInterpreterVisitorImpl 	rollbackVisitor	= new CRONIOInterpreterVisitorImpl(connection, allVariables, null, null);
+		CRONIOInterpreterVisitorImpl 	rollbackVisitor	= new CRONIOInterpreterVisitorImpl(connection, allVariables, null, null, null);
 
 		//MainVisitor
-		CRONIOInterpreterVisitorImpl 	mainVisitor		= new CRONIOInterpreterVisitorImpl(connection, allVariables, rollbackVisitor, rollbackTree);
+		CRONIOInterpreterVisitorImpl 	mainVisitor		= new CRONIOInterpreterVisitorImpl(connection, allVariables, defaultRollbackCondition, rollbackVisitor, rollbackTree);
 		mainVisitor.visit(mainTree);
 
 		//Close connection

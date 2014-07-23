@@ -27,29 +27,32 @@ import com.imotion.antlr.ImoLangParser.ValueContext;
 import com.imotion.antlr.ImoLangParser.VariableContext;
 import com.imotion.dslam.conn.CRONIOIConnection;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
+import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInterpreterVisitorValue> implements CRONIOILangVisitor {
 
-	private final String RESPONSE_KEY		= "#RESPONSE";
-	private final String READ_KEY			= "#READ";
-	private final String MATCH_KEY			= "#MATCH";
-	private final String ROLLBACK_TAG_KEY	= "#ROLLBACK_TAG";
+	private final String RESPONSE_KEY		= "@RESPONSE";
+	private final String READ_KEY			= "@READ";
+	private final String MATCH_KEY			= "@MATCH";
+	private final String ROLLBACK_TAG_KEY	= "@ROLLBACK_TAG";
 	
 	private CRONIOIConnection				connection;
 	private Map<String, Object>				allVariables;
 	private CRONIOInterpreterVisitorImpl 	rollbackVisitor;
 	private ProgramContext					rollbackTree;
+	private String							rollbackConditionRegEx;
 	
 	private boolean stopExecution;
 
-	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables, CRONIOInterpreterVisitorImpl rollbackVisitor, ProgramContext rollbackTree) {
-		this.connection			= connection;
-		this.allVariables		= new HashMap<>();
+	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables, String rollbackConditionRegEx, CRONIOInterpreterVisitorImpl rollbackVisitor, ProgramContext rollbackTree) {
+		this.connection				= connection;
+		this.allVariables			= new HashMap<>();
 		if (variables != null) {
 			allVariables.putAll(variables);
 		}
-		this.rollbackVisitor	= rollbackVisitor;
-		this.rollbackTree		= rollbackTree;
+		this.rollbackConditionRegEx	= rollbackConditionRegEx;
+		this.rollbackVisitor		= rollbackVisitor;
+		this.rollbackTree			= rollbackTree;
 	}
 	
 	/**
@@ -87,6 +90,16 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOIExecutionData			response 		= connection.executeCommand(commandValue.asString());
 		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
 		allVariables.put(RESPONSE_KEY, response);
+		
+		if (rollbackVisitor != null && !AEMFTCommonUtilsBase.isEmptyString(rollbackConditionRegEx)) {
+			Pattern	pattern = Pattern.compile(rollbackConditionRegEx);
+			Matcher	matcher = pattern.matcher(response.getResponse());
+			if (matcher.find()) {
+				stopExecution();
+				rollbackVisitor.visit(rollbackTree);
+			}
+		}
+		
 		return responseValue;
 	}
 	
@@ -125,12 +138,12 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	
 	@Override
 	public CRONIOInterpreterVisitorValue visitRollback(@NotNull ImoLangParser.RollbackContext ctx) {
+		stopExecution();
 		if (rollbackVisitor != null) {
 			CRONIOInterpreterVisitorValue tagValue = this.visit(ctx.stringExpr());
 			allVariables.put(ROLLBACK_TAG_KEY, tagValue.asString());
 			rollbackVisitor.visit(rollbackTree);
 		}
-		stopExecution();
 		return CRONIOInterpreterVisitorValue.VOID;
 	}
 	

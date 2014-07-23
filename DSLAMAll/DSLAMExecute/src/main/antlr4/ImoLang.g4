@@ -17,13 +17,11 @@ assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | fun
 
 function : (execution | readUntil | match | rollback | tagBlockCode) ';';
 		 
-execution: 		'execute' 	stringExpr ; 
+execution: 		'>' 	stringExpr ; 
 readUntil : 	'read'		stringExpr ;
 match:  		'match'		stringExpr ;
 rollback:		'rollback'	stringExpr ;
 tagBlockCode:	'tag'		stringExpr ;
-
-command : STRING_CHARACTERS;
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
 ifBlock: statement+;
