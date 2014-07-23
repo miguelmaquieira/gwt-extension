@@ -20,7 +20,7 @@ function : (execution | readUntil | match | rollback | tagBlockCode) ';';
 execution: 		'>' 	stringExpr ; 
 readUntil : 	'read'		stringExpr ;
 match:  		'match'		stringExpr ;
-rollback:		'rollback'	stringExpr ;
+rollback:		'rb'	stringExpr ;
 tagBlockCode:	'tag'		stringExpr ;
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;

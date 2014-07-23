@@ -8,12 +8,10 @@ public class CRONIOConnectionWrapperDummy extends CRONIOConnectionWrapperBase im
 	
 	@Override
 	public void connect(CRONIOBOINode node) {
-		super.connect(node);
 	}
 
 	@Override
 	public void disconnect() {
-		super.disconnect();
 	}
 	
 	@Override
