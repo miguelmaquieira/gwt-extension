@@ -64,10 +64,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Contraseña: ")
 	String password();
 	
-
 	@DefaultStringValue("Entrar")
 	String enter();
-	
+		
 	@DefaultStringValue("Email")
 	String email_placeholder();
 
@@ -103,8 +102,11 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	String cancel();
 
 	@DefaultStringValue("El documento actual tiene cambios sin guardar. ¿Seguro que quieres cerrarlo?")
+	String exit_without_save_document();
+	
+	@DefaultStringValue("Hay cambios sin guardar, ¿seguro que quieres salir?")
 	String exit_without_save();
-
+	
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
 	

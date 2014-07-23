@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter;
 
 import java.util.List;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
@@ -10,24 +11,32 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownGlyphIconButton;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEventTypes;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, CRONIOBusProjectBasePresenterConstants {
+public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, AEGWTHasLogicalEventHandlers, CRONIOBusProjectBasePresenterConstants {
 
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	
 	private CRONIOBusDesktopProjectsLayout projectsLayout;
 
 	public CRONIOBusProjectBasePresenter(T view) {
@@ -80,11 +89,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.EXECUTE.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			executeProject(currentProjectId);
-		} else if (EVENT_TYPE.OPEN_PREFERENCES_EVENT.equals(evtTyp)) {
-			if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (!AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) && Window.confirm("Hay cambios sin guardar, seguro que quieres salir?"))) {
-				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
-				getFlowEventHandlerManager().fireEvent(flowEvent);
-			}
 		}	
 	}
 
@@ -105,6 +109,39 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				EVENT_TYPE.EXECUTE.equals(type);
 	}
 
+	
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE evtTyp = evt.getEventType();
+		String sourceWidgetId = evt.getSourceWidgetId();
+		String sourceWidget = evt.getSourceWidget();
+		if (LOGICAL_TYPE.SELECT_EVENT.equals(evtTyp)) { 
+			
+			if (AEGWTBootstrapDropdownGlyphIconButton.NAME.equals(sourceWidget)) {
+				
+				if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_OPEN_PREFERENCES == Integer.valueOf(sourceWidgetId)) {
+					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
+						AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
+						getFlowEventHandlerManager().fireEvent(flowEvent);
+					}
+				}
+			}			
+		}
+				
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.SELECT_EVENT.equals(type);
+	}
+	
+	
+	
+	
 	/**
 	 * PROTECTED
 	 */
@@ -124,6 +161,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		super.viewAdded();
 		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
 		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, getProjectsLayout());
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 
 		String currentProjectId			= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 		String currentFinalSectionId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
