@@ -21,6 +21,12 @@ public class CRONIOAntlrUtils {
 	
 	private static final String VARIABLE_PREFFIX_PROCESS 	= "#";
 	
+	public static String precompileCode(String originalCode) {
+		String compiledCode = "";
+		
+		return compiledCode;
+	}
+	
 	public static  ProgramContext getTreeFromCode(String code) {
 		ImoLangLexer		lexer	= new ImoLangLexer(new ANTLRInputStream(code));
 		CommonTokenStream	tokens	= new CommonTokenStream(lexer);

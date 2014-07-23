@@ -83,6 +83,6 @@ LINE_COMMENT
     ;
 
 fragment	DIGIT 				: '0'..'9' ;
-fragment	IDENT_CHAR 			: ('a'..'z'|'A'..'Z' | '>');
+fragment	IDENT_CHAR 			: ('a'..'z'|'A'..'Z');
 fragment	STRING_CHARACTERS	:   STRING_CHARACTER+;
 fragment	STRING_CHARACTER	:   ~["\\];
