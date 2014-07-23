@@ -44,6 +44,8 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
 		setButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.COL_XS_OFFSET_3);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN);
+		// invisible, no need
+		setButtonVisible(BUTTON_SUBMIT, false);
 
 		FlowPanel textBoxesZone = new FlowPanel();
 		addWidget(textBoxesZone);
@@ -56,7 +58,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		protocolTypeDropdownButton.setContainerId(NAME);
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
-
+		
 		//username
 		userNameTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.user_placeholder(), TEXTS.user_placeholder());
 		textBoxesZone.add(userNameTextBox);
@@ -171,7 +173,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				userPromptTextBox.setText(userPrompt);
 				passwordPromptTextBox.setText(passwordPrompt);
 			}
-			handleProtocolType(protocolType);
+			handleProtocolType(protocolType, false);
 		}
 	}
 
@@ -180,7 +182,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		boolean errors = showValidateClientErrors();
 		if (errors == false) {
 			String	timeoutStr		= timeOutTextBox.getText();
-			String	protocoltypeStr	=  protocolTypeDropdownButton.getSelectedId();
+			String	protocoltypeStr	= protocolTypeDropdownButton.getSelectedId();
 			int		timeoutInt		= AEMFTCommonUtilsBase.getIntegerFromString(timeoutStr);
 			int		protocoltypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(protocoltypeStr);
 
@@ -219,7 +221,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			if (NAME.equals(sourceContainerId)) {
 				String selectedId = evt.getSourceWidgetId();
 				int protocolType = AEMFTCommonUtilsBase.getIntegerFromString(selectedId);
-				handleProtocolType(protocolType);
+				handleProtocolType(protocolType, true);
 			}
 		}
 	}
@@ -270,7 +272,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	 * PRIVATE
 	 */
 
-	private void handleProtocolType(int protocolType) {
+	private void handleProtocolType(int protocolType, boolean fireEvent) {
 		if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET) {
 			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET));
 			userPromptTextBox.setVisible(true);
@@ -280,6 +282,17 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			userPromptTextBox.setVisible(false);
 			passwordPromptTextBox.setVisible(false);
 		}
+		
+		if (fireEvent) {
+			AEMFTMetadataElementComposite formData = getData();
+
+			CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
+			connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+			connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
+			connectionConfigureFormEvt.setConnectionName(getId());
+			getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
+		}
+		
 		AEGWTJQueryPerfectScrollBar.updateScroll(CRONIOBusDesktopPreferencesMachineSectionsDeckPanel.NAME);
 	}
 }
