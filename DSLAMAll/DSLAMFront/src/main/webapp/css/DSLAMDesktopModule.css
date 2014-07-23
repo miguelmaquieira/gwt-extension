@@ -144,16 +144,12 @@
 	position: relative;
 }
 
-.dslam_studio-preferentesLayout-workZone-header {
-	position: absolute;
-	top: 0px;
-	width: 100%;
+.dslam_studio-preferencesLayout-workZone-header {
 	height: 35px;
 	background-color: #F2F1F0;
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	margin-bottom: 5px;
 }
 
 .dslam_studio-preferencesLayout-workZone {
@@ -169,8 +165,7 @@
 	background-color: #ffffff;
 }
 
-.dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox
-	{
+.dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox {
 	border-radius: 3px;
 	box-shadow: 0px 0px 3px #B8B8B8;
 	margin: 20px;
@@ -319,6 +314,15 @@
 
 .dslam_studio-container-zone {
 	width: 100%;
+}
+
+.dslam_studio-toolbar-actions-optionsButton {
+	float: right;
+}
+
+.dslam_studio-toolbar-actions-optionsButton .dropdown-menu {
+	left:-100px;	
+	top:50px;
 }
 
 .dslam_studio-toolbar-actions-preferencesButton {
@@ -830,7 +834,6 @@
 }
 
 .dslam_studio-preferencesMachineConfigureForm {
-	width: 400px;
 	margin-top: 20px;
 
 }

@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window.Location;
 import com.imotion.dslam.business.DSLAMBUIServiceConstant;
@@ -104,6 +106,14 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 //			url = BusinessBaseAppControllerConstants.DESKTOP_URI;
 //		}
 		Location.assign(url);
+	}
+	
+	
+	@Override
+	protected Date getCookiesExpiredDate() {
+		long DURATION = 0;
+		Date expires = new Date(DURATION);
+		return expires;
 	}
 	
 	/**********************************************************************

@@ -10,10 +10,16 @@ public interface CRONIOBusI18NPreferencesConnectionTexts extends Constants {
 	@DefaultStringValue("Prompt de contraseña")
 	String passwordPromptLabel();
 	
-	@DefaultStringValue("User: ")
+	@DefaultStringValue("Usuario ")
 	String userPromptPlaceHolder();
 
-	@DefaultStringValue("Password: ")
+	@DefaultStringValue("Contraseña ")
 	String passwordPromptPlaceHolder();
+	
+	@DefaultStringValue("Condición para rollback")
+	String rollbackConditionPromptLabel();
+	
+	@DefaultStringValue("Condición para rollback (Expresión regular)")
+	String rollbackConditionPromptPlaceHolder();
 	
 }

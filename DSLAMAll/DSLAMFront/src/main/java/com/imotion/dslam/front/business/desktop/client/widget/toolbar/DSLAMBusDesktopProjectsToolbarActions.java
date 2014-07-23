@@ -12,19 +12,21 @@ import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMB
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownGlyphIconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 
 public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopProjectsToolbarActions";
-
-	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	
+	public static int OPTION_TYPE_OPEN_PREFERENCES	= 1;
+	public static int OPTION_TYPE_EXIT				= 2;
 
 	private AEGWTBootstrapGlyphiconButton 		newButton;
 	private AEGWTBootstrapGlyphiconButton 		saveButton;
 	private AEGWTBootstrapGlyphiconButton 		saveAllButton;
 	private AEGWTBootstrapGlyphiconButton 		executeButton;
-	private AEGWTBootstrapGlyphiconButton 		preferencesButton;
 	private	 DSLAMBusDesktopNewProjectPopupForm	projectPopupForm;
 
 	public DSLAMBusDesktopProjectsToolbarActions() {
@@ -33,26 +35,29 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS);
 
 		//NEW
-		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, texts.create(), texts.create());
+		newButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FILE, TEXTS.create(), TEXTS.create());
 		root.add(newButton);
 
 		//SAVE
-		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, texts.save_project(), texts.save());
+		saveButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_FLOPPY_DISK, TEXTS.save_project(), TEXTS.save());
 		root.add(saveButton);
 
 		//SAVE ALL
-		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, texts.save_all(), texts.save_all());
+		saveAllButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_HDD, TEXTS.save_all(), TEXTS.save_all());
 		root.add(saveAllButton);
 		saveAllButton.setVisible(false);
 
 		//EXECUTE
-		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, texts.run(), texts.run());
+		executeButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLAY, TEXTS.run(), TEXTS.run());
 		root.add(executeButton);
 		
-		//PREFERENCES
-		preferencesButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_COG, "", texts.preferences());
-		preferencesButton.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_PREFERENCES_BUTTON);
-		root.add(preferencesButton);
+		//OPTIONS		
+		AEGWTBootstrapDropdownGlyphIconButton optionButton = new AEGWTBootstrapDropdownGlyphIconButton(AEGWTIBoostrapConstants.GLYPHICON_TASKS);		
+		optionButton.addElement(String.valueOf(OPTION_TYPE_OPEN_PREFERENCES),  TEXTS.preferences());
+		optionButton.addElement(String.valueOf(OPTION_TYPE_EXIT),TEXTS.exit());
+		optionButton.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_OPTIONS_BUTTON);
+		root.add(optionButton);
+		
 
 		newButton.addClickHandler(new ClickHandler() {
 
@@ -92,16 +97,6 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 			}
 		});
 		
-		preferencesButton.addClickHandler(new ClickHandler() {
-
-			@Override
-			public void onClick(ClickEvent event) {	
-				CRONIOBusDesktopProjectEvent openPreferencesEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-				openPreferencesEvent.setEventType(EVENT_TYPE.OPEN_PREFERENCES_EVENT);
-				getLogicalEventHandlerManager().fireEvent(openPreferencesEvent);
-			}
-		});
-
 	}
 
 	public void hideProjectForm() {

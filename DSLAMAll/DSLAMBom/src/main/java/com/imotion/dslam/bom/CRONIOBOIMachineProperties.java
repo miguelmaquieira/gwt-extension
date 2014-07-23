@@ -67,5 +67,9 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 	String getPasswordPromptRegEx();
 
 	void setPasswordPromptRegEx(String passwordPromptRegEx);
+	
+	String getRollbackConditionRegEx();
+
+	void setRollbackConditionRegEx(String rollbackConditionRegEx);
 
 }

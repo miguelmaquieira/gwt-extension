@@ -14,6 +14,7 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String PROMPT_REGEX				= "promptRegEx";
 	String USERNAME_PROMPT_REGEX	= "usernamePromptRegEx";
 	String PASSWORD_PROMPT_REGEX	= "passwordPromptRegEx";
+	String ROLLBACK_CONDITION_REGEX	= "rollbackConditionRegEx";
 	String SAVED_TIME				= "savedTime";
 	String CREATION_TIME			= "creationTime";
 	

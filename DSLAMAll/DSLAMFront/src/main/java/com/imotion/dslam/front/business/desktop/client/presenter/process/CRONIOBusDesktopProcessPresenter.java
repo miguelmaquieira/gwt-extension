@@ -25,7 +25,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public void bind() {
-		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+//		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
 	@Override
@@ -39,6 +39,8 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		super.dispatchEvent(evt);
+		
  		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
 
@@ -76,7 +78,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type); 			
+		return super.isDispatchEventType(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type); 			
 	}
 	
 	/**
