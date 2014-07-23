@@ -315,6 +315,15 @@
 	width: 100%;
 }
 
+.dslam_studio-toolbar-actions-optionsButton {
+	float: right;
+}
+
+.dslam_studio-toolbar-actions-optionsButton .dropdown-menu {
+	left:-100px;	
+	top:50px;
+}
+
 .dslam_studio-toolbar-actions-preferencesButton {
 	float: right;
 }

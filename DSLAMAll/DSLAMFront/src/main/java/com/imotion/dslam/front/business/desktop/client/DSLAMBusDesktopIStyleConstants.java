@@ -13,6 +13,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 					//dslam_studio-toolbar
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";					//dslam_studio-toolbar-actions
 	String TOOLBAR_ACTIONS_PREFERENCES_BUTTON			= TOOLBAR				+ "-actions-preferencesButton";	//dslam_studio-toolbar-actions-preferencesButton
+	String TOOLBAR_ACTIONS_OPTIONS_BUTTON				= TOOLBAR				+ "-actions-optionsButton";			//dslam_studio-toolbar-actions-optionsButton
 	String TOOLBAR_ACTIONS_CLOSE_BUTTON					= TOOLBAR				+ "-actions-closeButton";		//dslam_studio-toolbar-actions-closeButton
 	String TOOLBAR_ACTIONS_ZONE							= TOOLBAR_ACTIONS		+ "-zone";						//dslam_studio-toolbar-actions-zone
 	String TOOLBAR_INFO 								= TOOLBAR				+ "-info";						//dslam_studio-toolbar-info
