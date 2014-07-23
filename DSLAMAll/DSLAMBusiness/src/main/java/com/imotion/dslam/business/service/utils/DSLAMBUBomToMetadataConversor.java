@@ -277,6 +277,7 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIMachineProperties.PROMPT_REGEX						, connection.getPromptRegEx());
 			data.addElement(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX			, connection.getUsernamePromptRegEx());
 			data.addElement(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX			, connection.getPasswordPromptRegEx());
+			data.addElement(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX			, connection.getRollbackConditionRegEx());
 		}
 		return data;
 	}

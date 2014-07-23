@@ -37,7 +37,8 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			timeOutTextBox;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop 			promptTextBox; 
 	private AEGWTBootstrapFormFieldTextBoxLabelTop 			userPromptTextBox; 
-	private AEGWTBootstrapFormFieldTextBoxLabelTop 			passwordPromptTextBox; 
+	private AEGWTBootstrapFormFieldTextBoxLabelTop 			passwordPromptTextBox;
+	private AEGWTBootstrapFormFieldTextBoxLabelTop			rollbackConditionPromptTextBox;
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	protocolTypeDropdownButton;
 
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
@@ -52,14 +53,6 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
 		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
-		//protocol
-		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
-		textBoxesZone.add(protocolTypeDropdownButton);
-		protocolTypeDropdownButton.setContainerId(NAME);
-		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
-		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
-		protocolTypeDropdownButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
-		
 		FlowPanel textBoxesLeftZone = new FlowPanel();
 		textBoxesZone.add(textBoxesLeftZone);
 		textBoxesLeftZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
@@ -68,32 +61,45 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		textBoxesZone.add(textBoxesRightZone);
 		textBoxesRightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
+		////LEFTZONE
+		//protocol
+		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
+		textBoxesLeftZone.add(protocolTypeDropdownButton);
+		protocolTypeDropdownButton.setContainerId(NAME);
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
+		//protocolTypeDropdownButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
+		
 		//username
 		userNameTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.user_placeholder(), TEXTS.user_placeholder());
 		textBoxesLeftZone.add(userNameTextBox);
-
-		//password
-		passwordTextBox 			= new AEGWTBootstrapFormFieldPasswordBoxLabelTop(TEXTS.password_placeholder(), TEXTS.password_placeholder());
-		textBoxesRightZone.add(passwordTextBox);
-
-		//timeout
-		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.timeout_placeholder(), TEXTS.timeout_placeholder());
-		textBoxesLeftZone.add(timeOutTextBox);
-
+		
 		//prompt
 		promptTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.prompt_placeholder(), TEXTS.prompt_placeholder());
-		textBoxesRightZone.add(promptTextBox);
-
+		textBoxesLeftZone.add(promptTextBox);
 		//userPrompt
 		userPromptTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.userPromptLabel(), PREFERENCES_TEXTS.userPromptPlaceHolder());
 		textBoxesLeftZone.add(userPromptTextBox);
 		userPromptTextBox.setVisible(false);
+				
+		////RIGHTZONE
+		//timeout
+		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.timeout_placeholder(), TEXTS.timeout_placeholder());
+		textBoxesRightZone.add(timeOutTextBox);
+		
+		//password
+		passwordTextBox 			= new AEGWTBootstrapFormFieldPasswordBoxLabelTop(TEXTS.password_placeholder(), TEXTS.password_placeholder());
+		textBoxesRightZone.add(passwordTextBox);
+
+		//rollbackConditionPrompt
+		rollbackConditionPromptTextBox = new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.rollbackConditionPromptLabel(), PREFERENCES_TEXTS.rollbackConditionPromptPlaceHolder());
+		textBoxesRightZone.add(rollbackConditionPromptTextBox);
 
 		//passwordPromt
 		passwordPromptTextBox 		= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.passwordPromptLabel(), PREFERENCES_TEXTS.passwordPromptPlaceHolder());
 		textBoxesRightZone.add(passwordPromptTextBox);
 		passwordPromptTextBox.setVisible(false);
-
+			
 		userNameTextBox.addKeyUpHandler(new KeyUpHandler() {
 			
 			@Override
@@ -178,6 +184,21 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			}
 		});
 		
+		rollbackConditionPromptTextBox.addKeyUpHandler(new KeyUpHandler() {
+			
+			@Override
+			public void onKeyUp(KeyUpEvent event) {
+				AEMFTMetadataElementComposite formData = getData();
+
+				CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
+				connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+				connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
+				connectionConfigureFormEvt.setConnectionName(getId());
+				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
+			}
+		});
+
+		
 	}
 
 	public boolean showValidateClientErrors() {
@@ -193,13 +214,14 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	@Override
 	public void setData(AEMFTMetadataElementComposite connectionConfigureData) {
 		if (connectionConfigureData != null) {
-			String 			userName 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME					, connectionConfigureData);
-			String 			password 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD					, connectionConfigureData);
-			int 			timeout 			= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT						, connectionConfigureData);
-			String 			prompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT_REGEX				, connectionConfigureData);
-			String 			userPrompt 			= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, connectionConfigureData);
-			String 			passwordPrompt 		= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, connectionConfigureData);
-			int 			protocolType 		= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, connectionConfigureData);
+			String 			userName 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME					, connectionConfigureData);
+			String 			password 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD					, connectionConfigureData);
+			int 			timeout 					= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT						, connectionConfigureData);
+			String 			prompt 						= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT_REGEX				, connectionConfigureData);
+			String 			userPrompt 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, connectionConfigureData);
+			String 			passwordPrompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, connectionConfigureData);
+			String 			rollbackConditionPrompt 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, connectionConfigureData);
+			int 			protocolType 				= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, connectionConfigureData);
 
 			userNameTextBox.setText(userName);
 			passwordTextBox.setText(password);
@@ -211,6 +233,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				userPromptTextBox.setText(userPrompt);
 				passwordPromptTextBox.setText(passwordPrompt);
 			}
+			rollbackConditionPromptTextBox.setText(rollbackConditionPrompt);
 			handleProtocolType(protocolType, false);
 		}
 	}
@@ -225,14 +248,15 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			int		protocoltypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(protocoltypeStr);
 
 			AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME				, formData	, userNameTextBox.getText());
-			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD				, formData	, passwordTextBox.getText());
-			getElementController().setElement(CRONIOBOIMachineProperties.TIMEOUT				, formData	, timeoutInt);
-			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT_REGEX			, formData	, promptTextBox.getText());
-			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, formData	, userPromptTextBox.getText());
-			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, formData	, passwordPromptTextBox.getText());
-			getElementController().setElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE			, formData	, protocoltypeInt);
-			getElementController().setElement(CRONIOBOIMachineProperties.MACHINE_NAME			, formData	, getId());
+			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME					, formData	, userNameTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD					, formData	, passwordTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.TIMEOUT					, formData	, timeoutInt);
+			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT_REGEX				, formData	, promptTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX		, formData	, userPromptTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX		, formData	, passwordPromptTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, formData	, rollbackConditionPromptTextBox.getText());
+			getElementController().setElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, formData	, protocoltypeInt);
+			getElementController().setElement(CRONIOBOIMachineProperties.MACHINE_NAME				, formData	, getId());
 			return formData;
 		} else {
 			return null;
@@ -283,6 +307,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		promptTextBox.setText(""); 
 		userPromptTextBox.setText("");
 		passwordPromptTextBox.setText("");
+		rollbackConditionPromptTextBox.setText("");
 		protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
 	}
 
@@ -292,6 +317,9 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		passwordTextBox.setErrorLabelVisible(false);
 		timeOutTextBox.setErrorLabelVisible(false);
 		promptTextBox.setErrorLabelVisible(false);
+		userPromptTextBox.setErrorLabelVisible(false);
+		passwordPromptTextBox.setErrorLabelVisible(false);
+		rollbackConditionPromptTextBox.setErrorLabelVisible(false);
 	}
 
 	@Override
