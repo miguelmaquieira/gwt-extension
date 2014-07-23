@@ -2,12 +2,12 @@ package com.imotion.dslam.antlr;
 
 public interface CRONIOILangVisitor {
 
-	public void pause() throws InterruptedException;
+	public void pauseExecution() throws InterruptedException;
 	
-	public void next();
+	public void nextInstruction();
 	
-	public void stop();
+	public void stopExecution();
 	
-	public void play();
+	public void continueExecution();
 	
 }

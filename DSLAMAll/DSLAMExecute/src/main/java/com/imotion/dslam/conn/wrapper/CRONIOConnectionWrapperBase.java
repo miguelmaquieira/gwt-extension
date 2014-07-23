@@ -31,7 +31,7 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	
 	@Override
 	public void disconnect() {
-		runDisconnectScript();
+		finalizeConnection();
 		connectionStreams.closeStreams();
 	}
 	
@@ -83,12 +83,12 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 		return promptRegEx;
 	}
 	
-	protected void runConnectScript() throws IOException {
-		//TODO:
+	protected void initializeConnection() throws IOException {
+		//nothing to
 	}
 	
-	protected void runDisconnectScript() {
-		//TODO:
+	protected void finalizeConnection() {
+		//nothing to
 	}
 
 	protected CRONIOBOINode getNode() {
