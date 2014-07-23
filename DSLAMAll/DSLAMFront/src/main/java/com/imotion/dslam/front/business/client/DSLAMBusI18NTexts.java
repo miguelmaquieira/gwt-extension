@@ -107,6 +107,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Hay cambios sin guardar, ¿seguro que quieres salir?")
 	String exit_without_save();
 	
+	@DefaultStringValue("¿Seguro que quieres salir?")
+	String exit_confirmation();
+	
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
 	

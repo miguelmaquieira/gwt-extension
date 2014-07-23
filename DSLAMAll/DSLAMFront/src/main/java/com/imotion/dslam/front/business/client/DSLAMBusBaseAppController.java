@@ -110,7 +110,7 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 	
 	
 	@Override
-	protected Date getCookiesExpiredDate() {
+	protected Date getCookiesExpirationDate() {
 		long DURATION = 0;
 		Date expires = new Date(DURATION);
 		return expires;
