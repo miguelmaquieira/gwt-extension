@@ -11,6 +11,8 @@ public interface CRONIOConnectionIWrapper {
 	
 	String sendCommand(String command) throws IOException;
 	
+	void sendNoResponseCommand(String command);
+	
 	String readResponseUntil(String pattern) throws IOException;
 	
 	void disconnect();

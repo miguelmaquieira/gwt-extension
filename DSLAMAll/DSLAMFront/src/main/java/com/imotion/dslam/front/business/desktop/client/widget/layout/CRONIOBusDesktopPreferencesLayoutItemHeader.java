@@ -21,7 +21,6 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 	public CRONIOBusDesktopPreferencesLayoutItemHeader() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_ZONE_HEADER);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER);
 		
 		//INFO

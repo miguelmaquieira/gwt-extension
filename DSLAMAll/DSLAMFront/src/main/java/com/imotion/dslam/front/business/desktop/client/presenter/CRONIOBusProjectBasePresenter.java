@@ -287,7 +287,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			//SHOW HEADER INFO
 			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 			showInfoEvent.addElementAsString(DSLAMBOIProject.PROJECT_NAME	, projectName);
-			showInfoEvent.addElementAsBoolean(DSLAMBOIProject.IS_MODIFIED	, sectionIsModified);
+			showInfoEvent.addElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED	, sectionIsModified);
 			showInfoEvent.setProjectId(projectId);
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);

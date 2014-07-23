@@ -60,4 +60,12 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 
 	void setConnectionVariables(List<DSLAMBOIVariable> connectionVariables);
 
+	String getUsernamePromptRegEx();
+
+	void setUsernamePromptRegEx(String usernamePromptRegEx);
+
+	String getPasswordPromptRegEx();
+
+	void setPasswordPromptRegEx(String passwordPromptRegEx);
+
 }

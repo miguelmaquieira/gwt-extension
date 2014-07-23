@@ -144,16 +144,12 @@
 	position: relative;
 }
 
-.dslam_studio-preferentesLayout-workZone-header {
-	position: absolute;
-	top: 0px;
-	width: 100%;
+.dslam_studio-preferencesLayout-workZone-header {
 	height: 35px;
 	background-color: #F2F1F0;
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
-	margin-bottom: 5px;
 }
 
 .dslam_studio-preferencesLayout-workZone {
@@ -161,7 +157,7 @@
 	padding: 0px;
 }
 
-.dslam_studio-preferencesLayout-workZone>div {
+.dslam_studio-preferencesLayout-workZone > div {
 	height: 100%;
 }
 
@@ -169,8 +165,7 @@
 	background-color: #ffffff;
 }
 
-.dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox
-	{
+.dslam_studio-preferencesLayout-workZone .dslam_studio-preferencesLayout-contentInBox {
 	border-radius: 3px;
 	box-shadow: 0px 0px 3px #B8B8B8;
 	margin: 20px;
@@ -190,6 +185,11 @@
 	padding-right: 0px;
 	padding-left: 0px;
 	height: 100%;
+}
+
+.dslam_studio-preferencesLayout-menu .nav-list {
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .dslam_studio-preferencesLayout-menuZone .nav-list label {
@@ -225,6 +225,7 @@
 	border-bottom: 1px solid #CCCCCC;
 	padding: 5px;
 	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .dslam_studio-preferencesLayout-workZone-header-infoZone {

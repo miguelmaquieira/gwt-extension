@@ -46,45 +46,45 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		//MENU -> Project -> Script
 		menuScript 			= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
 		menuScript.setCloseMenu();
-		menuProject.addWidget(menuScript);
+		menuProject.add(menuScript);
 
 		//MENU -> Project -> Script -> MainScript
 		mainScript 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_MAIN_SCRIPT		,TEXTS.main_script_label(), this);
-		menuScript.addWidget(mainScript);
+		menuScript.add(mainScript);
 
 		//MENU -> Project -> Script -> RollbackScript
 		rollbackScript 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	,TEXTS.rollback_script_label(),this);
-		menuScript.addWidget(rollbackScript);
+		menuScript.add(rollbackScript);
 
 		//MENU -> Project  -> Process
 		menuProcess 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
 		menuProcess.setCloseMenu();
-		menuProject.addWidget(menuProcess);
+		menuProject.add(menuProcess.asWidget());
 
 		//MENU -> Project  -> Process -> Variables
 		variableProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
-		menuProcess.addWidget(variableProcess);
+		menuProcess.add(variableProcess);
 
 		//MENU -> Project  -> Process -> Schedule
 		scheduleProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
-		menuProcess.addWidget(scheduleProcess);
+		menuProcess.add(scheduleProcess);
 
 		//MENU -> Project  -> Process -> Properties
 		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
-		menuProcess.addWidget(propertiesProcess);
+		menuProcess.add(propertiesProcess);
 
 		//MENU -> Project  -> Process -> Nodes
 		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST			,TEXTS.nodes(), this);
-		menuProcess.addWidget(nodesProcess);
+		menuProcess.add(nodesProcess);
 
 		//MENU -> Project  -> Execution
 		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.execution());
 		menuExecution.setCloseMenu();
-		menuProject.addWidget(menuExecution);
+		menuProject.add(menuExecution);
 		
 		//MENU -> Project -> Execution -> Logs
 		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
-		menuExecution.addWidget(nodesLog);
+		menuExecution.add(nodesLog);
 
 		menu.addSeparator();
 	}
