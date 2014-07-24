@@ -26,6 +26,8 @@ import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEventType
 
 public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPreferencesBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasPreferencesEventHandlers, CRONIOBusPreferencesBasePresenterConstants {
 
+	public static final String NAME = "CRONIOBusPreferencesBasePresenter";
+	
 	private CRONIOBusDesktopPreferencesLayout preferencesLayout;
 
 	public CRONIOBusPreferencesBasePresenter(T view) {
@@ -51,6 +53,20 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 			updateNavigationData(mainSectionId, finalSectionPath);
 			if (navigate) {
+				
+				String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
+				AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
+				if (finalSectionData != null) {
+					finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+				}
+
+				//SHOW HEADER INFO
+				CRONIOBusDesktopPreferencesEvent showInfoEvent = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
+				showInfoEvent.setFinalSectionPath(finalSectionPath);
+				showInfoEvent.addElementAsComposite(SECTION_DATA, finalSectionData);
+				showInfoEvent.setEventType(EVENT_TYPE.SHOW_PREFERENCES_INFO);
+				getLogicalEventHandlerManager().fireEvent(showInfoEvent);
+				
 				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(mainSectionId, getName());
 				getFlowEventHandlerManager().fireEvent(flowEvent);
 			} else {
@@ -158,18 +174,10 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 		}
 
-		//TODO: move to connectionPresenter
-		String[] 	finalSectionPathSplit 	= finalSectionPath.split("\\.");
-		String 		finalSectionName 		= finalSectionPathSplit[finalSectionPathSplit.length-1];
-		String		machineName				= finalSectionPathSplit[1];
-		boolean 	sectionIsModified 		= getElementDataController().getElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED, finalSectionData);
-
 		//SHOW HEADER INFO
 		CRONIOBusDesktopPreferencesEvent showInfoEvent = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
-		showInfoEvent.addElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME	, machineName);
-		showInfoEvent.addElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED	, sectionIsModified);
-		//		showInfoEvent.setProjectId(projectId);
-		showInfoEvent.setFinalSectionId(finalSectionName);
+		showInfoEvent.setFinalSectionPath(finalSectionPath);
+		showInfoEvent.addElementAsComposite(SECTION_DATA, finalSectionData);
 		showInfoEvent.setEventType(EVENT_TYPE.SHOW_PREFERENCES_INFO);
 		getLogicalEventHandlerManager().fireEvent(showInfoEvent);
 

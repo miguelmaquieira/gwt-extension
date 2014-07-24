@@ -13,6 +13,8 @@ import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHas
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
+import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences.DSLAMBusDesktopPreferencesMenu;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopPreferencesToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -131,12 +133,21 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		String srcWindow 	= evt.getSourceWindow();
 		EVENT_TYPE type		= evt.getEventType();
 		if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(srcWindow)) {
-//			String projectId	= evt.getProjectId();
+			String srcWidget	= evt.getSourceWidget();
 			String sectionId	= evt.getFinalSectionId();
 			String sectionPath	= evt.getFinalSectionPath();
-			if (EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)) {
-				String		machineName			= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
-				boolean		sectionModified		= evt.getElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED);
+			String[] sectionPathSplit = null;
+			
+			if (sectionPath != null) {
+				sectionPathSplit = sectionPath.split("\\.");
+				sectionId = sectionPathSplit[sectionPathSplit.length - 1];
+			}
+			
+			if ((CRONIOBusDesktopPreferencesConnectionPresenter.NAME.equals(srcWidget) || CRONIOBusDesktopPreferencesPresenter.NAME.equals(srcWidget)) && EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)) {
+				AEMFTMetadataElementComposite sectionData = evt.getElementAsComposite(CRONIOBusPreferencesBasePresenterConstants.SECTION_DATA);
+				
+				String		machineName			= sectionPathSplit[1];
+				boolean		sectionModified		= getElementController().getElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED, sectionData);
 				
 				toolbar.setSavePreferencesEnabled(sectionModified);
 				sectionHeader.setMachineName(machineName);
