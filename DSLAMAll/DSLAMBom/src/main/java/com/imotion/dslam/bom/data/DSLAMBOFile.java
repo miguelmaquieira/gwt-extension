@@ -23,6 +23,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	private Long 	fileId;
 	private String 	filename;
 	private String 	content;
+	private String compileContent;
 	private int 	contentType;
 	private Date 	savedTime;
 	private Date 	creationTime;
@@ -63,6 +64,18 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	@Override
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	@Lob 
+	@Column(columnDefinition="TEXT")
+	@Override
+	public String getCompiledContent() {
+		return compileContent;
+	}
+
+	@Override
+	public void setCompiledContent(String compileContent) {
+		this.compileContent = compileContent;
 	}
 
 	@Override

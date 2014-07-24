@@ -13,6 +13,8 @@ public interface DSLAMBKIFilePersistenceService {
 
 	DSLAMBOIFile updateFileContent(Long fileId, String content, Date date);
 	
+	DSLAMBOIFile updateFileContent(Long fileId, String content, String compiledContent, Date date);
+	
 	DSLAMBOIFile updateFileName(Long fileId, String filename);
 
 	List<DSLAMBOIFile> getAllFiles();
