@@ -32,15 +32,20 @@ public class CRONIOBusDesktopNodeInfoPanel extends AEGWTBootstrapPanelWithHeadin
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		resetContent();
-		String  nodeName 		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME, data);
-		String  nodeIp	 		= getElementController().getElementAsString(CRONIOBOINode.NODE_IP, data);
-		String	nodeMachineType = getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE, data);
+		String  	nodeName 		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME	, data);
+		String  	nodeIp	 		= getElementController().getElementAsString(CRONIOBOINode.NODE_IP	, data);
+		String		nodeMachineType = getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE	, data);
+		boolean 	noWarning 		= getElementController().getElementAsBoolean(CRONIOBOINode.MACHINE_EXISTS, data);
 		
 		String nodeNameLabelText 	= TEXTS.node_name() + nodeName;
 		String nodeTypeLabelText 	= TEXTS.node_type() + nodeMachineType;
 		String nodeIpLabelText 		= TEXTS.node_ip() 	+ nodeIp;
+		String nodeWarningLabelText = "";
+		if (!noWarning) {
+			nodeWarningLabelText = TEXTS.no_machine_exist() + " " + nodeMachineType;
+		}
 		
-		CRONIOBusDesktopNodeInfo nodeInfo = new CRONIOBusDesktopNodeInfo(nodeNameLabelText, nodeTypeLabelText, nodeIpLabelText);
+		CRONIOBusDesktopNodeInfo nodeInfo = new CRONIOBusDesktopNodeInfo(nodeNameLabelText, nodeTypeLabelText, nodeIpLabelText, nodeWarningLabelText);
 		setContent(nodeInfo);
 	}
 }

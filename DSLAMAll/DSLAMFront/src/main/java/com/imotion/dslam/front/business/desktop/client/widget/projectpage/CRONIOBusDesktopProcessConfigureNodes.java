@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -113,7 +114,9 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		} else if (CRONIOBusDesktopProcessNodeFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				String srcWidgetId = evt.getSourceWidgetId();
+				boolean noWarning = evt.getelementAsBooleanDataValue();
 				AEMFTMetadataElementComposite nodeData = getElementController().getElementAsComposite(srcWidgetId, nodesData);
+				nodeData.addElement(CRONIOBOINodeDataConstants.MACHINE_EXISTS, noWarning);
 				AEMFTMetadataElementComposite cloneNodeData = (AEMFTMetadataElementComposite) nodeData.cloneObject();
 				cloneNodeData.setKey(srcWidgetId);
 				nodeInfoZone.setData(cloneNodeData);

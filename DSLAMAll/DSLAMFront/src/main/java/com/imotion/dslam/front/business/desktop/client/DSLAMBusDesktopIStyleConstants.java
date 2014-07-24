@@ -62,6 +62,11 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROJECTS_LAYOUT_ZONE_HEADER 								= PROJECTS_LAYOUT								+ "-zoneHeader";		//dslam_studio-projectsLayout-zoneHeader
 	String PROJECTS_LAYOUT_CONTENT_IN_BOX							= PROJECTS_LAYOUT								+ "-contentInBox ";		//dslam_studio-projectsLayout-contentInBox 
 	
+	// PROCESS --> NODES
+	String PROJECT_PROCESS_NODE_INFO_LABEL_ZONE						= APP_ID_PREFFIX + "projectProcess-nodeInfo-LabelZone";					//dslam_studio-projectProcess-nodeInfo-LabelZone
+	String PROJECT_PROCESS_NODE_INFO_LABEL							= APP_ID_PREFFIX + "projectProcess-nodeInfo-Label";						//dslam_studio-projectProcess-nodeInfo-Label
+	String PROJECT_PROCESS_NODE_INFO_CONTENT_LABEL					= APP_ID_PREFFIX + "projectProcess-nodeInfo-contentLabel";				//dslam_studio-projectProcess-nodeInfo-contentLabel
+	
 	//PREFERENCES LAYOUT
 	String PREFERENCES_LAYOUT 											= APP_ID_PREFFIX								+ "preferencesLayout";	//dslam_studio-preferencesLayout
 	String PREFERENCES_LAYOUT_MENU		 								= PREFERENCES_LAYOUT							+ "-menu";				//dslam_studio-preferencesLayout-menu
@@ -77,7 +82,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PREFERENCES_LAYOUT_BOTTOM_ZONE_RIGHT  						= PREFERENCES_LAYOUT_BOTTOM_ZONE				+ "-right";				//dslam_studio-preferencesLayout-bottomZone-right
 	String PREFERENCES_LAYOUT_ZONE_HEADER 								= PREFERENCES_LAYOUT							+ "-zoneHeader";		//dslam_studio-preferencesLayout-zoneHeader
 	String PREFERENCES_LAYOUT_CONTENT_IN_BOX							= PREFERENCES_LAYOUT							+ "-contentInBox ";		//dslam_studio-preferencesLayout-contentInBox 	
-	
+
 	//SCRITPS EDITOR
 	String SCRIPTS_EDITOR_CONTAINER						= APP_ID_PREFFIX		+ "scriptsEditorContainer";	//dslam_studio-scriptsEditorContainer
 	String SCRIPTS_EDITOR_AREA 							= APP_ID_PREFFIX		+ "scriptsEditorArea";		//dslam_studio-scriptsEditorArea

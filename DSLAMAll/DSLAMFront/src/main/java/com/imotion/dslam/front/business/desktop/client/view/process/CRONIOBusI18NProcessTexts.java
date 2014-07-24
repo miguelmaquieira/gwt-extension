@@ -16,7 +16,10 @@ public interface CRONIOBusI18NProcessTexts extends Constants {
 	@DefaultStringValue("Tipo: ")
 	String node_type();
 
-	@DefaultStringValue("Ip: ")
+	@DefaultStringValue("IP: ")
 	String node_ip();
+	
+	@DefaultStringValue("No existe la máquina")
+	String no_machine_exist();
 	
 }
