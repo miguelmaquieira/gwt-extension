@@ -93,7 +93,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
 
 		setLayoutData(layoutsData);
-		setTimeOut(5*60000);
+		setTimeOut(15*60000);
 		return getContextDataController().getContext();
 	}
 
