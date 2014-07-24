@@ -427,11 +427,32 @@
 	padding-right: 0px;
 }
 
+.dslam_studio-nodeList-container .glyphicon-exclamation-sign{
+    float: right;
+	color: #C61D1D;
+	padding-right: 5px;
+	margin-top: 2px;
+}
+
+.dslam_studio-projectProcess-nodeInfo-Label {
+	float: left;
+	padding-left: 0px;
+	font-weight: bold;
+}
+.dslam_studio-projectProcess-nodeInfo-contentLabel {
+	float: left;
+}
+
+.dslam_studio-projectProcess-nodeInfo-LabelZone {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
 .dslam_studio-processConfigureVariablesZone {
 	padding-left: 0px;
 	padding-right: 0px;
 	border-right: 1px solid #CCCCCC;
-	height: 100%
+	height: 100%;
 }
 
 .dslam_studio-processConfigurePropertiesZone {

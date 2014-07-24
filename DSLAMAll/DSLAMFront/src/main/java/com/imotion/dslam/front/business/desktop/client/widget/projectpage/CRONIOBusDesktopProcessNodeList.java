@@ -57,10 +57,8 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		String		machineType		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE, elementData);
 		AEMFTMetadataElementComposite machineTypesDataList = getElementController().getElementAsComposite(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, elementData);
 		boolean		machineExists	= getElementController().contains(machineType, machineTypesDataList);
-		elementData.addElement(CRONIOBOINode.MACHINE_EXISTS, machineExists);
-		//TODO: show error if machine doesn't exist
 		
-		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName);
+		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName, machineExists);
 		elementListContainer.add(element);
 		sort(null, false);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
@@ -162,8 +160,8 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	 * PROTECTED
 	 */
 	
-	protected CRONIOBusDesktopProcessNodeListElement createElement(String nodeId, String nodeName) {
-		return new CRONIOBusDesktopProcessNodeListElement(nodeId, nodeName, this);
+	protected CRONIOBusDesktopProcessNodeListElement createElement(String nodeId, String nodeName, boolean machineExist) {
+		return new CRONIOBusDesktopProcessNodeListElement(nodeId, nodeName, this, machineExist);
 	}
 		 
 	/**
