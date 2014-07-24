@@ -16,6 +16,10 @@ public interface DSLAMBOIFile extends Serializable, DSLAMBOIFileDataConstants {
 	String getContent();
 
 	void setContent(String content);
+	
+	String getCompiledContent();
+
+	void setCompiledContent(String compileContent);
 
 	int getContentType();
 

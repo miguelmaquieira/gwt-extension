@@ -196,13 +196,13 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		Date date = new Date();
 
 		//MainScript
-		DSLAMBOIFile mainScript = project.getMainScript();
-		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent(), date);
+		DSLAMBOIFile mainScript 			= project.getMainScript();
+		mainScript = addCompiledCode(mainScript, date);
 		project.setMainScript(mainScript);
 
 		//RollbackScript
 		DSLAMBOIFile rollbackScript = project.getRollBackScript();
-		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent(), date);
+		rollbackScript = addCompiledCode(rollbackScript, date);
 		project.setRollBackScript(rollbackScript);
 
 		//Process

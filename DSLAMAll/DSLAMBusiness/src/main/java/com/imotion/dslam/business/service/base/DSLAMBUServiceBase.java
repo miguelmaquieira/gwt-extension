@@ -1,12 +1,16 @@
 package com.imotion.dslam.business.service.base;
 
+import java.util.Date;
+
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
+import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersisteceJPAConnectionUtil;
@@ -16,7 +20,7 @@ import com.selene.arch.exe.bus.tagsearch.persistence.AEMFTTagIndexPersistence;
 public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DSLAMBUIWrapperPersistence> implements DSLAMBUIBusinessService {
 
 	private static final long serialVersionUID = -8777397730307974465L;
-	
+
 	private DSLAMBKIFilePersistenceService					filePersistence;
 	private DSLAMBKIProcessPersistenceService				processPersistence;
 	private DSLAMBKIProjectPersistenceService				projectPersistence;
@@ -35,6 +39,18 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		return new DSLAMBUWrapperPersistence();
 	}
 
+	/**
+	 *	PROTECTED 
+	 */
+
+	protected DSLAMBOIFile addCompiledCode(DSLAMBOIFile file, Date date) {
+		String content			= file.getContent();
+		String compiledContent	= CRONIOAntlrUtils.precompileCode(content, file.getContentType());
+		file.setCompiledContent(compiledContent);
+		file = getFilePersistence().updateFileContent(file.getFileId(), file.getContent(), file.getCompiledContent(), date);
+		return file;
+	}
+
 	//PERSISTENCE SERVICES
 	protected DSLAMBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
@@ -42,49 +58,49 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		}
 		return filePersistence;
 	}
-	
+
 	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
 			processPersistence =  getPersistence().getAppFactoryPersistence().newProcessPersistence(getSessionId());
 		}
 		return processPersistence;
 	}
-	
+
 	protected DSLAMBKIProjectPersistenceService getProjectPersistence() {
 		if (projectPersistence == null) {
 			projectPersistence =  getPersistence().getAppFactoryPersistence().newProjectPersistence(getSessionId());
 		}
 		return projectPersistence;
 	}
-	
+
 	protected CRONIOBKINodePersistenceService getNodePersistence() {
 		if (nodePersistence == null) {
 			nodePersistence =  getPersistence().getAppFactoryPersistence().newNodePersistence(getSessionId());
 		}
 		return nodePersistence;
 	}
-	
+
 	protected CRONIOBKIPreferencesPersistenceService getPreferencesPersistence() {
 		if (preferencesPersistence == null) {
 			preferencesPersistence =  getPersistence().getAppFactoryPersistence().newPreferencesPersistence(getSessionId());
 		}
 		return preferencesPersistence;
 	}
-	
+
 	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {
 		if (machinePropertiesPersistence == null) {
 			machinePropertiesPersistence =  getPersistence().getAppFactoryPersistence().newMachinePropertiesPersistence(getSessionId());
 		}
 		return machinePropertiesPersistence;
 	}
-	
+
 	protected CRONIOBKILoginPersistenceService getUserPersistence() {
 		if (userPersistence == null) {
 			userPersistence =  getPersistence().getAppFactoryPersistence().newUserPersistence(getSession().getSessionId());
 		}
 		return userPersistence;
 	}
-	
+
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
 	 ******************************************************************/
@@ -127,7 +143,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 			userPersistence = null;
 		}
 	}
-	
+
 	/********************************************************************
 	 * 								TRACES								*
 	 ********************************************************************/
@@ -300,11 +316,11 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
 	 * PRIVATE
 	 */
-	
+
 	private String getSessionId() {
 		return getSession().getSessionId();
 	}

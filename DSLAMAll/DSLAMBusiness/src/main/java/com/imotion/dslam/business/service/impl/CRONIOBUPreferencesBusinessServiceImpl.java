@@ -122,16 +122,16 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		List<CRONIOBOIMachineProperties> machineProList = preferences.getMachinePropertiesList();
 		
 		for (CRONIOBOIMachineProperties machine : machineProList) {
-
 			machine.setSaveTime(date);
 			machine.setPreferences(preferences);
 			
 			long machineId = machine.getMachinePropertiesId();
-			DSLAMBOIFile connectionScript 		= machine.getInitConnectionScript();
-			DSLAMBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
+			DSLAMBOIFile connectionScript 			= machine.getInitConnectionScript();
+			connectionScript = addCompiledCode(connectionScript, date);
 			
-			connectionScript	= getFilePersistence().updateFileContent(connectionScript.getFileId(), connectionScript.getContent(), date);
-			disconnectionScript	= getFilePersistence().updateFileContent(disconnectionScript.getFileId(), disconnectionScript.getContent(), date);
+			DSLAMBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
+			disconnectionScript = addCompiledCode(disconnectionScript, date);
+			
 			machine	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machine);
 		}
 		

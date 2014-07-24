@@ -31,10 +31,12 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInterpreterVisitorValue> implements CRONIOILangVisitor {
 
-	private final String RESPONSE_KEY		= "@RESPONSE";
-	private final String READ_KEY			= "@READ";
-	private final String MATCH_KEY			= "@MATCH";
-	private final String ROLLBACK_TAG_KEY	= "@ROLLBACK_TAG";
+	private final String LAST_RESPONSE_KEY		= "@RESPONSE";
+	private final String LAST_PROMPT_KEY		= "@PROMPT";
+	private final String LAST_CMD_KEY			= "@CMD";
+	private final String READ_KEY				= "@READ";
+	private final String MATCH_KEY				= "@MATCH";
+	private final String ROLLBACK_TAG_KEY		= "@TAG";
 	
 	private CRONIOIConnection				connection;
 	private Map<String, Object>				allVariables;
@@ -89,7 +91,9 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOInterpreterVisitorValue	commandValue 	= this.visit(ctx.stringExpr());
 		CRONIOIExecutionData			response 		= connection.executeCommand(commandValue.asString());
 		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
-		allVariables.put(RESPONSE_KEY, response);
+		allVariables.put(LAST_RESPONSE_KEY	, response.getResponse());
+		allVariables.put(LAST_PROMPT_KEY	, response.getPrompt());
+		allVariables.put(LAST_CMD_KEY		, response.getSourceCommand());
 		
 		if (rollbackVisitor != null && !AEMFTCommonUtilsBase.isEmptyString(rollbackConditionRegEx)) {
 			Pattern	pattern = Pattern.compile(rollbackConditionRegEx);
@@ -116,7 +120,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitMatch(@NotNull ImoLangParser.MatchContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue			= this.visit(ctx.stringExpr());
 		String							regExValueStr		= regExValue.asString();
-		CRONIOIExecutionData			lastExecutionData	= (CRONIOIExecutionData) allVariables.get(RESPONSE_KEY);
+		CRONIOIExecutionData			lastExecutionData	= (CRONIOIExecutionData) allVariables.get(LAST_RESPONSE_KEY);
 		String							lastResponse		= lastExecutionData.getResponse();
 		//TODO read about AWK
 		Pattern	pattern = Pattern.compile(regExValueStr);

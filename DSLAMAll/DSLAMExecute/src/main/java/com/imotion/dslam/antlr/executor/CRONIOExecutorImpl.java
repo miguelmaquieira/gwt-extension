@@ -30,8 +30,8 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	@Override
 	public void execute() {
-		String 				scriptCode			= project.getMainScript().getContent();
-		String				rollbackScriptCode	= project.getRollBackScript().getContent();
+		String 				scriptCode			= project.getMainScript().getCompiledContent();
+		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 	= CRONIOAntlrUtils.getVariablesFromProject(project);
 
 		DSLAMBOIProcess		process		= project.getProcess();

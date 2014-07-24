@@ -32,6 +32,21 @@ public class DSLAMBKFilePersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		}
 		return file;
 	}
+	
+	@Override
+	public DSLAMBOIFile updateFileContent(Long fileId, String content, String compiledContent,Date date) {
+		DSLAMBOFile file = getPersistenceModule().get(fileId);
+		if (file != null) {
+			file.setContent(content);
+			file.setCompiledContent(compiledContent);
+			if (date == null) {
+				date = new Date();
+			}
+			file.setSavedTime(date);
+			file = getPersistenceModule().update(file);
+		}
+		return file;
+	}
 
 	@Override
 	public DSLAMBOIFile updateFileName(Long fileId, String filename) {
