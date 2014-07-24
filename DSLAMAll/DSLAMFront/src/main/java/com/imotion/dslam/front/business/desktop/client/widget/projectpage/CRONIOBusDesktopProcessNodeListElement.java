@@ -18,14 +18,14 @@ public class CRONIOBusDesktopProcessNodeListElement extends AEGWTCompositePanel 
 	private AEGWTBootstrapTreeMenu menu;
 	private AEGWTBootstrapTreeMenuFinalItem menuItem;
 
-	public CRONIOBusDesktopProcessNodeListElement(final String nodeId, String nodeName, AEGWTCompositePanel parentWidget) {
+	public CRONIOBusDesktopProcessNodeListElement(final String nodeId, String nodeName, AEGWTCompositePanel parentWidget, boolean machineExist) {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		
 		menu = new AEGWTBootstrapTreeMenu();
 		root.add(menu);
 		
-		menuItem = new CRONIOBusDesktopProcessNodeFinalItem(nodeName, parentWidget);
+		menuItem = new CRONIOBusDesktopProcessNodeFinalItem(nodeName, parentWidget, machineExist);
 		menu.addWidget(menuItem);
 		
 		menu.addSeparator();

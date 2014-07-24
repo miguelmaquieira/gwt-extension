@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
@@ -70,10 +71,15 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		reset();
 		if (data != null) {
 			nodesData = data;
+			
+			AEMFTMetadataElementComposite machineList = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, data);
+			data.removeElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
+				AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
+				elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineList);
 				if (!DSLAMBOIProject.INFO.equals(elementData.getKey())) {
-					nodeList.addElement((AEMFTMetadataElementComposite) elementData);
+					nodeList.addElement(elementDataComposite);
 				}
 			}
 		} else {

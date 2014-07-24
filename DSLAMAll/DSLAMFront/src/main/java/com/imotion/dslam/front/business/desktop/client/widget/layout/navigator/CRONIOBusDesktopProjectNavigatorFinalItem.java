@@ -12,7 +12,7 @@ public class CRONIOBusDesktopProjectNavigatorFinalItem extends AEGWTBootstrapTre
 	private String mainSectionId;
 
 	public CRONIOBusDesktopProjectNavigatorFinalItem(String proyectId, String mainSectionId, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
-		super(proyectId, finalSectionId, text, parentWidget);
+		super(proyectId, finalSectionId, text, parentWidget, true);
 		this.mainSectionId = mainSectionId;
 	}
 	

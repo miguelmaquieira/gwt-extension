@@ -7,8 +7,8 @@ public class CRONIOBusDesktopProcessNodeFinalItem extends AEGWTBootstrapTreeMenu
 	
 	public static final String NAME  = "CRONIOBusDesktopProcessNodeFinalItem";
 
-	public CRONIOBusDesktopProcessNodeFinalItem(String nodeName, AEGWTICompositePanel parentWidget) {
-		super(null, nodeName, nodeName, parentWidget);
+	public CRONIOBusDesktopProcessNodeFinalItem(String nodeName, AEGWTICompositePanel parentWidget, boolean machineExist) {
+		super(null, nodeName, nodeName, parentWidget, machineExist);
 		
 	}
 	
@@ -21,7 +21,9 @@ public class CRONIOBusDesktopProcessNodeFinalItem extends AEGWTBootstrapTreeMenu
 	}
 	
 	/**
-	 * PROTECTED
+	 * AEGWTBootstrapTreeMenuFinalItem
 	 */
+	
+
 
 }

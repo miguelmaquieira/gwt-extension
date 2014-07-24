@@ -13,7 +13,7 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 	private String finalSectionPath;
 
 	public CRONIOBusDesktopPreferencesMenuFinalItem(String parentPath, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
-		super(null, finalSectionId, text, parentWidget);
+		super(null, finalSectionId, text, parentWidget, true);
 		this.finalSectionPath	= parentPath + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionId;
 		String[] mainSectionIdSplit = parentPath.split("\\.");
 		String mainSectionId 	= mainSectionIdSplit[0];
