@@ -107,6 +107,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Hay cambios sin guardar, ¿seguro que quieres salir?")
 	String exit_without_save();
 	
+	@DefaultStringValue("¿Seguro que quieres salir?")
+	String exit_confirmation();
+	
 	@DefaultStringValue("Ya existe un fichero con ese nombre")
 	String filename_exists();
 	
@@ -260,4 +263,6 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("La contraseña introducida es incorrecta, por favor vuelva a intentarlo")
 	String sign_in_incorrect_password();
 	
+	@DefaultStringValue("Su sesión ha expirado por inactividad")
+	String session_timeout();
 }

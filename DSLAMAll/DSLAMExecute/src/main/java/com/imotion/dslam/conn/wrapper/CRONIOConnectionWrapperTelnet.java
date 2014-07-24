@@ -27,7 +27,7 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 			CRONIOConnectionStreams connectionStreams = new CRONIOConnectionStreams(isIn, osOut);
 			setConnectionStreams(connectionStreams);
 
-			runConnectScript();
+			initializeConnection();
 		} catch (IOException e) {
 			throw new CRONIOConnectionUncheckedException(e);
 		}
@@ -43,7 +43,7 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 	 */
 	
 	@Override
-	protected void runConnectScript() throws IOException {
+	protected void initializeConnection() throws IOException {
 		String userPrompt 		= getMachineProperties().getUsernamePromptRegEx();
 		String passwordPrompt	= getMachineProperties().getPasswordPromptRegEx();
 		getConnectionStreams().readUntil(userPrompt);
@@ -51,7 +51,7 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 		getConnectionStreams().readUntil(passwordPrompt);
 		sendNoResponseCommand(getPassword());
 		getConnectionStreams().readUntil(getPromptRegEx());
-		super.runConnectScript();
+		super.initializeConnection();
 	}
 
 }

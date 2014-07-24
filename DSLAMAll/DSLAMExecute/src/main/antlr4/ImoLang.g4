@@ -15,11 +15,13 @@ statement   :	assignStatement
 			
 assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | function) ';'));
 
-function : 		execution
-			|	readUntil;
+function : (execution | readUntil | match | rollback | tagBlockCode) ';';
 		 
-execution : 'sendCommand(' stringExpr ');';
-readUntil : 'readUntil(' stringExpr ');';
+execution: 		'>' 	stringExpr ; 
+readUntil : 	'read'		stringExpr ;
+match:  		'match'		stringExpr ;
+rollback:		'rb'	stringExpr ;
+tagBlockCode:	'tag'		stringExpr ;
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
 ifBlock: statement+;
@@ -63,7 +65,7 @@ LOGICAL_COMPARATOR :   '=='
 					 | '<='
 					 | '>'
 					 | '>=';
-STRING_LITERAL:   '"' STRING_CHARACTERS? '"';
+STRING_LITERAL:   '"' STRING_CHARACTERS '"';
 
 //
 // Whitespace and comments

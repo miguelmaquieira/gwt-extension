@@ -118,23 +118,17 @@ border: 1px solid rgb(181, 213, 255);\
 background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==\") right repeat-y;\
 }\
 /* CUSTOM */\
-.ace-eclipse .ace_levelone {\
-color: red;\
+.ace-eclipse .ace_command {\
+color: #9b9849;\
 }\
-.ace-eclipse .ace_leveltwo {\
-color: #E0BA94;\
-}\
-.ace-eclipse .ace_levelthree {\
-color: green;\
-}\
-.ace-eclipse .ace_variable-local {\
-color: #8DE53B;\
+.ace-eclipse .ace_variable-script {\
+color: #0026ff;\
 }\
 .ace-eclipse .ace_variable-process {\
-color: #1FEFE5;\
+color: #29c639;\
 }\
-.ace-eclipse .ace_variable-extern {\
-color: #FFF249;\
+.ace-eclipse .ace_variable-execution {\
+color: #ff0000;\
 }\
 ";
 

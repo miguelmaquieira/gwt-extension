@@ -37,12 +37,14 @@ var DslamHighlightRules = function() {
     		"id|mode|name|protocol-filter|pppoe-relay-tag|circuit-id-pppoe|remote-id-pppoe|" +
     		"customer-id|shub|port|egress-port|cross-connect|engine|mac-addr-conc|unlock|database|save"
     );
+    
+    var commands = levelone + leveltwo + levelthree;
 
     var keywordMapper = this.createKeywordMapper({
-        "keyword.levelone"	: levelone,
-        "keyword.leveltwo"	: leveltwo,
-        "keyword.levelthree": levelthree
+        "keyword.command"	: commands,
     }, "default");
+    
+    var identifierExpression = "[a-zA-Z][a-zA-Z0-9_]*\\w*";
 
     this.$rules = { 
     
@@ -60,9 +62,10 @@ var DslamHighlightRules = function() {
            regex: '\\b(?:==|!=|<|<=|>|>=|\\+|-|\\*|/|.)\\b' },
          { token: 'comment.line.colons',
            regex: '//.*$' },
-         { token: 'variable-local', regex: '\\$[a-zA-Z][a-zA-Z0-9_]*\\w*'},
-         { token: 'variable-process', regex: '#[a-zA-Z][a-zA-Z0-9_]*\\w*'},
-         { token: 'variable-extern', regex: '%[a-zA-Z][a-zA-Z0-9_]*\\w*'},
+         { token: 'keyword'				, regex: '(>|read|match|tag|rb)'},
+         { token: 'variable-script'		, regex: '\\$' 	+ 	identifierExpression},
+         { token: 'variable-process'	, regex: '#' 	+ 	identifierExpression},
+         { token: 'variable-execution'	, regex: '@'	+ 	identifierExpression},
          { token: keywordMapper,
             regex: '[a-zA-Z_$][a-zA-Z0-9-]*\\b',
             caseInsensitive: true 

@@ -36,7 +36,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, AEGWTHasLogicalEventHandlers, CRONIOBusProjectBasePresenterConstants {
 
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
-	
+
 	private CRONIOBusDesktopProjectsLayout projectsLayout;
 
 	public CRONIOBusProjectBasePresenter(T view) {
@@ -109,43 +109,44 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				EVENT_TYPE.EXECUTE.equals(type);
 	}
 
-	
+
 	/**
 	 * AEGWTHasLogicalEventHandlers
 	 */
-	
+
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		LOGICAL_TYPE evtTyp = evt.getEventType();
 		String sourceWidgetId = evt.getSourceWidgetId();
 		String sourceWidget = evt.getSourceWidget();
 		if (LOGICAL_TYPE.SELECT_EVENT.equals(evtTyp)) { 
-			
+
 			if (AEGWTBootstrapDropdownGlyphIconButton.NAME.equals(sourceWidget)) {
-				
+
 				if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_OPEN_PREFERENCES == Integer.valueOf(sourceWidgetId)) {
 					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
 						AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
 						getFlowEventHandlerManager().fireEvent(flowEvent);
 					}
-					
+
 				} else if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_EXIT == Integer.valueOf(sourceWidgetId)) {
-					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
-						logout();						
-					}
+					exit();
 				}
 			}			
 		}
-				
+
 	}
+
+
+
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.SELECT_EVENT.equals(type);
 	}
-	
-	
-		
+
+
+
 	/**
 	 * PROTECTED
 	 */
@@ -297,7 +298,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
 			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-			
+
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
 
@@ -430,6 +431,18 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			}
 
 		});
+	}
+
+	private void exit() {	 
+		boolean confirmExit = false; 			
+		if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (confirmExit = Window.confirm(TEXTS.exit_without_save()))) {
+			if(!confirmExit) {
+				confirmExit = Window.confirm(TEXTS.exit_confirmation());
+			}
+		}		
+		if(confirmExit) {
+			logout();
+		}
 	}
 
 }

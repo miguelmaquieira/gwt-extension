@@ -31,11 +31,20 @@ snippet while\n\
 	while (${1}) {\n\
 		${2}//TODO:\n\
 	}\n\
-snippet sendCommand\n\
-	sendCommand(\"${1}\");\n\
+snippet >\n\
+	> ${1};\n\
 	\n\
-snippet readUntil\n\
-	readUntil(\"${1}\");";
+snippet read\n\
+	read \"${1}\";\n\
+	\n\
+snippet match\n\
+	match \"${1}\";\n\
+	\n\
+snippet rb\n\
+	rb \"${1}\";\n\
+	\n\
+snippet tag\n\
+	tag \"${1}\";";
 exports.scope = "dslam";
 
 });

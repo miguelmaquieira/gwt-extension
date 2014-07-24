@@ -4,11 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Event.NativePreviewEvent;
+import com.google.gwt.user.client.Event.NativePreviewHandler;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
@@ -42,7 +50,15 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.AEGWTIPresenter;
 import com.selene.arch.exe.gwt.mvp.context.ContextRetriever;
 
+
+
+
 public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
+	
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	
+	private HandlerRegistration nativeHandlerRegistration;
+	private Timer inactivityTimer ;
 
 	@Override
 	public void loadJS(Callback<Void, Exception> callback) {
@@ -77,6 +93,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
 
 		setLayoutData(layoutsData);
+		setTimeOut(15*60000);
 		return getContextDataController().getContext();
 	}
 
@@ -96,6 +113,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		return rc;
 	}
 
+
 	@Override
 	protected AEGWTIPresenter getPresenter(String[] tokenElements) {
 		AEGWTIPresenter presenter = null;
@@ -105,7 +123,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		}
 
 		String 	sid 		= getContextDataController().getElementAsString(AEGWTILoginAppControllerConstants.SESSION_LAST_SESSION_ID);
-	
+
 		if (AEGWTStringUtils.isEmptyString(sid)) {
 			presenter = new CRONIOBusDesktopLoginPresenter(new CRONIOBusDesktopLoginScreenView());
 		} else {
@@ -166,7 +184,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		CRONIOBusDesktopPreferencesLayout preferencesLayout = new CRONIOBusDesktopPreferencesLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesLayout);
 		preferencesLayout.postDisplay();
-		
+
 		CRONIOBusDesktopEmptyLayout emptyLayout = new CRONIOBusDesktopEmptyLayout();
 		deckPanelLayout.addLayout(CRONIOBusDesktopLayoutContainer.LAYOUT_EMPTY_ID, emptyLayout);
 		emptyLayout.postDisplay();
@@ -180,6 +198,36 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	private void setLayoutData(AEMFTMetadataElementComposite data) {
 		CRONIOBusDesktopLayoutContainer layoutContainer = (CRONIOBusDesktopLayoutContainer) super.container;
 		layoutContainer.setData(data);
+	}
+
+	
+	private void setTimeOut(final int timeoutInMillis) {
+		
+		inactivityTimer = new Timer() {
+
+			@Override
+			public void run() {
+				nativeHandlerRegistration.removeHandler();
+				inactivityTimer.cancel();
+				Window.alert(TEXTS.session_timeout());
+				logout();
+				
+
+			}
+		};
+		inactivityTimer.schedule(timeoutInMillis);
+
+		NativePreviewHandler handler;
+		handler = new NativePreviewHandler() {
+
+
+			@Override
+			public void onPreviewNativeEvent(NativePreviewEvent event) {
+				inactivityTimer.schedule(timeoutInMillis);
+			}
+		};
+		nativeHandlerRegistration = Event.addNativePreviewHandler(handler);
+
 	}
 
 }

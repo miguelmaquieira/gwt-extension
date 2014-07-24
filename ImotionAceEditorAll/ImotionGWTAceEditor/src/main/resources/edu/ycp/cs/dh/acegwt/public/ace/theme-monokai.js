@@ -131,23 +131,17 @@ color: #75715E\
 background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWPQ0FD0ZXBzd/wPAAjVAoxeSgNeAAAAAElFTkSuQmCC) right repeat-y\
 }\
 /* CUSTOM */\
-.ace-monokai .ace_levelone {\
-color: red;\
+.ace-monokai .ace_command {\
+color: #9b9849;\
 }\
-.ace-monokai .ace_leveltwo {\
-color: #E0BA94;\
-}\
-.ace-monokai .ace_levelthree {\
-color: green;\
-}\
-.ace-monokai .ace_variable-local {\
-color: #8DE53B;\
+.ace-monokai .ace_variable-script {\
+color: #0026ff;\
 }\
 .ace-monokai .ace_variable-process {\
-color: #1FEFE5;\
+color: #29c639;\
 }\
-.ace-monokai .ace_variable-extern {\
-color: #FFF249;\
+.ace-monokai .ace_variable-execution {\
+color: #ff0000;\
 }\
 ";
 
