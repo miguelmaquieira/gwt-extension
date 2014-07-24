@@ -66,18 +66,10 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 
 	@Override
 	public CRONIOIExecutionData executeCommand(String command) throws CRONIOConnectionUncheckedException {
-		return executeCommand(command, null);
-	}
-	
-	@Override
-	public CRONIOIExecutionData executeCommand(String command, String readUntilRegEx) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData = null;
 		try {
 			connectionWrapper.sendCommand(command);
-			if (AEMFTCommonUtilsBase.isEmptyString(readUntilRegEx)) {
-				readUntilRegEx = promptRegEx;
-			}
-			String fullResponse	= connectionWrapper.readResponseUntil(readUntilRegEx);
+			String fullResponse	= connectionWrapper.readResponseUntil(promptRegEx);
 			if (!AEMFTCommonUtilsBase.isEmptyString(fullResponse)) {
 				String prompt 	= getLastPrompt(fullResponse);
 				String response	= fullResponse.replace(prompt, "");
@@ -90,6 +82,21 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		return executionData;
+	}
+	
+	@Override
+	public CRONIOIExecutionData executeCommandWithoutRead(String command) throws CRONIOConnectionUncheckedException {
+		CRONIOIExecutionData executionData	= null;
+		try {
+			connectionWrapper.sendCommand(command);
+			executionData	= new CRONIOExecutionData(command, "", "");
+			if (getLogger() != null) {
+				getLogger().log(getConnectionId(), getNode(), executionData);
+			}
+		} catch (IOException e) {
+			throw new CRONIOConnectionUncheckedException("Command not sent: " + command);
 		}
 		return executionData;
 	}

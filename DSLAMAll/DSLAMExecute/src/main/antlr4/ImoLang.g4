@@ -15,13 +15,14 @@ statement   :	assignStatement
 			
 assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | function) ';'));
 
-function : (execution | readUntil | match | rollback | tagBlockCode) ';';
+function : (execution | executionWithoutResponse | readUntil | match | rollback | tagBlockCode) ';';
 		 
-execution: 		'>' 	stringExpr ; 
-readUntil : 	'read'		stringExpr ;
-match:  		'match'		stringExpr ;
-rollback:		'rb'	stringExpr ;
-tagBlockCode:	'tag'		stringExpr ;
+execution: 					'>' 	stringExpr ;
+executionWithoutResponse: 	'>>' 	stringExpr ; 
+readUntil : 				'read'	stringExpr ;
+match:  					'match'	stringExpr ;
+rollback:					'rb'	stringExpr ;
+tagBlockCode:				'tag'	stringExpr ;
 
 ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
 ifBlock: statement+;
@@ -49,15 +50,15 @@ value: 			INTEGER
 				| variable
 				| listItem;
 
-variable : 	VARIABLE_SCRIPT
-			| VARIABLE_PROCESS
-			|VARIABLE_EXTERNAL;
+variable : 		VARIABLE_SCRIPT
+			| 	VARIABLE_PROCESS
+			|	VARIABLE_EXECUTION;
 			
 //LEXER
 INTEGER: ('-')?(DIGIT)+;
-VARIABLE_SCRIPT : 	'$' VARIABLE_NAME;
-VARIABLE_PROCESS : 	'%' VARIABLE_NAME;
-VARIABLE_EXTERNAL : '#' VARIABLE_NAME;
+VARIABLE_SCRIPT : 	 '$' VARIABLE_NAME;
+VARIABLE_PROCESS : 	 '#' VARIABLE_NAME;
+VARIABLE_EXECUTION : '@' VARIABLE_NAME;
 VARIABLE_NAME : IDENT_CHAR ('_'| IDENT_CHAR | DIGIT)* ;
 LOGICAL_COMPARATOR :   '=='
 					 | '!='
@@ -85,4 +86,39 @@ LINE_COMMENT
 fragment	DIGIT 				: '0'..'9' ;
 fragment	IDENT_CHAR 			: ('a'..'z'|'A'..'Z');
 fragment	STRING_CHARACTERS	:   STRING_CHARACTER+;
-fragment	STRING_CHARACTER	:   ~["\\];
+fragment 	STRING_CHARACTER	:
+   	 		 ~["\\\r\n]
+ 			| '\\' EscapeSequence
+ 			;
+
+fragment EscapeSequence
+ : CharacterEscapeSequence
+ | '0' // no digit ahead! TODO
+ | HexEscapeSequence
+ | UnicodeEscapeSequence
+ ;
+    
+fragment CharacterEscapeSequence
+ : SingleEscapeCharacter
+ | NonEscapeCharacter
+ ;
+
+fragment HexEscapeSequence
+ : 'x' HexDigit HexDigit
+ ;
+
+fragment UnicodeEscapeSequence
+ : 'u' HexDigit HexDigit HexDigit HexDigit
+ ;
+ 
+ fragment SingleEscapeCharacter
+ : ['"\\bfnrtv]
+ ;
+
+fragment NonEscapeCharacter
+ : ~['"\\bfnrtv0-9xu\r\n]
+ ;
+ 
+ fragment HexDigit
+ : [0-9a-fA-F]
+ ;
