@@ -77,7 +77,7 @@ public class CRONIOBusDesktopPreferencesPresenter extends CRONIOBusPreferencesBa
 	
 	@Override
 	protected void openFinalSection(String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		
+		int i = 0;
 	}
 	
 	@Override
