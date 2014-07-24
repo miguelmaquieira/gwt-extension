@@ -52,14 +52,14 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	public void openConnection() throws IOException {
 		connectionWrapper.connect(node);
 		DSLAMBOIFile 	connectionScript		= machineProperties.getInitConnectionScript();
-		String 			connectionScriptContent	= connectionScript.getContent();
+		String 			connectionScriptContent	= connectionScript.getCompiledContent();
 		runScript(connectionScriptContent);
 	}
 	
 	@Override
 	public void closeConnection() {
 		DSLAMBOIFile 	closeConnectionScript			= machineProperties.getCloseConnectionScript();
-		String 			closeConnectionScriptContent	= closeConnectionScript.getContent();
+		String 			closeConnectionScriptContent	= closeConnectionScript.getCompiledContent();
 		runScript(closeConnectionScriptContent);
 		connectionWrapper.disconnect();
 	}

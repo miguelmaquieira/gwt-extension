@@ -4,7 +4,6 @@ import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
@@ -198,18 +197,12 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 
 		//MainScript
 		DSLAMBOIFile mainScript 			= project.getMainScript();
-		String mainScriptContent			= mainScript.getContent();
-		String mainScriptCompiledContent	= CRONIOAntlrUtils.precompileCode(mainScriptContent, mainScript.getContentType());
-		mainScript.setCompiledContent(mainScriptCompiledContent);
-		mainScript = getFilePersistence().updateFileContent(mainScript.getFileId(), mainScript.getContent(), mainScript.getCompiledContent(), date);
+		mainScript = addCompiledCode(mainScript, date);
 		project.setMainScript(mainScript);
 
 		//RollbackScript
-		DSLAMBOIFile rollbackScript 			= project.getRollBackScript();
-		String rollbackContent					= mainScript.getContent();
-		String rollbackScriptCompiledContent	= CRONIOAntlrUtils.precompileCode(rollbackContent, rollbackScript.getContentType());
-		rollbackScript.setCompiledContent(rollbackScriptCompiledContent);
-		rollbackScript = getFilePersistence().updateFileContent(rollbackScript.getFileId(), rollbackScript.getContent(), rollbackScript.getCompiledContent(), date);
+		DSLAMBOIFile rollbackScript = project.getRollBackScript();
+		rollbackScript = addCompiledCode(rollbackScript, date);
 		project.setRollBackScript(rollbackScript);
 
 		//Process

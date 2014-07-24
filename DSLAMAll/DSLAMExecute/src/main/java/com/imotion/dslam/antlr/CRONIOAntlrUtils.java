@@ -23,7 +23,7 @@ public class CRONIOAntlrUtils {
 	private static final String COMMAND_START 			= ">";
 	private static final String NEW_LINE		 			= "\n";
 	private static final String CONCAT_OPERATOR 			= " . ";
-	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]+";
+	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*";
 	private static final String INSTRUCTION_END			= ";";
 
 	//ERRORS
@@ -45,29 +45,36 @@ public class CRONIOAntlrUtils {
 						errors.put(END_COMMAND_ERROR_CODE, END_COMMAND_ERROR_MSG);
 					}
 					if (line.contains(" ")) {
-						List<String> lineItems = AEMFTCommonUtilsBase.splitByToken(line, " ");
+						List<String> lineItems = AEMFTCommonUtilsBase.splitByToken(line	, INSTRUCTION_END);
+						lineItems = AEMFTCommonUtilsBase.splitByToken(lineItems.get(0)	, " ");
 						for (int i = 0; i < lineItems.size(); i++) {
 							String lineItem = lineItems.get(i);
-							if (i > 0) {
-								compiledLineSB.append(CONCAT_OPERATOR);
-							}
-							if (lineItem.matches(VARIABLE_REGEX)) {
+							if (i == 0) {
 								compiledLineSB.append(lineItem);
 							} else {
-								if (lineItem.contains("\"")) {
+								lineItem = lineItem.trim();
+								if (i > 1) {
+									compiledLineSB.append(CONCAT_OPERATOR);
+								}
+								if (lineItem.matches(VARIABLE_REGEX)) {
 									compiledLineSB.append(lineItem);
 								} else {
-									boolean validCommand = checkValidCommand(lineItem, languageType);
-									if (validCommand) {
-										compiledLineSB.append("\"");
+									if (lineItem.contains("\"")) {
 										compiledLineSB.append(lineItem);
-										compiledLineSB.append("\"");
 									} else {
-										errors.put(COMMAND_NOT_FOUND_CODE, COMMAND_NOT_FOUND_ERROR_MSG + lineItem);
+										boolean validCommand = checkValidCommand(lineItem, languageType);
+										if (validCommand) {
+											compiledLineSB.append("\" ");
+											compiledLineSB.append(lineItem);
+											compiledLineSB.append(" \"");
+										} else {
+											errors.put(COMMAND_NOT_FOUND_CODE, COMMAND_NOT_FOUND_ERROR_MSG + lineItem);
+										}
 									}
 								}
 							}
 						}
+						compiledLineSB.append(INSTRUCTION_END);
 					} else {
 						compiledLineSB.append(line);
 					}

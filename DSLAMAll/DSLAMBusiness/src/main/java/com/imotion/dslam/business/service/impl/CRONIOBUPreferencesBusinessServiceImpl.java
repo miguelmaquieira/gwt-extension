@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
@@ -123,22 +122,15 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		List<CRONIOBOIMachineProperties> machineProList = preferences.getMachinePropertiesList();
 		
 		for (CRONIOBOIMachineProperties machine : machineProList) {
-
 			machine.setSaveTime(date);
 			machine.setPreferences(preferences);
 			
 			long machineId = machine.getMachinePropertiesId();
 			DSLAMBOIFile connectionScript 			= machine.getInitConnectionScript();
-			String connectionContent				= connectionScript.getContent();
-			String connectionCompiledContent	= CRONIOAntlrUtils.precompileCode(connectionContent, connectionScript.getContentType());
-			connectionScript.setCompiledContent(connectionCompiledContent);
-			connectionScript	= getFilePersistence().updateFileContent(connectionScript.getFileId(), connectionScript.getContent(), date);
+			connectionScript = addCompiledCode(connectionScript, date);
 			
 			DSLAMBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
-			String disconnectionContent			= disconnectionScript.getContent();
-			String disconnectionCompiledContent	= CRONIOAntlrUtils.precompileCode(disconnectionContent, disconnectionScript.getContentType());
-			disconnectionScript.setCompiledContent(disconnectionCompiledContent);
-			disconnectionScript	= getFilePersistence().updateFileContent(disconnectionScript.getFileId(), disconnectionScript.getContent(), disconnectionScript.getCompiledContent(), date);
+			disconnectionScript = addCompiledCode(disconnectionScript, date);
 			
 			machine	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machine);
 		}
