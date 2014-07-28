@@ -21,6 +21,7 @@ import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -139,15 +140,20 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 
 
 	@Override
-	public void getAllProjects() {
-		List<DSLAMBOIProject> 	projectList = getProjectPersistence().getAllProjects();
-
+	public void getAllProjectsByUser() {
+		//ContextIn
+		AEMFTMetadataElementComposite 	contextIn 	= getContext().getContextDataIN();
+		String 							userId 		= getElementDataController().getElementAsString(AEMFTILoginDataConstants.USER_ID, contextIn);
+		long 							userIdLong 	= Long.valueOf(userId);
+		CRONIOBOIUser 					user 		= getUserPersistence().getUserById(userIdLong);
+		List<DSLAMBOIProject> 			projectList = user.getProjectList();
+		
 		//trace-init
 		int resultsNumber = 0;
 		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			resultsNumber = projectList.size();
 		}
-		traceNumberOfResults(METHOD_GET_ALL_PROJECTS, DSLAMBOIProject.class.getSimpleName(), resultsNumber);
+		traceNumberOfResults(METHOD_GET_ALL_PROJECTS_BY_USER, DSLAMBOIProject.class.getSimpleName(), resultsNumber);
 		//end-trace
 
 		//ContextOut
@@ -184,10 +190,8 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	 */
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
-		//TODO: remove when login works
-//		String					userIdStr		= getSession().getUserId();
-//		long					userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
-		long					userId			= CRONIOBOIUser.TEST_USER_ID;
+		String					userIdStr		= getSession().getUserId();
+		long					userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
 		CRONIOBOIUser 			user 			= getUserPersistence().getUserById(userId);
 		CRONIOBOIPreferences 	userPreferences = user.getPreferences();
 		long					preferencesId	= userPreferences.getPreferencesId();

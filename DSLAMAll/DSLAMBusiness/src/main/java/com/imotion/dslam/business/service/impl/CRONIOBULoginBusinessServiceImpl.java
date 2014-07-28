@@ -190,15 +190,16 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 	 ********************************************************************/
 
 	private void loadUserData() {
-		AEMFTMetadataElementComposite 	contextIn			= getContext().getContextDataIN();
+		//ContextOut
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		AEMFTIMetadataElementController elementController	= getContext().getElementController();
 
-		String userId = elementController.getElementAsString(AEMFTILoginDataConstants.SESSION_USER_ID, contextIn);
+		String userId = elementController.getElementAsString(AEMFTILoginDataConstants.SESSION_USER_ID, contextOut);
 		
 		AEMFTMetadataElementComposite projectsDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		elementController.setElement(AEMFTILoginDataConstants.USER_ID, projectsDataContextIn, userId);
 		
-		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_ID);
+		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_BY_USER_ID);
 		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
 		
 		AEMFTMetadataElementComposite preferencesDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -208,7 +209,6 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite	preferencesData				= elementController.getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, preferencesDataContextOut);
 		
 		//ContextOut
-		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST	, projectsData);
 		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
@@ -30,14 +31,15 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		String userId			= getElementDataController().getElementAsString(AEMFTILoginDataConstants.USER_ID		, contextIn);
-		long preferencesId   	= CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID;
+		long userIdLong = Long.valueOf(userId);
+		CRONIOBOIUser user = getUserPersistence().getUserById(userIdLong);
+		CRONIOBOIPreferences preferences = user.getPreferences();
+		long preferencesId   	= preferences.getPreferencesId();
 		String preferencesIdStr = String.valueOf(preferencesId);
 
 		if (AEMFTCommonUtilsBase.isEmptyString(preferencesIdStr) ) {
 			traceNullParameter(METHOD_GET_PREFERENCES, CRONIOBOIPreferencesDataConstants.PREFERENCES_ID);
 		} else {
-
-			CRONIOBOIPreferences 	preferences = getPreferencesPersistence().getPreferences(preferencesId);
 
 			//ContextOut
 			AEMFTMetadataElementComposite preferencesData = DSLAMBUBomToMetadataConversor.fromPreferences(preferences);
@@ -53,8 +55,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		String 							connectionName	= getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME			, contextIn);
 		Date 							creationTime 	= new Date();
 
-		//Debemos conseguir el preferences Id del usuario, de momento puesto a pelo
-		long preferencesId = 1L;
+		long preferencesId   	= getElementDataController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID			, contextIn);
 
 		//InitScript
 		DSLAMBOIFile connectionScript = new DSLAMBOFile();
@@ -94,13 +95,17 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 	@Override
 	public void updateMachineConfig() {
 		//ContextIn
-		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();	
+		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
+		String userId			= getElementDataController().getElementAsString(AEMFTILoginDataConstants.USER_ID		, contextIn);
+		long userIdLong = Long.valueOf(userId);
+		CRONIOBOIUser user = getUserPersistence().getUserById(userIdLong);
+		CRONIOBOIPreferences preferences = user.getPreferences();
+		long preferencesId   	= preferences.getPreferencesId();
 
 		String machineName = getElementDataController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, contextIn);
-		CRONIOBOIMachineProperties currentMachineDB = getMachinePropertiesPersistence().getMachineProperties(CRONIOBOIPreferencesDataConstants.PREFERENCES_DEFAULT_ID, machineName);
+		CRONIOBOIMachineProperties currentMachineDB = getMachinePropertiesPersistence().getMachineProperties(preferencesId, machineName);
 		CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(contextIn);
 		long currentMachineDBId = currentMachineDB.getMachinePropertiesId();
-		//TODO preferencesId sustituir cuando usuarios
 		getMachinePropertiesPersistence().updateMachineProperties(currentMachineDBId, machineConfig);
 
 		//ContextOut
@@ -112,8 +117,6 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		//ContextIn
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		contextIn.setKey(PREFERENCES_DATA);
-		//AEMFTMetadataElementComposite machinePropertiesListData = getElementDataController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST			, contextIn);
-		//List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
 
 		Date 	date 		= new Date();
 		CRONIOBOIPreferences preferences = CRONIOBUMetadataToBomConversor.fromPreferencesData(contextIn);
