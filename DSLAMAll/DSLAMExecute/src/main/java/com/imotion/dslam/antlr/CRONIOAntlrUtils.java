@@ -28,6 +28,7 @@ public class CRONIOAntlrUtils {
 
 	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*";
 	private static final String INSTRUCTION_END			= ";";
+	private static final String CONCATENATION_OPERATOR	= ".";
 
 
 	private static final String VARIABLE_PREFFIX_PROCESS 	= "#";
@@ -60,7 +61,7 @@ public class CRONIOAntlrUtils {
 						for (int i = 0; i < lineItems.size(); i++) {
 							String lineItem = lineItems.get(i);
 							lineItem = lineItem.trim();
-							if (!lineItem.isEmpty()) {
+							if (!lineItem.isEmpty() && !CONCATENATION_OPERATOR.equals(lineItem)) {
 								if (itemToProcess == 0) {
 									compiledLineSB.append(lineItem);
 									compiledLineSB.append(" ");

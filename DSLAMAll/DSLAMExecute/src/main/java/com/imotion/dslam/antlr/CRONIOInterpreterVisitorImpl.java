@@ -1,7 +1,6 @@
 package com.imotion.dslam.antlr;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.MatchResult;
@@ -48,10 +47,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 
 	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables, String rollbackConditionRegEx, CRONIOInterpreterVisitorImpl rollbackVisitor, ProgramContext rollbackTree) {
 		this.connection				= connection;
-		this.allVariables			= new HashMap<>();
-		if (variables != null) {
-			allVariables.putAll(variables);
-		}
+		this.allVariables			= variables;
 		this.rollbackConditionRegEx	= rollbackConditionRegEx;
 		this.rollbackVisitor		= rollbackVisitor;
 		this.rollbackTree			= rollbackTree;
@@ -256,14 +252,14 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitCondition(@NotNull ImoLangParser.ConditionContext ctx) {
 		boolean result = false;
 
-		String	logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
+		String							logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
 		CRONIOInterpreterVisitorValue	leftSideValue		= this.visit(ctx.value(0));
 		CRONIOInterpreterVisitorValue	rightSideValue		= this.visit(ctx.value(1));
-		int		leftSideInt			= leftSideValue.asInteger();
-		int		rightSideInt		= rightSideValue.asInteger();
+		int								leftSideInt			= leftSideValue.isInteger() ? leftSideValue.asInteger() : -1;
+		int								rightSideInt		= rightSideValue.isInteger() ? rightSideValue.asInteger() : -1;
 
 		if (logicalComparator.equals("==")) {
-			result = leftSideInt == rightSideInt;
+			result = leftSideValue.equals(rightSideValue);
 		} else if (logicalComparator.equals("<=")) {
 			result = leftSideInt <= rightSideInt;
 		} else if (logicalComparator.equals(">=")) {
