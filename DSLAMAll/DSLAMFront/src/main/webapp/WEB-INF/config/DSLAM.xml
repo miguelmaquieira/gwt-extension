@@ -153,8 +153,8 @@
 				<SubService Name="UPDATE_PROJECTS">
 					<Descriptor>updateProjects</Descriptor>
 				</SubService>
-				<SubService Name="GET_ALL_PROJECTS">
-					<Descriptor>getAllProjects</Descriptor>
+				<SubService Name="GET_ALL_PROJECTS_BY_USER">
+					<Descriptor>getAllProjectsByUser</Descriptor>
 				</SubService>
 				<SubService Name="REMOVE_PROJECT">
 					<Descriptor>removeProject</Descriptor>

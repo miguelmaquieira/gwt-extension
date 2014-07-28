@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
@@ -187,8 +188,12 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 	private void createConnection(String connectionName) {
 		AEMFTMetadataElementComposite newConnectionData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		newConnectionData.addElement(CRONIOBOIMachineProperties.MACHINE_NAME			, connectionName);
-
+		
+		String preferecesIdkey = CRONIOBOIPreferencesDataConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferencesDataConstants.PREFERENCES_ID;
+		long preferencesId = getContextDataController().getElementAsLong(preferecesIdkey);
+		
+		newConnectionData.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connectionName);
+		newConnectionData.addElement(CRONIOBOIPreferences.PREFERENCES_ID			, preferencesId);
 
 		getClientServerConnection().executeComm(newConnectionData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_ADD_CONNECTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
