@@ -108,6 +108,17 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	}
 	
 	@Override
+	public CRONIOInterpreterVisitorValue visitExecutionWithoutResponse(@NotNull ImoLangParser.ExecutionWithoutResponseContext ctx) {
+		CRONIOInterpreterVisitorValue	commandValue 	= this.visit(ctx.stringExpr());
+		CRONIOIExecutionData			response 		= connection.executeCommandWithoutRead(commandValue.asString());
+		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
+		allVariables.put(LAST_RESPONSE_KEY	, response.getResponse());
+		allVariables.put(LAST_PROMPT_KEY	, response.getPrompt());
+		allVariables.put(LAST_CMD_KEY		, response.getSourceCommand());
+		return responseValue;
+	}
+	
+	@Override
 	public CRONIOInterpreterVisitorValue visitReadUntil(@NotNull ImoLangParser.ReadUntilContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue		= this.visit(ctx.stringExpr());
 		String							read	 		= connection.readUntil(regExValue.asString());

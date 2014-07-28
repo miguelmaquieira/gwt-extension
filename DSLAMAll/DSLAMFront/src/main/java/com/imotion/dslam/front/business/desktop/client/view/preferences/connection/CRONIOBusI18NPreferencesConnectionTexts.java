@@ -4,22 +4,22 @@ import com.google.gwt.i18n.client.Constants;
 
 public interface CRONIOBusI18NPreferencesConnectionTexts extends Constants {
 
-	@DefaultStringValue("Prompt de usuario")
+	@DefaultStringValue("Prompt de usuario (Expresión regular)")
 	String userPromptLabel();
 
-	@DefaultStringValue("Prompt de contraseña")
+	@DefaultStringValue("Prompt de contraseña (Expresión regular)")
 	String passwordPromptLabel();
 	
-	@DefaultStringValue("Usuario ")
+	@DefaultStringValue("Por ej.: Login:\\\\s")
 	String userPromptPlaceHolder();
 
-	@DefaultStringValue("Contraseña ")
+	@DefaultStringValue("Por ej.: Password: \\\\s")
 	String passwordPromptPlaceHolder();
 	
-	@DefaultStringValue("Condición para rollback")
+	@DefaultStringValue("Condición para rollback (Expresión regular)")
 	String rollbackConditionPromptLabel();
 	
-	@DefaultStringValue("Condición para rollback (Expresión regular)")
+	@DefaultStringValue("Expresión regular")
 	String rollbackConditionPromptPlaceHolder();
 	
 }

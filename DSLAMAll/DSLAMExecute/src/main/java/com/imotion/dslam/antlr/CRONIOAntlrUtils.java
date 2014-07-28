@@ -64,7 +64,7 @@ public class CRONIOAntlrUtils {
 									} else {
 										boolean validCommand = checkValidCommand(lineItem, languageType);
 										if (validCommand) {
-											compiledLineSB.append("\" ");
+											compiledLineSB.append("\"");
 											compiledLineSB.append(lineItem);
 											compiledLineSB.append(" \"");
 										} else {

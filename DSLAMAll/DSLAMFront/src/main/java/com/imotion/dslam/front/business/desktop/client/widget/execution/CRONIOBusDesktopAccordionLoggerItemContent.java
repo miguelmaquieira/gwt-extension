@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.execution;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -34,7 +35,7 @@ public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePa
 		FlowPanel responseZone = new FlowPanel();
 		contentZone.add(responseZone);
 		responseZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_RESPONSE_ZONE);
-		Label responseContent = new Label(response);
+		HTMLPanel responseContent = new HTMLPanel(response);
 		responseZone.add(responseContent);
 		
 		Label promptLabel = new Label(TEXTS.prompt_label());
