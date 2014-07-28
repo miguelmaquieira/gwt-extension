@@ -20,7 +20,7 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 	
 	@SuppressWarnings("resource")
 	@Override
-	public void connect(CRONIOBOINode node) {
+	public void connect(CRONIOBOINode node) throws CRONIOConnectionUncheckedException {
 		super.connect(node);
 		Properties	sessionProperties 	= new Properties();
 		sessionProperties.put("StrictHostKeyChecking", "no");
@@ -47,7 +47,7 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 	}
 
 	@Override
-	public void disconnect() {
+	public void disconnect() throws CRONIOConnectionUncheckedException {
 		super.disconnect();
 		channel.disconnect();
 		session.disconnect();
