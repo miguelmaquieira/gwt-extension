@@ -224,6 +224,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 					if (!AEMFTCommonUtilsBase.isEmptyList(statements)) {
 						visitStamentContextList(statements);
 					}
+					rbTagProcessed = true;
 				}
 			}
 			
