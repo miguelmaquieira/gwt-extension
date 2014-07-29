@@ -11,6 +11,7 @@ statement   :	assignStatement
 			|	whileStatement
 			|	forStatement
 			|	forEachStatement
+			|	rbCase
 			| 	function;
 			
 assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | function) ';'));
@@ -24,12 +25,15 @@ match:  					'match'	stringExpr ;
 rollback:					'rb'	stringExpr ;
 tagBlockCode:				'tag'	stringExpr ;
 
-ifStatement: 	'if' condition '{' ifBlock '}' ( 'else' (ifStatement | ('{' elseBlock '}') ) )?;
-ifBlock: statement+;
-elseBlock: statement+;
-whileStatement: 'while' condition '{' statement+ '}';
-forStatement: 	'for' VARIABLE_SCRIPT 'in' '(' value '..' value ')' '{' statement+ '}';
+ifStatement: 		'if' condition '{' ifBlock '}' ( 'else' (ifStatement | ('{' elseBlock '}') ) )?;
+ifBlock: 			statement+;
+elseBlock: 			statement+;
+whileStatement: 	'while' condition '{' statement+ '}';
+forStatement: 		'for' VARIABLE_SCRIPT 'in' '(' value '..' value ')' '{' statement+ '}';
 forEachStatement: 	'foreach' '(' VARIABLE_SCRIPT ':' variable ')' '{' statement+ '}';
+rbCase:				rbCaseItem+ rbCaseDefault?;
+rbCaseItem:			'rbCase' stringExpr '{' statement+ '}';
+rbCaseDefault:		'rbDefault' '{' statement+ '}';
 
 expression :	'(' expression ')'									#parExp
 				| left=expression op=('*'|'/') right=expression		#aritOp

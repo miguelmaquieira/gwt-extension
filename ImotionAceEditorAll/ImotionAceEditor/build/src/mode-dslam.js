@@ -53,7 +53,7 @@ var DslamHighlightRules = function() {
            regex: '\\bin\\b',
          },
          { token: 'keyword.control.conditional',
-           regex: '\\b(?:if|else)\\b',
+           regex: '\\b(?:if|else|rbCase|rbDefault)\\b',
          },
          { token: 'keyword.control.repeat',
            regex: '\\b(for|while|foreach)\\b',
@@ -62,13 +62,12 @@ var DslamHighlightRules = function() {
            regex: '\\b(?:==|!=|<|<=|>|>=|\\+|-|\\*|/|.)\\b' },
          { token: 'comment.line.colons',
            regex: '//.*$' },
-         { token: 'keyword'				, regex: '(>|read|match|tag|rb)'},
+         { token: 'keyword'				, regex: '(>|>>|read|match|tag|rb)'},
          { token: 'variable-script'		, regex: '\\$' 	+ 	identifierExpression},
          { token: 'variable-process'	, regex: '#' 	+ 	identifierExpression},
          { token: 'variable-execution'	, regex: '@'	+ 	identifierExpression},
          { token: keywordMapper,
             regex: '[a-zA-Z_$][a-zA-Z0-9-]*\\b',
-            caseInsensitive: true 
          }
  	]
     };

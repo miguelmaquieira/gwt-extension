@@ -20,6 +20,8 @@ import com.imotion.antlr.ImoLangParser.FunctionContext;
 import com.imotion.antlr.ImoLangParser.ListExpContext;
 import com.imotion.antlr.ImoLangParser.ListItemContext;
 import com.imotion.antlr.ImoLangParser.ProgramContext;
+import com.imotion.antlr.ImoLangParser.RbCaseDefaultContext;
+import com.imotion.antlr.ImoLangParser.RbCaseItemContext;
 import com.imotion.antlr.ImoLangParser.StatementContext;
 import com.imotion.antlr.ImoLangParser.StringExprContext;
 import com.imotion.antlr.ImoLangParser.ValueContext;
@@ -203,6 +205,36 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 			this.visit(ctx.elseBlock());
 		}
 
+		return CRONIOInterpreterVisitorValue.VOID;
+	}
+	
+	@Override
+	public CRONIOInterpreterVisitorValue visitRbCase(@NotNull ImoLangParser.RbCaseContext ctx) {
+		List<RbCaseItemContext> caseList	= ctx.rbCaseItem();
+		RbCaseDefaultContext 	caseDefault = ctx.rbCaseDefault();
+		
+		if (!AEMFTCommonUtilsBase.isEmptyList(caseList)) {
+			boolean rbTagProcessed = false;
+			for (RbCaseItemContext caseItem : caseList) {
+				CRONIOInterpreterVisitorValue tagValue = this.visit(caseItem.stringExpr());
+				String tagValueStr 	= tagValue.asString();
+				String lastTag		= (String) allVariables.get(ROLLBACK_TAG_KEY);
+				if (lastTag.equals(tagValueStr)) {
+					List<StatementContext> statements = caseItem.statement();
+					if (!AEMFTCommonUtilsBase.isEmptyList(statements)) {
+						visitStamentContextList(statements);
+					}
+				}
+			}
+			
+			if (!rbTagProcessed && caseDefault != null) {
+				List<StatementContext> statements = caseDefault.statement();
+				if (!AEMFTCommonUtilsBase.isEmptyList(statements)) {
+					visitStamentContextList(statements);
+				}
+			}
+		}
+		
 		return CRONIOInterpreterVisitorValue.VOID;
 	}
 
