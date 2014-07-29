@@ -354,7 +354,9 @@ public class DSLAMBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIUserPreferences.SAVED_TIME				, userPreferences.getSavedTime());
 			data.addElement(CRONIOBOIUserPreferences.DOWNTIME				, userPreferences.getDownTime());	
 		}
-		return data;
+		AEMFTMetadataElementComposite userPreferencesData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		userPreferencesData.addElement(CRONIOBOIPreferences.USER_CONFIG,data);
+		return userPreferencesData;
 	}
 
 	/**

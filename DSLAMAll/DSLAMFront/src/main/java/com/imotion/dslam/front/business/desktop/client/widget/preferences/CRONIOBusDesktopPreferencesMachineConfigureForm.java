@@ -84,7 +84,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				
 		////RIGHTZONE
 		//timeout
-		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.timeout_placeholder(), TEXTS.timeout_placeholder());
+		timeOutTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.timeout_ms_placeholder(), TEXTS.timeout_ms_placeholder());
 		textBoxesRightZone.add(timeOutTextBox);
 		
 		//password

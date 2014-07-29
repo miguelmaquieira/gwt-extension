@@ -83,6 +83,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Timeout")
 	String timeout_placeholder();
 	
+	@DefaultStringValue("Timeout (ms)")
+	String timeout_ms_placeholder();
+	
 	@DefaultStringValue("Nodos")
 	String nodes();
 	
@@ -220,6 +223,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Prompt")
 	String prompt_placeholder();
+	
+	@DefaultStringValue("Prompt (Expresión regular)")
+	String prompt_regex_placeholder();
 	
 	@DefaultStringValue("Protocolo")
 	String protocol_placeholder();

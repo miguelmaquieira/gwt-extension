@@ -8,6 +8,7 @@ import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
@@ -20,6 +21,7 @@ import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase implements CRONIOBUIPreferencesBusinessService, CRONIOBUIPreferencesBusinessServiceConstants, CRONIOBUIPreferencesBusinessServiceTrace {
@@ -118,7 +120,17 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		AEMFTMetadataElementComposite contextIn = getContext().getContextDataIN();
 		contextIn.setKey(PREFERENCES_DATA);
 
-		Date 	date 		= new Date();
+		String	preferencesIdKey 	= CRONIOBOIPreferences.PREFERENCES_ID;
+		AEMFTMetadataElementSingle	preferencesIdData 		= (AEMFTMetadataElementSingle) getElementDataController().getElement(preferencesIdKey, contextIn);
+		long preferencesId = preferencesIdData.getValueAsLong();
+		Date 	date 				= new Date();
+		
+		CRONIOBOIPreferences 		preferencesDB 		= getPreferencesPersistence().getPreferences(preferencesId);
+		CRONIOBOIUserPreferences 	userPreferencesDB 	= preferencesDB.getUserPreferences();
+		Long 						userPreferencesId 	= userPreferencesDB.getUserPreferencesId();
+		
+		contextIn.addElement(CRONIOBOIUserPreferences.USER_PREFERENCES_ID, userPreferencesId);
+		
 		CRONIOBOIPreferences preferences = CRONIOBUMetadataToBomConversor.fromPreferencesData(contextIn);
 		preferences.setSavedTime(date);
 
@@ -138,6 +150,10 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 			machine	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machine);
 		}
 		
+		preferences.getUserPreferences().setSavedTime(date);
+		CRONIOBOIUserPreferences userPreferences = preferences.getUserPreferences();
+		
+		getUserPreferencesPersistence().updateUserPreferences(userPreferencesId, userPreferences);
 		getPreferencesPersistence().updatePreferences(preferences.getPreferencesId(), preferences);
 		//init-trace
 		traceItemModifiedInPersistence(METHOD_UPDATE_PREFERENCES, CRONIOBOIPreferences.class.getSimpleName(), String.valueOf(preferences.getPreferencesId()));

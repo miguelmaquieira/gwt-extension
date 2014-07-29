@@ -129,11 +129,13 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 	public void setPreferencesSaved() {
 		menuMachines.setModified(false);
 		setResetModifiedMachinesSection(menuMachines);
+		menuUser.setModified(false);
+		setResetModifiedUserSection(menuUser);
 		
 	}
 	
 	public void setResetModifiedMachinesSection (AEGWTBootstrapTreeMenuItem section) {
-		Iterator<Widget> menuMachineList = menuMachines.iterator();
+		Iterator<Widget> menuMachineList = section.iterator();
 		while (menuMachineList.hasNext()) {
 			AEGWTBootstrapTreeMenuItem machineSection = (AEGWTBootstrapTreeMenuItem) menuMachineList.next();
 			machineSection.setModified(false);
@@ -142,6 +144,14 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 				AEGWTBootstrapTreeMenuFinalItem machineFinalSection = (AEGWTBootstrapTreeMenuFinalItem) machineFinalSections.next();
 				machineFinalSection.setModified(false);
 			}
+		}
+	}
+	
+	public void setResetModifiedUserSection (AEGWTBootstrapTreeMenuItem section) {
+		Iterator<Widget> userSectionList = section.iterator();
+		while (userSectionList.hasNext()) {
+			AEGWTBootstrapTreeMenuFinalItem userSection = (AEGWTBootstrapTreeMenuFinalItem) userSectionList.next();
+			userSection.setModified(false);
 		}
 	}
 

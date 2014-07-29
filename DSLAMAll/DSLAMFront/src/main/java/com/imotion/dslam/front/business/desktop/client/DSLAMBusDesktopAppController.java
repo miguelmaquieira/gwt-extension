@@ -12,10 +12,13 @@ import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
@@ -94,8 +97,20 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
 
+		StringBuilder sbKey = new StringBuilder();
+		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIPreferences.USER_CONFIG);
+		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBOIUserPreferences.DOWNTIME);
+		
+		String 	downTimeKey = sbKey.toString();
+		int		downTime 	= getContextDataController().getElementAsInt(downTimeKey);
+		
 		setLayoutData(layoutsData);
-		setTimeOut(15*60000);
+		setTimeOut(downTime*60000);
 		return getContextDataController().getContext();
 	}
 

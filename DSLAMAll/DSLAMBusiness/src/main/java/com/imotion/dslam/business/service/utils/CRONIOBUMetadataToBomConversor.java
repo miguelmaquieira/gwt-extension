@@ -9,6 +9,7 @@ import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -16,6 +17,7 @@ import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.imotion.dslam.bom.data.CRONIOBOPreferences;
+import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
@@ -294,14 +296,20 @@ public class CRONIOBUMetadataToBomConversor {
 		if (preferencesData != null) {
 			preferences = new CRONIOBOPreferences();
 
-			Long	preferencesId	= getElementController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID, preferencesData);
+			Long	preferencesId		= getElementController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID, preferencesData);
+			Long	userPreferencesId	= getElementController().getElementAsLong(CRONIOBOIUserPreferences.USER_PREFERENCES_ID, preferencesData);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIPreferences.CREATION_TIME	, preferencesData);
 			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIPreferences.SAVED_TIME	, preferencesData);
-			AEMFTMetadataElementComposite machinepropertiesListData = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, preferencesData);
+			AEMFTMetadataElementComposite machinePropertiesListData = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST	, preferencesData);
+			AEMFTMetadataElementComposite userPreferencesData 		= getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES			, preferencesData);
+			userPreferencesData.addElement(CRONIOBOIUserPreferences.USER_PREFERENCES_ID, userPreferencesId);
 			
-			List<CRONIOBOIMachineProperties> machinePropertiesList = fromMachinePropertiesList(machinepropertiesListData);
+			List<CRONIOBOIMachineProperties> 	machinePropertiesList 	= fromMachinePropertiesList(machinePropertiesListData);
+			CRONIOBOIUserPreferences         	userPreferences			= fromUserPreferences(userPreferencesData);
+			
 			preferences.setPreferencesId(preferencesId);
 			preferences.setMachinePropertiesList(machinePropertiesList);
+			preferences.setUserPreferences(userPreferences);
 			preferences.setCreationTime(creationTime);
 			preferences.setSavedTime(savedTime);
 
@@ -309,6 +317,25 @@ public class CRONIOBUMetadataToBomConversor {
 		return preferences;
 	}
 
+	public static CRONIOBOIUserPreferences fromUserPreferences(AEMFTMetadataElementComposite userPreferencesData) {
+		CRONIOBOIUserPreferences userPreferences = null;
+		if (userPreferencesData != null) {
+			userPreferences = new CRONIOBOUserPreferences();
+			
+			AEMFTMetadataElementComposite userConfigPreferencesData 		= getElementController().getElementAsComposite(CRONIOBOIPreferences.USER_CONFIG		, userPreferencesData);
+			
+			Long	userPreferencesId	= getElementController().getElementAsLong(CRONIOBOIUserPreferences.USER_PREFERENCES_ID		, userPreferencesData);
+			//Date	creationTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIPreferences.CREATION_TIME	, userConfigPreferencesData);
+			Date	savedTime			= new Date();
+			int		downTime			= getElementController().getElementAsInt(CRONIOBOIUserPreferences.DOWNTIME, userConfigPreferencesData);
+
+			userPreferences.setUserPreferencesId(userPreferencesId);
+			userPreferences.setDownTime(downTime);
+			userPreferences.setSavedTime(savedTime);
+		}
+		return userPreferences;
+	}
+	
 	/**
 	 * PRIVATE
 	 */

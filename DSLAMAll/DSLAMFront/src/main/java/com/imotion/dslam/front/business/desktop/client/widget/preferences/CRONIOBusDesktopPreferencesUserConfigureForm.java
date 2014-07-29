@@ -75,7 +75,8 @@ public class CRONIOBusDesktopPreferencesUserConfigureForm extends AEGWTBootstrap
 	@Override
 	public void setData(AEMFTMetadataElementComposite userPreferencesData) {
 		if (userPreferencesData != null) {
-			int 	downTime 	= getElementController().getElementAsInt(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES_DOWNTIME				, userPreferencesData);
+			
+			int 	downTime 	= getElementController().getElementAsInt(CRONIOBOIUserPreferences.DOWNTIME				, userPreferencesData);
 
 			if (downTime > 0) {
 				downTimeTextBox.setText(String.valueOf(downTime));

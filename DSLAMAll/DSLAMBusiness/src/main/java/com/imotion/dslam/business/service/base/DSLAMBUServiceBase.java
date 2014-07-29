@@ -10,6 +10,7 @@ import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKI
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
@@ -28,6 +29,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	private CRONIOBKIPreferencesPersistenceService			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService	machinePropertiesPersistence;
 	private CRONIOBKILoginPersistenceService 				userPersistence;
+	private CRONIOBKIUserPreferencesPersistenceService 		userPreferencesPersistence;
 
 	@Override
 	public String getName() {
@@ -100,6 +102,13 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		}
 		return userPersistence;
 	}
+	
+	protected CRONIOBKIUserPreferencesPersistenceService getUserPreferencesPersistence() {
+		if (userPreferencesPersistence == null) {
+			userPreferencesPersistence =  getPersistence().getAppFactoryPersistence().newUserPreferencesPersistence(getSession().getSessionId());
+		}
+		return userPreferencesPersistence;
+	}
 
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
@@ -141,6 +150,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (userPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPersistence);
 			userPersistence = null;
+		}
+		if (userPreferencesPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPreferencesPersistence);
+			userPreferencesPersistence = null;
 		}
 	}
 

@@ -370,10 +370,10 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 
 	private void firePreferencesSaved(String preferencesId) {
-		CRONIOBusDesktopPreferencesEvent connectionSavedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
-		connectionSavedEvt.setEventType(EVENT_TYPE.PREFERENCES_SAVED);
-		connectionSavedEvt.setPreferencesId(preferencesId);
-		getLogicalEventHandlerManager().fireEvent(connectionSavedEvt);
+		CRONIOBusDesktopPreferencesEvent preferencesSavedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
+		preferencesSavedEvt.setEventType(EVENT_TYPE.PREFERENCES_SAVED);
+		preferencesSavedEvt.setPreferencesId(preferencesId);
+		getLogicalEventHandlerManager().fireEvent(preferencesSavedEvt);
 	}
 
 	private CRONIOBusDesktopPreferencesLayout getPreferencesLayout() {
