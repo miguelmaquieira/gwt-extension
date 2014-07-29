@@ -67,18 +67,16 @@ public class CRONIOInterpreterVisitorValue {
 
 	@Override
 	public boolean equals(Object o) {
-
-		if(value == o) {
-			return true;
+		CRONIOInterpreterVisitorValue object = (CRONIOInterpreterVisitorValue) o;
+		boolean equals = o != null;
+		if (isInteger()) {
+			equals = equals && (asInteger() == object.asInteger());
+		} else if (isString()) {
+			equals = equals && asString().equals(object.asString());
+		} else {
+			equals = false;
 		}
-
-		if(value == null || o == null || o.getClass() != value.getClass()) {
-			return false;
-		}
-
-		CRONIOInterpreterVisitorValue that = (CRONIOInterpreterVisitorValue)o;
-
-		return this.value.equals(that.value);
+		return equals;
 	}
 
 	@Override

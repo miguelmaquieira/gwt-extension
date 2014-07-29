@@ -34,8 +34,13 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 	}
 
 	@Override
-	public void disconnect() {
+	public void disconnect() throws CRONIOConnectionUncheckedException {
 		super.disconnect();
+		try {
+			telnet.disconnect();
+		} catch (IOException e) {
+			throw new CRONIOConnectionUncheckedException(e);
+		}
 	}
 	
 	/**

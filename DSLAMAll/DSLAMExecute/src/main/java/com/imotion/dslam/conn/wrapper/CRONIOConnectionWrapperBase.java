@@ -30,13 +30,13 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	}
 	
 	@Override
-	public void disconnect() {
+	public void disconnect() throws CRONIOConnectionUncheckedException {
 		finalizeConnection();
 		connectionStreams.closeStreams();
 	}
 	
 	@Override
-	public String sendCommand(String command) throws IOException {
+	public String sendCommand(String command) throws CRONIOConnectionUncheckedException {
 		return connectionStreams.sendCommand(command);
 	}
 	
@@ -46,7 +46,7 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 	}
 	
 	@Override
-	public String readResponseUntil(String pattern) throws IOException {
+	public String readResponseUntil(String pattern) throws CRONIOConnectionUncheckedException {
 		return connectionStreams.readUntil(pattern);
 	}
 	

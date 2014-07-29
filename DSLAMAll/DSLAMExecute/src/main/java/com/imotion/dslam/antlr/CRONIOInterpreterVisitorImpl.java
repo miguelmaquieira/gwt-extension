@@ -1,7 +1,6 @@
 package com.imotion.dslam.antlr;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.MatchResult;
@@ -37,39 +36,36 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	private final String READ_KEY				= "@READ";
 	private final String MATCH_KEY				= "@MATCH";
 	private final String ROLLBACK_TAG_KEY		= "@TAG";
-	
+
 	private CRONIOIConnection				connection;
 	private Map<String, Object>				allVariables;
 	private CRONIOInterpreterVisitorImpl 	rollbackVisitor;
 	private ProgramContext					rollbackTree;
 	private String							rollbackConditionRegEx;
-	
+
 	private boolean stopExecution;
 
 	public CRONIOInterpreterVisitorImpl(CRONIOIConnection connection, Map<String, Object> variables, String rollbackConditionRegEx, CRONIOInterpreterVisitorImpl rollbackVisitor, ProgramContext rollbackTree) {
 		this.connection				= connection;
-		this.allVariables			= new HashMap<>();
-		if (variables != null) {
-			allVariables.putAll(variables);
-		}
+		this.allVariables			= variables;
 		this.rollbackConditionRegEx	= rollbackConditionRegEx;
 		this.rollbackVisitor		= rollbackVisitor;
 		this.rollbackTree			= rollbackTree;
 	}
-	
+
 	/**
 	 * CRONIOILangVisitor
 	 */
-	
+
 	@Override
 	public void pauseExecution() throws InterruptedException {
-		
+
 	}
 
 	@Override
 	public void nextInstruction() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -81,7 +77,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public void continueExecution() {
 		stopExecution = false;
 	}
-	
+
 	/**
 	 * Visitor methods
 	 */
@@ -94,7 +90,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		allVariables.put(LAST_RESPONSE_KEY	, response.getResponse());
 		allVariables.put(LAST_PROMPT_KEY	, response.getPrompt());
 		allVariables.put(LAST_CMD_KEY		, response.getSourceCommand());
-		
+
 		if (rollbackVisitor != null && !AEMFTCommonUtilsBase.isEmptyString(rollbackConditionRegEx)) {
 			Pattern	pattern = Pattern.compile(rollbackConditionRegEx);
 			Matcher	matcher = pattern.matcher(response.getResponse());
@@ -103,54 +99,50 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 				rollbackVisitor.visit(rollbackTree);
 			}
 		}
-		
+
 		return responseValue;
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitExecutionWithoutResponse(@NotNull ImoLangParser.ExecutionWithoutResponseContext ctx) {
 		CRONIOInterpreterVisitorValue	commandValue 	= this.visit(ctx.stringExpr());
 		CRONIOIExecutionData			response 		= connection.executeCommandWithoutRead(commandValue.asString());
+		allVariables.put(LAST_CMD_KEY, commandValue);
 		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
-		allVariables.put(LAST_RESPONSE_KEY	, response.getResponse());
-		allVariables.put(LAST_PROMPT_KEY	, response.getPrompt());
-		allVariables.put(LAST_CMD_KEY		, response.getSourceCommand());
 		return responseValue;
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitReadUntil(@NotNull ImoLangParser.ReadUntilContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue		= this.visit(ctx.stringExpr());
-		String							read	 		= connection.readUntil(regExValue.asString());
+		String							regExValueStr	= regExValue.asString().trim();
+		String							read	 		= connection.readUntil(regExValueStr);
 		allVariables.put(READ_KEY, read);
 		CRONIOInterpreterVisitorValue	readValue 		= new CRONIOInterpreterVisitorValue(read);
 		return readValue;
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitMatch(@NotNull ImoLangParser.MatchContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue			= this.visit(ctx.stringExpr());
 		String							regExValueStr		= regExValue.asString();
-		CRONIOIExecutionData			lastExecutionData	= (CRONIOIExecutionData) allVariables.get(LAST_RESPONSE_KEY);
-		String							lastResponse		= lastExecutionData.getResponse();
+		String							lastResponse		= (String) allVariables.get(LAST_RESPONSE_KEY);
 		//TODO read about AWK
 		Pattern	pattern = Pattern.compile(regExValueStr);
 		Matcher	matcher = pattern.matcher(lastResponse);
 		List<String> matchGroups = new ArrayList<>();
-		if (matcher.matches()) {
-			if (matcher.find()) {
-				MatchResult  matchResult = matcher.toMatchResult();
-				for (int i = 0; i < matchResult.groupCount(); i++) {
-					String matchGroupResult = matchResult.group(i);
-					matchGroups.add(matchGroupResult);
-				}
+		if (matcher.matches() || matcher.find()) {
+			MatchResult  matchResult = matcher.toMatchResult();
+			for (int i = 0; i <= matchResult.groupCount(); i++) {
+				String matchGroupResult = matchResult.group(i);
+				matchGroups.add(matchGroupResult);
 			}
-			allVariables.put(MATCH_KEY, matchGroups);
 		}
+		allVariables.put(MATCH_KEY, matchGroups);
 		CRONIOInterpreterVisitorValue	matchGroupsData = new CRONIOInterpreterVisitorValue(matchGroups);
 		return matchGroupsData;
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitRollback(@NotNull ImoLangParser.RollbackContext ctx) {
 		stopExecution();
@@ -161,7 +153,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		}
 		return CRONIOInterpreterVisitorValue.VOID;
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitTagBlockCode(@NotNull ImoLangParser.TagBlockCodeContext ctx) {
 		CRONIOInterpreterVisitorValue tagValue = this.visit(ctx.stringExpr());
@@ -205,6 +197,8 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 
 		if (conditionResult) {
 			this.visit(ctx.ifBlock());
+		} else if (ctx.ifStatement() != null) {
+			this.visit(ctx.ifStatement());
 		} else if (ctx.elseBlock() != null) {
 			this.visit(ctx.elseBlock());
 		}
@@ -228,7 +222,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		allVariables.remove(iterVarName);
 		return CRONIOInterpreterVisitorValue.VOID;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public CRONIOInterpreterVisitorValue visitForEachStatement(@NotNull ImoLangParser.ForEachStatementContext ctx) {
@@ -258,14 +252,14 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitCondition(@NotNull ImoLangParser.ConditionContext ctx) {
 		boolean result = false;
 
-		String	logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
+		String							logicalComparator 	= ctx.LOGICAL_COMPARATOR().getText();
 		CRONIOInterpreterVisitorValue	leftSideValue		= this.visit(ctx.value(0));
 		CRONIOInterpreterVisitorValue	rightSideValue		= this.visit(ctx.value(1));
-		int		leftSideInt			= leftSideValue.asInteger();
-		int		rightSideInt		= rightSideValue.asInteger();
+		int								leftSideInt			= leftSideValue.isInteger() ? leftSideValue.asInteger() : -1;
+		int								rightSideInt		= rightSideValue.isInteger() ? rightSideValue.asInteger() : -1;
 
 		if (logicalComparator.equals("==")) {
-			result = leftSideInt == rightSideInt;
+			result = leftSideValue.equals(rightSideValue);
 		} else if (logicalComparator.equals("<=")) {
 			result = leftSideInt <= rightSideInt;
 		} else if (logicalComparator.equals(">=")) {
@@ -280,7 +274,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOInterpreterVisitorValue resultValue = new CRONIOInterpreterVisitorValue(result);
 		return resultValue;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public CRONIOInterpreterVisitorValue visitValue(@NotNull ImoLangParser.ValueContext ctx) {
@@ -288,7 +282,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		TerminalNode 			stringNode				= ctx.STRING_LITERAL();
 		VariableContext 		variableContext			= ctx.variable();
 		ListItemContext 		listItemContext 		= ctx.listItem();
-		
+
 		Object object = null;
 		if (integerNode != null) {
 			String integerStr = integerNode.getText();
@@ -306,7 +300,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 			CRONIOInterpreterVisitorValue	indexValue			= this.visit(indexValueContext);
 			object	= list.get(indexValue.asInteger());
 		}
-		
+
 		if (object instanceof String) {
 			String objectAsString = (String) object;
 			objectAsString = objectAsString.replace("\"", "");
@@ -316,7 +310,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOInterpreterVisitorValue value = new CRONIOInterpreterVisitorValue(object);
 		return value; 
 	}
-	
+
 	@Override 
 	public CRONIOInterpreterVisitorValue visitStringExpr(@NotNull ImoLangParser.StringExprContext ctx) {
 		List<ValueContext> stringValueContextList = ctx.value();
@@ -362,7 +356,7 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitAtomExpr(@NotNull ImoLangParser.AtomExprContext ctx) { 
 		return this.visit(ctx.value());
 	}
-	
+
 	@Override
 	public CRONIOInterpreterVisitorValue visitListExp(@NotNull ImoLangParser.ListExpContext ctx) {
 		List<ValueContext> valueContextList = ctx.value();
@@ -374,15 +368,15 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 		CRONIOInterpreterVisitorValue listValue = new CRONIOInterpreterVisitorValue(list);
 		return listValue; 
 	}
-	
+
 	/**
 	 * PROTECTED
 	 */
-	
+
 	protected boolean shouldVisitNextChild(@NotNull RuleNode node, CRONIOInterpreterVisitorValue currentResult) {
 		return !stopExecution;
 	}
-	
+
 	/**
 	 * PRIVATE
 	 */

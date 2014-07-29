@@ -27,15 +27,16 @@ public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePa
 		FlowPanel requestZone = new FlowPanel();
 		contentZone.add(requestZone);
 		requestZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_REQUEST_ZONE);
-		Label requestContent = new Label(request);
+		HTMLPanel requestContent = new HTMLPanel(request);
 		requestZone.add(requestContent);
 		
+		String responseAsHtml = response.replace("\n", "<br/>");
 		Label responseLabel = new Label(TEXTS.response_label());
 		contentZone.add(responseLabel);
 		FlowPanel responseZone = new FlowPanel();
 		contentZone.add(responseZone);
 		responseZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_RESPONSE_ZONE);
-		HTMLPanel responseContent = new HTMLPanel(response);
+		HTMLPanel responseContent = new HTMLPanel(responseAsHtml);
 		responseZone.add(responseContent);
 		
 		Label promptLabel = new Label(TEXTS.prompt_label());
@@ -43,7 +44,7 @@ public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePa
 		FlowPanel promptZone = new FlowPanel();
 		contentZone.add(promptZone);
 		promptZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_PROMPT_ZONE);
-		Label promptContent = new Label(prompt);
+		HTMLPanel promptContent = new HTMLPanel(prompt);
 		promptZone.add(promptContent);
 	}
 

@@ -24,7 +24,7 @@ match:  					'match'	stringExpr ;
 rollback:					'rb'	stringExpr ;
 tagBlockCode:				'tag'	stringExpr ;
 
-ifStatement: 	'if' condition '{' ifBlock '}' ('else' '{' elseBlock '}')?;
+ifStatement: 	'if' condition '{' ifBlock '}' ( 'else' (ifStatement | ('{' elseBlock '}') ) )?;
 ifBlock: statement+;
 elseBlock: statement+;
 whileStatement: 'while' condition '{' statement+ '}';

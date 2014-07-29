@@ -80,7 +80,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 			} else {
 				throw new CRONIOConnectionUncheckedException("No response received from command: " + command);
 			}
-		} catch (IOException e) {
+		} catch (CRONIOConnectionUncheckedException e) {
 			e.printStackTrace();
 		}
 		return executionData;
@@ -90,12 +90,12 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	public CRONIOIExecutionData executeCommandWithoutRead(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData	= null;
 		try {
-			connectionWrapper.sendCommand(command);
+			connectionWrapper.sendNoResponseCommand(command);
 			executionData	= new CRONIOExecutionData(command, "", "");
 			if (getLogger() != null) {
 				getLogger().log(getConnectionId(), getNode(), executionData);
 			}
-		} catch (IOException e) {
+		} catch (CRONIOConnectionUncheckedException e) {
 			throw new CRONIOConnectionUncheckedException("Command not sent: " + command);
 		}
 		return executionData;
@@ -103,12 +103,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 
 	@Override
 	public String readUntil(String regExp) throws CRONIOConnectionUncheckedException {
-		String read = null;
-		try {
-			read = connectionWrapper.readResponseUntil(regExp);
-		} catch (IOException e) {
-			throw new CRONIOConnectionUncheckedException(e);
-		}
+		String read = connectionWrapper.readResponseUntil(regExp);
 		return read;
 	}
 
