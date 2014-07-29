@@ -26,7 +26,7 @@ public class CRONIOAntlrUtils {
 	private static final String ROLLBACK_START 			= "rb";
 	private static final String TAG_START 				= "tag";
 
-	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*";
+	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*(\\[\\d\\])?";
 	private static final String INSTRUCTION_END			= ";";
 	private static final String CONCATENATION_OPERATOR	= ".";
 
