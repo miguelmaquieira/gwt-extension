@@ -17,6 +17,16 @@ snippet else if\n\
 		${2}//TODO:\n\
 	}\n\
 \n\
+snippet rbCase\n\
+	rbCase \"${1}\" {\n\
+		${2}//TODO:\n\
+	}\n\
+\n\
+snippet rbDefault\n\
+	rbDefault {\n\
+		${1}//TODO:\n\
+	}\n\
+\n\
 snippet for\n\
 	for ${1} in (${2} .. ${3}) {\n\
 		${4}//TODO:\n\
@@ -44,7 +54,8 @@ snippet rb\n\
 	rb \"${1}\";\n\
 	\n\
 snippet tag\n\
-	tag \"${1}\";";
+	tag \"${1}\";\n\
+";
 exports.scope = "dslam";
 
 });
