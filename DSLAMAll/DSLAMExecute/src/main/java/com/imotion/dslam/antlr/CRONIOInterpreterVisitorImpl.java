@@ -199,6 +199,8 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 
 		if (conditionResult) {
 			this.visit(ctx.ifBlock());
+		} else if (ctx.ifStatement() != null) {
+			this.visit(ctx.ifStatement());
 		} else if (ctx.elseBlock() != null) {
 			this.visit(ctx.elseBlock());
 		}
