@@ -90,7 +90,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	public CRONIOIExecutionData executeCommandWithoutRead(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData	= null;
 		try {
-			connectionWrapper.sendCommand(command);
+			connectionWrapper.sendNoResponseCommand(command);
 			executionData	= new CRONIOExecutionData(command, "", "");
 			if (getLogger() != null) {
 				getLogger().log(getConnectionId(), getNode(), executionData);
