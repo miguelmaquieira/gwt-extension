@@ -7,6 +7,7 @@ import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKI
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTPersistenceFactoryPool;
 import com.selene.arch.exe.core.AEMFTICoreProxyService;
 import com.selene.arch.exe.core.envi.config.AEMFTIConfigurationService;
@@ -93,6 +94,18 @@ public class DSLAMBKPersistenceFactoryPool extends AEMFTPersistenceFactoryPool i
 		}
 		return (CRONIOBKILoginPersistenceService) newPersistenceService(impl, sessionId);
 	}
+	
+	@Override
+	public CRONIOBKIUserPreferencesPersistenceService newUserPreferencesPersistence(String sessionId) {
+		String impl = DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_USER_PREFERENCES_PERSISTENCE_DEFAULT_IMPL;
+		if (getConfigSrv() != null) {
+			impl = getConfigSrv().getProperty(
+					DSLAMBKIPersistenceConstants.CFG_CRONIO_PERSISTENCE_USER_PREFERENCES_PERSISTENCE_IMPL,
+					DSLAMBKIPersistenceConstants.CTE_CRONIO_PERSISTENCE_USER_PREFERENCES_PERSISTENCE_DEFAULT_IMPL);
+		}
+		return (CRONIOBKIUserPreferencesPersistenceService) newPersistenceService(impl, sessionId);
+	}
+
 
 /***********************************************************************
 	 * 					      PRIVATE FUNCTION                             *

@@ -81,7 +81,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		machineProperties.setCreationTime(creationTime);
 		machineProperties.setSaveTime(creationTime);
 		machineProperties = getMachinePropertiesPersistence().addMachineProperties(machineProperties, preferencesId);
-
+		
 		//init-trace
 		traceNewItemPersistent(METHOD_ADD_CONNECTION, CRONIOBOIMachineProperties.class.getSimpleName(), machineProperties.getMachineName());
 		//end-trace
@@ -149,6 +149,11 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		contextOut.addElement(PREFERENCES_DATA, preferencesDataElement);
 	}
 
+	@Override
+	public void updateUserPreferences() {
+
+	}
+	
 	@Override
 	public void removePreferences() {
 

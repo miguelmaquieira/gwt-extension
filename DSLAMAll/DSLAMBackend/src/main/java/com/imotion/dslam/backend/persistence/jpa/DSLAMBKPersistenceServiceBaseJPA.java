@@ -8,6 +8,7 @@ import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenc
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
+import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.core.AEMFTICoreProxyService;
 
@@ -22,6 +23,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	private CRONIOBKINodePersistenceService						nodePersistence;
 	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
+	private CRONIOBKIUserPreferencesPersistenceService			userPreferencesPersistence;
 	
 	@Override
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
@@ -76,6 +78,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) machinePropertiesPersistence);
 			machinePropertiesPersistence = null;
 		}
+		if (userPreferencesPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPreferencesPersistence);
+			userPreferencesPersistence = null;
+		}
 	}
 	
 	/**************************************************************
@@ -120,5 +126,12 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			preferencesPersistence = (CRONIOBKIPreferencesPersistenceService) getFactoryPersistence().newPreferencesPersistence(getSessionId());
 		}
 		return preferencesPersistence;
+	}
+	
+	protected CRONIOBKIUserPreferencesPersistenceService getUserPreferencesPersistence() {
+		if (userPreferencesPersistence == null) {
+			userPreferencesPersistence = (CRONIOBKIUserPreferencesPersistenceService) getFactoryPersistence().newUserPreferencesPersistence(getSessionId());
+		}
+		return userPreferencesPersistence;
 	}
 }

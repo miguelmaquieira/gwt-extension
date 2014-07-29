@@ -7,6 +7,7 @@ import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKI
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceFactory;
 
 public interface DSLAMBKIPersistenceFactory extends AEMFTIPersistenceFactory {
@@ -24,5 +25,7 @@ public interface DSLAMBKIPersistenceFactory extends AEMFTIPersistenceFactory {
 	public CRONIOBKIMachinePropertiesPersistenceService newMachinePropertiesPersistence(String sessionId);
 
 	public CRONIOBKILoginPersistenceService newUserPersistence(String sessionId);
+	
+	public	CRONIOBKIUserPreferencesPersistenceService newUserPreferencesPersistence(String sessionId);
 	
 }

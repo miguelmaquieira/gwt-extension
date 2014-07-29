@@ -22,6 +22,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAM
 import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.preferences.user.CRONIOBusDesktopPreferencesUserPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerPresenter;
@@ -30,6 +31,7 @@ import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktop
 import com.imotion.dslam.front.business.desktop.client.view.login.CRONIOBusDesktopLoginScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.CRONIOBusDesktopPreferencesScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.connection.CRONIOBusDesktopPreferencesConnectionScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.preferences.user.CRONIOBusDesktopPreferencesUserScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.process.CRONIOBusDesktopProcessScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.projectpage.DSLAMBusDesktopProjectPageScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.scriptsmanager.DSLAMBusDesktopScriptsManagerScreenView;
@@ -140,6 +142,8 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 				presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES.equals(token1) ) {
 				presenter = new CRONIOBusDesktopPreferencesConnectionPresenter(new CRONIOBusDesktopPreferencesConnectionScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_USER.equals(token1) ) {
+				presenter = new CRONIOBusDesktopPreferencesUserPresenter(new CRONIOBusDesktopPreferencesUserScreenView());
 			} 
 		}
 		return presenter;

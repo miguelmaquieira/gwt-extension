@@ -13,5 +13,7 @@ public interface CRONIOBUIPreferencesBusinessService extends DSLAMBUIBusinessSer
 	void removePreferences();
 	
 	void updateMachineConfig();
+	
+	void updateUserPreferences();
 
 }

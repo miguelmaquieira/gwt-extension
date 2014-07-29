@@ -8,6 +8,7 @@ import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKM
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKPreferencesPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKProcessPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.project.DSLAMBKProjectPersistenceServiceJPA;
+import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKUserPreferencesPersistenceServiceJPA;
 import com.selene.arch.base.MFTIConstant;
 
 public interface DSLAMBKIPersistenceConstants {
@@ -52,5 +53,9 @@ public interface DSLAMBKIPersistenceConstants {
 	//User
 	public static final String CFG_CRONIO_PERSISTENCE_USER_PERSISTENCE_IMPL				= "BACKEND.USER_PERSISTENCE_IMPL";
 	public static final String CTE_CRONIO_PERSISTENCE_USER_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKLoginPersistenceJPA.class.getName();
+
+	//User preferences
+	public static final String CFG_CRONIO_PERSISTENCE_USER_PREFERENCES_PERSISTENCE_IMPL				= "BACKEND.USER_PREFERENCES_PERSISTENCE_IMPL";
+	public static final String CTE_CRONIO_PERSISTENCE_USER_PREFERENCES_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKUserPreferencesPersistenceServiceJPA.class.getName();
 
 }

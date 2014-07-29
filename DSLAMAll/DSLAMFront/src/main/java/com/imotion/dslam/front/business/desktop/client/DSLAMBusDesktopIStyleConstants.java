@@ -119,6 +119,12 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PREFERENCES_MACHINE_DECKPANEL 				= APP_ID_PREFFIX			+ "preferencesMachineDeckPanel"; 			//dslam_studio-preferencesMachineDeckPanel
 	String PREFERENCES_MACHINE_VARIABLES_LIST			= APP_ID_PREFFIX			+ "preferencesMachineVariablesList";		//dslam_studio-preferencesMachineVariablesList
 	String PREFERENCES_MACHINE_CONFIGURE_FORM			= APP_ID_PREFFIX			+ "preferencesMachineConfigureForm";		//dslam_studio-preferencesMachineConfigureForm
+	String PREFERENCES_CONNECTION_VIEW 					= APP_ID_PREFFIX			+ "preferencesConnectionView";	//dslam_studio-preferencesConnectionView
+	
+	//PREFERENCES --> USER VIEW
+	String PREFERENCES_USER_CONFIGURE_FORM				= APP_ID_PREFFIX			+ "preferencesUserConfigureForm";		//dslam_studio-preferencesUserConfigureForm
+	String PREFERENCES_USER_VIEW 						= APP_ID_PREFFIX			+ "preferencesUserView";		//dslam_studio-preferencesUserView	
+	
 	
 	//EXECUTION
 	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
@@ -132,9 +138,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 			= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
 
 	//PREFERENCES
-	
-	String PREFERENCES_CONNECTION_VIEW 					= APP_ID_PREFFIX			+ "preferencesConnectionView";						//dslam_studio-preferencesConnectionView
-	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";						//dslam_studio-preferencesView
+	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";			//dslam_studio-preferencesView
 
 	
 	//LOGIN	

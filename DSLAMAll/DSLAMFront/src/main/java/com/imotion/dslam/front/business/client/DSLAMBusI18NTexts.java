@@ -265,4 +265,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Su sesión ha expirado por inactividad")
 	String session_timeout();
+	
+	@DefaultStringValue("Usuario")
+	String user_label();
 }

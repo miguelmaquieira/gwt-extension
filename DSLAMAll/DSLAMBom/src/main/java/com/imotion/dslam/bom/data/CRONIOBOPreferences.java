@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +20,7 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 
 @Entity(name="Preferences")
 public class CRONIOBOPreferences implements CRONIOBOIPreferences {
@@ -25,6 +29,7 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 	
 	private Long 								preferencesId;
 	private List<CRONIOBOIMachineProperties> 	machinePropertiesList;
+	private CRONIOBOIUserPreferences			userPreferences;
 	private Date 								savedTime;
 	private Date 								creationTime;
 	private Long								version;
@@ -68,6 +73,19 @@ public class CRONIOBOPreferences implements CRONIOBOIPreferences {
 	@Override
 	public void removeMachineProperties(CRONIOBOIMachineProperties machineProperties) {
 		machinePropertiesList.remove(machineProperties);
+	}
+	
+	@OneToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOUserPreferences.class)
+	@JoinColumn(name=CRONIOBOUserPreferences.USER_PREFERENCES_ID)
+	@Override
+	public CRONIOBOIUserPreferences getUserPreferences() {
+		return userPreferences;
+	}
+	
+	@Override
+	public void setUserPreferences(CRONIOBOIUserPreferences userPreferences) {
+		this.userPreferences = userPreferences;
+		//this.userPreferences.setPreferences(this);
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

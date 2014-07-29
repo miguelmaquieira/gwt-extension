@@ -15,6 +15,7 @@ import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPre
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.preferences.user.CRONIOBusDesktopPreferencesUserPresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences.DSLAMBusDesktopPreferencesMenu;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopPreferencesToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -143,19 +144,30 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 				sectionId = sectionPathSplit[sectionPathSplit.length - 1];
 			}
 			
-			if ((CRONIOBusDesktopPreferencesConnectionPresenter.NAME.equals(srcWidget) || CRONIOBusDesktopPreferencesPresenter.NAME.equals(srcWidget)) && EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)) {
+			if ((CRONIOBusDesktopPreferencesConnectionPresenter.NAME.equals(srcWidget) || CRONIOBusDesktopPreferencesUserPresenter.NAME.equals(srcWidget) || CRONIOBusDesktopPreferencesPresenter.NAME.equals(srcWidget)) && EVENT_TYPE.SHOW_PREFERENCES_INFO.equals(type)) {
 				AEMFTMetadataElementComposite sectionData = evt.getElementAsComposite(CRONIOBusPreferencesBasePresenterConstants.SECTION_DATA);
 				
-				String		machineName			= sectionPathSplit[1];
+				String      mainSection			= sectionPathSplit[0];
 				boolean		sectionModified		= getElementController().getElementAsBoolean(CRONIOBOIPreferences.INFO_IS_MODIFIED, sectionData);
 				
 				toolbar.setSavePreferencesEnabled(sectionModified);
-				sectionHeader.setMachineName(machineName);
-				sectionHeader.setSectionNameFromId(sectionId);
-				sectionHeader.setModified(sectionModified);
-				sectionHeader.setVisible(true);
-				setId(machineName);
-				toolbar.setId(machineName);	
+				
+				if (CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST.equals(mainSection)) {
+					String		machineName			= sectionPathSplit[1];
+					sectionHeader.setSectionName(machineName);
+					sectionHeader.setFinalSectionNameFromId(sectionId);
+					sectionHeader.setModified(sectionModified);
+					sectionHeader.setVisible(true);
+					setId(machineName);
+					toolbar.setId(machineName);	
+				} else if (CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES.equals(mainSection)) {
+					sectionHeader.setSectionName(TEXTS.user_label());
+					sectionHeader.setFinalSectionNameFromId(sectionId);
+					sectionHeader.setModified(sectionModified);
+					sectionHeader.setVisible(true);
+					setId(TEXTS.user_label());
+					toolbar.setId(TEXTS.user_label());	
+				}	
 			} else if (EVENT_TYPE.SECTION_MODIFIED.equals(type)) {
 				preferencesMenu.setPreferencesSectionModified(sectionPath);
 				sectionHeader.setModified(true);

@@ -25,6 +25,7 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 
 	private AEGWTBootstrapTreeMenu 				menu;
 	private AEGWTBootstrapTreeMenuItem 			menuMachines;
+	private AEGWTBootstrapTreeMenuItem 			menuUser;
 
 	public DSLAMBusDesktopPreferencesMenu() {
 		FlowPanel root = new FlowPanel();
@@ -41,6 +42,18 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		menuMachines.setId(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 		menuMachines.setCloseMenu();
 		menu.addWidget(menuMachines);
+		
+		//MENU -> Machines
+		menuUser 		= new AEGWTBootstrapTreeMenuItem(TEXTS.user_label());
+		menuUser.setId(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES);
+		menuUser.setCloseMenu();
+		menu.addWidget(menuUser);
+		
+		String menuPathUser = menuUser.getId() ;
+		
+		//MENU -> User -> Config
+		CRONIOBusDesktopPreferencesMenuFinalItem userConfig 	= new CRONIOBusDesktopPreferencesMenuFinalItem(menuPathUser, CRONIOBOIPreferences.USER_CONFIG		,TEXTS.config(), this);
+		menuUser.add(userConfig);
 	}
 
 	public void addConnection(String connectionName) {
@@ -97,6 +110,18 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 						}
 					}
 				}	
+			}
+		} else if (CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES.equals(mainSection)) {
+			menuUser.setModified(true);
+			Iterator<Widget> finalUserSectionList = menuUser.iterator();
+			while (finalUserSectionList.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem finalUserSection = (AEGWTBootstrapTreeMenuFinalItem) finalUserSectionList.next();
+				String 		finalUserPathId 		= finalUserSection.getId();
+				String[] 	finalUserPathIdSplit	= finalUserPathId.split("\\.");
+				String 		finalUserSectionId 	= finalUserPathIdSplit[finalUserPathIdSplit.length - 1];
+				if (finalUserSectionId.equals(finalSection)) {
+					finalUserSection.setModified(true);
+				}
 			}
 		}
 	}

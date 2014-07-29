@@ -14,6 +14,10 @@ public interface CRONIOBOIPreferences extends Serializable, CRONIOBOIPreferences
 
 	void setMachinePropertiesList(List<CRONIOBOIMachineProperties> machinePropertiesList);
 
+	CRONIOBOIUserPreferences getUserPreferences();
+	
+	void setUserPreferences(CRONIOBOIUserPreferences userPreferences);
+	
 	Date getSavedTime();
 
 	void setSavedTime(Date savedTime);

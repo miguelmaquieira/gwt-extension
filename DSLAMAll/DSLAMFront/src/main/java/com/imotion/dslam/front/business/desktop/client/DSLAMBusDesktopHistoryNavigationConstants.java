@@ -9,5 +9,6 @@ public interface DSLAMBusDesktopHistoryNavigationConstants {
 	public final static String TOKEN_EXECUTION 		= "execution";
 	public final static String TOKEN_PREFERENCES 		= "preferences";
 	public final static String TOKEN_MACHINES 		= "machines";
+	public final static String TOKEN_USER 			= "user";
 
 }

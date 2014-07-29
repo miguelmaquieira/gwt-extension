@@ -53,6 +53,8 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 					preferencesFlowEvent();
 				} else if (CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST.equals(sourceWindow)) {
 					machinesFlowEvent();
+				} else if (CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES.equals(sourceWindow)) {
+					userFlowEvent();
 				} else if (CRONIOBusDesktopLoginPresenter.NAME.equals(sourceWindow)) {
 					History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROJECT_PAGE);
 				}
@@ -88,6 +90,10 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 	
 	private void machinesFlowEvent() {
 		History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES);
+	}
+	
+	private void userFlowEvent() {
+		History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_USER);
 	}
 	
 	private void projectProcessFlowEvent(AEGWTFlowEvent evt) {
