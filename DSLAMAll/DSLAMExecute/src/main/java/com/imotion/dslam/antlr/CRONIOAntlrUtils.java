@@ -16,6 +16,7 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOAntlrUtils {
 
@@ -25,6 +26,8 @@ public class CRONIOAntlrUtils {
 	private static final String MATCH_START 				= "match";
 	private static final String ROLLBACK_START 			= "rb";
 	private static final String TAG_START 				= "tag";
+	private static final String RB_CASE_START 			= "rbCase";
+	private static final String RB_CASE_DEFAULT_START 			= "rbDefault";
 
 	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*(\\[\\d\\])?";
 	private static final String INSTRUCTION_END			= ";";
@@ -33,7 +36,6 @@ public class CRONIOAntlrUtils {
 
 	private static final String VARIABLE_PREFFIX_PROCESS 	= "#";
 	private static final String NEW_LINE		 			= "\n";
-	private static final String CONCAT_OPERATOR 			= " . ";
 
 	//ERRORS
 	private static final String END_COMMAND_ERROR_CODE 		= "1";
@@ -47,65 +49,26 @@ public class CRONIOAntlrUtils {
 			Map<String, String> errors 			= new HashMap<>();
 			List<String>		originalLines	= AEMFTCommonUtilsBase.splitByToken(originalCode, NEW_LINE);
 			for (String line : originalLines) {
-				line = line.trim();
-				StringBuilder compiledLineSB = new StringBuilder();
+				line = processLineSpaces(line);
+				String compiledLine = "";
 				if (isExecutionInstruction(line)) {
-					line = processCodeLine(line);
 					if (!line.endsWith(INSTRUCTION_END)) {
 						errors.put(END_COMMAND_ERROR_CODE, END_COMMAND_ERROR_MSG);
-					}
-					if (line.contains(" ")) {
-						List<String> lineItems = AEMFTCommonUtilsBase.splitByToken(line	, INSTRUCTION_END);
-						lineItems = AEMFTCommonUtilsBase.splitByToken(lineItems.get(0)	, " ");
-						int itemToProcess = 0;
-						for (int i = 0; i < lineItems.size(); i++) {
-							String lineItem = lineItems.get(i);
-							lineItem = lineItem.trim();
-							if (!lineItem.isEmpty() && !CONCATENATION_OPERATOR.equals(lineItem)) {
-								if (itemToProcess == 0) {
-									compiledLineSB.append(lineItem);
-									compiledLineSB.append(" ");
-								} else {
-									if (itemToProcess > 1) {
-										compiledLineSB.append(CONCAT_OPERATOR);
-										compiledLineSB.append("\" \"");
-										compiledLineSB.append(CONCAT_OPERATOR);
-									}
-									if (lineItem.matches(VARIABLE_REGEX)) {
-										compiledLineSB.append(lineItem);
-									} else {
-										if (lineItem.contains("\"")) {
-											compiledLineSB.append(lineItem);
-										} else {
-											boolean validCommand = checkValidCommand(line, lineItem, languageType);
-											if (validCommand) {
-												compiledLineSB.append("\"");
-												compiledLineSB.append(lineItem);
-												compiledLineSB.append("\"");
-											} else {
-												errors.put(COMMAND_NOT_FOUND_CODE, COMMAND_NOT_FOUND_ERROR_MSG + lineItem);
-											}
-										}
-									}
-								}
-								itemToProcess++;
-							}
-						}
-						compiledLineSB.append(INSTRUCTION_END);
 					} else {
-						compiledLineSB.append(line);
+						if (isCommandLine(line)) {
+							compiledLine = processCommandsLine(line, languageType, errors);
+						} else {
+							compiledLine = processFunctionLine(line, errors);
+						}
 					}
 				} else {
-					compiledLineSB.append(line);
+					compiledLine = line;
 				}
-
-				if (errors.size() > 0) {
-					throw new CRONIOAntlrCompilationException(errors);
-				}
-
-				String compiledLine = compiledLineSB.toString();
 				compiledCodeSb.append(compiledLine);
 				compiledCodeSb.append(NEW_LINE);
+			}
+			if (errors.size() > 0) {
+				throw new CRONIOAntlrCompilationException(errors);
 			}
 		}
 		String compiledCode = compiledCodeSb.toString();
@@ -174,27 +137,29 @@ public class CRONIOAntlrUtils {
 	}
 
 	private static boolean isExecutionInstruction(String line) {
-		boolean execution = line.startsWith(COMMAND_START) 
-				|| line.startsWith(COMMAND_NO_RESPONSE_START) 
+		boolean execution = isCommandLine(line)
 				|| line.startsWith(READ_START) 
 				|| line.startsWith(MATCH_START) 
-				|| line.startsWith(ROLLBACK_START) 
+				|| (!line.startsWith(RB_CASE_START) && !line.startsWith(RB_CASE_DEFAULT_START) && line.startsWith(ROLLBACK_START))
 				|| line.startsWith(TAG_START);
 		return execution;
 	}
+	
+	private static boolean isCommandLine(String line) {
+		boolean commandLine = line.startsWith(COMMAND_START) 
+				|| line.startsWith(COMMAND_NO_RESPONSE_START) ;
+		return commandLine;
+	}
 
-	private static boolean checkValidCommand(String line, String command, int languageType) {
+	private static boolean isValidCommand(String command, int languageType) {
 		boolean validCommand = false;
-		if (line.startsWith(COMMAND_START) || line.startsWith(COMMAND_NO_RESPONSE_START) ) {
-			//TODO: check if command belongs to machine language.
-			validCommand = true;
-		} else {
-			validCommand = true;
-		}
+		//TODO: check if command belongs to machine language.
+		validCommand = true;
 		return validCommand;
 	}
 
-	private static String processCodeLine(String line) {
+	private static String processLineSpaces(String line) {
+		line = line.trim();
 		String processedLine = line;
 		if (line.startsWith(COMMAND_NO_RESPONSE_START)) {
 			processedLine = line.replaceFirst(COMMAND_NO_RESPONSE_START, COMMAND_NO_RESPONSE_START + " ");
@@ -204,11 +169,103 @@ public class CRONIOAntlrUtils {
 			processedLine = line.replaceFirst(READ_START, READ_START + " ");
 		} else if (line.startsWith(MATCH_START)  ) {
 			processedLine = line.replaceFirst(MATCH_START, MATCH_START + " ");
+		} else if (line.startsWith(RB_CASE_START)  ) {
+			processedLine = line.replaceFirst(RB_CASE_START, RB_CASE_START + " ");
+		} else if (line.startsWith(RB_CASE_DEFAULT_START)  ) {
+			processedLine = line.replaceFirst(RB_CASE_DEFAULT_START, RB_CASE_DEFAULT_START + " ");
 		} else if (line.startsWith(ROLLBACK_START)  ) {
 			processedLine = line.replaceFirst(ROLLBACK_START, ROLLBACK_START + " ");
 		} else if (line.startsWith(TAG_START) ) {
 			processedLine = line.replaceFirst(TAG_START, TAG_START + " ");
 		}
+		processedLine = processedLine.replaceAll(";", " ;");
+		processedLine = processedLine.replaceAll("\\s{2,}", " ");
+		return processedLine;
+	}
+	
+	private static String processCommandsLine(String line, int languageType, Map<String, String> errors) {
+		StringBuilder	processedLineSb	= new StringBuilder();
+		List<String> lineItems = AEMFTCommonUtils.splitByToken(line, " ");
+		if (!AEMFTCommonUtilsBase.isEmptyList(lineItems)) {
+			processedLineSb.append(lineItems.get(0));
+			boolean		itemStartsString		= false;
+			boolean 	stringNotClosed 		= false;
+			int			itemsSize				= lineItems.size();
+			//from ">" to ";"
+			for (int i = 1; i < itemsSize - 1; i++ ) {
+				boolean		itemClosesString 		= false;
+				boolean		concatenatorOperator	= false;
+				String currentItem 		= lineItems.get(i);
+				currentItem				= currentItem.trim();
+				
+				String processedItem	= "";
+				if (CONCATENATION_OPERATOR.equals(currentItem)) {
+					concatenatorOperator = true;
+					processedItem = currentItem;
+				} else if (currentItem.length() > 1 && currentItem.startsWith("\"") && currentItem.endsWith("\"")) {
+					processedItem = currentItem;
+				} else if ( (currentItem.startsWith("\"") && !currentItem.endsWith("\"")) || (!stringNotClosed && currentItem.equals("\"")) ) {
+					stringNotClosed		= true;
+					itemStartsString	= true;
+					processedItem = currentItem;
+				} else if ( (currentItem.endsWith("\"") && !currentItem.startsWith("\"")) || (stringNotClosed && currentItem.equals("\"")) ) {
+					stringNotClosed 	= false;
+					itemStartsString 	= false;
+					itemClosesString	= true;
+					processedItem		= currentItem;
+				} else if (stringNotClosed) {
+					processedItem = currentItem;
+					itemStartsString = false;
+				} else if (currentItem.matches(VARIABLE_REGEX)) {
+					processedItem = currentItem;
+				} else if (isValidCommand(currentItem, languageType)) {
+					processedItem = "\"" + currentItem + "\"";
+				} else {
+					processedItem = currentItem;
+					errors.put(COMMAND_NOT_FOUND_CODE, COMMAND_NOT_FOUND_ERROR_MSG + currentItem);
+				}
+				
+				if ( (i > 1 && !stringNotClosed && !itemClosesString && !concatenatorOperator) || (i > 1 && stringNotClosed && itemStartsString) ) {
+					processedLineSb.append(" ");
+					processedLineSb.append(CONCATENATION_OPERATOR);
+				}
+				processedLineSb.append(" ");
+				processedLineSb.append(processedItem);
+			}
+			processedLineSb.append(lineItems.get(itemsSize - 1));
+		}
+		String processedLine = processedLineSb.toString();
+		return processedLine;
+	}
+	
+	private static String processFunctionLine(String line, Map<String, String> errors) {
+		List<String> lineItems = AEMFTCommonUtils.splitByToken(line, " ");
+		StringBuilder processedLineSb = new StringBuilder();
+		if (!AEMFTCommonUtilsBase.isEmptyList(lineItems)) {
+			processedLineSb.append(lineItems.get(0));
+			int	itemsSize = lineItems.size();
+			//from "function" to ";"
+			for (int i = 1; i < itemsSize - 1; i++ ) {
+				String currentItem 	= lineItems.get(i);
+				currentItem			= currentItem.trim();
+				String processedItem = "";
+				if (currentItem.matches(VARIABLE_REGEX)) {
+					processedItem = currentItem;
+				} else {
+					if (currentItem.startsWith("\"")) {
+						processedItem = currentItem;
+					} else if (currentItem.equals(CONCATENATION_OPERATOR)) {
+						processedItem = currentItem;
+					} else {
+						processedItem = "\"" + currentItem + "\"";
+					}
+				}
+				processedLineSb.append(" ");
+				processedLineSb.append(processedItem);
+			}
+			processedLineSb.append(lineItems.get(itemsSize - 1));
+		}
+		String processedLine = processedLineSb.toString();
 		return processedLine;
 	}
 
