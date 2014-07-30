@@ -21,7 +21,7 @@ function : (execution | executionWithoutResponse | readUntil | match | rollback 
 execution: 					'>' 	stringExpr ;
 executionWithoutResponse: 	'>>' 	stringExpr ; 
 readUntil : 				'read'	stringExpr ;
-match:  					'match'	stringExpr ;
+match:  					'match'	stringExpr ('>' value)?;
 rollback:					'rb'	stringExpr ;
 tagBlockCode:				'tag'	stringExpr ;
 

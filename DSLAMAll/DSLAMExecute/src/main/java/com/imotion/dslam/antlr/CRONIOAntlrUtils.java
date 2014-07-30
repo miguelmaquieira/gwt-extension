@@ -27,11 +27,12 @@ public class CRONIOAntlrUtils {
 	private static final String ROLLBACK_START 			= "rb";
 	private static final String TAG_START 				= "tag";
 	private static final String RB_CASE_START 			= "rbCase";
-	private static final String RB_CASE_DEFAULT_START 			= "rbDefault";
+	private static final String RB_CASE_DEFAULT_START 	= "rbDefault";
 
 	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*(\\[\\d\\])?";
 	private static final String INSTRUCTION_END			= ";";
 	private static final String CONCATENATION_OPERATOR	= ".";
+	private static final String MATCH_TARGET_OPERATOR		= ">";
 
 
 	private static final String VARIABLE_PREFFIX_PROCESS 	= "#";
@@ -178,7 +179,7 @@ public class CRONIOAntlrUtils {
 		} else if (line.startsWith(TAG_START) ) {
 			processedLine = line.replaceFirst(TAG_START, TAG_START + " ");
 		}
-		processedLine = processedLine.replaceAll(";", " ;");
+		processedLine = processedLine.replaceAll(INSTRUCTION_END, " " + INSTRUCTION_END);
 		processedLine = processedLine.replaceAll("\\s{2,}", " ");
 		return processedLine;
 	}
@@ -254,7 +255,7 @@ public class CRONIOAntlrUtils {
 				} else {
 					if (currentItem.startsWith("\"")) {
 						processedItem = currentItem;
-					} else if (currentItem.equals(CONCATENATION_OPERATOR)) {
+					} else if (currentItem.equals(CONCATENATION_OPERATOR) || currentItem.equals(MATCH_TARGET_OPERATOR)) {
 						processedItem = currentItem;
 					} else {
 						processedItem = "\"" + currentItem + "\"";
