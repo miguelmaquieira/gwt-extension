@@ -75,7 +75,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		textBoxesLeftZone.add(userNameTextBox);
 		
 		//prompt
-		promptTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.prompt_placeholder(), TEXTS.prompt_placeholder());
+		promptTextBox 				= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.prompt_regex_placeholder(), TEXTS.prompt_regex_placeholder());
 		textBoxesLeftZone.add(promptTextBox);
 		//userPrompt
 		userPromptTextBox 			= new AEGWTBootstrapFormFieldTextBoxLabelTop(PREFERENCES_TEXTS.userPromptLabel(), PREFERENCES_TEXTS.userPromptPlaceHolder());
@@ -196,9 +196,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 				connectionConfigureFormEvt.setConnectionName(getId());
 				getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
 			}
-		});
-
-		
+		});	
 	}
 
 	public boolean showValidateClientErrors() {

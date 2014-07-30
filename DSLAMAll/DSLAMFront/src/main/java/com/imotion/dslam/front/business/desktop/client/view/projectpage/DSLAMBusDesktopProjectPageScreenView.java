@@ -13,8 +13,7 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	
 	public DSLAMBusDesktopProjectPageScreenView() {
 		root = new FlowPanel();
-		initContentPanel(root);
-		
+		initContentPanel(root);	
 	}
 	
 	/**
@@ -39,7 +38,6 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	
 	@Override
 	public void beforeExitSection() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 }

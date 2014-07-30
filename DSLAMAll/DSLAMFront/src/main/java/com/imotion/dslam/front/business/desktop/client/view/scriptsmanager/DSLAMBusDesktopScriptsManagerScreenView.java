@@ -34,9 +34,7 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 			}
 		});
 		editorZone.add(editor);
-		
 	}
-
 
 	/**
 	 * AEGWTICompositePanel
@@ -61,17 +59,13 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	
 	@Override
 	public void beforeExitSection() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
-
-
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/
-
 }

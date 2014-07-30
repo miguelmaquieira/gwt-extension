@@ -41,5 +41,4 @@ public class CRONIOBusDesktopProjectNavigatorFinalItem extends AEGWTBootstrapTre
 		
 		getLogicalEventHandlerManager().fireEvent(openFinalSectionEvent);
 	}
-
 }

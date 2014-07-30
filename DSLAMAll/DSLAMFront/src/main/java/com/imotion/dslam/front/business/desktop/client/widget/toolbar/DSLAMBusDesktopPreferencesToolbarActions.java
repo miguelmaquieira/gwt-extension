@@ -18,7 +18,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphico
 public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePanel {
 
 	public static final String NAME = "DSLAMBusDesktopPreferencesToolbarActions";
-
 	private DSLAMBusI18NTexts texts = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapGlyphiconButton 			newConnectionButton;
@@ -26,8 +25,6 @@ public class DSLAMBusDesktopPreferencesToolbarActions extends AEGWTCompositePane
 	private AEGWTBootstrapGlyphiconButton 			closeButton;
 	private	 CRONIOBusDesktopNewConnectionPopupForm	connectionPopupForm;
 	
-	
-
 	public DSLAMBusDesktopPreferencesToolbarActions() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);

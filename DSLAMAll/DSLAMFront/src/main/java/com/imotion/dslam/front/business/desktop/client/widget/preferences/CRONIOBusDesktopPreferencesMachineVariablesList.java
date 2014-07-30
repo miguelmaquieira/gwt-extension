@@ -11,7 +11,6 @@ public class CRONIOBusDesktopPreferencesMachineVariablesList extends DSLAMBusDes
 		super(deleteButton);
 	}
 
-	
 	/**
 	 * AEGWTICompositePanel
 	 */

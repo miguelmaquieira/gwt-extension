@@ -20,7 +20,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu
 public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implements CRONIOBusPreferencesBasePresenterConstants {
 
 	public static final String NAME = "DSLAMBusDesktopPreferencesMenu";
-
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapTreeMenu 				menu;
@@ -131,7 +130,6 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		setResetModifiedMachinesSection(menuMachines);
 		menuUser.setModified(false);
 		setResetModifiedUserSection(menuUser);
-		
 	}
 	
 	public void setResetModifiedMachinesSection (AEGWTBootstrapTreeMenuItem section) {

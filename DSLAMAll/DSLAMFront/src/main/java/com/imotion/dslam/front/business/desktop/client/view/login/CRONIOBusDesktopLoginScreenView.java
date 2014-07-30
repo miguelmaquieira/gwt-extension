@@ -27,8 +27,7 @@ public class CRONIOBusDesktopLoginScreenView extends DSLAMBusDesktopPanelBaseVie
 		form = new CRONIOBusDesktopSignInForm(TEXTS.sign_in_description_text());
 		root.add(form);			
 	}
-
-
+	
 	@Override
 	public String getName() {
 		return NAME;

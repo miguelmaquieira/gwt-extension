@@ -104,6 +104,4 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 	protected String getMsgDeleteText() {
 		return TEXTS.delete_variables_confirmation();
 	}
-
-
 }

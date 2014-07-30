@@ -57,7 +57,6 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 		}
 	}
 
-
 	/*
 	 * AEGWTBootstrapTable
 	 */

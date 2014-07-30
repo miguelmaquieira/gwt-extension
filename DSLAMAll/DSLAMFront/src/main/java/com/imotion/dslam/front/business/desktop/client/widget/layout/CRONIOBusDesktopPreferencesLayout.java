@@ -81,7 +81,6 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 
 		sectionHeader = new CRONIOBusDesktopPreferencesLayoutItemHeader();
 		bottomRightZone.add(sectionHeader);
-		sectionHeader.setVisible(false);
 
 		preferencesWorkZone = new FlowPanel();
 		bottomRightZone.add(preferencesWorkZone);
@@ -96,6 +95,11 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 	public void setLayoutContent(Widget content) {
 		preferencesWorkZone.clear();
 		preferencesWorkZone.add(content);
+	}
+	
+	@Override
+	public void setvisibleLayoutItemHeader(boolean visible) {
+		sectionHeader.setVisible(visible);
 	}
 
 	/**
@@ -157,14 +161,12 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 					sectionHeader.setSectionName(machineName);
 					sectionHeader.setFinalSectionNameFromId(sectionId);
 					sectionHeader.setModified(sectionModified);
-					sectionHeader.setVisible(true);
 					setId(machineName);
 					toolbar.setId(machineName);	
 				} else if (CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES.equals(mainSection)) {
 					sectionHeader.setSectionName(TEXTS.user_label());
 					sectionHeader.setFinalSectionNameFromId(sectionId);
 					sectionHeader.setModified(sectionModified);
-					sectionHeader.setVisible(true);
 					setId(TEXTS.user_label());
 					toolbar.setId(TEXTS.user_label());	
 				}	
@@ -196,6 +198,4 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 				||
 				EVENT_TYPE.CONNECTION_CREATED.equals(type);
 	}
-
-
 }

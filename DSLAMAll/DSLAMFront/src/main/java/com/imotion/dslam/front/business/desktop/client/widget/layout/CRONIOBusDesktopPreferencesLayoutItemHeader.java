@@ -43,8 +43,7 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 		
 		sectionName = new AEGWTLabel("Section");
 		infoZone.add(sectionName);
-		sectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME);
-		
+		sectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME);	
 	}
 	
 	public void setSectionName(String sectionNameStr) {
@@ -89,5 +88,4 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 		// TODO Auto-generated method stub
 
 	}
-
 }

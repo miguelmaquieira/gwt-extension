@@ -89,7 +89,5 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
-
 	}
-
 }

@@ -58,7 +58,6 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 		optionButton.addStyleName(DSLAMBusDesktopIStyleConstants.TOOLBAR_ACTIONS_OPTIONS_BUTTON);
 		root.add(optionButton);
 		
-
 		newButton.addClickHandler(new ClickHandler() {
 
 			@Override
@@ -96,7 +95,6 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
-		
 	}
 
 	public void hideProjectForm() {
@@ -133,7 +131,6 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/**
@@ -146,5 +143,4 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 		}
 		return projectPopupForm;
 	}
-
 }

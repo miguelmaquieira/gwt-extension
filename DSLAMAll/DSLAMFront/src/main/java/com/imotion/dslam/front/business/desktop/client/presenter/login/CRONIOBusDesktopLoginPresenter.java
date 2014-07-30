@@ -23,7 +23,6 @@ import com.selene.arch.exe.gwt.mvp.event.navigator.AEGWTNavigationEventTypes.NAV
 
 public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIOBusDesktopLoginDisplay> implements AEGWTHasAuthenticationEventHandlers, AEGWTHasNavigationEventHandlers{
 
-	
 	public static final String NAME = "CRONIOBusDesktopLoginPresenter";
 	
 	public CRONIOBusDesktopLoginPresenter(CRONIOBusDesktopLoginDisplay view) {
@@ -36,13 +35,11 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 		getLogicalEventHandlerManager().addEventHandler(AEGWTHasNavigationEventHandlers.TYPE, this);
 	}
 	
-	
 	@Override
 	public String getName() {
 		return NAME;
 	}
 
-	
 	@Override
 	protected void addView(HasWidgets container) {
 		CRONIOBusDesktopLayoutContainer layoutContainer = (CRONIOBusDesktopLayoutContainer) container;
@@ -57,7 +54,6 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 	 *                   AEGWTHasAuthenticationEventHandlers
 	 ************************************************************************/
 	
-	
 	@Override
 	public void dispatchEvent(AEGWTAuthenticationEvent evt) {
 		if (AUTHENTICATION_TYPE.SIGN_IN_ATTEMPT.equals(evt.getEventType())) {
@@ -65,7 +61,6 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 		}		
 	}
 
-	
 	@Override
 	public boolean isDispatchEventType(AUTHENTICATION_TYPE type) {
 		return AUTHENTICATION_TYPE.SIGN_IN_ATTEMPT.equals(type);
@@ -75,7 +70,6 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 	/************************************************************************
 	 *                   AEGWTHasNavigationEventHandlers
 	 ************************************************************************/
-	
 	
 	@Override
 	public void dispatchEvent(AEGWTNavigationEvent evt) {
@@ -92,7 +86,6 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 	public boolean isDispatchEventType(NAVIGATOR_TYPE type) {
 		return NAVIGATOR_TYPE.OK_EVENT.equals(type);
 	}
-	
 	
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
@@ -135,8 +128,5 @@ public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIO
 				
 			}
 		});
-		
 	}
-	
-	
 }

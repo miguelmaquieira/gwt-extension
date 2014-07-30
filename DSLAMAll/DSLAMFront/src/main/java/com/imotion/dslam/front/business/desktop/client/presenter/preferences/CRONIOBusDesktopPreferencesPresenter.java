@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.preferences;
 
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusPreferencesBasePresenter;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
@@ -24,50 +25,24 @@ public class CRONIOBusDesktopPreferencesPresenter extends CRONIOBusPreferencesBa
 		return NAME;
 	}
 	
+	@Override
+	protected void addView(HasWidgets container) {
+		super.addView(container);
+		getPreferencesLayout().setvisibleLayoutItemHeader(false);
+		
+	}
+	
 	/**
 	 * AEGWTHasLogicalEventHandlers
 	 */
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-// 		String			srcWidget		= evt.getSourceWidget();
-//		LOGICAL_TYPE	type			= evt.getEventType();
-//
-//		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} 
+
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-	//	return LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type);
 		return false;
 	}
 	
@@ -77,7 +52,6 @@ public class CRONIOBusDesktopPreferencesPresenter extends CRONIOBusPreferencesBa
 	
 	@Override
 	protected void openFinalSection(String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		int i = 0;
 	}
 	
 	@Override

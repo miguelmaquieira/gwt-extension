@@ -55,24 +55,7 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 //				updateFinalSectionInContext(finalSectionData);
 //			}	
 //		} 
-//			else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} 
+
 	}
 
 	@Override
@@ -80,7 +63,6 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type)
 				||
 				LOGICAL_TYPE.SAVE_EVENT.equals(type);
-	
 	}
 	
 	/**

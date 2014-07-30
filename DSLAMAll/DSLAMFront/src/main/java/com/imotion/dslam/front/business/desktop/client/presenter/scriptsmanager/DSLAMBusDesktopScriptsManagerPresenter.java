@@ -20,7 +20,6 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 		return NAME;
 	}
 
-	
 	/**
 	 * PROTECTED
 	 */
@@ -33,6 +32,5 @@ public class DSLAMBusDesktopScriptsManagerPresenter extends CRONIOBusProjectBase
 	@Override
 	protected String getSectionType() {
 		return SECTION_TYPE_SCRIPT;
-	}
-	
+	}	
 }

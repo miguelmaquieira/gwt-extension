@@ -63,5 +63,4 @@ public class DSLAMBusDesktopPreferencesToolbar extends AEGWTCompositePanel {
 	public void setData(AEMFTMetadataElementComposite data) {
 		
 	}
-
 }

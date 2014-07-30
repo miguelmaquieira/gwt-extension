@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.projectpage;
 
+import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
@@ -18,6 +19,12 @@ public class DSLAMBusDesktopProjectPagePresenter extends CRONIOBusProjectBasePre
 	@Override
 	public String getName() {
 		return NAME;
+	}
+	
+	@Override
+	protected void addView(HasWidgets container) {
+		super.addView(container);
+		getProjectsLayout().setvisibleLayoutItemHeader(false);	
 	}
 	
 	/**
