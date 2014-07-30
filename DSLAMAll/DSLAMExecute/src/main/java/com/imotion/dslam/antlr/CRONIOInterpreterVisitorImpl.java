@@ -128,10 +128,23 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public CRONIOInterpreterVisitorValue visitMatch(@NotNull ImoLangParser.MatchContext ctx) {
 		CRONIOInterpreterVisitorValue	regExValue			= this.visit(ctx.stringExpr());
 		String							regExValueStr		= regExValue.asString();
-		String							lastResponse		= (String) allVariables.get(LAST_RESPONSE_KEY);
+		ValueContext 					valueCtx 			= ctx.value();
+		
+		CRONIOInterpreterVisitorValue	targetValue			= null;
+		if (valueCtx != null) {
+			targetValue = this.visit(valueCtx);
+		}
+		
+		String targetStr = null;
+		if (targetValue != null) {
+			targetStr	= targetValue.asString();
+		} else {
+			targetStr	= (String) allVariables.get(LAST_RESPONSE_KEY);
+		}
+
 		//TODO read about AWK
 		Pattern	pattern = Pattern.compile(regExValueStr);
-		Matcher	matcher = pattern.matcher(lastResponse);
+		Matcher	matcher = pattern.matcher(targetStr);
 		List<String> matchGroups = new ArrayList<>();
 		if (matcher.matches() || matcher.find()) {
 			MatchResult  matchResult = matcher.toMatchResult();
