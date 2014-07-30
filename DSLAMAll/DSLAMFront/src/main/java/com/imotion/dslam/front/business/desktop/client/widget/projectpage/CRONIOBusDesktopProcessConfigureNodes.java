@@ -27,6 +27,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private CRONIOBusDesktopProcessNodeList				nodeList;
 	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
 	private	 AEMFTMetadataElementComposite				nodesData;
+	private AEMFTMetadataElementComposite				machineListData;
 	
 
 	public CRONIOBusDesktopProcessConfigureNodes() {
@@ -74,11 +75,15 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 			nodesData = data;
 			
 			AEMFTMetadataElementComposite machineList = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, data);
+			if (machineList != null) {
+				machineListData = machineList;
+			}
+			
 			data.removeElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
 				AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
-				elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineList);
+				elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineListData.cloneObject());
 				if (!DSLAMBOIProject.INFO.equals(elementData.getKey())) {
 					nodeList.addElement(elementDataComposite);
 				}
