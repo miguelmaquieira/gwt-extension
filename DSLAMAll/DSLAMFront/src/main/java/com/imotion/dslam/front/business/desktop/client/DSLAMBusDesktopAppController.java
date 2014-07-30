@@ -55,9 +55,6 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.AEGWTIPresenter;
 import com.selene.arch.exe.gwt.mvp.context.ContextRetriever;
 
-
-
-
 public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -109,6 +106,10 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		String 	downTimeKey = sbKey.toString();
 		int		downTime 	= getContextDataController().getElementAsInt(downTimeKey);
 		
+		if (downTime <= 0) {
+			downTime = CRONIODesktopIAppControllerConstants.DEFAULT_DOWNTIME;
+		}
+		
 		setLayoutData(layoutsData);
 		setTimeOut(downTime*60000);
 		return getContextDataController().getContext();
@@ -129,7 +130,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		ContextRetriever rc = null;
 		return rc;
 	}
-
 
 	@Override
 	protected AEGWTIPresenter getPresenter(String[] tokenElements) {
@@ -209,7 +209,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		emptyLayout.postDisplay();
 	}
 
-
 	/**
 	 * PRIVATE 
 	 */
@@ -219,7 +218,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		layoutContainer.setData(data);
 	}
 
-	
 	private void setTimeOut(final int timeoutInMillis) {
 		
 		inactivityTimer = new Timer() {
@@ -230,8 +228,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 				inactivityTimer.cancel();
 				Window.alert(TEXTS.session_timeout());
 				logout();
-				
-
 			}
 		};
 		inactivityTimer.schedule(timeoutInMillis);
@@ -246,7 +242,5 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			}
 		};
 		nativeHandlerRegistration = Event.addNativePreviewHandler(handler);
-
 	}
-
 }

@@ -16,8 +16,6 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends DSLAMBusDesktopPro
 		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL		, TEXTS.external_variable());
 	}	
 
-	
-	
 	/**
 	 * AEGWTCompositePanel
 	 */
@@ -26,5 +24,4 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends DSLAMBusDesktopPro
 	public String getName() {
 		return NAME;
 	}
-
 }

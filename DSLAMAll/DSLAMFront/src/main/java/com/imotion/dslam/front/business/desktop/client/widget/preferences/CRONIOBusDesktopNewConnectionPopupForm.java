@@ -23,7 +23,6 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 
 	public static final String NAME = "CRONIOBusDesktopNewConnectionPopupForm";
-	
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	public static final int MODE_NEW_CONNECTION		= 1;

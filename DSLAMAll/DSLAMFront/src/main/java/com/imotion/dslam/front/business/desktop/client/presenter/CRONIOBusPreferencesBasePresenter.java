@@ -127,7 +127,6 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 				EVENT_TYPE.SAVE_PREFERENCES.equals(type);
 	}
 
-
 	/**
 	 * PROTECTED
 	 */
@@ -140,6 +139,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		Widget viewAsWidget = getView().asWidget();
 		layoutContainer.setLayoutContent(viewAsWidget);
 		preferencesLayout = (CRONIOBusDesktopPreferencesLayout) layoutContainer.getCurrentLayout();
+		preferencesLayout.setvisibleLayoutItemHeader(true);	
 	}
 
 	@Override
@@ -151,6 +151,10 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		String sectionKey = getContextDataController().getElementAsString(PREFERENCES_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
 		AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA_PREFFIX + sectionKey);
 		openFinalSection(sectionKey, finalSectionData);
+	}
+	
+	protected CRONIOBusDesktopPreferencesLayout getPreferencesLayout() {
+		return preferencesLayout;
 	}
 
 	protected abstract void openFinalSection(String machineFinalSectionId, AEMFTMetadataElementComposite finalSectionData);
@@ -368,16 +372,11 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 	}
 
-
 	private void firePreferencesSaved(String preferencesId) {
 		CRONIOBusDesktopPreferencesEvent preferencesSavedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
 		preferencesSavedEvt.setEventType(EVENT_TYPE.PREFERENCES_SAVED);
 		preferencesSavedEvt.setPreferencesId(preferencesId);
 		getLogicalEventHandlerManager().fireEvent(preferencesSavedEvt);
-	}
-
-	private CRONIOBusDesktopPreferencesLayout getPreferencesLayout() {
-		return preferencesLayout;
 	}
 
 }

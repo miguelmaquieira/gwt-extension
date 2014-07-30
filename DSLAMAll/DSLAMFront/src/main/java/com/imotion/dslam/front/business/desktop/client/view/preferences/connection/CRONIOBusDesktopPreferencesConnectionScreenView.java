@@ -19,7 +19,6 @@ public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDes
 	private FlowPanel 												root;
 	private CRONIOBusDesktopPreferencesMachineSectionsDeckPanel		machinesSectionsDeckPanel;
 
-
 	public CRONIOBusDesktopPreferencesConnectionScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
@@ -64,7 +63,6 @@ public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDes
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -79,20 +77,9 @@ public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDes
 
 	}
 
-	//	/**
-	//	 * CRONIOBusProjectBaseDisplay
-	//	 */
-	//	
-	//	@Override
-	//	public void beforeExitSection() {
-	//		// TODO Auto-generated method stub
-	//		
-	//	}
-
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
-
 
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS

@@ -28,8 +28,7 @@ public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationF
 
 	private AEGWTTextBox						userNameBox;
 	private CRONIOBusDesktopPasswordTextBox		passwordTextBox;
-
-
+	
 	public CRONIOBusDesktopSignInForm(String description) {
 		super(description);		
 		addStyleName(DSLAMBusDesktopIStyleConstants.SIGN_FORM);
@@ -102,10 +101,8 @@ public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationF
 		} else {
 			errors = checkBasicErrors(errors);
 		}
-
 		return errors;
 	}
-
 
 	/****************************************************************************
 	 *                     AEGWTHasAuthenticationEventHandlers
@@ -137,13 +134,11 @@ public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationF
 	 *                     AEGWTFormContainerPanelBase
 	 ****************************************************************************/
 	
-	
 	@Override
 	public void initFormValidation(AEGWTIValidationChangeHandler formValidationhandler) {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 	/****************************************************************************
 	 *                     		PRIVATE FUNCTION
@@ -174,7 +169,6 @@ public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationF
 		return errors;
 	}
 
-
 	public void gotoLoginSuccessfullStatus() {
 		AEGWTNavigationEvent evt = new AEGWTNavigationEvent(getWindowName(), getName());
 		evt.setEventType(NAVIGATOR_TYPE.OK_EVENT);
@@ -188,6 +182,5 @@ public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationF
 				getErrorWidget().setVisibility(Visibility.HIDDEN);				
 			}
 		});
-	}
-	
+	}	
 }

@@ -10,4 +10,6 @@ public interface CRONIODesktopIAppControllerConstants {
 	String CONNECTIONS_DATA	= "CONNECTIONS_DATA";
 	
 	String PREFERENCES_DATA_PREFFIX = PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR;
+	
+	int DEFAULT_DOWNTIME = 15;
 }

@@ -54,6 +54,11 @@ public class CRONIOBusDesktopLayoutContainer extends AEGWTCompositePanel impleme
 		CRONIOBusDesktopIsLayout currentLayout = getCurrentLayout();
 		currentLayout.setLayoutContent(widget);
 	}
+	
+	@Override
+	public void setvisibleLayoutItemHeader(boolean visible) {
+		
+	}
 
 	@Override
 	public void setCurrentPresenter(AEGWTBasePresenter<?> currentPresenter) {

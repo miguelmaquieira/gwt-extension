@@ -7,7 +7,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
 public class CRONIOBusDesktopEmptyLayout extends AEGWTCompositePanel implements CRONIOBusDesktopIsLayout{
 
-
 	public 	final static String NAME = "CRONIOBusDesktopEmptyLayout";
 	
 	private FlowPanel root;
@@ -17,7 +16,6 @@ public class CRONIOBusDesktopEmptyLayout extends AEGWTCompositePanel implements 
 		initWidget(root);
 	}
 
-	
 	/**
 	 * AEGWTCompositePanel
 	 */
@@ -31,14 +29,12 @@ public class CRONIOBusDesktopEmptyLayout extends AEGWTCompositePanel implements 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
-
 	}
 	
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
 	}
-	
 		
 	/**
 	 * CRONIOBusDesktopIsLayout
@@ -49,5 +45,9 @@ public class CRONIOBusDesktopEmptyLayout extends AEGWTCompositePanel implements 
 		root.clear();
 		root.add(content);
 	}
-
+	
+	@Override
+	public void setvisibleLayoutItemHeader(boolean visible) {
+	
+	}
 }

@@ -13,7 +13,6 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu
 public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
 
 	public static final String NAME = "DSLAMBusDesktopProjectNavigatorElement";
-
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapTreeMenu 				menu;
@@ -145,5 +144,4 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub	
 	}
-
 }

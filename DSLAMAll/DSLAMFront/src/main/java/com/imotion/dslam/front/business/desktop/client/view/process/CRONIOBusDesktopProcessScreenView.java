@@ -53,14 +53,12 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		//processSectionsDeckPanel.setData(data);
-		
+
 	}
 
 	@Override
 	public void updateProcess(AEMFTMetadataElementComposite processData) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/****************************************************************************
@@ -68,8 +66,7 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	 ****************************************************************************/
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
@@ -91,8 +88,6 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
-
-
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS
 	 ************************************************************************/

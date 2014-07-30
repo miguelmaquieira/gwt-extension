@@ -8,7 +8,6 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PASSWORD_TEXTBOX 					= APP_ID_PREFFIX	+ "passwordTextBox";			//dslam_studio-passwordTextBox
 	String PASSWORD_CHECKBOX 					= APP_ID_PREFFIX	+ "passwordCheckBox";			//dslam_studio-passwordCheckBox
 	
-	
 	//TOOLBAR
 	String TOOLBAR										= APP_ID_PREFFIX 		+ "toolbar"; 					//dslam_studio-toolbar
 	String TOOLBAR_ACTIONS 								= TOOLBAR				+ "-actions";					//dslam_studio-toolbar-actions

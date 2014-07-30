@@ -25,13 +25,11 @@ import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
 
 	public static final String NAME = "DSLAMBusDesktopNavigator";
-	
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
 	private FlowPanel elementListContainerZone;
 	private FlowPanel elementListContainer;
 	
-
 	private AEGWTComparator nameComparatorAsc;
 
 	public DSLAMBusDesktopProjectNavigator() {
@@ -218,6 +216,5 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		}
 		return elementWidget;
 	}
-
 }
 

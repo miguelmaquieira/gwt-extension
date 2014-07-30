@@ -61,7 +61,6 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}
 		});
-		
 	}
 	
 	/**
@@ -72,6 +71,7 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	public String getName() {
 		return NAME;
 	}
+	
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNC_OPTION, data);

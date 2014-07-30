@@ -166,8 +166,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	
 	private DSLAMBusDesktopProcessConfigureScheduleForm getSchedulePopup() {
 		if (scheduleForm == null) {
-			scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);
-			
+			scheduleForm = new DSLAMBusDesktopProcessConfigureScheduleForm(this);	
 		}
 		return scheduleForm;
 	}

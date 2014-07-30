@@ -23,13 +23,11 @@ public class DSLAMBusDesktopControllerScreenView extends DSLAMBusDesktopPanelBas
 		root.add(label);
 	}
 
-
 	@Override
 	public HasClickHandlers getSubscribeButton() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public HasClickHandlers getAnchorCreateAccount() {
@@ -37,27 +35,21 @@ public class DSLAMBusDesktopControllerScreenView extends DSLAMBusDesktopPanelBas
 		return null;
 	}
 
-
 	@Override
 	public HasClickHandlers getAnchorLogin() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
 	public void invalidSubscriberEmail() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 
 	@Override
 	public void showSubscriptionPopup() {
 		// TODO Auto-generated method stub
-		
 	}
-
 
 	@Override
 	public String getSubscriberEmail() {
@@ -65,27 +57,21 @@ public class DSLAMBusDesktopControllerScreenView extends DSLAMBusDesktopPanelBas
 		return null;
 	}
 
-
 	@Override
 	public void showAccountActivated() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 
 	@Override
 	public void showAccountNoActivated() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 
 	@Override
 	public void showResetPassword(String resetKey) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 
 	@Override
 	public String getName() {
@@ -93,11 +79,8 @@ public class DSLAMBusDesktopControllerScreenView extends DSLAMBusDesktopPanelBas
 		return null;
 	}
 
-
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 }

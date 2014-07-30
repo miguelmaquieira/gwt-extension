@@ -6,5 +6,6 @@ import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 public interface CRONIOBusDesktopIsLayout extends AEGWTICompositePanel {
 
 	public void setLayoutContent(Widget widget);
+	public void setvisibleLayoutItemHeader(boolean visible);
 	
 }

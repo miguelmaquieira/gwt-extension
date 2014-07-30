@@ -59,7 +59,6 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 		sectionHeader = new CRONIOBusDesktopProjectsLayoutItemHeader();
 		bottomRightZone.add(sectionHeader);
-		sectionHeader.setVisible(false);
 
 		projectWorkZone = new FlowPanel();
 		bottomRightZone.add(projectWorkZone);
@@ -78,6 +77,11 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public void setLayoutContent(Widget content) {
 		projectWorkZone.clear();
 		projectWorkZone.add(content);
+	}
+	
+	@Override
+	public void setvisibleLayoutItemHeader(boolean visible) {
+		sectionHeader.setVisible(visible);
 	}
 
 	/**
@@ -122,7 +126,6 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setProyectName(projectName);
 				sectionHeader.setSectionNameFromId(sectionId);
 				sectionHeader.setModified(sectionModified);
-				sectionHeader.setVisible(true);
 				setId(projectId);
 				toolbar.setId(projectId);
 				if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
@@ -159,6 +162,4 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				||
 				EVENT_TYPE.PROJECT_CREATED.equals(type);
 	}
-
-
 }

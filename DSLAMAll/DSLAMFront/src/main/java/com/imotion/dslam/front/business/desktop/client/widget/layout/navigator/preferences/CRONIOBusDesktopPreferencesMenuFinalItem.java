@@ -42,5 +42,4 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 		openFinalSectionEvent.setFinalSectionPath(finalSectionPath);
 		getLogicalEventHandlerManager().fireEvent(openFinalSectionEvent);
 	}
-
 }

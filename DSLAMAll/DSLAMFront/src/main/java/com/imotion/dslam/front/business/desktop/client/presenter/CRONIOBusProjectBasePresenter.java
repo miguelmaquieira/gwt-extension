@@ -134,19 +134,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				}
 			}			
 		}
-
 	}
-
-
-
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.SELECT_EVENT.equals(type);
 	}
-
-
-
+	
 	/**
 	 * PROTECTED
 	 */
@@ -159,6 +153,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		Widget viewAsWidget = getView().asWidget();
 		layoutContainer.setLayoutContent(viewAsWidget);
 		projectsLayout = (CRONIOBusDesktopProjectsLayout) layoutContainer.getCurrentLayout();
+		projectsLayout.setvisibleLayoutItemHeader(true);	
 	}
 
 	@Override
@@ -176,7 +171,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 
 	protected abstract void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData);
-
 
 	protected void updateFinalSectionInContext( AEMFTMetadataElementComposite finalSectionData) {
 		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
@@ -206,6 +200,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		getContextDataController().setElement(finalSectionKey, finalSectionData);
 
 		fireSectionModified(currentProjectId, currentSectionId);
+	}
+	
+	protected CRONIOBusDesktopProjectsLayout getProjectsLayout() {
+		return projectsLayout;
 	}
 
 	protected abstract String getSectionType();
@@ -304,10 +302,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 
 		}
-	}
-
-	private CRONIOBusDesktopProjectsLayout getProjectsLayout() {
-		return projectsLayout;
 	}
 
 	private void saveCurrentProjectInDB() {
@@ -444,5 +438,4 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			logout();
 		}
 	}
-
 }

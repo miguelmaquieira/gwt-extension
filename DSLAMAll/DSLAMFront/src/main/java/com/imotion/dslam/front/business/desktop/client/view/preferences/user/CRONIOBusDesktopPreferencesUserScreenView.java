@@ -62,7 +62,6 @@ public class CRONIOBusDesktopPreferencesUserScreenView extends DSLAMBusDesktopPa
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -74,13 +73,11 @@ public class CRONIOBusDesktopPreferencesUserScreenView extends DSLAMBusDesktopPa
 	@Override
 	public void updatePreferences(AEMFTMetadataElementComposite preferencesData) {
 		// TODO Auto-generated method stub
-
 	}
 
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
-
 
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS

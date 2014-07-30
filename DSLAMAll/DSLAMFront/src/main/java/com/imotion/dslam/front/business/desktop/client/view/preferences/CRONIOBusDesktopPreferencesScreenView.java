@@ -24,12 +24,6 @@ public class CRONIOBusDesktopPreferencesScreenView extends DSLAMBusDesktopPanelB
 		initContentPanel(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_VIEW);
 	}
-
-//	@Override
-//	public void openProcessSection(String sectionId ,AEMFTMetadataElementComposite processData) {
-//		processSectionsDeckPanel.showSection(sectionId, processData);
-//		processSectionsDeckPanel.setVisibility(Visibility.VISIBLE);	
-//	}
 	
 	/**
 	 * AEGWTICompositePanel
@@ -40,14 +34,11 @@ public class CRONIOBusDesktopPreferencesScreenView extends DSLAMBusDesktopPanelB
 
 	@Override
 	public void postDisplay() {
-//		super.postDisplay();
-//		getLogicalEventHandlerManager().addLogicalEventHandler(this);
-//		processSectionsDeckPanel.postDisplay();
+
 	}
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		//processSectionsDeckPanel.setData(data);
 		
 	}
 
@@ -57,7 +48,6 @@ public class CRONIOBusDesktopPreferencesScreenView extends DSLAMBusDesktopPanelB
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -68,24 +58,12 @@ public class CRONIOBusDesktopPreferencesScreenView extends DSLAMBusDesktopPanelB
 
 	@Override
 	public void updatePreferences(AEMFTMetadataElementComposite preferencesData) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-	
-//	/**
-//	 * CRONIOBusProjectBaseDisplay
-//	 */
-//	
-//	@Override
-//	public void beforeExitSection() {
-//		// TODO Auto-generated method stub
-//		
-//	}
 	
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS
 	 ************************************************************************/
-
 
 	/************************************************************************
 	 *                        PRIVATE FUNCTIONS

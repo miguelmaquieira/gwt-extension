@@ -92,11 +92,9 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		//optionsZone.setData(data);
 	}
 
 	public AEMFTMetadataElementComposite getData() {
-		//return optionsZone.getData();
 		return null;
 	}
 }

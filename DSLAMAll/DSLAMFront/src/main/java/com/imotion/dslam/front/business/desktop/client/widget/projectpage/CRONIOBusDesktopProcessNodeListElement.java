@@ -11,6 +11,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 
 public class CRONIOBusDesktopProcessNodeListElement extends AEGWTCompositePanel {
+	
 	public static final String NAME = "CRONIOBusDesktopProcessNodeListElement";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
@@ -47,13 +48,10 @@ public class CRONIOBusDesktopProcessNodeListElement extends AEGWTCompositePanel 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
 	public AEGWTICompositePanel getParentWidget(IsWidget child) {
 		return parentWidget;
 	}
-	
 }
-

@@ -19,6 +19,4 @@ public class CRONIOBusDesktopPasswordCheckBox extends AEGWTCheckBox {
 	protected String getLabelZoneStyleName() {
 		return AEGWTIBoostrapConstants.COL_XS_7;
 	}
-
-
 }

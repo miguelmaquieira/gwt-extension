@@ -175,5 +175,3 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		nodeVariablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
 	}
 }
-
-

@@ -20,9 +20,7 @@ public class CRONIOBusDesktopPasswordTextBox extends AEGWTPasswordBox {
 		return new CRONIOBusDesktopPasswordCheckBox(labelText);
 	}
 	
-	
 	public AEGWTTextBox getTextBox() {
 		return getPasswordTextBox();
-	}
-	
+	}	
 }
