@@ -33,7 +33,7 @@ var DslamHighlightRules = function() {
            regex: '\\bin\\b',
          },
          { token: 'keyword.control.conditional',
-           regex: '\\b(?:if|else|rbCase|rbDefault)\\b',
+           regex: '\\b(?:if|else|rbCase|rbDefault|switch|case)\\b',
          },
          { token: 'keyword.control.repeat',
            regex: '\\b(for|while|foreach)\\b',

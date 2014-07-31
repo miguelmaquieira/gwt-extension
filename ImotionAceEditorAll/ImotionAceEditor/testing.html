@@ -19,51 +19,7 @@
 
 <div id="editor">
 
-//THIS IS A COMMENT
 
-$ID = 2845
-
-show equipment protection-element xml
-
-configure equipment slot nt-b no unlock
-
-configure equipment protection-group 1 admin-status lock
-
-configure vlan id $ID mode residential-bridge name INET_PPP_RES protocol-filter pass-pppoe
-
-configure vlan id $ID pppoe-relay-tag configurable circuit-id-pppoe physical-id remote-id-pppoe customer-id
-
-configure vlan shub id $ID   mode residential-bridge name INET_PPP_RES
-
-show interface shub port xml
-
-configure vlan shub id $ID egress-port #NETWORK
-
-show equipment slot $ID  
-
-$INIT   = 1;
-$END    = 12;
-FOR $i IN ($INIT..$END) {
-    configure vlan shub id $ID egress-port lt:1/1/$i 
-}
-
-
-$j = 13
-WHILE ($j LEQ #MAXNODES)
-   configure vlan shub id $ID egress-port lt:1/1/$j
-   $j = $j + 1;
-}
-
-
-configure pppox-relay cross-connect engine $ID mac-addr-conc name INET_PPP_RES
-
-if (%ALL_RIGHT) {
-    configure equipment slot nt-b unlock
-    
-    configure equipment protection-group 1 admin-status unlock
-    
-    admin software-mngt shub database save
-}
 </div>
     
 <script src="build/src/ace.js" type="text/javascript" charset="utf-8"></script>
