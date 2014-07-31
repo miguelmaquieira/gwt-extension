@@ -24,8 +24,10 @@ public interface CRONIOBOIMachinePropertiesDataConstants {
 	String CLOSE_CONNECTION_SCRIPT_ID	= "closeConnectionScriptId";
 	
 	//PROTOCOL TYPES
-	int PROTOCOL_TYPE_SSH		= 1;
-	int PROTOCOL_TYPE_TELNET	= 2;
+	int PROTOCOL_TYPE_SSH_1		= 1;
+	int PROTOCOL_TYPE_SSH_2		= 2;
+	int PROTOCOL_TYPE_TELNET	= 3;
+	int PROTOCOL_TYPE_TEST		= 4;
 
 	//Context
 	String MACHINE_CONNECTION_SCRIPT 	= "MACHINE_CONNECTION_SCRIPT";

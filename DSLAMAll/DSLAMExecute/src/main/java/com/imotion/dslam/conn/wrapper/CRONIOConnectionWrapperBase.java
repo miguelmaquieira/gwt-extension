@@ -75,7 +75,7 @@ public abstract class CRONIOConnectionWrapperBase implements CRONIOConnectionIWr
 		return timeout;
 	}
 
-	protected String getIp() {
+	protected String getHost() {
 		return ip;
 	}
 	

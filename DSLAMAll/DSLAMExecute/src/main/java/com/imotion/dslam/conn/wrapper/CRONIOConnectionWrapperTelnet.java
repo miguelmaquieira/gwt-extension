@@ -20,7 +20,7 @@ public class CRONIOConnectionWrapperTelnet extends CRONIOConnectionWrapperBase i
 
 		telnet = new TelnetClient();
 		try {
-			telnet.connect(getIp());
+			telnet.connect(getHost());
 
 			InputStream isIn	= telnet.getInputStream();
 			PrintStream osOut	= new PrintStream(telnet.getOutputStream());
