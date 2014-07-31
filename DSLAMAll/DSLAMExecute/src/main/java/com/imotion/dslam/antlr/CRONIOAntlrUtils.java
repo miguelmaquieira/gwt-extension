@@ -32,8 +32,7 @@ public class CRONIOAntlrUtils {
 	private static final String VARIABLE_REGEX			= "^(\\$|#|@)[A-Za-z][A-Za-z0-9_]*(\\[\\d\\])?";
 	private static final String INSTRUCTION_END			= ";";
 	private static final String CONCATENATION_OPERATOR	= ".";
-	private static final String MATCH_TARGET_OPERATOR		= ">";
-
+	private static final String CONCATENATION_OPERATOR_WITH_SPACES	= CONCATENATION_OPERATOR + "\" \"" + CONCATENATION_OPERATOR;
 
 	private static final String VARIABLE_PREFFIX_PROCESS 	= "#";
 	private static final String NEW_LINE		 			= "\n";
@@ -224,7 +223,7 @@ public class CRONIOAntlrUtils {
 				
 				if ( (i > 1 && !stringNotClosed && !itemClosesString && !concatenatorOperator) || (i > 1 && stringNotClosed && itemStartsString) ) {
 					processedLineSb.append(" ");
-					processedLineSb.append(CONCATENATION_OPERATOR);
+					processedLineSb.append(CONCATENATION_OPERATOR_WITH_SPACES);
 				}
 				processedLineSb.append(" ");
 				processedLineSb.append(processedItem);
