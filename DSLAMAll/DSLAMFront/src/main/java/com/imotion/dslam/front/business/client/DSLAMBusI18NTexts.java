@@ -218,8 +218,14 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Telnet")
 	String telnet();
 	
-	@DefaultStringValue("SSH")
-	String ssh();
+	@DefaultStringValue("SSH1")
+	String ssh1();
+	
+	@DefaultStringValue("SSH2")
+	String ssh2();
+	
+	@DefaultStringValue("Test")
+	String test();
 	
 	@DefaultStringValue("Prompt")
 	String prompt_placeholder();

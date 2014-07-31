@@ -52,15 +52,11 @@ public class CRONIOAntlrUtils {
 			for (String line : originalLines) {
 				line = processLineSpaces(line);
 				String compiledLine = "";
-				if (isExecutionInstruction(line)) {
+				if (isCommandLine(line)) {
 					if (!line.endsWith(INSTRUCTION_END)) {
 						errors.put(END_COMMAND_ERROR_CODE, END_COMMAND_ERROR_MSG);
-					} else {
-						if (isCommandLine(line)) {
-							compiledLine = processCommandsLine(line, languageType, errors);
-						} else {
-							compiledLine = processFunctionLine(line, errors);
-						}
+					} else if (isCommandLine(line)) {
+						compiledLine = processExecutionLine(line, languageType, errors);
 					}
 				} else {
 					compiledLine = line;
@@ -184,7 +180,7 @@ public class CRONIOAntlrUtils {
 		return processedLine;
 	}
 	
-	private static String processCommandsLine(String line, int languageType, Map<String, String> errors) {
+	private static String processExecutionLine(String line, int languageType, Map<String, String> errors) {
 		StringBuilder	processedLineSb	= new StringBuilder();
 		List<String> lineItems = AEMFTCommonUtils.splitByToken(line, " ");
 		if (!AEMFTCommonUtilsBase.isEmptyList(lineItems)) {
@@ -239,35 +235,4 @@ public class CRONIOAntlrUtils {
 		return processedLine;
 	}
 	
-	private static String processFunctionLine(String line, Map<String, String> errors) {
-		List<String> lineItems = AEMFTCommonUtils.splitByToken(line, " ");
-		StringBuilder processedLineSb = new StringBuilder();
-		if (!AEMFTCommonUtilsBase.isEmptyList(lineItems)) {
-			processedLineSb.append(lineItems.get(0));
-			int	itemsSize = lineItems.size();
-			//from "function" to ";"
-			for (int i = 1; i < itemsSize - 1; i++ ) {
-				String currentItem 	= lineItems.get(i);
-				currentItem			= currentItem.trim();
-				String processedItem = "";
-				if (currentItem.matches(VARIABLE_REGEX)) {
-					processedItem = currentItem;
-				} else {
-					if (currentItem.startsWith("\"")) {
-						processedItem = currentItem;
-					} else if (currentItem.equals(CONCATENATION_OPERATOR) || currentItem.equals(MATCH_TARGET_OPERATOR)) {
-						processedItem = currentItem;
-					} else {
-						processedItem = "\"" + currentItem + "\"";
-					}
-				}
-				processedLineSb.append(" ");
-				processedLineSb.append(processedItem);
-			}
-			processedLineSb.append(lineItems.get(itemsSize - 1));
-		}
-		String processedLine = processedLineSb.toString();
-		return processedLine;
-	}
-
 }

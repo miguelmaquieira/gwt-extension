@@ -13,7 +13,8 @@ import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperDummy;
-import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH;
+import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH1;
+import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH2;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperTelnet;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
@@ -39,8 +40,10 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		this.patternPrompt 		= Pattern.compile(promptRegEx);
 		this.protocolType 		= machineProperties.getProtocolType();
 		this.variablesMap		= CRONIOAntlrUtils.getMachineVariables(machineProperties);
-		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH == protocolType) {
-			connectionWrapper = new CRONIOConnectionWrapperSSH();
+		if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1 == protocolType) {
+			connectionWrapper = new CRONIOConnectionWrapperSSH1();
+		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_2 == protocolType) {
+			connectionWrapper = new CRONIOConnectionWrapperSSH2();
 		} else if (CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET == protocolType) {
 			connectionWrapper = new CRONIOConnectionWrapperTelnet();
 		} else {

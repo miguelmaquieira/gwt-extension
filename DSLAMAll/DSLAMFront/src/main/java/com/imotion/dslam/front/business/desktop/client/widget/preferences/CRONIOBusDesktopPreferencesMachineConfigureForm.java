@@ -66,8 +66,10 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
 		textBoxesLeftZone.add(protocolTypeDropdownButton);
 		protocolTypeDropdownButton.setContainerId(NAME);
-		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH)	, TEXTS.ssh());
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH_1)	, TEXTS.ssh1());
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH_2)	, TEXTS.ssh2());
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TELNET)	, TEXTS.telnet());
+		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_TEST)	, TEXTS.test());
 		//protocolTypeDropdownButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
 		//username
@@ -306,7 +308,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 		userPromptTextBox.setText("");
 		passwordPromptTextBox.setText("");
 		rollbackConditionPromptTextBox.setText("");
-		protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
+		protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1));
 	}
 
 	@Override
@@ -341,8 +343,16 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET));
 			userPromptTextBox.setVisible(true);
 			passwordPromptTextBox.setVisible(true);
+		} else if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1) {
+			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1));
+			userPromptTextBox.setVisible(false);
+			passwordPromptTextBox.setVisible(false);
+		} else if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_2) {
+			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_2));
+			userPromptTextBox.setVisible(false);
+			passwordPromptTextBox.setVisible(false);
 		} else {
-			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH));
+			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TEST));
 			userPromptTextBox.setVisible(false);
 			passwordPromptTextBox.setVisible(false);
 		}

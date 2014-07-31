@@ -12,7 +12,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
+public class CRONIOConnectionWrapperSSH2 extends CRONIOConnectionWrapperBase implements CRONIOConnectionIWrapper {
 
 	private JSch					jsch;
 	private Session					session;
@@ -27,7 +27,7 @@ public class CRONIOConnectionWrapperSSH extends CRONIOConnectionWrapperBase impl
 		
 		jsch = new JSch();
 		try {
-			session = jsch.getSession(getUser(), getIp(), 22);
+			session = jsch.getSession(getUser(), getHost());
 			session.setPassword(getPassword());
 			session.setTimeout(getTimeout());
 			session.setConfig(sessionProperties);
