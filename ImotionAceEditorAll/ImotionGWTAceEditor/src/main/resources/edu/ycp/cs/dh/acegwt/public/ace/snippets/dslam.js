@@ -16,6 +16,28 @@ snippet else if\n\
 	else if (${1}) {\n\
 		${2}//TODO:\n\
 	}\n\
+	\n\
+snippet switch\n\
+	switch (${1}) {\n\
+		case ${2}: \n\
+		{\n\
+			${3};\n\
+			break;\n\
+		}\n\
+		default: \n\
+		{\n\
+			${4};\n\
+			break;\n\
+		}\n\
+	}\n\
+	\n\
+snippet case \n\
+	case ${1}\n\
+	{\n\
+		${1};\n\
+		break;\n\
+	}\n\
+	\n\
 \n\
 snippet rbCase\n\
 	rbCase \"${1}\" {\n\
