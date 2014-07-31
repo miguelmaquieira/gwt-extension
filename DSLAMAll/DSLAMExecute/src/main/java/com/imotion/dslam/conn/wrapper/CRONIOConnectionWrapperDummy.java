@@ -21,6 +21,11 @@ public class CRONIOConnectionWrapperDummy extends CRONIOConnectionWrapperBase im
 	}
 	
 	@Override
+	public void sendNoResponseCommand(String command) {
+		//nothing to do
+	}
+	
+	@Override
 	public String readResponseUntil(String pattern) throws CRONIOConnectionUncheckedException {
 		return "Response " + pattern;
 	}
