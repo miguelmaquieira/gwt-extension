@@ -26,4 +26,6 @@ public interface CRONIOBUILoginBusinessServiceConstants {
 	String		EMAIL_BODY_ACTIVATE_USER		= "activateUser_body";
 	String		EMAIL_BODY_GUEST				= "guestEmail_body";
 	String		EMAIL_SUBJECT_GUEST				= "guestEmail_subject";
+	
+	String USER_DATA = "USER_DATA";
 }

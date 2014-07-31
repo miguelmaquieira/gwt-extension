@@ -37,10 +37,10 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
 		String 							projectName		= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_NAME			, contextIn);
-		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE	, contextIn);
+		int 							machineType		= getElementDataController().getElementAsInt(CRONIOBOIProjectDataConstants.PROJECT_MACHINE_TYPE		, contextIn);
 		Date 							creationTime 	= new Date();
 		
-		String 							userIdStr		= getSession().getUserId();
+		String 							userIdStr		= getElementDataController().getElementAsString(CRONIOBOIUser.USER_ID			, contextIn);
 		long							userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
 		
 		//MainScript
@@ -190,7 +190,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 	 */
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
-		String					userIdStr		= getSession().getUserId();
+		String					userIdStr		= getElementDataController().getElementAsString(CRONIOBOIUser.USER_ID			, projectData);
 		long					userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
 		CRONIOBOIUser 			user 			= getUserPersistence().getUserById(userId);
 		CRONIOBOIPreferences 	userPreferences = user.getPreferences();

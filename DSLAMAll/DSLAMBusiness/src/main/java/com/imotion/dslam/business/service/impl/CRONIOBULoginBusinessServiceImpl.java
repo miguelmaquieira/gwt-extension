@@ -207,10 +207,11 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		
 		AEMFTMetadataElementComposite 	preferencesDataContextOut 	= getController().executeService(preferencesDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_GET_PREFERENCES_ID);
 		AEMFTMetadataElementComposite	preferencesData				= elementController.getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, preferencesDataContextOut);
-		
+
 		//ContextOut
 		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST	, projectsData);
 		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
+		
 	}
 
 	private String getError() {

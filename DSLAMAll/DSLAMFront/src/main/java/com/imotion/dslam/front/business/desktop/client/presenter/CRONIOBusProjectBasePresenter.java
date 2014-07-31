@@ -7,6 +7,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
@@ -22,7 +23,9 @@ import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDe
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTILoginAppControllerConstants;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownGlyphIconButton;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
@@ -45,7 +48,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA};
+		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, AEGWTILoginAppControllerConstants.SESSION};
 	}
 
 	/**
@@ -233,6 +236,12 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		newProjectData.addElement(DSLAMBOIProject.PROJECT_NAME			, projectName);
 		newProjectData.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, machinetTypeInt);
 
+		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
+		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
+		String userIdStr = userIdData.getValueAsString();
+		
+		newProjectData.addElement(CRONIOBOIUser.USER_ID, userIdStr);
+		
 		getClientServerConnection().executeComm(newProjectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_ADD_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
@@ -313,8 +322,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentProjectId);
 		String projectDataKey = sbKey.toString();
-
+		
+		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
+		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
+		String userIdStr = userIdData.getValueAsString();
+		
 		AEMFTMetadataElementComposite projectData = getContextDataController().getElementAsComposite(projectDataKey);
+		projectData.addElement(CRONIOBOIUser.USER_ID, userIdStr);
+		
 		getClientServerConnection().executeComm(projectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
