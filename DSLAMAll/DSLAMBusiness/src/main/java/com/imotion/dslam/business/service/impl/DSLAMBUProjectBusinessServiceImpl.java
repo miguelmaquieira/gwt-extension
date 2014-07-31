@@ -96,6 +96,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA, projectData);
+		String a="";
 	}
 
 	@Override
@@ -217,6 +218,10 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		getProjectPersistence().updateProject(project.getProjectId(), project);
 		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
 
+		AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) projectData.getElement(CRONIOBOIProjectDataConstants.PROJECT_EXECUTION);
+		projectDataElement.addElement(CRONIOBOIProjectDataConstants.PROJECT_EXECUTION, logData.cloneObject());
+		
+		
 		return projectDataElement;
 	}
 

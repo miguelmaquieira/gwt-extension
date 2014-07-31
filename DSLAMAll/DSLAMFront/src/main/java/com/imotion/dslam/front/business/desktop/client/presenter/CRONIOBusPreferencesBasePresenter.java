@@ -22,6 +22,7 @@ import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIO
 import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesUserConfigureForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.client.presenter.controller.AEGWTILoginAppControllerConstants;
 import com.selene.arch.exe.gwt.client.service.comm.AEGWTCommClientAsynchCallbackRequest;
 import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEvent;
@@ -39,7 +40,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, PREFERENCES_NAVIGATION_DATA};
+		return new String[] {CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, PREFERENCES_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PROJECTS_DATA, AEGWTILoginAppControllerConstants.SESSION};
 	}
 
 	/**

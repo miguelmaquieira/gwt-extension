@@ -8,8 +8,11 @@ import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAM
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopExecutionDisplay {
+public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBaseView implements DSLAMBusDesktopExecutionDisplay, AEGWTHasLogicalEventHandlers {
 
 	public static final String NAME = "DSLAMBusDesktopExecutionScreenView";
 	
@@ -33,6 +36,7 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
 	@Override
@@ -52,6 +56,24 @@ public class DSLAMBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBase
 				logger.setData(logData);
 			}
 		}
+	}
+	
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+	
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE evtTyp = evt.getEventType();
+		if (LOGICAL_TYPE.UPDATE_EVENT.equals(evtTyp)) {
+			beforeExitSection();
+		}
+		
+	}
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return  LOGICAL_TYPE.UPDATE_EVENT.equals(type);
 	}
 
 	/**

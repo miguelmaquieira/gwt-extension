@@ -127,6 +127,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			if (AEGWTBootstrapDropdownGlyphIconButton.NAME.equals(sourceWidget)) {
 
 				if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_OPEN_PREFERENCES == Integer.valueOf(sourceWidgetId)) {
+					String finalSectionKey = getContextDataController().getElementAsString(CRONIOBusProjectBasePresenterConstants.PROJECT_NAVIGATION_DATA_CURRENT_FINAL_SECTION_ID);
+					if (CRONIOBOIProjectDataConstants.PROJECT_EXECUTION_LOG.equals(finalSectionKey)) {
+						AEGWTLogicalEvent logToContextevt = new AEGWTLogicalEvent(getName(), getName());
+						//logToContextevt.setSourceWidgetId(getSelectedId());
+						logToContextevt.setEventType(LOGICAL_TYPE.UPDATE_EVENT);
+						getLogicalEventHandlerManager().fireEvent(logToContextevt);
+					}
+					
 					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
 						AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
 						getFlowEventHandlerManager().fireEvent(flowEvent);
