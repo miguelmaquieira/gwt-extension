@@ -129,7 +129,6 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			String[] splitArgTokens = arg.split("\\?");
 			arg = splitArgTokens[0];
 		}
-		final String argProcessed = arg;
 
 		ContextRetriever rc = null;
 		return rc;

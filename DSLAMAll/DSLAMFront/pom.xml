@@ -271,8 +271,7 @@
 				</executions>
 				<configuration>
 					<modules>
-						<!-- Marketplace gwt module inherits Core gwt module therefore both 
-							will be gwt:compiled -->
+						<!-- Marketplace gwt module inherits Core gwt module therefore both will be gwt:compiled -->
 						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
 					</modules>
 					<runTarget>DSLAMBusDesktopModule.jsp</runTarget>

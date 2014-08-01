@@ -1,63 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html style="height: 100%">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!-- IEXPLORER -->
-<meta http-equiv="X-UA-Compatible" content="IE=8">
-<title>Chronium</title>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!-- IEXPLORER -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	
+	<title>Chronium</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-<link type="text/css" rel="stylesheet"
-	href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet"
-	href="jquery/perfect-scrollbar-0.4.10/perfect-scrollbar.css">
-<link type="text/css" rel="stylesheet"
-	href="css/jquery.datetimepicker.css">
-<link type="text/css" rel="stylesheet"
-	href="dslamBusDesktop/css/SeleneCommonModule.css">
-<link type="text/css" rel="stylesheet"
-	href="dslamBusDesktop/css/SeleneDesktopModule.css">
-<link type="text/css" rel="stylesheet"
-	href="dslamBusDesktop/css/BusinessCommonModule.css">
-<link type="text/css" rel="stylesheet"
-	href="dslamBusDesktop/css/BusinessDesktopModule.css">
-<link type="text/css" rel="stylesheet" href="css/DSLAMCommonModule.css">
-<link type="text/css" rel="stylesheet" href="css/DSLAMDesktopModule.css">
+	<link type="text/css" rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="jquery/perfect-scrollbar-0.4.10/perfect-scrollbar.css">
+	<link type="text/css" rel="stylesheet" href="css/jquery.datetimepicker.css">
+	<link type="text/css" rel="stylesheet" href="dslamBusDesktop/css/SeleneCommonModule.css">
+	<link type="text/css" rel="stylesheet" href="dslamBusDesktop/css/SeleneDesktopModule.css">
+	<link type="text/css" rel="stylesheet" href="dslamBusDesktop/css/BusinessCommonModule.css">
+	<link type="text/css" rel="stylesheet" href="dslamBusDesktop/css/BusinessDesktopModule.css">
+	<link type="text/css" rel="stylesheet" href="css/DSLAMCommonModule.css">
+	<link type="text/css" rel="stylesheet" href="css/DSLAMDesktopModule.css">
+	<link type="text/css" rel="stylesheet" href="css/ChroniumDesktopModule.css">
+	
 
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="gwt:property" content="locale=<%=request.getLocale()%>">
+	<!-- <meta name='viewport' id='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'> -->
 
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta name="gwt:property" content="locale=<%=request.getLocale()%>">
-<!-- <meta name='viewport' id='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'> -->
-
-<!-- THIRD PARTY JS -->
-<!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
-<!-- <script type="text/javascript" src="js/cordova-2.6.0.js" charset="utf-8"></script> -->
-<!-- <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script> -->
-
-<!-- ACE Editor -->
-<script src="dslamBusDesktop/ace/ace.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/theme-eclipse.js"
-	type="text/javascript" charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/mode-java.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/theme-monokai.js"
-	type="text/javascript" charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/mode-dslam.js" type="text/javascript"
-	charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/snippets/dslam.js"
-	type="text/javascript" charset="utf-8"></script>
-<script src="dslamBusDesktop/ace/ext-language_tools.js"
-	type="text/javascript" charset="utf-8"></script>
-<script src="js/atmosphere.js" type="text/javascript" charset="utf-8"></script>
+	<!-- ACE Editor -->
+	<script src="dslamBusDesktop/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/theme-eclipse.js"type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/mode-java.js" type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/mode-dslam.js" type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/snippets/dslam.js" type="text/javascript" charset="utf-8"></script>
+	<script src="dslamBusDesktop/ace/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/atmosphere.js" type="text/javascript" charset="utf-8"></script>
 
 
-<!-- GWT-MODULE -->
-<script type="text/javascript"
-	src="dslamBusDesktop/dslamBusDesktop.nocache.js"></script>
+	<!-- GWT-MODULE -->
+	<script type="text/javascript" src="dslamBusDesktop/dslamBusDesktop.nocache.js"></script>
 </head>
 <body>
 	<div id="progressIcon">

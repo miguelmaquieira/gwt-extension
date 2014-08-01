@@ -1,4 +1,8 @@
-package com.imotion.dslam.antlr;
+package com.imotion.antlr;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+
+import com.imotion.antlr.ImoLangLexer;
 
 
 
@@ -53,6 +57,8 @@ public class Test {
 														+ "}";
 	
 	public static void main( String[] args ) {
+		ANTLRInputStream is = new ANTLRInputStream("asdasd");
+		//ImoLangLexer lexer = new ImoLangLexer("adasdsa");
 //		DSLAMLexer lexer = new DSLAMLexer(new ANTLRInputStream(FOR_EACH_EXAMPLE));
 //		CommonTokenStream tokens = new CommonTokenStream(lexer);
 //		

@@ -19,9 +19,6 @@
         <dependent-module archiveName="SeleneBase-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SeleneBase/SeleneBase">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="SeleneDev-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SeleneDev/SeleneDev">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="Selene4GWT-Beta_Selene_2600.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Selene4GWT/Selene4GWT">
             <dependency-type>uses</dependency-type>
         </dependent-module>

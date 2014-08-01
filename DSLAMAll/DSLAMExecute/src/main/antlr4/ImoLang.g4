@@ -34,11 +34,15 @@ forEachStatement: 	'foreach' '(' VARIABLE_SCRIPT ':' variable ')' '{' statement+
 rbCase:				rbCaseItem+ rbCaseDefault?;
 rbCaseItem:			'rbCase' stringExpr '{' statement+ '}';
 rbCaseDefault:		'rbDefault' '{' statement+ '}';
+switchCase:			'switch' stringExpr '{' caseItem+ defaultCase?'}';
+caseItem: 			'case:' stringExpr '{' statement+ '}';
+defaultCase: 		'default:' stringExpr '{' statement+ '}';
+
 
 expression :	'(' expression ')'									#parExp
 				| left=expression op=('*'|'/') right=expression		#aritOp
    				| left=expression op=('+'|'-') right=expression 	#aritOp
-     			| atom=value												#atomExpr
+     			| atom=value										#atomExpr
      			;
      			
 stringExpr : value ('.' value)*;
@@ -60,11 +64,11 @@ variable : 		VARIABLE_SCRIPT
 			
 //LEXER
 INTEGER: ('-')?(DIGIT)+;
-VARIABLE_SCRIPT : 	 '$' VARIABLE_NAME;
-VARIABLE_PROCESS : 	 '#' VARIABLE_NAME;
-VARIABLE_EXECUTION : '@' VARIABLE_NAME;
-VARIABLE_NAME : IDENT_CHAR ('_'| IDENT_CHAR | DIGIT)* ;
-LOGICAL_COMPARATOR :   '=='
+VARIABLE_SCRIPT: 	 '$' VARIABLE_NAME;
+VARIABLE_PROCESS: 	 '#' VARIABLE_NAME;
+VARIABLE_EXECUTION:  '@' VARIABLE_NAME;
+VARIABLE_NAME: IDENT_CHAR ('_'| IDENT_CHAR | DIGIT)* ;
+LOGICAL_COMPARATOR:   '=='
 					 | '!='
 					 | '<'
 					 | '<='
