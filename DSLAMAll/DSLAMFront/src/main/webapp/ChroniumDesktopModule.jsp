@@ -38,7 +38,7 @@
 
 
 	<!-- GWT-MODULE -->
-	<script type="text/javascript" src="dslamBusDesktop/dslamBusDesktop.nocache.js"></script>
+	<script type="text/javascript" src="chroniumDesktop/chroniumDesktop.nocache.js"></script>
 </head>
 <body>
 	<div id="progressIcon">
