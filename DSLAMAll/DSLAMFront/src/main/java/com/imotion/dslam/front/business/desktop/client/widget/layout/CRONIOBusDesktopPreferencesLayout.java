@@ -138,10 +138,11 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 		String srcWindow 	= evt.getSourceWindow();
 		EVENT_TYPE type		= evt.getEventType();
 		if (CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER.equals(srcWindow)) {
-			String srcWidget	= evt.getSourceWidget();
-			String sectionId	= evt.getFinalSectionId();
-			String sectionPath	= evt.getFinalSectionPath();
-			String[] sectionPathSplit = null;
+			String 		srcWidget			= evt.getSourceWidget();
+			String 		sectionId			= evt.getFinalSectionId();
+			String 		mainSectionId		= evt.getMainSectionId();
+			String 		sectionPath			= evt.getFinalSectionPath();
+			String[] 	sectionPathSplit 	= null;
 			
 			if (sectionPath != null) {
 				sectionPathSplit = sectionPath.split("\\.");
@@ -183,6 +184,14 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 				String connectionName = getElementController().getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME, connectionData);
 				preferencesMenu.addConnection(connectionName);
 				toolbar.hideConnectionForm();
+			} else if (EVENT_TYPE.SECTION_SELECTED.equals(type)) {
+				preferencesMenu.resetSectionSelected();
+				if (sectionId == null) {
+					sectionId = evt.getMainSectionId();
+					preferencesMenu.setSectionSelected(sectionId);
+				} else {
+					preferencesMenu.setFinalSectionSelected(mainSectionId, sectionPath);
+				}
 			}
 		}
 	}
@@ -195,6 +204,8 @@ public class CRONIOBusDesktopPreferencesLayout extends AEGWTCompositePanel imple
 				EVENT_TYPE.PREFERENCES_SAVED.equals(type)
 				||
 				EVENT_TYPE.SECTION_MODIFIED.equals(type)
+				||
+				EVENT_TYPE.SECTION_SELECTED.equals(type)
 				||
 				EVENT_TYPE.CONNECTION_CREATED.equals(type);
 	}

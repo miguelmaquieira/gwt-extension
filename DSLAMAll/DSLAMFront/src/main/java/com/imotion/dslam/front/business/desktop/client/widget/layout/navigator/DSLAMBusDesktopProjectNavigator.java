@@ -64,6 +64,13 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		}
 	}
 	
+	public void setProjectSectionSeleted(String projectId, String sectionId) {
+		DSLAMBusDesktopProjectNavigatorElement projectElement = getElementById(projectId);
+		if (projectElement != null) {
+			projectElement.setProjectSectionSelected(sectionId);
+		}
+	}
+	
 	public void setProjectSaved(String projectId) {
 		DSLAMBusDesktopProjectNavigatorElement projectElement = getElementById(projectId);
 		if (projectElement != null) {
@@ -108,6 +115,14 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			}
 		}
 		return projectIds;
+	}
+	
+	public void removeProjectSectionSelected() {
+		List<DSLAMBusDesktopProjectNavigatorElement> projectElementList = getElementWidgetList();
+		for (DSLAMBusDesktopProjectNavigatorElement projectElement : projectElementList) {
+			projectElement.removeProjectSectionSelected();
+		}
+		
 	}
 
 	/**

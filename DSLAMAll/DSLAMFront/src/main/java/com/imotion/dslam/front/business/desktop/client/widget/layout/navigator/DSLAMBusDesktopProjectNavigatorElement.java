@@ -8,7 +8,6 @@ import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjec
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuItem;
 
 public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
 
@@ -16,10 +15,10 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapTreeMenu 				menu;
-	private AEGWTBootstrapTreeMenuItem 			menuProject;
-	private AEGWTBootstrapTreeMenuItem		 	menuScript;
-	private AEGWTBootstrapTreeMenuItem 			menuProcess;
-	private AEGWTBootstrapTreeMenuItem 			menuExecution;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuProject;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem		 	menuScript;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuProcess;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuExecution;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	mainScript;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	rollbackScript;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	variableProcess;
@@ -38,12 +37,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		root.add(menu);
 
 		//MENU -> Project
-		menuProject 		= new AEGWTBootstrapTreeMenuItem(projectName);
+		menuProject 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_PROJECT, projectName, this);
 		menuProject.setCloseMenu();
 		menu.addWidget(menuProject);
 
 		//MENU -> Project -> Script
-		menuScript 			= new AEGWTBootstrapTreeMenuItem(TEXTS.scripts_label());
+		menuScript 			= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_SCRIPT, TEXTS.scripts_label(), this);
 		menuScript.setCloseMenu();
 		menuProject.add(menuScript);
 
@@ -56,7 +55,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuScript.add(rollbackScript);
 
 		//MENU -> Project  -> Process
-		menuProcess 		= new AEGWTBootstrapTreeMenuItem(TEXTS.process_label());
+		menuProcess 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_PROCESS, TEXTS.process_label(), this);
 		menuProcess.setCloseMenu();
 		menuProject.add(menuProcess.asWidget());
 
@@ -77,7 +76,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.add(nodesProcess);
 
 		//MENU -> Project  -> Execution
-		menuExecution 		= new AEGWTBootstrapTreeMenuItem(TEXTS.execution());
+		menuExecution 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_EXECUTION, TEXTS.execution(), this);
 		menuExecution.setCloseMenu();
 		menuProject.add(menuExecution);
 		
@@ -86,6 +85,48 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuExecution.add(nodesLog);
 
 		menu.addSeparator();
+	}
+	
+	public void removeProjectSectionSelected() {
+		mainScript.setSelected(false);
+		rollbackScript.setSelected(false);
+		variableProcess.setSelected(false);
+		scheduleProcess.setSelected(false);
+		propertiesProcess.setSelected(false);
+		nodesProcess.setSelected(false);
+		nodesLog.setSelected(false);
+		menuProject.setSelected(false);
+		menuScript.setSelected(false);
+		menuProcess.setSelected(false);
+		menuExecution.setSelected(false);
+	}
+	
+	public void setProjectSectionSelected(String sectionId) {
+	
+		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+			mainScript.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
+			rollbackScript.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+			variableProcess.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+			scheduleProcess.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+			propertiesProcess.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
+			nodesProcess.setSelected(true);
+		} else if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
+			nodesLog.setSelected(true);
+		} else if (SECTION_TYPE_PROJECT.equals(sectionId)) {
+			menuProject.setSelected(true);
+		} else if (SECTION_TYPE_SCRIPT.equals(sectionId)) {
+			menuScript.setSelected(true);
+		} else if (SECTION_TYPE_PROCESS.equals(sectionId)) {
+			menuProcess.setSelected(true);
+		} else if (SECTION_TYPE_EXECUTION.equals(sectionId)) {
+			menuExecution.setSelected(true);
+		}
+		
 	}
 
 	public void setProjectSectionModified(String sectionId) {

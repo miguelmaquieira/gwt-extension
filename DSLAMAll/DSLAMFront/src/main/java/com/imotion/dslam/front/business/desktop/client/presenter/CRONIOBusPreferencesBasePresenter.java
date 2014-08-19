@@ -54,26 +54,31 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 			String 		finalSectionPath 	= evt.getFinalSectionPath();
 			boolean 	navigate 			= !getSectionType().equals(mainSectionId);
 
-			updateNavigationData(mainSectionId, finalSectionPath);
-			if (navigate) {
-				
-				String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
-				AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
-				if (finalSectionData != null) {
-					finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
-				}
-
-				//SHOW HEADER INFO
-				CRONIOBusDesktopPreferencesEvent showInfoEvent = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
-				showInfoEvent.setFinalSectionPath(finalSectionPath);
-				showInfoEvent.addElementAsComposite(SECTION_DATA, finalSectionData);
-				showInfoEvent.setEventType(EVENT_TYPE.SHOW_PREFERENCES_INFO);
-				getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-				
-				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(mainSectionId, getName());
-				getFlowEventHandlerManager().fireEvent(flowEvent);
+			if (finalSectionPath ==	null) {
+				fireSectionSelected(mainSectionId);
 			} else {
-				openFinalSection(finalSectionPath);
+				updateNavigationData(mainSectionId, finalSectionPath);
+				if (navigate) {
+					
+					String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
+					AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
+					if (finalSectionData != null) {
+						finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
+					}
+
+					//SHOW HEADER INFO
+					CRONIOBusDesktopPreferencesEvent showInfoEvent = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
+					showInfoEvent.setFinalSectionPath(finalSectionPath);
+					showInfoEvent.addElementAsComposite(SECTION_DATA, finalSectionData);
+					showInfoEvent.setEventType(EVENT_TYPE.SHOW_PREFERENCES_INFO);
+					getLogicalEventHandlerManager().fireEvent(showInfoEvent);
+					
+					AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(mainSectionId, getName());
+					getFlowEventHandlerManager().fireEvent(flowEvent);
+				} else {
+					openFinalSection(finalSectionPath);
+				}
+				fireFinalSectionSelected(mainSectionId, finalSectionPath);
 			}
 		} else if (EVENT_TYPE.NEW_CONNECTION.equals(evtTyp)) {
 			String	connectionName 	= evt.getElementAsString(CRONIOBOIMachineProperties.MACHINE_NAME);
@@ -377,6 +382,24 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		preferencesSavedEvt.setEventType(EVENT_TYPE.PREFERENCES_SAVED);
 		preferencesSavedEvt.setPreferencesId(preferencesId);
 		getLogicalEventHandlerManager().fireEvent(preferencesSavedEvt);
+	}
+	
+	private void fireSectionSelected(String currentSectionId) {
+		CRONIOBusDesktopPreferencesEvent sectionSelectedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
+		sectionSelectedEvt.setEventType(EVENT_TYPE.SECTION_SELECTED);
+		sectionSelectedEvt.setMainSectionId(currentSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionSelectedEvt);	
+	}
+	
+	private void fireFinalSectionSelected(String mainSectionId, String finalSectionPath) {
+		String[] finalSectionPathSplit = finalSectionPath.split("\\.");
+		String finalSectionId =  finalSectionPathSplit[finalSectionPathSplit.length-1];
+		CRONIOBusDesktopPreferencesEvent sectionSelectedEvt = new CRONIOBusDesktopPreferencesEvent(PREFERENCES_PRESENTER, getName());
+		sectionSelectedEvt.setEventType(EVENT_TYPE.SECTION_SELECTED);
+		sectionSelectedEvt.setMainSectionId(mainSectionId);
+		sectionSelectedEvt.setFinalSectionPath(finalSectionPath);
+		sectionSelectedEvt.setFinalSectionId(finalSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionSelectedEvt);
 	}
 
 }

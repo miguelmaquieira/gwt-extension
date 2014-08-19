@@ -23,27 +23,26 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private AEGWTBootstrapTreeMenu 				menu;
-	private AEGWTBootstrapTreeMenuItem 			menuMachines;
-	private AEGWTBootstrapTreeMenuItem 			menuUser;
+	private CRONIOBusDesktopPreferencesNavigatorTreeMenuItem 			menuMachines;
+	private CRONIOBusDesktopPreferencesNavigatorTreeMenuItem 			menuUser;
 
 	public DSLAMBusDesktopPreferencesMenu() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_MENU);
-		//setId(projectId);
 
 		//MENU
 		menu 				= new AEGWTBootstrapTreeMenu();
 		root.add(menu);
 
 		//MENU -> Machines
-		menuMachines 		= new AEGWTBootstrapTreeMenuItem(TEXTS.machines());
+		menuMachines 		= new CRONIOBusDesktopPreferencesNavigatorTreeMenuItem(SECTION_TYPE_MACHINE_PREFERENCES, TEXTS.machines(), this);
 		menuMachines.setId(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 		menuMachines.setCloseMenu();
 		menu.addWidget(menuMachines);
 		
-		//MENU -> Machines
-		menuUser 		= new AEGWTBootstrapTreeMenuItem(TEXTS.user_label());
+		//MENU -> User
+		menuUser 		= new CRONIOBusDesktopPreferencesNavigatorTreeMenuItem(SECTION_TYPE_USER_PREFERENCES, TEXTS.user_label(), this);
 		menuUser.setId(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES);
 		menuUser.setCloseMenu();
 		menu.addWidget(menuUser);
@@ -57,7 +56,7 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 
 	public void addConnection(String connectionName) {
 		//MENU -> Machines -> DSLAM
-		AEGWTBootstrapTreeMenuItem connection = new AEGWTBootstrapTreeMenuItem(connectionName);
+		CRONIOBusDesktopPreferencesNavigatorTreeMenuItem connection = new CRONIOBusDesktopPreferencesNavigatorTreeMenuItem(connectionName, connectionName, this);
 		menuMachines.add(connection);
 		connection.setContainerId(menuMachines.getId());
 		connection.setId(connectionName);
@@ -150,6 +149,76 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		while (userSectionList.hasNext()) {
 			AEGWTBootstrapTreeMenuFinalItem userSection = (AEGWTBootstrapTreeMenuFinalItem) userSectionList.next();
 			userSection.setModified(false);
+		}
+	}
+	
+	public void resetSectionSelected() {
+		resetMachinesSectionSelected();
+		resetUserSectionSelected();
+	}
+	
+	public void resetUserSectionSelected() {
+		menuUser.setSelected(false);
+		Iterator<Widget> userSectionList = menuUser.iterator();
+		while (userSectionList.hasNext()) {
+			AEGWTBootstrapTreeMenuFinalItem userSection = (AEGWTBootstrapTreeMenuFinalItem) userSectionList.next();
+			userSection.setSelected(false);
+		}
+	}
+	
+	public void resetMachinesSectionSelected() {
+		menuMachines.setSelected(false);
+		Iterator<Widget> menuMachineList = menuMachines.iterator();
+		while (menuMachineList.hasNext()) {
+			AEGWTBootstrapTreeMenuItem machineSection = (AEGWTBootstrapTreeMenuItem) menuMachineList.next();
+			machineSection.setSelected(false);
+			Iterator<Widget> machineFinalSections = machineSection.iterator();
+			while (machineFinalSections.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem machineFinalSection = (AEGWTBootstrapTreeMenuFinalItem) machineFinalSections.next();
+				machineFinalSection.setSelected(false);
+			}
+		}
+	}
+	
+	public void setSectionSelected(String sectionId) {
+		if (SECTION_TYPE_MACHINE_PREFERENCES.equals(sectionId)) {
+			menuMachines.setSelected(true);
+		} else if (SECTION_TYPE_USER_PREFERENCES.equals(sectionId)) {
+			menuUser.setSelected(true);
+		} else {
+			Iterator<Widget> machineList = menuMachines.iterator();
+			while (machineList.hasNext()) {
+				CRONIOBusDesktopPreferencesNavigatorTreeMenuItem machineSection = (CRONIOBusDesktopPreferencesNavigatorTreeMenuItem) machineList.next();
+				if(machineSection.getId().equals(sectionId)) {
+					machineSection.setSelected(true);
+				}
+			}
+		}
+	}
+	
+	public void setFinalSectionSelected(String mainSectionId, String sectionPath) {
+		String[] sectionPathSplit = sectionPath.split("\\.");
+		if ( CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST.equals(mainSectionId)) {
+			String machine 		= sectionPathSplit[1];
+			Iterator<Widget> menuMachineList = menuMachines.iterator();
+			while (menuMachineList.hasNext()) {
+				AEGWTBootstrapTreeMenuItem machineSection = (AEGWTBootstrapTreeMenuItem) menuMachineList.next();
+				if (machineSection.getId().equals(machine)) {
+					Iterator<Widget> machineFinalSections = machineSection.iterator();
+					while (machineFinalSections.hasNext()) {
+						AEGWTBootstrapTreeMenuFinalItem machineFinalSection = (AEGWTBootstrapTreeMenuFinalItem) machineFinalSections.next();
+						if (machineFinalSection.getId().equals(sectionPath)) {
+						machineFinalSection.setSelected(true);
+						}
+					}
+				}
+			}
+		} else if (CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES.equals(mainSectionId)) {
+			Iterator<Widget> userSectionList = menuUser.iterator();
+			while (userSectionList.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem userSection = (AEGWTBootstrapTreeMenuFinalItem) userSectionList.next();
+				userSection.setSelected(true);
+			}
 		}
 	}
 

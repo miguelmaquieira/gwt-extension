@@ -148,6 +148,12 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 				projectListNavigator.addElement(projectData);
 				toolbar.hideProjectForm();
+			} else if (EVENT_TYPE.SECTION_SELECTED.equals(type)) {
+				projectListNavigator.removeProjectSectionSelected();
+				if (sectionId == null) {
+					sectionId = evt.getMainSectionId();
+				}
+				projectListNavigator.setProjectSectionSeleted(projectId, sectionId);
 			}
 		}
 	}
@@ -159,6 +165,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				EVENT_TYPE.PROJECT_SAVED.equals(type)
 				||
 				EVENT_TYPE.SECTION_MODIFIED.equals(type)
+				||
+				EVENT_TYPE.SECTION_SELECTED.equals(type)
 				||
 				EVENT_TYPE.PROJECT_CREATED.equals(type);
 	}

@@ -62,21 +62,26 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			String projectId		= evt.getProjectId();
 			String mainSectionId	= evt.getMainSectionId();
 			String finalSectionId	= evt.getFinalSectionId();
+			
+			if (finalSectionId == null) {
+				fireSectionSelected(projectId, mainSectionId);
+			} else{
+				String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 
-			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+				boolean navigate 		= !getSectionType().equals(mainSectionId);
+				boolean	 projectChange	= !projectId.equals(currentProjectId);
 
-			boolean navigate 		= !getSectionType().equals(mainSectionId);
-			boolean	 projectChange	= !projectId.equals(currentProjectId);
-
-			getView().beforeExitSection();
-			updateNavigationData(projectId, mainSectionId, finalSectionId);
-			if (navigate) {
-				AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
-				flowEvent.setSourceWidgetId(mainSectionId);
-				getFlowEventHandlerManager().fireEvent(flowEvent);
-			} else {
-				openFinalSection(projectChange, projectId, finalSectionId);
-			}
+				getView().beforeExitSection();
+				updateNavigationData(projectId, mainSectionId, finalSectionId);
+				if (navigate) {
+					AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+					flowEvent.setSourceWidgetId(mainSectionId);
+					getFlowEventHandlerManager().fireEvent(flowEvent);
+				} else {
+					openFinalSection(projectChange, projectId, finalSectionId);
+				}
+				fireFinalSectionSelected(projectId, finalSectionId);
+			}	
 		} else if (EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(evtTyp)) {
 			AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 			updateFinalSectionInContext(finalSectionData);
@@ -423,6 +428,22 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			sectionModifiedEvt.setFinalSectionId(currentSectionId);
 			getLogicalEventHandlerManager().fireEvent(sectionModifiedEvt);
 		}	
+	}
+	
+	private void fireSectionSelected(String projectId, String currentSectionId) {
+		CRONIOBusDesktopProjectEvent sectionSelectedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		sectionSelectedEvt.setEventType(EVENT_TYPE.SECTION_SELECTED);
+		sectionSelectedEvt.setProjectId(projectId);
+		sectionSelectedEvt.setMainSectionId(currentSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionSelectedEvt);	
+	}
+	
+	private void fireFinalSectionSelected(String projectId, String currentSectionId) {
+		CRONIOBusDesktopProjectEvent sectionSelectedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		sectionSelectedEvt.setEventType(EVENT_TYPE.SECTION_SELECTED);
+		sectionSelectedEvt.setProjectId(projectId);
+		sectionSelectedEvt.setFinalSectionId(currentSectionId);
+		getLogicalEventHandlerManager().fireEvent(sectionSelectedEvt);
 	}
 
 	private void executeProject(String projectId) {
