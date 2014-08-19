@@ -36,6 +36,10 @@ public class CRONIOBusDesktopProcessNodeListElement extends AEGWTCompositePanel 
 		return menuItem.getElementName();
 	}
 	
+	public void setSelected(boolean selected) {
+		menuItem.setSelected(selected);
+	}
+	
 	/****************************************************************************
 	 *                        AEGWTICompositePanel
 	 ****************************************************************************/

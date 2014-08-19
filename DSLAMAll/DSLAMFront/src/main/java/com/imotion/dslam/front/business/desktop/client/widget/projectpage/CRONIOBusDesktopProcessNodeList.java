@@ -87,6 +87,17 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	public void reset() {
 		elementListContainer.clear();
 	}
+	
+	public void setElementSeleted(String srcWidget) {
+		List<CRONIOBusDesktopProcessNodeListElement> nodeList = getElementWidgetList();
+		for (CRONIOBusDesktopProcessNodeListElement nodeElement : nodeList) {
+			if (srcWidget.equals(nodeElement.getElementName())){
+				nodeElement.setSelected(true);
+			} else {
+				nodeElement.setSelected(false);
+			}
+		}
+	}
 
 	/**
 	 * AEGWTCompositePanel

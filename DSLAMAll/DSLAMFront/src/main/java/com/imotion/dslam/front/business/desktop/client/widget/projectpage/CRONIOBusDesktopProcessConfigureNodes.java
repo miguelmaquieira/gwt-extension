@@ -125,6 +125,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				AEMFTMetadataElementComposite cloneNodeData = (AEMFTMetadataElementComposite) nodeData.cloneObject();
 				cloneNodeData.setKey(srcWidgetId);
 				nodeInfoZone.setData(cloneNodeData);
+				nodeList.setElementSeleted(srcWidgetId);
 				nodeInfoZone.setVisible(true);
 			}	
 		} else if (CRONIOBusDesktopProcessConfigureNodesInfo.NAME.equals(srcWidget)) {
