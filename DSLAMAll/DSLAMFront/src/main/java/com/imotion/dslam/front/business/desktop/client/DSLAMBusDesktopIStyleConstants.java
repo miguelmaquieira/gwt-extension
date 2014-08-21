@@ -126,15 +126,19 @@ public interface DSLAMBusDesktopIStyleConstants {
 	
 	
 	//EXECUTION
-	String EXECUTION 									= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
-	String EXECUTION_LOGGER_TABS 						= EXECUTION					+ "-loggerTabs";			//dslam_studio-execution-loggerTabs
-	String EXECUTION_LOGGER_TABS_CONTAINER 				= EXECUTION					+ "-loggerTabsContainer";	//dslam_studio-execution-loggerTabsContainer
-	String EXECUTION_LOGGER 							= EXECUTION					+ "-logger";				//dslam_studio-execution-logger
-	String EXECUTION_LOGGER_CONTAINER 					= EXECUTION_LOGGER			+ "Container";				//dslam_studio-execution-loggerContainer
-	String EXECUTION_LOGGER_TABS_CONTENT_ZONE 			= EXECUTION					+ "-loggerTabsContentZone";	//dslam_studio-execution-loggerTabsContentZone
-	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 			= EXECUTION					+ "-loggerTabsResponseZone";//dslam_studio-execution-loggerTabsResponseZone
-	String EXECUTION_LOGGER_TABS_REQUEST_ZONE 			= EXECUTION					+ "-loggerTabsRequestZone";//dslam_studio-execution-loggerTabsRequestZone
-	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 			= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
+	String EXECUTION 										= APP_ID_PREFFIX			+ "execution";				//dslam_studio-execution
+	String EXECUTION_LOGGER_TABS 							= EXECUTION					+ "-loggerTabs";			//dslam_studio-execution-loggerTabs
+	String EXECUTION_LOGGER_TABS_CONTAINER 					= EXECUTION					+ "-loggerTabsContainer";	//dslam_studio-execution-loggerTabsContainer
+	String EXECUTION_LOGGER 								= EXECUTION					+ "-logger";				//dslam_studio-execution-logger
+	String EXECUTION_LOGGER_CONTAINER 						= EXECUTION_LOGGER			+ "Container";				//dslam_studio-execution-loggerContainer
+	String EXECUTION_LOGGER_FILTER_PANEL 					= EXECUTION					+ "-loggerFilterPanel";		//dslam_studio-execution-loggerFilterPanel
+	String EXECUTION_LOGGER_FILTER_PANEL_FORM 				= EXECUTION					+ "-loggerFilterPanelForm";		//dslam_studio-execution-loggerFilterPanelForm
+	String EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE 	= EXECUTION					+ "-loggerFilterPanelFormSeverityZone";		//dslam_studio-execution-loggerFilterPanelFormSeverityZone
+	String EXECUTION_LOGGER_FILTER_PANEL_FORM_DATETIME		= EXECUTION					+ "-loggerFilterPanelFormDateTime";		//dslam_studio-execution-loggerFilterPanelFormDateTime
+	String EXECUTION_LOGGER_TABS_CONTENT_ZONE 				= EXECUTION					+ "-loggerTabsContentZone";	//dslam_studio-execution-loggerTabsContentZone
+	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 				= EXECUTION					+ "-loggerTabsResponseZone";//dslam_studio-execution-loggerTabsResponseZone
+	String EXECUTION_LOGGER_TABS_REQUEST_ZONE 				= EXECUTION					+ "-loggerTabsRequestZone";//dslam_studio-execution-loggerTabsRequestZone
+	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 				= EXECUTION					+ "-loggerTabsPromptZone";	//dslam_studio-execution-loggerTabsPromptZone
 
 	//PREFERENCES
 	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";			//dslam_studio-preferencesView

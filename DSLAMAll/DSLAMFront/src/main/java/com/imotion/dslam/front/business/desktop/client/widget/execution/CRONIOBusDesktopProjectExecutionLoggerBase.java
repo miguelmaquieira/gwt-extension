@@ -20,7 +20,9 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSetListRegroup;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapPanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
 public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCompositePanel {
@@ -33,7 +35,9 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	
 	private int totalScroll; 
 
-	private FlowPanel loggerContaniner;
+	private FlowPanel 									loggerContaniner;
+	private AEGWTBootstrapPanel 						filterPanel;
+	private CRONIOBusDesktopProjectExecutionFilterForm	filterForm;
 
 	public CRONIOBusDesktopProjectExecutionLoggerBase(String loggerId) {
 		setId(loggerId);
@@ -46,6 +50,14 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		loggerContaniner = new FlowPanel();
 		root.add(loggerContaniner);
 		loggerContaniner.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
+		loggerContaniner.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
+		
+		filterPanel = new AEGWTBootstrapPanel();
+		filterPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL);
+		loggerContaniner.add(filterPanel);
+		
+		filterForm = new CRONIOBusDesktopProjectExecutionFilterForm();
+		filterPanel.getBody().add(filterForm);
 		
 		CRONIOLoggerRPCSerializer rpc_serializer = GWT.create(CRONIOLoggerRPCSerializer.class);
 		AtmosphereRequestConfig rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);
@@ -204,6 +216,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		filterForm.postDisplay();
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(getId(), this, getCurrentHeight(), true);
 	}
 

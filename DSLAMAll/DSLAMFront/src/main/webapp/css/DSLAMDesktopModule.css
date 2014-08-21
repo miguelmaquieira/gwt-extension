@@ -683,6 +683,24 @@
 	padding: 10px;
 }
 
+.dslam_studio-execution-loggerFilterPanelFormDateTime {
+	margin-left: -35px;
+	margin-bottom: 15px;
+	padding-left: 0px;
+}
+
+.dslam_studio-execution-loggerFilterPanel .aegwt-bootstrapForm-buttonsZone {
+	padding-left: 0px;
+}
+
+.dslam_studio-execution-loggerFilterPanelForm .gwt-RadioButton > label {
+	margin-left: 10px;
+}
+
+.dslam_studio-execution-loggerFilterPanelFormSeverityZone {
+	padding-left: 0px;
+}
+
 /*****************************************
 *			PREFERENCES
 ******************************************/

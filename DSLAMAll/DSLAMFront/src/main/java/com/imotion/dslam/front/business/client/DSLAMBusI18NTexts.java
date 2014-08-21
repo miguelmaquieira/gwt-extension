@@ -40,6 +40,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Eliminar")
 	String delete();
 	
+	@DefaultStringValue("Filtrar")
+	String filter();
+	
 	@DefaultStringValue("Navegador")
 	String navigator();
 	
@@ -72,10 +75,18 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 
 	@DefaultStringValue("Cambiar contraseña")
 	String change_password();
-
 	
 	@DefaultStringValue("Usuario")
 	String user_placeholder();
+	
+	@DefaultStringValue("Buscar...")
+	String search_placeholder();
+	
+	@DefaultStringValue("Filtrar:")
+	String filter_label();
+	
+	@DefaultStringValue("Filtro de texto:")
+	String filter_text_label();
 	
 	@DefaultStringValue("Contraseña")
 	String password_placeholder();
@@ -280,4 +291,34 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Usuario")
 	String user_label();
+
+	@DefaultStringValue("Todos")
+	String all();
+	
+	@DefaultStringValue("Info")
+	String info();
+	
+	@DefaultStringValue("Debug")
+	String debug();
+	
+	@DefaultStringValue("Warning")
+	String warning();
+	
+	@DefaultStringValue("Error")
+	String error();
+	
+	@DefaultStringValue("Critical")
+	String critical();
+	
+	@DefaultStringValue("Filtro por gravedad:")
+	String filter_for_gravity();
+	
+	@DefaultStringValue("Antes de:")
+	String before_label();
+	
+	@DefaultStringValue("beforeDate")
+	String before_date();
+	
+	@DefaultStringValue("Ahora")
+	String now();
 }
