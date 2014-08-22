@@ -122,6 +122,10 @@
 	margin-left: 10px;
 }
 
+.dslam_studio-list-container .tree-toogler:hover { 
+    background-color: #EEEEEE;
+} 
+
 /**************************************
 *			LAYOUT PREFERENCES
 ***************************************/
@@ -241,6 +245,10 @@
 	float: left;
 	margin-left: 10px;
 }
+
+.dslam_studio-preferencesLayout-menu .tree-toogler:hover { 
+    background-color: #EEEEEE;
+} 
 
 /*********************************
 *	TOOLBAR
@@ -643,7 +651,7 @@
 	{
 	font-size: 13px;
 	float: left;
-	width: 48%;
+	width: 50%;
 }
 
 .dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle>.subElementHeader
@@ -651,7 +659,7 @@
 	font-size: 13px;
 	color: #999999;
 	float: left;
-	width: 48%;
+	width: 50%;
 }
 
 .dslam_studio-execution-loggerTabsResponseZone .gwt-Label {
@@ -684,9 +692,8 @@
 }
 
 .dslam_studio-execution-loggerFilterPanelFormDateTime {
-	margin-left: -35px;
 	margin-bottom: 15px;
-	padding-left: 0px;
+	padding-left: 5px;
 }
 
 .dslam_studio-execution-loggerFilterPanel .aegwt-bootstrapForm-buttonsZone {
@@ -699,6 +706,55 @@
 
 .dslam_studio-execution-loggerFilterPanelFormSeverityZone {
 	padding-left: 0px;
+}
+
+.dslam_studio-execution-loggerFilterPanel .header {
+	width: 100% !important;
+	height: 40px;
+	font-size: 16px !important;
+	font-weight: bold;
+	margin-left: -15px;
+	padding-left: 15px;
+	padding-top: 10px;
+	margin-top:-10px
+}
+
+.dslam_studio-execution-loggerTabs .header {
+	margin-left: -10px;
+	padding-left: 10px;
+	margin-top: -10px;
+	padding-top: 10px;
+	height: 40px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.dslam_studio-execution-loggerTabs .subElementHeader {
+	height: 40px;
+	margin-left: -10px;
+	padding-left: 10px;
+	margin-top: -10px;
+	padding-top: 10px;
+}
+
+.dslam_studio-execution-loggerFilterPanel .panel-heading {
+	background-color: #9A9A9A;
+}
+
+.dslam_studio-execution-loggerFilterPanel .icon {
+	height: 40px;
+	margin-left: -15px;
+	margin-top: -10px;
+	padding-top: 10px;
+	float: right;
+}
+
+.dslam_studio-execution-loggerTabs .icon {
+	height: 40px;
+	margin-left: -15px;
+	margin-top: -10px;
+	padding-top: 10px;
+	float: right;
 }
 
 /*****************************************

@@ -63,7 +63,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		
 		String header = dateStr + " " + nodeName + " " + nodeIp;
 		
-		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header);
+		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header,true);
 		accordionPanelContainer.addWiget(accordionPanel);
 		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
 		

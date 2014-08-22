@@ -10,6 +10,7 @@ import org.atmosphere.gwt20.client.AtmosphereResponse;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
@@ -22,12 +23,13 @@ import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetad
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapPanel;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordionPanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
 public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCompositePanel {
 
-	public static final String NAME = "CRONIOBusDesktopProjectExecutionLogger";
+	public static final String NAME 			= "CRONIOBusDesktopProjectExecutionLogger";
+	private static DSLAMBusI18NTexts TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
 
 	private Atmosphere 			atmosphere;
 	private AtmosphereRequest 	rpcRequest;
@@ -36,7 +38,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	private int totalScroll; 
 
 	private FlowPanel 									loggerContaniner;
-	private AEGWTBootstrapPanel 						filterPanel;
+	private AEGWTBootstrapAccordionPanel				filterPanel;
 	private CRONIOBusDesktopProjectExecutionFilterForm	filterForm;
 
 	public CRONIOBusDesktopProjectExecutionLoggerBase(String loggerId) {
@@ -52,12 +54,17 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		loggerContaniner.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
 		loggerContaniner.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
-		filterPanel = new AEGWTBootstrapPanel();
+		filterPanel = new AEGWTBootstrapAccordionPanel(TEXTS.filtered(), false);
+		
+		FlowPanel panelContent = new FlowPanel();
+		filterPanel.addContentWidget(panelContent);
+		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
+
 		filterPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL);
 		loggerContaniner.add(filterPanel);
 		
 		filterForm = new CRONIOBusDesktopProjectExecutionFilterForm();
-		filterPanel.getBody().add(filterForm);
+		panelContent.add(filterForm);
 		
 		CRONIOLoggerRPCSerializer rpc_serializer = GWT.create(CRONIOLoggerRPCSerializer.class);
 		AtmosphereRequestConfig rpcRequestConfig = AtmosphereRequestConfig.create(rpc_serializer);

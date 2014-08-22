@@ -27,7 +27,8 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  severityDropdownButton;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			filterTextBox;
 	private	 AEGWTBootstrapDateTimePickerTextBox            safeBeforeDateTimePickerTextBox;
-	private LabelElement									beforeLabel;					
+	private LabelElement									beforeLabel;	
+	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  numberRowsDropdownButton;
 	
 	public CRONIOBusDesktopProjectExecutionFilterForm() {
 		setGlyphIconButtonText(BUTTON_SUBMIT, TEXTS.filter(), AEGWTIBoostrapConstants.SPAN_GLYPHICON_FILTER);
@@ -59,26 +60,40 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		
 		filterTextBox 	= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.filter_text_label(), TEXTS.search_placeholder());
 		filterZone.add(filterTextBox);
-		//filterTextBox.getTextBox().getElement().setPropertyString("width", "100px");
+		
+		FlowPanel beforeZone = new FlowPanel();
+		formZone.add(beforeZone);
+		beforeZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		
 		beforeLabel 	= Document.get().createLabelElement();
 		beforeLabel.setInnerText(TEXTS.before_label());
 		beforeLabel.getStyle().setWidth(100, Unit.PCT);
 		beforeLabel.getStyle().setPaddingLeft(0, Unit.PX);
-		formZone.getElement().appendChild(beforeLabel);
+		beforeZone.getElement().appendChild(beforeLabel);
 		
 		RadioButton beforeNow 	= new RadioButton(TEXTS.before_date(),TEXTS.now());
 		RadioButton beforeDate 	= new RadioButton(TEXTS.before_date());
 		beforeNow.getElement().addClassName(AEGWTIBoostrapConstants.COL_XS_12);
 		beforeDate.getElement().addClassName(AEGWTIBoostrapConstants.COL_XS_1);
 		beforeNow.setValue(true);
-		formZone.add(beforeNow);
-		formZone.add(beforeDate);
+		beforeZone.add(beforeNow);
+		beforeZone.add(beforeDate);
 		
 		safeBeforeDateTimePickerTextBox = new AEGWTBootstrapDateTimePickerTextBox(null);
-		safeBeforeDateTimePickerTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
+		safeBeforeDateTimePickerTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		safeBeforeDateTimePickerTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_DATETIME);
-		formZone.add(safeBeforeDateTimePickerTextBox);
+		beforeZone.add(safeBeforeDateTimePickerTextBox);
+		
+		FlowPanel rowsZone = new FlowPanel();
+		formZone.add(rowsZone);
+		rowsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
+		
+		numberRowsDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.rows_for_page());
+		rowsZone.add(numberRowsDropdownButton);
+		numberRowsDropdownButton.addElement(TEXTS.number_10(), TEXTS.number_10());
+		numberRowsDropdownButton.addElement(TEXTS.number_20(), TEXTS.number_20());
+		numberRowsDropdownButton.addElement(TEXTS.number_50(), TEXTS.number_50());
+		numberRowsDropdownButton.setItemSelected(TEXTS.number_20());
 		
 	}
 

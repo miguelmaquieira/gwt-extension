@@ -313,6 +313,12 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Filtro por gravedad:")
 	String filter_for_gravity();
 	
+	@DefaultStringValue("Filtrado")
+	String filtered();
+	
+	@DefaultStringValue("Trazas por página:")
+	String rows_for_page();
+	
 	@DefaultStringValue("Antes de:")
 	String before_label();
 	
@@ -321,4 +327,13 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Ahora")
 	String now();
+	
+	@DefaultStringValue("10")
+	String number_10();
+	
+	@DefaultStringValue("20")
+	String number_20();
+	
+	@DefaultStringValue("50")
+	String number_50();
 }
