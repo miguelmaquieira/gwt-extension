@@ -68,6 +68,10 @@
 	padding-left: 20px;
 }
 
+.dslam_studio-projectsLayout-listZone .nav-list .tree .nav-header label {
+	padding-left: 40px;
+}
+
 .dslam_studio-projectsLayout-listZone .nav-list .tree a {
 	padding-left: 30px;
 }
