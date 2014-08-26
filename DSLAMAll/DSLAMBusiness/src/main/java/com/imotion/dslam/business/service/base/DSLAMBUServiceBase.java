@@ -5,6 +5,7 @@ import java.util.Date;
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
+import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
@@ -30,6 +31,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	private CRONIOBKIMachinePropertiesPersistenceService	machinePropertiesPersistence;
 	private CRONIOBKILoginPersistenceService 				userPersistence;
 	private CRONIOBKIUserPreferencesPersistenceService 		userPreferencesPersistence;
+	private CRONIOBKIExecutionPersistenceService 			executionPersistence;
 
 	@Override
 	public String getName() {
@@ -109,6 +111,13 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		}
 		return userPreferencesPersistence;
 	}
+	
+	protected CRONIOBKIExecutionPersistenceService getExecutionPersistence() {
+		if (executionPersistence == null) {
+			executionPersistence =  getPersistence().getAppFactoryPersistence().newExecutionPersistence(getSession().getSessionId());
+		}
+		return executionPersistence;
+	}
 
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
@@ -154,6 +163,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (userPreferencesPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPreferencesPersistence);
 			userPreferencesPersistence = null;
+		}
+		if (executionPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) executionPersistence);
+			executionPersistence = null;
 		}
 	}
 
