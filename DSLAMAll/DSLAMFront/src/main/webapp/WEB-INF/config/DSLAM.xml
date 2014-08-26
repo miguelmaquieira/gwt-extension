@@ -173,6 +173,9 @@
 					<Descriptor>executeProject</Descriptor>
 					<Async>true</Async>
 				</SubService>
+				<SubService Name="ADD_EXECUTION">
+					<Descriptor>addExecution</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 		<Service Name="SRV_BUS_PREFERENCES">

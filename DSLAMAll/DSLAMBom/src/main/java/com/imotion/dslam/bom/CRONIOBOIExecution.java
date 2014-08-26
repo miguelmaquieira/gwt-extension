@@ -13,9 +13,9 @@ public interface CRONIOBOIExecution extends Serializable, CRONIOBOIExecutionData
 	
 	void setProject(DSLAMBOIProject project);
 	
-	Date getSavedTime();
-
-	void setSavedTime(Date savedTime);
+	String getDestinationLogs();
+	
+	void setDestinationLogs(String destinationLogs);
 
 	Date getCreationTime();
 

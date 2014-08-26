@@ -32,6 +32,7 @@ import com.selene.arch.exe.core.envi.io.AEMFTIIOConstant;
 public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIProjectBusinessService, DSLAMBUIProjectBusinessServiceConstants, DSLAMBUIProjectBusinessServiceTrace {
 
 	private static final long serialVersionUID = -3287573002047034251L;
+	
 	@Override
 	public void addProject() {
 		//ContextIn
@@ -183,7 +184,6 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(NODES_DATA_LIST, nodesData);
 	}
-
 	
 	/**
 	 * PRIVATE
