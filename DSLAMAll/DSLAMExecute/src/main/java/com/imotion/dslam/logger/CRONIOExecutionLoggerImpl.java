@@ -8,6 +8,7 @@ import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
+import org.apache.log4j.PropertyConfigurator;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 
@@ -45,6 +46,8 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 			apndr.setName(targetLog);
 			logger.addAppender(apndr);
 		}
+		
+		PropertyConfigurator.configure("log4mongo.properties");
 	}
 
 	@Override
