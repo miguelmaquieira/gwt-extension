@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
+import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
+import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
 import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.core.AEMFTICoreProxyService;
@@ -18,12 +20,14 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 
 	private DSLAMBKPersistenceModuleJPA<Q, Id> persistenceModule;
 	
+	private DSLAMBKIProjectPersistenceService					projectPersistence;
 	private DSLAMBKIFilePersistenceService 						filePersistence;
 	private DSLAMBKIProcessPersistenceService 					processPersistence;
 	private CRONIOBKINodePersistenceService						nodePersistence;
 	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
 	private CRONIOBKIUserPreferencesPersistenceService			userPreferencesPersistence;
+	private CRONIOBKIExecutionPersistenceService				executionPersistence;
 	
 	@Override
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
@@ -58,6 +62,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	@Override
 	public void releaseInstance() {
 		super.releaseInstance();
+		if (projectPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) projectPersistence);
+			projectPersistence = null;
+		}
 		if (filePersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) filePersistence);
 			filePersistence = null;
@@ -82,6 +90,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) userPreferencesPersistence);
 			userPreferencesPersistence = null;
 		}
+		if (executionPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) executionPersistence);
+			executionPersistence = null;
+		}
 	}
 	
 	/**************************************************************
@@ -91,6 +103,13 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	@Override
 	protected void initFactoryPersistence(AEMFTICoreProxyService coreProxy) {
 		getFactoryPersistence(coreProxy);
+	}
+	
+	protected DSLAMBKIProjectPersistenceService getProjectPersistence() {
+		if (projectPersistence == null) {
+			projectPersistence = (DSLAMBKIProjectPersistenceService) getFactoryPersistence().newProjectPersistence(getSessionId());
+		}
+		return projectPersistence;
 	}
 	
 	protected DSLAMBKIFilePersistenceService getFilePersistence() {
@@ -133,5 +152,12 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			userPreferencesPersistence = (CRONIOBKIUserPreferencesPersistenceService) getFactoryPersistence().newUserPreferencesPersistence(getSessionId());
 		}
 		return userPreferencesPersistence;
+	}
+	
+	protected CRONIOBKIExecutionPersistenceService getExecutionPersistence() {
+		if (executionPersistence == null) {
+			executionPersistence = (CRONIOBKIExecutionPersistenceService) getFactoryPersistence().newExecutionPersistence(getSessionId());
+		}
+		return executionPersistence;
 	}
 }

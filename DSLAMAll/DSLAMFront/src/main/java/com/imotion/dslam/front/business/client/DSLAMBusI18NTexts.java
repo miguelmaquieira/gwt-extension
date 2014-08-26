@@ -336,4 +336,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("50")
 	String number_50();
+	
+	@DefaultStringValue("Logs")
+	String logs();
 }

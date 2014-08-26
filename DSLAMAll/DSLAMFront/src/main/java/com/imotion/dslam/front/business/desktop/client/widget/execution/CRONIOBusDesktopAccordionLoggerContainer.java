@@ -9,6 +9,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadata
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordionPanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordionPanelContainer;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapPager;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
@@ -25,6 +26,9 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
 		getLoggerContainer().add(accordionPanelContainer);
 		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
+		
+		AEGWTBootstrapPager pager = new AEGWTBootstrapPager("#","#");
+		getLoggerContainer().add(pager);
 	}
 	
 	public void beforeExitSection() {

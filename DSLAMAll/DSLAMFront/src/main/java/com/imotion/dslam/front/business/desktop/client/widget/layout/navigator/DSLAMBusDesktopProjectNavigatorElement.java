@@ -19,13 +19,14 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem		 	menuScript;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuProcess;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuExecution;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuLogs;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	mainScript;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	rollbackScript;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	variableProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	scheduleProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	propertiesProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesLog;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesConsole;
 
 	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
 		FlowPanel root = new FlowPanel();
@@ -80,9 +81,14 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuExecution.setCloseMenu();
 		menuProject.add(menuExecution);
 		
-		//MENU -> Project -> Execution -> Logs
-		nodesLog 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
-		menuExecution.add(nodesLog);
+		//MENU -> Project -> Execution -> Console
+		nodesConsole 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
+		menuExecution.add(nodesConsole);
+		
+		//MENU -> Project  -> Execution -> Logs
+		menuLogs 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_EXECUTION, TEXTS.logs(), this);
+		menuLogs.setCloseMenu();
+		menuExecution.add(menuLogs);
 
 		menu.addSeparator();
 	}
@@ -94,7 +100,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		scheduleProcess.setSelected(false);
 		propertiesProcess.setSelected(false);
 		nodesProcess.setSelected(false);
-		nodesLog.setSelected(false);
+		nodesConsole.setSelected(false);
 		menuProject.setSelected(false);
 		menuScript.setSelected(false);
 		menuProcess.setSelected(false);
@@ -116,7 +122,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
 			nodesProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
-			nodesLog.setSelected(true);
+			nodesConsole.setSelected(true);
 		} else if (SECTION_TYPE_PROJECT.equals(sectionId)) {
 			menuProject.setSelected(true);
 		} else if (SECTION_TYPE_SCRIPT.equals(sectionId)) {
