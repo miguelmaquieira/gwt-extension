@@ -1,7 +1,6 @@
 package com.imotion.dslam.backend.persistence.service.execution;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
@@ -32,22 +31,6 @@ public class CRONIOBKExecutionPersistenceServiceJPA extends DSLAMBKPersistenceSe
 		
 		executionJPA = getPersistenceModule().create(executionJPA);
 		return executionJPA;
-	}
-	
-	@Override
-	public CRONIOBOIExecution updateExecution(Long executionId, CRONIOBOIExecution updatedExecution) {
-		CRONIOBOExecution originalExecution = getPersistenceModule().get(executionId);
-		if (originalExecution != null) {
-			originalExecution.setSavedTime(new Date());
-			getPersistenceModule().update(originalExecution);
-		}
-		return originalExecution;
-	}
-	
-	@Override
-	public List<CRONIOBOIExecution> getAllExecutions() {
-		List<CRONIOBOExecution> executionListJpa = getPersistenceModule().findAll();
-		return AEMFTCommonUtilsBase.castList(executionListJpa);
 	}
 	
 	@Override

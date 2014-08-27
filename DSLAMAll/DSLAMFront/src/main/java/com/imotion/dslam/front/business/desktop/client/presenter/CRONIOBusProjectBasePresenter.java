@@ -6,6 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -97,6 +98,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.EXECUTE.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			executeProject(currentProjectId);
+			addExecutionToDB(currentProjectId);
+			//projectsLayout.addExecution(currentProjectId, currentDate);
+			
 		}	
 	}
 
@@ -219,7 +223,39 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	/**
 	 *	PRIVATE 
 	 */
+	private void addExecutionToDB(String currentId) {
+		
+		AEMFTMetadataElementComposite newExecutionData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		
+		newExecutionData.addElement(CRONIOBOIExecutionDataConstants.PROJECT_ID		, currentId);
+		
+		
+		
+		getClientServerConnection().executeComm(newExecutionData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_ADD_EXECUTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				if (dataResult != null) {
+//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+//					if (projectData != null) {
+//						String projectId = getElementDataController().getElementAsString(DSLAMBOIProject.PROJECT_ID, projectData);
+//						updateProjectClientData(projectId, projectData, false);
+//
+//						CRONIOBusDesktopProjectEvent projectCreatedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+//						projectCreatedEvt.setEventType(EVENT_TYPE.PROJECT_CREATED);
+//						projectCreatedEvt.addElementAsDataValue(projectData);
+//						getLogicalEventHandlerManager().fireEvent(projectCreatedEvt);
+//					}
+				}
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+			}
+		});
+	}
+	
 
 	private void updateNavigationData(String projectId, String mainSectionId, String finalSectionId) {
 		AEMFTMetadataElementComposite navigationData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
@@ -453,6 +489,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				
 			}
 
 			@Override

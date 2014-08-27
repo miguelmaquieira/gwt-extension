@@ -20,19 +20,19 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 @Entity(name="Execution")
 public class CRONIOBOExecution implements CRONIOBOIExecution {
 
-	private static final long serialVersionUID = -2150526690424573062L;
+	private static final long serialVersionUID = -3324713164638338747L;
 	
 	private Long 				executionId;
 	private DSLAMBOIProject 	project;
-	private Date 				savedTime;
+	private String				destinationLogs;
 	private Date 				creationTime;
 	private Long				version; 
 
 	public CRONIOBOExecution() {}
 
 	@Id
-	@SequenceGenerator(name = "executionIdGenerator", sequenceName = "ExecutionSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ExecutionIdGenerator")	
+	@SequenceGenerator(name = "executionIdGenerator", sequenceName = "executionSeq") //It only takes effect for databases providing identifier generators.
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "executionIdGenerator")	
 	@Override
 	public Long getExecutionId() {
 		return executionId;
@@ -55,16 +55,14 @@ public class CRONIOBOExecution implements CRONIOBOIExecution {
 		this.project = project;
 	}
 	
-	
-	@Temporal(TemporalType.TIMESTAMP)
 	@Override
-	public Date getSavedTime() {
-		return savedTime;
+	public String getDestinationLogs() {
+		return destinationLogs;
 	}
 
 	@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
+	public void setDestinationLogs(String destinationLogs) {
+		this.destinationLogs = destinationLogs;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

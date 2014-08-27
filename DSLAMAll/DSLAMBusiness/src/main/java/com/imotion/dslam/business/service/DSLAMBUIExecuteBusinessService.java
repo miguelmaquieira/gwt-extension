@@ -7,5 +7,7 @@ import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
 public interface DSLAMBUIExecuteBusinessService extends DSLAMBUIBusinessService {
 
 	void executeProject();
+	
+	void addExecution();
 
 }

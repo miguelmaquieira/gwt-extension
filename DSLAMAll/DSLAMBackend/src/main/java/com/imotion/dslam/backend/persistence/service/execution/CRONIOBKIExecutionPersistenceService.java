@@ -10,10 +10,6 @@ public interface CRONIOBKIExecutionPersistenceService {
 	
 	CRONIOBOIExecution addExecution(CRONIOBOIExecution execution);
 	
-	CRONIOBOIExecution updateExecution(Long executionId, CRONIOBOIExecution updatedExecution);
-
-	List<CRONIOBOIExecution> getAllExecutions();
-	
 	List<CRONIOBOIExecution> getAllExecutionsByProject(long projectId);
 
 	void removeExecution(Long executionIdAsLong);
