@@ -6,10 +6,12 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -42,6 +44,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private CRONIOBusDesktopProjectsLayout projectsLayout;
+	
+	private String lastExecutionDate;
 
 	public CRONIOBusProjectBasePresenter(T view) {
 		super(view);
@@ -98,9 +102,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.EXECUTE.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			executeProject(currentProjectId);
-			addExecutionToDB(currentProjectId);
-			//projectsLayout.addExecution(currentProjectId, currentDate);
-			
+			addExecutionToDB(currentProjectId);	
 		}	
 	}
 
@@ -198,7 +200,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		sbKey.append(currentSectionId);
 		String finalSectionKey = sbKey.toString();
 
-		if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(currentSectionId)) {
+		if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
 			getElementDataController().setElement(DSLAMBOIProject.INFO_IS_MODIFIED, finalSectionData, true);
 		}
 
@@ -236,16 +238,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
-//					if (projectData != null) {
-//						String projectId = getElementDataController().getElementAsString(DSLAMBOIProject.PROJECT_ID, projectData);
-//						updateProjectClientData(projectId, projectData, false);
-//
-//						CRONIOBusDesktopProjectEvent projectCreatedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-//						projectCreatedEvt.setEventType(EVENT_TYPE.PROJECT_CREATED);
-//						projectCreatedEvt.addElementAsDataValue(projectData);
-//						getLogicalEventHandlerManager().fireEvent(projectCreatedEvt);
-//					}
+				 AEMFTMetadataElementComposite dateExecutionData = dataResult.getCompositeElement(DSLAMBUIExecuteBusinessServiceConstants.DATE_EXECUTION_DATA);
+				String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, dateExecutionData);
+				lastExecutionDate = dateExecutionStr;
+				//projectsLayout.addExecution(currentProjectId, lastExecutionDate);
 				}
 			}
 
@@ -287,7 +283,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				if (dataResult != null) {
+			if (dataResult != null) {
 					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
 					if (projectData != null) {
 						String projectId = getElementDataController().getElementAsString(DSLAMBOIProject.PROJECT_ID, projectData);
@@ -315,7 +311,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(projectId);
-			if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(projectFinalSectionId)) {
+			if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
 				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 				//Final Section Data
 				sbKey.append(projectFinalSectionId);
@@ -457,7 +453,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 
 	private void fireSectionModified(String projectId, String currentSectionId) {
-		if (!DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(currentSectionId)) {
+		if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
 			CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 			sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
 			sectionModifiedEvt.setProjectId(projectId);

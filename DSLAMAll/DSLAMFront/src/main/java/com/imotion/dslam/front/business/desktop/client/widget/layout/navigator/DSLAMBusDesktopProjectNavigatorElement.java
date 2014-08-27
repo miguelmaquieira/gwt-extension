@@ -82,7 +82,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.add(menuExecution);
 		
 		//MENU -> Project -> Execution -> Console
-		nodesConsole 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			,TEXTS.console_label(), this);
+		nodesConsole 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE			,TEXTS.console_label(), this);
 		menuExecution.add(nodesConsole);
 		
 		//MENU -> Project  -> Execution -> Logs
@@ -121,7 +121,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			propertiesProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
 			nodesProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
+		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			nodesConsole.setSelected(true);
 		} else if (SECTION_TYPE_PROJECT.equals(sectionId)) {
 			menuProject.setSelected(true);
@@ -172,6 +172,11 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		scheduleProcess.setModified(false);
 		propertiesProcess.setModified(false);
 		nodesProcess.setModified(false);
+	}
+	
+	public void addExecution(String projectId, String executionDateStr) {
+		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
+		menuLogs.add(execution);
 	}
 
 	public AEMFTMetadataElementComposite getData() {

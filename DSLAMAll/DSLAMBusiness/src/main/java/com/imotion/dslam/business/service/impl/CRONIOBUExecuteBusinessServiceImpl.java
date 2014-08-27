@@ -15,6 +15,8 @@ import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIExecuteBusinessService, DSLAMBUIExecuteBusinessServiceConstants, DSLAMBUIExecuteBusinessServiceTrace {
 
@@ -71,9 +73,12 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		//end-trace
 
 		//ContextOut
-//		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
-//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-//		contextOut.addElement(PROJECT_DATA, projectDataElement);
+		AEMFTMetadataElementComposite dateExecutionData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		String formatDate = "dd/MM/yyyy HH:mm";
+		String creationDateStr = AEMFTCommonUtils.formatDate(creationTime, formatDate, getSession().getCurrentLocale());
+		dateExecutionData.addElement(CRONIOBOIExecution.CREATION_TIME, creationDateStr);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(DATE_EXECUTION_DATA, dateExecutionData);
 	}
 
 	/**

@@ -124,6 +124,15 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 		}
 		
 	}
+	
+	public void addExecution(String projectId, String executionDateStr) {
+		List<DSLAMBusDesktopProjectNavigatorElement> projectNavigatorElementList = getElementWidgetList();
+		for (DSLAMBusDesktopProjectNavigatorElement ProjectNavigatorElement : projectNavigatorElementList) {
+			if (ProjectNavigatorElement.getId().equals(projectId)) {
+				ProjectNavigatorElement.addExecution(projectId, executionDateStr);
+			}
+		}
+	}
 
 	/**
 	 * AEGWTCompositePanel
