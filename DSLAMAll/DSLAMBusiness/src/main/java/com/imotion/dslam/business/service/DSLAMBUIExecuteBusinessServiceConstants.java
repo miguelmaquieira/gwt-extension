@@ -20,5 +20,6 @@ public interface DSLAMBUIExecuteBusinessServiceConstants {
 	
 	//CONTEXT
 	String 	EXECUTE_DATA = "EXECUTE_DATA";
+	String 	DATE_EXECUTION_DATA = "DATE_EXECUTION_DATA";
 	
 }

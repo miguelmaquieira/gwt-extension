@@ -68,6 +68,10 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public List<String> getModifiedProjetIds() {
 		return projectListNavigator.getModifiedProjectIds();
 	}
+	
+	public void addExecution(String projectId, String executionDateStr) {
+		projectListNavigator.addExecution(projectId, executionDateStr);
+	}
 
 	/**
 	 * CRONIOBusDesktopIsLayout
@@ -128,7 +132,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setModified(sectionModified);
 				setId(projectId);
 				toolbar.setId(projectId);
-				if (DSLAMBOIProject.PROJECT_EXECUTION_LOG.equals(sectionId)) {
+				if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 					toolbar.setExecuteEnabled(true);
 				} else {
 					toolbar.setExecuteEnabled(false);
