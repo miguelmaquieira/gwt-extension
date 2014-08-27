@@ -45,7 +45,7 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		String targetLog = logsDir + "/" + projectName + ".log";
 		if (logger.getAppender(projectName) == null) {
 			Properties prop = new Properties();
-			String propFileName = "log4execution.properties";		
+			String propFileName = classpathDir + "../config/log4execution.properties";		
 			InputStream inputStream = new FileInputStream(propFileName);
 			prop.load(inputStream);
 			prop.put("log4j.appender.FILE.name", projectName);
