@@ -44,8 +44,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private CRONIOBusDesktopProjectsLayout projectsLayout;
-	
-	private String lastExecutionDate;
 
 	public CRONIOBusProjectBasePresenter(T view) {
 		super(view);
@@ -238,10 +236,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-				 AEMFTMetadataElementComposite dateExecutionData = dataResult.getCompositeElement(DSLAMBUIExecuteBusinessServiceConstants.DATE_EXECUTION_DATA);
-				String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, dateExecutionData);
-				lastExecutionDate = dateExecutionStr;
-				//projectsLayout.addExecution(currentProjectId, lastExecutionDate);
+					AEMFTMetadataElementComposite dateExecutionData = dataResult.getCompositeElement(DSLAMBUIExecuteBusinessServiceConstants.DATE_EXECUTION_DATA);
+					String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, dateExecutionData);
+					String projectId = getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, dateExecutionData);
+					projectsLayout.addExecution(projectId, dateExecutionStr);
 				}
 			}
 

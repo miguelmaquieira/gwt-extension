@@ -77,6 +77,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		String formatDate = "dd/MM/yyyy HH:mm";
 		String creationDateStr = AEMFTCommonUtils.formatDate(creationTime, formatDate, getSession().getCurrentLocale());
 		dateExecutionData.addElement(CRONIOBOIExecution.CREATION_TIME, creationDateStr);
+		dateExecutionData.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(DATE_EXECUTION_DATA, dateExecutionData);
 	}
