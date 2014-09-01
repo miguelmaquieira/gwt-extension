@@ -483,7 +483,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				
+
 			}
 
 			@Override

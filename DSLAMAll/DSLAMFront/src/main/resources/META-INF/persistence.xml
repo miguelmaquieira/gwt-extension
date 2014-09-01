@@ -70,4 +70,18 @@
 			<property name="hibernate.c3p0.timeout" value="100" />
 		</properties>
 	</persistence-unit>
+	
+	<persistence-unit name="eclipselink.mongodb.jpa" transaction-type="RESOURCE_LOCAL">
+	    <!-- Registered entities -->
+		<class>com.imotion.dslam.bom.data.CRONIOBOLog</class>
+        <properties>
+            <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
+            <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
+            <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
+            <property name="eclipselink.nosql.property.mongo.host" value="localhost"/>
+            <property name="eclipselink.nosql.property.mongo.db" value="executionLogs"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
+        </properties>
+    </persistence-unit>
+	
 </persistence>
