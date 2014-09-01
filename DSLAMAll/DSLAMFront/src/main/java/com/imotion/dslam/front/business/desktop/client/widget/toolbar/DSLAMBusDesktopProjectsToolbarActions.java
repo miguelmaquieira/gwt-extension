@@ -91,7 +91,7 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 			@Override
 			public void onClick(ClickEvent event) {
 				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-				saveProjectEvent.setEventType(EVENT_TYPE.EXECUTE);
+				saveProjectEvent.setEventType(EVENT_TYPE.ADD_EXECUTION);
 				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
 			}
 		});
