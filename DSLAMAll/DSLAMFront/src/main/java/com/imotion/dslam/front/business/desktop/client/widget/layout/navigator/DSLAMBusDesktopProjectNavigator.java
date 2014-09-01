@@ -6,12 +6,15 @@ import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasComparator;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasSort;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -149,7 +152,25 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			elementListContainer.clear();
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
-				addElement((AEMFTMetadataElementComposite) elementData);
+				if (!CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementData.getKey())) {
+					addElement((AEMFTMetadataElementComposite) elementData);
+				} else {
+					AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
+					List<AEMFTMetadataElement> projectExecutionsListData = elementDataComposite.getSortedElementList();
+					for (AEMFTMetadataElement projectExecutionData : projectExecutionsListData) {
+						AEMFTMetadataElementComposite projectExecutionDataComposite = (AEMFTMetadataElementComposite) projectExecutionData;
+						String projectId = projectExecutionDataComposite.getKey();
+						List<AEMFTMetadataElement> executionDataList = projectExecutionDataComposite.getSortedElementList();
+						for (AEMFTMetadataElement execution : executionDataList) {
+							AEMFTMetadataElementComposite executionDataComposite = (AEMFTMetadataElementComposite) execution;
+							AEMFTMetadataElementSingle creationTimeData = (AEMFTMetadataElementSingle) executionDataComposite.getElement(CRONIOBOIExecution.CREATION_TIME);
+							String 		creationTimeStr 		= creationTimeData.getValueAsSerializable().toString();
+							String[] 	creationTimeStrSplit 	= creationTimeStr.split("\\.");
+							String 		creationTimeStrFormat	= creationTimeStrSplit[0];
+							addExecution(projectId, creationTimeStrFormat);
+						}
+					}
+				}	
 			}
 		}
 	}

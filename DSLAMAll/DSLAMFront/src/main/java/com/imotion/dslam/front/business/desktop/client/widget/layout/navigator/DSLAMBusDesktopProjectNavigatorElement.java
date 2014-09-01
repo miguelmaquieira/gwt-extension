@@ -14,19 +14,19 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	public static final String NAME = "DSLAMBusDesktopProjectNavigatorElement";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTBootstrapTreeMenu 				menu;
-	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuProject;
-	private CRONIOBusDesktopProjectNavigatorTreeMenuItem		 	menuScript;
-	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuProcess;
-	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuExecution;
-	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 			menuLogs;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	mainScript;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	rollbackScript;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	variableProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	scheduleProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	propertiesProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 	nodesConsole;
+	private AEGWTBootstrapTreeMenu 							menu;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuProject;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem	menuScript;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuProcess;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuExecution;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuLogs;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		mainScript;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		rollbackScript;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		variableProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		scheduleProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		propertiesProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		nodesProcess;
+	private CRONIOBusDesktopProjectNavigatorFinalItem 		nodesConsole;
 
 	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
 		FlowPanel root = new FlowPanel();

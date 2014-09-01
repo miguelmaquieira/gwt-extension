@@ -14,6 +14,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
@@ -94,9 +95,13 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 		AEMFTMetadataElementComposite userData = getElementDataController().getElementAsComposite(CRONIOBUILoginBusinessServiceConstants.USER_DATA, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.USER_DATA, userData);
 		
+		AEMFTMetadataElementComposite executionsData = getElementDataController().getElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA, result);
+		projectsData.addElement(executionsData);
+		
 		AEMFTMetadataElementComposite layoutsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
+		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_EXECUTIONS_ID, executionsData.cloneObject());
 
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);

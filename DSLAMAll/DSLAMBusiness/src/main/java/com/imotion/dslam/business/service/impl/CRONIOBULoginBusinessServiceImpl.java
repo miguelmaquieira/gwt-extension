@@ -3,6 +3,7 @@ package com.imotion.dslam.business.service.impl;
 
 import java.util.Locale;
 
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
@@ -202,6 +203,11 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_BY_USER_ID);
 		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
 		
+		AEMFTMetadataElementComposite projectsDataClone = (AEMFTMetadataElementComposite) projectsData.cloneObject();
+		
+		AEMFTMetadataElementComposite 	executionsDataContextOut 	= getController().executeService(projectsDataContextOut, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID);
+		AEMFTMetadataElementComposite	executionsData				= elementController.getElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA, executionsDataContextOut);
+		
 		AEMFTMetadataElementComposite preferencesDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		elementController.setElement(AEMFTILoginDataConstants.USER_ID, preferencesDataContextIn, userId);
 		
@@ -209,8 +215,9 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite	preferencesData				= elementController.getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, preferencesDataContextOut);
 
 		//ContextOut
-		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST	, projectsData);
+		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST		, projectsDataClone);
 		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
+		contextOut.addElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA		, executionsData);
 		
 	}
 

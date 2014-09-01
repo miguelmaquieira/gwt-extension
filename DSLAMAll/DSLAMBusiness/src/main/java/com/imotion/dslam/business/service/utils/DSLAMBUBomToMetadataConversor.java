@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
@@ -357,6 +358,35 @@ public class DSLAMBUBomToMetadataConversor {
 		AEMFTMetadataElementComposite userPreferencesData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		userPreferencesData.addElement(CRONIOBOIPreferences.USER_CONFIG,data);
 		return userPreferencesData;
+	}
+	
+	/**
+	 * EXECUTION
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromExecution(CRONIOBOIExecution execution) {
+		AEMFTMetadataElementComposite data = null;
+		if (execution != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+
+			data.addElement(CRONIOBOIExecution.EXECUTION_ID		, String.valueOf(execution.getExecutionId()));
+			data.addElement(CRONIOBOIExecution.PROJECT_ID		, String.valueOf(execution.getProject().getProjectId()));
+			data.addElement(CRONIOBOIExecution.CREATION_TIME	, execution.getCreationTime());
+			data.addElement(CRONIOBOIExecution.DESTINATION_LOGS	, execution.getDestinationLogs());
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromExecutionsProjectList(List<CRONIOBOIExecution> executionProjectList) {
+		//AEMFTMetadataElementComposite data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		AEMFTMetadataElementComposite dataExecutionProjectListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(executionProjectList)) {
+			for (CRONIOBOIExecution execution : executionProjectList) {
+				dataExecutionProjectListData.addElement(String.valueOf(execution.getExecutionId()), fromExecution(execution));
+				//data.addElement(DSLAMBUIExecuteBusinessServiceConstants.EXECUTIONS_BY_PROJECT_LIST_DATA, dataExecutionProjectListData);
+			}
+		}
+		return dataExecutionProjectListData;
 	}
 
 	/**

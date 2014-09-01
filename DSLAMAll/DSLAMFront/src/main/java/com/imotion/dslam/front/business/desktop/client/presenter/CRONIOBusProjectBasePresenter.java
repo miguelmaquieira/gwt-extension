@@ -11,7 +11,7 @@ import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -51,7 +51,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public String[] getInMapping() {
-		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, AEGWTILoginAppControllerConstants.SESSION};
+		return new String[] {CRONIODesktopIAppControllerConstants.PROJECTS_DATA, PROJECT_NAVIGATION_DATA, CRONIODesktopIAppControllerConstants.PREFERENCES_DATA, CRONIODesktopIAppControllerConstants.EXECUTIONS_DATA, AEGWTILoginAppControllerConstants.SESSION};
 	}
 
 	/**
@@ -98,10 +98,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			int		machinetTypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(machineTypeStr);
 			createProject(projectName, machinetTypeInt);
 		} else if (EVENT_TYPE.EXECUTE.equals(evtTyp)) {
+			String projectId = evt.getElementAsString(CRONIOBOIExecution.PROJECT_ID);
+			executeProject(projectId);
+		} else if (EVENT_TYPE.ADD_EXECUTION.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-			executeProject(currentProjectId);
-			addExecutionToDB(currentProjectId);	
-		}	
+			addExecutionToDB(currentProjectId);
+			
+		}		
 	}
 
 	@Override
@@ -118,7 +121,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				||
 				EVENT_TYPE.NEW_PROJECT.equals(type)
 				||
-				EVENT_TYPE.EXECUTE.equals(type);
+				EVENT_TYPE.EXECUTE.equals(type)
+				||
+				EVENT_TYPE.ADD_EXECUTION.equals(type);
 	}
 
 
@@ -236,10 +241,15 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite dateExecutionData = dataResult.getCompositeElement(DSLAMBUIExecuteBusinessServiceConstants.DATE_EXECUTION_DATA);
+					AEMFTMetadataElementComposite dateExecutionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.DATE_EXECUTION_DATA);
 					String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, dateExecutionData);
 					String projectId = getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, dateExecutionData);
 					projectsLayout.addExecution(projectId, dateExecutionStr);
+					
+					CRONIOBusDesktopProjectEvent addExecutionEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+					addExecutionEvt.setEventType(EVENT_TYPE.EXECUTE);
+					addExecutionEvt.addElementAsString(CRONIOBOIExecution.PROJECT_ID, projectId);
+					getLogicalEventHandlerManager().fireEvent(addExecutionEvt);
 				}
 			}
 
@@ -483,7 +493,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				
 			}
 
 			@Override

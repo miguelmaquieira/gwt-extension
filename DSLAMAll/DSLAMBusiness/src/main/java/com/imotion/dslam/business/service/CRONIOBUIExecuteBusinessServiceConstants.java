@@ -4,7 +4,7 @@ import com.imotion.dslam.business.DSLAMBUIConstant;
 import com.imotion.dslam.business.DSLAMBUIServiceConstant;
 import com.selene.arch.base.MFTIConstant;
 
-public interface DSLAMBUIExecuteBusinessServiceConstants {
+public interface CRONIOBUIExecuteBusinessServiceConstants {
 	
 	// BusinessExecuteService types
 	long 	CTE_BUSINESS_EXECUTE_SERVICE_TYPE 		= DSLAMBUIServiceConstant.CTE_DSLAM_APP_BUS_EXECUTE_SERVICE_SUBTYPE | DSLAMBUIConstant.CTE_DSLAM_APP_BUSINESS_SERVICE_TYPE;
@@ -15,11 +15,14 @@ public interface DSLAMBUIExecuteBusinessServiceConstants {
 	long	CTE_BUSINESS_EXECUTE_SERVICE_RANGE_TRACE = CTE_BUSINESS_EXECUTE_SERVICE_TYPE | MFTIConstant.CTE_MFT_RANGE_TRACE;
 
 	//METHODS
-	String 	METHOD_EXECUTE_PROJECT 	= "EXECUTE_PROJECT";
-	String 	METHOD_ADD_EXECUTION 	= "ADD_EXECUTION";
+	String 	METHOD_EXECUTE_PROJECT 					= "EXECUTE_PROJECT";
+	String 	METHOD_ADD_EXECUTION 					= "ADD_EXECUTION";
+	String  METHOD_GET_ALL_EXCUTIONS_BY_PROJECT_ID	= "GET_ALL_EXCUTIONS_BY_PROJECT_ID";
 	
 	//CONTEXT
-	String 	EXECUTE_DATA = "EXECUTE_DATA";
-	String 	DATE_EXECUTION_DATA = "DATE_EXECUTION_DATA";
+	String 	EXECUTE_DATA 					= "EXECUTE_DATA";
+	String 	EXECUTIONS_BY_PROJECT_LIST_DATA = "EXECUTIONS_BY_PROJECT_LIST_DATA";
+	String 	DATE_EXECUTION_DATA 			= "DATE_EXECUTION_DATA";
+	String  EXECUTIONS_DATA					= "EXECUTIONS_DATA";
 	
 }
