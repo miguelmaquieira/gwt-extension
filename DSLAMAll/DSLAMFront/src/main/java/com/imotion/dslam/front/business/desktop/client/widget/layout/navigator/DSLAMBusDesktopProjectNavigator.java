@@ -166,7 +166,12 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 							AEMFTMetadataElementSingle creationTimeData = (AEMFTMetadataElementSingle) executionDataComposite.getElement(CRONIOBOIExecution.CREATION_TIME);
 							String 		creationTimeStr 		= creationTimeData.getValueAsSerializable().toString();
 							String[] 	creationTimeStrSplit 	= creationTimeStr.split("\\.");
-							String 		creationTimeStrFormat	= creationTimeStrSplit[0];
+							
+							String[] creationTimeStrSplit1 = creationTimeStrSplit[0].split("\\-");
+							String[] creationTimeStrSplit2 = creationTimeStrSplit1[2].split(" ");
+							
+							
+							String 		creationTimeStrFormat	= creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
 							addExecution(projectId, creationTimeStrFormat);
 						}
 					}

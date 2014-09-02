@@ -3,11 +3,11 @@ package com.imotion.dslam.front.business.desktop.client.presenter.execution;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 
-public class DSLAMBusDesktopExecutionPresenter extends CRONIOBusProjectBasePresenter<DSLAMBusDesktopExecutionDisplay> {
+public class CRONIOBusDesktopExecutionPresenter extends CRONIOBusProjectBasePresenter<CRONIOBusDesktopExecutionDisplay> {
 
-	public static final String NAME = "DSLAMBusDesktopExecutionPresenter";
+	public static final String NAME = "CRONIOBusDesktopExecutionPresenter";
 
-	public DSLAMBusDesktopExecutionPresenter(DSLAMBusDesktopExecutionDisplay view) {
+	public CRONIOBusDesktopExecutionPresenter(CRONIOBusDesktopExecutionDisplay view) {
 		super(view);
 	}
 

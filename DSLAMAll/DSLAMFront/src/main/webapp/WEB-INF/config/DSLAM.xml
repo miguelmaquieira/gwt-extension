@@ -179,6 +179,9 @@
 				<SubService Name="GET_ALL_EXCUTIONS_BY_PROJECT_ID">
 					<Descriptor>getAllExecutionsByProjectId</Descriptor>
 				</SubService>
+				<SubService Name="GET_EXECUTION">
+					<Descriptor>getExecution</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 		<Service Name="SRV_BUS_PREFERENCES">

@@ -23,7 +23,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstant
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.flow.DSLAMBusDesktopAppFlowController;
-import com.imotion.dslam.front.business.desktop.client.presenter.execution.DSLAMBusDesktopExecutionPresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.execution.CRONIOBusDesktopExecutionPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.login.CRONIOBusDesktopLoginPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.CRONIOBusDesktopPreferencesPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
@@ -31,7 +31,7 @@ import com.imotion.dslam.front.business.desktop.client.presenter.preferences.use
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.projectpage.DSLAMBusDesktopProjectPagePresenter;
 import com.imotion.dslam.front.business.desktop.client.presenter.scriptsmanager.DSLAMBusDesktopScriptsManagerPresenter;
-import com.imotion.dslam.front.business.desktop.client.view.execution.DSLAMBusDesktopExecutionScreenView;
+import com.imotion.dslam.front.business.desktop.client.view.execution.CRONIOBusDesktopExecutionScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.info.DSLAMBusDesktopInfoScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.login.CRONIOBusDesktopLoginScreenView;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.CRONIOBusDesktopPreferencesScreenView;
@@ -160,13 +160,15 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE.equals(token1) ) {
 				presenter = new CRONIOBusDesktopProcessPresenter(new CRONIOBusDesktopProcessScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_EXECUTION.equals(token1) ) {
-				presenter = new DSLAMBusDesktopExecutionPresenter(new DSLAMBusDesktopExecutionScreenView());
+				presenter = new CRONIOBusDesktopExecutionPresenter(new CRONIOBusDesktopExecutionScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PREFERENCES.equals(token1) ) {
 				presenter = new CRONIOBusDesktopPreferencesPresenter(new CRONIOBusDesktopPreferencesScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_MACHINES.equals(token1) ) {
 				presenter = new CRONIOBusDesktopPreferencesConnectionPresenter(new CRONIOBusDesktopPreferencesConnectionScreenView());
 			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_USER.equals(token1) ) {
 				presenter = new CRONIOBusDesktopPreferencesUserPresenter(new CRONIOBusDesktopPreferencesUserScreenView());
+			} else if (DSLAMBusDesktopHistoryNavigationConstants.TOKEN_LOG.equals(token1) ) {
+				presenter = new CRONIOBusDesktopExecutionPresenter(new CRONIOBusDesktopExecutionScreenView());
 			} 
 		}
 		return presenter;

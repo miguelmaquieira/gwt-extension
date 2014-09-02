@@ -1,16 +1,14 @@
 package com.imotion.antlr;
 
+import static org.junit.Assert.assertEquals;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
 
 import com.imotion.antlr.ImoLangParser.ProgramContext;
-import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
-import com.imotion.dslam.antlr.CRONIOInterpreterVisitorValue;
 import com.imotion.dslam.conn.CRONIOConnectionImpl;
 import com.imotion.dslam.conn.CRONIOIConnection;
-
-import static org.junit.Assert.*;
 
 public class ImoLanLexerTest {
 	
@@ -27,7 +25,7 @@ public class ImoLanLexerTest {
 		ProgramContext tree = parser.program();
 		
 		String lexerText = lexer.getText();
-		CRONIOIConnection connection = new CRONIOConnectionImpl(0, null, null);
+		CRONIOIConnection connection = new CRONIOConnectionImpl(0, 0, null, null);
 		
 		//ImoLangVisitor<CRONIOInterpreterVisitorValue> interpreter = new CRONIOInterpreterVisitorImpl(connection, variables, rollbackConditionRegEx, rollbackVisitor, rollbackTree)
 ////		

@@ -175,7 +175,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	}
 	
 	public void addExecution(String projectId, String executionDateStr) {
-		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
+		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, DSLAMBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
 		menuLogs.add(execution);
 	}
 

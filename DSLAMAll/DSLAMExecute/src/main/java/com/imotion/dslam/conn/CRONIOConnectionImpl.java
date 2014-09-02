@@ -31,9 +31,9 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	private int 						protocolType;
 	private Map<String, Object> 		variablesMap;
 
-	public CRONIOConnectionImpl(long processId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
+	public CRONIOConnectionImpl(long processId, long executionId, CRONIOBOINode node, CRONIOIExecutionLogger	logger) {
 		this.machineProperties 	= node.getMachineProperties();
-		this.connectionId		= generateConnectionId(processId, node.getNodeId());
+		this.connectionId		= generateConnectionId(processId, executionId, node.getNodeId());
 		this.node 				= node;
 		this.logger				= logger;
 		this.promptRegEx 		= machineProperties.getPromptRegEx();
@@ -126,9 +126,11 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		return logger;
 	}
 
-	private String generateConnectionId(long processId, long nodeId) {
+	private String generateConnectionId(long processId, long executionId, long nodeId) {
 		StringBuilder connectionIdSB = new StringBuilder();
 		connectionIdSB.append(processId);
+		connectionIdSB.append(CONNECTION_ID_SEP);
+		connectionIdSB.append(executionId);
 		connectionIdSB.append(CONNECTION_ID_SEP);
 		connectionIdSB.append(nodeId);
 		return connectionIdSB.toString();

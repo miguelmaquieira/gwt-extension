@@ -19,7 +19,8 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	public		static		final 	String 	NAME 	= "CRONIOBusDesktopAccordionLoggerContainer";
 	private		static		final	int 	HEIGHT 	= 50;
 	
-	private AEGWTBootstrapAccordionPanelContainer accordionPanelContainer;
+	private AEGWTBootstrapAccordionPanelContainer 	accordionPanelContainer;
+	private AEGWTBootstrapPager						pager;
 	
 	public CRONIOBusDesktopAccordionLoggerContainer(String loggerId) {
 		super(loggerId);
@@ -27,12 +28,20 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		getLoggerContainer().add(accordionPanelContainer);
 		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 		
-		AEGWTBootstrapPager pager = new AEGWTBootstrapPager("#","#");
+		pager = new AEGWTBootstrapPager("#","#");
 		getLoggerContainer().add(pager);
 	}
 	
 	public void beforeExitSection() {
 		super.beforeExitSection();
+	}
+	
+	public void setFilterVisible (boolean visible) {
+		super.setFilterVisible(visible);
+	}
+	
+	public void setPagerVisible (boolean visible) {
+		pager.setVisible(visible);
 	}
 
 	/**

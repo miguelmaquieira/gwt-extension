@@ -1,7 +1,7 @@
 package com.imotion.dslam.business.service.base;
 
-import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.bus.service.AEMFTIBusinessServiceIdConstant;
@@ -31,6 +31,7 @@ public interface DSLAMBUIServiceIdConstant extends AEMFTIBusinessServiceIdConsta
 	String CTE_DSLAM_BU_SRV_EXECUTE_PREFIX								= CTE_DSLAM_BU_SRV_EXECUTE_ID 		+ AEMFTIBusinessConstant.CTE_MFT_AE_BUS_SERVICE_ID_SEPARATOR;
 	String CTE_DSLAM_BU_SRV_EXECUTE_EXECUTE_PROJECT_ID					= CTE_DSLAM_BU_SRV_EXECUTE_PREFIX	+ CRONIOBUIExecuteBusinessServiceConstants.METHOD_EXECUTE_PROJECT;
 	String CTE_DSLAM_BU_SRV_EXECUTE_ADD_EXECUTION_ID					= CTE_DSLAM_BU_SRV_EXECUTE_PREFIX	+ CRONIOBUIExecuteBusinessServiceConstants.METHOD_ADD_EXECUTION;
-	String CTE_DSLAM_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID	= CTE_DSLAM_BU_SRV_EXECUTE_PREFIX	+ CRONIOBUIExecuteBusinessServiceConstants.METHOD_GET_ALL_EXCUTIONS_BY_PROJECT_ID;
+	String CTE_DSLAM_BU_SRV_EXECUTE_GET_EXECUTION_ID					= CTE_DSLAM_BU_SRV_EXECUTE_PREFIX	+ CRONIOBUIExecuteBusinessServiceConstants.METHOD_GET_EXECUTION;
+	String CTE_DSLAM_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID	= CTE_DSLAM_BU_SRV_EXECUTE_PREFIX	+ CRONIOBUIExecuteBusinessServiceConstants.METHOD_GET_ALL_EXECUTIONS_BY_PROJECT_ID;
 	
 }	
