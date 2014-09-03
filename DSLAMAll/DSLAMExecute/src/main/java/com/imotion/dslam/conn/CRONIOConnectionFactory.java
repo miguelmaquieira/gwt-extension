@@ -7,8 +7,8 @@ import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 
 public class CRONIOConnectionFactory {
 
-	public static CRONIOIConnection getConnection(long processId, CRONIOBOINode node, CRONIOIExecutionLogger logger) {
-		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(processId, node, logger);
+	public static CRONIOIConnection getConnection(long processId, long executionId, CRONIOBOINode node, CRONIOIExecutionLogger logger) {
+		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(processId, executionId, node, logger);
 		try {
 			connection.openConnection();
 		} catch (IOException e) {

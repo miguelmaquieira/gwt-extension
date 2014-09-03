@@ -1,5 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -10,10 +11,12 @@ public class CRONIOBusDesktopProjectNavigatorFinalItem extends AEGWTBootstrapTre
 	public static final String NAME  = "CRONIOBusDesktopProjectNavigatorFinalItem";
 	
 	private String mainSectionId;
+	private String text;
 
 	public CRONIOBusDesktopProjectNavigatorFinalItem(String proyectId, String mainSectionId, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
 		super(proyectId, finalSectionId, text, parentWidget, true);
 		this.mainSectionId = mainSectionId;
+		this.text = text;
 	}
 	
 	/**
@@ -32,6 +35,10 @@ public class CRONIOBusDesktopProjectNavigatorFinalItem extends AEGWTBootstrapTre
 	protected void fireClick() {
 		String projectId		= getContainerId();
 		String finalSectionId	= getId();
+		
+		if (CRONIOBOIProjectDataConstants.PROJECT_EXECUTION_LOG.equals(finalSectionId)) {
+			finalSectionId = text;
+		}
 		
 		CRONIOBusDesktopProjectEvent openFinalSectionEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
 		openFinalSectionEvent.setEventType(EVENT_TYPE.OPEN_FINAL_SECTION_EVENT);

@@ -29,7 +29,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	}
 
 	@Override
-	public void execute() {
+	public void execute(Long executionId) {
 		String 				scriptCode			= project.getMainScript().getCompiledContent();
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 	= CRONIOAntlrUtils.getVariablesFromProject(project);
@@ -39,14 +39,14 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		boolean				sync		= process.isSynchronous();
 		long				processId	= process.getProcessId();
 
-		executeInNodes(processId, scriptCode, rollbackScriptCode, variables, nodeList, sync);
+		executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodeList, sync);
 	}
 
 	/**
 	 * PRIVATE
 	 */
 
-	private void executeInNode(long processId, CRONIOBOINode node, String scriptCode, String rollbackScriptCode, Map<String, Object> allVariables) {
+	private void executeInNode(long processId, long executionId, CRONIOBOINode node, String scriptCode, String rollbackScriptCode, Map<String, Object> allVariables) {
 		//RollbackScript
 		ProgramContext 	rollbackTree 				= null;
 		String			defaultRollbackCondition 	= null;
@@ -60,7 +60,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		ProgramContext mainTree		= CRONIOAntlrUtils.getTreeFromCode(scriptCode);
 
 		//Open Connection
-		CRONIOIConnection connection = CRONIOConnectionFactory.getConnection(processId, node, getLogger());
+		CRONIOIConnection connection = CRONIOConnectionFactory.getConnection(processId, executionId, node, getLogger());
 
 		//RollbackVisitor
 		CRONIOInterpreterVisitorImpl 	rollbackVisitor	= new CRONIOInterpreterVisitorImpl(connection, allVariables, null, null, null);
@@ -73,7 +73,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		CRONIOConnectionFactory.releaseConnection(connection);
 	}
 
-	private void executeInNodes(long processId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
+	private void executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
 		threads = new HashMap<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = CRONIOAntlrUtils.getNodeVariables(node);
@@ -81,20 +81,20 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 			allVariables.putAll(nodeVariables);
 			allVariables.putAll(processVariables);
 			if (sync) {
-				executeInNode(processId, node, scriptCode, rollbackScriptCode, allVariables);
+				executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
 			} else {
-				Thread thread = executeInNodeAsync(processId, node, scriptCode, rollbackScriptCode, allVariables);
+				Thread thread = executeInNodeAsync(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
 				threads.put(node.getNodeId(), thread);
 			}
 		}
 	}
 
-	private Thread executeInNodeAsync(final long processId, final CRONIOBOINode node, final String scriptCode, final String rollbackScriptCode, final Map<String, Object> allVariables) {
+	private Thread executeInNodeAsync(final long processId,final long executionId,final CRONIOBOINode node, final String scriptCode, final String rollbackScriptCode, final Map<String, Object> allVariables) {
 		Runnable task = new Runnable() {
 
 			@Override
 			public void run() {
-				executeInNode(processId, node, scriptCode, rollbackScriptCode, allVariables);
+				executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
 				checkEnd(node.getNodeId());
 			}
 		};

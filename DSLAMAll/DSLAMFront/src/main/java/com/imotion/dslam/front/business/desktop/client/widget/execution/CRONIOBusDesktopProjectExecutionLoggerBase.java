@@ -201,6 +201,11 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		saveContextEvt.addElementAsDataValue(logDataList);
 		getLogicalEventHandlerManager().fireEvent(saveContextEvt);
 	}
+	
+	public void setFilterVisible(boolean visible) {
+		filterPanel.setVisible(visible);
+		filterForm.setVisible(visible);
+	}
 
 	/**
 	 * AEGWTICompositePanel

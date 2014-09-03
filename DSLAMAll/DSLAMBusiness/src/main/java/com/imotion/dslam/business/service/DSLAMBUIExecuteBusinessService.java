@@ -9,6 +9,8 @@ public interface DSLAMBUIExecuteBusinessService extends DSLAMBUIBusinessService 
 	void executeProject();
 	
 	void addExecution();
+	
+	void getExecution();
 
 	void getAllExecutionsByProjectId();
 

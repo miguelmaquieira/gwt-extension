@@ -13,7 +13,7 @@ import com.imotion.dslam.conn.CRONIOIExecutionData;
 public class CRONIOConnectionWrapperTest {
 
 	public static void main(String[] args) throws IOException {
-		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(1, getNodeData(), null);
+		CRONIOConnectionImpl connection = new CRONIOConnectionImpl(1, 1, getNodeData(), null);
 		connection.openConnection();
 		try {
 			CRONIOIExecutionData responseData = connection.executeCommand("echo hola");
