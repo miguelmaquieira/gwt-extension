@@ -6,8 +6,9 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.apache.log4j.Level;
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
 import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
@@ -24,18 +25,35 @@ public class CRONIOBOLog implements CRONIOBOILog{
 	@GeneratedValue
 	@Field(name="_id")
 	private String logId;	
+	
+	@Field(name="timestamp")
+	@Temporal(value = TemporalType.DATE)
 	private Date timestamp;
-	private Level level;
+	
+	@Field(name="level")
+	private String level;
+	
+	@Field(name="thread")
 	private String thread;
+	
+	@Field(name="message")
 	private String message;
+	
 	@Embedded
+	@Field(name="loggerName")
 	private CRONIOLoggerData loggerName;
+	
+	@Field(name="fileName")
 	private String fileName; 
+	
+	@Field(name="method")
 	private String method;
+	
+	@Field(name="lineNumber")
 	private String lineNumber; 
+		
 	@Embedded
-	private CRONIOLoggerData loggerClass;
-	@Embedded
+	@Field(name="host")
 	private CRONIOHostData host;
 
 	
@@ -64,12 +82,12 @@ public class CRONIOBOLog implements CRONIOBOILog{
 	}
 
 	@Override
-	public Level getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
 	@Override
-	public void setLevel(Level level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
@@ -133,15 +151,6 @@ public class CRONIOBOLog implements CRONIOBOILog{
 		this.lineNumber = lineNumber;
 	}
 
-	@Override
-	public CRONIOLoggerData getLoggerClass() {
-		return loggerClass;
-	}
-
-	@Override
-	public void setLoggerClass(CRONIOLoggerData loggerClass) {
-		this.loggerClass = loggerClass;
-	}
 
 	@Override
 	public CRONIOHostData getHost() {

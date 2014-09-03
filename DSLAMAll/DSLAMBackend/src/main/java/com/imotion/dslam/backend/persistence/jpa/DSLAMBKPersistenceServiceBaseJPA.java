@@ -33,8 +33,11 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
 		if (persistenceModule == null) {
 			persistenceModule = new DSLAMBKPersistenceModuleJPA<Q, Id>();
+			setPersistenceUnit();
 			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(), getSessionId()});
+			
 		}
+		
 		return persistenceModule;
 	}
 	
@@ -99,7 +102,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	/**************************************************************
      *                   PROTECTED FUNCTIONS                      *
      **************************************************************/
-	
+	protected void setPersistenceUnit() {
+//		persistenceModule.setPersitenceUnitName("dslam");
+	}
+
 	@Override
 	protected void initFactoryPersistence(AEMFTICoreProxyService coreProxy) {
 		getFactoryPersistence(coreProxy);

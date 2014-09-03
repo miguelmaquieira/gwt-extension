@@ -13,10 +13,11 @@ import org.eclipse.persistence.nosql.annotations.NoSql;
 public class CRONIOLoggerData implements Serializable{ 
 
 	private static final long serialVersionUID = -5597314122463993102L;
-
+	
+	@Field(name = "fullyQualifiedClassName")
 	String fullyQualifiedClassName; 
-	@Field(name = "package")
-	String[] packageInfo; 
+
+	@Field(name = "className")
 	String className;
 		
 	public CRONIOLoggerData() {
@@ -31,13 +32,6 @@ public class CRONIOLoggerData implements Serializable{
 		this.fullyQualifiedClassName = fullyQualifiedClassName;
 	}
 
-	public String[] getPackageInfo() {
-		return packageInfo;
-	}
-
-	public void setPackageInfo(String[] packageInfo) {
-		this.packageInfo = packageInfo;
-	}
 
 	public String getClassName() {
 		return className;

@@ -2,6 +2,7 @@ package com.imotion.dslam.backend.persistence;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
 import com.imotion.dslam.backend.DSLAMBKIConstants;
+import com.imotion.dslam.backend.persistence.log.CRONIOBKLogPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKLoginPersistenceJPA;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKExecutionPersistenceServiceJPA;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKFilePersistenceServiceJPA;
@@ -63,4 +64,8 @@ public interface DSLAMBKIPersistenceConstants {
 	public static final String CFG_CRONIO_PERSISTENCE_EXECUTION_PERSISTENCE_IMPL				= "BACKEND.EXECUTION_PERSISTENCE_IMPL";
 	public static final String CTE_CRONIO_PERSISTENCE_EXECUTION_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKExecutionPersistenceServiceJPA.class.getName();
 
+	//Log
+	public static final String CFG_CRONIO_PERSISTENCE_LOG_PERSISTENCE_IMPL				= "BACKEND.LOG_PERSISTENCE_IMPL";
+	public static final String CTE_CRONIO_PERSISTENCE_LOG_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKLogPersistenceServiceJPA.class.getName();
+	
 }

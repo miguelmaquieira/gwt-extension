@@ -3,8 +3,6 @@ package com.imotion.dslam.bom;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.apache.log4j.Level;
-
 import com.imotion.dslam.bom.data.CRONIOHostData;
 import com.imotion.dslam.bom.data.CRONIOLoggerData;
 
@@ -18,9 +16,9 @@ public interface CRONIOBOILog extends Serializable, CRONIOBOILogDataConstants {
 
 	void setTimestamp(Date timestamp);
 
-	Level getLevel();
+	String getLevel();
 
-	void setLevel(Level level);
+	void setLevel(String level);
 
 	String getThread();
 
@@ -46,9 +44,9 @@ public interface CRONIOBOILog extends Serializable, CRONIOBOILogDataConstants {
 
 	void setLineNumber(String lineNumber);
 
-	CRONIOLoggerData getLoggerClass();
-
-	void setLoggerClass(CRONIOLoggerData loggerClass);
+//	CRONIOLoggerData getLoggerClass();
+//
+//	void setLoggerClass(CRONIOLoggerData loggerClass);
 
 	CRONIOHostData getHost();
 

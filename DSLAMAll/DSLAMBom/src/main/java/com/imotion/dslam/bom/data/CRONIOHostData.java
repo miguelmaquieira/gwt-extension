@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 import org.eclipse.persistence.nosql.annotations.DataFormatType;
+import org.eclipse.persistence.nosql.annotations.Field;
 import org.eclipse.persistence.nosql.annotations.NoSql;
 
 @Embeddable
@@ -13,8 +14,13 @@ public class CRONIOHostData implements Serializable{
 	
 	private static final long serialVersionUID = 1921519632948974669L;
 
+	@Field(name = "process")
 	String process;
+	
+	@Field(name = "name")
 	String name;
+	
+	@Field(name = "ip")
 	String ip;
 	
 	public CRONIOHostData() {
