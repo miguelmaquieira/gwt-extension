@@ -339,4 +339,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Logs")
 	String logs();
+	
+	@DefaultStringValue("Log")
+	String log();
 }

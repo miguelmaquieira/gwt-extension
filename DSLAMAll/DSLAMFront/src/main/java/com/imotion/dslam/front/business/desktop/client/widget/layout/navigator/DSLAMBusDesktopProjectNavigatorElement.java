@@ -86,9 +86,9 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuExecution.add(nodesConsole);
 		
 		//MENU -> Project  -> Execution -> Logs
-		menuLogs 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_EXECUTION, TEXTS.logs(), this);
+		menuLogs 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_LOG, TEXTS.logs(), this);
 		menuLogs.setCloseMenu();
-		menuExecution.add(menuLogs);
+		menuProject.add(menuLogs);
 
 		menu.addSeparator();
 	}
@@ -105,6 +105,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuScript.setSelected(false);
 		menuProcess.setSelected(false);
 		menuExecution.setSelected(false);
+		menuLogs.setSelected(false);
 	}
 	
 	public void setProjectSectionSelected(String sectionId) {
@@ -131,6 +132,8 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			menuProcess.setSelected(true);
 		} else if (SECTION_TYPE_EXECUTION.equals(sectionId)) {
 			menuExecution.setSelected(true);
+		} else if (SECTION_TYPE_LOG.equals(sectionId)) {
+			menuLogs.setSelected(true);
 		}
 		
 	}

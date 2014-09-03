@@ -128,9 +128,9 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 
 	private String generateConnectionId(long processId, long executionId, long nodeId) {
 		StringBuilder connectionIdSB = new StringBuilder();
-		connectionIdSB.append(processId);
-		connectionIdSB.append(CONNECTION_ID_SEP);
 		connectionIdSB.append(executionId);
+		connectionIdSB.append(CONNECTION_ID_SEP);
+		connectionIdSB.append(processId);
 		connectionIdSB.append(CONNECTION_ID_SEP);
 		connectionIdSB.append(nodeId);
 		return connectionIdSB.toString();

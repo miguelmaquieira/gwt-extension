@@ -52,6 +52,7 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 	
 	public void setSectionNameFromId(String sectionId) {
 		String sectionNameValue = "";
+		String dateRegEx 		= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
 		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
 			sectionNameValue = TEXTS.main_script_label();
 		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
@@ -66,6 +67,8 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 			sectionNameValue = TEXTS.nodes();
 		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			sectionNameValue = TEXTS.console_label();
+		} else if (sectionId.matches(dateRegEx)) {
+			sectionNameValue = TEXTS.log() + " " + sectionId;
 		}
 		sectionName.setText(sectionNameValue);
 	}
