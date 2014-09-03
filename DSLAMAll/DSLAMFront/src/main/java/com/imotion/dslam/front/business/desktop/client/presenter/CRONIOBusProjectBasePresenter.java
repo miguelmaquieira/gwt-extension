@@ -150,12 +150,15 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 					exit();
 				}
 			}			
+		} else if (LOGICAL_TYPE.SUBMIT_EVENT.equals(evtTyp)) { 
+			getAllLogsTest();
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SELECT_EVENT.equals(type);
+		return LOGICAL_TYPE.SELECT_EVENT.equals(type) || 
+				LOGICAL_TYPE.SUBMIT_EVENT.equals(type);
 	}
 	
 	/**
@@ -515,4 +518,26 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			logout();
 		}
 	}
+	
+	private void getAllLogsTest() {
+		
+		AEMFTMetadataElementComposite newProjectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		newProjectData.addElement(DSLAMBOIProject.PROJECT_NAME			, "");
+		newProjectData.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, "");
+		
+		getClientServerConnection().executeComm(newProjectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_ALL_LOGS, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+
+			@Override
+			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				
+
+			}
+
+			@Override
+			public void onError(Throwable th) {
+				// TODO Auto-generated method stub
+			}
+		});
+	}
+	
 }

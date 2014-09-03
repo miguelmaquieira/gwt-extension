@@ -6,9 +6,11 @@ import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
@@ -155,8 +157,8 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 //			int		timeoutInt		= AEMFTCommonUtilsBase.getIntegerFromString(timeoutStr);
 //			int		protocoltypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(protocoltypeStr);
 //
-//			AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-//			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME					, formData	, userNameTextBox.getText());
+			AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME					, formData	, "Probando");
 //			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD					, formData	, passwordTextBox.getText());
 //			getElementController().setElement(CRONIOBOIMachineProperties.TIMEOUT					, formData	, timeoutInt);
 //			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT_REGEX				, formData	, promptTextBox.getText());
@@ -165,10 +167,10 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 //			getElementController().setElement(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, formData	, rollbackConditionPromptTextBox.getText());
 //			getElementController().setElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, formData	, protocoltypeInt);
 //			getElementController().setElement(CRONIOBOIMachineProperties.MACHINE_NAME				, formData	, getId());
-//			return formData;
+			return formData;
 //		} else {
-			return null;
-		//}
+//			return null;
+//		}
 	}
 
 	@Override

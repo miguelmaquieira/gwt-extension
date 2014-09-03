@@ -200,5 +200,15 @@
 				</SubService>
 			</SubServiceList>
 		</Service>
+		<Service Name="SRV_BUS_LOG">
+			<Description>Log business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBULogBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="GET_ALL_LOGS">
+					<Descriptor>getAllLogs</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>		
 	</ServiceList>
 </Application>

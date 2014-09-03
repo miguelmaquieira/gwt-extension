@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.antlr.CRONIOAntlrUtils;
+import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
@@ -32,6 +33,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	private CRONIOBKILoginPersistenceService 				userPersistence;
 	private CRONIOBKIUserPreferencesPersistenceService 		userPreferencesPersistence;
 	private CRONIOBKIExecutionPersistenceService 			executionPersistence;
+	private CRONIOBKILogPersistenceService 					logPersistence;
 
 	@Override
 	public String getName() {
@@ -118,6 +120,14 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		}
 		return executionPersistence;
 	}
+	
+	protected CRONIOBKILogPersistenceService getLogPersistence() {
+		if (logPersistence == null) {
+			logPersistence =  getPersistence().getAppFactoryPersistence().newLogPersistence(getSession().getSessionId());
+		}
+		return logPersistence;
+	}
+	
 
 	/******************************************************************
 	 * 					      AEMFTIFactorable                        *
@@ -167,6 +177,10 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 		if (executionPersistence != null) {
 			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) executionPersistence);
 			executionPersistence = null;
+		}
+		if (logPersistence != null) {
+			getPersistence().getAppFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) logPersistence);
+			logPersistence = null;
 		}
 	}
 

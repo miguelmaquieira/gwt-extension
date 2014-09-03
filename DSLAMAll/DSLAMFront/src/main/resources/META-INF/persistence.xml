@@ -71,9 +71,11 @@
 		</properties>
 	</persistence-unit>
 	
-	<persistence-unit name="eclipselink.mongodb.jpa" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="mongoDslam" transaction-type="RESOURCE_LOCAL">
 	    <!-- Registered entities -->
+	    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<class>com.imotion.dslam.bom.data.CRONIOBOLog</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
             <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
