@@ -17,7 +17,7 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	@Override
 	public List<CRONIOBOILog> getAllLogs() {
 		
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().findAll(1,10);
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}
 	

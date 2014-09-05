@@ -1,13 +1,17 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
+import java.util.Iterator;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
 
 public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
 
@@ -106,6 +110,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.setSelected(false);
 		menuExecution.setSelected(false);
 		menuLogs.setSelected(false);
+		
+		Iterator<Widget> logItemList = menuLogs.iterator();
+		while (logItemList.hasNext()) {
+			AEGWTBootstrapTreeMenuFinalItem log = (AEGWTBootstrapTreeMenuFinalItem) logItemList.next();
+			log.setSelected(false);
+		}
 	}
 	
 	public void setProjectSectionSelected(String sectionId) {
@@ -134,6 +144,14 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			menuExecution.setSelected(true);
 		} else if (SECTION_TYPE_LOG.equals(sectionId)) {
 			menuLogs.setSelected(true);
+		} else {
+			Iterator<Widget> logItemList = menuLogs.iterator();
+			while (logItemList.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem log = (AEGWTBootstrapTreeMenuFinalItem) logItemList.next();
+				if (sectionId.equals(log.getElementName())) {
+					log.setSelected(true);
+				}
+			}
 		}
 		
 	}
