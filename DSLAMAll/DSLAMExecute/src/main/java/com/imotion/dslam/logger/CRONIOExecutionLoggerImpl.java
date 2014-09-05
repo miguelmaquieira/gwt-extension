@@ -80,7 +80,7 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 		//Log file
 		log4jLogger.debug(logValueStr);
-
+		
 		//ClientConsole
 		CRONIOLoggerEvent loggerEvent = new CRONIOLoggerEvent();
 		loggerEvent.setConnectionId(connectionId);

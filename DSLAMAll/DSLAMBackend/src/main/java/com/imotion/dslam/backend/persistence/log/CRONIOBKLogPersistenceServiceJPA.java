@@ -17,7 +17,19 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	@Override
 	public List<CRONIOBOILog> getAllLogs() {
 		
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().findAll();
+
+		//List<CRONIOBOLog> logsListJpa = getPersistenceModule().findAll();
+
+		
+		String customQuery = "Select o from logs o where o.message like '37%'";
+//		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";
+//		String customQuery = "Select o from CRONIOBOLog o where o.level like 'DEBU%'";
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
+		
+//		String customQuery = "db.logs.find({ level: 'DEBUG' })";
+//		List<CRONIOBOLog> logsListJpa = getPersistenceModule().nativeQuery(customQuery);
+		
+
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}
 	
