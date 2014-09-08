@@ -18,8 +18,8 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	public List<CRONIOBOILog> getAllLogs() {
 		
 		
-		String customQuery = "Select o from logs o where o.message like '37%'";
-//		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";
+//		String customQuery = "Select o from CRONIOBOLog o where o.message like '37%'";
+		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";
 //		String customQuery = "Select o from CRONIOBOLog o where o.level like 'DEBU%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 		
