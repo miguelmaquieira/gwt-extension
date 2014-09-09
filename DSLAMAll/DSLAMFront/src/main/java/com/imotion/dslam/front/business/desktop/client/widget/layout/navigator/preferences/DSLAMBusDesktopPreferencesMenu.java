@@ -222,19 +222,6 @@ public class DSLAMBusDesktopPreferencesMenu extends AEGWTCompositePanel implemen
 		}
 	}
 
-	//	public boolean isModified() {
-	//		return menuProject.isModified();
-	//	}	
-		
-	//
-	//	public AEMFTMetadataElementComposite getData() {
-	//		return null;
-	//	}
-	//
-	//	public String getElementName() {
-	//		return menuProject.getLabelText();
-	//	}
-
 	@Override
 	public String getName() {
 		return NAME;

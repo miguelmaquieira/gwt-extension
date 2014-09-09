@@ -87,4 +87,5 @@
         </properties>
     </persistence-unit>
 	
+	
 </persistence>

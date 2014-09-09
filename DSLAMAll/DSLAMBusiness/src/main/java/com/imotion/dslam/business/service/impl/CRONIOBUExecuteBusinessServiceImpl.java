@@ -130,6 +130,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		AEMFTMetadataElementSingle 		executionIdData = (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOIExecution.EXECUTION_ID);
 		String							executionId 	= executionIdData.getValueAsString();
 		
+		
 //		List<CRONIOBOLog> lineLogList = get
 //		int i = 0;
 //		List<AEMFTMetadataElement> projectList = projectListdata.getElementList();
