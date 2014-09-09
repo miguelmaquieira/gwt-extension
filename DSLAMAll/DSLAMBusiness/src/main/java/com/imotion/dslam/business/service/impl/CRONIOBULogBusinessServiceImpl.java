@@ -20,9 +20,9 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 	
 	
 	@Override
-	public void getAllLogs() { 
+	public void getFilteredLogs() { 
 		
-		List<CRONIOBOILog> logs = getLogPersistence().getAllLogs();
+		List<CRONIOBOILog> logs = getLogPersistence().getLogsByfilter();
 		
 //		AEMFTMetadataElementComposite preferencesData = DSLAMBUBomToMetadataConversor.fromPreferences(preferences);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();

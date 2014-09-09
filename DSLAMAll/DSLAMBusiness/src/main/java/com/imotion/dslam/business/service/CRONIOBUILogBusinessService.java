@@ -4,5 +4,5 @@ import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
 
 public interface CRONIOBUILogBusinessService extends DSLAMBUIBusinessService{
 
-	public void getAllLogs();
+	public void getFilteredLogs();
 }

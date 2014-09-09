@@ -1,5 +1,6 @@
 package com.imotion.dslam.backend.persistence.log;
 
+import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceModuleJPA;
@@ -15,17 +16,16 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 
 		
 	@Override
-	public List<CRONIOBOILog> getAllLogs() {
+	public List<CRONIOBOILog> getLogsByfilter() {
 		
+		Date   timestamp;
+		String Level;
+		String texto;
+		String executionID;
 		
-//		String customQuery = "Select o from CRONIOBOLog o where o.message like '37%'";
-		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";
-//		String customQuery = "Select o from CRONIOBOLog o where o.level like 'DEBU%'";
+		String customQuery = "Select o from CRONIOBOLog o where o.message like '%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
-		
-//		String customQuery = "db.logs.find({ level: 'DEBUG' })";
-//		List<CRONIOBOLog> logsListJpa = getPersistenceModule().nativeQuery(customQuery);
-		
+
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}
 	

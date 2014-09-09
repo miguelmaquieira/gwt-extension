@@ -208,8 +208,8 @@
 			<Type>300171153899520</Type>
 			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBULogBusinessServiceImpl</Descriptor>
 			<SubServiceList>
-				<SubService Name="GET_ALL_LOGS">
-					<Descriptor>getAllLogs</Descriptor>
+				<SubService Name="GET_FILTERED_LOGS">
+					<Descriptor>getFilteredLogs</Descriptor>
 				</SubService>
 			</SubServiceList>
 		</Service>		
