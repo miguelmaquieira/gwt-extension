@@ -71,11 +71,11 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		logValueSB.append(nodeName);
 		logValueSB.append("\t");
 		logValueSB.append(request);
-		logValueSB.append("\n");
+		logValueSB.append("\t");
 		logValueSB.append(response);
-		logValueSB.append("\n");
+		logValueSB.append("\t");
 		logValueSB.append(prompt);
-		logValueSB.append("\n");
+		logValueSB.append("\t");
 		String logValueStr = logValueSB.toString();
 
 		//Log file

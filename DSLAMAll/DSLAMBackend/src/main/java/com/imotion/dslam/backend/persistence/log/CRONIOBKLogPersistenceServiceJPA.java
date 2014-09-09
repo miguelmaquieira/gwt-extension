@@ -21,14 +21,24 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		//List<CRONIOBOLog> logsListJpa = getPersistenceModule().findAll();
 
 		
-		String customQuery = "Select o from logs o where o.message like '37%'";
-//		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";
+		String customQuery = "Select o from CRONIOBOLog o where o.message like '99:%'";
+//		String customQuery = "Select o from CRONIOBOLog o where o.lineNumber like '10%'";"db.logs.find( { message: /^94:/ } )";
 //		String customQuery = "Select o from CRONIOBOLog o where o.level like 'DEBU%'";
+		
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 		
 //		String customQuery = "db.logs.find({ level: 'DEBUG' })";
 //		List<CRONIOBOLog> logsListJpa = getPersistenceModule().nativeQuery(customQuery);
 		
+
+		return AEMFTCommonUtilsBase.castList(logsListJpa);
+	}
+	
+	@Override
+	public List<CRONIOBOILog> getExecutionLogs(String executionId) {
+
+		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}

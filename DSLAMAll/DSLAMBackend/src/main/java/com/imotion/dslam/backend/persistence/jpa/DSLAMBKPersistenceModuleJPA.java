@@ -1,7 +1,6 @@
 package com.imotion.dslam.backend.persistence.jpa;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTIPersistenceJPAModule;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersistenceJPAModuleImpl;
@@ -27,8 +26,6 @@ public class DSLAMBKPersistenceModuleJPA<Q, Id extends Serializable> extends AEM
 		this.persitenceUnitName = persitenceUnitName;
 	}
 
-
-	
 	/**************************************************************
      *               PROTECTED EXTENDED FUNCTIONS                 *
      **************************************************************/

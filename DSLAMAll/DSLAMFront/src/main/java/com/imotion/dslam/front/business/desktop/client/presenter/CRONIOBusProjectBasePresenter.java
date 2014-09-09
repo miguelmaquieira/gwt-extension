@@ -158,7 +158,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
 			AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
 			String executionId = executionIdDataSingle.getValueAsString();
-			getExecutionData(executionId);
+			getLogData(executionId);
 			
 
 		}
@@ -243,15 +243,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	 *	PRIVATE 
 	 */
 	
-	private void getExecutionData(String executionId) {
+	private void getLogData(String executionId) {
 		
-		AEMFTMetadataElementComposite executionData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		AEMFTMetadataElementComposite logData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		
-		executionData.addElement(CRONIOBOIExecutionDataConstants.EXECUTION_ID		, executionId);
+		logData.addElement(CRONIOBOIExecutionDataConstants.EXECUTION_ID		, executionId);
 		
-		
-		
-		getClientServerConnection().executeComm(executionData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_GET_EXECUTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(logData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_EXECUTION_LOGS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
