@@ -123,44 +123,6 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		contextOut.addElement(EXECUTIONS_DATA, executionsData);
 	}
 	
-	@Override
-	public void getExecution() {
-		//ContextIn
-		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
-		AEMFTMetadataElementSingle 		executionIdData = (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOIExecution.EXECUTION_ID);
-		String							executionId 	= executionIdData.getValueAsString();
-		
-		
-//		List<CRONIOBOLog> lineLogList = get
-//		int i = 0;
-//		List<AEMFTMetadataElement> projectList = projectListdata.getElementList();
-//		List<String> projectIdList = new ArrayList<>();
-//		for (AEMFTMetadataElement project : projectList) {
-//			String projectId = project.getKey();
-//			projectIdList.add(projectId);
-//		}
-//		
-//		AEMFTMetadataElementComposite executionsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-//		
-//		for (String projectId : projectIdList) {
-//			projectIdAsLong = Long.valueOf(projectId).longValue();
-//			List<CRONIOBOIExecution> executionProjectList = getExecutionPersistence().getAllExecutionsByProject(projectIdAsLong);
-//			if (!AEMFTCommonUtilsBase.isEmptyList(executionProjectList)) {
-//				resultsNumber = resultsNumber + executionProjectList.size();
-//				AEMFTMetadataElementComposite executionProjectListData = DSLAMBUBomToMetadataConversor.fromExecutionsProjectList(executionProjectList);
-//				executionsData.addElement(projectId, executionProjectListData);
-//			}
-//		}
-//		
-//		//init-trace
-//		traceNumberOfResults(METHOD_GET_ALL_EXECUTIONS_BY_PROJECT_ID, CRONIOBOIExecution.class.getSimpleName(), resultsNumber);
-//		//end-trace
-//
-//		//ContextOut
-//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-//		contextOut.addElement(EXECUTIONS_DATA, executionsData);
-	}
-	
 	/**
 	 * PRIVATE 
 	 */

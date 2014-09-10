@@ -26,8 +26,6 @@ public class DSLAMBKPersistenceModuleJPA<Q, Id extends Serializable> extends AEM
 		this.persitenceUnitName = persitenceUnitName;
 	}
 
-
-	
 	/**************************************************************
      *               PROTECTED EXTENDED FUNCTIONS                 *
      **************************************************************/

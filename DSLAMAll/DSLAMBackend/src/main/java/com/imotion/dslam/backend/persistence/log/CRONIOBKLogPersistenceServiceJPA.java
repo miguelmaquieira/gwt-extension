@@ -11,15 +11,11 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOILog, CRONIOBOLog, String> implements CRONIOBKILogPersistenceService{
 
-
 	private static final long serialVersionUID = 1L;
 
-	
-		
 	@Override
 	public List<CRONIOBOILog> getLogsByfilter() {
-		
-		
+
 		
 		Date   timestamp	= new Date();
 		String Level		= "DEBUG";
@@ -34,6 +30,16 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +" )";
 		
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, timestamp, offset, size);
+
+
+		return AEMFTCommonUtilsBase.castList(logsListJpa);
+	}
+	
+	@Override
+	public List<CRONIOBOILog> getExecutionLogs(String executionId) {
+
+		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}
