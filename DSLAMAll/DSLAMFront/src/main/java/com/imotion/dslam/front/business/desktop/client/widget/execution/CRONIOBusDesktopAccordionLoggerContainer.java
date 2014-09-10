@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -24,6 +25,14 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	
 	private AEGWTBootstrapAccordionPanelContainer 	accordionPanelContainer;
 	private AEGWTBootstrapPager						pager;
+	
+	private String dateStr; 	
+	private String 	nodeIp; 			
+	private String 	nodeName;
+	private String 	nodeRequest;
+	private String 	nodeResponse;
+	private String 	nodePrompt; 	
+	private String header;
 	
 	public CRONIOBusDesktopAccordionLoggerContainer(String loggerId) {
 		super(loggerId);
@@ -68,7 +77,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 			List<AEMFTMetadataElement> logList = executionLogsData.getSortedElementList();
 			for (AEMFTMetadataElement log : logList) {
 				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
-				
+				addLogItem(logData, false);
 			}
 		}
 	}
@@ -77,17 +86,31 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	 */
 
 	@Override
-	protected void addLogItem(AEMFTMetadataElementComposite logData) {
+	protected void addLogItem(AEMFTMetadataElementComposite logData, boolean isExecution) {
+		if (isExecution) {
+			AEMFTMetadataElementSingle 	date 			= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOIClientLoggerConstants.TIMESTAMP	, logData);
+			dateStr 		= date.toString().replace("TIMESTAMP: ", "");
+			nodeIp 			= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_IP						, logData);
+			nodeName 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_NAME						, logData);
+			nodeRequest 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.REQUEST_DATA					, logData);
+			nodeResponse 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.RESPONSE_DATA					, logData);
+			nodePrompt 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.PROMPT_DATA					, logData);
+			header 			= dateStr + " " + nodeName + " " + nodeIp;
+		} else {
+			AEMFTMetadataElementSingle 	date 			= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOBOILogDataConstants.TIMESTAMP	, logData);
+			dateStr 		= date.toString().replace("timestamp: ", "");
+			AEMFTMetadataElementSingle 	messageData 	= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOBOILogDataConstants.MESSAGE	, logData);
+			String message = messageData.toString();
+			String[] messageSplit = message.split("\\,");
+			nodeIp 			= messageSplit[1];
+			nodeName 		= messageSplit[2];
+			nodeRequest 	= messageSplit[3];
+			nodeResponse 	= messageSplit[4];
+			nodePrompt 		= messageSplit[5];
+			header 			= dateStr + " " + nodeName + " " + nodeIp;
+		}
 		
-		AEMFTMetadataElementSingle 	date 			= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOIClientLoggerConstants.TIMESTAMP	, logData);
-		String 						dateStr 		= date.toString().replace("TIMESTAMP: ", "");
-		String 						nodeIp 			= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_IP						, logData);
-		String 						nodeName 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.NODE_NAME						, logData);
-		String 						nodeRequest 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.REQUEST_DATA					, logData);
-		String 						nodeResponse 	= getElementController().getElementAsString(CRONIOIClientLoggerConstants.RESPONSE_DATA					, logData);
-		String 						nodePrompt 		= getElementController().getElementAsString(CRONIOIClientLoggerConstants.PROMPT_DATA					, logData);
 		
-		String header = dateStr + " " + nodeName + " " + nodeIp;
 		
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header,true);
 		accordionPanelContainer.addWiget(accordionPanel);

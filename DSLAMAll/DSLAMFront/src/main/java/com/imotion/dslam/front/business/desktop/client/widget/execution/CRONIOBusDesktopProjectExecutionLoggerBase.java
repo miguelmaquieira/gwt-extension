@@ -178,7 +178,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	private void logEventData(AEMFTMetadataElementComposite logData) {
 		logDataList.addElement(logData);
 		
-		addLogItem(logData);
+		addLogItem(logData, true);
 		
 		totalScroll += getItemHeight();
 		
@@ -188,7 +188,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	
 	protected abstract int getItemHeight(); 
 
-	protected abstract void addLogItem(AEMFTMetadataElementComposite logData);
+	protected abstract void addLogItem(AEMFTMetadataElementComposite logData, boolean isExecution);
 	
 	protected FlowPanel getLoggerContainer() {
 		return loggerContaniner;
