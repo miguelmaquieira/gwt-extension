@@ -17,7 +17,8 @@ public interface CRONIOBusDesktopProjectEventTypes {
 		SAVE_ALL_PROJECTS, 
 		OPEN_EVENT,
 		ADD_EXECUTION,
-		EXECUTE
+		EXECUTE,
+		ADD_EXECUTION_LOGS
 	}
 	
 }

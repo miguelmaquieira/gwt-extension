@@ -1,9 +1,12 @@
 package com.imotion.dslam.front.business.desktop.client.widget.execution;
 
+import java.util.List;
+
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -59,6 +62,16 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
+	@Override
+	public void setData(AEMFTMetadataElementComposite executionLogsData) {
+		if (executionLogsData != null) {
+			List<AEMFTMetadataElement> logList = executionLogsData.getSortedElementList();
+			for (AEMFTMetadataElement log : logList) {
+				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
+				
+			}
+		}
+	}
 	/**
 	 * CRONIOBusDesktopProjectExecutionLogger
 	 */
