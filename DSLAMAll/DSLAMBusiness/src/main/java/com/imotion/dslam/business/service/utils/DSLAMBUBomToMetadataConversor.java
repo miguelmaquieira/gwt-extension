@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
@@ -378,15 +379,50 @@ public class DSLAMBUBomToMetadataConversor {
 	}
 	
 	public  static AEMFTMetadataElementComposite fromExecutionsProjectList(List<CRONIOBOIExecution> executionProjectList) {
-		//AEMFTMetadataElementComposite data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		AEMFTMetadataElementComposite dataExecutionProjectListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(executionProjectList)) {
 			for (CRONIOBOIExecution execution : executionProjectList) {
 				dataExecutionProjectListData.addElement(String.valueOf(execution.getExecutionId()), fromExecution(execution));
-				//data.addElement(DSLAMBUIExecuteBusinessServiceConstants.EXECUTIONS_BY_PROJECT_LIST_DATA, dataExecutionProjectListData);
 			}
 		}
 		return dataExecutionProjectListData;
+	}
+	
+	/**
+	 * LOG
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromLog(CRONIOBOILog log) {
+		AEMFTMetadataElementComposite data = null;
+		if (log != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+
+			data.addElement(CRONIOBOILog.LOG_ID			, log.getLogId());
+			data.addElement(CRONIOBOILog.TIMESTAMP		, String.valueOf(log.getTimestamp()));
+			data.addElement(CRONIOBOILog.MESSAGE		, log.getMessage());
+			data.addElement(CRONIOBOILog.LEVEL			, log.getLevel());
+			data.addElement(CRONIOBOILog.THREAD			, log.getThread());
+			
+//			data.addElement(CRONIOBOILog.FILENAME		, log.getFileName());
+//			data.addElement(CRONIOBOILog.HOST			, log.getHost());
+//			data.addElement(CRONIOBOILog.METHOD			, log.getMethod());
+//			data.addElement(CRONIOBOILog.LOGGER_NAME	, log.getLoggerName());
+//			data.addElement(CRONIOBOILog.LINENUMBER		, log.getLineNumber());
+			
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromLogList(List<CRONIOBOILog> logList) {
+		AEMFTMetadataElementComposite logListData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(logList)) {
+			int count = 0;
+			for (CRONIOBOILog log : logList) {	
+				logListData.addElement(String.valueOf(count), fromLog(log));
+				count++;
+			}
+		}
+		return logListData;
 	}
 
 	/**

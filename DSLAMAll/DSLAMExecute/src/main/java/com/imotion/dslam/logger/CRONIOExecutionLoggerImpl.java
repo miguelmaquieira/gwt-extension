@@ -65,15 +65,15 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 		StringBuilder logValueSB = new StringBuilder();
 		logValueSB.append(connectionId);
-		logValueSB.append("-");
+		logValueSB.append(",");
 		logValueSB.append(nodeIp);
-		logValueSB.append("-");
+		logValueSB.append(",");
 		logValueSB.append(nodeName);
-		logValueSB.append("-");
+		logValueSB.append(",");
 		logValueSB.append(request);
-		logValueSB.append("-");
+		logValueSB.append(",");
 		logValueSB.append(response);
-		logValueSB.append("-");
+		logValueSB.append(",");
 		logValueSB.append(prompt);
 		logValueSB.append("\n");
 		String logValueStr = logValueSB.toString();

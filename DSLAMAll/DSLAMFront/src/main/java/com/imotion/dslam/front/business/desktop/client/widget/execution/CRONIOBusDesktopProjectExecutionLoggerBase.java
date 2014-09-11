@@ -34,7 +34,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	private Atmosphere 			atmosphere;
 	private AtmosphereRequest 	rpcRequest;
 	private AEMFTMetadataElementCompositeRecordSetListRegroup logDataList;
-	
+
 	private int totalScroll; 
 
 	private FlowPanel 									loggerContaniner;
@@ -178,7 +178,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	private void logEventData(AEMFTMetadataElementComposite logData) {
 		logDataList.addElement(logData);
 		
-		addLogItem(logData);
+		addLogItem(logData, true);
 		
 		totalScroll += getItemHeight();
 		
@@ -188,7 +188,9 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	
 	protected abstract int getItemHeight(); 
 
-	protected abstract void addLogItem(AEMFTMetadataElementComposite logData);
+	protected abstract void addLogItem(AEMFTMetadataElementComposite logData, boolean isExecution);
+	
+	
 	
 	protected FlowPanel getLoggerContainer() {
 		return loggerContaniner;
@@ -205,6 +207,10 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	public void setFilterVisible(boolean visible) {
 		filterPanel.setVisible(visible);
 		filterForm.setVisible(visible);
+	}
+	
+	public void setExecutionIdInForm(String executionId) {
+		filterForm.setExecutionId(executionId);
 	}
 
 	/**

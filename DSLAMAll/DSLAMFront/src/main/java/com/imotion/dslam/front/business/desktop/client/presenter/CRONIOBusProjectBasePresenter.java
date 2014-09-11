@@ -159,9 +159,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
 			AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
 			String executionId = executionIdDataSingle.getValueAsString();
-			getLogData(executionId);
-			
-
+			getExecutionLogsData(executionId);
 		}
 		
 	}
@@ -244,7 +242,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	 *	PRIVATE 
 	 */
 	
-	private void getLogData(String executionId) {
+	private void getExecutionLogsData(String executionId) {
 		
 		AEMFTMetadataElementComposite logData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		
@@ -255,17 +253,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-//					AEMFTMetadataElementComposite executionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
-//					String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, executionData);
-//					String projectId = getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
-//					Long executionId = getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
-//					projectsLayout.addExecution(projectId, dateExecutionStr);
-//					
-//					CRONIOBusDesktopProjectEvent addExecutionEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-//					addExecutionEvt.setEventType(EVENT_TYPE.EXECUTE);
-//					addExecutionEvt.addElementAsString(CRONIOBOIExecution.PROJECT_ID, projectId);
-//					addExecutionEvt.addElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionId);
-//					getLogicalEventHandlerManager().fireEvent(addExecutionEvt);
+					AEMFTMetadataElementComposite executionLogsData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA);
+					CRONIOBusDesktopProjectEvent getExecutionLogsEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+					getExecutionLogsEvt.setEventType(EVENT_TYPE.ADD_EXECUTION_LOGS);
+					getExecutionLogsEvt.addElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA, executionLogsData);
+					getLogicalEventHandlerManager().fireEvent(getExecutionLogsEvt);
 				}
 			}
 

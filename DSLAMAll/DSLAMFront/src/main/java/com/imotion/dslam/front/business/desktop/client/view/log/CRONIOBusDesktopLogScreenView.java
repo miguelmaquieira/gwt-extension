@@ -2,7 +2,11 @@ package com.imotion.dslam.front.business.desktop.client.view.log;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.log.CRONIOBusDesktopLogDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
@@ -11,7 +15,7 @@ import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadata
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay {
+public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public static final String NAME = "CRONIOBusDesktopLogScreenView";
 	
@@ -35,30 +39,32 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
 	}
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			root.clear();
-		
-			AEMFTMetadataElementSingle projectIdData = (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIExecution.PROJECT_ID);
-			String projectId = projectIdData.getValueAsString();
-				
-			logger = new CRONIOBusDesktopAccordionLoggerContainer(projectId);
-			root.add(logger);
-			logger.postDisplay();
-			logger.setSize("100%", "100%");
+			AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
 			
-			AEGWTLogicalEvent getLogEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-			getLogEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, data);
-			getLogEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
-			getLogicalEventHandlerManager().fireEvent(getLogEvt);
+			if (executionLogsData == null) {
+				root.clear();
 				
-//				AEMFTMetadataElementComposite logData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_EXECUTION_LOG, data);
-//				if (logData != null) {
-//					logger.setData(logData);
-//				}
+				AEMFTMetadataElementSingle projectIdData = (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIExecution.PROJECT_ID);
+				String projectId = projectIdData.getValueAsString();
+					
+				logger = new CRONIOBusDesktopAccordionLoggerContainer(projectId);
+				root.add(logger);
+				logger.postDisplay();
+				logger.setSize("100%", "100%");
+				
+				AEGWTLogicalEvent getLogEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+				getLogEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, data);
+				getLogEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
+				getLogicalEventHandlerManager().fireEvent(getLogEvt);
+			} else {
+				logger.setData(executionLogsData);
+			}	
 		}
 	}
 
@@ -71,5 +77,25 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 		if (logger != null) {
 			logger.beforeExitSection();	
 		}
+	}
+	
+	/**
+	 * CRONIOBusDesktopHasProjectEventHandlers
+	 */
+
+	@Override
+	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
+		EVENT_TYPE evtTyp = evt.getEventType();
+		if (EVENT_TYPE.ADD_EXECUTION_LOGS.equals(evtTyp)) {
+			AEMFTMetadataElementComposite executionLogsData = evt.getEventData();
+			setData(executionLogsData);
+		}
+		
+	}
+
+	@Override
+	public boolean isDispatchEventType(EVENT_TYPE type) {
+		
+		return EVENT_TYPE.ADD_EXECUTION_LOGS.equals(type);
 	}
 }

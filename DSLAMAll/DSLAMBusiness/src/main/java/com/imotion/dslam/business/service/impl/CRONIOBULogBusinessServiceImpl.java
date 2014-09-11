@@ -12,6 +12,7 @@ import com.imotion.dslam.business.service.CRONIOBUILogBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
+import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
@@ -74,34 +75,17 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		
 		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId);
 		
-//		List<CRONIOBOLog> lineLogList = get
-		int i = 0;
-//		List<AEMFTMetadataElement> projectList = projectListdata.getElementList();
-//		List<String> projectIdList = new ArrayList<>();
-//		for (AEMFTMetadataElement project : projectList) {
-//			String projectId = project.getKey();
-//			projectIdList.add(projectId);
-//		}
-//		
-//		AEMFTMetadataElementComposite executionsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-//		
-//		for (String projectId : projectIdList) {
-//			projectIdAsLong = Long.valueOf(projectId).longValue();
-//			List<CRONIOBOIExecution> executionProjectList = getExecutionPersistence().getAllExecutionsByProject(projectIdAsLong);
-//			if (!AEMFTCommonUtilsBase.isEmptyList(executionProjectList)) {
-//				resultsNumber = resultsNumber + executionProjectList.size();
-//				AEMFTMetadataElementComposite executionProjectListData = DSLAMBUBomToMetadataConversor.fromExecutionsProjectList(executionProjectList);
-//				executionsData.addElement(projectId, executionProjectListData);
-//			}
-//		}
-//		
-//		//init-trace
-//		traceNumberOfResults(METHOD_GET_ALL_EXECUTIONS_BY_PROJECT_ID, CRONIOBOIExecution.class.getSimpleName(), resultsNumber);
-//		//end-trace
-//
-//		//ContextOut
-//		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-//		contextOut.addElement(EXECUTIONS_DATA, executionsData);
+		int resultsNumber = logs.size();
+		
+		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logs);
+
+		//init-trace
+		traceNumberOfResults(METHOD_GET_EXECUTION_LOGS, CRONIOBOILog.class.getSimpleName(), resultsNumber);
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(EXECUTION_LOGS_DATA, logListData);
 	}
 
 }

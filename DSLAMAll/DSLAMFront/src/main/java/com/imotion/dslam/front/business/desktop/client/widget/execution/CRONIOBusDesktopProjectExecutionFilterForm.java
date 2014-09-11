@@ -23,6 +23,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapForm {
 
+
 	private static DSLAMBusI18NTexts 	TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
 	
 	public 	static final String 		NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
@@ -33,6 +34,8 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	private	AEGWTBootstrapDateTimePickerTextBox            	safeBeforeDateTimePickerTextBox;
 	private LabelElement									beforeLabel;	
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	numberRowsDropdownButton;
+	
+	private String executionId;
 	
 	public CRONIOBusDesktopProjectExecutionFilterForm() {
 		
@@ -107,6 +110,9 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		return showErrors;
 	}
 
+	public void setExecutionId (String executionId) {
+		this.executionId = executionId;
+	}
 	/**
 	 * AEGWTICompositePanel
 	 */
