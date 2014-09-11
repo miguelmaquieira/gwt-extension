@@ -7,6 +7,7 @@ import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceModuleJPA;
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.data.CRONIOBOLog;
+import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOILog, CRONIOBOLog, String> implements CRONIOBKILogPersistenceService{
@@ -14,22 +15,33 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public List<CRONIOBOILog> getLogsByfilter() {
+	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData) {
 
 		
-		Date   timestamp	= new Date();
-		String Level		= "DEBUG";
-		String texto		= "MIGUELTURRA";
-		String executionID	= "43";
-		int offset			= 0;
-		int size			= 10;	
+		
+		
+		
+		String 	text			= filterData.getFilterText();
+		String 	executionID		= filterData.getExecutionID();
+		Date   	timestamp		= filterData.getMaxTimestamp();
+		String 	level			= filterData.getLevel();
+		int 	offset			= filterData.getOffset();
+		int 	size			= filterData.getSize();	
+		
+		if (text == null) {
+			text = "";
+		}
+		
+
+
+		
 		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
 							+ "WHERE (o.message LIKE '%"+ executionID +"%' "
-							+ "AND o.message LIKE '%"+ texto +"%' "
-							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +" )";
+							+ "AND o.message LIKE '%"+ text +"%' "
+							+ "AND o.timestamp < :"+ CRONIOBOLogFilter.MAX_TIMESTAMP +" )";
 		
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, timestamp, offset, size);
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLogFilter.MAX_TIMESTAMP, timestamp, offset, size);
 
 
 		return AEMFTCommonUtilsBase.castList(logsListJpa);

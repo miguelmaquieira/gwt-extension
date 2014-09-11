@@ -6,7 +6,8 @@ import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
+import com.imotion.dslam.bom.data.CRONIOBOLog;
+import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -22,17 +23,19 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapForm {
 
-	public static final String NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
-	public static final String DATE_FORMAT_PICKER	= "d/m/Y H:i";
-	private static DSLAMBusI18NTexts 	TEXTS 		= GWT.create(DSLAMBusI18NTexts.class);
+	private static DSLAMBusI18NTexts 	TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
+	
+	public 	static final String 		NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
+	public 	static final String 		DATE_FORMAT_PICKER	= "d/m/Y H:i";
 
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  severityDropdownButton;
+	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	severityDropdownButton;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			filterTextBox;
-	private	 AEGWTBootstrapDateTimePickerTextBox            safeBeforeDateTimePickerTextBox;
+	private	AEGWTBootstrapDateTimePickerTextBox            	safeBeforeDateTimePickerTextBox;
 	private LabelElement									beforeLabel;	
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  numberRowsDropdownButton;
+	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	numberRowsDropdownButton;
 	
 	public CRONIOBusDesktopProjectExecutionFilterForm() {
+		
 		setGlyphIconButtonText(BUTTON_SUBMIT, TEXTS.filter(), AEGWTIBoostrapConstants.SPAN_GLYPHICON_FILTER);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN_DEFAULT);
@@ -49,12 +52,12 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		
 		severityDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.filter_for_gravity());
 		severityZone.add(severityDropdownButton);
-		severityDropdownButton.addElement("id", TEXTS.all());
-		severityDropdownButton.addElement("id", TEXTS.debug());
-		severityDropdownButton.addElement("id", TEXTS.info());
-		severityDropdownButton.addElement("id", TEXTS.warning());
-		severityDropdownButton.addElement("id", TEXTS.error());
-		severityDropdownButton.addElement("id", TEXTS.critical());
+		severityDropdownButton.addElement(TEXTS.all()		, TEXTS.all());
+		severityDropdownButton.addElement(TEXTS.debug()		, TEXTS.debug());
+		severityDropdownButton.addElement(TEXTS.info()		, TEXTS.info());
+		severityDropdownButton.addElement(TEXTS.warning()	, TEXTS.warning());
+		severityDropdownButton.addElement(TEXTS.error()		, TEXTS.error());
+		severityDropdownButton.addElement(TEXTS.critical()	, TEXTS.critical());
 		
 		FlowPanel filterZone = new FlowPanel();
 		formZone.add(filterZone);
@@ -156,9 +159,16 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 //			String	protocoltypeStr	= protocolTypeDropdownButton.getSelectedId();
 //			int		timeoutInt		= AEMFTCommonUtilsBase.getIntegerFromString(timeoutStr);
 //			int		protocoltypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(protocoltypeStr);
-//
+		
 			AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME					, formData	, "Probando");
+			getElementController().setElement(CRONIOBOLogFilter.LEVEL 			, formData	, severityDropdownButton.getSelectedId());
+			getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());
+			getElementController().setElement(CRONIOBOLogFilter.MAX_TIMESTAMP 	, formData	, safeBeforeDateTimePickerTextBox.getDateText());
+			getElementController().setElement(CRONIOBOLogFilter.SIZE	 		, formData	, numberRowsDropdownButton.getSelectedId());
+			getElementController().setElement(CRONIOBOLogFilter.OFFSET	 		, formData	, 0);
+			getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	 , formData	, 0);
+	
+			
 //			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD					, formData	, passwordTextBox.getText());
 //			getElementController().setElement(CRONIOBOIMachineProperties.TIMEOUT					, formData	, timeoutInt);
 //			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT_REGEX				, formData	, promptTextBox.getText());

@@ -152,7 +152,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				}
 			}			
 		} else if (LOGICAL_TYPE.SUBMIT_EVENT.equals(evtTyp)) { 
-			getFilteredLogs();
+			AEMFTMetadataElementComposite filterData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
+			getFilteredLogs(filterData);
 
 		} else if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp)) {
 			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
@@ -597,13 +598,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		}
 	}
 	
-	private void getFilteredLogs() {
+	private void getFilteredLogs(AEMFTMetadataElementComposite filterData) {
 		
-		AEMFTMetadataElementComposite newProjectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		newProjectData.addElement(DSLAMBOIProject.PROJECT_NAME			, "");
-		newProjectData.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, "");
 		
-		getClientServerConnection().executeComm(newProjectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_FILTERED_LOGS, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(filterData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_FILTERED_LOGS, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {

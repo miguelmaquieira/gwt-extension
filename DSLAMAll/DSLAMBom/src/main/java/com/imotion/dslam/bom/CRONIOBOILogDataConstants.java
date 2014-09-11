@@ -2,6 +2,7 @@ package com.imotion.dslam.bom;
 
 public interface CRONIOBOILogDataConstants {
 
+	//Attributes
 	String ID			= "_id";
 	String TIMESTAMP	= "timestamp";
 	String LEVEL		= "level";
@@ -12,4 +13,6 @@ public interface CRONIOBOILogDataConstants {
 	String METHOD		= "method";
 	String LINENUMBER	= "lineNumber";
 	String HOST			= "host";
+	
+
 }
