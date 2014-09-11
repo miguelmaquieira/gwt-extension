@@ -2,8 +2,7 @@ package com.imotion.dslam.bom;
 
 public interface CRONIOBOILogDataConstants {
 
-	//Attributes
-	
+	//Attributes	
 	String LOG_ID		= "_id";
 	String TIMESTAMP	= "timestamp";
 	String LEVEL		= "level";

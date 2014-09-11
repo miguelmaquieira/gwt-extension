@@ -25,7 +25,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 
 	private static DSLAMBusI18NTexts 	TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
-	
+
 	public 	static final String 		NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
 	public 	static final String 		DATE_FORMAT_PICKER	= "d/m/Y H:i";
 
@@ -34,25 +34,25 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	private	AEGWTBootstrapDateTimePickerTextBox            	safeBeforeDateTimePickerTextBox;
 	private LabelElement									beforeLabel;	
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	numberRowsDropdownButton;
-	
+
 	private String executionId;
-	
+
 	public CRONIOBusDesktopProjectExecutionFilterForm() {
-		
+
 		setGlyphIconButtonText(BUTTON_SUBMIT, TEXTS.filter(), AEGWTIBoostrapConstants.SPAN_GLYPHICON_FILTER);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN);
 		addButtonStyle(BUTTON_SUBMIT, AEGWTIBoostrapConstants.BTN_DEFAULT);
 		addButtonsZoneStylename(AEGWTIBoostrapConstants.COL_XS_12);
-		
+
 		FlowPanel formZone = new FlowPanel();
 		addWidget(formZone);
 		formZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM);
-		
+
 		FlowPanel severityZone = new FlowPanel();
 		formZone.add(severityZone);
 		severityZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE);
 		severityZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+
 		severityDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.filter_for_gravity());
 		severityZone.add(severityDropdownButton);
 		severityDropdownButton.addElement(TEXTS.all()		, TEXTS.all());
@@ -61,24 +61,24 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		severityDropdownButton.addElement(TEXTS.warning()	, TEXTS.warning());
 		severityDropdownButton.addElement(TEXTS.error()		, TEXTS.error());
 		severityDropdownButton.addElement(TEXTS.critical()	, TEXTS.critical());
-		
+
 		FlowPanel filterZone = new FlowPanel();
 		formZone.add(filterZone);
 		filterZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+
 		filterTextBox 	= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.filter_text_label(), TEXTS.search_placeholder());
 		filterZone.add(filterTextBox);
-		
+
 		FlowPanel beforeZone = new FlowPanel();
 		formZone.add(beforeZone);
 		beforeZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+
 		beforeLabel 	= Document.get().createLabelElement();
 		beforeLabel.setInnerText(TEXTS.before_label());
 		beforeLabel.getStyle().setWidth(100, Unit.PCT);
 		beforeLabel.getStyle().setPaddingLeft(0, Unit.PX);
 		beforeZone.getElement().appendChild(beforeLabel);
-		
+
 		RadioButton beforeNow 	= new RadioButton(TEXTS.before_date(),TEXTS.now());
 		RadioButton beforeDate 	= new RadioButton(TEXTS.before_date());
 		beforeNow.getElement().addClassName(AEGWTIBoostrapConstants.COL_XS_12);
@@ -86,23 +86,23 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		beforeNow.setValue(true);
 		beforeZone.add(beforeNow);
 		beforeZone.add(beforeDate);
-		
+
 		safeBeforeDateTimePickerTextBox = new AEGWTBootstrapDateTimePickerTextBox(null);
 		safeBeforeDateTimePickerTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 		safeBeforeDateTimePickerTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_DATETIME);
 		beforeZone.add(safeBeforeDateTimePickerTextBox);
-		
+
 		FlowPanel rowsZone = new FlowPanel();
 		formZone.add(rowsZone);
 		rowsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		
+
 		numberRowsDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.rows_for_page());
 		rowsZone.add(numberRowsDropdownButton);
 		numberRowsDropdownButton.addElement(TEXTS.number_10(), TEXTS.number_10());
 		numberRowsDropdownButton.addElement(TEXTS.number_20(), TEXTS.number_20());
 		numberRowsDropdownButton.addElement(TEXTS.number_50(), TEXTS.number_50());
 		numberRowsDropdownButton.setItemSelected(TEXTS.number_20());
-		
+
 	}
 
 	public boolean showValidateClientErrors() {
@@ -116,13 +116,13 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	/**
 	 * AEGWTICompositePanel
 	 */
-	
+
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
 		safeBeforeDateTimePickerTextBox.addJS(getId(), DATE_FORMAT_PICKER);
 	}
-	
+
 	@Override
 	public String getName() {
 		return NAME;
@@ -130,63 +130,24 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite connectionConfigureData) {
-//		if (connectionConfigureData != null) {
-//			String 			userName 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME					, connectionConfigureData);
-//			String 			password 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD					, connectionConfigureData);
-//			int 			timeout 					= getElementController().getElementAsInt(CRONIOBOIMachineProperties.TIMEOUT						, connectionConfigureData);
-//			String 			prompt 						= getElementController().getElementAsString(CRONIOBOIMachineProperties.PROMPT_REGEX				, connectionConfigureData);
-//			String 			userPrompt 					= getElementController().getElementAsString(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX	, connectionConfigureData);
-//			String 			passwordPrompt 				= getElementController().getElementAsString(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX	, connectionConfigureData);
-//			String 			rollbackConditionPrompt 	= getElementController().getElementAsString(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, connectionConfigureData);
-//			int 			protocolType 				= getElementController().getElementAsInt(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, connectionConfigureData);
-//
-//			userNameTextBox.setText(userName);
-//			passwordTextBox.setText(password);
-//			if (timeout > 0) {
-//				timeOutTextBox.setText(String.valueOf(timeout));
-//			}
-//			promptTextBox.setText(prompt);
-//			if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET) {
-//				userPromptTextBox.setText(userPrompt);
-//				passwordPromptTextBox.setText(passwordPrompt);
-//			}
-//			rollbackConditionPromptTextBox.setText(rollbackConditionPrompt);
-//			handleProtocolType(protocolType, false);
-//		}
+
 	}
-	
-	
+
+
 
 	@Override
 	public AEMFTMetadataElementComposite getData() {
-//		boolean errors = showValidateClientErrors();
-//		if (errors == false) {
-//			String	timeoutStr		= timeOutTextBox.getText();
-//			String	protocoltypeStr	= protocolTypeDropdownButton.getSelectedId();
-//			int		timeoutInt		= AEMFTCommonUtilsBase.getIntegerFromString(timeoutStr);
-//			int		protocoltypeInt	= AEMFTCommonUtilsBase.getIntegerFromString(protocoltypeStr);
-		
-			AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(CRONIOBOLogFilter.LEVEL 			, formData	, severityDropdownButton.getSelectedId());
-			getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());
-			getElementController().setElement(CRONIOBOLogFilter.MAX_TIMESTAMP 	, formData	, safeBeforeDateTimePickerTextBox.getDateText());
-			getElementController().setElement(CRONIOBOLogFilter.SIZE	 		, formData	, numberRowsDropdownButton.getSelectedId());
-			getElementController().setElement(CRONIOBOLogFilter.OFFSET	 		, formData	, 0);
-			getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	 , formData	, 0);
-	
-			
-//			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD					, formData	, passwordTextBox.getText());
-//			getElementController().setElement(CRONIOBOIMachineProperties.TIMEOUT					, formData	, timeoutInt);
-//			getElementController().setElement(CRONIOBOIMachineProperties.PROMPT_REGEX				, formData	, promptTextBox.getText());
-//			getElementController().setElement(CRONIOBOIMachineProperties.USERNAME_PROMPT_REGEX		, formData	, userPromptTextBox.getText());
-//			getElementController().setElement(CRONIOBOIMachineProperties.PASSWORD_PROMPT_REGEX		, formData	, passwordPromptTextBox.getText());
-//			getElementController().setElement(CRONIOBOIMachineProperties.ROLLBACK_CONDITION_REGEX	, formData	, rollbackConditionPromptTextBox.getText());
-//			getElementController().setElement(CRONIOBOIMachineProperties.PROTOCOL_TYPE				, formData	, protocoltypeInt);
-//			getElementController().setElement(CRONIOBOIMachineProperties.MACHINE_NAME				, formData	, getId());
-			return formData;
-//		} else {
-//			return null;
-//		}
+
+		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+		getElementController().setElement(CRONIOBOLogFilter.LEVEL 			, formData	, severityDropdownButton.getSelectedId());
+		getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());
+		getElementController().setElement(CRONIOBOLogFilter.MAX_TIMESTAMP 	, formData	, safeBeforeDateTimePickerTextBox.getDateText());
+		getElementController().setElement(CRONIOBOLogFilter.SIZE	 		, formData	, numberRowsDropdownButton.getSelectedId());
+		getElementController().setElement(CRONIOBOLogFilter.OFFSET	 		, formData	, 0);
+		getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	 , formData	, executionId);
+
+		return formData;
+
 	}
 
 	@Override
@@ -201,17 +162,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
-//		super.dispatchEvent(evt);
-//		LOGICAL_TYPE type = evt.getEventType();
-//		String sourceWidget = evt.getSourceWidget();
-//		if (AEGWTBootstrapDropdownButton.NAME.equals(sourceWidget) && LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
-//			String sourceContainerId = evt.getSourceContainerId();
-//			if (NAME.equals(sourceContainerId)) {
-//				String selectedId = evt.getSourceWidgetId();
-//				int protocolType = AEMFTCommonUtilsBase.getIntegerFromString(selectedId);
-//				handleProtocolType(protocolType, true);
-//			}
-//		}
+
 	}
 
 	@Override
@@ -227,32 +178,16 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 	@Override
 	protected void resetForm() {
-//		userNameTextBox.setText("");
-//		passwordTextBox.setText(""); 
-//		timeOutTextBox.setText("");
-//		promptTextBox.setText(""); 
-//		userPromptTextBox.setText("");
-//		passwordPromptTextBox.setText("");
-//		rollbackConditionPromptTextBox.setText("");
-//		protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1));
 	}
 
 	@Override
 	protected void resetErrorLabel() {
-//		userNameTextBox.setErrorLabelVisible(false);
-//		passwordTextBox.setErrorLabelVisible(false);
-//		timeOutTextBox.setErrorLabelVisible(false);
-//		promptTextBox.setErrorLabelVisible(false);
-//		userPromptTextBox.setErrorLabelVisible(false);
-//		passwordPromptTextBox.setErrorLabelVisible(false);
-//		rollbackConditionPromptTextBox.setErrorLabelVisible(false);
+		
 	}
 
 	@Override
 	protected boolean isValidEvent(AEGWTLogicalEvent evt) {
-//		if (CRONIOBusDesktopPreferencesConnectionPresenter.NAME.equals(evt.getSourceWidget())) {
-//			return true;
-//		} else 
+
 		return false;
 	}
 
@@ -261,39 +196,5 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 	}
 
-	/**
-	 * PRIVATE
-	 */
-
-	private void handleProtocolType(int protocolType, boolean fireEvent) {
-//		if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET) {
-//			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TELNET));
-//			userPromptTextBox.setVisible(true);
-//			passwordPromptTextBox.setVisible(true);
-//		} else if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1) {
-//			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_1));
-//			userPromptTextBox.setVisible(false);
-//			passwordPromptTextBox.setVisible(false);
-//		} else if (protocolType == CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_2) {
-//			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_SSH_2));
-//			userPromptTextBox.setVisible(false);
-//			passwordPromptTextBox.setVisible(false);
-//		} else {
-//			protocolTypeDropdownButton.setItemSelected(String.valueOf(CRONIOBOIMachineProperties.PROTOCOL_TYPE_TEST));
-//			userPromptTextBox.setVisible(false);
-//			passwordPromptTextBox.setVisible(false);
-//		}
-//		
-//		if (fireEvent) {
-//			AEMFTMetadataElementComposite formData = getData();
-//
-//			CRONIOBusDesktopPreferencesEvent connectionConfigureFormEvt = new CRONIOBusDesktopPreferencesEvent(getId(), getName());
-//			connectionConfigureFormEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
-//			connectionConfigureFormEvt.addElementAsComposite(getId() ,formData);
-//			connectionConfigureFormEvt.setConnectionName(getId());
-//			getLogicalEventHandlerManager().fireEvent(connectionConfigureFormEvt);
-//		}
-//		
-//		AEGWTJQueryPerfectScrollBar.updateScroll(CRONIOBusDesktopPreferencesMachineSectionsDeckPanel.NAME);
-	}
+	
 }
