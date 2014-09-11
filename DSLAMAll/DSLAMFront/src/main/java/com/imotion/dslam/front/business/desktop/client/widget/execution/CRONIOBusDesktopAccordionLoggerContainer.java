@@ -102,6 +102,9 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 			AEMFTMetadataElementSingle 	messageData 	= (AEMFTMetadataElementSingle) getElementController().getElement(CRONIOBOILogDataConstants.MESSAGE	, logData);
 			String message = messageData.toString();
 			String[] messageSplit = message.split("\\,");
+			String[] executionSplit = messageSplit[0].split("\\:");
+			String executionId = executionSplit[1].trim();
+			super.setExecutionIdInForm(executionId);
 			nodeIp 			= messageSplit[1];
 			nodeName 		= messageSplit[2];
 			nodeRequest 	= messageSplit[3];
@@ -109,9 +112,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 			nodePrompt 		= messageSplit[5];
 			header 			= dateStr + " " + nodeName + " " + nodeIp;
 		}
-		
-		
-		
+	
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header,true);
 		accordionPanelContainer.addWiget(accordionPanel);
 		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
@@ -162,4 +163,5 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	protected int getItemHeight() {
 		return HEIGHT;
 	}
+
 }

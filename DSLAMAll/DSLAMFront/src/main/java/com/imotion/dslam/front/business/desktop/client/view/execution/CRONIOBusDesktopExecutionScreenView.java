@@ -66,10 +66,6 @@ public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBas
 				getLogEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
 				getLogicalEventHandlerManager().fireEvent(getLogEvt);
 				
-//				AEMFTMetadataElementComposite logData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_EXECUTION_LOG, data);
-//				if (logData != null) {
-//					logger.setData(logData);
-//				}
 			}
 		}
 	}

@@ -25,6 +25,8 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	public static final String NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
 	public static final String DATE_FORMAT_PICKER	= "d/m/Y H:i";
 	private static DSLAMBusI18NTexts 	TEXTS 		= GWT.create(DSLAMBusI18NTexts.class);
+	
+	private String executionId;
 
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  severityDropdownButton;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			filterTextBox;
@@ -104,6 +106,9 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		return showErrors;
 	}
 
+	public void setExecutionId (String executionId) {
+		this.executionId = executionId;
+	}
 	/**
 	 * AEGWTICompositePanel
 	 */
