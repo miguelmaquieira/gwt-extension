@@ -8,6 +8,7 @@ import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 public interface CRONIOBKILogPersistenceService {
 	
 	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData);
-	public List<CRONIOBOILog> getExecutionLogs(String executionId);
+	public List<CRONIOBOILog> getExecutionLogs(String executionId, int offset, int numberResults);
+
 
 }

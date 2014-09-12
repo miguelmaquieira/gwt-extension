@@ -14,5 +14,9 @@ public interface CRONIOBOILogDataConstants {
 	String LINENUMBER	= "lineNumber";
 	String HOST			= "host";
 	
+	// Data Keys
+	String ISFILTER 		= "isFilter";
+	String OFFSET 			= "offset";
+	String NUMBERRESULTS 	= "numberResults";
 
 }

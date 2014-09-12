@@ -4,11 +4,15 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
+import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordionPanel;
@@ -26,6 +30,11 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	private AEGWTBootstrapAccordionPanelContainer 	accordionPanelContainer;
 	private AEGWTBootstrapPager						pager;
 	
+	private boolean	isFilter;
+	private int 		offset;
+	private int 		numberResults;
+	private String 		executionId;
+	
 	private String dateStr; 	
 	private String 	nodeIp; 			
 	private String 	nodeName;
@@ -40,7 +49,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		getLoggerContainer().add(accordionPanelContainer);
 		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 		
-		pager = new AEGWTBootstrapPager("#","#");
+		pager = new AEGWTBootstrapPager("#log","#log");
 		getLoggerContainer().add(pager);
 	}
 	
@@ -72,12 +81,30 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	}
 
 	@Override
-	public void setData(AEMFTMetadataElementComposite executionLogsData) {
+	public void setData(AEMFTMetadataElementComposite data) {
+		
+		AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
 		if (executionLogsData != null) {
 			List<AEMFTMetadataElement> logList = executionLogsData.getSortedElementList();
 			for (AEMFTMetadataElement log : logList) {
 				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
 				addLogItem(logData, false);
+			}
+			AEMFTMetadataElementSingle isFilterData 		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
+			AEMFTMetadataElementSingle offsetData			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
+			AEMFTMetadataElementSingle numberResultsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBERRESULTS);
+			boolean 	isFilter 		= isFilterData.getValueAsBool();
+			int 		offset 			= offsetData.getValueAsInt();
+			int 		numberResults 	= numberResultsData.getValueAsInt();
+			
+			this.isFilter 		= isFilter;
+			this.offset 		= offset;
+			this.numberResults 	= numberResults;
+			
+			if (offset == 0) {
+				pager.buttonPreviousDisable(true);
+			} else {
+				pager.buttonPreviousDisable(false);
 			}
 		}
 	}
@@ -105,6 +132,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 			String[] executionSplit = messageSplit[0].split("\\:");
 			String executionId = executionSplit[1].trim();
 			super.setExecutionIdInForm(executionId);
+			this.executionId = executionId;
 			nodeIp 			= messageSplit[1];
 			nodeName 		= messageSplit[2];
 			nodeRequest 	= messageSplit[3];
@@ -151,12 +179,41 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					}
 				}
 			}	
+		} else if (AEGWTBootstrapPager.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.NEXT_EVENT.equals(type) || LOGICAL_TYPE.PREVIOUS_EVENT.equals(type)) {
+				evt.stopPropagation();
+				if (LOGICAL_TYPE.NEXT_EVENT.equals(type)) {
+					offset = offset + numberResults;
+				} else {
+					if (offset != 0) {
+						offset = offset - numberResults;
+					}
+				}
+				accordionPanelContainer.clear();
+				
+				AEMFTMetadataElementComposite 	executionData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+				AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement(); 
+				executionIdData.setValueAs(executionId);
+				getElementController().setElement(CRONIOBOIExecution.EXECUTION_ID, executionData, executionIdData);
+				
+				AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+				getLogsEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, executionData);
+				getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
+				getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
+				getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBERRESULTS, numberResults);
+				getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
+				getLogicalEventHandlerManager().fireEvent(getLogsEvt);
+			}	
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.CHANGE_EVENT.equals(type);
+		return LOGICAL_TYPE.CHANGE_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.NEXT_EVENT.equals(type)
+				||
+				LOGICAL_TYPE.PREVIOUS_EVENT.equals(type);
 	}
 
 	@Override
