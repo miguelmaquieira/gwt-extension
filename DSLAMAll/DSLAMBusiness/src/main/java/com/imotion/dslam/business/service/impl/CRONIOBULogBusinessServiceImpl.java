@@ -16,6 +16,7 @@ import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implements CRONIOBUILogBusinessService, CRONIOBUILogBusinessServiceConstants, CRONIOBUILogBusinessServiceTrace {
 
@@ -37,16 +38,11 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		String	executionId		= getElementDataController().getElementAsString(CRONIOBOLogFilter.EXECUTION_ID, contextIn);
 		int 	offset			= getElementDataController().getElementAsInt(CRONIOBOLogFilter.OFFSET, contextIn);
 		
-		SimpleDateFormat formatText = new SimpleDateFormat("dd/MM/YYYY HH:mm");
-		Date timestamp = null;
-		try {
-			timestamp = formatText.parse(timestampStr);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	
 		int numRows = Integer.valueOf(numRowsStr);
+		
+		
+		Date timestamp = AEMFTCommonUtils.getDateFromFormattedString(timestampStr, "dd/MM/yyyy HH:mm");
 		
 		
 		CRONIOBOLogFilter filterData = new CRONIOBOLogFilter();

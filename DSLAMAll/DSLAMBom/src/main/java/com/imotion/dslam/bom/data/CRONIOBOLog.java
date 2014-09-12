@@ -27,7 +27,7 @@ public class CRONIOBOLog implements CRONIOBOILog{
 	private String logId;	
 	
 	@Field(name="timestamp")
-	@Temporal(value = TemporalType.DATE)
+	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date timestamp;
 	
 	@Field(name="level")

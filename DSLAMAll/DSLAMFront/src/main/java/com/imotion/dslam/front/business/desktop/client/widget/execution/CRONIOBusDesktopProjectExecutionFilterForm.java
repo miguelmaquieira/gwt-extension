@@ -6,7 +6,6 @@ import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
-import com.imotion.dslam.bom.data.CRONIOBOLog;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
