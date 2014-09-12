@@ -162,7 +162,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
 			String executionId = executionIdDataSingle.getValueAsString();
 			int offset 			= evt.getElementAsInt(CRONIOBOILog.OFFSET);
-			int numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBERRESULTS);
+			int numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBER_RESULTS);
 			boolean isFilter	= evt.getElementAsBoolean(CRONIOBOILog.ISFILTER);
 			
 			if (isFilter) {
@@ -262,27 +262,30 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		
 		logData.addElement(CRONIOBOIExecutionDataConstants.EXECUTION_ID		, executionId);
 		logData.addElement(CRONIOBOILogDataConstants.OFFSET					, offset);
-		logData.addElement(CRONIOBOILogDataConstants.NUMBERRESULTS			, numberResults);
+		logData.addElement(CRONIOBOILogDataConstants.NUMBER_RESULTS			, numberResults);
 		
 		getClientServerConnection().executeComm(logData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_EXECUTION_LOGS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite executionLogsData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA);
-					CRONIOBusDesktopProjectEvent getExecutionLogsEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-					AEMFTMetadataElementSingle isFilterData 		= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.ISFILTER);
-					AEMFTMetadataElementSingle offsetData			= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.OFFSET);
-					AEMFTMetadataElementSingle numberResultsData	= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.NUMBERRESULTS);
-					boolean 	isFilter 		= isFilterData.getValueAsBool();
-					int 		offset 			= offsetData.getValueAsInt();
-					int 		numberResults 	= numberResultsData.getValueAsInt();
+					AEMFTMetadataElementComposite 	executionLogsData 		= dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA);
+					CRONIOBusDesktopProjectEvent 	getExecutionLogsEvt 	= new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+					AEMFTMetadataElementSingle 		isFilterData 			= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.ISFILTER);
+					AEMFTMetadataElementSingle 		offsetData				= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.OFFSET);
+					AEMFTMetadataElementSingle 		numberResultsData		= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.NUMBER_RESULTS);
+					AEMFTMetadataElementSingle 		totalExecutionLogsData	= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
+					boolean 	isFilter 			= isFilterData.getValueAsBool();
+					int 		offset 				= offsetData.getValueAsInt();
+					int 		numberResults 		= numberResultsData.getValueAsInt();
+					int			totalExecutionLogs	= totalExecutionLogsData.getValueAsInt();
 					
 					getExecutionLogsEvt.setEventType(EVENT_TYPE.ADD_EXECUTION_LOGS);
 					getExecutionLogsEvt.addElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA, executionLogsData);
-					getExecutionLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER	, isFilter);
-					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET			, offset);
-					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.NUMBERRESULTS	, numberResults);
+					getExecutionLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER			, isFilter);
+					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET					, offset);
+					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS			, numberResults);
+					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.TOTAL_EXECUTION_LOGS	, totalExecutionLogs);
 					getLogicalEventHandlerManager().fireEvent(getExecutionLogsEvt);
 				}
 			}

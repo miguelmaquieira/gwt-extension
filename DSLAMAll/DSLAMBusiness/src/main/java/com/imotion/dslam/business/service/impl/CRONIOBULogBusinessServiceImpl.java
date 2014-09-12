@@ -14,7 +14,6 @@ import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
-import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implements CRONIOBUILogBusinessService, CRONIOBUILogBusinessServiceConstants, CRONIOBUILogBusinessServiceTrace {
 
@@ -64,10 +63,11 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		AEMFTMetadataElementSingle 		executionIdData 	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOIExecution.EXECUTION_ID);
 		String							executionId 		= executionIdData.getValueAsString();
 		AEMFTMetadataElementSingle		offsetData			= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.OFFSET);
-		AEMFTMetadataElementSingle		numberResultsData	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.NUMBERRESULTS);
+		AEMFTMetadataElementSingle		numberResultsData	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.NUMBER_RESULTS);
 		int								offset 				= offsetData.getValueAsInt();
 		int								numberResults 		= numberResultsData.getValueAsInt();
 		
+		int totalExecutionLogs	= getLogPersistence().getTotalExecutionLogs(executionId);
 		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId,  offset, numberResults);
 		
 		int resultsNumber;
@@ -85,10 +85,11 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(EXECUTION_LOGS_DATA			, logListData);
-		contextOut.addElement(CRONIOBOILog.OFFSET			, offset);
-		contextOut.addElement(CRONIOBOILog.NUMBERRESULTS	, numberResults);
-		contextOut.addElement(CRONIOBOILog.ISFILTER			, false);
+		contextOut.addElement(EXECUTION_LOGS_DATA				, logListData);
+		contextOut.addElement(CRONIOBOILog.OFFSET				, offset);
+		contextOut.addElement(CRONIOBOILog.NUMBER_RESULTS		, numberResults);
+		contextOut.addElement(CRONIOBOILog.ISFILTER				, false);
+		contextOut.addElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS	, totalExecutionLogs);
 		}
 
 }

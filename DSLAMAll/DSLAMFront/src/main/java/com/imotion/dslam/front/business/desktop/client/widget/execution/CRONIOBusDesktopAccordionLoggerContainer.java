@@ -90,12 +90,14 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
 				addLogItem(logData, false);
 			}
-			AEMFTMetadataElementSingle isFilterData 		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
-			AEMFTMetadataElementSingle offsetData			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
-			AEMFTMetadataElementSingle numberResultsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBERRESULTS);
-			boolean 	isFilter 		= isFilterData.getValueAsBool();
-			int 		offset 			= offsetData.getValueAsInt();
-			int 		numberResults 	= numberResultsData.getValueAsInt();
+			AEMFTMetadataElementSingle isFilterData 			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
+			AEMFTMetadataElementSingle offsetData				= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
+			AEMFTMetadataElementSingle numberResultsData		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBER_RESULTS);
+			AEMFTMetadataElementSingle totalExecutionLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
+			boolean 	isFilter 			= isFilterData.getValueAsBool();
+			int 		offset 				= offsetData.getValueAsInt();
+			int 		numberResults 		= numberResultsData.getValueAsInt();
+			int 		totalExecutionLogs	= totalExecutionLogsData.getValueAsInt();
 			
 			this.isFilter 		= isFilter;
 			this.offset 		= offset;
@@ -105,6 +107,12 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 				pager.buttonPreviousDisable(true);
 			} else {
 				pager.buttonPreviousDisable(false);
+			}
+			
+			if (totalExecutionLogs <= (offset + numberResults)) {
+				pager.buttonNextDisable(true);
+			} else {
+				pager.buttonNextDisable(false);
 			}
 		}
 	}
@@ -200,7 +208,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 				getLogsEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, executionData);
 				getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
 				getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
-				getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBERRESULTS, numberResults);
+				getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS, numberResults);
 				getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
 				getLogicalEventHandlerManager().fireEvent(getLogsEvt);
 			}	
