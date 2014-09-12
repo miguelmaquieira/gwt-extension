@@ -14,34 +14,7 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 
 	private static final long serialVersionUID = 1L;
 
-	
-	
-	
-//	@Override
-//	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData) {
-//
-//		
-//		
-//		Date   timestamp	= new Date();
-////		String Level		= "DEBUG";
-//		String text			= "MIGUELTURRA";
-//		String executionID	= "45";
-//		int offset			= 0;
-//		int size			= 10;	
-//		
-//		String customQuery	= "SELECT o FROM CRONIOBOLog o "
-//							+ "WHERE (o.message LIKE '%"+ executionID +"%' "
-//							+ "AND o.message LIKE '%"+ text +"%' "
-//							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +" )";
-//		
-//		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, timestamp, offset, size);
-//
-//
-//		return AEMFTCommonUtilsBase.castList(logsListJpa);
-//	}
-	
-	
-	
+
 	@Override
 	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData) {
 	
