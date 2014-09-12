@@ -1,9 +1,14 @@
 package com.imotion.dslam.front.business.desktop.client.widget.execution;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.LabelElement;
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
@@ -11,6 +16,7 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
@@ -33,9 +39,12 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	private	AEGWTBootstrapDateTimePickerTextBox            	safeBeforeDateTimePickerTextBox;
 	private LabelElement									beforeLabel;	
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	numberRowsDropdownButton;
-
+	private RadioButton beforeNow;
+	private RadioButton beforeDate;
+		
 	private String executionId;
 
+	
 	public CRONIOBusDesktopProjectExecutionFilterForm() {
 
 		setGlyphIconButtonText(BUTTON_SUBMIT, TEXTS.filter(), AEGWTIBoostrapConstants.SPAN_GLYPHICON_FILTER);
@@ -78,8 +87,8 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		beforeLabel.getStyle().setPaddingLeft(0, Unit.PX);
 		beforeZone.getElement().appendChild(beforeLabel);
 
-		RadioButton beforeNow 	= new RadioButton(TEXTS.before_date(),TEXTS.now());
-		RadioButton beforeDate 	= new RadioButton(TEXTS.before_date());
+		beforeNow 	= new RadioButton(TEXTS.before_date(),TEXTS.now());
+		beforeDate 	= new RadioButton(TEXTS.before_date());
 		beforeNow.getElement().addClassName(AEGWTIBoostrapConstants.COL_XS_12);
 		beforeDate.getElement().addClassName(AEGWTIBoostrapConstants.COL_XS_1);
 		beforeNow.setValue(true);
@@ -139,12 +148,25 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		getElementController().setElement(CRONIOBOLogFilter.LEVEL 			, formData	, severityDropdownButton.getSelectedId());
-		getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());
-		getElementController().setElement(CRONIOBOLogFilter.MAX_TIMESTAMP 	, formData	, safeBeforeDateTimePickerTextBox.getDateText());
+		getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());				
 		getElementController().setElement(CRONIOBOLogFilter.SIZE	 		, formData	, numberRowsDropdownButton.getSelectedId());
 		getElementController().setElement(CRONIOBOLogFilter.OFFSET	 		, formData	, 0);
-		getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	 , formData	, executionId);
+		getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	, formData	, executionId);
 
+				
+		Date timestamp = null;
+		if(beforeNow.getValue()) {
+			timestamp = new Date();
+		} else {			
+			String dateStr = safeBeforeDateTimePickerTextBox.getDateText();
+			DateTimeFormat formatter = DateTimeFormat.getFormat("dd/MM/yyyy HH:mm");
+			timestamp = formatter.parse(dateStr);
+		}
+		
+		getElementController().setElement(CRONIOBOLogFilter.MAX_TIMESTAMP, formData, timestamp);
+
+		
+		
 		return formData;
 
 	}

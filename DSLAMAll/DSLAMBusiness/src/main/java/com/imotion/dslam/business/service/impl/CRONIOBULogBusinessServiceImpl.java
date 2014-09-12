@@ -1,7 +1,5 @@
 package com.imotion.dslam.business.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		
 		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
 		String 	filterText		= getElementDataController().getElementAsString(CRONIOBOLogFilter.FILTER_TEXT, contextIn);
-		String 	timestampStr	= getElementDataController().getElementAsString(CRONIOBOLogFilter.MAX_TIMESTAMP, contextIn);
+		Date 	timestamp		= (Date) getElementDataController().getElementAsSerializable(CRONIOBOLogFilter.MAX_TIMESTAMP, contextIn);
 		String 	numRowsStr		= getElementDataController().getElementAsString(CRONIOBOLogFilter.SIZE, contextIn);
 		String	level			= getElementDataController().getElementAsString(CRONIOBOLogFilter.LEVEL, contextIn);
 		String	executionId		= getElementDataController().getElementAsString(CRONIOBOLogFilter.EXECUTION_ID, contextIn);
@@ -41,10 +39,7 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 	
 		int numRows = Integer.valueOf(numRowsStr);
 		
-		
-		Date timestamp = AEMFTCommonUtils.getDateFromFormattedString(timestampStr, "dd/MM/yyyy HH:mm");
-		
-		
+
 		CRONIOBOLogFilter filterData = new CRONIOBOLogFilter();
 		filterData.setOffset(offset);
 		filterData.setSize(numRows);
