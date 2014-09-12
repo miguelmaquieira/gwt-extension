@@ -36,10 +36,10 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	}
 	
 	@Override
-	public List<CRONIOBOILog> getExecutionLogs(String executionId) {
+	public List<CRONIOBOILog> getExecutionLogs(String executionId, int offset, int numberResults) {
 
 		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery, 0, 20);
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery, offset, numberResults);
 		
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}

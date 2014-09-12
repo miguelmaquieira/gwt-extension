@@ -36,13 +36,22 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 	@Override
 	public void getExecutionLogs() {
 		//ContextIn
-		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
-		AEMFTMetadataElementSingle 		executionIdData = (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOIExecution.EXECUTION_ID);
-		String							executionId 	= executionIdData.getValueAsString();
+		AEMFTMetadataElementComposite 	contextIn 			= getContext().getContextDataIN();
+		AEMFTMetadataElementSingle 		executionIdData 	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOIExecution.EXECUTION_ID);
+		String							executionId 		= executionIdData.getValueAsString();
+		AEMFTMetadataElementSingle		offsetData			= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.OFFSET);
+		AEMFTMetadataElementSingle		numberResultsData	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.NUMBERRESULTS);
+		int								offset 				= offsetData.getValueAsInt();
+		int								numberResults 		= numberResultsData.getValueAsInt();
 		
-		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId);
+		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId,  offset, numberResults);
 		
-		int resultsNumber = logs.size();
+		int resultsNumber;
+		if (logs != null) {
+			resultsNumber = logs.size();
+		} else {
+			resultsNumber = 0;
+		}
 		
 		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logs);
 
@@ -52,7 +61,10 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 
 		//ContextOut
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(EXECUTION_LOGS_DATA, logListData);
-	}
+		contextOut.addElement(EXECUTION_LOGS_DATA			, logListData);
+		contextOut.addElement(CRONIOBOILog.OFFSET			, offset);
+		contextOut.addElement(CRONIOBOILog.NUMBERRESULTS	, numberResults);
+		contextOut.addElement(CRONIOBOILog.ISFILTER			, false);
+		}
 
 }

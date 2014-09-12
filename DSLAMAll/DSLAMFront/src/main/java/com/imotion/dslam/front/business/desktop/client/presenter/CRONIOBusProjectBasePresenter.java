@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
+import com.imotion.dslam.bom.CRONIOBOILog;
+import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -158,7 +160,19 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
 			AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
 			String executionId = executionIdDataSingle.getValueAsString();
-			getExecutionLogsData(executionId);
+			int offset 			= evt.getElementAsInt(CRONIOBOILog.OFFSET);
+			int numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBERRESULTS);
+			boolean isFilter	= evt.getElementAsBoolean(CRONIOBOILog.ISFILTER);
+			
+			if (isFilter) {
+				
+			} else {
+				if (offset < 0 || numberResults < 0) {
+					getExecutionLogsData(executionId, 0, 20);
+				} else{
+					getExecutionLogsData(executionId, offset, numberResults);
+				}
+			}	
 		}
 		
 	}
@@ -241,11 +255,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	 *	PRIVATE 
 	 */
 	
-	private void getExecutionLogsData(String executionId) {
+	private void getExecutionLogsData(String executionId, int offset, int numberResults) {
 		
 		AEMFTMetadataElementComposite logData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		
 		logData.addElement(CRONIOBOIExecutionDataConstants.EXECUTION_ID		, executionId);
+		logData.addElement(CRONIOBOILogDataConstants.OFFSET					, offset);
+		logData.addElement(CRONIOBOILogDataConstants.NUMBERRESULTS			, numberResults);
 		
 		getClientServerConnection().executeComm(logData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_EXECUTION_LOGS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
@@ -254,8 +270,18 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				if (dataResult != null) {
 					AEMFTMetadataElementComposite executionLogsData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA);
 					CRONIOBusDesktopProjectEvent getExecutionLogsEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+					AEMFTMetadataElementSingle isFilterData 		= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.ISFILTER);
+					AEMFTMetadataElementSingle offsetData			= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.OFFSET);
+					AEMFTMetadataElementSingle numberResultsData	= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.NUMBERRESULTS);
+					boolean 	isFilter 		= isFilterData.getValueAsBool();
+					int 		offset 			= offsetData.getValueAsInt();
+					int 		numberResults 	= numberResultsData.getValueAsInt();
+					
 					getExecutionLogsEvt.setEventType(EVENT_TYPE.ADD_EXECUTION_LOGS);
 					getExecutionLogsEvt.addElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_LOGS_DATA, executionLogsData);
+					getExecutionLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER	, isFilter);
+					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET			, offset);
+					getExecutionLogsEvt.addElementAsInt(CRONIOBOILog.NUMBERRESULTS	, numberResults);
 					getLogicalEventHandlerManager().fireEvent(getExecutionLogsEvt);
 				}
 			}

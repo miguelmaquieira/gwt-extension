@@ -63,7 +63,7 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 				getLogEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
 				getLogicalEventHandlerManager().fireEvent(getLogEvt);
 			} else {
-				logger.setData(executionLogsData);
+				logger.setData(data);
 			}	
 		}
 	}
