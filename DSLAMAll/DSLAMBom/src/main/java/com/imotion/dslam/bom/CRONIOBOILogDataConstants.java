@@ -1,8 +1,8 @@
 package com.imotion.dslam.bom;
 
 public interface CRONIOBOILogDataConstants {
-	
-	//Atributes
+
+	//Attributes	
 	String LOG_ID		= "_id";
 	String TIMESTAMP	= "timestamp";
 	String LEVEL		= "level";
@@ -18,4 +18,5 @@ public interface CRONIOBOILogDataConstants {
 	String ISFILTER 		= "isFilter";
 	String OFFSET 			= "offset";
 	String NUMBERRESULTS 	= "numberResults";
+
 }

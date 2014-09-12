@@ -7,30 +7,58 @@ import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceModuleJPA;
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.data.CRONIOBOLog;
+import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOILog, CRONIOBOLog, String> implements CRONIOBKILogPersistenceService{
 
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	
+//	@Override
+//	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData) {
+//
+//		
+//		
+//		Date   timestamp	= new Date();
+////		String Level		= "DEBUG";
+//		String text			= "MIGUELTURRA";
+//		String executionID	= "45";
+//		int offset			= 0;
+//		int size			= 10;	
+//		
+//		String customQuery	= "SELECT o FROM CRONIOBOLog o "
+//							+ "WHERE (o.message LIKE '%"+ executionID +"%' "
+//							+ "AND o.message LIKE '%"+ text +"%' "
+//							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +" )";
+//		
+//		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, timestamp, offset, size);
+//
+//
+//		return AEMFTCommonUtilsBase.castList(logsListJpa);
+//	}
+	
+	
+	
 	@Override
-	public List<CRONIOBOILog> getLogsByfilter() {
-
+	public List<CRONIOBOILog> getLogsByfilter(CRONIOBOLogFilter filterData) {
+	
+		String 	text			= filterData.getFilterText();
+		String 	executionID		= filterData.getExecutionID();
+		Date   	beforeDate		= filterData.getMaxTimestamp();
+		String 	level			= filterData.getLevel();
+		int 	offset			= filterData.getOffset();
+		int 	size			= filterData.getSize();	
 		
-		Date   timestamp	= new Date();
-		String Level		= "DEBUG";
-		String texto		= "MIGUELTURRA";
-		String executionID	= "43";
-		int offset			= 0;
-		int size			= 10;	
 		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
-							+ "WHERE (o.message LIKE '%"+ executionID +"%' "
-							+ "AND o.message LIKE '%"+ texto +"%' "
-							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +" )";
+							+ "WHERE (o.message LIKE '"+ executionID +":%' "
+							+ "AND o.message LIKE '%"+ text +"%' "
+							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
 		
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, timestamp, offset, size);
-
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate, offset, size);
 
 		return AEMFTCommonUtilsBase.castList(logsListJpa);
 	}
