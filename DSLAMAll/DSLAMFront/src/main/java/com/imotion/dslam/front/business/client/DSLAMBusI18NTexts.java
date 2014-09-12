@@ -342,4 +342,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Log")
 	String log();
+	
+	@DefaultStringValue("Debe introducir una fecha válida")
+	String emptyDateError();
 }

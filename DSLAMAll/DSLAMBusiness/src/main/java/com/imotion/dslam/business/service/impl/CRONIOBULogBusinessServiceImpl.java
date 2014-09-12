@@ -11,7 +11,6 @@ import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
-import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 
@@ -29,16 +28,12 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		
 		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
 		String 	filterText		= getElementDataController().getElementAsString(CRONIOBOLogFilter.FILTER_TEXT, contextIn);
-		Date 	timestamp		= (Date) getElementDataController().getElementAsSerializable(CRONIOBOLogFilter.MAX_TIMESTAMP, contextIn);
-		String 	numRowsStr		= getElementDataController().getElementAsString(CRONIOBOLogFilter.SIZE, contextIn);
+		Date 	timestamp		= (Date) getElementDataController().getElementAsSerializable(CRONIOBOLogFilter.MAX_TIMESTAMP, contextIn);		
 		String	level			= getElementDataController().getElementAsString(CRONIOBOLogFilter.LEVEL, contextIn);
 		String	executionId		= getElementDataController().getElementAsString(CRONIOBOLogFilter.EXECUTION_ID, contextIn);
-		int 	offset			= getElementDataController().getElementAsInt(CRONIOBOLogFilter.OFFSET, contextIn);
+		int 	offset			= getElementDataController().getElementAsInt(CRONIOBOLogFilter.OFFSET, contextIn);		
+		int 	numRows			= getElementDataController().getElementAsInt(CRONIOBOLogFilter.SIZE, contextIn);
 		
-	
-		int numRows = Integer.valueOf(numRowsStr);
-		
-
 		CRONIOBOLogFilter filterData = new CRONIOBOLogFilter();
 		filterData.setOffset(offset);
 		filterData.setSize(numRows);
@@ -46,14 +41,12 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		filterData.setLevel(level);
 		filterData.setFilterText(filterText);
 		filterData.setMaxTimestamp(timestamp);
-		
-		
-		
-		List<CRONIOBOILog> logs = getLogPersistence().getLogsByfilter(filterData);
+
+		List<CRONIOBOILog> logList = getLogPersistence().getLogsByfilter(filterData);
 		
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		AEMFTMetadataElement logsData = null;
-		contextOut.addElement(LOGS_DATA, logsData);
+		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logList);
+		contextOut.addElement(LOGS_DATA, logListData);
 	}
 	
 	@Override
