@@ -160,6 +160,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		AEMFTMetadataElementComposite formData = null;
 		
 		if(!checkErrors()) {
+			resetErrorLabel();
 			formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 			getElementController().setElement(CRONIOBOLogFilter.LEVEL 			, formData	, severityDropdownButton.getSelectedId());
 			getElementController().setElement(CRONIOBOLogFilter.FILTER_TEXT 	, formData	, filterTextBox.getText());	
@@ -214,7 +215,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 	@Override
 	protected void resetErrorLabel() {
-
+		safeBeforeDateTimePickerTextBox.setErrorLabelVisible(false);
 	}
 
 	@Override
