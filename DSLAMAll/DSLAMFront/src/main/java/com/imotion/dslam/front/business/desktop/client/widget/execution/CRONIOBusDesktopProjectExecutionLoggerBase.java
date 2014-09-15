@@ -196,6 +196,10 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		return loggerContaniner;
 	}
 	
+	protected CRONIOBusDesktopProjectExecutionFilterForm getFilterForm() {
+		return filterForm;
+	}
+	
 	public void beforeExitSection() {
 		atmosphere.unsubscribe();
 		CRONIOBusDesktopProjectEvent saveContextEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());

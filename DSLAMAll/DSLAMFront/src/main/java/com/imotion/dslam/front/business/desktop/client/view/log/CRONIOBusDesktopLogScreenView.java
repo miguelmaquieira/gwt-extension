@@ -46,8 +46,9 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
 			AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
+			AEMFTMetadataElementComposite filteredLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
 			
-			if (executionLogsData == null) {
+			if (executionLogsData == null && filteredLogsData == null) {
 				root.clear();
 				
 				AEMFTMetadataElementSingle projectIdData = (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIExecution.PROJECT_ID);
@@ -86,7 +87,7 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
 		EVENT_TYPE evtTyp = evt.getEventType();
-		if (EVENT_TYPE.ADD_EXECUTION_LOGS.equals(evtTyp)) {
+		if (EVENT_TYPE.ADD_EXECUTION_LOGS.equals(evtTyp) || EVENT_TYPE.ADD_FILTERED_LOGS.equals(evtTyp)) {
 			AEMFTMetadataElementComposite executionLogsData = evt.getEventData();
 			setData(executionLogsData);
 		}
@@ -96,6 +97,8 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		
-		return EVENT_TYPE.ADD_EXECUTION_LOGS.equals(type);
+		return EVENT_TYPE.ADD_EXECUTION_LOGS.equals(type)
+				||
+				EVENT_TYPE.ADD_FILTERED_LOGS.equals(type);
 	}
 }

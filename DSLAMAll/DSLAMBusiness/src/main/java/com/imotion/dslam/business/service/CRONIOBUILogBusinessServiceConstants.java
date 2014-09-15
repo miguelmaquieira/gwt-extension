@@ -7,6 +7,6 @@ public interface CRONIOBUILogBusinessServiceConstants {
 	String  METHOD_GET_EXECUTION_LOGS	= "GET_EXECUTION_LOGS";
 
 	//CONTEXT
-	String 	LOGS_DATA 					= "LOGS_DATA";
+	String 	FILTERED_LOGS_DATA 			= "FILTERED_LOGS_DATA";
 	String 	EXECUTION_LOGS_DATA 		= "EXECUTION_LOGS_DATA";
 }

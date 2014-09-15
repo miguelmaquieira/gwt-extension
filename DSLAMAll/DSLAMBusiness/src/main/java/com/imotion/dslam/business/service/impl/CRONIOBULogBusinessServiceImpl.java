@@ -41,12 +41,17 @@ public class CRONIOBULogBusinessServiceImpl extends DSLAMBUServiceBase implement
 		filterData.setLevel(level);
 		filterData.setFilterText(filterText);
 		filterData.setMaxTimestamp(timestamp);
-
+		
+		int totalFilteredLogs	= getLogPersistence().getTotalLogsByfilter(filterData);
 		List<CRONIOBOILog> logList = getLogPersistence().getLogsByfilter(filterData);
 		
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logList);
-		contextOut.addElement(LOGS_DATA, logListData);
+		contextOut.addElement(FILTERED_LOGS_DATA, logListData);
+		contextOut.addElement(CRONIOBOILog.OFFSET				, offset);
+		contextOut.addElement(CRONIOBOILog.NUMBER_RESULTS		, numRows);
+		contextOut.addElement(CRONIOBOILog.ISFILTER				, true);
+		contextOut.addElement(CRONIOBOILog.TOTAL_FILTERED_LOGS	, totalFilteredLogs);
 	}
 	
 	@Override

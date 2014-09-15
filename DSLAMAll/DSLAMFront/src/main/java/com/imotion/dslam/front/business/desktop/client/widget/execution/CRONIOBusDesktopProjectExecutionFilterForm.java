@@ -166,6 +166,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 			getElementController().setElement(CRONIOBOLogFilter.SIZE	 		, formData	, (int)Integer.valueOf(numberRowsDropdownButton.getSelectedId()));
 			getElementController().setElement(CRONIOBOLogFilter.OFFSET	 		, formData	, 0);
 			getElementController().setElement(CRONIOBOLogFilter.EXECUTION_ID	, formData	, executionId);
+			getElementController().setElement(CRONIOBOLogFilter.ISFILTER		, formData	, true);
 
 			Date timestamp = null;
 			if(beforeNow.getValue()) {

@@ -37,6 +37,24 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	}
 	
 	@Override
+	public int getTotalLogsByfilter(CRONIOBOLogFilter filterData) {
+	
+		String 	text			= filterData.getFilterText();
+		String 	executionID		= filterData.getExecutionID();
+		Date   	beforeDate		= filterData.getMaxTimestamp();
+		String 	level			= filterData.getLevel();
+		
+		String customQuery	= "SELECT o FROM CRONIOBOLog o "
+							+ "WHERE (o.message LIKE '"+ executionID +":%' "
+							+ "AND o.message LIKE '%"+ text +"%' "
+							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
+		
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate);
+
+		return logsListJpa.size();
+	}
+	
+	@Override
 	public List<CRONIOBOILog> getExecutionLogs(String executionId, int offset, int numberResults) {
 
 		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";

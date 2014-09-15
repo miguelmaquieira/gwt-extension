@@ -18,7 +18,8 @@ public interface CRONIOBusDesktopProjectEventTypes {
 		OPEN_EVENT,
 		ADD_EXECUTION,
 		EXECUTE,
-		ADD_EXECUTION_LOGS
+		ADD_EXECUTION_LOGS,
+		ADD_FILTERED_LOGS
 	}
 	
 }
