@@ -31,9 +31,12 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 							+ "AND o.message LIKE '%"+ text +"%' "
 							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
 		
-		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate, offset, size);
-
-		return AEMFTCommonUtilsBase.castList(logsListJpa);
+		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate, offset, size);		
+		
+		//Temporal solution(bug:eclipselink query methods setMaxRows and setFirstResult don't work together)		
+		List<CRONIOBOLog> subLogList = getSublist(logsListJpa, size); 
+			
+		return AEMFTCommonUtilsBase.castList(subLogList);
 	}
 	
 	@Override
@@ -59,8 +62,10 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 
 		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery, offset, numberResults);
-		
-		return AEMFTCommonUtilsBase.castList(logsListJpa);
+		//Temporal solution(bug:eclipselink query methods setMaxRows and setFirstResult don't work together)		
+		List<CRONIOBOLog> subLogList = getSublist(logsListJpa, numberResults); 
+				
+		return AEMFTCommonUtilsBase.castList(subLogList);
 	}
 	
 	
@@ -72,6 +77,9 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		
 		return logsListJpa.size();
 	}
+	
+	
+	
 	
 	/**
 	 * AEMFTIHasPersistenceModule
@@ -86,5 +94,16 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		getPersistenceModule().setPersitenceUnitName(DSLAMBKPersistenceModuleJPA.MONGO_PERSISTENCE_UNIT_NAME);
 	}
 
+	
+	private List<CRONIOBOLog> getSublist(List<CRONIOBOLog> logsListJpa, int size) {
+		int resultSize = logsListJpa.size();
+		List<CRONIOBOLog> subLogList; 
+		if (resultSize < size) {
+			subLogList = logsListJpa;
+		} else { 
+			subLogList = logsListJpa.subList(0, size);			
+		}
+		return subLogList;
+	}
 
 }
