@@ -7,6 +7,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
+import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
@@ -83,25 +84,36 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		
+		accordionPanelContainer.clear();
+		
 		AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
-		if (executionLogsData != null) {
-			List<AEMFTMetadataElement> logList = executionLogsData.getSortedElementList();
+		AEMFTMetadataElementComposite filteredLogsData 	= (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
+		if (executionLogsData != null || filteredLogsData != null) {
+			List<AEMFTMetadataElement> 	logList;
+			boolean						isFiltered;
+			int							total;
+			if (executionLogsData != null) {
+				logList = executionLogsData.getSortedElementList();
+				isFiltered = false;
+			} else {
+				logList = filteredLogsData.getSortedElementList();
+				isFiltered = true;
+			}
+			
 			for (AEMFTMetadataElement log : logList) {
 				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
 				addLogItem(logData, false);
 			}
+			
 			AEMFTMetadataElementSingle isFilterData 			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
 			AEMFTMetadataElementSingle offsetData				= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
 			AEMFTMetadataElementSingle numberResultsData		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBER_RESULTS);
-			AEMFTMetadataElementSingle totalExecutionLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
 			boolean 	isFilter 			= isFilterData.getValueAsBool();
 			int 		offset 				= offsetData.getValueAsInt();
 			int 		numberResults 		= numberResultsData.getValueAsInt();
-			int 		totalExecutionLogs	= totalExecutionLogsData.getValueAsInt();
-			
-			this.isFilter 		= isFilter;
-			this.offset 		= offset;
-			this.numberResults 	= numberResults;
+			this.isFilter 					= isFilter;
+			this.offset 					= offset;
+			this.numberResults 				= numberResults;
 			
 			if (offset == 0) {
 				pager.buttonPreviousDisable(true);
@@ -109,7 +121,17 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 				pager.buttonPreviousDisable(false);
 			}
 			
-			if (totalExecutionLogs <= (offset + numberResults)) {
+			if (isFiltered) {
+				AEMFTMetadataElementSingle 	totalFilteredLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_FILTERED_LOGS);
+				int 						totalFilteredLogs		= totalFilteredLogsData.getValueAsInt();
+				total 												= totalFilteredLogs; 
+			} else {
+				AEMFTMetadataElementSingle 	totalExecutionLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
+				int 						totalExecutionLogs		= totalExecutionLogsData.getValueAsInt();
+				total 												= totalExecutionLogs;
+			}
+			
+			if (total <= (offset + numberResults)) {
 				pager.buttonNextDisable(true);
 			} else {
 				pager.buttonNextDisable(false);
@@ -198,19 +220,30 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					}
 				}
 				accordionPanelContainer.clear();
+		
+				if (isFilter) {
+					AEMFTMetadataElementComposite formData = super.getFilterForm().getData();
+					
+					AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+					getLogsEvt.addElement(CRONIOBOILogFilterDataConstants.FILTER_FORM_DATA, formData);
+					getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
+					getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
+					getLogicalEventHandlerManager().fireEvent(getLogsEvt);
+				} else {
+					AEMFTMetadataElementComposite 	executionData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+					AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement(); 
+					executionIdData.setValueAs(executionId);
+					getElementController().setElement(CRONIOBOIExecution.EXECUTION_ID, executionData, executionIdData);
+					
+					AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+					getLogsEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, executionData);
+					getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
+					getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
+					getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS, numberResults);
+					getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
+					getLogicalEventHandlerManager().fireEvent(getLogsEvt);
 				
-				AEMFTMetadataElementComposite 	executionData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
-				AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement(); 
-				executionIdData.setValueAs(executionId);
-				getElementController().setElement(CRONIOBOIExecution.EXECUTION_ID, executionData, executionIdData);
-				
-				AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-				getLogsEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, executionData);
-				getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
-				getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
-				getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS, numberResults);
-				getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
-				getLogicalEventHandlerManager().fireEvent(getLogsEvt);
+				}
 			}	
 		}
 	}

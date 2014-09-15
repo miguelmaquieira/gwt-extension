@@ -10,10 +10,12 @@ import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
+import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -158,24 +160,29 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			getFilteredLogs(filterData);
 
 		} else if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp)) {
-			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
-			AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
-			String executionId = executionIdDataSingle.getValueAsString();
-			int offset 			= evt.getElementAsInt(CRONIOBOILog.OFFSET);
-			int numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBER_RESULTS);
-			boolean isFilter	= evt.getElementAsBoolean(CRONIOBOILog.ISFILTER);
+			String executionId;
+			int offset;
+			int numberResults;
 			
-			if (isFilter) {
-				
+			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
+			if (executionData == null) {
+				AEMFTMetadataElementComposite 	filterFormData 	= evt.getElementAsComposite(CRONIOBOILogFilterDataConstants.FILTER_FORM_DATA);
+				AEMFTMetadataElementSingle		offsetData 		= (AEMFTMetadataElementSingle) evt.getElement(CRONIOBOILogDataConstants.OFFSET);
+				filterFormData.addElement(CRONIOBOILogFilterDataConstants.OFFSET, offsetData);
+				getFilteredLogs(filterFormData);
 			} else {
+				AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
+				executionId 	= executionIdDataSingle.getValueAsString();
+				offset 			= evt.getElementAsInt(CRONIOBOILog.OFFSET);
+				numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBER_RESULTS);
+				
 				if (offset < 0 || numberResults < 0) {
 					getExecutionLogsData(executionId, 0, 20);
 				} else{
 					getExecutionLogsData(executionId, offset, numberResults);
 				}
-			}	
-		}
-		
+			} 	
+		}	
 	}
 
 	@Override
@@ -626,7 +633,24 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
+				AEMFTMetadataElementComposite 	filteredLogsData 		= dataResult.getCompositeElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
+				CRONIOBusDesktopProjectEvent 	getFilteredLogsEvt 		= new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+				AEMFTMetadataElementSingle 		isFilterData 			= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.ISFILTER);
+				AEMFTMetadataElementSingle 		offsetData				= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.OFFSET);
+				AEMFTMetadataElementSingle 		numberResultsData		= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.NUMBER_RESULTS);
+				AEMFTMetadataElementSingle 		totalFilteredLogsData	= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOILog.TOTAL_FILTERED_LOGS);
+				boolean 	isFilter 			= isFilterData.getValueAsBool();
+				int 		offset 				= offsetData.getValueAsInt();
+				int 		numberResults 		= numberResultsData.getValueAsInt();
+				int			totalFilteredLogs	= totalFilteredLogsData.getValueAsInt();
 				
+				getFilteredLogsEvt.setEventType(EVENT_TYPE.ADD_FILTERED_LOGS);
+				getFilteredLogsEvt.addElementAsComposite(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA, filteredLogsData);
+				getFilteredLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER			, isFilter);
+				getFilteredLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET					, offset);
+				getFilteredLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS			, numberResults);
+				getFilteredLogsEvt.addElementAsInt(CRONIOBOILog.TOTAL_FILTERED_LOGS		, totalFilteredLogs);
+				getLogicalEventHandlerManager().fireEvent(getFilteredLogsEvt);	
 
 			}
 

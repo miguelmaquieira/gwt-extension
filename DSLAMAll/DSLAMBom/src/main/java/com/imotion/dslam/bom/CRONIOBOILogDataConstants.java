@@ -19,5 +19,6 @@ public interface CRONIOBOILogDataConstants {
 	String OFFSET 				= "offset";
 	String NUMBER_RESULTS 		= "numberResults";
 	String TOTAL_EXECUTION_LOGS = "totalExecutionLogs";
+	String TOTAL_FILTERED_LOGS 	= "totalFilteredLogs";
 
 }

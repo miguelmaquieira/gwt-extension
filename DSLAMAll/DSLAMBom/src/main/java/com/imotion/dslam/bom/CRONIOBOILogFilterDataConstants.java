@@ -11,4 +11,7 @@ public interface CRONIOBOILogFilterDataConstants {
 	String LEVEL			= "level";
 	String MAX_TIMESTAMP	= "maxTimestamp";
 	
+	String ISFILTER			= "isFilter";
+	String FILTER_FORM_DATA	= "FILTER_FORM_DATA";
+	
 }
