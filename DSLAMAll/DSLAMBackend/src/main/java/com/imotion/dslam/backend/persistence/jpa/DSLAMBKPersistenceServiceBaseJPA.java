@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
+import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
 import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
@@ -28,6 +29,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
 	private CRONIOBKIUserPreferencesPersistenceService			userPreferencesPersistence;
 	private CRONIOBKIExecutionPersistenceService				executionPersistence;
+	private CRONIOBKILogPersistenceService						logPersistence;
 	
 	@Override
 	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
@@ -97,13 +99,16 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) executionPersistence);
 			executionPersistence = null;
 		}
+		if (logPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) logPersistence);
+			logPersistence = null;
+		}
 	}
 	
 	/**************************************************************
      *                   PROTECTED FUNCTIONS                      *
      **************************************************************/
 	protected void setPersistenceUnit() {
-//		persistenceModule.setPersitenceUnitName("dslam");
 	}
 
 	@Override
@@ -165,5 +170,12 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			executionPersistence = (CRONIOBKIExecutionPersistenceService) getFactoryPersistence().newExecutionPersistence(getSessionId());
 		}
 		return executionPersistence;
+	}
+	
+	protected CRONIOBKILogPersistenceService getLogPersistence() {
+		if (logPersistence == null) {
+			logPersistence = (CRONIOBKILogPersistenceService) getFactoryPersistence().newLogPersistence(getSessionId());
+		}
+		return logPersistence;
 	}
 }
