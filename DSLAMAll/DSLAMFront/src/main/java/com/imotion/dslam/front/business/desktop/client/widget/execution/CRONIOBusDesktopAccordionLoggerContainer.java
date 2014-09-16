@@ -46,12 +46,14 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	
 	public CRONIOBusDesktopAccordionLoggerContainer(String loggerId) {
 		super(loggerId);
-		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
-		getLoggerContainer().add(accordionPanelContainer);
-		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 		
 		pager = new AEGWTBootstrapPager("#log","#log");
 		getLoggerContainer().add(pager);
+		
+		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
+		getLoggerContainer().add(accordionPanelContainer);
+		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
+		accordionPanelContainer.removeStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 	}
 	
 	public void beforeExitSection() {

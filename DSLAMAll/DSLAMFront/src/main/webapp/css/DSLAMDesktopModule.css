@@ -641,10 +641,23 @@
 }
 
 /*****************************************
-*			EXECUTE
+*			LOGGER
 ******************************************/
+.dslam_studio-execution-loggerTabs {
+	overflow: visible;
+}
+
+.dslam_studio-execution-loggerContainer .pager {
+	margin-top: 10px;
+	margin-bottom:20px;
+}
+
+.pager li > a {
+	border-radius: 4px;
+}
+
 .dslam_studio-execution-loggerContainer .panel-heading {
-	height: 42px;
+	height: 35px;
 }
 
 .dslam_studio-execution-loggerContainer {
@@ -653,14 +666,14 @@
 
 .dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle>.header
 	{
-	font-size: 13px;
+	font-size: 12px;
 	float: left;
 	width: 50%;
 }
 
 .dslam_studio-execution-loggerContainer .panel-heading .accordion-toggle>.subElementHeader
 	{
-	font-size: 13px;
+	font-size: 12px;
 	color: #999999;
 	float: left;
 	width: 50%;
@@ -693,6 +706,7 @@
 
 .dslam_studio-execution-loggerTabs .panel-heading {
 	padding: 10px;
+	background-color: #F9F9F9;
 }
 
 .dslam_studio-execution-loggerFilterPanelFormDateTime {
@@ -714,7 +728,7 @@
 
 .dslam_studio-execution-loggerFilterPanel .header {
 	width: 100% !important;
-	height: 40px;
+	height: 35px;
 	font-size: 16px !important;
 	font-weight: bold;
 	margin-left: -15px;
@@ -728,13 +742,13 @@
 	padding-left: 10px;
 	margin-top: -10px;
 	padding-top: 10px;
-	height: 40px;
+	height: 35px;
 	font-size: 13px;
 	font-weight: bold;
 }
 
 .dslam_studio-execution-loggerTabs .subElementHeader {
-	height: 40px;
+	height: 35px;
 	margin-left: -10px;
 	padding-left: 10px;
 	margin-top: -10px;
@@ -743,22 +757,27 @@
 
 .dslam_studio-execution-loggerFilterPanel .panel-heading {
 	background-color: #9A9A9A;
+	border-radius: 4px;
 }
 
 .dslam_studio-execution-loggerFilterPanel .icon {
-	height: 40px;
+	height: 35px;
 	margin-left: -15px;
-	margin-top: -10px;
+	margin-top: -12px;
 	padding-top: 10px;
 	float: right;
 }
 
 .dslam_studio-execution-loggerTabs .icon {
-	height: 40px;
+	height: 35px;
 	margin-left: -15px;
-	margin-top: -10px;
+	margin-top: -12px;
 	padding-top: 10px;
 	float: right;
+}
+
+.dslam_studio-execution-loggerFilterPanel {
+	margin-bottom: 10px;
 }
 
 /*****************************************

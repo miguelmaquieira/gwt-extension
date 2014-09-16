@@ -75,9 +75,9 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	
 	@Override
 	public void beforeExitSection() {
-		if (logger != null) {
-			logger.beforeExitSection();	
-		}
+//		if (logger != null) {
+//			logger.beforeExitSection();	
+//		}
 	}
 	
 	/**

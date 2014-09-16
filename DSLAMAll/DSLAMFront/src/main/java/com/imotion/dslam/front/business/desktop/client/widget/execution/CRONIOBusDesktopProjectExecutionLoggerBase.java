@@ -37,7 +37,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 
 	private int totalScroll; 
 
-	private FlowPanel 									loggerContaniner;
+	private FlowPanel 									loggerContainer;
 	private AEGWTBootstrapAccordionPanel				filterPanel;
 	private CRONIOBusDesktopProjectExecutionFilterForm	filterForm;
 
@@ -49,10 +49,10 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		initWidget(root);
 		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER);
 		
-		loggerContaniner = new FlowPanel();
-		root.add(loggerContaniner);
-		loggerContaniner.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
-		loggerContaniner.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
+		loggerContainer = new FlowPanel();
+		root.add(loggerContainer);
+		loggerContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
+		loggerContainer.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
 		filterPanel = new AEGWTBootstrapAccordionPanel(TEXTS.filtered(), false);
 		
@@ -61,7 +61,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
 
 		filterPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL);
-		loggerContaniner.add(filterPanel);
+		loggerContainer.add(filterPanel);
 		
 		filterForm = new CRONIOBusDesktopProjectExecutionFilterForm();
 		panelContent.add(filterForm);
@@ -193,7 +193,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 	
 	
 	protected FlowPanel getLoggerContainer() {
-		return loggerContaniner;
+		return loggerContainer;
 	}
 	
 	protected CRONIOBusDesktopProjectExecutionFilterForm getFilterForm() {
