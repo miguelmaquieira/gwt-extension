@@ -14,6 +14,7 @@ public interface CRONIOBOIExecutionDataConstants {
 
 	//CONTEXT
 	String EXECUTION_DATA		= "executionData";
+	String CONSOLE				= "console";
 
 	
 }

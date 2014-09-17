@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
@@ -27,15 +28,15 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 
 	public		static		final 	String 	NAME 	= "CRONIOBusDesktopAccordionLoggerContainer";
 	private		static		final	int 	HEIGHT 	= 50;
-	
+
 	private AEGWTBootstrapAccordionPanelContainer 	accordionPanelContainer;
 	private AEGWTBootstrapPager						pager;
-	
+
 	private boolean	isFilter;
 	private int 		offset;
 	private int 		numberResults;
 	private String 		executionId;
-	
+
 	private String dateStr; 	
 	private String 	nodeIp; 			
 	private String 	nodeName;
@@ -43,27 +44,27 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	private String 	nodeResponse;
 	private String 	nodePrompt; 	
 	private String header;
-	
+
 	public CRONIOBusDesktopAccordionLoggerContainer(String loggerId) {
 		super(loggerId);
-		
+
 		pager = new AEGWTBootstrapPager("#log","#log");
 		getLoggerContainer().add(pager);
-		
+
 		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
 		getLoggerContainer().add(accordionPanelContainer);
 		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 		accordionPanelContainer.removeStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 	}
-	
+
 	public void beforeExitSection() {
 		super.beforeExitSection();
 	}
-	
+
 	public void setFilterVisible (boolean visible) {
 		super.setFilterVisible(visible);
 	}
-	
+
 	public void setPagerVisible (boolean visible) {
 		pager.setVisible(visible);
 	}
@@ -71,12 +72,12 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 	/**
 	 * AEGWTICompositePanel
 	 */
-	
+
 	@Override
 	public String getName() {
 		return NAME;
 	}
-	
+
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
@@ -85,60 +86,71 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		
-		accordionPanelContainer.clear();
-		
-		AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
-		AEMFTMetadataElementComposite filteredLogsData 	= (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
-		if (executionLogsData != null || filteredLogsData != null) {
-			List<AEMFTMetadataElement> 	logList;
-			boolean						isFiltered;
-			int							total;
-			if (executionLogsData != null) {
-				logList = executionLogsData.getSortedElementList();
-				isFiltered = false;
+		if (data != null) {
+			accordionPanelContainer.clear();
+			
+			if (CRONIOBOIExecutionDataConstants.CONSOLE.equals(data.getKey())) {
+				List<AEMFTMetadataElement> logList = data.getSortedElementList();
+				
+				for (AEMFTMetadataElement log : logList) {
+					AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
+					addLogItem(logData, true);
+				}
 			} else {
-				logList = filteredLogsData.getSortedElementList();
-				isFiltered = true;
-			}
-			
-			for (AEMFTMetadataElement log : logList) {
-				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
-				addLogItem(logData, false);
-			}
-			
-			AEMFTMetadataElementSingle isFilterData 			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
-			AEMFTMetadataElementSingle offsetData				= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
-			AEMFTMetadataElementSingle numberResultsData		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBER_RESULTS);
-			boolean 	isFilter 			= isFilterData.getValueAsBool();
-			int 		offset 				= offsetData.getValueAsInt();
-			int 		numberResults 		= numberResultsData.getValueAsInt();
-			this.isFilter 					= isFilter;
-			this.offset 					= offset;
-			this.numberResults 				= numberResults;
-			
-			if (offset == 0) {
-				pager.buttonPreviousDisable(true);
-			} else {
-				pager.buttonPreviousDisable(false);
-			}
-			
-			if (isFiltered) {
-				AEMFTMetadataElementSingle 	totalFilteredLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_FILTERED_LOGS);
-				int 						totalFilteredLogs		= totalFilteredLogsData.getValueAsInt();
-				total 												= totalFilteredLogs; 
-			} else {
-				AEMFTMetadataElementSingle 	totalExecutionLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
-				int 						totalExecutionLogs		= totalExecutionLogsData.getValueAsInt();
-				total 												= totalExecutionLogs;
-			}
-			
-			if (total <= (offset + numberResults)) {
-				pager.buttonNextDisable(true);
-			} else {
-				pager.buttonNextDisable(false);
+				AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
+				AEMFTMetadataElementComposite filteredLogsData 	= (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
+				if (executionLogsData != null || filteredLogsData != null) {
+					List<AEMFTMetadataElement> 	logList;
+					boolean						isFiltered;
+					int							total;
+					if (executionLogsData != null) {
+						logList = executionLogsData.getSortedElementList();
+						isFiltered = false;
+					} else {
+						logList = filteredLogsData.getSortedElementList();
+						isFiltered = true;
+					}
+
+					for (AEMFTMetadataElement log : logList) {
+						AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
+						addLogItem(logData, false);
+					}
+
+					AEMFTMetadataElementSingle isFilterData 			= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.ISFILTER);
+					AEMFTMetadataElementSingle offsetData				= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.OFFSET);
+					AEMFTMetadataElementSingle numberResultsData		= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.NUMBER_RESULTS);
+					boolean 	isFilter 			= isFilterData.getValueAsBool();
+					int 		offset 				= offsetData.getValueAsInt();
+					int 		numberResults 		= numberResultsData.getValueAsInt();
+					this.isFilter 					= isFilter;
+					this.offset 					= offset;
+					this.numberResults 				= numberResults;
+
+					if (offset == 0) {
+						pager.buttonPreviousDisable(true);
+					} else {
+						pager.buttonPreviousDisable(false);
+					}
+
+					if (isFiltered) {
+						AEMFTMetadataElementSingle 	totalFilteredLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_FILTERED_LOGS);
+						int 						totalFilteredLogs		= totalFilteredLogsData.getValueAsInt();
+						total 												= totalFilteredLogs; 
+					} else {
+						AEMFTMetadataElementSingle 	totalExecutionLogsData	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOILog.TOTAL_EXECUTION_LOGS);
+						int 						totalExecutionLogs		= totalExecutionLogsData.getValueAsInt();
+						total 												= totalExecutionLogs;
+					}
+
+					if (total <= (offset + numberResults)) {
+						pager.buttonNextDisable(true);
+					} else {
+						pager.buttonNextDisable(false);
+					}
+				}
 			}
 		}
+
 	}
 	/**
 	 * CRONIOBusDesktopProjectExecutionLogger
@@ -172,16 +184,16 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 			nodePrompt 		= messageSplit[5];
 			header 			= dateStr + " " + nodeName + " " + nodeIp;
 		}
-	
+
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header,true);
 		accordionPanelContainer.addWiget(accordionPanel);
 		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
-		
+
 		Label subElementHeader = new Label(nodeRequest);
 		subElementHeader.addStyleName("subElementHeader");
 		subElementHeader.setTitle(nodeRequest);
 		accordionPanel.addHeaderWidgetToAnchor(subElementHeader);
-		
+
 		FlowPanel panelContent = new FlowPanel();
 		accordionPanel.addContentWidget(panelContent);
 		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
@@ -198,7 +210,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		String			srcWidget		= evt.getSourceWidget();
 		String			srcWidgetId		= evt.getSourceWidgetId();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		
+
 		if (AEGWTBootstrapAccordionPanel.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.CHANGE_EVENT.equals(type)) {
 				evt.stopPropagation();
@@ -222,10 +234,10 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					}
 				}
 				accordionPanelContainer.clear();
-		
+
 				if (isFilter) {
 					AEMFTMetadataElementComposite formData = super.getFilterForm().getData();
-					
+
 					AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 					getLogsEvt.addElement(CRONIOBOILogFilterDataConstants.FILTER_FORM_DATA, formData);
 					getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
@@ -236,7 +248,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement(); 
 					executionIdData.setValueAs(executionId);
 					getElementController().setElement(CRONIOBOIExecution.EXECUTION_ID, executionData, executionIdData);
-					
+
 					AEGWTLogicalEvent getLogsEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 					getLogsEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, executionData);
 					getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
@@ -244,7 +256,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS, numberResults);
 					getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
 					getLogicalEventHandlerManager().fireEvent(getLogsEvt);
-				
+
 				}
 			}	
 		}

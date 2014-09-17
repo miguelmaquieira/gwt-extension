@@ -51,6 +51,7 @@ public interface CRONIOBOIProjectDataConstants {
 	String PROJECT_CONFIGURE_OPTION_ID		= "projectConfigureOptionId";
 	String PROJECT_CONFIGURE_DATA			= "projectConfigureData";
 	String PROJECT_DATA						= "projectData";
+	String CONSOLE							= "console";
 	
 
 }
