@@ -60,7 +60,8 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	@Override
 	public List<CRONIOBOILog> getExecutionLogs(String executionId, int offset, int numberResults) {
 
-		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
+		String customQuery	= "SELECT o FROM CRONIOBOLog o "
+							+ "WHERE o.message LIKE '"+ executionId +":%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery, offset, numberResults);
 		//Temporal solution(bug:eclipselink query methods setMaxRows and setFirstResult don't work together)		
 		List<CRONIOBOLog> subLogList = getSublist(logsListJpa, numberResults); 
@@ -72,7 +73,8 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 	@Override
 	public int getTotalExecutionLogs(String executionId) {
 
-		String customQuery = "Select o from CRONIOBOLog o where o.message like '"+ executionId +":%'";
+		String customQuery	= "SELECT o FROM CRONIOBOLog o "
+							+ "WHERE o.message LIKE '"+ executionId +":%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 		
 		return logsListJpa.size();
@@ -94,6 +96,10 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 		getPersistenceModule().setPersitenceUnitName(DSLAMBKPersistenceModuleJPA.MONGO_PERSISTENCE_UNIT_NAME);
 	}
 
+	
+	/****************************************************************************
+	 *                      PRIVATE FUNCTIONS
+	 ****************************************************************************/
 	
 	private List<CRONIOBOLog> getSublist(List<CRONIOBOLog> logsListJpa, int size) {
 		int resultSize = logsListJpa.size();
