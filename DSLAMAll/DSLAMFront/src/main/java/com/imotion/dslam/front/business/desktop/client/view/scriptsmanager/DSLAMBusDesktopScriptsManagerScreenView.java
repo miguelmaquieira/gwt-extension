@@ -59,7 +59,6 @@ public class DSLAMBusDesktopScriptsManagerScreenView extends DSLAMBusDesktopPane
 	
 	@Override
 	public void beforeExitSection() {
-		// TODO Auto-generated method stub	
 	}
 
 	/************************************************************************

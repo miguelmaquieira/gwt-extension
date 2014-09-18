@@ -38,6 +38,5 @@ public class DSLAMBusDesktopProjectPageScreenView extends DSLAMBusDesktopPanelBa
 	
 	@Override
 	public void beforeExitSection() {
-		// TODO Auto-generated method stub	
 	}
 }

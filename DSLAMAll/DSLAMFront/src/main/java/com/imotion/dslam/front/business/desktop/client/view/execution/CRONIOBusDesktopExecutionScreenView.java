@@ -73,7 +73,7 @@ public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBas
 	/**
 	 * CRONIOBusProjectBaseDisplay
 	 */
-	
+
 	@Override
 	public void beforeExitSection() {
 		if (logger != null) {

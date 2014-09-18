@@ -245,7 +245,8 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					getLogicalEventHandlerManager().fireEvent(getLogsEvt);
 				} else {
 					AEMFTMetadataElementComposite 	executionData 	= AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
-					AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement(); 
+					AEMFTMetadataElementSingle		executionIdData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getSingleElement();
+					long executionId = Long.parseLong(this.executionId);
 					executionIdData.setValueAs(executionId);
 					getElementController().setElement(CRONIOBOIExecution.EXECUTION_ID, executionData, executionIdData);
 

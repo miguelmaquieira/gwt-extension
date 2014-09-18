@@ -160,9 +160,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			getFilteredLogs(filterData);
 
 		} else if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp)) {
-			String executionId;
-			int offset;
-			int numberResults;
+			long 	executionId;
+			String  executionIdStr;
+			int 	offset;
+			int 	numberResults;
 			
 			AEMFTMetadataElementComposite executionData = evt.getElementAsComposite(CRONIOBOIExecution.EXECUTION_DATA);
 			if (executionData == null) {
@@ -172,14 +173,15 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				getFilteredLogs(filterFormData);
 			} else {
 				AEMFTMetadataElementSingle executionIdDataSingle = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
-				executionId 	= executionIdDataSingle.getValueAsString();
+				executionId 	= executionIdDataSingle.getValueAsLong();
+				executionIdStr	= String.valueOf(executionId);	
 				offset 			= evt.getElementAsInt(CRONIOBOILog.OFFSET);
 				numberResults 	= evt.getElementAsInt(CRONIOBOILog.NUMBER_RESULTS);
 				
 				if (offset < 0 || numberResults < 0) {
-					getExecutionLogsData(executionId, 0, 20);
+					getExecutionLogsData(executionIdStr, 0, 20);
 				} else{
-					getExecutionLogsData(executionId, offset, numberResults);
+					getExecutionLogsData(executionIdStr, offset, numberResults);
 				}
 			} 	
 		}	
@@ -319,10 +321,33 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				if (dataResult != null) {
 					AEMFTMetadataElementComposite executionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
 					String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, executionData);
-					String projectId = getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
-					Long executionId = getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
+					dateExecutionStr = dateExecutionStr.replace("/", "-");
+					String 	projectId 		= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
+					Long 	executionId 	= getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
+					String 	executionIdStr	= String.valueOf(executionId);	
 					projectsLayout.addExecution(projectId, dateExecutionStr);
 					
+					StringBuilder sbKey = new StringBuilder();
+					sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+					sbKey.append(CRONIODesktopIAppControllerConstants.EXECUTIONS_DATA);
+					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+					sbKey.append(projectId);
+					String finalSectionKey = sbKey.toString();
+					
+					AEMFTMetadataElementComposite executionsData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
+					executionsData = (AEMFTMetadataElementComposite) executionsData.cloneObject();
+					executionData.setKey(executionIdStr);
+					executionsData.addElement(executionData);
+					
+					AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+					storageEvent.setFullKey(finalSectionKey);
+					storageEvent.addElementAsDataValue(executionsData);
+					storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+					getLogicalEventHandlerManager().fireEvent(storageEvent);
+
+//					getContextDataController().setElement(finalSectionKey, executionsData);
+				
 					CRONIOBusDesktopProjectEvent addExecutionEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 					addExecutionEvt.setEventType(EVENT_TYPE.EXECUTE);
 					addExecutionEvt.addElementAsString(CRONIOBOIExecution.PROJECT_ID, projectId);
@@ -399,7 +424,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 			
-			String dateRegEx = "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
+			String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
 					
 			if (projectFinalSectionId.matches(dateRegEx)) {
 				sbKey.append(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA);
@@ -431,16 +456,17 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			if (finalSectionData != null) {
 				finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 				if (isLog) {
-					List<AEMFTMetadataElement> executionList = finalSectionData.getElementList();
+					List<AEMFTMetadataElement> executionList = finalSectionData.getSortedElementList();
 					for (AEMFTMetadataElement execution : executionList) {
 						AEMFTMetadataElementComposite executionData = (AEMFTMetadataElementComposite) execution;
 						AEMFTMetadataElementSingle creationTime = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.CREATION_TIME);
 						String creationTimeStr = creationTime.getValueAsSerializable().toString();
+						creationTimeStr = creationTimeStr.replace("/", "-");
 						String[] creationTimeStrSplit 	= creationTimeStr.split("\\.");
 						String[] creationTimeStrSplit1 	= creationTimeStrSplit[0].split("\\-");
 						String[] creationTimeStrSplit2 	= creationTimeStrSplit1[2].split(" ");
 						String creationTimeStrFormat = creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
-						if(creationTimeStrFormat.equals(projectFinalSectionId)) {
+						if(creationTimeStrFormat.equals(projectFinalSectionId) || creationTimeStr.equals(projectFinalSectionId)) {
 							finalSectionData = executionData;
 						}
 					}

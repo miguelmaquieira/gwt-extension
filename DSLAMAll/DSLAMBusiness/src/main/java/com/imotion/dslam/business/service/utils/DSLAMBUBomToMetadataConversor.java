@@ -370,7 +370,7 @@ public class DSLAMBUBomToMetadataConversor {
 		if (execution != null) {
 			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 
-			data.addElement(CRONIOBOIExecution.EXECUTION_ID		, String.valueOf(execution.getExecutionId()));
+			data.addElement(CRONIOBOIExecution.EXECUTION_ID		, execution.getExecutionId());
 			data.addElement(CRONIOBOIExecution.PROJECT_ID		, String.valueOf(execution.getProject().getProjectId()));
 			data.addElement(CRONIOBOIExecution.CREATION_TIME	, execution.getCreationTime());
 			data.addElement(CRONIOBOIExecution.DESTINATION_LOGS	, execution.getDestinationLogs());

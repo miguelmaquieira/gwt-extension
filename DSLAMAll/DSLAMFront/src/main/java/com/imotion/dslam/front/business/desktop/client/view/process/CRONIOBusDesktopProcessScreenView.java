@@ -81,8 +81,6 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	
 	@Override
 	public void beforeExitSection() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	/************************************************************************
