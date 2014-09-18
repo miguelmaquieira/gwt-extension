@@ -78,11 +78,11 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 	
 	@Override
 	public DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long> getPersistenceModule() {
-		if (persistenceModule == null) {
+		//if (persistenceModule == null) {
 			persistenceModule = new DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long>();
 			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(),  getSessionId() });
 			
-		}
+		//}
 		return persistenceModule;
 	}
 
