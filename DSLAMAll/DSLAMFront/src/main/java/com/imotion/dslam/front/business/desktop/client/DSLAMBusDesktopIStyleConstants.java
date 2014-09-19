@@ -32,6 +32,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NODE_LIST									= APP_ID_PREFFIX 		+ "nodeList";			//dslam_studio-nodeList		
 	String NODE_LIST_CONTAINER							= NODE_LIST		 		+ "-container";			//dslam_studio-nodeList-container
 	String NODE_LIST_CONTAINER_ZONE 					= LIST_CONTAINER		+ "-zone";				//dslam_studio-nodeList-container-zone
+	String NODE_LIST_ADD_ELEMENT						= NODE_LIST				+ "-addElement"; 		//dslam_studio-nodeList-addElement
 	
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
@@ -110,6 +111,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_NODES_LIST 				= APP_ID_PREFFIX			+ "processConfigureNodesList";				//dslam_studio-processConfigureNodesList
 	String PROCESS_CONFIGURE_NODE_VARIABLES_LIST        = APP_ID_PREFFIX			+ "processConfigureNodesVariableList";		//dslam_studio-processConfigureNodesVariableList
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
+	String POPUP_NODES_FORM_CONTAINER					= APP_ID_PREFFIX			+ "processAddNodeFormContainer";		//dslam_studio-processAddNodeFormContainer
 	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer
 	String POPUP_SCHEDULE_FORM_SAVE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleFormSaveZone";		//dslam_studio-processConfigureScheduleFormSaveZone
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton

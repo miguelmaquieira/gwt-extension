@@ -344,5 +344,17 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	String log();
 	
 	@DefaultStringValue("Debe introducir una fecha válida")
-	String emptyDateError();
+	String empty_date_error();
+	
+	@DefaultStringValue("addNode")
+	String add_node();
+	
+	@DefaultStringValue("Añadir Nodo")
+	String add_node_label();
+	
+	@DefaultStringValue("Nombre del Nodo")
+	String node_name();
+	
+	@DefaultStringValue("La dirección IP no es válida ( [0..255].[0..255].[0..255].[0..255] )")
+	String ip_error_textbox();
 }
