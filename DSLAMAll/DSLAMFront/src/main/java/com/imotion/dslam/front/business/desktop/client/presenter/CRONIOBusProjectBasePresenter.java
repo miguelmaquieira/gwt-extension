@@ -336,7 +336,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 					String finalSectionKey = sbKey.toString();
 					
 					AEMFTMetadataElementComposite executionsData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
-					executionsData = (AEMFTMetadataElementComposite) executionsData.cloneObject();
+					
+					if (executionsData != null) {
+						executionsData = (AEMFTMetadataElementComposite) executionsData.cloneObject();
+						
+					} else {
+						executionsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+					}
+					
 					executionData.setKey(executionIdStr);
 					executionsData.addElement(executionData);
 					

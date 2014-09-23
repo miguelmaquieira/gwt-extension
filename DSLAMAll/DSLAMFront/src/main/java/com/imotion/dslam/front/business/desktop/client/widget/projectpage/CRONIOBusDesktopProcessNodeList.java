@@ -26,9 +26,10 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	public static final String NAME = "CRONIOBusDesktopProcessNodeList";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	private FlowPanel elementListContainerZone;
-	private FlowPanel elementListContainer;
-	private CRONIOBusDesktopHeaderListFileActions header;
+	private FlowPanel 								elementListContainerZone;
+	private FlowPanel 								elementListContainer;
+	private CRONIOBusDesktopHeaderListFileActions 	header;
+	private CRONIOBusDesktopProcessAddNodeForm		addNodePopupForm;
 
 	private AEGWTComparator 					nameComparatorAsc;
 	
@@ -64,6 +65,12 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		sort(null, false);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}
+	
+	public void addAddNodeElement() {
+		CRONIOBusDesktopProcessAddNodeListElement element = createElement();
+		elementListContainer.add(element);
+		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
+	}
 
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
@@ -97,6 +104,13 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 				nodeElement.setSelected(false);
 			}
 		}
+	}
+	
+	public CRONIOBusDesktopProcessAddNodeForm getNodePopup() {
+		if (addNodePopupForm == null) {
+			addNodePopupForm = new CRONIOBusDesktopProcessAddNodeForm(this);
+		}
+		return addNodePopupForm;
 	}
 
 	/**
@@ -175,6 +189,10 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	protected CRONIOBusDesktopProcessNodeListElement createElement(String nodeId, String nodeName, boolean machineExist) {
 		return new CRONIOBusDesktopProcessNodeListElement(nodeId, nodeName, this, machineExist);
 	}
+	
+	protected CRONIOBusDesktopProcessAddNodeListElement createElement() {
+		return new CRONIOBusDesktopProcessAddNodeListElement(this);
+	}
 		 
 	/**
 	 * PRIVATE
@@ -200,5 +218,6 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		}
 		return elementWidget;
 	}
+
 }
 

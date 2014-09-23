@@ -92,6 +92,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		} else {
 			nodesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		}
+		nodeList.addAddNodeElement();
 	}
 	
 	@Override

@@ -146,7 +146,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 			if(AEGWTStringUtils.isEmptyString(dateStr)) {
 				error = true;
 			}
-			safeBeforeDateTimePickerTextBox.setEmptyError(TEXTS.emptyDateError());
+			safeBeforeDateTimePickerTextBox.setEmptyError(TEXTS.empty_date_error());
 		}
 		return error;
 
