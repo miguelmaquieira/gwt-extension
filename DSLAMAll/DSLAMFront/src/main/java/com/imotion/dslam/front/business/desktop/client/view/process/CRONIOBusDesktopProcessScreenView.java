@@ -1,11 +1,17 @@
 package com.imotion.dslam.front.business.desktop.client.view.process;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessDisplay;
+import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessSectionsDeckPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -13,7 +19,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopProcessDisplay, AEGWTHasLogicalEventHandlers {
+public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopProcessDisplay, AEGWTHasLogicalEventHandlers, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public		static final String				NAME = "CRONIOBusDesktopProcessScreenView";
 	private	 	static final DSLAMBusI18NTexts 	TEXTS = GWT.create(DSLAMBusI18NTexts.class);
@@ -48,6 +54,7 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	public void postDisplay() {
 		super.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
 		processSectionsDeckPanel.postDisplay();
 	}
 
@@ -73,6 +80,29 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	/****************************************************************************
+	 *                      CRONIOBusDesktopHasProjectEventHandlers
+	 ****************************************************************************/
+	
+	@Override
+	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
+		EVENT_TYPE evtTyp 	= evt.getEventType();
+		String srcWidget	= evt.getSourceWidget();
+		
+		if (EVENT_TYPE.GET_MACHINE_TYPES.equals(evtTyp) && CRONIOBusDesktopProcessPresenter.NAME.equals(srcWidget)) {
+			evt.stopPropagation();
+			List<String> machineList = (List<String>) evt.getElementAsSerializableDataValue();
+			processSectionsDeckPanel.setMachineTypes(machineList);
+		}
+		
+	}
+
+	@Override
+	public boolean isDispatchEventType(EVENT_TYPE type) {
+		
+		return EVENT_TYPE.GET_MACHINE_TYPES.equals(type);
 	}
 	
 	/**

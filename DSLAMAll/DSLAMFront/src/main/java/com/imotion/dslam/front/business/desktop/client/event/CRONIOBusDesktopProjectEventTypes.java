@@ -19,7 +19,8 @@ public interface CRONIOBusDesktopProjectEventTypes {
 		ADD_EXECUTION,
 		EXECUTE,
 		ADD_EXECUTION_LOGS,
-		ADD_FILTERED_LOGS
+		ADD_FILTERED_LOGS,
+		GET_MACHINE_TYPES
 	}
 	
 }

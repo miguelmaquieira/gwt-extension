@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
@@ -63,6 +65,10 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		this.setVisibility(Visibility.VISIBLE);
 		AEGWTJQueryPerfectScrollBar.updateScroll(getName());
 		AEGWTJQueryPerfectScrollBar.top(getName());
+	}
+	
+	public void setMachineTypes (List<String> machineList) {
+		nodesConfigure.setMachineTypes(machineList);
 	}
 
 	/**

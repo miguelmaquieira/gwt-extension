@@ -62,7 +62,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		
 		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName, machineExists);
 		elementListContainer.add(element);
-		sort(null, false);
+	//	sort(null, false);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}
 	
@@ -111,6 +111,18 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 			addNodePopupForm = new CRONIOBusDesktopProcessAddNodeForm(this);
 		}
 		return addNodePopupForm;
+	}
+	
+	public void setMachineTypes(List<String> machineList) {
+		addNodePopupForm.setMachineTypes(machineList);
+	}
+	
+	public void setErrorNodeExist() {
+		addNodePopupForm.setErrorNodeExist();
+	}
+	
+	public void resetForm() {
+		addNodePopupForm.resetForm();
 	}
 
 	/**
@@ -199,7 +211,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	 */
 	private List<CRONIOBusDesktopProcessNodeListElement> getElementWidgetList() {
 		List<CRONIOBusDesktopProcessNodeListElement> widgetList = new ArrayList<>();
-		for (int i = 0; i < elementListContainer.getWidgetCount(); i++) {
+		for (int i = 0; i < elementListContainer.getWidgetCount() - 1; i++) {
 			CRONIOBusDesktopProcessNodeListElement elementWidget = (CRONIOBusDesktopProcessNodeListElement) elementListContainer.getWidget(i);
 			widgetList.add(elementWidget);
 		}
@@ -218,6 +230,4 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		}
 		return elementWidget;
 	}
-
 }
-

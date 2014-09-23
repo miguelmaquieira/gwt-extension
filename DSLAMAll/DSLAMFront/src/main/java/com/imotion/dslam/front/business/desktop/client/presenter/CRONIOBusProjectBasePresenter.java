@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.presenter;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
@@ -11,6 +13,7 @@ import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -26,6 +29,7 @@ import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPro
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -64,7 +68,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		EVENT_TYPE evtTyp = evt.getEventType();
+		EVENT_TYPE evtTyp 	= evt.getEventType();
+		String srcWidget	= evt.getSourceWidget();
 		if (EVENT_TYPE.OPEN_FINAL_SECTION_EVENT.equals(evtTyp)) {
 			String projectId		= evt.getProjectId();
 			String mainSectionId	= evt.getMainSectionId();
@@ -108,8 +113,30 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.ADD_EXECUTION.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			addExecutionToDB(currentProjectId);
+		} else if (EVENT_TYPE.GET_MACHINE_TYPES.equals(evtTyp) && CRONIOBusDesktopProcessAddNodeFinalItem.NAME.equals(srcWidget)) {
+			evt.stopPropagation();
+			StringBuilder sbKey = new StringBuilder();
+			sbKey.append(CRONIOBOIPreferencesDataConstants.PREFERENCES_DATA);
+			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST);
+			String machineTypesKey = sbKey.toString();
 			
-		}		
+			AEMFTMetadataElementComposite machinePropertiesListData = getContextDataController().getElementAsComposite(machineTypesKey);
+			List<AEMFTMetadataElement> machinePropertiesList = machinePropertiesListData.getSortedElementList();
+			List<String> machineList = new ArrayList<>();
+			String	 machine = null;
+			for (AEMFTMetadataElement machineProperties : machinePropertiesList) {
+				machine = machineProperties.getKey();
+				if (machine != null) {
+					machineList.add(machine);
+				}
+			}
+			
+			CRONIOBusDesktopProjectEvent 	getMachineTypesEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+			getMachineTypesEvt.setEventType(EVENT_TYPE.GET_MACHINE_TYPES);
+			getMachineTypesEvt.addElementAsSerializableDataValue((Serializable) machineList);
+			getLogicalEventHandlerManager().fireEvent(getMachineTypesEvt);
+		}	
 	}
 
 	@Override
@@ -128,7 +155,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				||
 				EVENT_TYPE.EXECUTE.equals(type)
 				||
-				EVENT_TYPE.ADD_EXECUTION.equals(type);
+				EVENT_TYPE.ADD_EXECUTION.equals(type)
+				||
+				EVENT_TYPE.GET_MACHINE_TYPES.equals(type);
 	}
 
 

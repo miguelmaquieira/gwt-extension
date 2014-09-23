@@ -142,6 +142,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("La variable ya existe")
 	String error_variable_exist();
 	
+	@DefaultStringValue("El nodo ya existe")
+	String error_node_exist();
+	
 	@DefaultStringValue("La fecha ya existe")
 	String error_schedule_exist();
 	
@@ -357,4 +360,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("La dirección IP no es válida ( [0..255].[0..255].[0..255].[0..255] )")
 	String ip_error_textbox();
+	
+	@DefaultStringValue("Formato:<br/>[Nombre variable] [valor variable] [Tipo Variable],<br/>Tipos de Variables:<br/>t = variable tipo texto<br/>n = variable numérica<br/>Ejemplos:<br/>contador 6 n, palabra casa t,")
+	String format_variables_input();
 }

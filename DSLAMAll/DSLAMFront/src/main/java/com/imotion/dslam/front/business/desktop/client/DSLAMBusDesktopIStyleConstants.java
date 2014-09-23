@@ -110,6 +110,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_NODES_INFO 				= APP_ID_PREFFIX			+ "processConfigureNodesInfo";			//dslam_studio-processConfigureNodesInfo
 	String PROCESS_CONFIGURE_NODES_LIST 				= APP_ID_PREFFIX			+ "processConfigureNodesList";				//dslam_studio-processConfigureNodesList
 	String PROCESS_CONFIGURE_NODE_VARIABLES_LIST        = APP_ID_PREFFIX			+ "processConfigureNodesVariableList";		//dslam_studio-processConfigureNodesVariableList
+	String PROCESS_CONFIGURE_ADD_NODE_VARIABLES         = APP_ID_PREFFIX			+ "processConfigureAddNodeVariables";		//dslam_studio-processConfigureAddNodeVariables
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
 	String POPUP_NODES_FORM_CONTAINER					= APP_ID_PREFFIX			+ "processAddNodeFormContainer";		//dslam_studio-processAddNodeFormContainer
 	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer

@@ -29,7 +29,6 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private	 AEMFTMetadataElementComposite				nodesData;
 	private AEMFTMetadataElementComposite				machineListData;
 	
-
 	public CRONIOBusDesktopProcessConfigureNodes() {
 		root = new FlowPanel();
 		initWidget(root);
@@ -58,6 +57,10 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		nodeList.reset();
 		nodeInfoZone.reset();
 		nodeInfoZone.setVisible(false);
+	}
+	
+	public void setMachineTypes(List<String> machineList) {
+		nodeList.setMachineTypes(machineList);
 	}
 	
 	/**
@@ -140,11 +143,43 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodesData);
 				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}	
+		} else if (CRONIOBusDesktopProcessAddNodeForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
+			String 	name		= evt.getElementAsString(CRONIOBOINodeDataConstants.NODE_NAME);
+			String 	ip 			= evt.getElementAsString(CRONIOBOINodeDataConstants.NODE_IP);
+			String 	nodeType 	= evt.getElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE);
+			
+			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			getElementController().setElement(CRONIOBOINodeDataConstants.NODE_NAME			, data	, name);
+			getElementController().setElement(CRONIOBOINodeDataConstants.NODE_IP			, data	, ip);
+			getElementController().setElement(CRONIOBOINodeDataConstants.NODE_TYPE			, data	, nodeType);
+
+			if (!nodesData.contains(name)) {
+				addNode(name, data);
+			} else {
+				nodeList.setErrorNodeExist();
+			}
+			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+			saveEvt.setSourceWidget(getName());
+			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodesData);
+			getLogicalEventHandlerManager().fireEvent(saveEvt);
+			
 		}	
 	}
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
 		return LOGICAL_TYPE.OPEN_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
+	}
+	
+	/**
+	 * PRIVATE
+	 */
+	
+	private void addNode(String name, AEMFTMetadataElementComposite data) {
+		nodeList.reset();
+		nodesData.addElement(name,data);
+		setData(nodesData);
+		nodeList.resetForm();	
 	}
 }
