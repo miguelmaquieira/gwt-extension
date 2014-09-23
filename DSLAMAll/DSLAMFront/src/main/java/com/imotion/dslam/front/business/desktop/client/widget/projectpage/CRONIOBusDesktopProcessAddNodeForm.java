@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -12,7 +14,6 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextArea;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
@@ -27,7 +28,6 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	private AEGWTBootstrapFormFieldTextBox  	nameTextBox;
 	private AEGWTBootstrapFormFieldTextBox  	ipTextBox;
 	private AEGWTBootstrapDropdownButton		machineTypeDropdownButton;
-	private AEGWTBootstrapFormFieldTextArea  	variablesTextBox;
 	private AEGWTButton 						saveButton;
 	private AEGWTButton							cancelButton;
 	private boolean							editMode;
@@ -46,12 +46,7 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 		
 		machineTypeDropdownButton = new AEGWTBootstrapDropdownButton();
 		root.add(machineTypeDropdownButton);
-	//	machineTypeDropdownButton.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT)		, TEXTS.text_variable());
-	//	machineTypeDropdownButton.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_NUMERIC)	, TEXTS.numeric_variable());
-		
-		variablesTextBox = new AEGWTBootstrapFormFieldTextArea(null, TEXTS.variables());
-		root.add(variablesTextBox);
-		
+	
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
 		
@@ -78,11 +73,20 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 					ipTextBox.setErrorLabelText(TEXTS.empty_textbox());
 				}
 				
-				String ipRegEx 	= "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}";
-				
-				if (!ipRegEx.matches(ipTextBox.getTextBox().getValue())) {
+				String 		numberpRegEx 	= "25[0-5]|2[0-4][0-9]|[0-9]|[1-9][0-9]|1[0-9][0-9]";
+				String 		ip 				= ipTextBox.getTextBox().getValue();
+				String[] 	ipSplit 		= ip.split ("\\.");
+				int         ipSplitSize    	= ipSplit.length;
+				if (ipSplitSize != 4) {
 					errors = true;
 					ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
+				} else {
+					for (int i = 0;i < 4;i++) {
+						if(!(ipSplit[i].matches(numberpRegEx))) {
+							errors = true;
+							ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
+						}
+					}
 				}
 				
 				if (errors == false) {
@@ -92,7 +96,6 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_NAME				, nameTextBox.getText());
 					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_IP				, ipTextBox.getText());
 					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE				, machineTypeDropdownButton.getSelectedId());
-					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST	, variablesTextBox.getText());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -115,17 +118,9 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	public void resetForm() {
 		nameTextBox.setText("");
 		ipTextBox.setText("");
-		variablesTextBox.setText("");
-	//	machineTypeDropdownButton.setItemSelected(id);
 		resetErrors();
 		hide();
 	}
-	
-//	public void resetForm(int variableScopeDefault, int variableTypeDefault ) {
-//		variableIdTextBox.setItemSelected(String.valueOf(variableScopeDefault));
-//		variableValueTextBox.setItemSelected(String.valueOf(variableTypeDefault));
-//		resetForm();
-//	}
 	
 	public void setEditMode(String mode) {
 		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
@@ -139,14 +134,17 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 		return editMode;
 	}
 	
-//	public void setErrorVariableExist() {
-//		variableIdTextBox.setErrorLabelText(TEXTS.error_variable_exist());
-//		variableIdTextBox.setErrorLabelVisible(true);
-//	}
-//	
-//	public void addVariableScope(int variableScope , String text) {
-//		variableIdTextBox.addElement(String.valueOf(variableScope)	, text);
-//	}
+	public void setErrorNodeExist() {
+		nameTextBox.setErrorLabelText(TEXTS.error_node_exist());
+		nameTextBox.setErrorLabelVisible(true);
+	}
+
+	public void setMachineTypes(List<String> machineList) {
+		
+		for (String machine : machineList) {
+			machineTypeDropdownButton.addElement(machine		, machine);
+		}
+	}
 	
 	/**
 	 * AEGWTCompositePanel
@@ -156,24 +154,16 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	public String getName() {
 		return NAME;
 	}
+	
+	@Override
+	public void postDisplay() {
+		super.postDisplay();
+	}
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
 		if (variableData != null) {
-//			String 	nodeName 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
-//			String 	nodeIp 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
-//			int 	variableScope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData);
-//			int 	variableType 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableData);
-//			String	variableScopeStr	= String.valueOf(variableScope);
-//			String	variableTypeStr		= String.valueOf(variableType);
-//			
-//			variableIdTextBox.setEnabled(false);
-//			variableIdTextBox.setDropdownEnabled(true);
-//			variableIdTextBox.setItemSelected(variableScopeStr);	
-//			variableIdTextBox.setText(variableName);
-//			
-//			variableValueTextBox.setItemSelected(variableTypeStr);	
-//			variableValueTextBox.setText(variableValue);
+
 		}
 	}
 	
@@ -184,6 +174,5 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	private void resetErrors() {
 		nameTextBox.setErrorLabelVisible(false);
 		ipTextBox.setErrorLabelVisible(false); 
-		variablesTextBox.setErrorLabelVisible(false); 
 	}
 }

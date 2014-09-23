@@ -3,6 +3,9 @@ package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 import com.google.gwt.core.shared.GWT;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
@@ -44,7 +47,13 @@ public class CRONIOBusDesktopProcessAddNodeFinalItem extends AEGWTBootstrapTreeM
 	
 	@Override
 	protected void fireClick() {
-		((CRONIOBusDesktopProcessNodeList) parentWidget).getNodePopup().center();
+		 CRONIOBusDesktopProcessAddNodeForm popupForm = ((CRONIOBusDesktopProcessNodeList) parentWidget).getNodePopup();
+		 popupForm.center();
+		 popupForm.postDisplay();
+		
+		CRONIOBusDesktopProjectEvent 	getMachineTypesEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+		getMachineTypesEvt.setEventType(EVENT_TYPE.GET_MACHINE_TYPES);
+		getLogicalEventHandlerManager().fireEvent(getMachineTypesEvt);
 	}
 	
 }
