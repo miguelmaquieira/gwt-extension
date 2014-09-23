@@ -37,18 +37,20 @@ var DslamHighlightRules = function() {
          },
          { token: 'keyword.control.repeat',
            regex: '\\b(for|while|foreach)\\b',
-         },
+         },       
+         { token: 'log', 
+           regex: '\\b(:?log)\\b',},
          { token: 'keyword.operator',
            regex: '\\b(?:==|!=|<|<=|>|>=|\\+|-|\\*|/|.)\\b' },
          { token: 'comment.line.colons',
            regex: '//.*$' },
          { token: 'keyword'				, regex: '(>|>>|read|match|tag|rb)'},
+         
          { token: 'variable-script'		, regex: '\\$' 	+ 	identifierExpression},
          { token: 'variable-process'	, regex: '#' 	+ 	identifierExpression},
          { token: 'variable-execution'	, regex: '@'	+ 	identifierExpression},
-         { token: keywordMapper,
-            regex: '[a-zA-Z_$][a-zA-Z0-9-]*\\b',
-         }
+         { token: keywordMapper			, regex: '[a-zA-Z_$][a-zA-Z0-9-]*\\b'}
+        
  	]
     };
     
