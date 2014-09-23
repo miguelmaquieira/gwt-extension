@@ -143,6 +143,9 @@ color: #29c639;\
 .ace-monokai .ace_variable-execution {\
 color: #ff0000;\
 }\
+.ace-monokai .ace_log {\
+color: #ffff00;\
+}\
 ";
 
 var dom = require("../lib/dom");
