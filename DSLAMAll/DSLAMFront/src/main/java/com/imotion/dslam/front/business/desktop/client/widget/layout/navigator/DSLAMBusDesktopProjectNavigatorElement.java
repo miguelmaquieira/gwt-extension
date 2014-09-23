@@ -9,6 +9,7 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
@@ -22,6 +23,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuProject;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem	menuScript;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuProcess;
+	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuNodesProcess;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuExecution;
 	private CRONIOBusDesktopProjectNavigatorTreeMenuItem 	menuLogs;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 		mainScript;
@@ -76,9 +78,15 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
 		menuProcess.add(propertiesProcess);
 
+		//MENU -> Project  -> Process -> Environments
+		menuNodesProcess 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_PROCESS, TEXTS.environments(), this);
+		menuNodesProcess.setCloseMenu();
+		menuNodesProcess.addIconButton(AEGWTIBoostrapConstants.GLYPHICON + " " + AEGWTIBoostrapConstants.GLYPHICON_PLUS);
+		menuProcess.add(menuNodesProcess.asWidget());
+		
 		//MENU -> Project  -> Process -> Nodes
 		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST			,TEXTS.nodes(), this);
-		menuProcess.add(nodesProcess);
+		menuNodesProcess.add(nodesProcess);
 
 		//MENU -> Project  -> Execution
 		menuExecution 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_EXECUTION, TEXTS.execution(), this);

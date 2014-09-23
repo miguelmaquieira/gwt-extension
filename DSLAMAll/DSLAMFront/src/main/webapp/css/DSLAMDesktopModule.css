@@ -115,6 +115,19 @@
 	padding: 0px;
 }
 
+.aegwt-bootstrap-tree-menu-item-with-button {
+	width: 87% !important;
+}
+
+.aegwt-bootstrap-tree-menu-item-button {
+	display:visible;
+	padding: 0px 4px;
+}
+
+.aegwt-bootstrap-tree-menu-item-button-invisible {
+	display: none;
+}
+
 .dslam_studio-projectsLayout-zoneHeader>.gwt-Label {
 	float: left;
 	margin-left: 5px;
