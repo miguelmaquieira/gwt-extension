@@ -130,6 +130,9 @@ color: #29c639;\
 .ace-eclipse .ace_variable-execution {\
 color: #ff0000;\
 }\
+.ace-eclipse  .ace_log {\
+color: #ffff00;\
+}\
 ";
 
 exports.cssClass = "ace-eclipse";

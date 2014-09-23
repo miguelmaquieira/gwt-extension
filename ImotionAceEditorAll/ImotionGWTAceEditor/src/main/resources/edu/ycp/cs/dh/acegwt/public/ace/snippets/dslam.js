@@ -74,9 +74,13 @@ snippet match\n\
 	\n\
 snippet rb\n\
 	rb \"${1}\";\n\
-	\n\
+		\n\
 snippet tag\n\
 	tag \"${1}\";\n\
+	\n\
+snippet log\n\
+	log (level, message);\n\
+			\n\
 ";
 exports.scope = "dslam";
 
