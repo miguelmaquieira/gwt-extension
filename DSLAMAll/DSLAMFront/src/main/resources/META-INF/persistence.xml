@@ -25,11 +25,14 @@
 			<!-- ===========DATABASE============ -->
 			<!-- =============================== -->
 
-			<!-- MySQL -->
+			<!-- Localhost -->
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdbtest" />
 			
-			<!-- CLOUDBEE -->
+			<!-- CLOUDBEE DSLAM-->
 			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb" /> -->
+			
+			<!-- CLOUDBEE CHRONIUM-->
+<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_chronium-io-db" /> -->
 			
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
@@ -41,9 +44,13 @@
 			<property name="hibernate.connection.user" value="dslamuser" />
 			<property name="hibernate.connection.password" value="dslampassword" />
 			
-			<!-- CLOUDBEE -->
-			<!-- <property name="hibernate.connection.user" value="b3824f64a6f0d8" /> -->
-			<!-- <property name="hibernate.connection.password" value="e5a71044" /> -->
+			<!-- CLOUDBEE DSLAM -->
+<!-- 			<property name="hibernate.connection.user" value="b3824f64a6f0d8" /> -->
+<!-- 			<property name="hibernate.connection.password" value="e5a71044" /> -->
+			
+			<!-- CLOUDBEE CHRONIUM -->
+<!-- 			<property name="hibernate.connection.user" value="ba2513e61bbc0e" /> -->
+<!-- 			<property name="hibernate.connection.password" value="922d36c5" /> -->
 
 			<!-- =============================== -->
 			<!-- ===========OTHER PROPS========== -->
@@ -60,8 +67,7 @@
 			<!-- ==============POOL============= -->
 			<!-- =============================== -->
 			<!-- Connection pools Hibernate-C3P0 -->
-			<property name="hibernate.connection.provider_class"
-				value="org.hibernate.connection.C3P0ConnectionProvider" />
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
 			<property name="hibernate.c3p0.max_statements" value="0" />
 			<property name="hibernate.c3p0.max_size" value="5" />
 			<property name="hibernate.c3p0.min_size" value="1" />
@@ -86,6 +92,5 @@
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
     </persistence-unit>
-	
 	
 </persistence>
