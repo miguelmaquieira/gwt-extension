@@ -1,15 +1,12 @@
 package com.imotion.dslam.logger;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
-import java.util.Properties;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 
@@ -44,13 +41,12 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		//Appenders
 		String targetLog = logsDir + "/" + projectName + ".log";
 		if (logger.getAppender(projectName) == null) {
-			Properties prop = new Properties();
-			String propFileName = classpathDir + "../config/log4execution.properties";		
-			InputStream inputStream = new FileInputStream(propFileName);
-			prop.load(inputStream);
-			prop.put("log4j.appender.FILE.name", projectName);
-			prop.put("log4j.appender.FILE.File", targetLog);
-			PropertyConfigurator.configure(prop);		
+	
+			String xmlFileName = classpathDir + "../config/log4execution.xml";
+			System.setProperty("logfilePath", targetLog);
+			System.setProperty("logfileName", projectName);
+			DOMConfigurator.configure(xmlFileName);
+				
 		}
 
 	}

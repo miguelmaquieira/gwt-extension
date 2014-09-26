@@ -1,0 +1,1352 @@
+2014-09-25 14:21:39,053 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,061 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,078 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,088 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,301 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,304 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,311 DEBUG 60:2:921,localhost,MIGUELTURRA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,315 DEBUG 60:2:921,localhost,MIGUELTURRA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,315 DEBUG 60:2:921,localhost,MIGUELTURRA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,315 DEBUG 60:2:921,localhost,MIGUELTURRA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,316 DEBUG 60:2:921,localhost,MIGUELTURRA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,316 DEBUG 60:2:921,localhost,MIGUELTURRA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,316 DEBUG 60:2:921,localhost,MIGUELTURRA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,317 DEBUG 60:2:921,localhost,MIGUELTURRA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,317 DEBUG 60:2:921,localhost,MIGUELTURRA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,318 DEBUG 60:2:921,localhost,MIGUELTURRA,exit,,
+
+2014-09-25 14:21:39,318 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,320 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,328 DEBUG 60:2:922,localhost,LP-TELDE,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,328 DEBUG 60:2:922,localhost,LP-TELDE,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,328 DEBUG 60:2:922,localhost,LP-TELDE,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,328 DEBUG 60:2:922,localhost,LP-TELDE,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,329 DEBUG 60:2:922,localhost,LP-TELDE,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,329 DEBUG 60:2:922,localhost,LP-TELDE,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,329 DEBUG 60:2:922,localhost,LP-TELDE,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,330 DEBUG 60:2:922,localhost,LP-TELDE,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,330 DEBUG 60:2:922,localhost,LP-TELDE,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,330 DEBUG 60:2:922,localhost,LP-TELDE,exit,,
+
+2014-09-25 14:21:39,330 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,332 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,340 DEBUG 60:2:923,localhost,SANJAVIER,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,340 DEBUG 60:2:923,localhost,SANJAVIER,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,341 DEBUG 60:2:923,localhost,SANJAVIER,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,341 DEBUG 60:2:923,localhost,SANJAVIER,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,341 DEBUG 60:2:923,localhost,SANJAVIER,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,341 DEBUG 60:2:923,localhost,SANJAVIER,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,342 DEBUG 60:2:923,localhost,SANJAVIER,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,342 DEBUG 60:2:923,localhost,SANJAVIER,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,342 DEBUG 60:2:923,localhost,SANJAVIER,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,343 DEBUG 60:2:923,localhost,SANJAVIER,exit,,
+
+2014-09-25 14:21:39,343 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,344 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,354 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,355 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,355 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,355 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,356 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,356 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,356 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,356 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,357 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,357 DEBUG 60:2:924,localhost,LP-SANCRISTOBAL,exit,,
+
+2014-09-25 14:21:39,357 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,359 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,371 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,373 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,374 DEBUG 60:2:925,localhost,M-ALMENARA3,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,374 DEBUG 60:2:925,localhost,M-ALMENARA3,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,374 DEBUG 60:2:925,localhost,M-ALMENARA3,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,375 DEBUG 60:2:925,localhost,M-ALMENARA3,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,375 DEBUG 60:2:925,localhost,M-ALMENARA3,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,375 DEBUG 60:2:925,localhost,M-ALMENARA3,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,391 DEBUG 60:2:925,localhost,M-ALMENARA3,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,392 DEBUG 60:2:925,localhost,M-ALMENARA3,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,392 DEBUG 60:2:925,localhost,M-ALMENARA3,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,402 DEBUG 60:2:925,localhost,M-ALMENARA3,exit,,
+
+2014-09-25 14:21:39,402 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,407 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,414 DEBUG 60:2:926,localhost,B-ABRERA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,431 DEBUG 60:2:926,localhost,B-ABRERA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,431 DEBUG 60:2:926,localhost,B-ABRERA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,432 DEBUG 60:2:926,localhost,B-ABRERA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,432 DEBUG 60:2:926,localhost,B-ABRERA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,432 DEBUG 60:2:926,localhost,B-ABRERA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,432 DEBUG 60:2:926,localhost,B-ABRERA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,433 DEBUG 60:2:926,localhost,B-ABRERA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,433 DEBUG 60:2:926,localhost,B-ABRERA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,433 DEBUG 60:2:926,localhost,B-ABRERA,exit,,
+
+2014-09-25 14:21:39,434 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,444 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,455 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,456 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,456 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,456 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,456 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,457 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,457 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,457 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,458 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,458 DEBUG 60:2:927,localhost,SANTSADURNIDANOIA,exit,,
+
+2014-09-25 14:21:39,458 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,468 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:21:39,478 DEBUG 60:2:928,localhost,ALBERCA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,478 DEBUG 60:2:928,localhost,ALBERCA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,480 DEBUG 60:2:928,localhost,ALBERCA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,481 DEBUG 60:2:928,localhost,ALBERCA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,481 DEBUG 60:2:928,localhost,ALBERCA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,486 DEBUG 60:2:928,localhost,ALBERCA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,487 DEBUG 60:2:928,localhost,ALBERCA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,491 DEBUG 60:2:928,localhost,ALBERCA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,492 DEBUG 60:2:928,localhost,ALBERCA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:21:39,492 DEBUG 60:2:928,localhost,ALBERCA,exit,,
+
+2014-09-25 14:21:39,493 WARN  null#30002000132#org.hibernate.ejb.EntityManagerImpl@66a7e9fd
+2014-09-25 14:22:11,686 DEBUG Refurbishing idle resources - Thu Sep 25 14:22:11 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:22:11,690 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:22:11,690 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629] on IDLE CHECK.
+2014-09-25 14:22:11,690 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26] on IDLE CHECK.
+2014-09-25 14:22:11,694 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:22:11,694 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:23:01,686 DEBUG Checking for expired resources - Thu Sep 25 14:23:01 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:01,686 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:01,686 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:01,687 DEBUG Refurbishing idle resources - Thu Sep 25 14:23:01 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:01,687 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:01,687 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629] on IDLE CHECK.
+2014-09-25 14:23:01,687 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26] on IDLE CHECK.
+2014-09-25 14:23:01,689 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:23:01,689 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:23:26,686 DEBUG Checking for expired resources - Thu Sep 25 14:23:26 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,687 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,687 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629 ---> idle_time: 107219; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,687 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,689 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:26,689 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:26,689 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629
+2014-09-25 14:23:26,689 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26 ---> idle_time: 123472; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,689 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629
+2014-09-25 14:23:26,689 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,689 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26
+2014-09-25 14:23:26,689 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26
+2014-09-25 14:23:26,691 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:26,691 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:26,691 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:26,691 DEBUG incremented pending_acquires: 1
+2014-09-25 14:23:26,693 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 14:23:26,694 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 14:23:26,696 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629
+2014-09-25 14:23:26,697 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629
+2014-09-25 14:23:26,696 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26
+2014-09-25 14:23:26,697 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@24bdca26
+2014-09-25 14:23:26,725 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@6e812837.acquireResource() returning. 
+2014-09-25 14:23:26,725 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:26,726 DEBUG decremented pending_acquires: 0
+2014-09-25 14:23:51,686 DEBUG Checking for expired resources - Thu Sep 25 14:23:51 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:51,686 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:51,686 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:51,688 DEBUG Refurbishing idle resources - Thu Sep 25 14:23:51 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:23:51,688 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@7abc4629)
+2014-09-25 14:23:51,688 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@298ae8d6] on IDLE CHECK.
+2014-09-25 14:23:51,690 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@298ae8d6] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:24:16,686 DEBUG Checking for expired resources - Thu Sep 25 14:24:16 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:24:16,686 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:24:16,687 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@30a0f3d1]
+2014-09-25 14:27:28,397 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,399 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,400 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,401 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,554 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,557 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,564 DEBUG 61:2:921,localhost,MIGUELTURRA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,569 DEBUG 61:2:921,localhost,MIGUELTURRA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,570 DEBUG 61:2:921,localhost,MIGUELTURRA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,570 DEBUG 61:2:921,localhost,MIGUELTURRA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,570 DEBUG 61:2:921,localhost,MIGUELTURRA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,571 DEBUG 61:2:921,localhost,MIGUELTURRA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,571 DEBUG 61:2:921,localhost,MIGUELTURRA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,575 DEBUG 61:2:921,localhost,MIGUELTURRA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,575 DEBUG 61:2:921,localhost,MIGUELTURRA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,576 DEBUG 61:2:921,localhost,MIGUELTURRA,exit,,
+
+2014-09-25 14:27:28,576 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,578 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,587 DEBUG 61:2:922,localhost,LP-TELDE,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,587 DEBUG 61:2:922,localhost,LP-TELDE,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,587 DEBUG 61:2:922,localhost,LP-TELDE,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,588 DEBUG 61:2:922,localhost,LP-TELDE,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,588 DEBUG 61:2:922,localhost,LP-TELDE,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,588 DEBUG 61:2:922,localhost,LP-TELDE,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,588 DEBUG 61:2:922,localhost,LP-TELDE,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,589 DEBUG 61:2:922,localhost,LP-TELDE,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,598 DEBUG 61:2:922,localhost,LP-TELDE,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,598 DEBUG 61:2:922,localhost,LP-TELDE,exit,,
+
+2014-09-25 14:27:28,598 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,603 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,616 DEBUG 61:2:923,localhost,SANJAVIER,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,617 DEBUG 61:2:923,localhost,SANJAVIER,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,617 DEBUG 61:2:923,localhost,SANJAVIER,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,617 DEBUG 61:2:923,localhost,SANJAVIER,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,618 DEBUG 61:2:923,localhost,SANJAVIER,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,618 DEBUG 61:2:923,localhost,SANJAVIER,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,618 DEBUG 61:2:923,localhost,SANJAVIER,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,619 DEBUG 61:2:923,localhost,SANJAVIER,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,619 DEBUG 61:2:923,localhost,SANJAVIER,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,619 DEBUG 61:2:923,localhost,SANJAVIER,exit,,
+
+2014-09-25 14:27:28,620 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,621 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,631 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,631 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,631 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,632 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,632 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,632 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,633 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,633 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,633 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,633 DEBUG 61:2:924,localhost,LP-SANCRISTOBAL,exit,,
+
+2014-09-25 14:27:28,634 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,635 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,662 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,664 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,665 DEBUG 61:2:925,localhost,M-ALMENARA3,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,665 DEBUG 61:2:925,localhost,M-ALMENARA3,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,672 DEBUG 61:2:925,localhost,M-ALMENARA3,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,674 DEBUG 61:2:925,localhost,M-ALMENARA3,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,674 DEBUG 61:2:925,localhost,M-ALMENARA3,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,674 DEBUG 61:2:925,localhost,M-ALMENARA3,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,675 DEBUG 61:2:925,localhost,M-ALMENARA3,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,675 DEBUG 61:2:925,localhost,M-ALMENARA3,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,675 DEBUG 61:2:925,localhost,M-ALMENARA3,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,676 DEBUG 61:2:925,localhost,M-ALMENARA3,exit,,
+
+2014-09-25 14:27:28,676 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,678 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,692 DEBUG 61:2:926,localhost,B-ABRERA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,693 DEBUG 61:2:926,localhost,B-ABRERA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,693 DEBUG 61:2:926,localhost,B-ABRERA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,693 DEBUG 61:2:926,localhost,B-ABRERA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,694 DEBUG 61:2:926,localhost,B-ABRERA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,694 DEBUG 61:2:926,localhost,B-ABRERA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,694 DEBUG 61:2:926,localhost,B-ABRERA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,695 DEBUG 61:2:926,localhost,B-ABRERA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,695 DEBUG 61:2:926,localhost,B-ABRERA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,695 DEBUG 61:2:926,localhost,B-ABRERA,exit,,
+
+2014-09-25 14:27:28,695 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,704 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,716 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,716 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,717 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,717 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,717 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,717 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,718 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,722 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,723 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,723 DEBUG 61:2:927,localhost,SANTSADURNIDANOIA,exit,,
+
+2014-09-25 14:27:28,723 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,727 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:28,742 DEBUG 61:2:928,localhost,ALBERCA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,743 DEBUG 61:2:928,localhost,ALBERCA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,743 DEBUG 61:2:928,localhost,ALBERCA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,743 DEBUG 61:2:928,localhost,ALBERCA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,743 DEBUG 61:2:928,localhost,ALBERCA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,744 DEBUG 61:2:928,localhost,ALBERCA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,744 DEBUG 61:2:928,localhost,ALBERCA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,744 DEBUG 61:2:928,localhost,ALBERCA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,745 DEBUG 61:2:928,localhost,ALBERCA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 14:27:28,745 DEBUG 61:2:928,localhost,ALBERCA,exit,,
+
+2014-09-25 14:27:28,745 WARN  null#30002000132#org.hibernate.ejb.EntityManagerImpl@3706d2f1
+2014-09-25 14:27:57,654 DEBUG Refurbishing idle resources - Thu Sep 25 14:27:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:27:57,658 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 3, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:27:57,658 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d] on IDLE CHECK.
+2014-09-25 14:27:57,658 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18] on IDLE CHECK.
+2014-09-25 14:27:57,658 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@657466c] on IDLE CHECK.
+2014-09-25 14:27:57,662 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:27:57,662 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:27:57,662 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@657466c] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:28:47,655 DEBUG Checking for expired resources - Thu Sep 25 14:28:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:28:47,655 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:28:47,655 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:28:47,655 DEBUG Refurbishing idle resources - Thu Sep 25 14:28:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:28:47,655 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 3, unused: 3, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:28:47,656 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18] on IDLE CHECK.
+2014-09-25 14:28:47,656 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d] on IDLE CHECK.
+2014-09-25 14:28:47,656 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@657466c] on IDLE CHECK.
+2014-09-25 14:28:47,657 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:28:47,658 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:28:47,657 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@657466c] on IDLE CHECK has SUCCEEDED.
+2014-09-25 14:29:12,654 DEBUG Checking for expired resources - Thu Sep 25 14:29:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,654 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,655 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18 ---> idle_time: 103927; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,655 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,656 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,657 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,657 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18
+2014-09-25 14:29:12,657 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c ---> idle_time: 123166; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,657 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18
+2014-09-25 14:29:12,657 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,657 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,657 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,657 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d ---> idle_time: 123432; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,657 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c
+2014-09-25 14:29:12,658 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c
+2014-09-25 14:29:12,657 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,658 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d
+2014-09-25 14:29:12,658 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d
+2014-09-25 14:29:12,659 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,659 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,659 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@78c543da]
+2014-09-25 14:29:12,659 DEBUG incremented pending_acquires: 1
+2014-09-25 14:29:12,660 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 14:29:12,662 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d
+2014-09-25 14:29:12,662 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6a154f8d
+2014-09-25 14:29:12,663 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 14:29:12,667 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18
+2014-09-25 14:29:12,667 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18
+2014-09-25 14:29:12,668 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@657466c closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 14:29:12,668 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c
+2014-09-25 14:29:12,668 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@657466c
+2014-09-25 14:29:12,688 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@263f2592.acquireResource() returning. 
+2014-09-25 14:29:12,689 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@78c543da [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@75c54e18)
+2014-09-25 14:29:12,689 DEBUG decremented pending_acquires: 0
+2014-09-25 15:52:26,856 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:26,866 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:26,867 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:26,870 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,029 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,032 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,039 DEBUG 62:2:921,localhost,MIGUELTURRA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,043 DEBUG 62:2:921,localhost,MIGUELTURRA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,044 DEBUG 62:2:921,localhost,MIGUELTURRA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,044 DEBUG 62:2:921,localhost,MIGUELTURRA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,044 DEBUG 62:2:921,localhost,MIGUELTURRA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,045 DEBUG 62:2:921,localhost,MIGUELTURRA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,045 DEBUG 62:2:921,localhost,MIGUELTURRA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,047 DEBUG 62:2:921,localhost,MIGUELTURRA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,047 DEBUG 62:2:921,localhost,MIGUELTURRA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,048 DEBUG 62:2:921,localhost,MIGUELTURRA,exit,,
+
+2014-09-25 15:52:27,049 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,052 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,060 DEBUG 62:2:922,localhost,LP-TELDE,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,060 DEBUG 62:2:922,localhost,LP-TELDE,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,060 DEBUG 62:2:922,localhost,LP-TELDE,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,060 DEBUG 62:2:922,localhost,LP-TELDE,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,061 DEBUG 62:2:922,localhost,LP-TELDE,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,061 DEBUG 62:2:922,localhost,LP-TELDE,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,061 DEBUG 62:2:922,localhost,LP-TELDE,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,062 DEBUG 62:2:922,localhost,LP-TELDE,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,062 DEBUG 62:2:922,localhost,LP-TELDE,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,062 DEBUG 62:2:922,localhost,LP-TELDE,exit,,
+
+2014-09-25 15:52:27,063 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,064 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,072 DEBUG 62:2:923,localhost,SANJAVIER,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,073 DEBUG 62:2:923,localhost,SANJAVIER,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,079 DEBUG 62:2:923,localhost,SANJAVIER,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,085 DEBUG 62:2:923,localhost,SANJAVIER,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,085 DEBUG 62:2:923,localhost,SANJAVIER,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,085 DEBUG 62:2:923,localhost,SANJAVIER,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,089 DEBUG 62:2:923,localhost,SANJAVIER,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,090 DEBUG 62:2:923,localhost,SANJAVIER,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,090 DEBUG 62:2:923,localhost,SANJAVIER,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,090 DEBUG 62:2:923,localhost,SANJAVIER,exit,,
+
+2014-09-25 15:52:27,091 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,096 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,128 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,128 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,129 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,129 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,129 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,129 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,130 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,130 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,130 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,136 DEBUG 62:2:924,localhost,LP-SANCRISTOBAL,exit,,
+
+2014-09-25 15:52:27,136 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,138 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,150 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,151 DEBUG 62:2:925,localhost,M-ALMENARA3,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,151 DEBUG 62:2:925,localhost,M-ALMENARA3,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,151 DEBUG 62:2:925,localhost,M-ALMENARA3,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,152 DEBUG 62:2:925,localhost,M-ALMENARA3,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,152 DEBUG 62:2:925,localhost,M-ALMENARA3,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,152 DEBUG 62:2:925,localhost,M-ALMENARA3,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,152 DEBUG 62:2:925,localhost,M-ALMENARA3,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,153 DEBUG 62:2:925,localhost,M-ALMENARA3,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,153 DEBUG 62:2:925,localhost,M-ALMENARA3,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,153 DEBUG 62:2:925,localhost,M-ALMENARA3,exit,,
+
+2014-09-25 15:52:27,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,164 DEBUG 62:2:926,localhost,B-ABRERA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,164 DEBUG 62:2:926,localhost,B-ABRERA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,164 DEBUG 62:2:926,localhost,B-ABRERA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,165 DEBUG 62:2:926,localhost,B-ABRERA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,165 DEBUG 62:2:926,localhost,B-ABRERA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,165 DEBUG 62:2:926,localhost,B-ABRERA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,166 DEBUG 62:2:926,localhost,B-ABRERA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,166 DEBUG 62:2:926,localhost,B-ABRERA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,166 DEBUG 62:2:926,localhost,B-ABRERA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,167 DEBUG 62:2:926,localhost,B-ABRERA,exit,,
+
+2014-09-25 15:52:27,167 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,169 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,177 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,181 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,181 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,182 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,182 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,182 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,182 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,183 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,183 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,183 DEBUG 62:2:927,localhost,SANTSADURNIDANOIA,exit,,
+
+2014-09-25 15:52:27,184 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,185 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:27,207 DEBUG 62:2:928,localhost,ALBERCA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,207 DEBUG 62:2:928,localhost,ALBERCA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,207 DEBUG 62:2:928,localhost,ALBERCA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,208 DEBUG 62:2:928,localhost,ALBERCA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,208 DEBUG 62:2:928,localhost,ALBERCA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,208 DEBUG 62:2:928,localhost,ALBERCA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,211 DEBUG 62:2:928,localhost,ALBERCA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,211 DEBUG 62:2:928,localhost,ALBERCA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,212 DEBUG 62:2:928,localhost,ALBERCA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 15:52:27,212 DEBUG 62:2:928,localhost,ALBERCA,exit,,
+
+2014-09-25 15:52:27,212 WARN  null#30002000132#org.hibernate.ejb.EntityManagerImpl@66c103b1
+2014-09-25 15:52:47,147 DEBUG Refurbishing idle resources - Thu Sep 25 15:52:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:52:47,150 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK.
+2014-09-25 15:52:47,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:52:47,153 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK.
+2014-09-25 15:52:47,154 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:52:47,154 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:53:37,146 DEBUG Checking for expired resources - Thu Sep 25 15:53:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:53:37,146 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:53:37,146 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:53:37,146 DEBUG Refurbishing idle resources - Thu Sep 25 15:53:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:53:37,146 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:53:37,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK.
+2014-09-25 15:53:37,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK.
+2014-09-25 15:53:37,148 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:53:37,148 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:54:02,147 DEBUG Checking for expired resources - Thu Sep 25 15:54:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:02,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:02,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,146 DEBUG Refurbishing idle resources - Thu Sep 25 15:54:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,147 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK.
+2014-09-25 15:54:27,147 DEBUG Checking for expired resources - Thu Sep 25 15:54:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,147 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2 ---> idle_time: 119961; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,147 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,149 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:54:27,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK.
+2014-09-25 15:54:27,150 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:54:27,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,151 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2
+2014-09-25 15:54:27,151 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c ---> idle_time: 120284; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,151 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2
+2014-09-25 15:54:27,155 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 15:54:27,157 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2
+2014-09-25 15:54:27,157 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@92050a2
+2014-09-25 15:54:27,151 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,158 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,158 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c
+2014-09-25 15:54:27,158 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c
+2014-09-25 15:54:27,158 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 15:54:27,158 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c
+2014-09-25 15:54:27,159 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c
+2014-09-25 15:54:27,158 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,159 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:27,159 DEBUG incremented pending_acquires: 1
+2014-09-25 15:54:27,188 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 15:54:27,188 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:54:27,189 DEBUG decremented pending_acquires: 0
+2014-09-25 15:54:52,147 DEBUG Checking for expired resources - Thu Sep 25 15:54:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:52,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:54:52,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:17,147 DEBUG Refurbishing idle resources - Thu Sep 25 15:55:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:17,147 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:55:17,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16] on IDLE CHECK.
+2014-09-25 15:55:17,147 DEBUG Checking for expired resources - Thu Sep 25 15:55:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:17,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:17,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:17,149 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:55:42,147 DEBUG Checking for expired resources - Thu Sep 25 15:55:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:42,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:55:42,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:07,147 DEBUG Refurbishing idle resources - Thu Sep 25 15:56:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:07,147 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:56:07,147 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16] on IDLE CHECK.
+2014-09-25 15:56:07,147 DEBUG Checking for expired resources - Thu Sep 25 15:56:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:07,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:07,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:07,149 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:56:32,147 DEBUG Checking for expired resources - Thu Sep 25 15:56:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:32,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:32,147 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16 ---> idle_time: 124959; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:32,147 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:32,147 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:56:32,148 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16
+2014-09-25 15:56:32,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:56:32,148 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16
+2014-09-25 15:56:32,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:32,148 DEBUG incremented pending_acquires: 1
+2014-09-25 15:56:32,148 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 15:56:32,149 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16
+2014-09-25 15:56:32,149 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@67482f16
+2014-09-25 15:56:32,179 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 15:56:32,179 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:56:32,179 DEBUG decremented pending_acquires: 0
+2014-09-25 15:56:57,148 DEBUG Checking for expired resources - Thu Sep 25 15:56:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:57,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:57,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:57,148 DEBUG Refurbishing idle resources - Thu Sep 25 15:56:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:56:57,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:56:57,148 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e] on IDLE CHECK.
+2014-09-25 15:56:57,150 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:57:22,147 DEBUG Checking for expired resources - Thu Sep 25 15:57:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:22,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:22,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:47,147 DEBUG Checking for expired resources - Thu Sep 25 15:57:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:47,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:47,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:47,148 DEBUG Refurbishing idle resources - Thu Sep 25 15:57:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:57:47,149 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:57:47,149 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e] on IDLE CHECK.
+2014-09-25 15:57:47,150 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:58:12,147 DEBUG Checking for expired resources - Thu Sep 25 15:58:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:12,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:12,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG Checking for expired resources - Thu Sep 25 15:58:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e ---> idle_time: 124969; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:58:37,148 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e
+2014-09-25 15:58:37,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:58:37,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,148 DEBUG incremented pending_acquires: 1
+2014-09-25 15:58:37,149 DEBUG Refurbishing idle resources - Thu Sep 25 15:58:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:58:37,149 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:58:37,148 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e
+2014-09-25 15:58:37,153 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 15:58:37,154 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e
+2014-09-25 15:58:37,154 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@3e72895e
+2014-09-25 15:58:37,180 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 15:58:37,180 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:58:37,180 DEBUG decremented pending_acquires: 0
+2014-09-25 15:59:02,147 DEBUG Checking for expired resources - Thu Sep 25 15:59:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:02,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:02,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:27,148 DEBUG Checking for expired resources - Thu Sep 25 15:59:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:27,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:27,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:27,149 DEBUG Refurbishing idle resources - Thu Sep 25 15:59:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:27,149 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 15:59:27,149 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@27673854] on IDLE CHECK.
+2014-09-25 15:59:27,151 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@27673854] on IDLE CHECK has SUCCEEDED.
+2014-09-25 15:59:52,147 DEBUG Checking for expired resources - Thu Sep 25 15:59:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:52,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 15:59:52,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:17,147 DEBUG Checking for expired resources - Thu Sep 25 16:00:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:17,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:17,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:17,150 DEBUG Refurbishing idle resources - Thu Sep 25 16:00:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:17,150 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:00:17,150 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@27673854] on IDLE CHECK.
+2014-09-25 16:00:17,151 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@27673854] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:00:42,148 DEBUG Checking for expired resources - Thu Sep 25 16:00:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:42,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:42,149 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854 ---> idle_time: 124968; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:42,149 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:42,149 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:00:42,149 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854
+2014-09-25 16:00:42,149 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854
+2014-09-25 16:00:42,149 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:00:42,149 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:00:42,149 DEBUG incremented pending_acquires: 1
+2014-09-25 16:00:42,149 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@27673854 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:00:42,150 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854
+2014-09-25 16:00:42,150 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@27673854
+2014-09-25 16:00:42,170 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:00:42,171 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:00:42,171 DEBUG decremented pending_acquires: 0
+2014-09-25 16:01:07,147 DEBUG Checking for expired resources - Thu Sep 25 16:01:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:07,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:07,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:07,151 DEBUG Refurbishing idle resources - Thu Sep 25 16:01:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:07,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:01:07,151 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3] on IDLE CHECK.
+2014-09-25 16:01:07,154 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:01:32,147 DEBUG Checking for expired resources - Thu Sep 25 16:01:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:32,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:32,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:57,147 DEBUG Checking for expired resources - Thu Sep 25 16:01:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:57,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:57,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:57,151 DEBUG Refurbishing idle resources - Thu Sep 25 16:01:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:01:57,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:01:57,151 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3] on IDLE CHECK.
+2014-09-25 16:01:57,153 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:02:22,147 DEBUG Checking for expired resources - Thu Sep 25 16:02:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:22,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:22,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,147 DEBUG Checking for expired resources - Thu Sep 25 16:02:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,147 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3 ---> idle_time: 124977; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,147 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:02:47,148 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3
+2014-09-25 16:02:47,148 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:02:47,148 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3
+2014-09-25 16:02:47,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,148 DEBUG incremented pending_acquires: 1
+2014-09-25 16:02:47,148 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:02:47,149 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3
+2014-09-25 16:02:47,149 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@101d0ea3
+2014-09-25 16:02:47,151 DEBUG Refurbishing idle resources - Thu Sep 25 16:02:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:02:47,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:02:47,170 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:02:47,170 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:02:47,170 DEBUG decremented pending_acquires: 0
+2014-09-25 16:03:12,147 DEBUG Checking for expired resources - Thu Sep 25 16:03:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:12,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:12,147 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:37,147 DEBUG Checking for expired resources - Thu Sep 25 16:03:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:37,147 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:37,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:37,151 DEBUG Refurbishing idle resources - Thu Sep 25 16:03:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:03:37,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:03:37,151 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251] on IDLE CHECK.
+2014-09-25 16:03:37,155 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:04:02,148 DEBUG Checking for expired resources - Thu Sep 25 16:04:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:02,148 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:02,148 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:27,149 DEBUG Checking for expired resources - Thu Sep 25 16:04:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:27,149 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:27,149 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:27,151 DEBUG Refurbishing idle resources - Thu Sep 25 16:04:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:27,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:04:27,152 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251] on IDLE CHECK.
+2014-09-25 16:04:27,153 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:04:52,149 DEBUG Checking for expired resources - Thu Sep 25 16:04:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:52,149 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:52,150 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251 ---> idle_time: 124980; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:52,151 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:52,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:04:52,151 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251
+2014-09-25 16:04:52,151 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251
+2014-09-25 16:04:52,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:04:52,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:04:52,151 DEBUG incremented pending_acquires: 1
+2014-09-25 16:04:52,151 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:04:52,152 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251
+2014-09-25 16:04:52,152 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@7a06d251
+2014-09-25 16:04:52,169 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:04:52,169 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:04:52,169 DEBUG decremented pending_acquires: 0
+2014-09-25 16:05:17,149 DEBUG Checking for expired resources - Thu Sep 25 16:05:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:17,149 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:17,149 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:17,152 DEBUG Refurbishing idle resources - Thu Sep 25 16:05:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:17,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:05:17,152 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639] on IDLE CHECK.
+2014-09-25 16:05:17,154 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:05:42,150 DEBUG Checking for expired resources - Thu Sep 25 16:05:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:42,150 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:05:42,150 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:07,150 DEBUG Checking for expired resources - Thu Sep 25 16:06:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:07,150 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:07,150 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:07,152 DEBUG Refurbishing idle resources - Thu Sep 25 16:06:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:07,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:06:07,153 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639] on IDLE CHECK.
+2014-09-25 16:06:07,154 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:06:32,150 DEBUG Checking for expired resources - Thu Sep 25 16:06:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:32,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:32,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,150 DEBUG Checking for expired resources - Thu Sep 25 16:06:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,151 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639 ---> idle_time: 124982; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,151 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,151 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639
+2014-09-25 16:06:57,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:06:57,151 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639
+2014-09-25 16:06:57,151 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:06:57,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,152 DEBUG incremented pending_acquires: 1
+2014-09-25 16:06:57,152 DEBUG Refurbishing idle resources - Thu Sep 25 16:06:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:06:57,152 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:06:57,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:06:57,152 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639
+2014-09-25 16:06:57,157 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@64c4b639
+2014-09-25 16:06:57,198 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:06:57,198 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:06:57,198 DEBUG decremented pending_acquires: 0
+2014-09-25 16:07:22,150 DEBUG Checking for expired resources - Thu Sep 25 16:07:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:22,150 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:22,150 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:47,150 DEBUG Checking for expired resources - Thu Sep 25 16:07:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:47,150 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:47,150 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:47,153 DEBUG Refurbishing idle resources - Thu Sep 25 16:07:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:07:47,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:07:47,153 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366] on IDLE CHECK.
+2014-09-25 16:07:47,155 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:08:12,151 DEBUG Checking for expired resources - Thu Sep 25 16:08:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:12,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:12,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:37,151 DEBUG Checking for expired resources - Thu Sep 25 16:08:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:37,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:37,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:37,153 DEBUG Refurbishing idle resources - Thu Sep 25 16:08:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:08:37,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:08:37,154 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366] on IDLE CHECK.
+2014-09-25 16:08:37,155 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:09:02,151 DEBUG Checking for expired resources - Thu Sep 25 16:09:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:02,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:02,152 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366 ---> idle_time: 124954; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:02,152 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:02,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:09:02,152 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366
+2014-09-25 16:09:02,152 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366
+2014-09-25 16:09:02,152 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:09:02,152 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:02,152 DEBUG incremented pending_acquires: 1
+2014-09-25 16:09:02,152 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:09:02,153 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366
+2014-09-25 16:09:02,153 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2b737366
+2014-09-25 16:09:02,179 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:09:02,179 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:09:02,179 DEBUG decremented pending_acquires: 0
+2014-09-25 16:09:27,151 DEBUG Checking for expired resources - Thu Sep 25 16:09:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:27,151 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:27,151 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:27,153 DEBUG Refurbishing idle resources - Thu Sep 25 16:09:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:27,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:09:27,153 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d] on IDLE CHECK.
+2014-09-25 16:09:27,155 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:09:52,152 DEBUG Checking for expired resources - Thu Sep 25 16:09:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:52,152 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:09:52,152 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:17,152 DEBUG Checking for expired resources - Thu Sep 25 16:10:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:17,152 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:17,152 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:17,153 DEBUG Refurbishing idle resources - Thu Sep 25 16:10:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:17,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:10:17,154 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d] on IDLE CHECK.
+2014-09-25 16:10:17,155 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:10:42,152 DEBUG Checking for expired resources - Thu Sep 25 16:10:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:42,152 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:10:42,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,152 DEBUG Checking for expired resources - Thu Sep 25 16:11:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,153 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d ---> idle_time: 124974; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,153 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:11:07,153 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d
+2014-09-25 16:11:07,153 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:11:07,153 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d
+2014-09-25 16:11:07,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,154 DEBUG incremented pending_acquires: 1
+2014-09-25 16:11:07,154 DEBUG Refurbishing idle resources - Thu Sep 25 16:11:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:07,154 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:11:07,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:11:07,154 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d
+2014-09-25 16:11:07,154 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@17e2b69d
+2014-09-25 16:11:07,174 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:11:07,174 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:11:07,175 DEBUG decremented pending_acquires: 0
+2014-09-25 16:11:32,152 DEBUG Checking for expired resources - Thu Sep 25 16:11:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:32,152 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:32,152 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:57,152 DEBUG Checking for expired resources - Thu Sep 25 16:11:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:57,152 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:57,152 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:57,154 DEBUG Refurbishing idle resources - Thu Sep 25 16:11:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:11:57,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:11:57,154 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5] on IDLE CHECK.
+2014-09-25 16:11:57,156 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:12:22,153 DEBUG Checking for expired resources - Thu Sep 25 16:12:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:22,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:22,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:47,153 DEBUG Checking for expired resources - Thu Sep 25 16:12:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:47,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:47,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:47,154 DEBUG Refurbishing idle resources - Thu Sep 25 16:12:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:12:47,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:12:47,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5] on IDLE CHECK.
+2014-09-25 16:12:47,156 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:13:12,153 DEBUG Checking for expired resources - Thu Sep 25 16:13:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:12,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:12,154 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5 ---> idle_time: 124980; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:12,154 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:12,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:13:12,154 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5
+2014-09-25 16:13:12,154 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5
+2014-09-25 16:13:12,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:13:12,154 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:12,154 DEBUG incremented pending_acquires: 1
+2014-09-25 16:13:12,154 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:13:12,155 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5
+2014-09-25 16:13:12,155 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@202668d5
+2014-09-25 16:13:12,181 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:13:12,181 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:13:12,181 DEBUG decremented pending_acquires: 0
+2014-09-25 16:13:37,153 DEBUG Checking for expired resources - Thu Sep 25 16:13:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:37,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:37,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:37,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:13:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:13:37,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:13:37,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2] on IDLE CHECK.
+2014-09-25 16:13:37,157 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:14:02,153 DEBUG Checking for expired resources - Thu Sep 25 16:14:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:02,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:02,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:27,153 DEBUG Checking for expired resources - Thu Sep 25 16:14:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:27,153 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:27,153 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:27,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:14:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:27,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:14:27,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2] on IDLE CHECK.
+2014-09-25 16:14:27,158 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:14:52,153 DEBUG Checking for expired resources - Thu Sep 25 16:14:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:52,154 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:14:52,154 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,153 DEBUG Checking for expired resources - Thu Sep 25 16:15:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,154 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,154 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2 ---> idle_time: 124973; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,154 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:15:17,154 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2
+2014-09-25 16:15:17,154 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:15:17,154 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2
+2014-09-25 16:15:17,154 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,154 DEBUG incremented pending_acquires: 1
+2014-09-25 16:15:17,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:15:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:17,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:15:17,155 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:15:17,155 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2
+2014-09-25 16:15:17,155 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6e9227b2
+2014-09-25 16:15:17,183 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:15:17,183 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:15:17,183 DEBUG decremented pending_acquires: 0
+2014-09-25 16:15:42,154 DEBUG Checking for expired resources - Thu Sep 25 16:15:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:42,154 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:15:42,154 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:07,155 DEBUG Checking for expired resources - Thu Sep 25 16:16:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:07,155 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:07,155 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:07,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:16:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:07,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:16:07,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38] on IDLE CHECK.
+2014-09-25 16:16:07,156 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:16:32,156 DEBUG Checking for expired resources - Thu Sep 25 16:16:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:32,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:32,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:57,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:16:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:57,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:16:57,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38] on IDLE CHECK.
+2014-09-25 16:16:57,156 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:16:57,156 DEBUG Checking for expired resources - Thu Sep 25 16:16:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:57,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:16:57,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,156 DEBUG Checking for expired resources - Thu Sep 25 16:17:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,157 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38 ---> idle_time: 124974; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,157 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:17:22,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:17:22,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:22,157 DEBUG incremented pending_acquires: 1
+2014-09-25 16:17:22,157 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38
+2014-09-25 16:17:22,157 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38
+2014-09-25 16:17:22,159 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:17:22,159 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38
+2014-09-25 16:17:22,159 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@5cc9ee38
+2014-09-25 16:17:22,181 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:17:22,181 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:17:22,181 DEBUG decremented pending_acquires: 0
+2014-09-25 16:17:47,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:17:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:47,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:17:47,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK.
+2014-09-25 16:17:47,156 DEBUG Checking for expired resources - Thu Sep 25 16:17:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:47,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:47,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:17:47,157 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:18:12,157 DEBUG Checking for expired resources - Thu Sep 25 16:18:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:12,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:12,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:37,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:18:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:37,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:18:37,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK.
+2014-09-25 16:18:37,156 DEBUG Checking for expired resources - Thu Sep 25 16:18:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:37,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:37,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:18:37,157 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:19:02,156 DEBUG Checking for expired resources - Thu Sep 25 16:19:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:02,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:02,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:19:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:19:27,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK.
+2014-09-25 16:19:27,156 DEBUG Checking for expired resources - Thu Sep 25 16:19:27 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4 ---> idle_time: 124975; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:19:27,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:19:27,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:27,157 DEBUG incremented pending_acquires: 1
+2014-09-25 16:19:27,158 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:19:27,157 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4
+2014-09-25 16:19:27,161 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4
+2014-09-25 16:19:27,162 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:19:27,162 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4
+2014-09-25 16:19:27,162 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@68e220e4
+2014-09-25 16:19:27,176 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:19:27,176 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:19:27,176 DEBUG decremented pending_acquires: 0
+2014-09-25 16:19:52,157 DEBUG Checking for expired resources - Thu Sep 25 16:19:52 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:52,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:19:52,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:17,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:20:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:17,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:20:17,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe] on IDLE CHECK.
+2014-09-25 16:20:17,156 DEBUG Checking for expired resources - Thu Sep 25 16:20:17 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:17,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:17,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:17,158 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:20:42,156 DEBUG Checking for expired resources - Thu Sep 25 16:20:42 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:42,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:20:42,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:07,155 DEBUG Refurbishing idle resources - Thu Sep 25 16:21:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:07,155 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:21:07,155 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe] on IDLE CHECK.
+2014-09-25 16:21:07,156 DEBUG Checking for expired resources - Thu Sep 25 16:21:07 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:07,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:07,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:07,157 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:21:32,156 DEBUG Checking for expired resources - Thu Sep 25 16:21:32 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:32,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:32,157 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe ---> idle_time: 124981; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:32,157 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:32,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:21:32,157 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe
+2014-09-25 16:21:32,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:21:32,157 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe
+2014-09-25 16:21:32,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:32,157 DEBUG incremented pending_acquires: 1
+2014-09-25 16:21:32,160 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:21:32,160 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe
+2014-09-25 16:21:32,160 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@b2920fe
+2014-09-25 16:21:32,178 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:21:32,178 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:21:32,178 DEBUG decremented pending_acquires: 0
+2014-09-25 16:21:57,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:21:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:57,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:21:57,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK.
+2014-09-25 16:21:57,156 DEBUG Checking for expired resources - Thu Sep 25 16:21:57 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:57,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:57,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:21:57,158 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:22:22,156 DEBUG Checking for expired resources - Thu Sep 25 16:22:22 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:22,156 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:22,156 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:47,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:22:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:47,157 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:22:47,157 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK.
+2014-09-25 16:22:47,157 DEBUG Checking for expired resources - Thu Sep 25 16:22:47 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:47,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:47,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:22:47,159 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:23:12,157 DEBUG Checking for expired resources - Thu Sep 25 16:23:12 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:12,157 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:12,157 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,156 DEBUG Refurbishing idle resources - Thu Sep 25 16:23:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,156 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:23:37,156 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK.
+2014-09-25 16:23:37,158 DEBUG Checking for expired resources - Thu Sep 25 16:23:37 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,158 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,158 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff ---> idle_time: 124980; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,158 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,158 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff
+2014-09-25 16:23:37,158 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff
+2014-09-25 16:23:37,160 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:23:37,160 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 0, unused: 0, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:23:37,160 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:23:37,160 DEBUG incremented pending_acquires: 1
+2014-09-25 16:23:37,161 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:23:37,162 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff
+2014-09-25 16:23:37,162 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff
+2014-09-25 16:23:37,162 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@2a1087ff] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:23:37,184 DEBUG com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager@205f03a9.acquireResource() returning. 
+2014-09-25 16:23:37,185 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@2986e847 [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@475b78c)
+2014-09-25 16:23:37,185 DEBUG decremented pending_acquires: 0
+2014-09-25 16:24:02,158 DEBUG Checking for expired resources - Thu Sep 25 16:24:02 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:24:02,160 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
+2014-09-25 16:24:02,160 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@2986e847]
