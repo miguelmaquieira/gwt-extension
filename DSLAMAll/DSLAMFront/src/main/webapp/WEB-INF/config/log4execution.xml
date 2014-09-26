@@ -9,9 +9,7 @@
 	</appender>
 
 	<appender name="mongo" class="org.log4mongo.MongoDbAppender">
-		<!-- <param name="hostname" value="localhost" /> -->
-		<!-- <param name="port" value="27017" /> -->
-		<param name="databaseName" value="executionLogs" />
+		<param name="databaseName" value="chronium-logs-db" />
 		<param name="collectionName" value="logs" />
 	</appender>
 
