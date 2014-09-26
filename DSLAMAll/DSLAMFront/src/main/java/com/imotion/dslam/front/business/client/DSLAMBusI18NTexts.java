@@ -190,6 +190,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Proceso")
 	String process_label();
 	
+	@DefaultStringValue("Entornos")
+	String environments();
+	
 	@DefaultStringValue("Main Script")
 	String main_script_label();
 	
