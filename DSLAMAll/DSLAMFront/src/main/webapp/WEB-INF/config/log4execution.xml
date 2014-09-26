@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="async" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="mongo" />
+		<appender-ref ref="fileAppender" />
+	</appender>
+
+	<appender name="mongo" class="org.log4mongo.MongoDbAppender">
+		<!-- <param name="hostname" value="localhost" /> -->
+		<!-- <param name="port" value="27017" /> -->
+		<param name="databaseName" value="executionLogs" />
+		<param name="collectionName" value="logs" />
+	</appender>
+
+	<appender name="fileAppender" class="org.apache.log4j.FileAppender">
+		<param name="file" value="${logfilePath}" />
+		<param name="name" value="${logfileName}" />
+		<param name="threshold" value="debug" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p %m%n" />
+		</layout>
+	</appender>
+
+
+	<logger name="com.imotion.dslam.logger.CRONIOExecutionLoggerImpl"
+		additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="async" />
+	</logger>
+
+
+</log4j:configuration>

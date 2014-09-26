@@ -1,0 +1,216 @@
+2014-09-25 16:43:59,819 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:43:59,863 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:43:59,866 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:43:59,870 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,018 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,023 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,032 DEBUG 65:2:921,localhost,MIGUELTURRA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,038 DEBUG 65:2:921,localhost,MIGUELTURRA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,041 DEBUG 65:2:921,localhost,MIGUELTURRA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,043 DEBUG 65:2:921,localhost,MIGUELTURRA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,045 DEBUG 65:2:921,localhost,MIGUELTURRA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,047 DEBUG 65:2:921,localhost,MIGUELTURRA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,049 DEBUG 65:2:921,localhost,MIGUELTURRA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,061 DEBUG 65:2:921,localhost,MIGUELTURRA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,063 DEBUG 65:2:921,localhost,MIGUELTURRA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,074 DEBUG 65:2:921,localhost,MIGUELTURRA,exit,,
+
+2014-09-25 16:44:00,085 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,089 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,114 DEBUG 65:2:922,localhost,LP-TELDE,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,131 DEBUG 65:2:922,localhost,LP-TELDE,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,134 DEBUG 65:2:922,localhost,LP-TELDE,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,135 DEBUG 65:2:922,localhost,LP-TELDE,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,136 DEBUG 65:2:922,localhost,LP-TELDE,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,137 DEBUG 65:2:922,localhost,LP-TELDE,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,139 DEBUG 65:2:922,localhost,LP-TELDE,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,141 DEBUG 65:2:922,localhost,LP-TELDE,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,144 DEBUG 65:2:922,localhost,LP-TELDE,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,145 DEBUG 65:2:922,localhost,LP-TELDE,exit,,
+
+2014-09-25 16:44:00,147 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,150 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,160 DEBUG 65:2:923,localhost,SANJAVIER,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,163 DEBUG 65:2:923,localhost,SANJAVIER,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,170 DEBUG 65:2:923,localhost,SANJAVIER,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,172 DEBUG 65:2:923,localhost,SANJAVIER,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,174 DEBUG 65:2:923,localhost,SANJAVIER,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,175 DEBUG 65:2:923,localhost,SANJAVIER,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,176 DEBUG 65:2:923,localhost,SANJAVIER,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,177 DEBUG 65:2:923,localhost,SANJAVIER,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,179 DEBUG 65:2:923,localhost,SANJAVIER,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,180 DEBUG 65:2:923,localhost,SANJAVIER,exit,,
+
+2014-09-25 16:44:00,182 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,185 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,195 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,196 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,197 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,199 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,200 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,201 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,202 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,204 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,206 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,207 DEBUG 65:2:924,localhost,LP-SANCRISTOBAL,exit,,
+
+2014-09-25 16:44:00,208 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,210 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,218 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,221 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,223 DEBUG 65:2:925,localhost,M-ALMENARA3,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,230 DEBUG 65:2:925,localhost,M-ALMENARA3,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,231 DEBUG 65:2:925,localhost,M-ALMENARA3,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,233 DEBUG 65:2:925,localhost,M-ALMENARA3,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,235 DEBUG 65:2:925,localhost,M-ALMENARA3,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,236 DEBUG 65:2:925,localhost,M-ALMENARA3,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,237 DEBUG 65:2:925,localhost,M-ALMENARA3,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,238 DEBUG 65:2:925,localhost,M-ALMENARA3,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,239 DEBUG 65:2:925,localhost,M-ALMENARA3,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,248 DEBUG 65:2:925,localhost,M-ALMENARA3,exit,,
+
+2014-09-25 16:44:00,253 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,258 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,272 DEBUG 65:2:926,localhost,B-ABRERA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,273 DEBUG 65:2:926,localhost,B-ABRERA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,274 DEBUG 65:2:926,localhost,B-ABRERA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,275 DEBUG 65:2:926,localhost,B-ABRERA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,285 DEBUG 65:2:926,localhost,B-ABRERA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,286 DEBUG 65:2:926,localhost,B-ABRERA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,292 DEBUG 65:2:926,localhost,B-ABRERA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,294 DEBUG 65:2:926,localhost,B-ABRERA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,295 DEBUG 65:2:926,localhost,B-ABRERA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,296 DEBUG 65:2:926,localhost,B-ABRERA,exit,,
+
+2014-09-25 16:44:00,298 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,302 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,326 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,328 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,329 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,330 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,331 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,333 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,334 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,335 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,336 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,337 DEBUG 65:2:927,localhost,SANTSADURNIDANOIA,exit,,
+
+2014-09-25 16:44:00,338 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,341 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:00,351 DEBUG 65:2:928,localhost,ALBERCA,pwd,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,352 DEBUG 65:2:928,localhost,ALBERCA,echo iteracion del for  1,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,355 DEBUG 65:2:928,localhost,ALBERCA,echo iteracion del for  2,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,356 DEBUG 65:2:928,localhost,ALBERCA,echo iteracion del for  3,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,357 DEBUG 65:2:928,localhost,ALBERCA,echo iteracion del for  4,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,358 DEBUG 65:2:928,localhost,ALBERCA,ifconfig,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,359 DEBUG 65:2:928,localhost,ALBERCA,ifconfig eth0 up,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,363 DEBUG 65:2:928,localhost,ALBERCA,echo probando rollback,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,364 DEBUG 65:2:928,localhost,ALBERCA,echo entró en noperm,Response ,gaelhosteneo@gaelhosteneo-K53SD:.+\$
+
+2014-09-25 16:44:00,368 DEBUG 65:2:928,localhost,ALBERCA,exit,,
+
+2014-09-25 16:44:00,374 WARN  null#30002000132#org.hibernate.ejb.EntityManagerImpl@1f822302
+2014-09-25 16:44:20,206 DEBUG Refurbishing idle resources - Thu Sep 25 16:44:20 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:44:20,235 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:44:20,235 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2] on IDLE CHECK.
+2014-09-25 16:44:20,235 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849] on IDLE CHECK.
+2014-09-25 16:44:20,239 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:44:20,239 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:45:10,206 DEBUG Checking for expired resources - Thu Sep 25 16:45:10 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:10,208 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:10,209 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:10,210 DEBUG Refurbishing idle resources - Thu Sep 25 16:45:10 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:10,212 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2] on IDLE CHECK.
+2014-09-25 16:45:10,213 DEBUG Testing PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849] on IDLE CHECK.
+2014-09-25 16:45:10,215 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 2, unused: 2, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:45:10,216 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:45:10,215 DEBUG Test of PooledConnection [com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2] on IDLE CHECK has SUCCEEDED.
+2014-09-25 16:45:35,206 DEBUG Checking for expired resources - Thu Sep 25 16:45:35 CEST 2014 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:35,208 DEBUG BEGIN check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:35,209 DEBUG EXPIRED idle resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849 ---> idle_time: 123399; max_idle_time: 100000 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:35,210 DEBUG Removing expired resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849 [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
+2014-09-25 16:45:35,213 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:45:35,213 DEBUG Preparing to destroy resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849
+2014-09-25 16:45:35,214 DEBUG Preparing to destroy PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849
+2014-09-25 16:45:35,217 DEBUG com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849 closed by a client.
+java.lang.Exception: DEBUG -- CLOSE BY CLIENT STACK TRACE
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:491)
+	at com.mchange.v2.c3p0.impl.NewPooledConnection.close(NewPooledConnection.java:191)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.destroyResource(C3P0PooledConnectionPool.java:470)
+	at com.mchange.v2.resourcepool.BasicResourcePool$1DestroyResourceTask.run(BasicResourcePool.java:964)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:547)
+2014-09-25 16:45:35,220 DEBUG Successfully destroyed PooledConnection: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849
+2014-09-25 16:45:35,221 DEBUG Successfully destroyed resource: com.mchange.v2.c3p0.impl.NewPooledConnection@6cc75849
+2014-09-25 16:45:35,217 DEBUG trace com.mchange.v2.resourcepool.BasicResourcePool@64adeaab [managed: 1, unused: 1, excluded: 0] (e.g. com.mchange.v2.c3p0.impl.NewPooledConnection@5ea26cb2)
+2014-09-25 16:45:35,223 DEBUG FINISHED check for expired resources.  [com.mchange.v2.resourcepool.BasicResourcePool@64adeaab]
