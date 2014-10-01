@@ -5,7 +5,7 @@
 
 	<appender name="async" class="org.apache.log4j.AsyncAppender">
 		<appender-ref ref="mongo" />
-		<appender-ref ref="fileAppender" />
+<!-- 		<appender-ref ref="fileAppender" /> -->
 	</appender>
 
 	<appender name="mongo" class="org.log4mongo.MongoDbAppender">
@@ -13,15 +13,15 @@
 		<param name="collectionName" value="logs" />
 	</appender>
 
-	<appender name="fileAppender" class="org.apache.log4j.FileAppender">
-		<param name="file" value="${logfilePath}" />
-		<param name="name" value="${logfileName}" />
-		<param name="threshold" value="debug" />
-		<param name="append" value="true" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d %-5p %m%n" />
-		</layout>
-	</appender>
+<!-- 	<appender name="fileAppender" class="org.apache.log4j.FileAppender"> -->
+<!-- 		<param name="file" value="./logs/prueba.log" /> -->
+<!-- 		<param name="name" value="Prueba" /> -->
+<!-- 		<param name="threshold" value="debug" /> -->
+<!-- 		<param name="append" value="true" /> -->
+<!-- 		<layout class="org.apache.log4j.PatternLayout"> -->
+<!-- 			<param name="ConversionPattern" value="%d %-5p %m%n" /> -->
+<!-- 		</layout> -->
+<!-- 	</appender> -->
 
 
 	<logger name="com.imotion.dslam.logger.CRONIOExecutionLoggerImpl"
