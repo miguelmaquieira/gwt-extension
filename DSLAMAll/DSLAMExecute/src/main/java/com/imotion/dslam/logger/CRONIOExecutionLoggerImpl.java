@@ -54,18 +54,7 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 	}
 
 
-	private void addFileAppender(Logger logger, String targetLog) {
-		PatternLayout layout = new PatternLayout();
-		layout.setConversionPattern("%d %-5p %m%n");
 
-		// Create appender
-		FileAppender appender = new FileAppender();
-		appender.setFile(targetLog);
-		appender.setName(FILE_APPENDER_NAME);
-		appender.setLayout(layout);
-		appender.activateOptions();
-		logger.addAppender(appender);
-	}
 
 	@Override
 	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data) {
@@ -150,4 +139,16 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		}
 	}
 
+	private void addFileAppender(Logger logger, String targetLog) {
+		PatternLayout layout = new PatternLayout();
+		layout.setConversionPattern("%d %-5p %m%n");
+
+		// Create appender
+		FileAppender appender = new FileAppender();
+		appender.setFile(targetLog);
+		appender.setName(FILE_APPENDER_NAME);
+		appender.setLayout(layout);
+		appender.activateOptions();
+		logger.addAppender(appender);
+	}
 }
