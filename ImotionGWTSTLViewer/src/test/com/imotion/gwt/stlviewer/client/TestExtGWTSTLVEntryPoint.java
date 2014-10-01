@@ -3,6 +3,7 @@ package test.com.imotion.gwt.stlviewer.client;
 import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVSpinner;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -12,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -27,7 +29,9 @@ import com.imotion.gwt.stlviewer.client.widget.threejs.EXTGWTSTLVLoaderWidgetThr
 public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 
 	private static final String 	DEFAULT_MODEL_PATH 		= "models/thingiverse/Doll_Multiscan.stl";
-	private static final double	DEFAULT_SPEED_VARIATION	= 0.01;
+	private static final double	DEFAULT_Z_SPEED_VARIATION	= 0.01;
+	private static final double	DEFAULT_X_SPEED_VARIATION	= 0.01;
+	private static final double	DEFAULT_Y_SPEED_VARIATION	= 0.01;
 	
 	private TextBox 					pathTextBox;
 	private EXTGWTSTLILoaderDisplay 	rendererWidget;
@@ -41,12 +45,14 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		
 		FlowPanel contentPanel = new FlowPanel();
 		rootPanel.add(contentPanel);
-		contentPanel.setWidth("640px");
+		contentPanel.setWidth("720px");
+		contentPanel.getElement().getStyle().setMarginLeft(50, Unit.PX);
 
-		//FORM
+		// FORM
 		VerticalPanel formVP = new VerticalPanel();
 		contentPanel.add(formVP);
 		formVP.setWidth("100%");
+		formVP.setSpacing(10);
 		
 		HorizontalPanel loadZone = new HorizontalPanel();
 		formVP.add(loadZone);
@@ -59,13 +65,46 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		pathTextBox.setWidth("100%");
 		loadZone.setCellWidth(pathTextBox, "70%");
 		loadZone.setCellHorizontalAlignment(pathTextBox, HasHorizontalAlignment.ALIGN_RIGHT);
-
-		//Load button
-		Button okButton = new Button("CARGAR");
-		loadZone.add(okButton);
-		okButton.setWidth("100%");
-		loadZone.setCellWidth(okButton, "30%");
-		loadZone.setCellHorizontalAlignment(okButton, HasHorizontalAlignment.ALIGN_LEFT);
+		
+		// Parameters panel
+		FlowPanel parametersPanel = new FlowPanel();
+		formVP.add(parametersPanel);
+		
+		Label zoomLabel = new Label("Zoom (%)");
+		parametersPanel.add(zoomLabel);
+		
+		final TextBox zoomValue = new TextBox();
+		zoomValue.setText("5");
+		parametersPanel.add(zoomValue);
+		
+		// Load button
+		Button zoomButtom = new Button("SET");
+		parametersPanel.add(zoomButtom);
+		zoomButtom.setWidth("60px");
+		
+		// Button panel
+		FlowPanel butonPanel = new FlowPanel();
+		formVP.add(butonPanel);
+		
+		// Load button
+		Button okButton = new Button("LOAD");
+		butonPanel.add(okButton);
+		okButton.setWidth("100px");
+		
+		// Start button
+		Button startButton = new Button("START");
+		butonPanel.add(startButton);
+		startButton.setWidth("100px");
+		
+		// Stop button
+		Button stopButton = new Button("STOP");
+		butonPanel.add(stopButton);
+		stopButton.setWidth("100px");
+		
+		// Mouse interaction button
+		final Button mouseButton = new Button("MOUSE ACT.");
+		butonPanel.add(mouseButton);
+		mouseButton.setWidth("120px");
 		
 		//Model Selector
 		selectUrl = new ListBox();
@@ -91,6 +130,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		//Renderer
 		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(false, 0xA09595, 0xFFFFFF, 640, 480);
 		contentPanel.add(rendererWidget);
+		rendererWidget.setZoomPercentage(5);
 		
 		//Controls Panel
 		HorizontalPanel controlsPanel = new HorizontalPanel();
@@ -101,9 +141,17 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		controlsPanel.add(zoomSpinner);
 		controlsPanel.setCellHorizontalAlignment(zoomSpinner, HasHorizontalAlignment.ALIGN_CENTER);
 		
-		TestExtGWTSTLVSpinner speedSpinner = new TestExtGWTSTLVSpinner("SPEED");
-		controlsPanel.add(speedSpinner);
-		controlsPanel.setCellHorizontalAlignment(speedSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		TestExtGWTSTLVSpinner speedXSpinner = new TestExtGWTSTLVSpinner("SPEED X");
+		controlsPanel.add(speedXSpinner);
+		controlsPanel.setCellHorizontalAlignment(speedXSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		TestExtGWTSTLVSpinner speedYSpinner = new TestExtGWTSTLVSpinner("SPEED Y");
+		controlsPanel.add(speedYSpinner);
+		controlsPanel.setCellHorizontalAlignment(speedYSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		TestExtGWTSTLVSpinner speedZSpinner = new TestExtGWTSTLVSpinner("SPEED Z");
+		controlsPanel.add(speedZSpinner);
+		controlsPanel.setCellHorizontalAlignment(speedZSpinner, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		//Handlers
 		okButton.addClickHandler(new ClickHandler() {
@@ -111,7 +159,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				String path = pathTextBox.getText();
-				rendererWidget.loadModel(path, new EXTGWTSTLExceptionCallback() {
+				rendererWidget.loadModel(path, false, new EXTGWTSTLExceptionCallback() {
 					
 					@Override
 					public void onFailure(EXTGWTSTLException exception) {
@@ -122,13 +170,60 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			}
 		});
 		
+		startButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.setGyreZSpeed(DEFAULT_Z_SPEED_VARIATION);
+			}
+		});
+		
+		stopButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.setGyreZSpeed(0.0f);
+			}
+		});
+		
+		mouseButton.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				String buttonText = mouseButton.getText();
+				if (buttonText.equals("MOUSE ACT.")) {
+					mouseButton.setText("MOUSE DEACT.");
+					rendererWidget.captureMouseEvents(true);
+				} else {
+					mouseButton.setText("MOUSE ACT.");
+					rendererWidget.captureMouseEvents(false);
+				}
+			}
+		});
+		
+		zoomButtom.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				String zoomText = zoomValue.getText();
+				float zoom = 10;
+				try {
+					zoom = Float.parseFloat(zoomText);
+					if (zoom >= 100) {
+						Window.alert("Zoom value should be lower than 100");
+					}
+				} catch (NumberFormatException nfe) {
+					
+				}
+				rendererWidget.setZoomPercentage(zoom);
+			}
+		});
 		
 		zoomSpinner.addDecraseClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
 				rendererWidget.zoomIn();
-				
 			}
 		});
 		
@@ -140,23 +235,53 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			}
 		});
 		
-		speedSpinner.addDecraseClickHandler(new ClickHandler() {
+		speedZSpinner.addDecraseClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.decreaseGyreSpeed(DEFAULT_SPEED_VARIATION);
+				rendererWidget.decreaseZGyreSpeed(DEFAULT_Z_SPEED_VARIATION);
 			}
 		});
 		
-		speedSpinner.addIncreaseClickHandler(new ClickHandler() {
+		speedZSpinner.addIncreaseClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.increaseGyreSpeed(DEFAULT_SPEED_VARIATION);
+				rendererWidget.increaseZGyreSpeed(DEFAULT_Z_SPEED_VARIATION);
 			}
 		});
 		
+		speedXSpinner.addDecraseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.decreaseXGyreSpeed(DEFAULT_X_SPEED_VARIATION);
+			}
+		});
+		
+		speedXSpinner.addIncreaseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.increaseXGyreSpeed(DEFAULT_X_SPEED_VARIATION);
+			}
+		});
+		
+		speedYSpinner.addDecraseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.decreaseYGyreSpeed(DEFAULT_Y_SPEED_VARIATION);
+			}
+		});
+		
+		speedYSpinner.addIncreaseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.increaseYGyreSpeed(DEFAULT_Y_SPEED_VARIATION);
+			}
+		});
 		
 	}
-
 }
