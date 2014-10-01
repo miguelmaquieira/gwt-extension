@@ -2,7 +2,6 @@ package com.imotion.dslam.logger;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Enumeration;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
