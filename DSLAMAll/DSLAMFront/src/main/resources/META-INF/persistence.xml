@@ -25,33 +25,17 @@
 			<!-- ===========DATABASE============ -->
 			<!-- =============================== -->
 
-			<!-- Localhost -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/dslamdbtest" />
-			
-			<!-- CLOUDBEE DSLAM-->
-			<!-- <property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb" /> -->
-			
-			<!-- CLOUDBEE CHRONIUM-->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_chronium-io-db" /> -->
-			
+			<property name="hibernate.connection.url" value="${hibernate.connection.url}" />			
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
-
-
+			
 			<!-- =============================== -->
 			<!-- =============LOGIN============= -->
 			<!-- =============================== -->
-			<property name="hibernate.connection.user" value="dslamuser" />
-			<property name="hibernate.connection.password" value="dslampassword" />
 			
-			<!-- CLOUDBEE DSLAM -->
-<!-- 			<property name="hibernate.connection.user" value="b3824f64a6f0d8" /> -->
-<!-- 			<property name="hibernate.connection.password" value="e5a71044" /> -->
+			<property name="hibernate.connection.user" value="${hibernate.connection.user}" />
+			<property name="hibernate.connection.password" value="${hibernate.connection.password}" /> 
 			
-			<!-- CLOUDBEE CHRONIUM -->
-<!-- 			<property name="hibernate.connection.user" value="ba2513e61bbc0e" /> -->
-<!-- 			<property name="hibernate.connection.password" value="922d36c5" /> -->
-
 			<!-- =============================== -->
 			<!-- ===========OTHER PROPS========== -->
 			<!-- =============================== -->
@@ -83,15 +67,11 @@
 		<class>com.imotion.dslam.bom.data.CRONIOBOLog</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-<!--             <property name="eclipselink.jpa.uppercase-column-names" value="true"/> -->
             <property name="eclipselink.target-database" value="org.eclipse.persistence.nosql.adapters.mongo.MongoPlatform"/>
-            <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>
-            
-            <!-- Localhost -->
-            <property name="eclipselink.nosql.property.mongo.db" value="chronium-logs-db"/>
-            <property name="eclipselink.nosql.property.mongo.port" value="27017"/>
-            <property name="eclipselink.nosql.property.mongo.host" value="localhost"/>
-            
+            <property name="eclipselink.nosql.connection-spec" value="org.eclipse.persistence.nosql.adapters.mongo.MongoConnectionSpec"/>                  
+            <property name="eclipselink.nosql.property.mongo.db" value="${mongo.db}"/>
+            <property name="eclipselink.nosql.property.mongo.port" value="${mongo.port}"/>
+            <property name="eclipselink.nosql.property.mongo.host" value="${mongo.host}"/>                     
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
     </persistence-unit>

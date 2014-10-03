@@ -54,8 +54,6 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 	}
 
 
-
-
 	@Override
 	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data) {
 		String	nodeIp			= node.getNodeIp();
