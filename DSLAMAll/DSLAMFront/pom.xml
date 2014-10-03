@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+						http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.imotion</groupId>
@@ -15,21 +17,17 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory>
+		<!-- Hibernate -->
+		<hibernate.connection.url>jdbc:mysql://localhost:3306/dslamdbtest</hibernate.connection.url>
+		<hibernate.connection.user>dslamuser</hibernate.connection.user>
+		<hibernate.connection.password>dslampassword</hibernate.connection.password>
+		<!-- Mongo -->
+		<mongo.db>chronium-logs-db</mongo.db>
+		<mongo.port>27017</mongo.port>
+		<mongo.host>localhost</mongo.host>
 	</properties>
 
 	<dependencies>
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.google.appengine</groupId> -->
-<!-- 			<artifactId>appengine-tools-sdk</artifactId> -->
-<!-- 			<version>${appengine.target.version}</version> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.google.appengine</groupId> -->
-<!-- 			<artifactId>appengine-remote-api</artifactId> -->
-<!-- 			<version>${appengine.target.version}</version> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -144,16 +142,7 @@
 					<groupId>com.googlecode.objectify</groupId>
 					<artifactId>objectify</artifactId>
 				</exclusion>
-<!-- 				<exclusion> -->
-<!-- 					<groupId>com.google.guava</groupId> -->
-<!-- 					<artifactId>guava</artifactId> -->
-<!-- 				</exclusion> -->
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>SeleneDev</artifactId>
-			<version>${selene.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.selene</groupId>
@@ -186,6 +175,7 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
 			</resource>
 			<resource>
 				<!-- the java source files must be on the classpath during gwt:compile -->
@@ -271,7 +261,8 @@
 				</executions>
 				<configuration>
 					<modules>
-						<!-- Marketplace gwt module inherits Core gwt module therefore both will be gwt:compiled -->
+						<!-- Marketplace gwt module inherits Core gwt module therefore both 
+							will be gwt:compiled -->
 						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
 					</modules>
 					<runTarget>DSLAMBusDesktopModule.jsp</runTarget>
@@ -291,7 +282,8 @@
 					<!-- <skip>${gwt.skipCompilation}</skip> -->
 					<!-- Number of cores -->
 					<localWorkers>4</localWorkers>
-					<extraJvmArgs>-Xms768m -Xmx2048m -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+					<extraJvmArgs>-Xms768m -Xmx2048m
+						-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -413,5 +405,45 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+
+	
+	<profiles>
+		<profile>
+			<id>dslam</id>
+			<properties>
+			    <!-- Hibernate -->
+				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb</hibernate.connection.url>
+				<hibernate.connection.user>b3824f64a6f0d8</hibernate.connection.user>
+				<hibernate.connection.password>e5a71044</hibernate.connection.password>
+				<!-- Mongo (TODO)-->
+				<mongo.db>chronium-logs-db</mongo.db>
+				<mongo.port>27017</mongo.port>
+				<mongo.host>localhost</mongo.host>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>chronium</id>
+			<properties>
+				<!-- Hibernate -->
+				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_chronium-io-db</hibernate.connection.url>
+				<hibernate.connection.user>ba2513e61bbc0e</hibernate.connection.user>
+				<hibernate.connection.password>922d36c5</hibernate.connection.password>
+				<!-- Mongo (TODO) --> 
+				<mongo.db>chronium-logs-db</mongo.db>
+				<mongo.port>27017</mongo.port>
+				<mongo.host>localhost</mongo.host>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+	
+
 
 </project>

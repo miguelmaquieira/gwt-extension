@@ -13,7 +13,7 @@
 		<javaversion>1.7</javaversion>
 
 		<!-- Package versions -->
-		<selene.version>Beta_Selene_2600</selene.version>
+		<selene.version>Beta_Selene_2910</selene.version>
 		<gwt.version>2.6.0</gwt.version>
 		<appengine.target.version>1.9.1</appengine.target.version>
 		<objectify.version>4.0.1</objectify.version>
@@ -42,7 +42,6 @@
 		<module>DSLAMExecute</module>
 		<module>DSLAMBusiness</module>
 		<module>DSLAMFront</module>
-		<module>DSLAMTest</module>
   </modules>
 
 	<build>

@@ -10,8 +10,8 @@ public class DSLAMBKPersistenceModuleJPA<Q, Id extends Serializable> extends AEM
 	// serial number
 	private static final long serialVersionUID = -7923101269597352273L;
 	
-	public static final String DEFAULT_PERSISTENCE_UNIT_NAME = "dslam";
-	public static final String MONGO_PERSISTENCE_UNIT_NAME = "mongoDslam";
+	public static final String DEFAULT_PERSISTENCE_UNIT_NAME	= "dslam";
+	public static final String MONGO_PERSISTENCE_UNIT_NAME 		= "mongoDslam";
 
 	private String persitenceUnitName = DEFAULT_PERSISTENCE_UNIT_NAME ;
 	

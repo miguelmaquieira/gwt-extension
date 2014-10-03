@@ -1,15 +1,12 @@
 package com.imotion.dslam.logger;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
-import java.util.Properties;
 
+import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.PatternLayout;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 
@@ -23,6 +20,7 @@ import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
 public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 	private static final long MAX_TIME_OUT = 300;
+	private static final String FILE_APPENDER_NAME = "fileAppender";
 
 	private static Logger					log4jLogger;;
 	private String 							projectName	;
@@ -33,27 +31,28 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
 		broadcastBuffer = new CRONIOLoggerEventCollection();
 		DSLAMBOIProcess process = project.getProcess();
-		processId	= String.valueOf(process.getProcessId());
-		projectName = project.getProjectName();
-		Logger logger = getLog4JLogger();
-		String 	classpathDir	= getClass().getClassLoader().getResource(".").getPath();
-		File 	logDirFile		= new File(classpathDir + "../logs/");
-		String 	logsDir			= logDirFile.getAbsolutePath();
+		processId		= String.valueOf(process.getProcessId());
+		projectName 	= project.getProjectName();
+		Logger logger 	= getLog4JLogger();
+		String 	logsDir	= "./logs/";
 
 
-		//Appenders
-		String targetLog = logsDir + "/" + projectName + ".log";
-		if (logger.getAppender(projectName) == null) {
-			Properties prop = new Properties();
-			String propFileName = classpathDir + "../config/log4execution.properties";		
-			InputStream inputStream = new FileInputStream(propFileName);
-			prop.load(inputStream);
-			prop.put("log4j.appender.FILE.name", projectName);
-			prop.put("log4j.appender.FILE.File", targetLog);
-			PropertyConfigurator.configure(prop);		
+		//File Appender
+		String targetLog = logsDir + projectName + ".log";
+		FileAppender fileAppender = (FileAppender) logger.getAppender(FILE_APPENDER_NAME);
+		if (fileAppender != null) {
+			if (!fileAppender.getFile().equals(targetLog)) {
+				logger.removeAppender(FILE_APPENDER_NAME);
+				addFileAppender(logger, targetLog);
+			}
+
+		} else {
+			addFileAppender(logger, targetLog);
 		}
 
+
 	}
+
 
 	@Override
 	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data) {
@@ -80,7 +79,8 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 		//Log file
 		log4jLogger.debug(logValueStr);
-		
+
+
 		//ClientConsole
 		CRONIOLoggerEvent loggerEvent = new CRONIOLoggerEvent();
 		loggerEvent.setConnectionId(connectionId);
@@ -137,4 +137,16 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		}
 	}
 
+	private void addFileAppender(Logger logger, String targetLog) {
+		PatternLayout layout = new PatternLayout();
+		layout.setConversionPattern("%d %-5p %m%n");
+
+		// Create appender
+		FileAppender appender = new FileAppender();
+		appender.setFile(targetLog);
+		appender.setName(FILE_APPENDER_NAME);
+		appender.setLayout(layout);
+		appender.activateOptions();
+		logger.addAppender(appender);
+	}
 }

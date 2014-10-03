@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="async" class="org.apache.log4j.AsyncAppender">
+		<appender-ref ref="mongo" />
+	</appender>
+
+	<appender name="mongo" class="org.log4mongo.MongoDbAppender">
+		<param name="databaseName" value="chronium-logs-db" />
+		<param name="collectionName" value="logs" />
+	</appender>
+
+	<logger name="com.imotion.dslam.logger.CRONIOExecutionLoggerImpl"
+		additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="async" />
+	</logger>
+
+
+</log4j:configuration>

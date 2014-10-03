@@ -16,12 +16,10 @@ public abstract class DSLAMBusDesktopPanelBaseView extends AEGWTCompositeDesktop
 	@Override
 	public void initContentPanel(HasWidgets contentPanel) {
 		FlowPanel rootPanel = new FlowPanel();
-		//rootPanel.addStyleName(AEGWTIBoostrapConstants.CONTAINER);
 		initWidget(rootPanel);
 		
 		//CONTENT
 		Widget contentPanelAsWidget = (Widget) contentPanel;
-//		contentPanelAsWidget.addStyleName(AEGWTIBoostrapConstants.COL_XS_10);
 		rootPanel.add(contentPanelAsWidget);
 		setContentPanel(contentPanel, false);
 	}
