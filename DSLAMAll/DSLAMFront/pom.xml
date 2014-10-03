@@ -261,8 +261,7 @@
 				</executions>
 				<configuration>
 					<modules>
-						<!-- Marketplace gwt module inherits Core gwt module therefore both 
-							will be gwt:compiled -->
+						<!-- Marketplace gwt module inherits Core gwt module therefore both will be gwt:compiled -->
 						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
 					</modules>
 					<runTarget>DSLAMBusDesktopModule.jsp</runTarget>
@@ -282,8 +281,7 @@
 					<!-- <skip>${gwt.skipCompilation}</skip> -->
 					<!-- Number of cores -->
 					<localWorkers>4</localWorkers>
-					<extraJvmArgs>-Xms768m -Xmx2048m
-						-Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
+					<extraJvmArgs>-Xms768m -Xmx2048m -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -412,11 +410,11 @@
 		<profile>
 			<id>dslam</id>
 			<properties>
-			    <!-- Hibernate -->
+<!-- 			    Hibernate -->
 				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb</hibernate.connection.url>
 				<hibernate.connection.user>b3824f64a6f0d8</hibernate.connection.user>
 				<hibernate.connection.password>e5a71044</hibernate.connection.password>
-				<!-- Mongo (TODO)-->
+<!-- 				Mongo (TODO) -->
 				<mongo.db>chronium-logs-db</mongo.db>
 				<mongo.port>27017</mongo.port>
 				<mongo.host>localhost</mongo.host>
@@ -429,11 +427,11 @@
 		<profile>
 			<id>chronium</id>
 			<properties>
-				<!-- Hibernate -->
+<!-- 				Hibernate -->
 				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_chronium-io-db</hibernate.connection.url>
 				<hibernate.connection.user>ba2513e61bbc0e</hibernate.connection.user>
 				<hibernate.connection.password>922d36c5</hibernate.connection.password>
-				<!-- Mongo (TODO) --> 
+<!-- 				Mongo (TODO)  -->
 				<mongo.db>chronium-logs-db</mongo.db>
 				<mongo.port>27017</mongo.port>
 				<mongo.host>localhost</mongo.host>
