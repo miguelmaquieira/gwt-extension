@@ -1,16 +1,20 @@
 package com.imotion.dslam.business.service.impl;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
+import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIFile;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
@@ -185,6 +189,76 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		contextOut.addElement(NODES_DATA_LIST, nodesData);
 	}
 	
+	@Override
+	public void addNodeList() {
+		//ContextIn
+		AEMFTMetadataElementComposite 	contextIn 			= getContext().getContextDataIN();
+		String 							nodeListName		= getElementDataController().getElementAsString(CRONIOBOINodeListDataConstants.NODELIST_NAME	, contextIn);
+		String 							currentProjectIdStr	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID		, contextIn);
+		long							currentProjectId	= AEMFTCommonUtilsBase.getLongFromString(currentProjectIdStr);
+		Date 							creationTime 		= new Date();
+		
+		DSLAMBOIProject project = getProjectPersistence().getProject(currentProjectId);
+		DSLAMBOIProcess process = project.getProcess();
+		
+		//nodeList
+		CRONIOBOINodeList nodeList = new CRONIOBONodeList();
+		nodeList.setNodeListName(nodeListName);
+		nodeList.setProcess(process);
+		nodeList.setSavedTime(creationTime);
+		nodeList.setCreationTime(creationTime);
+		
+		long processId = process.getProcessId();
+		nodeList 	= getNodeListPersistence().addNodeList(nodeList,processId);
+		
+		getProcessPersistence().addNodeListUpdateProcess(processId, nodeList);
+		
+		//init-trace
+		traceNewItemPersistent(METHOD_ADD_NODELIST, CRONIOBOINodeList.class.getSimpleName(), String.valueOf(nodeList.getNodeListId()));
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite nodeListDataElement = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(NODELIST_DATA, nodeListDataElement);
+	}
+	
+	@Override
+	public void getAllNodeListsByProjectId() {
+		//ContextIn
+		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
+		int 							resultsNumber 	= 0;
+		Long 							projectIdAsLong = null;
+				
+		List<AEMFTMetadataElement> projectList = contextIn.getSortedElementList();
+		List<String> projectIdList = new ArrayList<>();
+		for (AEMFTMetadataElement project : projectList) {
+			String projectId = project.getKey();
+			projectIdList.add(projectId);
+		}
+		
+		AEMFTMetadataElementComposite nodeListsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		
+		for (String projectId : projectIdList) {
+			projectIdAsLong = Long.valueOf(projectId).longValue();
+			List<CRONIOBOINodeList> listNodeList = getNodeListPersistence().getAllNodeListsByProject(projectIdAsLong);
+			if (!AEMFTCommonUtilsBase.isEmptyList(listNodeList)) {
+				resultsNumber = resultsNumber + listNodeList.size();
+				AEMFTMetadataElementComposite nodeListData = DSLAMBUBomToMetadataConversor.fromListNodeList(listNodeList);
+				nodeListsData.addElement(projectId, nodeListData);
+			}
+		}
+		
+		//init-trace
+		traceNumberOfResults(METHOD_GET_ALL_NODELISTS_BY_PROJECT_ID, CRONIOBOINodeList.class.getSimpleName(), resultsNumber);
+		//end-trace
+
+		//ContextOut
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(LIST_NODELIST_DATA, nodeListsData);
+		
+	}
+
 	/**
 	 * PRIVATE
 	 */
@@ -213,6 +287,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		DSLAMBOIProcess process = project.getProcess();
 		process = getProcessPersistence().updateProcess(process.getProcessId(), process, preferencesId, date);
 		project.setProcess(process);
+		project.setSavedTime(date);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);
 		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());

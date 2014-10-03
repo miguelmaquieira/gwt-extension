@@ -10,6 +10,7 @@ import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
+import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -136,6 +137,24 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			}
 		}
 	}
+	
+	public void addNodeList(String projectId, String nodeListName) {
+		List<DSLAMBusDesktopProjectNavigatorElement> projectNavigatorElementList = getElementWidgetList();
+		for (DSLAMBusDesktopProjectNavigatorElement ProjectNavigatorElement : projectNavigatorElementList) {
+			if (ProjectNavigatorElement.getId().equals(projectId)) {
+				ProjectNavigatorElement.addNodeList(projectId, nodeListName);
+			}
+		}
+	}
+	
+	public void hideAddNodeListForm(String projectId) {
+		List<DSLAMBusDesktopProjectNavigatorElement> projectNavigatorElements = getElementWidgetList();
+		for (DSLAMBusDesktopProjectNavigatorElement projectNavigatorElement : projectNavigatorElements) {
+			if (projectId.equals(projectNavigatorElement.getId())) {
+				projectNavigatorElement.hideAddNodeListForm();
+			}
+		}
+	}
 
 	/**
 	 * AEGWTCompositePanel
@@ -152,27 +171,40 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			elementListContainer.clear();
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
-				if (!CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementData.getKey())) {
+				if (!CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementData.getKey()) && !DSLAMBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA.equals(elementData.getKey())) {
 					addElement((AEMFTMetadataElementComposite) elementData);
 				} else {
 					AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
-					List<AEMFTMetadataElement> projectExecutionsListData = elementDataComposite.getSortedElementList();
-					for (AEMFTMetadataElement projectExecutionData : projectExecutionsListData) {
-						AEMFTMetadataElementComposite projectExecutionDataComposite = (AEMFTMetadataElementComposite) projectExecutionData;
-						String projectId = projectExecutionDataComposite.getKey();
-						List<AEMFTMetadataElement> executionDataList = projectExecutionDataComposite.getSortedElementList();
-						for (AEMFTMetadataElement execution : executionDataList) {
-							AEMFTMetadataElementComposite executionDataComposite = (AEMFTMetadataElementComposite) execution;
-							AEMFTMetadataElementSingle creationTimeData = (AEMFTMetadataElementSingle) executionDataComposite.getElement(CRONIOBOIExecution.CREATION_TIME);
-							String 		creationTimeStr 		= creationTimeData.getValueAsSerializable().toString();
-							String[] 	creationTimeStrSplit 	= creationTimeStr.split("\\.");
-							
-							String[] creationTimeStrSplit1 = creationTimeStrSplit[0].split("\\-");
-							String[] creationTimeStrSplit2 = creationTimeStrSplit1[2].split(" ");
-							
-							
-							String 		creationTimeStrFormat	= creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
-							addExecution(projectId, creationTimeStrFormat);
+					if (CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementDataComposite.getKey())) {
+						List<AEMFTMetadataElement> projectExecutionsListData = elementDataComposite.getSortedElementList();
+						for (AEMFTMetadataElement projectExecutionData : projectExecutionsListData) {
+							AEMFTMetadataElementComposite projectExecutionDataComposite = (AEMFTMetadataElementComposite) projectExecutionData;
+							String projectId = projectExecutionDataComposite.getKey();
+							List<AEMFTMetadataElement> executionDataList = projectExecutionDataComposite.getSortedElementList();
+							for (AEMFTMetadataElement execution : executionDataList) {
+								AEMFTMetadataElementComposite executionDataComposite = (AEMFTMetadataElementComposite) execution;
+								AEMFTMetadataElementSingle creationTimeData = (AEMFTMetadataElementSingle) executionDataComposite.getElement(CRONIOBOIExecution.CREATION_TIME);
+								String 		creationTimeStr 		= creationTimeData.getValueAsSerializable().toString();
+								String[] 	creationTimeStrSplit 	= creationTimeStr.split("\\.");
+								
+								String[] creationTimeStrSplit1 = creationTimeStrSplit[0].split("\\-");
+								String[] creationTimeStrSplit2 = creationTimeStrSplit1[2].split(" ");
+								
+								String 		creationTimeStrFormat	= creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
+								addExecution(projectId, creationTimeStrFormat);
+							}
+						}
+					} else {
+						List<AEMFTMetadataElement> projectNodeListsData = elementDataComposite.getSortedElementList();
+						for (AEMFTMetadataElement projectNodeListData : projectNodeListsData) {
+							AEMFTMetadataElementComposite projectNodeListDataComposite = (AEMFTMetadataElementComposite) projectNodeListData;
+							String projectId = projectNodeListDataComposite.getKey();
+							List<AEMFTMetadataElement> nodeListDataList = projectNodeListDataComposite.getSortedElementList();
+							for (AEMFTMetadataElement nodeList : nodeListDataList) {
+								AEMFTMetadataElementComposite nodeListDataComposite = (AEMFTMetadataElementComposite) nodeList;
+								String nodeListName = nodeListDataComposite.getKey();
+								addNodeList(projectId, nodeListName);
+							}
 						}
 					}
 				}	

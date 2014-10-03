@@ -3,6 +3,7 @@ package com.imotion.dslam.backend.persistence.jpa;
 import java.io.Serializable;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
+import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKINodeListPersistenceService;
 import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
 import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
@@ -25,6 +26,7 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	private DSLAMBKIFilePersistenceService 						filePersistence;
 	private DSLAMBKIProcessPersistenceService 					processPersistence;
 	private CRONIOBKINodePersistenceService						nodePersistence;
+	private CRONIOBKINodeListPersistenceService					nodeListPersistence;
 	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
 	private CRONIOBKIUserPreferencesPersistenceService			userPreferencesPersistence;
@@ -82,6 +84,10 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 		if (nodePersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
 			nodePersistence = null;
+		}
+		if (nodeListPersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodeListPersistence);
+			nodeListPersistence = null;
 		}
 		if (preferencesPersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) preferencesPersistence);
@@ -142,6 +148,13 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 			nodePersistence = (CRONIOBKINodePersistenceService) getFactoryPersistence().newNodePersistence(getSessionId());
 		}
 		return nodePersistence;
+	}
+	
+	protected CRONIOBKINodeListPersistenceService getNodeListPersistence() {
+		if (nodeListPersistence == null) {
+			nodeListPersistence = (CRONIOBKINodeListPersistenceService) getFactoryPersistence().newNodeListPersistence(getSessionId());
+		}
+		return nodeListPersistence;
 	}
 	
 	protected CRONIOBKIMachinePropertiesPersistenceService getMachinePropertiesPersistence() {

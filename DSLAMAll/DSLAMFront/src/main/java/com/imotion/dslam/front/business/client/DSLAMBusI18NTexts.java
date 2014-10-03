@@ -214,6 +214,9 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Lista de Nodos")
 	String node_list();
 	
+	@DefaultStringValue("Entorno")
+	String enviroment();
+	
 	@DefaultStringValue("Variables del Nodo")
 	String node_variable_list();
 	
@@ -361,9 +364,18 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Nombre del Nodo")
 	String node_name();
 	
-	@DefaultStringValue("La dirección IP no es válida ( [0..255].[0..255].[0..255].[0..255] )")
+	@DefaultStringValue("Nombre de la lista de Nodos")
+	String node_list_name();
+	
+	@DefaultStringValue("La dirección IP no es válida ( [0..255].[0..255].[0..255].[0..255] o localhost )")
 	String ip_error_textbox();
+	
+	@DefaultStringValue("localhost")
+	String localhost();
 	
 	@DefaultStringValue("Formato:<br/>[Nombre variable] [valor variable] [Tipo Variable],<br/>Tipos de Variables:<br/>t = variable tipo texto<br/>n = variable numérica<br/>Ejemplos:<br/>contador 6 n, palabra casa t,")
 	String format_variables_input();
+	
+	@DefaultStringValue("Ejecutar")
+	String execute();
 }

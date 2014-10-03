@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 
+import java.util.List;
+
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -8,6 +10,8 @@ import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopExecutePopupForm;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopNewProjectPopupForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -28,6 +32,7 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 	private AEGWTBootstrapGlyphiconButton 		saveAllButton;
 	private AEGWTBootstrapGlyphiconButton 		executeButton;
 	private	 DSLAMBusDesktopNewProjectPopupForm	projectPopupForm;
+	private	 CRONIOBusDesktopExecutePopupForm	executePopupForm;
 
 	public DSLAMBusDesktopProjectsToolbarActions() {
 		FlowPanel root = new FlowPanel();
@@ -90,15 +95,21 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				CRONIOBusDesktopProjectEvent saveProjectEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-				saveProjectEvent.setEventType(EVENT_TYPE.ADD_EXECUTION);
-				getLogicalEventHandlerManager().fireEvent(saveProjectEvent);
+				
+				getExecutePopup().center();
+				CRONIOBusDesktopProjectEvent 	getProcessNodeListsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+				getProcessNodeListsEvt.setEventType(EVENT_TYPE.GET_PROCESS_NODELISTS);
+				getLogicalEventHandlerManager().fireEvent(getProcessNodeListsEvt);
 			}
 		});
 	}
 
 	public void hideProjectForm() {
 		getProjectPopup().hide();
+	}
+	
+	public void hideExecuteForm() {
+		getExecutePopup().hide();
 	}
 
 	public void reset() {
@@ -117,6 +128,10 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 	
 	public void setExecuteEnabled(boolean enabled) {
 		executeButton.setEnabled(enabled);
+	}
+	
+	public void addNodeListsToExecuteForm(List<String> nodeLists) {
+		executePopupForm.addNodeListsToExecuteForm(nodeLists);
 	}
 
 	/**
@@ -142,5 +157,12 @@ public class DSLAMBusDesktopProjectsToolbarActions extends AEGWTCompositePanel {
 			projectPopupForm = new DSLAMBusDesktopNewProjectPopupForm(this);
 		}
 		return projectPopupForm;
+	}
+	
+	private CRONIOBusDesktopExecutePopupForm getExecutePopup() {
+		if (executePopupForm == null) {
+			executePopupForm = new CRONIOBusDesktopExecutePopupForm(this);
+		}
+		return executePopupForm;
 	}
 }

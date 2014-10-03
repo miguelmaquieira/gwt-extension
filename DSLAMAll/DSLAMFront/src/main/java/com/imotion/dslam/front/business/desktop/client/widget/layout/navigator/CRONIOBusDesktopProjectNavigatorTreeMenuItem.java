@@ -2,6 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeListForm;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuItem;
 
@@ -12,12 +13,29 @@ public class CRONIOBusDesktopProjectNavigatorTreeMenuItem extends AEGWTBootstrap
 	private String projectId;
 	private String mainSectionId;
 	
+	private CRONIOBusDesktopProcessAddNodeListForm addNodeListPopupForm;
+	
 	public CRONIOBusDesktopProjectNavigatorTreeMenuItem(String projectId,String mainSectionId, String text, AEGWTICompositePanel parentWidget) {
 		super(text, parentWidget);
 		this.projectId 		= projectId;
 		this.mainSectionId 	= mainSectionId;	
 	}
 	
+	public CRONIOBusDesktopProcessAddNodeListForm getNodeListPopup() {
+		if (addNodeListPopupForm == null) {
+			addNodeListPopupForm = new CRONIOBusDesktopProcessAddNodeListForm(this);
+		}
+		return addNodeListPopupForm;
+	}
+	
+	public void setErrorNodeExist() {
+		addNodeListPopupForm.setErrorNodeListExist();
+	}
+	
+	public void resetForm() {
+		addNodeListPopupForm.resetForm();
+	}
+
 	/**
 	 * PROTECTED
 	 */
@@ -33,5 +51,10 @@ public class CRONIOBusDesktopProjectNavigatorTreeMenuItem extends AEGWTBootstrap
 		openSectionEvent.setMainSectionId(mainSectionId);
 		
 		getLogicalEventHandlerManager().fireEvent(openSectionEvent);
+	}
+	
+	@Override
+	protected void fireButtonClick() {
+		getNodeListPopup().center();
 	}
 }

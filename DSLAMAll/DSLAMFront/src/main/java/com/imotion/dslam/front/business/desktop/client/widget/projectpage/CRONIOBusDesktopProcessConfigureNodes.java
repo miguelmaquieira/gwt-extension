@@ -5,7 +5,9 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
@@ -27,6 +29,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private CRONIOBusDesktopProcessNodeList				nodeList;
 	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
 	private	 AEMFTMetadataElementComposite				nodesData;
+	private	 AEMFTMetadataElementComposite				nodesDataList;
 	private AEMFTMetadataElementComposite				machineListData;
 	
 	public CRONIOBusDesktopProcessConfigureNodes() {
@@ -74,16 +77,26 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		reset();
-		if (data != null) {
-			nodesData = data;
-			
-			AEMFTMetadataElementComposite machineList = getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, data);
+		AEMFTMetadataElementComposite nodesNodeList = null;
+		AEMFTMetadataElementComposite nodesListData = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, data);
+		if (nodesListData != null) {
+			nodesNodeList = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, nodesListData);
+			AEMFTMetadataElementComposite machineList 	= getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, nodesListData);
 			if (machineList != null) {
 				machineListData = machineList;
+				nodesListData.removeElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
 			}
+			if (nodesListData != null) {
+				nodesDataList = nodesListData;
+			}
+		}
+		
+		AEMFTMetadataElementComposite nodes 		= getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, data);
+		
+		if (nodes != null) {
+			nodesData = nodes;
 			
-			data.removeElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
+			List<AEMFTMetadataElement> elementDataList = nodes.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
 				AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
 				elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineListData.cloneObject());
@@ -92,10 +105,31 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 					nodeList.addElement(elementDataComposite);
 				}
 			}
+			nodesDataList.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST, nodes);
 		} else {
-			nodesData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			nodesData = nodesNodeList;
+			if (nodesData != null) {
+				List<AEMFTMetadataElement> elementDataList = nodesData.getSortedElementList();
+				for (AEMFTMetadataElement elementData : elementDataList) {
+					AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
+					elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineListData.cloneObject());
+
+					if (!DSLAMBOIProject.INFO.equals(elementData.getKey())) {
+						nodeList.addElement(elementDataComposite);
+					}
+				}
+			}
 		}
 		nodeList.addAddNodeElement();
+		
+		if (nodes != null) {
+			AEGWTLogicalEvent updateContextEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+			updateContextEvt.setEventType(LOGICAL_TYPE.UPDATE_EVENT);
+			updateContextEvt.setSourceWidget(getName());
+			updateContextEvt.addElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, nodesDataList);
+			getLogicalEventHandlerManager().fireEvent(updateContextEvt);
+		}
+		
 	}
 	
 	@Override
@@ -116,9 +150,13 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		LOGICAL_TYPE	type			= evt.getEventType();
 		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
+				evt.stopPropagation();
 				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
 				AEMFTMetadataElementComposite cloneNodesData = (AEMFTMetadataElementComposite) nodesData.cloneObject();
-				setData(cloneNodesData);
+				AEMFTMetadataElementComposite cloneNodesFormatData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+				getElementController().setElement(CRONIOBOINodeList.NODELIST_NODE_LIST, cloneNodesFormatData, cloneNodesData);
+				//cloneNodesFormatData.addElement(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, getMachinesFromPreferences());
+				setData(cloneNodesFormatData);
 			}	
 		} else if (CRONIOBusDesktopProcessNodeFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
@@ -161,7 +199,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			saveEvt.setSourceWidget(getName());
-			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodesData);
+			saveEvt.addElementAsComposite(DSLAMBOIProcess.PROCESS_NODES_DATA, nodesData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 			
 		}	
@@ -179,7 +217,9 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private void addNode(String name, AEMFTMetadataElementComposite data) {
 		nodeList.reset();
 		nodesData.addElement(name,data);
-		setData(nodesData);
+		AEMFTMetadataElementComposite nodesDataClone = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
+		nodesDataClone.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST, nodesData.cloneObject());
+		setData(nodesDataClone);
 		nodeList.resetForm();	
 	}
 }

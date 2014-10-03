@@ -1,10 +1,13 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
+import java.io.Serializable;
 import java.util.List;
 
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
@@ -20,6 +23,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
+	
+	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
 	private FlowPanel 									root;
 	private DSLAMBusDesktopProjectsToolbar				toolbar;
@@ -71,6 +76,10 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	
 	public void addExecution(String projectId, String executionDateStr) {
 		projectListNavigator.addExecution(projectId, executionDateStr);
+	}
+	
+	public void addNodeList(String projectId, String nodeListName) {
+		projectListNavigator.addNodeList(projectId, nodeListName);
 	}
 
 	/**
@@ -126,6 +135,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED);
 				List<String> modifiedProjects	= getModifiedProjetIds();
 				boolean projectModified = modifiedProjects.contains(projectId);
+				
 				toolbar.setSaveProjectEnabled(projectModified);
 				sectionHeader.setProyectName(projectName);
 				sectionHeader.setSectionNameFromId(sectionId);
@@ -152,26 +162,31 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				AEMFTMetadataElementComposite projectData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 				projectListNavigator.addElement(projectData);
 				toolbar.hideProjectForm();
+			} else if (EVENT_TYPE.NODELIST_CREATED.equals(type)) {
+				String nodeListProjectId =evt.getElementAsString(DSLAMBOIProject.PROJECT_ID);
+				projectListNavigator.hideAddNodeListForm(nodeListProjectId);
 			} else if (EVENT_TYPE.SECTION_SELECTED.equals(type)) {
 				projectListNavigator.removeProjectSectionSelected();
 				if (sectionId == null) {
 					sectionId = evt.getMainSectionId();
 				}
 				projectListNavigator.setProjectSectionSeleted(projectId, sectionId);
+			} else if (EVENT_TYPE.GET_PROCESS_NODELISTS.equals(type)) {
+				Serializable nodeListsData = evt.getElementAsSerializableDataValue();
+				List<String> nodeLists = (List<String>) nodeListsData;
+				toolbar.addNodeListsToExecuteForm(nodeLists);
 			}
 		}
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		return EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)
-				||
-				EVENT_TYPE.PROJECT_SAVED.equals(type)
-				||
-				EVENT_TYPE.SECTION_MODIFIED.equals(type)
-				||
-				EVENT_TYPE.SECTION_SELECTED.equals(type)
-				||
-				EVENT_TYPE.PROJECT_CREATED.equals(type);
+		return EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)||
+				EVENT_TYPE.PROJECT_SAVED.equals(type)||
+				EVENT_TYPE.SECTION_MODIFIED.equals(type)||
+				EVENT_TYPE.SECTION_SELECTED.equals(type)||
+				EVENT_TYPE.PROJECT_CREATED.equals(type)||
+				EVENT_TYPE.NODELIST_CREATED.equals(type)||
+				EVENT_TYPE.GET_PROCESS_NODELISTS.equals(type);
 	}
 }

@@ -28,7 +28,6 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 	public static final String NAME = "CRONIOBusDesktopHeaderListActions";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 	
-	//private AEGWTBootstrapGlyphiconButton      uploadButton;
 	private FormPanel							form;
 	
 	public CRONIOBusDesktopHeaderListFileActions(String text) {

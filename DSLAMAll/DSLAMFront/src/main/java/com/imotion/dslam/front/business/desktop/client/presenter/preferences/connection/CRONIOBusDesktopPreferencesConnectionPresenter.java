@@ -47,15 +47,6 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 			evt.stopPropagation();
 			saveCurrentMachineConfigureInDB();
 		} 
-//		else if (CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
-//			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
-//				evt.stopPropagation();
-//				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIMachineProperties.MACHINE_VARIABLES);
-//				int i = 0;
-//				updateFinalSectionInContext(finalSectionData);
-//			}	
-//		} 
-
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuFinalItem;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenuItem;
 
 public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel implements CRONIOBusProjectBasePresenterConstants {
 
@@ -79,14 +80,10 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProcess.add(propertiesProcess);
 
 		//MENU -> Project  -> Process -> Environments
-		menuNodesProcess 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_PROCESS, TEXTS.environments(), this);
+		menuNodesProcess 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_ENVIROMENTS, TEXTS.environments(), this);
 		menuNodesProcess.setCloseMenu();
 		menuNodesProcess.addIconButton(AEGWTIBoostrapConstants.GLYPHICON + " " + AEGWTIBoostrapConstants.GLYPHICON_PLUS);
 		menuProcess.add(menuNodesProcess.asWidget());
-		
-		//MENU -> Project  -> Process -> Nodes
-		nodesProcess 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST			,TEXTS.nodes(), this);
-		menuNodesProcess.add(nodesProcess);
 
 		//MENU -> Project  -> Execution
 		menuExecution 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_EXECUTION, TEXTS.execution(), this);
@@ -111,7 +108,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		variableProcess.setSelected(false);
 		scheduleProcess.setSelected(false);
 		propertiesProcess.setSelected(false);
-		nodesProcess.setSelected(false);
+		menuNodesProcess.setSelected(false);
 		nodesConsole.setSelected(false);
 		menuProject.setSelected(false);
 		menuScript.setSelected(false);
@@ -123,6 +120,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		while (logItemList.hasNext()) {
 			AEGWTBootstrapTreeMenuFinalItem log = (AEGWTBootstrapTreeMenuFinalItem) logItemList.next();
 			log.setSelected(false);
+		}
+		
+		Iterator<Widget> nodeListItemList = menuNodesProcess.iterator();
+		while (nodeListItemList.hasNext()) {
+			AEGWTBootstrapTreeMenuFinalItem nodeList = (AEGWTBootstrapTreeMenuFinalItem) nodeListItemList.next();
+			nodeList.setSelected(false);
 		}
 	}
 	
@@ -138,7 +141,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			scheduleProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			propertiesProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS.equals(sectionId)) {
 			nodesProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			nodesConsole.setSelected(true);
@@ -152,12 +155,21 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			menuExecution.setSelected(true);
 		} else if (SECTION_TYPE_LOG.equals(sectionId)) {
 			menuLogs.setSelected(true);
+		} else if (SECTION_TYPE_ENVIROMENTS.equals(sectionId)) {
+			menuNodesProcess.setSelected(true);
 		} else {
 			Iterator<Widget> logItemList = menuLogs.iterator();
 			while (logItemList.hasNext()) {
 				AEGWTBootstrapTreeMenuFinalItem log = (AEGWTBootstrapTreeMenuFinalItem) logItemList.next();
 				if (sectionId.equals(log.getElementName())) {
 					log.setSelected(true);
+				}
+			}
+			Iterator<Widget> nodeListItemList = menuNodesProcess.iterator();
+			while (nodeListItemList.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem nodeList = (AEGWTBootstrapTreeMenuFinalItem) nodeListItemList.next();
+				if (sectionId.equals(nodeList.getElementName())) {
+					nodeList.setSelected(true);
 				}
 			}
 		}
@@ -181,8 +193,9 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			menuProcess.setModified(true);
 			propertiesProcess.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
+		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS.equals(sectionId)) {
 			menuProcess.setModified(true);
+			menuNodesProcess.setModified(true);
 			nodesProcess.setModified(true);
 		}
 	}
@@ -197,15 +210,33 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		mainScript.setModified(false);
 		rollbackScript.setModified(false);
 		menuProcess.setModified(false);
+		menuNodesProcess.setModified(false);
 		variableProcess.setModified(false);
 		scheduleProcess.setModified(false);
 		propertiesProcess.setModified(false);
-		nodesProcess.setModified(false);
+		setResetModifiedEnviromentsSection(menuNodesProcess);
+	}
+	
+	public void setResetModifiedEnviromentsSection (AEGWTBootstrapTreeMenuItem section) {
+		Iterator<Widget> listNodeList = section.iterator();
+		while (listNodeList.hasNext()) {
+			AEGWTBootstrapTreeMenuFinalItem nodeListSection = (AEGWTBootstrapTreeMenuFinalItem) listNodeList.next();
+			nodeListSection.setModified(false);
+		}
 	}
 	
 	public void addExecution(String projectId, String executionDateStr) {
 		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, DSLAMBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
 		menuLogs.add(execution);
+	}
+	
+	public void addNodeList(String projectId, String nodeListName) {
+		CRONIOBusDesktopProjectNavigatorFinalItem nodeList = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_ENVIROMENTS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS	, nodeListName, this);
+		menuNodesProcess.add(nodeList);
+	}
+	
+	public void hideAddNodeListForm() {
+		menuNodesProcess.resetForm();
 	}
 
 	public AEMFTMetadataElementComposite getData() {

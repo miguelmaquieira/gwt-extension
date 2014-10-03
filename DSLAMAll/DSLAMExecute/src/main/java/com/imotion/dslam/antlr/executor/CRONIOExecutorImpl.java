@@ -9,8 +9,10 @@ import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.conn.CRONIOConnectionFactory;
 import com.imotion.dslam.conn.CRONIOIConnection;
 import com.imotion.dslam.logger.CRONIOExecutionLoggerImpl;
@@ -29,17 +31,25 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	}
 
 	@Override
-	public void execute(Long executionId) {
+	public void execute(Long executionId, String nodeListName) {
 		String 				scriptCode			= project.getMainScript().getCompiledContent();
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 	= CRONIOAntlrUtils.getVariablesFromProject(project);
 
-		DSLAMBOIProcess		process		= project.getProcess();
-		List<CRONIOBOINode> nodeList	= process.getNodeList();
-		boolean				sync		= process.isSynchronous();
-		long				processId	= process.getProcessId();
+		DSLAMBOIProcess			process			= project.getProcess();
+		List<CRONIOBOINodeList> listNodeList 	= process.getListNodeList();
+		CRONIOBOINodeList		currentNodeList = new CRONIOBONodeList(); 
+		for (CRONIOBOINodeList nodeList: listNodeList) {
+			if (nodeListName.equals(nodeList.getNodeListName())) {
+				currentNodeList = nodeList;
+			}
+		}
+		
+		List<CRONIOBOINode> 	nodes 		= currentNodeList.getNodeList();
+		boolean					sync		= process.isSynchronous();
+		long					processId	= process.getProcessId();
 
-		executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodeList, sync);
+		executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodes, sync);
 	}
 
 	/**

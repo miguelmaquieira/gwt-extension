@@ -98,7 +98,7 @@ public class DSLAMBusDesktopAppFlowController extends AEGWTBaseFlowController {
 	
 	private void projectProcessFlowEvent(AEGWTFlowEvent evt) {
 		String mainSectionId = evt.getSourceWidgetId();
-		if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_PROCESS.equals(mainSectionId)) {
+		if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_PROCESS.equals(mainSectionId) ||CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_ENVIROMENTS.equals(mainSectionId)) {
 			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_PROCESS_PAGE);
 		} else if (CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_SCRIPT.equals(mainSectionId)) {
 			History.newItem(DSLAMBusDesktopHistoryNavigationConstants.TOKEN_SCRIPTS_MANAGER);

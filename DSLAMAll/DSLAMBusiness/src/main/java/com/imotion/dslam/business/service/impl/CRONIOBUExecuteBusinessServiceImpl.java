@@ -7,7 +7,7 @@ import java.util.List;
 import com.imotion.dslam.antlr.executor.CRONIOExecutorImpl;
 import com.imotion.dslam.antlr.executor.CRONIOIExecutor;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
-import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOExecution;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
@@ -38,6 +38,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		long							projectId				= AEMFTCommonUtilsBase.getLongFromString(projectIdStr);
 		AEMFTMetadataElementSingle		executionIdDataSingle	= (AEMFTMetadataElementSingle) getElementDataController().getElement(CRONIOBOIExecution.EXECUTION_ID, contextIn);
 		long							executionId				= executionIdDataSingle.getValueAsLong();
+		String							nodeListName 			= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, contextIn);
 		
 		DSLAMBOIProject project = getProjectPersistence().getProject(projectId);
 		
@@ -47,20 +48,20 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 			//end-trace
 
 			CRONIOIExecutor executor = getExecutor(project);
-			executor.execute(executionId);
+			executor.execute(executionId, nodeListName);
 		} else {
 			//init-trace
 			traceItemNotFound(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
 			//end-trace
 		}
-	
 	}
 	
 	@Override
 	public void addExecution() {
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
-		String 							projectId		= getElementDataController().getElementAsString(CRONIOBOIExecutionDataConstants.PROJECT_ID		, contextIn);
+		String 							projectId		= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID		, contextIn);
+		String 							nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME		, contextIn);
 		Date 							creationTime 	= new Date();
 		Long 							projectIdAsLong = Long.valueOf(projectId).longValue();
 		DSLAMBOIProject 				project 		= getProjectPersistence().getProject(projectIdAsLong);
@@ -74,7 +75,6 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		traceNewItemPersistent(METHOD_ADD_EXECUTION, CRONIOBOIExecution.class.getSimpleName(), projectId);
 		//end-trace
 
-		
 		//ContextOut
 		AEMFTMetadataElementComposite dateExecutionData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		String formatDate = "dd/MM/yyyy HH:mm:ss";
@@ -84,7 +84,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends DSLAMBUServiceBase imple
 		dateExecutionData.addElement(CRONIOBOIExecution.EXECUTION_ID, executionSave.getExecutionId());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(EXECUTION_DATA, dateExecutionData);
-		
+		contextOut.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
 	}
 
 	@Override

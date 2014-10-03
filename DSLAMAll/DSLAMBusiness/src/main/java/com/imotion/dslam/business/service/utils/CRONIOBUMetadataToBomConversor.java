@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
@@ -16,6 +17,7 @@ import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
+import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.CRONIOBOPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
 import com.imotion.dslam.bom.data.DSLAMBOFile;
@@ -125,10 +127,10 @@ public class CRONIOBUMetadataToBomConversor {
 			List<Date> scheduleList = fromScheduleDataList(scheduleDataList);
 			process.setScheduleList(scheduleList);
 
-			//process nodeList
-			AEMFTMetadataElementComposite nodeDataList = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_NODE_LIST, processData);
-			List<CRONIOBOINode> nodeList = fromNodeDataList(nodeDataList);
-			process.setNodeList(nodeList);
+			//process listNodeList
+			AEMFTMetadataElementComposite nodeListDataList = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_NODELIST_LIST, processData);
+			List<CRONIOBOINodeList> listNodeList = fromNodeListDataList(nodeListDataList);
+			process.setListNodeList(listNodeList);
 
 		}
 		return process;
@@ -173,6 +175,45 @@ public class CRONIOBUMetadataToBomConversor {
 			node.setVariableList(nodeVariables);
 		}
 		return node;
+	}
+	
+	private static List<CRONIOBOINodeList> fromNodeListDataList(AEMFTMetadataElementComposite nodeListDataList) {
+		List<CRONIOBOINodeList> listNodeList = null;
+		if (nodeListDataList != null) {
+			listNodeList =  new ArrayList<>();
+			List<AEMFTMetadataElement> nodeListDataElementList = nodeListDataList.getElementList();
+			for (AEMFTMetadataElement nodeListDataElement: nodeListDataElementList) {
+				if (!DSLAMBOIProject.INFO.equals(nodeListDataElement.getKey())) {
+					CRONIOBOINodeList nodeList = fromNodeListData((AEMFTMetadataElementComposite) nodeListDataElement);
+					listNodeList.add(nodeList);
+				}
+			}
+		}
+		return listNodeList;
+	}
+
+	private static CRONIOBOINodeList fromNodeListData(AEMFTMetadataElementComposite nodeListDataElement) {
+		CRONIOBOINodeList nodeList = null;
+		if (nodeListDataElement != null) {
+			nodeList = new CRONIOBONodeList();
+			Date actualDate = new Date();
+
+			String	nodeListName	= nodeListDataElement.getKey();
+			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINodeList.CREATION_TIME	, nodeListDataElement);
+
+			nodeList.setNodeListName(nodeListName);
+			nodeList.setSavedTime(actualDate);
+			if (creationTime == null) {
+				nodeList.setCreationTime(actualDate);
+			} else {
+				nodeList.setCreationTime(creationTime);
+			}
+
+			AEMFTMetadataElementComposite nodeListData = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, nodeListDataElement);
+			List<CRONIOBOINode> nodes = fromNodeDataList(nodeListData);
+			nodeList.setNodeList(nodes);
+		}
+		return nodeList;
 	}
 
 	public static List<Date> fromScheduleDataList(AEMFTMetadataElementComposite scheduleDataList) {

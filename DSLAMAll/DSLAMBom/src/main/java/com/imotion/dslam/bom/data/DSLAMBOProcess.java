@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
@@ -25,14 +25,14 @@ import com.imotion.dslam.bom.DSLAMBOIVariable;
 @Entity(name="Process")
 public class DSLAMBOProcess implements DSLAMBOIProcess {
 
-	private static final long serialVersionUID = 7636685992356098248L;
-
+	private static final long serialVersionUID = -1296222038272480787L;
+	
 	private Long 					processId;
 	private String 					processName;
 	private boolean 				synchronous;
 	private List<Date>				scheduleList;
 	private List<DSLAMBOIVariable> 	variableList;
-	private List<CRONIOBOINode>		nodeList;
+	private List<CRONIOBOINodeList>	listNodeList;
 	private Date 					savedTime;
 	private Date 					creationTime;
 	private DSLAMBOIProject			project;
@@ -113,36 +113,37 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		variableList.add(variable);
 	}
 
-	@OneToMany(mappedBy=CRONIOBOINode.NODE_PROCESS, targetEntity=CRONIOBONode.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToMany(mappedBy=CRONIOBOINodeList.NODELIST_PROCESS, targetEntity=CRONIOBONodeList.class, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	
 	@Override
-	public List<CRONIOBOINode> getNodeList() {
-		return nodeList;
+	public List<CRONIOBOINodeList> getListNodeList() {
+		return listNodeList;
 	}
 
 	@Override
-	public void setNodeList(List<CRONIOBOINode> nodeList) {
-		this.nodeList = null;
-		if (nodeList != null) {
-			for (CRONIOBOINode node : nodeList) {
-				addNode(node);
+	public void setListNodeList(List<CRONIOBOINodeList> listNodeList) {
+		this.listNodeList = null;
+		if (listNodeList != null && listNodeList.size() > 0) {
+			for (CRONIOBOINodeList nodeList : listNodeList) {
+				addNodeList(nodeList);
 			}
 		}
 	}
 
 	@Override
-	public void addNode(CRONIOBOINode node) {
-		if (nodeList == null) {
-			nodeList = new ArrayList<>();
+	public void addNodeList(CRONIOBOINodeList nodeList) {
+		if (listNodeList == null) {
+			listNodeList = new ArrayList<>();
 		}
-		nodeList.add(node);
-		node.setProcess(this);
+		listNodeList.add(nodeList);
+		nodeList.setProcess(this);
 	}
 
 	@Override
-	public void removeNode(CRONIOBOINode node) {
-		if (nodeList != null) {
-			nodeList.remove(node);
-			node.setProcess(null);
+	public void removeNodeList(CRONIOBOINodeList nodeList) {
+		if (listNodeList != null) {
+			listNodeList.remove(nodeList);
+			nodeList.setProcess(null);
 		}
 
 	}	

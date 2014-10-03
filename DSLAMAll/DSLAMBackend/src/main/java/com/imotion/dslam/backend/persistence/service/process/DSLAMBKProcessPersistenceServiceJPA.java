@@ -7,6 +7,7 @@ import java.util.List;
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
@@ -30,28 +31,28 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 			originalProcess.setSynchronous(processData.isSynchronous());
 			originalProcess.setScheduleList(processData.getScheduleList());
 			originalProcess.setVariableList(processData.getVariableList());
-			List<CRONIOBOINode> originalNodeList 	= originalProcess.getNodeList();
-			List<CRONIOBOINode> nodesToRemove 		= new ArrayList<>(); 
-			if (!AEMFTCommonUtilsBase.isEmptyList(originalNodeList)) {
-				for (CRONIOBOINode node : originalNodeList) {
-					nodesToRemove.add(node);
+			List<CRONIOBOINodeList> originalListNodeList 	= originalProcess.getListNodeList();
+			List<CRONIOBOINodeList> nodeListsToRemove 		= new ArrayList<>(); 
+			if (!AEMFTCommonUtilsBase.isEmptyList(originalListNodeList)) {
+				for (CRONIOBOINodeList nodeList : originalListNodeList) {
+					nodeListsToRemove.add(nodeList);
 				}
 			}
 			
-			for (CRONIOBOINode node : nodesToRemove) {
-				originalProcess.removeNode(node);
+			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
+				originalProcess.removeNodeList(nodeList);
 			}
 			
-			List<CRONIOBOINode> newNodeList			= processData.getNodeList();
-			List<CRONIOBOINode> persistedNodeList	= new ArrayList<>();
-			if (!AEMFTCommonUtilsBase.isEmptyList(newNodeList)) {
-				for (CRONIOBOINode node : newNodeList) {
-					setMachinePropertiesToNode(preferencesId, node);
-					node = getNodePersistence().addNode(node);
-					persistedNodeList.add(node);
+			List<CRONIOBOINodeList> newListNodeList			= processData.getListNodeList();
+			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
+			if (!AEMFTCommonUtilsBase.isEmptyList(newListNodeList)) {
+				for (CRONIOBOINodeList nodeList : newListNodeList) {
+					setMachinePropertiesToNodeList(preferencesId, nodeList);
+					nodeList = getNodeListPersistence().addNodeList(nodeList, processId);
+					persistedListNodeList.add(nodeList);
 				}
 			}
-			originalProcess.setNodeList(persistedNodeList);
+			originalProcess.setListNodeList(persistedListNodeList);
 			
 			if (date == null) {
 				date = new Date();
@@ -61,9 +62,21 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 			getPersistenceModule().update(originalProcess);
 			
 			//orphan nodes
-			for (CRONIOBOINode node : nodesToRemove) {
-				getNodePersistence().removeNode(node.getNodeId());
+			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
+				getNodeListPersistence().removeNodeList(nodeList.getNodeListId());
 			}
+		}
+		return originalProcess;
+	}
+	
+	@Override
+	public DSLAMBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList) {
+		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
+		if (originalProcess != null) {
+			originalProcess.addNodeList(nodeList);
+			Date date = new Date();
+			originalProcess.setSavedTime(date);
+			getPersistenceModule().update(originalProcess);
 		}
 		return originalProcess;
 	}
@@ -97,11 +110,18 @@ public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServi
 	 * PRIVATE
 	 */
 
-	private CRONIOBOINode setMachinePropertiesToNode(Long preferencesId, CRONIOBOINode node) {
-		String nodeType = node.getNodeType();
-		CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, nodeType);
-		node.setMachineProperties(machineProperties);
-		return node;
+	private CRONIOBOINodeList setMachinePropertiesToNodeList(Long preferencesId, CRONIOBOINodeList nodeList) {
+		List<CRONIOBOINode> nodesNodeList = nodeList.getNodeList();
+		
+		if (nodesNodeList != null) {
+			for (CRONIOBOINode node : nodesNodeList) {
+				String nodeType = node.getNodeType();
+				CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, nodeType);
+				node.setMachineProperties(machineProperties);
+			}
+		}
+		
+		return nodeList;
 	}
 	
 }

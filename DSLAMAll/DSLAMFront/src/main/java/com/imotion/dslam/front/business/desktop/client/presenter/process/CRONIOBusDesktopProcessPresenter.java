@@ -1,11 +1,11 @@
 package com.imotion.dslam.front.business.desktop.client.presenter.process;
 
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureSchedule;
@@ -62,9 +62,9 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
 				updateFinalSectionInContext(finalSectionData);
 			}	
-		} else if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
-			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
+		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
+			if (LOGICAL_TYPE.UPDATE_EVENT.equals(type)) {
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOINodeList.NODELIST_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
@@ -78,7 +78,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return super.isDispatchEventType(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type); 			
+		return super.isDispatchEventType(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type) || LOGICAL_TYPE.OPEN_EVENT.equals(type) || LOGICAL_TYPE.UPDATE_EVENT.equals(type); 			
 	}
 	
 	/**
@@ -87,7 +87,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		if (projectFinalSectionId.equals(DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST)) {
+		if (projectFinalSectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			finalSectionData.addElement(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, getMachinesFromPreferences());
 		}
 		getView().openProcessSection(projectFinalSectionId, finalSectionData);

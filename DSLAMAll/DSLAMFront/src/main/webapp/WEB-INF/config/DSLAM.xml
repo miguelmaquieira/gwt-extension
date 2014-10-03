@@ -162,6 +162,12 @@
 				<SubService Name="GET_CSV_NODES">
 					<Descriptor>getCsvNodes</Descriptor>
 				</SubService>
+				<SubService Name="ADD_NODELIST">
+					<Descriptor>addNodeList</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_NODELISTS_BY_PROJECT_ID">
+					<Descriptor>getAllNodeListsByProjectId</Descriptor>
+				</SubService>
 			</SubServiceList>
 		</Service>
 		<Service Name="SRV_BUS_EXECUTE">

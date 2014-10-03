@@ -12,6 +12,6 @@ public interface CRONIOBKIExecutionPersistenceService {
 	
 	List<CRONIOBOIExecution> getAllExecutionsByProject(long projectId);
 
-	void removeExecution(Long executionIdAsLong);
+	void removeExecution(Long executionIdAsLong); 
 
 }

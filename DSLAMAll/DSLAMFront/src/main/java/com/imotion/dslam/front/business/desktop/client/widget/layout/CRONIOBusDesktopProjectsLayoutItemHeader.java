@@ -63,8 +63,9 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 			sectionNameValue = TEXTS.schedule();
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			sectionNameValue = TEXTS.properties();
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
-			sectionNameValue = TEXTS.nodes();
+		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
+			String[] sectionIdSplit = sectionId.split("\\.");
+			sectionNameValue = TEXTS.enviroment() + "(" + sectionIdSplit[2] +")";
 		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			sectionNameValue = TEXTS.console_label();
 		} else if (sectionId.matches(dateRegEx)) {

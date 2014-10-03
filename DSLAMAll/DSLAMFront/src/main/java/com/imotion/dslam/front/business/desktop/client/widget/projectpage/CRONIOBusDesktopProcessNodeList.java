@@ -31,7 +31,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	private CRONIOBusDesktopHeaderListFileActions 	header;
 	private CRONIOBusDesktopProcessAddNodeForm		addNodePopupForm;
 
-	private AEGWTComparator 					nameComparatorAsc;
+	private AEGWTComparator 						nameComparatorAsc;
 	
 	public CRONIOBusDesktopProcessNodeList() {
 		FlowPanel root = new FlowPanel();
@@ -62,7 +62,6 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		
 		CRONIOBusDesktopProcessNodeListElement element = createElement(nodeId, nodeName, machineExists);
 		elementListContainer.add(element);
-	//	sort(null, false);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}
 	

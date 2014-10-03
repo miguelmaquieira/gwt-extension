@@ -3,6 +3,6 @@ package com.imotion.dslam.antlr.executor;
 
 public interface CRONIOIExecutor {
 	
-	void execute(Long executionid);
+	void execute(Long executionid,String nodeListName);
 	
 }

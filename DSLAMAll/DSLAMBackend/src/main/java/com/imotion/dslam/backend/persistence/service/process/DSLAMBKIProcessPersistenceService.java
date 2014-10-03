@@ -3,6 +3,7 @@ package com.imotion.dslam.backend.persistence.service.process;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 
 
@@ -18,5 +19,7 @@ public interface DSLAMBKIProcessPersistenceService {
 	DSLAMBOIProcess getProcess(Long processIdAsLong);
 
 	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess processData, Long preferencesId, Date date);
+	
+	DSLAMBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList);
 
 }

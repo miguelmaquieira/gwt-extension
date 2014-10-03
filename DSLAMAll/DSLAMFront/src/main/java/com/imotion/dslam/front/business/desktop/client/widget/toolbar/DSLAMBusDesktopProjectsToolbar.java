@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.toolbar;
 
+import java.util.List;
+
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.bom.DSLAMBOIProject;
@@ -60,6 +62,10 @@ public class DSLAMBusDesktopProjectsToolbar extends AEGWTCompositePanel {
 	
 	public void reset() {
 		projectActions.reset();
+	}
+	
+	public void addNodeListsToExecuteForm(List<String> nodeLists){
+		projectActions.addNodeListsToExecuteForm(nodeLists);
 	}
 
 	/**

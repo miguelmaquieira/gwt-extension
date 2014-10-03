@@ -26,5 +26,6 @@ public interface CRONIOBUIExecuteBusinessServiceConstants {
 	String 	EXECUTION_DATA 					= "EXECUTION_DATA";
 	String  EXECUTIONS_DATA					= "EXECUTIONS_DATA";
 	String  EXECUTION_LOGS_DATA				= "EXECUTION_LOGS_DATA";
+	String  NODE_LISTS_DATA					= "NODE_LISTS_DATA";
 	
 }

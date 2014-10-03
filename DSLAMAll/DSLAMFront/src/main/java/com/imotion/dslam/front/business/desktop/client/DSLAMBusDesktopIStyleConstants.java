@@ -40,6 +40,11 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NEW_PROJECT_FORM_INPUT_ZONE 					= NEW_PROJECT_FORM			+ "-inputZone";		//dslam_studio-newProjectForm-inputZone
 	String NEW_PROJECT_FORM_SAVE_ZONE 					= NEW_PROJECT_FORM			+ "-saveZone";		//dslam_studio-newProjectForm-saveZone
 
+	//EXECUTE FORM
+	String EXECUTE_FORM 								= APP_ID_PREFFIX			+ "executeForm";	//dslam_studio-executeForm
+	String EXECUTE_FORM_INPUT_ZONE 						= EXECUTE_FORM				+ "-inputZone";		//dslam_studio-executeForm-inputZone
+	String EXECUTE_FORM_SAVE_ZONE 						= EXECUTE_FORM				+ "-saveZone";		//dslam_studio-executeForm-saveZone
+	
 	//CONNECTION FORM
 	String NEW_CONNECTION_FORM 							= APP_ID_PREFFIX			+ "newConnectionForm";	//dslam_studio-newConnectionForm
 	String NEW_CONNECTION_FORM_ERROR_ZONE 				= NEW_CONNECTION_FORM		+ "-errorZone";			//dslam_studio-newConnectionForm-errorZone
@@ -113,6 +118,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String PROCESS_CONFIGURE_ADD_NODE_VARIABLES         = APP_ID_PREFFIX			+ "processConfigureAddNodeVariables";		//dslam_studio-processConfigureAddNodeVariables
 	String POPUP_VARIABLES_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureVariablesFormContainer";		//dslam_studio-processConfigureVariablesFormContainer
 	String POPUP_NODES_FORM_CONTAINER					= APP_ID_PREFFIX			+ "processAddNodeFormContainer";		//dslam_studio-processAddNodeFormContainer
+	String POPUP_NODE_LIST_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processAddNodeListFormContainer";		//dslam_studio-processAddNodeListFormContainer
 	String POPUP_SCHEDULE_FORM_CONTAINER				= APP_ID_PREFFIX			+ "processConfigureScheduleFormContainer";		//dslam_studio-processConfigureScheduleFormContainer
 	String POPUP_SCHEDULE_FORM_SAVE_ZONE				= APP_ID_PREFFIX			+ "processConfigureScheduleFormSaveZone";		//dslam_studio-processConfigureScheduleFormSaveZone
 	String SUBMIT_BUTTON_VARIABLES_FORM					= APP_ID_PREFFIX			+ "processConfigureVariablesFormSubmitButton";		//dslam_studio-processConfigureVariablesFormSubmitButton

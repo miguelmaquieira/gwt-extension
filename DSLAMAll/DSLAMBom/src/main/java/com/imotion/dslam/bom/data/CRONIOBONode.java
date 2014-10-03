@@ -18,7 +18,7 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIVariable;
 
 @Entity(name="Node")
@@ -31,7 +31,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 	private String 							nodeIp;
 	private String 							nodeType;
 	private List<DSLAMBOIVariable> 			variableList;
-	private DSLAMBOIProcess					process;
+	private CRONIOBOINodeList				nodeList;
 	private CRONIOBOIMachineProperties		machineProperties;
 	private Date 							savedTime;
 	private Date 							creationTime;
@@ -93,16 +93,16 @@ public class CRONIOBONode implements CRONIOBOINode {
 		this.variableList = variableList;
 	}
 
-	@ManyToOne(targetEntity=DSLAMBOProcess.class)
-	@JoinColumn(name=DSLAMBOIProcess.PROCESS_ID)
+	@ManyToOne(targetEntity=CRONIOBONodeList.class)
+	@JoinColumn(name=CRONIOBOINodeList.NODELIST_ID)
 	@Override
-	public DSLAMBOIProcess getProcess() {
-		return process;
+	public CRONIOBOINodeList getNodeList() {
+		return nodeList;
 	}
 
 	@Override
-	public void setProcess(DSLAMBOIProcess process) {
-		this.process = process;
+	public void setNodeList(CRONIOBOINodeList nodeList) {
+		this.nodeList = nodeList;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

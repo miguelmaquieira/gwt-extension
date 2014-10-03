@@ -203,10 +203,19 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_BY_USER_ID);
 		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
 		
-		AEMFTMetadataElementComposite projectsDataClone = (AEMFTMetadataElementComposite) projectsData.cloneObject();
+		AEMFTMetadataElementComposite projectsDataClone = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		AEMFTMetadataElementComposite projectsDataClone2 = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		
+		if (projectsData != null) {
+			projectsDataClone = (AEMFTMetadataElementComposite) projectsData.cloneObject();
+			projectsDataClone2 = (AEMFTMetadataElementComposite) projectsData.cloneObject();
+		}
 		
 		AEMFTMetadataElementComposite 	executionsDataContextOut 	= getController().executeService(projectsDataContextOut, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID);
 		AEMFTMetadataElementComposite	executionsData				= elementController.getElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA, executionsDataContextOut);
+		
+		AEMFTMetadataElementComposite 	nodeListsDataContextOut 	= getController().executeService(projectsDataClone2, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_NODELISTS_BY_PROJECT_ID);
+		AEMFTMetadataElementComposite	nodeListsData				= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA, nodeListsDataContextOut);
 		
 		AEMFTMetadataElementComposite preferencesDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		elementController.setElement(AEMFTILoginDataConstants.USER_ID, preferencesDataContextIn, userId);
@@ -218,6 +227,7 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST		, projectsDataClone);
 		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
 		contextOut.addElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA		, executionsData);
+		contextOut.addElement(nodeListsData);
 		
 	}
 

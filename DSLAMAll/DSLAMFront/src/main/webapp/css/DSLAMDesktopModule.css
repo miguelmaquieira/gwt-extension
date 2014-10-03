@@ -102,6 +102,14 @@
 	width: 380px;
 }
 
+.dslam_studio-executeForm {
+	background-color: #FFFFFF;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #888888;
+	width: 380px;
+}
+
 .dslam_studio-projectsLayout-zoneHeader {
 	height: 35px;
 	background-color: #F2F1F0;
@@ -121,7 +129,13 @@
 
 .aegwt-bootstrap-tree-menu-item-button {
 	display:visible;
-	padding: 0px 4px;
+	padding: 6px 4px;
+	border-radius: 0px;
+	height: 30px;
+	border: medium none;
+	width: 13%;
+	margin-top: -3px;
+	background-color: #EEEEEE;
 }
 
 .aegwt-bootstrap-tree-menu-item-button-invisible {
@@ -678,6 +692,14 @@
 	float:	left;
 }
 
+.dslam_studio-processAddNodeListFormContainer {
+	background-color: #FFFFFF;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #888888;
+	width: 380px;
+}
+
 /*****************************************
 *			LOGGER
 ******************************************/
@@ -914,18 +936,13 @@
     margin-top: 5px;
 }
 
-
-
 .dslam_studio-authenticationForm-fieldsZone .gwt-SuggestBox {
 	padding: 0px 10px;
 }
 
-
-
 .dslam_studio-passwordTextBox .aegwt-passwordBox-textBoxZone input {
 	width: 100%;
 }
-
 
 .dslam_studio-authenticationForm-fieldsZone .gwt-SuggestBox,.dslam_studio-authenticationForm-fieldsZone  .dslam_studio-passwordTextBox {
 	background-color: #ffffff;
@@ -936,7 +953,6 @@
 	border-radius: 2px;
 	border-width: 1px;
 }
-
 
 .dslam_studio-passwordTextBox .aegwt-passwordBox-checkBoxZone {
 	background-color: #dddddd;

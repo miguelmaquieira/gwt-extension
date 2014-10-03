@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator;
 
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -38,6 +39,8 @@ public class CRONIOBusDesktopProjectNavigatorFinalItem extends AEGWTBootstrapTre
 		
 		if (CRONIOBOIProjectDataConstants.PROJECT_EXECUTION_LOG.equals(finalSectionId)) {
 			finalSectionId = text;
+		} else if (CRONIOBOIProjectDataConstants.PROJECT_PROCESS_NODE_LISTS.equals(finalSectionId)) {
+			finalSectionId = finalSectionId + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + text;
 		}
 		
 		CRONIOBusDesktopProjectEvent openFinalSectionEvent = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());

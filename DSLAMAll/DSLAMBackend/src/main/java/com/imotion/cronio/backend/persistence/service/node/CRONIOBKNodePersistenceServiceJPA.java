@@ -2,7 +2,7 @@ package com.imotion.cronio.backend.persistence.service.node;
 
 import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
@@ -13,10 +13,10 @@ public class CRONIOBKNodePersistenceServiceJPA extends DSLAMBKPersistenceService
 	@Override
 	public CRONIOBOINode addNode(CRONIOBOINode node) {
 		CRONIOBONode nodeJPA = (CRONIOBONode) node;
-		DSLAMBOIProcess process = node.getProcess();
-		if (process != null && !AEMFTCommonUtils.isNullLong(process.getProcessId())) {
-			process = getProcessPersistence().getProcess(process.getProcessId());
-			node.setProcess(process);
+		CRONIOBOINodeList nodeList = node.getNodeList();
+		if (nodeList != null && !AEMFTCommonUtils.isNullLong(nodeList.getNodeListId())) {
+			nodeList = getNodeListPersistence().getNodeList(nodeList.getNodeListId());
+			node.setNodeList(nodeList);
 		}
 		nodeJPA = getPersistenceModule().create(nodeJPA);
 		return nodeJPA;

@@ -1,52 +1,42 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
-import java.util.List;
-
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
+import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBox;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
+public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 
-	public static final String NAME = "CRONIOBusDesktopProcessAddNodeForm";
+	public static final String NAME = "CRONIOBusDesktopProcessAddNodeListForm";
 	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
 
-	private AEGWTBootstrapFormFieldTextBox  	nameTextBox;
-	private AEGWTBootstrapFormFieldTextBox  	ipTextBox;
-	private AEGWTBootstrapDropdownButton		machineTypeDropdownButton;
+	private AEGWTBootstrapFormFieldTextBox  	nameNodeListTextBox;
 	private AEGWTButton 						saveButton;
 	private AEGWTButton							cancelButton;
 	private boolean							editMode;
+	
 
-	public CRONIOBusDesktopProcessAddNodeForm(AEGWTICompositePanel parent) {
+	public CRONIOBusDesktopProcessAddNodeListForm(AEGWTICompositePanel parent) {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_NODES_FORM_CONTAINER);
+		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_NODE_LIST_FORM_CONTAINER);
 		
-		nameTextBox = new AEGWTBootstrapFormFieldTextBox(null, TEXTS.node_name());
-		root.add(nameTextBox);
-		
-		ipTextBox = new AEGWTBootstrapFormFieldTextBox(null, TEXTS.ip());
-		root.add(ipTextBox);
-		
-		machineTypeDropdownButton = new AEGWTBootstrapDropdownButton();
-		root.add(machineTypeDropdownButton);
-	
+		nameNodeListTextBox = new AEGWTBootstrapFormFieldTextBox(null, TEXTS.node_list_name());
+		root.add(nameNodeListTextBox);
+
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
 		
@@ -63,45 +53,16 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 				
 				resetErrors();
 				
-				if (nameTextBox.getTextBox().getValue() == null || nameTextBox.getTextBox().getValue() == "") {
+				if (nameNodeListTextBox.getTextBox().getValue() == null || nameNodeListTextBox.getTextBox().getValue() == "") {
 					errors = true;
-					nameTextBox.setErrorLabelText(TEXTS.empty_textbox());
-				}
-				
-				if (ipTextBox.getTextBox().getValue() == null || ipTextBox.getTextBox().getValue() == "") {
-					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.empty_textbox());
-				}
-				
-				String 		numberpRegEx 	= "25[0-5]|2[0-4][0-9]|[0-9]|[1-9][0-9]|1[0-9][0-9]";
-				String 		ip 				= ipTextBox.getTextBox().getValue();
-				String[] 	ipSplit 		= ip.split ("\\.");
-				int         ipSplitSize    	= ipSplit.length;
-				
-				if (ipSplitSize == 1 && !TEXTS.localhost().equalsIgnoreCase(ip)) {
-					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
-				}
-				
-				if (ipSplitSize != 4 && ipSplitSize > 1) {
-					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
-				} else if (ipSplitSize == 4){
-					for (int i = 0;i < 4;i++) {
-						if(!(ipSplit[i].matches(numberpRegEx))) {
-							errors = true;
-							ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
-						}
-					}
+					nameNodeListTextBox.setErrorLabelText(TEXTS.empty_textbox());
 				}
 				
 				if (errors == false) {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_NAME				, nameTextBox.getText());
-					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_IP				, ipTextBox.getText());
-					evt.addElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE				, machineTypeDropdownButton.getSelectedId());
+					evt.addElementAsString(CRONIOBOINodeListDataConstants.NODELIST_NAME				, nameNodeListTextBox.getText());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -122,8 +83,7 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	}
 	
 	public void resetForm() {
-		nameTextBox.setText("");
-		ipTextBox.setText("");
+		nameNodeListTextBox.setText("");
 		resetErrors();
 		hide();
 	}
@@ -140,16 +100,9 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 		return editMode;
 	}
 	
-	public void setErrorNodeExist() {
-		nameTextBox.setErrorLabelText(TEXTS.error_node_exist());
-		nameTextBox.setErrorLabelVisible(true);
-	}
-
-	public void setMachineTypes(List<String> machineList) {
-		
-		for (String machine : machineList) {
-			machineTypeDropdownButton.addElement(machine		, machine);
-		}
+	public void setErrorNodeListExist() {
+		nameNodeListTextBox.setErrorLabelText(TEXTS.error_node_exist());
+		nameNodeListTextBox.setErrorLabelVisible(true);
 	}
 	
 	/**
@@ -178,7 +131,6 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	 */
 	
 	private void resetErrors() {
-		nameTextBox.setErrorLabelVisible(false);
-		ipTextBox.setErrorLabelVisible(false); 
+		nameNodeListTextBox.setErrorLabelVisible(false);
 	}
 }

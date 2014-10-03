@@ -5,10 +5,12 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
@@ -58,9 +60,11 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			rootDeckPanel.showWidget(2);
 			extraOptionsConfigure.setData(sectionData);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LIST.equals(sectionId)) {
+		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			rootDeckPanel.showWidget(3);
-			nodesConfigure.setData(sectionData);
+			AEMFTMetadataElementComposite nodeListData = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
+			nodeListData.addElement(CRONIOBOINodeList.NODELIST_DATA, sectionData);
+			nodesConfigure.setData(nodeListData);
 		}
 		this.setVisibility(Visibility.VISIBLE);
 		AEGWTJQueryPerfectScrollBar.updateScroll(getName());
