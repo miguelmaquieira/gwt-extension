@@ -42,7 +42,7 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 	public void processLogin() {
 		super.processLogin();
 		String error = getError();
-		if (error == null) {
+		if (error == null) {		
 			loadUserData();
 		}
 	}

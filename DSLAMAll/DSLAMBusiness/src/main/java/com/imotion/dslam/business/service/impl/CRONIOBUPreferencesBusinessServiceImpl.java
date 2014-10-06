@@ -109,10 +109,6 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends DSLAMBUServiceBase i
 		CRONIOBOIMachineProperties machineConfig = CRONIOBUMetadataToBomConversor.fromMachineConfigData(contextIn);
 		long currentMachineDBId = currentMachineDB.getMachinePropertiesId();
 		getMachinePropertiesPersistence().updateMachineProperties(currentMachineDBId, machineConfig);
-
-		//ContextOut
-		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		//		contextOut.addElement(PROJECT_DATA, machineConfigData);
 	}
 	//	@Override
 	public void updatePreferences() {
