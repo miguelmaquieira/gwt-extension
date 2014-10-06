@@ -77,7 +77,7 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				hide();
+				resetForm();
 			}
 		});
 	}
@@ -105,6 +105,11 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 		nameNodeListTextBox.setErrorLabelVisible(true);
 	}
 	
+
+	public void showDuplicateNodeListNameError(String nodeListName) {
+		nameNodeListTextBox.setErrorLabelTextAndShow(TEXTS.nodelist_exist_error() + nodeListName);
+	}
+	
 	/**
 	 * AEGWTCompositePanel
 	 */
@@ -112,11 +117,6 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 	@Override
 	public String getName() {
 		return NAME;
-	}
-	
-	@Override
-	public void postDisplay() {
-		super.postDisplay();
 	}
 
 	@Override
@@ -133,4 +133,5 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 	private void resetErrors() {
 		nameNodeListTextBox.setErrorLabelVisible(false);
 	}
+	
 }

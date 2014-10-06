@@ -246,11 +246,20 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	public String getElementName() {
 		return menuProject.getLabelText();
 	}
+	
+	public void showDuplicateNodeListNameError(String nodeListName) {
+		menuNodesProcess.showDuplicateNodeListNameError(nodeListName);
+	}
+	
+	/**
+	 * AEGWTCompositePanel
+	 */
 
 	@Override
 	public String getName() {
 		return NAME;
 	}
+	
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {

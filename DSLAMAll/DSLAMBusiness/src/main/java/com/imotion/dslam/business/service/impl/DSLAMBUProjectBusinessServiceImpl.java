@@ -29,6 +29,7 @@ import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.composite.AEMFTMetadataElementCompositeRecordSet;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.envi.io.AEMFTIIOConstant;
@@ -197,30 +198,45 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		String 							currentProjectIdStr	= getElementDataController().getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID		, contextIn);
 		long							currentProjectId	= AEMFTCommonUtilsBase.getLongFromString(currentProjectIdStr);
 		Date 							creationTime 		= new Date();
+		boolean							error				= false;
 		
 		DSLAMBOIProject project = getProjectPersistence().getProject(currentProjectId);
 		DSLAMBOIProcess process = project.getProcess();
 		
-		//nodeList
-		CRONIOBOINodeList nodeList = new CRONIOBONodeList();
-		nodeList.setNodeListName(nodeListName);
-		nodeList.setProcess(process);
-		nodeList.setSavedTime(creationTime);
-		nodeList.setCreationTime(creationTime);
+		List<CRONIOBOINodeList> nodeLists = process.getListNodeList();
+		for (CRONIOBOINodeList nodeList : nodeLists) {
+			if (nodeListName.equals(nodeList.getNodeListName())){
+				error = true;
+			}
+		}
 		
-		long processId = process.getProcessId();
-		nodeList 	= getNodeListPersistence().addNodeList(nodeList,processId);
-		
-		getProcessPersistence().addNodeListUpdateProcess(processId, nodeList);
-		
-		//init-trace
-		traceNewItemPersistent(METHOD_ADD_NODELIST, CRONIOBOINodeList.class.getSimpleName(), String.valueOf(nodeList.getNodeListId()));
-		//end-trace
+		if (error == true) {
+			AEMFTMetadataElementCompositeRecordSet errorData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			errorData.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
+			errorData.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, currentProjectId);
+			getContext().getContextOUT().addElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERROR,errorData);
+		} else {
+			//nodeList
+			CRONIOBOINodeList nodeList = new CRONIOBONodeList();
+			nodeList.setNodeListName(nodeListName);
+			nodeList.setProcess(process);
+			nodeList.setSavedTime(creationTime);
+			nodeList.setCreationTime(creationTime);
+			
+			long processId = process.getProcessId();
+			nodeList 	= getNodeListPersistence().addNodeList(nodeList,processId);
+			
+			getProcessPersistence().addNodeListUpdateProcess(processId, nodeList);
+			
+			//init-trace
+			traceNewItemPersistent(METHOD_ADD_NODELIST, CRONIOBOINodeList.class.getSimpleName(), String.valueOf(nodeList.getNodeListId()));
+			//end-trace
 
-		//ContextOut
-		AEMFTMetadataElementComposite nodeListDataElement = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
-		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(NODELIST_DATA, nodeListDataElement);
+			//ContextOut
+			AEMFTMetadataElementComposite nodeListDataElement = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
+			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+			contextOut.addElement(NODELIST_DATA, nodeListDataElement);
+		}
 	}
 	
 	@Override

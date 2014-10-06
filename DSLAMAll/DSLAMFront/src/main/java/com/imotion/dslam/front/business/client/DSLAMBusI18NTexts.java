@@ -378,4 +378,7 @@ public interface DSLAMBusI18NTexts extends AEGWTI18NCommonTexts {
 	
 	@DefaultStringValue("Ejecutar")
 	String execute();
+	
+	@DefaultStringValue("Ya existe una lista de nodos con el nombre:")
+	String nodelist_exist_error();
 }

@@ -36,6 +36,10 @@ public class CRONIOBusDesktopProjectNavigatorTreeMenuItem extends AEGWTBootstrap
 		addNodeListPopupForm.resetForm();
 	}
 
+	public void showDuplicateNodeListNameError(String nodeListName) {
+		addNodeListPopupForm.showDuplicateNodeListNameError(nodeListName);
+	}
+
 	/**
 	 * PROTECTED
 	 */

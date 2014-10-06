@@ -155,6 +155,18 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			}
 		}
 	}
+	
+	public void showDuplicateNodeListNameError(long projectId, String nodeListName) {
+		List<DSLAMBusDesktopProjectNavigatorElement> projectNavigatorElementList = getElementWidgetList();
+		for (DSLAMBusDesktopProjectNavigatorElement projectNavigatorElement : projectNavigatorElementList) {
+			
+			String projectNavigatorElementId 	= projectNavigatorElement.getId();
+			String projectIdStr 				= String.valueOf(projectId);
+			if (projectNavigatorElementId.equals(projectIdStr)) {
+				projectNavigatorElement.showDuplicateNodeListNameError(nodeListName);
+			}
+		}
+	}
 
 	/**
 	 * AEGWTCompositePanel

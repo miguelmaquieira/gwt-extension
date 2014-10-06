@@ -18,6 +18,7 @@ import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
@@ -81,8 +82,10 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			if (finalSectionId == null) {
 				fireSectionSelected(projectId, mainSectionId);
 			} else{
-		
 				boolean navigate 		= !getSectionType().equals(mainSectionId);
+				if (getSectionType() ==CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_PROCESS && CRONIOBusProjectBasePresenterConstants.SECTION_TYPE_ENVIROMENTS.equals(mainSectionId)  ) {
+					navigate = false;
+				}
 				boolean	 projectChange	= !projectId.equals(currentProjectId);
 
 				getView().beforeExitSection();
@@ -440,40 +443,52 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite nodeListData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.NODELIST_DATA);
-					String projectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-					String 	nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME	, nodeListData);	
-					projectsLayout.addNodeList(projectId, nodeListName);
-
-					StringBuilder sbKey = new StringBuilder();
-					sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-					sbKey.append(CRONIODesktopIAppControllerConstants.LIST_NODELIST_DATA);
-					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-					sbKey.append(projectId);
-					String finalSectionKey = sbKey.toString();
-
-					AEMFTMetadataElementComposite listNodeListData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
-
-					if (listNodeListData != null) {
-						listNodeListData = (AEMFTMetadataElementComposite) listNodeListData.cloneObject();
+					AEMFTMetadataElementComposite errorData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERROR);
+					if (errorData != null) {
+						CRONIOBusDesktopProjectEvent errorDuplicateNodeListNameEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+						errorDuplicateNodeListNameEvt.setEventType(EVENT_TYPE.DUPLICATE_NODELIST_ERROR);
+						errorDuplicateNodeListNameEvt.addElementAsDataValue(errorData);
+						getLogicalEventHandlerManager().fireEvent(errorDuplicateNodeListNameEvt);
 					} else {
-						listNodeListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+						AEMFTMetadataElementComposite nodeListData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.NODELIST_DATA);
+						String projectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+						String 	nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME	, nodeListData);	
+						projectsLayout.addNodeList(projectId, nodeListName);
+
+						StringBuilder sbKey = new StringBuilder();
+						sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(projectId);
+						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
+						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+						String finalSectionKey = sbKey.toString();
+
+						AEMFTMetadataElementComposite listNodeListData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
+
+						if (listNodeListData != null) {
+							listNodeListData = (AEMFTMetadataElementComposite) listNodeListData.cloneObject();
+						} else {
+							listNodeListData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+						}
+
+						nodeListData.setKey(nodeListName);
+						listNodeListData.addElement(nodeListName ,nodeListData);
+
+						AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+						storageEvent.setFullKey(finalSectionKey);
+						storageEvent.addElementAsDataValue(listNodeListData);
+						storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+						getLogicalEventHandlerManager().fireEvent(storageEvent);
+						
+						getContextDataController().setElement(finalSectionKey, listNodeListData.cloneObject());
+
+						CRONIOBusDesktopProjectEvent nodeListCreaTedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+						nodeListCreaTedEvt.setEventType(EVENT_TYPE.NODELIST_CREATED);
+						nodeListCreaTedEvt.addElementAsString(DSLAMBOIProject.PROJECT_ID, projectId);
+						getLogicalEventHandlerManager().fireEvent(nodeListCreaTedEvt);
 					}
-
-					nodeListData.setKey(nodeListName);
-					listNodeListData.addElement(nodeListData);
-
-					AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
-					storageEvent.setFullKey(finalSectionKey);
-					storageEvent.addElementAsDataValue(listNodeListData);
-					storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
-					getLogicalEventHandlerManager().fireEvent(storageEvent);
-
-					CRONIOBusDesktopProjectEvent nodeListCreaTedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-					nodeListCreaTedEvt.setEventType(EVENT_TYPE.NODELIST_CREATED);
-					nodeListCreaTedEvt.addElementAsString(DSLAMBOIProject.PROJECT_ID, projectId);
-					getLogicalEventHandlerManager().fireEvent(nodeListCreaTedEvt);
 				}
 			}
 

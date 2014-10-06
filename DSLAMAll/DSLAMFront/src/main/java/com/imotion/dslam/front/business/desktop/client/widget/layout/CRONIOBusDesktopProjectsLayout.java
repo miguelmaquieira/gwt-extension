@@ -6,6 +6,8 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -15,6 +17,7 @@ import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPro
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.DSLAMBusDesktopProjectNavigator;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbar;
+import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -175,6 +178,14 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				Serializable nodeListsData = evt.getElementAsSerializableDataValue();
 				List<String> nodeLists = (List<String>) nodeListsData;
 				toolbar.addNodeListsToExecuteForm(nodeLists);
+			} else if (EVENT_TYPE.DUPLICATE_NODELIST_ERROR.equals(type)) {
+				EVENT_TYPE eventType = evt.getEventType();
+				if(EVENT_TYPE.DUPLICATE_NODELIST_ERROR.equals(eventType)) {
+					AEMFTMetadataElement errorData = evt.getElementAsDataValue();
+					long currentProjectId 	= getElementController().getElementAsLong(CRONIOBOIProjectDataConstants.PROJECT_ID, errorData);
+					String nodeListName = getElementController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, errorData);
+					projectListNavigator.showDuplicateNodeListNameError(currentProjectId, nodeListName);
+				}
 			}
 		}
 	}
@@ -187,6 +198,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				EVENT_TYPE.SECTION_SELECTED.equals(type)||
 				EVENT_TYPE.PROJECT_CREATED.equals(type)||
 				EVENT_TYPE.NODELIST_CREATED.equals(type)||
-				EVENT_TYPE.GET_PROCESS_NODELISTS.equals(type);
+				EVENT_TYPE.GET_PROCESS_NODELISTS.equals(type)||
+				EVENT_TYPE.DUPLICATE_NODELIST_ERROR.equals(type);
 	}
 }
