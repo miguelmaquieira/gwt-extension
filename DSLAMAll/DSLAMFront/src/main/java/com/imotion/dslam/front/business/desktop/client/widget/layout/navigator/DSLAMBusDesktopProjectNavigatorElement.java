@@ -5,8 +5,12 @@ import java.util.Iterator;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
+import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -83,6 +87,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuNodesProcess 		= new CRONIOBusDesktopProjectNavigatorTreeMenuItem(projectId, SECTION_TYPE_ENVIROMENTS, TEXTS.environments(), this);
 		menuNodesProcess.setCloseMenu();
 		menuNodesProcess.addIconButton(AEGWTIBoostrapConstants.GLYPHICON + " " + AEGWTIBoostrapConstants.GLYPHICON_PLUS);
+		menuNodesProcess.addStyleName(DSLAMBusDesktopIStyleConstants.BOOTSTRAP_TREEMENU_ITEM_LEVEL3);
 		menuProcess.add(menuNodesProcess.asWidget());
 
 		//MENU -> Project  -> Execution
@@ -168,7 +173,14 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			Iterator<Widget> nodeListItemList = menuNodesProcess.iterator();
 			while (nodeListItemList.hasNext()) {
 				AEGWTBootstrapTreeMenuFinalItem nodeList = (AEGWTBootstrapTreeMenuFinalItem) nodeListItemList.next();
-				if (sectionId.equals(nodeList.getElementName())) {
+				StringBuilder sbKey = new StringBuilder();
+				sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
+				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+				sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+				sbKey.append(nodeList.getElementName());
+				String nodeListKey = sbKey.toString();
+				if (sectionId.equals(nodeListKey)) {
 					nodeList.setSelected(true);
 				}
 			}

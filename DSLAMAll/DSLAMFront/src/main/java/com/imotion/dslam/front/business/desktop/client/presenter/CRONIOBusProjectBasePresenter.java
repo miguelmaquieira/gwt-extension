@@ -446,7 +446,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite errorData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERROR);
+					AEMFTMetadataElementComposite errorData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS);
 					if (errorData != null) {
 						CRONIOBusDesktopProjectEvent errorDuplicateNodeListNameEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 						errorDuplicateNodeListNameEvt.setEventType(EVENT_TYPE.DUPLICATE_NODELIST_ERROR);
@@ -827,5 +827,4 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			}
 		});
 	}
-
 }

@@ -32,7 +32,7 @@ public interface DSLAMBUIProjectBusinessServiceConstants {
 	String 	NODES_DATA_LIST 			= "NODES_DATA_LIST";
 	String 	NODELIST_DATA 				= "NODELIST_DATA";
 	String 	LIST_NODELIST_DATA 			= "LIST_NODELIST_DATA";
-	String 	KEY_EXIST_ERROR 			= "ERROR_EXIST";
+	String 	KEY_EXIST_ERRORS 			= "ERROR_EXIST"; 
 	//METHODS
 	String 	METHOD_ADD_NODELIST			= "ADD_NODELIST";
 

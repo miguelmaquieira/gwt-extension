@@ -16,12 +16,6 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.imotion</groupId>
 			<artifactId>DSLAMBackend</artifactId>
 			<version>${project.version}</version>
@@ -40,11 +34,6 @@
 			<groupId>com.selene</groupId>
 			<artifactId>SeleneBase</artifactId>
 			<version>${selene.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>${jodaTime.version}</version>
 		</dependency>
 	</dependencies>
 </project>
