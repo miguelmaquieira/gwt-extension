@@ -204,9 +204,11 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 		DSLAMBOIProcess process = project.getProcess();
 		
 		List<CRONIOBOINodeList> nodeLists = process.getListNodeList();
-		for (CRONIOBOINodeList nodeList : nodeLists) {
-			if (nodeListName.equals(nodeList.getNodeListName())){
-				error = true;
+		if (!AEMFTCommonUtilsBase.isEmptyList(nodeLists)) {
+			for (CRONIOBOINodeList nodeList : nodeLists) {
+				if (nodeListName.equals(nodeList.getNodeListName())){
+					error = true;
+				}
 			}
 		}
 		
@@ -236,6 +238,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 			AEMFTMetadataElementComposite nodeListDataElement = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
 			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 			contextOut.addElement(NODELIST_DATA, nodeListDataElement);
+			contextOut.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, currentProjectIdStr);
 		}
 	}
 	

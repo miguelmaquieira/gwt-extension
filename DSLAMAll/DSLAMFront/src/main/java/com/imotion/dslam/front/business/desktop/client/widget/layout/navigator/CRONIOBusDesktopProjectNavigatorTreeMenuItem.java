@@ -59,6 +59,10 @@ public class CRONIOBusDesktopProjectNavigatorTreeMenuItem extends AEGWTBootstrap
 	
 	@Override
 	protected void fireButtonClick() {
+		if (addNodeListPopupForm == null) {
+			addNodeListPopupForm = new CRONIOBusDesktopProcessAddNodeListForm(this);
+		}
+		addNodeListPopupForm.setProjectId(projectId);
 		getNodeListPopup().center();
 	}
 }

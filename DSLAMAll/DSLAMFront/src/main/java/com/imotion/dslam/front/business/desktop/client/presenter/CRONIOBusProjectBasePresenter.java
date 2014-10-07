@@ -243,6 +243,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (LOGICAL_TYPE.SAVE_EVENT.equals(evtTyp) && CRONIOBusDesktopProcessAddNodeListForm.NAME.equals(sourceWidget)) {
 			String nodeListName = evt.getElementAsString(CRONIOBOINodeList.NODELIST_NAME);
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
+			if (AEMFTCommonUtilsBase.isEmptyString(currentProjectId)) {
+				currentProjectId = evt.getElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID);
+			}
 			addNodeListToDB(nodeListName, currentProjectId);
 		}	
 	}
@@ -452,7 +455,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 					} else {
 						AEMFTMetadataElementComposite nodeListData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.NODELIST_DATA);
 						String projectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-						String 	nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME	, nodeListData);	
+						String nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME	, nodeListData);	
+						if (AEMFTCommonUtilsBase.isEmptyString(projectId)) {
+							AEMFTMetadataElementSingle projectIdData = (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOIProjectDataConstants.PROJECT_ID);
+							projectId	= projectIdData.getValueAsString();
+						}
 						projectsLayout.addNodeList(projectId, nodeListName);
 
 						StringBuilder sbKey = new StringBuilder();

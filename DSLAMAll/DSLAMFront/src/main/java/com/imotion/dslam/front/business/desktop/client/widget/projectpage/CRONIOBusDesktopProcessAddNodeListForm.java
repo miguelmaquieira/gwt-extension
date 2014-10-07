@@ -5,6 +5,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -26,6 +27,7 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 	private AEGWTButton 						saveButton;
 	private AEGWTButton							cancelButton;
 	private boolean							editMode;
+	private String 								projectId;
 	
 
 	public CRONIOBusDesktopProcessAddNodeListForm(AEGWTICompositePanel parent) {
@@ -62,7 +64,8 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(CRONIOBOINodeListDataConstants.NODELIST_NAME				, nameNodeListTextBox.getText());
+					evt.addElementAsString(CRONIOBOIProjectDataConstants.PROJECT_ID		,	projectId);
+					evt.addElementAsString(CRONIOBOINodeListDataConstants.NODELIST_NAME	, nameNodeListTextBox.getText());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -108,6 +111,10 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 
 	public void showDuplicateNodeListNameError(String nodeListName) {
 		nameNodeListTextBox.setErrorLabelTextAndShow(TEXTS.nodelist_exist_error() + nodeListName);
+	}
+	
+	public void setProjectId (String projectId) {
+		this.projectId = projectId;
 	}
 	
 	/**
