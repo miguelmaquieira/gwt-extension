@@ -111,33 +111,16 @@
 			<groupId>com.selene</groupId>
 			<artifactId>SeleneBase</artifactId>
 			<version>${selene.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>SeleneBase</artifactId>
-			<version>${selene.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>com.selene</groupId>
-			<artifactId>Selene</artifactId>
+			<artifactId>Selene4GWT</artifactId>
 			<version>${selene.version}</version>
 			<exclusions>
 				<exclusion>
-					<groupId>com.google.code.morphia</groupId>
-					<artifactId>morphia</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.mongodb</groupId>
-					<artifactId>mongo-java-driver</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.google.appengine</groupId>
-					<artifactId>appengine-api-1.0-sdk</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.googlecode.objectify</groupId>
-					<artifactId>objectify</artifactId>
+					<groupId>com.googlecode.mgwt</groupId>
+					<artifactId>mgwt</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -145,14 +128,14 @@
 			<groupId>com.selene</groupId>
 			<artifactId>Selene4GWT</artifactId>
 			<version>${selene.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.googlecode.mgwt</groupId>
+					<artifactId>mgwt</artifactId>
+				</exclusion>
+			</exclusions>
 			<classifier>sources</classifier>
 		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>Selene4GWT</artifactId>
-			<version>${selene.version}</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
