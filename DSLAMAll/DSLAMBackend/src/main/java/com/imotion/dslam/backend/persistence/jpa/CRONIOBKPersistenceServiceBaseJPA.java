@@ -4,27 +4,27 @@ import java.io.Serializable;
 
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKINodeListPersistenceService;
-import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
+import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceServiceBase;
 import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
-import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.file.CRONIOBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
-import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
-import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.process.CRONIOBKIProcessPersistenceService;
+import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.core.AEMFTICoreProxyService;
 
-public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extends Serializable> extends DSLAMBKPersistenceServiceBase<T, Q, Id> {
+public abstract class CRONIOBKPersistenceServiceBaseJPA<T, Q extends T, Id extends Serializable> extends CRONIOBKPersistenceServiceBase<T, Q, Id> {
 
 	private static final long serialVersionUID = -3861653720997741685L;
 
-	private DSLAMBKPersistenceModuleJPA<Q, Id> persistenceModule;
+	private CRONIOBKPersistenceModuleJPA<Q, Id> persistenceModule;
 	
-	private DSLAMBKIProjectPersistenceService					projectPersistence;
-	private DSLAMBKIFilePersistenceService 						filePersistence;
-	private DSLAMBKIProcessPersistenceService 					processPersistence;
+	private CRONIOBKIProjectPersistenceService					projectPersistence;
+	private CRONIOBKIFilePersistenceService 					filePersistence;
+	private CRONIOBKIProcessPersistenceService 					processPersistence;
 	private CRONIOBKINodePersistenceService						nodePersistence;
 	private CRONIOBKINodeListPersistenceService					nodeListPersistence;
 	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
@@ -34,9 +34,9 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 	private CRONIOBKILogPersistenceService						logPersistence;
 	
 	@Override
-	public DSLAMBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
+	public CRONIOBKPersistenceModuleJPA<Q, Id> getPersistenceModule() {
 		if (persistenceModule == null) {
-			persistenceModule = new DSLAMBKPersistenceModuleJPA<Q, Id>();
+			persistenceModule = new CRONIOBKPersistenceModuleJPA<Q, Id>();
 			setPersistenceUnit();
 			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(), getSessionId()});
 			
@@ -122,23 +122,23 @@ public abstract class DSLAMBKPersistenceServiceBaseJPA<T, Q extends T, Id extend
 		getFactoryPersistence(coreProxy);
 	}
 	
-	protected DSLAMBKIProjectPersistenceService getProjectPersistence() {
+	protected CRONIOBKIProjectPersistenceService getProjectPersistence() {
 		if (projectPersistence == null) {
-			projectPersistence = (DSLAMBKIProjectPersistenceService) getFactoryPersistence().newProjectPersistence(getSessionId());
+			projectPersistence = (CRONIOBKIProjectPersistenceService) getFactoryPersistence().newProjectPersistence(getSessionId());
 		}
 		return projectPersistence;
 	}
 	
-	protected DSLAMBKIFilePersistenceService getFilePersistence() {
+	protected CRONIOBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
-			filePersistence = (DSLAMBKIFilePersistenceService) getFactoryPersistence().newFilePersistence(getSessionId());
+			filePersistence = (CRONIOBKIFilePersistenceService) getFactoryPersistence().newFilePersistence(getSessionId());
 		}
 		return filePersistence;
 	}
 
-	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
+	protected CRONIOBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
-			processPersistence = (DSLAMBKIProcessPersistenceService) getFactoryPersistence().newProcessPersistence(getSessionId());
+			processPersistence = (CRONIOBKIProcessPersistenceService) getFactoryPersistence().newProcessPersistence(getSessionId());
 		}
 		return processPersistence;
 	}

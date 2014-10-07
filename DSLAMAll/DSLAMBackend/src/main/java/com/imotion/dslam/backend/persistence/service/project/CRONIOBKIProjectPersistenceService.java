@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.imotion.dslam.bom.DSLAMBOIProject;
 
-public interface DSLAMBKIProjectPersistenceService {
+public interface CRONIOBKIProjectPersistenceService {
 	
 	DSLAMBOIProject getProject(long projectId);
 	

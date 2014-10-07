@@ -1,8 +1,8 @@
 package com.imotion.dslam.business.service;
 
-import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
+import com.imotion.dslam.business.service.base.CRONIOBUIBusinessService;
 
-public interface CRONIOBUIPreferencesBusinessService extends DSLAMBUIBusinessService {
+public interface CRONIOBUIPreferencesBusinessService extends CRONIOBUIBusinessService {
 
 	void addConnection();
 	

@@ -5,21 +5,21 @@ import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKINodeList
 import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
-import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.file.CRONIOBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
-import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
-import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.process.CRONIOBKIProcessPersistenceService;
+import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceFactory;
 
-public interface DSLAMBKIPersistenceFactory extends AEMFTIPersistenceFactory {
+public interface CRONIOBKIPersistenceFactory extends AEMFTIPersistenceFactory {
 
-	public	DSLAMBKIFilePersistenceService newFilePersistence(String sessionId);
+	public	CRONIOBKIFilePersistenceService newFilePersistence(String sessionId);
 	
-	public	DSLAMBKIProcessPersistenceService newProcessPersistence(String sessionId);
+	public	CRONIOBKIProcessPersistenceService newProcessPersistence(String sessionId);
 	
-	public	DSLAMBKIProjectPersistenceService newProjectPersistence(String sessionId);
+	public	CRONIOBKIProjectPersistenceService newProjectPersistence(String sessionId);
 	
 	public	CRONIOBKINodePersistenceService newNodePersistence(String sessionId);
 	

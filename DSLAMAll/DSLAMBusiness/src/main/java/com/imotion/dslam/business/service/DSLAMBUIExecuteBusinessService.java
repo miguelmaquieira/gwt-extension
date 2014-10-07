@@ -1,10 +1,10 @@
 package com.imotion.dslam.business.service;
 
-import com.imotion.dslam.business.service.base.DSLAMBUIBusinessService;
+import com.imotion.dslam.business.service.base.CRONIOBUIBusinessService;
 
 
 
-public interface DSLAMBUIExecuteBusinessService extends DSLAMBUIBusinessService {
+public interface DSLAMBUIExecuteBusinessService extends CRONIOBUIBusinessService {
 
 	void executeProject();
 	

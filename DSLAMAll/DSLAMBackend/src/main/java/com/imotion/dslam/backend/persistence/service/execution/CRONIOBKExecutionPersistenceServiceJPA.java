@@ -3,14 +3,14 @@ package com.imotion.dslam.backend.persistence.service.execution;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOExecution;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
-public class CRONIOBKExecutionPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOIExecution, CRONIOBOExecution, Long> implements CRONIOBKIExecutionPersistenceService {
+public class CRONIOBKExecutionPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOIExecution, CRONIOBOExecution, Long> implements CRONIOBKIExecutionPersistenceService {
 
 	private static final long serialVersionUID = 7616081258676466890L;
 

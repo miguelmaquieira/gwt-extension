@@ -8,7 +8,7 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 
 
 
-public interface DSLAMBKIProcessPersistenceService {
+public interface CRONIOBKIProcessPersistenceService {
 
 	DSLAMBOIProcess addProcess(DSLAMBOIProcess process);
 
