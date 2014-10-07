@@ -33,6 +33,7 @@ public interface DSLAMBusDesktopIStyleConstants {
 	String NODE_LIST_CONTAINER							= NODE_LIST		 		+ "-container";			//dslam_studio-nodeList-container
 	String NODE_LIST_CONTAINER_ZONE 					= LIST_CONTAINER		+ "-zone";				//dslam_studio-nodeList-container-zone
 	String NODE_LIST_ADD_ELEMENT						= NODE_LIST				+ "-addElement"; 		//dslam_studio-nodeList-addElement
+	String BOOTSTRAP_TREEMENU_ITEM_LEVEL3				= APP_ID_PREFFIX		+ "treeMenuItem-level3"; 	//dslam_studio-treeMenuItem-level3	
 	
 	//PROJECT FORM
 	String NEW_PROJECT_FORM 							= APP_ID_PREFFIX			+ "newProjectForm";	//dslam_studio-newProjectForm
