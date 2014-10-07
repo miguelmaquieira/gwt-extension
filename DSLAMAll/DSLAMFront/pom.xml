@@ -17,6 +17,8 @@
 
 	<properties>
 		<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory>
+		
+		<gwt.ace.editor.version>0.0.2</gwt.ace.editor.version>
 		<!-- Hibernate -->
 		<hibernate.connection.url>jdbc:mysql://localhost:3306/dslamdbtest</hibernate.connection.url>
 		<hibernate.connection.user>dslamuser</hibernate.connection.user>
@@ -33,12 +35,6 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servletApi.version}</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- GWT-BASE -->
@@ -69,26 +65,16 @@
 			<artifactId>gwt-ajaxloader</artifactId>
 			<version>1.1.0</version>
 		</dependency>
+
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${validation-api.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${validation-api.version}</version>
-			<classifier>sources</classifier>
+			<groupId>com.imotion.ace</groupId>
+			<artifactId>ImotionGWTAceEditor</artifactId>
+			<version>${gwt.ace.editor.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.imotion.ace</groupId>
 			<artifactId>ImotionGWTAceEditor</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.imotion.ace</groupId>
-			<artifactId>ImotionGWTAceEditor</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${gwt.ace.editor.version}</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
@@ -107,6 +93,17 @@
 			<groupId>com.imotion</groupId>
 			<artifactId>DSLAMBusiness</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.imotion</groupId>
+			<artifactId>DSLAMExecute</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.imotion</groupId>
+			<artifactId>DSLAMExecute</artifactId>
+			<version>${project.version}</version>
+			<classifier>sources</classifier>
 		</dependency>
 
 		<!-- SELENE -->
@@ -155,17 +152,22 @@
 			<artifactId>Selene4GWT</artifactId>
 			<version>${selene.version}</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>com.imotion</groupId>
-			<artifactId>DSLAMExecute</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation-api.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.imotion</groupId>
-			<artifactId>DSLAMExecute</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<classifier>sources</classifier>
-		</dependency>
+<!-- 		JUST FOR DEBUGGING PROPOSALS -->		
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.validation</groupId> -->
+<!-- 			<artifactId>validation-api</artifactId> -->
+<!-- 			<version>${validation-api.version}</version> -->
+<!-- 			<classifier>sources</classifier> -->
+<!-- 		</dependency> -->
+		
+		<!-- UNIT TESTING -->
+		
 	</dependencies>
 
 	<build>
@@ -302,6 +304,8 @@
 					<!-- the exploded war structure ends up in target/${webappDirectory} -->
 					<webappDirectory>${webappDirectory}</webappDirectory>
 					<dependentWarExcludes></dependentWarExcludes>
+<!-- 					 <packagingExcludes>WEB-INF/lib/*-sources.jar</packagingExcludes> -->
+<!-- 					<packagingExcludes>WEB-INF/lib/gwt-dev-2.6.0.jar</packagingExcludes> -->
 					<!-- <packagingExcludes>WEB-INF/deploy/**, WEB-INF/lib/gwt-dev-2.5.1.jar, 
 						com.imotion.saboreando.front.business.desktop.entrypoint.BusinessDesktopModule/**</packagingExcludes> -->
 				</configuration>
@@ -403,8 +407,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-
 	
 	<profiles>
 		<profile>
@@ -442,6 +444,4 @@
 		</profile>
 	</profiles>
 	
-
-
 </project>
