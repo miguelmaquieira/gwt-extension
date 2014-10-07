@@ -36,7 +36,6 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	private CRONIOBusDesktopProjectNavigatorFinalItem 		variableProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 		scheduleProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 		propertiesProcess;
-	private CRONIOBusDesktopProjectNavigatorFinalItem 		nodesProcess;
 	private CRONIOBusDesktopProjectNavigatorFinalItem 		nodesConsole;
 
 	public DSLAMBusDesktopProjectNavigatorElement(String projectId, String projectName) {
@@ -146,8 +145,6 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 			scheduleProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			propertiesProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS.equals(sectionId)) {
-			nodesProcess.setSelected(true);
 		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			nodesConsole.setSelected(true);
 		} else if (SECTION_TYPE_PROJECT.equals(sectionId)) {
@@ -205,10 +202,24 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			menuProcess.setModified(true);
 			propertiesProcess.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS.equals(sectionId)) {
+		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			menuProcess.setModified(true);
 			menuNodesProcess.setModified(true);
-			nodesProcess.setModified(true);
+			
+			Iterator<Widget> nodeListItemList = menuNodesProcess.iterator();
+			while (nodeListItemList.hasNext()) {
+				AEGWTBootstrapTreeMenuFinalItem nodeList = (AEGWTBootstrapTreeMenuFinalItem) nodeListItemList.next();
+				StringBuilder sbKey = new StringBuilder();
+				sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
+				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+				sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+				sbKey.append(nodeList.getElementName());
+				String nodeListKey = sbKey.toString();
+				if (sectionId.equals(nodeListKey)) {
+					nodeList.setModified(true);
+				}
+			}
 		}
 	}
 

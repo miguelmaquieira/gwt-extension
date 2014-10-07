@@ -3,12 +3,12 @@ package com.imotion.dslam.backend.persistence.service.project;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.data.DSLAMBOProject;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class DSLAMBKProjectPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<DSLAMBOIProject, DSLAMBOProject, Long> implements DSLAMBKIProjectPersistenceService {
+public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<DSLAMBOIProject, DSLAMBOProject, Long> implements CRONIOBKIProjectPersistenceService {
 
 	private static final long serialVersionUID = -1754757807591412638L;
 

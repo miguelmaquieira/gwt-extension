@@ -5,13 +5,13 @@ import java.io.Serializable;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTIPersistenceJPAModule;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersistenceJPAModuleImpl;
 
-public class DSLAMBKPersistenceModuleJPA<Q, Id extends Serializable> extends AEMFTPersistenceJPAModuleImpl<Q, Id> implements AEMFTIPersistenceJPAModule<Q, Id> {
+public class CRONIOBKPersistenceModuleJPA<Q, Id extends Serializable> extends AEMFTPersistenceJPAModuleImpl<Q, Id> implements AEMFTIPersistenceJPAModule<Q, Id> {
 
 	// serial number
 	private static final long serialVersionUID = -7923101269597352273L;
 	
-	public static final String DEFAULT_PERSISTENCE_UNIT_NAME	= "dslam";
-	public static final String MONGO_PERSISTENCE_UNIT_NAME 		= "mongoDslam";
+	public static final String DEFAULT_PERSISTENCE_UNIT_NAME		= "cronio";
+	public static final String MONGO_PERSISTENCE_UNIT_NAME 		= "mongoCronio";
 
 	private String persitenceUnitName = DEFAULT_PERSISTENCE_UNIT_NAME ;
 	

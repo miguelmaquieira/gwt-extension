@@ -3,14 +3,14 @@ package com.imotion.dslam.backend.persistence.log;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceModuleJPA;
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceModuleJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.data.CRONIOBOLog;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOILog, CRONIOBOLog, String> implements CRONIOBKILogPersistenceService{
+public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOILog, CRONIOBOLog, String> implements CRONIOBKILogPersistenceService{
 
 	private static final long serialVersionUID = 1L;
 
@@ -93,7 +93,7 @@ public class CRONIOBKLogPersistenceServiceJPA extends DSLAMBKPersistenceServiceB
 
 	@Override
 	protected void setPersistenceUnit() {
-		getPersistenceModule().setPersitenceUnitName(DSLAMBKPersistenceModuleJPA.MONGO_PERSISTENCE_UNIT_NAME);
+		getPersistenceModule().setPersitenceUnitName(CRONIOBKPersistenceModuleJPA.MONGO_PERSISTENCE_UNIT_NAME);
 	}
 
 	

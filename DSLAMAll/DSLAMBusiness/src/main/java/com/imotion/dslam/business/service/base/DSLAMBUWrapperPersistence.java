@@ -1,21 +1,21 @@
 package com.imotion.dslam.business.service.base;
 
-import com.imotion.dslam.backend.persistence.DSLAMBKIPersistenceFactory;
-import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceServiceBase;
-import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
+import com.imotion.dslam.backend.persistence.CRONIOBKIPersistenceFactory;
+import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceServiceBase;
+import com.imotion.dslam.business.CRONIOBUIWrapperPersistence;
 import com.selene.arch.exe.bus.service.AEMFTBusinessServiceWrapperPersistence;
 
-public class DSLAMBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersistence implements DSLAMBUIWrapperPersistence {
+public class DSLAMBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersistence implements CRONIOBUIWrapperPersistence {
 
 	// serial number
 	private static final long serialVersionUID = -5343514754637590997L;
 	
-	private DSLAMBKIPersistenceFactory factoryPool;
+	private CRONIOBKIPersistenceFactory factoryPool;
 
 	@Override
-	public DSLAMBKIPersistenceFactory getAppFactoryPersistence() {
+	public CRONIOBKIPersistenceFactory getAppFactoryPersistence() {
 		if (factoryPool == null) {
-			factoryPool = (DSLAMBKIPersistenceFactory) DSLAMBKPersistenceServiceBase.getFactoryPersistence(getBusinessWrapper().getProxyCore());
+			factoryPool = (CRONIOBKIPersistenceFactory) CRONIOBKPersistenceServiceBase.getFactoryPersistence(getBusinessWrapper().getProxyCore());
 		}
 		return factoryPool;
 	}
