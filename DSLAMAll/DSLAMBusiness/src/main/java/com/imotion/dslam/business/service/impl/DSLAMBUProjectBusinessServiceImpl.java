@@ -214,7 +214,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implem
 			AEMFTMetadataElementCompositeRecordSet errorData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			errorData.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
 			errorData.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, currentProjectId);
-			getContext().getContextOUT().addElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERROR,errorData);
+			getContext().getContextOUT().addElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS,errorData);
 		} else {
 			//nodeList
 			CRONIOBOINodeList nodeList = new CRONIOBONodeList();

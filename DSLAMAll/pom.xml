@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.imotion</groupId>
-  <artifactId>DSLAMAll</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>DSLAMAll</name>
+  
+  	<modelVersion>4.0.0</modelVersion>
+  	<groupId>com.imotion</groupId>
+  	<artifactId>DSLAMAll</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<packaging>pom</packaging>
+  	<name>DSLAMAll</name>
   
   
-  <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<properties>
+  		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javaversion>1.7</javaversion>
 
 		<!-- Package versions -->
@@ -22,7 +23,7 @@
 		<validation-api.version>1.0.0.GA</validation-api.version>
 		<servletApi.version>3.0.1</servletApi.version>
 		<jodaTime.version>2.3</jodaTime.version>
-
+	
 		<!-- Plugin versions -->
 		<mavenCompilerPlugin.version>2.5.1</mavenCompilerPlugin.version>
 		<mavenEclipsePlugin.version>2.9</mavenEclipsePlugin.version>
@@ -30,20 +31,30 @@
 		<mavenSourcePlugin.version>2.2.1</mavenSourcePlugin.version>
 		<mavenJarPlugin.version>2.4</mavenJarPlugin.version>
 		<mavenInstallPlugin.version>2.4</mavenInstallPlugin.version>
-
-		<!-- Tests -->
+	
+		<!-- Unit testing -->
+		<junit.version>3.8.1</junit.version>
 		<skipTests>true</skipTests>
-
 	</properties>
-
+	
 	<modules>
 		<module>DSLAMBom</module>
 		<module>DSLAMBackend</module>
 		<module>DSLAMExecute</module>
 		<module>DSLAMBusiness</module>
 		<module>DSLAMFront</module>
-  </modules>
+	</modules>
 
+	<dependencies>
+	
+	<!-- UNIT TESTING -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<!-- Compiler configuration -->
@@ -83,6 +94,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
