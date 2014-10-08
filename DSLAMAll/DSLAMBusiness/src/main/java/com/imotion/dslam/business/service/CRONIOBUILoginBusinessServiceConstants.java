@@ -1,15 +1,15 @@
 package com.imotion.dslam.business.service;
 
-import com.imotion.dslam.business.DSLAMBUIConstant;
-import com.imotion.dslam.business.DSLAMBUIServiceConstant;
+import com.imotion.dslam.business.CRONIOBUIConstant;
+import com.imotion.dslam.business.CRONIOBUIServiceConstant;
 import com.selene.arch.base.MFTIConstant;
 
 public interface CRONIOBUILoginBusinessServiceConstants {
 
 	// BusinessLoginService types
-	public static long 		CTE_BUSINESS_LOGIN_SERVICE_TYPE 	= DSLAMBUIServiceConstant.CTE_DSLAM_APP_BUS_LOGIN_SERVICE_SUBTYPE | DSLAMBUIConstant.CTE_DSLAM_APP_BUSINESS_SERVICE_TYPE;
+	public static long 		CTE_BUSINESS_LOGIN_SERVICE_TYPE 	= CRONIOBUIServiceConstant.CTE_CRONIO_APP_BUS_LOGIN_SERVICE_SUBTYPE | CRONIOBUIConstant.CTE_CRONIO_APP_BUSINESS_SERVICE_TYPE;
 	public static String 	CTE_BUSINESS_LOGIN_SERVICE_HEX_TYPE 	= Long.toHexString(CTE_BUSINESS_LOGIN_SERVICE_TYPE);
-	public static String 	CTE_BUSINESS_LOGIN_SERVICE_NAME 		= "DSLAMBUIBusinessLoginServiceConstants";
+	public static String 	CTE_BUSINESS_LOGIN_SERVICE_NAME 		= "CRONIOBUIBusinessLoginServiceConstants";
 
 	// Constants
 	public static long CTE_BUSINESS_LOGIN_SERVICE_RANGE_TRACE 		= CTE_BUSINESS_LOGIN_SERVICE_TYPE | MFTIConstant.CTE_MFT_RANGE_TRACE;

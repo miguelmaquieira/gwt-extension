@@ -2,7 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter.preferences.co
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasPreferencesEventHandlers;
@@ -128,7 +128,7 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 		String machineConfigureDataKey = sbKey.toString();
 		
 		AEMFTMetadataElementComposite machineConfigureData = getContextDataController().getElementAsComposite(machineConfigureDataKey);
-		getClientServerConnection().executeComm(machineConfigureData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_UPDATE_MACHINE_CONFIG_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(machineConfigureData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PREFERENCES_UPDATE_MACHINE_CONFIG_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {

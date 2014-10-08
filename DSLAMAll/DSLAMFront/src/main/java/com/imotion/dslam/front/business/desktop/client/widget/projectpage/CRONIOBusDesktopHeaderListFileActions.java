@@ -12,8 +12,8 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.Hidden;
 import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.client.DSLAMBusPresenterBaseConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
@@ -61,7 +61,7 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 		Hidden hiddenFieldServiceId = new Hidden();
 		formContaimer.add(hiddenFieldServiceId);
 		hiddenFieldServiceId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_SERVICE_ID);
-		hiddenFieldServiceId.setValue(DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_CSV_NODES_ID);
+		hiddenFieldServiceId.setValue(CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_GET_CSV_NODES_ID);
 		
 		form.addSubmitCompleteHandler(new SubmitCompleteHandler() {
 			
@@ -72,7 +72,7 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 				if (!AEMFTCommonUtilsBase.isEmptyString(jsonResponseNoPreTag)) {
 					JSONObject jsonValue = (JSONObject) JSONParser.parseStrict(jsonResponseNoPreTag);
 					AEMFTMetadataElementComposite nodeListData = AEGWTJSONUtils.fromJSONToMetadataElement(jsonValue);
-					nodeListData = getElementController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.NODES_DATA_LIST, nodeListData);
+					nodeListData = getElementController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.NODES_DATA_LIST, nodeListData);
 					AEGWTLogicalEvent openEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 					openEvt.setEventType(LOGICAL_TYPE.OPEN_EVENT);
 					openEvt.setSourceWidget(getName());

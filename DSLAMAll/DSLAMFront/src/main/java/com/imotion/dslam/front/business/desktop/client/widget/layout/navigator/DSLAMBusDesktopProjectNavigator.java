@@ -10,7 +10,7 @@ import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -183,7 +183,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 			elementListContainer.clear();
 			List<AEMFTMetadataElement> elementDataList = data.getSortedElementList();
 			for (AEMFTMetadataElement elementData : elementDataList) {
-				if (!CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementData.getKey()) && !DSLAMBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA.equals(elementData.getKey())) {
+				if (!CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA.equals(elementData.getKey()) && !CRONIOBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA.equals(elementData.getKey())) {
 					addElement((AEMFTMetadataElementComposite) elementData);
 				} else {
 					AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;

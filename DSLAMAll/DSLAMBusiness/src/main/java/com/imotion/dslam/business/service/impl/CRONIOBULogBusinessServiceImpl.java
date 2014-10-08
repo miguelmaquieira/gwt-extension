@@ -10,7 +10,7 @@ import com.imotion.dslam.business.service.CRONIOBUILogBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
-import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 
@@ -46,7 +46,7 @@ public class CRONIOBULogBusinessServiceImpl extends CRONIOBUServiceBase implemen
 		List<CRONIOBOILog> logList = getLogPersistence().getLogsByfilter(filterData);
 		
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logList);
+		AEMFTMetadataElementComposite logListData = CRONIOBUBomToMetadataConversor.fromLogList(logList);
 		contextOut.addElement(FILTERED_LOGS_DATA, logListData);
 		contextOut.addElement(CRONIOBOILog.OFFSET				, offset);
 		contextOut.addElement(CRONIOBOILog.NUMBER_RESULTS		, numRows);
@@ -75,7 +75,7 @@ public class CRONIOBULogBusinessServiceImpl extends CRONIOBUServiceBase implemen
 			resultsNumber = 0;
 		}
 		
-		AEMFTMetadataElementComposite logListData = DSLAMBUBomToMetadataConversor.fromLogList(logs);
+		AEMFTMetadataElementComposite logListData = CRONIOBUBomToMetadataConversor.fromLogList(logs);
 
 		//init-trace
 		traceNumberOfResults(METHOD_GET_EXECUTION_LOGS, CRONIOBOILog.class.getSimpleName(), resultsNumber);

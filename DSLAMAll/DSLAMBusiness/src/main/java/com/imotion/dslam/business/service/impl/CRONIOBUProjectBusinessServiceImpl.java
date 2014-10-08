@@ -18,13 +18,13 @@ import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.CRONIOBOFile;
 import com.imotion.dslam.bom.data.CRONIOBOProcess;
 import com.imotion.dslam.bom.data.CRONIOBOProject;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessService;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessService;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
-import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -34,7 +34,7 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.envi.io.AEMFTIIOConstant;
 
-public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase implements DSLAMBUIProjectBusinessService, DSLAMBUIProjectBusinessServiceConstants, DSLAMBUIProjectBusinessServiceTrace {
+public class CRONIOBUProjectBusinessServiceImpl extends CRONIOBUServiceBase implements CRONIOBUIProjectBusinessService, CRONIOBUIProjectBusinessServiceConstants, CRONIOBUIProjectBusinessServiceTrace {
 
 	private static final long serialVersionUID = -3287573002047034251L;
 	
@@ -87,7 +87,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
+		AEMFTMetadataElementComposite projectDataElement = CRONIOBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA, projectDataElement);
 	}
@@ -163,7 +163,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectList(projectList, getSession().getCurrentLocale());
+		AEMFTMetadataElementComposite projectDataElement = CRONIOBUBomToMetadataConversor.fromProjectList(projectList, getSession().getCurrentLocale());
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PROJECT_DATA_LIST, projectDataElement);
 	}
@@ -185,7 +185,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite nodesData = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
+		AEMFTMetadataElementComposite nodesData = CRONIOBUBomToMetadataConversor.fromNodeList(nodeList);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(NODES_DATA_LIST, nodesData);
 	}
@@ -216,7 +216,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 			AEMFTMetadataElementCompositeRecordSet errorData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 			errorData.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
 			errorData.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, currentProjectId);
-			getContext().getContextOUT().addElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS,errorData);
+			getContext().getContextOUT().addElement(CRONIOBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS,errorData);
 		} else {
 			//nodeList
 			CRONIOBOINodeList nodeList = new CRONIOBONodeList();
@@ -235,7 +235,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 			//end-trace
 
 			//ContextOut
-			AEMFTMetadataElementComposite nodeListDataElement = DSLAMBUBomToMetadataConversor.fromNodeList(nodeList);
+			AEMFTMetadataElementComposite nodeListDataElement = CRONIOBUBomToMetadataConversor.fromNodeList(nodeList);
 			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 			contextOut.addElement(NODELIST_DATA, nodeListDataElement);
 			contextOut.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID, currentProjectIdStr);
@@ -263,7 +263,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 			List<CRONIOBOINodeList> listNodeList = getNodeListPersistence().getAllNodeListsByProject(projectIdAsLong);
 			if (!AEMFTCommonUtilsBase.isEmptyList(listNodeList)) {
 				resultsNumber = resultsNumber + listNodeList.size();
-				AEMFTMetadataElementComposite nodeListData = DSLAMBUBomToMetadataConversor.fromListNodeList(listNodeList);
+				AEMFTMetadataElementComposite nodeListData = CRONIOBUBomToMetadataConversor.fromListNodeList(listNodeList);
 				nodeListsData.addElement(projectId, nodeListData);
 			}
 		}
@@ -309,7 +309,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		project.setSavedTime(date);
 
 		getProjectPersistence().updateProject(project.getProjectId(), project);
-		AEMFTMetadataElementComposite projectDataElement = DSLAMBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
+		AEMFTMetadataElementComposite projectDataElement = CRONIOBUBomToMetadataConversor.fromProjectFull(project, getSession().getCurrentLocale());
 
 		return projectDataElement;
 	}

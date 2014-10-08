@@ -18,7 +18,7 @@ import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceCon
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
-import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
@@ -44,7 +44,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends CRONIOBUServiceBase 
 		} else {
 
 			//ContextOut
-			AEMFTMetadataElementComposite preferencesData = DSLAMBUBomToMetadataConversor.fromPreferences(preferences);
+			AEMFTMetadataElementComposite preferencesData = CRONIOBUBomToMetadataConversor.fromPreferences(preferences);
 			AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 			contextOut.addElement(PREFERENCES_DATA, preferencesData);
 		}
@@ -89,7 +89,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends CRONIOBUServiceBase 
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite connectionDataElement = DSLAMBUBomToMetadataConversor.fromMachineProperties(machineProperties);
+		AEMFTMetadataElementComposite connectionDataElement = CRONIOBUBomToMetadataConversor.fromMachineProperties(machineProperties);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(CONNECTION_DATA, connectionDataElement);
 	}
@@ -156,7 +156,7 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends CRONIOBUServiceBase 
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite preferencesDataElement = DSLAMBUBomToMetadataConversor.fromPreferences(preferences);
+		AEMFTMetadataElementComposite preferencesDataElement = CRONIOBUBomToMetadataConversor.fromPreferences(preferences);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(PREFERENCES_DATA, preferencesDataElement);
 	}

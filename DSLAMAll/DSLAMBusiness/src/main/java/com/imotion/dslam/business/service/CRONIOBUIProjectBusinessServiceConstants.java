@@ -3,7 +3,7 @@ package com.imotion.dslam.business.service;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 
 
-public interface DSLAMBUIProjectBusinessServiceConstants {
+public interface CRONIOBUIProjectBusinessServiceConstants {
 	
 	//METHODS
 	String 	METHOD_ADD_PROJECT					= "ADD_PROJECT";

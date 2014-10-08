@@ -7,11 +7,11 @@ import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstan
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceConstants;
-import com.imotion.dslam.business.service.base.DSLAMBUICommonServiceTrace;
-import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
-import com.imotion.dslam.business.service.base.DSLAMBUWrapperPersistence;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.base.CRONIOBUICommonServiceConstants;
+import com.imotion.dslam.business.service.base.CRONIOBUICommonServiceTrace;
+import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.CRONIOBUWrapperPersistence;
 import com.selene.arch.base.bom.AEMFTILoginData;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.login.AEMFTIBusinessLoginServiceConstants;
@@ -22,7 +22,7 @@ import com.selene.arch.exe.bus.login.impl.AEMFTBusinessLoginServiceImpl;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 
 @SuppressWarnings("serial")
-public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceImpl<DSLAMBUWrapperPersistence> implements CRONIOBUILoginBusinessService, CRONIOBUILoginBusinessServiceConstants, DSLAMBUICommonServiceConstants {
+public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceImpl<CRONIOBUWrapperPersistence> implements CRONIOBUILoginBusinessService, CRONIOBUILoginBusinessServiceConstants, CRONIOBUICommonServiceConstants {
 
 	/**
 	 * AEMFTBusinessLoginServiceImpl
@@ -117,7 +117,7 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		params[0] = serviceName;
 		params[1] = methodName;
 		params[2] = elementType;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE, params);
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE, params);
 	}
 
 	/**
@@ -152,8 +152,8 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 	}
 
 	@Override
-	protected DSLAMBUWrapperPersistence createPersistenceWrapper() {
-		return new DSLAMBUWrapperPersistence();
+	protected CRONIOBUWrapperPersistence createPersistenceWrapper() {
+		return new CRONIOBUWrapperPersistence();
 	}
 
 	@Override
@@ -200,8 +200,8 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 		AEMFTMetadataElementComposite projectsDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		elementController.setElement(AEMFTILoginDataConstants.USER_ID, projectsDataContextIn, userId);
 		
-		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_PROJECTS_BY_USER_ID);
-		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
+		AEMFTMetadataElementComposite 	projectsDataContextOut 	= getController().executeService(projectsDataContextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_GET_ALL_PROJECTS_BY_USER_ID);
+		AEMFTMetadataElementComposite	projectsData			= elementController.getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, projectsDataContextOut);
 		
 		AEMFTMetadataElementComposite projectsDataClone = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		AEMFTMetadataElementComposite projectsDataClone2 = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
@@ -211,20 +211,20 @@ public class CRONIOBULoginBusinessServiceImpl extends AEMFTBusinessLoginServiceI
 			projectsDataClone2 = (AEMFTMetadataElementComposite) projectsData.cloneObject();
 		}
 		
-		AEMFTMetadataElementComposite 	executionsDataContextOut 	= getController().executeService(projectsDataContextOut, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID);
+		AEMFTMetadataElementComposite 	executionsDataContextOut 	= getController().executeService(projectsDataContextOut, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_EXECUTE_GET_ALL_EXECUTIONS_BY_PROJECT_ID);
 		AEMFTMetadataElementComposite	executionsData				= elementController.getElementAsComposite(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA, executionsDataContextOut);
 		
-		AEMFTMetadataElementComposite 	nodeListsDataContextOut 	= getController().executeService(projectsDataClone2, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_GET_ALL_NODELISTS_BY_PROJECT_ID);
-		AEMFTMetadataElementComposite	nodeListsData				= elementController.getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA, nodeListsDataContextOut);
+		AEMFTMetadataElementComposite 	nodeListsDataContextOut 	= getController().executeService(projectsDataClone2, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_GET_ALL_NODELISTS_BY_PROJECT_ID);
+		AEMFTMetadataElementComposite	nodeListsData				= elementController.getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA, nodeListsDataContextOut);
 		
 		AEMFTMetadataElementComposite preferencesDataContextIn = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		elementController.setElement(AEMFTILoginDataConstants.USER_ID, preferencesDataContextIn, userId);
 		
-		AEMFTMetadataElementComposite 	preferencesDataContextOut 	= getController().executeService(preferencesDataContextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_GET_PREFERENCES_ID);
+		AEMFTMetadataElementComposite 	preferencesDataContextOut 	= getController().executeService(preferencesDataContextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PREFERENCES_GET_PREFERENCES_ID);
 		AEMFTMetadataElementComposite	preferencesData				= elementController.getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, preferencesDataContextOut);
 
 		//ContextOut
-		contextOut.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST		, projectsDataClone);
+		contextOut.addElement(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST		, projectsDataClone);
 		contextOut.addElement(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA	, preferencesData);
 		contextOut.addElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA		, executionsData);
 		contextOut.addElement(nodeListsData);

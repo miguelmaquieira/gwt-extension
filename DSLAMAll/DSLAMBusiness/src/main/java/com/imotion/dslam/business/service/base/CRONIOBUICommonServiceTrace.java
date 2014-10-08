@@ -2,7 +2,7 @@ package com.imotion.dslam.business.service.base;
 
 import com.selene.arch.exe.core.envi.trace.AEMFTITraceConstant;
 
-public interface DSLAMBUICommonServiceTrace {
+public interface CRONIOBUICommonServiceTrace {
 
 
 
@@ -14,28 +14,28 @@ public interface DSLAMBUICommonServiceTrace {
 	* Message: The execution of the service {0}, method {1} has found {2} elements in the
 	* 			search result for the parameters {3}
 	*/
-	public static long CTE_BUSINESS_SERVICE_DUPLICATED_ITEM_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_DUPLICATED_ITEM_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_1
 			| 0x0000000000000001L;
 
 	/**
 	* Message: The execution of the service {0}, method {1} has found that the parameter {2} is null
 	*/
-	public static long CTE_BUSINESS_SERVICE_NULL_PARAMETER_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_NULL_PARAMETER_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_1
 			| 0x0000000000000002L;
 
 	/**
 	* Message: The execution of the service {0}, method {1} has found an unexpected null element with {2} type
 	*/
-	public static long CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_1
 			| 0x0000000000000003L;
 
 	/**
 	* Message: The execution of the service {0}, method {1} has found an element of type {2} where {3} was expected
 	*/
-	public static long CTE_BUSINESS_SERVICE_UNEXPECTED_ELEMENT_TYPE_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_UNEXPECTED_ELEMENT_TYPE_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_1
 			| 0x0000000000000004L;
 
@@ -47,7 +47,7 @@ public interface DSLAMBUICommonServiceTrace {
 	/**
 	 * Message: The execution of the service {0}, method {1}, has found that the parameter {2} has an unexpected value {3}
 	 */
-	public static long CTE_BUSINESS_SERVICE_UNEXPECTED_PARAM_VALUE_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_UNEXPECTED_PARAM_VALUE_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_2
 			| 0x0000000000000001L; ;
 
@@ -59,7 +59,7 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : Start of method method {0} of service {1}.
 	 */
 	public static long CTE_BUSINESS_SERVICE_METHOD_START_TRACE =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3
 			| 0x0000000000000001L;
 
@@ -67,7 +67,7 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : End of method method {0} of service {1}.
 	 */
 	public static long CTE_BUSINESS_SERVICE_METHOD_END_TRACE =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3
 			| 0x0000000000000002L;
 
@@ -75,7 +75,7 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : The execution of the service {0}, method {1} has not obtained the object of kind {2} and id : {3}
 	 */
 	public static long CTE_BUSINESS_SERVICE_ITEM_NOT_FOUND =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_3
 			| 0x0000000000000003L;
 
@@ -88,7 +88,7 @@ public interface DSLAMBUICommonServiceTrace {
 	/**
 	* Message: The execution of the service {0}, method {1} has not obtained results in the search with params {2}
 	*/
-	public static long CTE_BUSINESS_SERVICE_NO_ITEMS_FOUND_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_NO_ITEMS_FOUND_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000001L;
 
@@ -96,28 +96,28 @@ public interface DSLAMBUICommonServiceTrace {
 	/**
 	* Message: The execution of the service {0}, method {1} has obtained {2} results of {3} type
 	*/
-	public static long CTE_BUSINESS_SERVICE_NUMBER_OF_RESULTS_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_NUMBER_OF_RESULTS_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000002L;
 
 	/**
 	 *  Message : The execution of the service {0}, method {1} has saved new item of type {2} with this authorName:  {3}.
 	 */
-	public static long CTE_BUSINESS_SERVICE_ITEM_CREATED_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_ITEM_CREATED_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000003L;
 
 	/**
 	 *  Message : The execution of the service {0}, method {1} has erased an item of type {2} with this id:  {3}.
 	 */
-	public static long CTE_BUSINESS_SERVICE_ITEM_REMOVED_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_ITEM_REMOVED_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000004L;
 
 	/**
 	 *  Message : The execution of the service {0}, method {1} has recovered an item of type {2} with this id:  {3}.
 	 */
-	public static long CTE_BUSINESS_SERVICE_ITEM_RECOVERED_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_ITEM_RECOVERED_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000005L;
 
@@ -125,7 +125,7 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : The execution of the service {0}, method {1} hasn't got results of type {2}.
 	 */
 	public static long CTE_BUSINESS_SERVICE_PERSISTENCE_NO_RESULTS_TRACE =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000006L;
 
@@ -133,7 +133,7 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : The execution of the service {0}, method {1} has modified a item of type {2} with this id:  {3}.
 	 */
 	public static long CTE_BUSINESS_SERVICE_ITEM_MODIFIED_TRACE =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000007L;
 
@@ -141,14 +141,14 @@ public interface DSLAMBUICommonServiceTrace {
 	 *  Message : BusinessServiceBase, method -{0}- new tag created with this id : {1}.
 	 */
 	public static long CTE_BUSINESS_SERVICE_NEW_TAG_CREATED_TRACE =
-			DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+			CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000008L;
 
 	/**
 	 *  Message : The execution of the service {0}, method {1} is working with an item of type {2} and this data:  {3}.
 	 */
-	public static long CTE_BUSINESS_SERVICE_CURRENT_ITEM_TRACE = DSLAMBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
+	public static long CTE_BUSINESS_SERVICE_CURRENT_ITEM_TRACE = CRONIOBUICommonServiceConstants.CTE_BUSINESS_SERVICE_COMMON_RANGE_TRACE
 			| AEMFTITraceConstant.CTE_MFT_AE_CORE_ENVI_TRACE_LEVEL_4
 			| 0x0000000000000009L;
 }

@@ -17,7 +17,7 @@ import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.CRONIOBOIVariable;
 import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.controller.AEMFTMetadataElementControllerImpl;
@@ -26,7 +26,7 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
-public class DSLAMBUBomToMetadataConversor {
+public class CRONIOBUBomToMetadataConversor {
 
 	private AEMFTIMetadataElementController elementController = null;
 	
@@ -85,7 +85,7 @@ public class DSLAMBUBomToMetadataConversor {
 			for (CRONIOBOIProcess process : processList) {
 				dataProcessList.addElement(process.getProcessName(), fromProcessFull(process, locale));
 			}
-			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
+			data.addElement(CRONIOBUIProjectBusinessServiceConstants.PROCESS_DATA_LIST,dataProcessList);
 		}
 		
 		if (!AEMFTCommonUtilsBase.isEmptyList(fileList)) {
@@ -94,7 +94,7 @@ public class DSLAMBUBomToMetadataConversor {
 			for (CRONIOBOIFile file : fileList) {
 				dataFilesList.addElement(file.getFilename(),fromFileIdName(file));
 			}
-			data.addElement(DSLAMBUIProjectBusinessServiceConstants.PROCESS_FILE_DATA_LIST,dataFilesList);
+			data.addElement(CRONIOBUIProjectBusinessServiceConstants.PROCESS_FILE_DATA_LIST,dataFilesList);
 		}
 		
 		return data;
@@ -195,9 +195,9 @@ public class DSLAMBUBomToMetadataConversor {
 			CRONIOBOIFile 	mainScript 		= project.getMainScript();
 			CRONIOBOIFile 	rollBackScript 	= project.getRollBackScript();
 			CRONIOBOIProcess process 		= project.getProcess();
-			AEMFTMetadataElementComposite mainScriptData 		= DSLAMBUBomToMetadataConversor.fromFile(mainScript);
-			AEMFTMetadataElementComposite rollBackScriptData 	= DSLAMBUBomToMetadataConversor.fromFile(rollBackScript);
-			AEMFTMetadataElementComposite processData 			= DSLAMBUBomToMetadataConversor.fromProcessFull(process, locale);
+			AEMFTMetadataElementComposite mainScriptData 		= CRONIOBUBomToMetadataConversor.fromFile(mainScript);
+			AEMFTMetadataElementComposite rollBackScriptData 	= CRONIOBUBomToMetadataConversor.fromFile(rollBackScript);
+			AEMFTMetadataElementComposite processData 			= CRONIOBUBomToMetadataConversor.fromProcessFull(process, locale);
 			
 			data.addElement(CRONIOBOIProject.PROJECT_MAIN_SCRIPT			, mainScriptData);
 			data.addElement(CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT		, rollBackScriptData);
