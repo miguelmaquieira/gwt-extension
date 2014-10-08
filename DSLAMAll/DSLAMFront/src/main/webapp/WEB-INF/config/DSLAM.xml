@@ -142,7 +142,7 @@
 		<Service Name="SRV_BUS_PROJECT">
 			<Description>Project business service</Description>
 			<Type>300171153899520</Type>
-			<Descriptor>com.imotion.dslam.business.service.impl.DSLAMBUProjectBusinessServiceImpl</Descriptor>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUProjectBusinessServiceImpl</Descriptor>
 			<SubServiceList>
 				<SubService Name="ADD_PROJECT">
 					<Descriptor>addProject</Descriptor>
