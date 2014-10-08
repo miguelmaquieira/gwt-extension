@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConstants {
+public interface CRONIOBOIProcess extends Serializable, CRONIOBOIProcessDataConstants {
 
 	Long getProcessId();
 
@@ -24,11 +24,11 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 	
 	void addSchedule(Date schedule);
 	
-	List<DSLAMBOIVariable> getVariableList();
+	List<CRONIOBOIVariable> getVariableList();
 
-	void setVariableList(List<DSLAMBOIVariable> variableList);
+	void setVariableList(List<CRONIOBOIVariable> variableList);
 	
-	void addVariable(DSLAMBOIVariable variable);
+	void addVariable(CRONIOBOIVariable variable);
 	
 	List<CRONIOBOINodeList> getListNodeList();
 
@@ -46,8 +46,8 @@ public interface DSLAMBOIProcess extends Serializable, DSLAMBOIProcessDataConsta
 
 	void setCreationTime(Date creationTime);
 
-	DSLAMBOIProject getProject();
+	CRONIOBOIProject getProject();
 
-	void setProject(DSLAMBOIProject project);
+	void setProject(CRONIOBOIProject project);
 
 }

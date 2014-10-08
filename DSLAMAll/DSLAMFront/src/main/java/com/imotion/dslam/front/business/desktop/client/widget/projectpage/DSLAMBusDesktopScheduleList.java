@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -49,7 +49,7 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 					String 						formattedDate 		= AEGWTBusinessUtils.getFormattedTimeMessage(scheduleValue, DSLAMBusDesktopProcessConfigureScheduleForm.DATE_FORMAT);
 
 					Map<String,String> scheduleRow = new HashMap<String, String>();
-					scheduleRow.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE, formattedDate);
+					scheduleRow.put(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE, formattedDate);
 
 					addRowItem(scheduleRow, formattedDate, true, true,false);
 				}
@@ -63,8 +63,8 @@ public class DSLAMBusDesktopScheduleList extends AEGWTBootstrapTable {
 
 	@Override
 	protected void setupHeader() {
-		super.headerDataFields.add(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
-		super.headerMapFieldText.put(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, TEXTS.schedule());
+		super.headerDataFields.add(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE);
+		super.headerMapFieldText.put(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE		, TEXTS.schedule());
 	}
 
 	@Override

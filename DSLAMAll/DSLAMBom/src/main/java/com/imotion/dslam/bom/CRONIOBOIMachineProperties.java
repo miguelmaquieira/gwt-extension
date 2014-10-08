@@ -38,13 +38,13 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 
 	void setPromptRegEx(String promptRegEx);
 
-	DSLAMBOIFile getInitConnectionScript();
+	CRONIOBOIFile getInitConnectionScript();
 
-	void setInitConnectionScript(DSLAMBOIFile initConnectionScript);
+	void setInitConnectionScript(CRONIOBOIFile initConnectionScript);
 
-	DSLAMBOIFile getCloseConnectionScript();
+	CRONIOBOIFile getCloseConnectionScript();
 
-	void setCloseConnectionScript(DSLAMBOIFile finishConnectionScript);
+	void setCloseConnectionScript(CRONIOBOIFile finishConnectionScript);
 
 	CRONIOBOIPreferences getPreferences();
 
@@ -56,9 +56,9 @@ public interface CRONIOBOIMachineProperties extends Serializable, CRONIOBOIMachi
 	void setCreationTime(Date createdTime);
 	Date getCreationTime();
 
-	List<DSLAMBOIVariable> getConnectionVariables();
+	List<CRONIOBOIVariable> getConnectionVariables();
 
-	void setConnectionVariables(List<DSLAMBOIVariable> connectionVariables);
+	void setConnectionVariables(List<CRONIOBOIVariable> connectionVariables);
 
 	String getUsernamePromptRegEx();
 

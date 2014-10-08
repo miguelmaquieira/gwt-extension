@@ -8,7 +8,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
@@ -97,7 +97,7 @@ public class DSLAMBusDesktopProjectNavigator extends AEGWTCompositePanel impleme
 	public void updateElement(AEMFTMetadataElementComposite elementData) {
 		if (elementData != null) {
 			
-			String projectId = getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID, elementData);
+			String projectId = getElementController().getElementAsString(CRONIOBOIProject.PROJECT_ID, elementData);
 			DSLAMBusDesktopProjectNavigatorElement elementWidget = getElementById(String.valueOf(projectId));
 			elementWidget.setData(elementData);
 			sort(null, false);

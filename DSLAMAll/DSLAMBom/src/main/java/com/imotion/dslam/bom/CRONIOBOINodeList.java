@@ -22,9 +22,9 @@ public interface CRONIOBOINodeList extends Serializable, CRONIOBOINodeListDataCo
 	
 	void removeNode(CRONIOBOINode node);
 	
-	DSLAMBOIProcess getProcess();
+	CRONIOBOIProcess getProcess();
 
-	void setProcess(DSLAMBOIProcess process);
+	void setProcess(CRONIOBOIProcess process);
 	
 	Date getSavedTime();
 

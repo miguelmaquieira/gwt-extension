@@ -15,26 +15,26 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 
 @Entity(name="Project")
-public class DSLAMBOProject implements DSLAMBOIProject {
+public class CRONIOBOProject implements CRONIOBOIProject {
 
 	private static final long serialVersionUID = -5386591730111246458L;
 	
 	private Long 				projectId;
 	private String 				projectName;
 	private int				machineType;
-	private DSLAMBOIFile 		mainScript;
-	private DSLAMBOIFile 		rollBackScript;
-	private DSLAMBOIProcess		process;
+	private CRONIOBOIFile 		mainScript;
+	private CRONIOBOIFile 		rollBackScript;
+	private CRONIOBOIProcess		process;
 	private Date 				savedTime;
 	private Date 				creationTime;
 	private Long				version; 
 
-	public DSLAMBOProject() {}
+	public CRONIOBOProject() {}
 
 	@Id
 	@SequenceGenerator(name = "ProjectIdGenerator", sequenceName = "ProjectSeq") //It only takes effect for databases providing identifier generators.
@@ -64,33 +64,33 @@ public class DSLAMBOProject implements DSLAMBOIProject {
 		this.machineType = machineType;
 	}
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOFile.class)
 	@JoinColumn(name=CRONIOBOIProjectDataConstants.MAIN_SCRIPT_ID)
-	public DSLAMBOIFile getMainScript() {
+	public CRONIOBOIFile getMainScript() {
 		return mainScript;
 	}
 
-	public void setMainScript(DSLAMBOIFile mainScript) {
+	public void setMainScript(CRONIOBOIFile mainScript) {
 		this.mainScript = mainScript;
 	}
 	
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOFile.class)
 	@JoinColumn(name=CRONIOBOIProjectDataConstants.ROLLBACK_SCRIPT_ID)
-	public DSLAMBOIFile getRollBackScript() {
+	public CRONIOBOIFile getRollBackScript() {
 		return rollBackScript;
 	}
 
-	public void setRollBackScript(DSLAMBOIFile rollBackScript) {
+	public void setRollBackScript(CRONIOBOIFile rollBackScript) {
 		this.rollBackScript = rollBackScript;
 	}
 	
-	@OneToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOProcess.class)
-	@JoinColumn(name=DSLAMBOProcess.PROCESS_ID)
-	public DSLAMBOIProcess getProcess() {
+	@OneToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOProcess.class)
+	@JoinColumn(name=CRONIOBOProcess.PROCESS_ID)
+	public CRONIOBOIProcess getProcess() {
 		return process;
 	}
 
-	public void setProcess(DSLAMBOIProcess process) {
+	public void setProcess(CRONIOBOIProcess process) {
 		this.process = process;
 		this.process.setProject(this);
 	}

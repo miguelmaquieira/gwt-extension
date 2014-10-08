@@ -13,10 +13,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 
 @Entity(name="File")
-public class DSLAMBOFile implements DSLAMBOIFile {
+public class CRONIOBOFile implements CRONIOBOIFile {
 
 	private static final long serialVersionUID = 4235149869033046131L;
 	
@@ -29,7 +29,7 @@ public class DSLAMBOFile implements DSLAMBOIFile {
 	private Date 	creationTime;
 	private Long	version; 
 
-	public DSLAMBOFile() {}
+	public CRONIOBOFile() {}
 
 	@Id
 	@SequenceGenerator(name = "FileIdGenerator", sequenceName = "FileSeq") //It only takes effect for databases providing identifier generators.

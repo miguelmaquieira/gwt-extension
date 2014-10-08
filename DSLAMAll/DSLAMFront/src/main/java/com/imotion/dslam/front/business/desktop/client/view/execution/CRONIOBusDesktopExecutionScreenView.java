@@ -2,8 +2,8 @@ package com.imotion.dslam.front.business.desktop.client.view.execution;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.CRONIOBusDesktopExecutionDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
@@ -43,9 +43,9 @@ public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBas
 		if (data != null) {
 			root.clear();
 		
-			AEMFTMetadataElementComposite processData = data.getCompositeElement(DSLAMBOIProject.PROJECT_PROCESS);
+			AEMFTMetadataElementComposite processData = data.getCompositeElement(CRONIOBOIProject.PROJECT_PROCESS);
 			if (processData != null) {
-				String processId = getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID, processData);
+				String processId = getElementController().getElementAsString(CRONIOBOIProcess.PROCESS_ID, processData);
 				logger = new CRONIOBusDesktopAccordionLoggerContainer(processId);
 				root.add(logger);
 				logger.postDisplay();
@@ -53,7 +53,7 @@ public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBas
 				logger.setFilterVisible(false);
 				logger.setPagerVisible(false);
 			
-				AEMFTMetadataElementComposite consoleData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE, data);
+				AEMFTMetadataElementComposite consoleData = getElementController().getElementAsComposite(CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE, data);
 				if (consoleData != null) {
 					logger.setData(consoleData);
 			

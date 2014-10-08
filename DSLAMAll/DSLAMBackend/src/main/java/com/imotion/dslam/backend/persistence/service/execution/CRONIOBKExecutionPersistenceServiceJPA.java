@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOExecution;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
@@ -23,7 +23,7 @@ public class CRONIOBKExecutionPersistenceServiceJPA extends CRONIOBKPersistenceS
 	@Override
 	public CRONIOBOIExecution addExecution(CRONIOBOIExecution execution) {
 		CRONIOBOExecution executionJPA = (CRONIOBOExecution) execution;
-		DSLAMBOIProject project = execution.getProject();
+		CRONIOBOIProject project = execution.getProject();
 		if (project != null && !AEMFTCommonUtils.isNullLong(project.getProjectId())) {
 			project = getProjectPersistence().getProject(project.getProjectId());
 			execution.setProject(project);

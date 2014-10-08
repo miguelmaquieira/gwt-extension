@@ -2,7 +2,7 @@ package com.imotion.dslam.bom;
 
 import java.io.Serializable;
 
-public interface DSLAMBOIVariable extends Serializable, DSLAMBOIVariablesDataConstants {
+public interface CRONIOBOIVariable extends Serializable, CRONIOBOIVariablesDataConstants {
 
 	String getVariableName();
 

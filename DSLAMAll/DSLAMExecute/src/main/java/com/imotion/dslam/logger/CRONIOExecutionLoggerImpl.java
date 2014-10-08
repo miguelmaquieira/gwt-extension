@@ -11,8 +11,8 @@ import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.conn.CRONIOIExecutionData;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEvent;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
@@ -28,9 +28,9 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 	private long							lastBroadcastTime;
 	private CRONIOLoggerEventCollection		broadcastBuffer;
 
-	public CRONIOExecutionLoggerImpl(DSLAMBOIProject project) throws IOException {
+	public CRONIOExecutionLoggerImpl(CRONIOBOIProject project) throws IOException {
 		broadcastBuffer = new CRONIOLoggerEventCollection();
-		DSLAMBOIProcess process = project.getProcess();
+		CRONIOBOIProcess process = project.getProcess();
 		processId		= String.valueOf(process.getProcessId());
 		projectName 	= project.getProjectName();
 		Logger logger 	= getLog4JLogger();

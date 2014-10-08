@@ -1,6 +1,6 @@
 package com.imotion.dslam.bom;
 
-public interface DSLAMBOIVariablesDataConstants {
+public interface CRONIOBOIVariablesDataConstants {
 	
 	//ATTRIBUTES
 	String 	VARIABLE_NAME 	= "variableName";

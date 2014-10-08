@@ -6,8 +6,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.Timer;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -86,12 +86,12 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 				timer = null;
 			}
 			fileData = data;
-			String 	content		= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, data);
-			int		contentType	= getElementController().getElementAsInt(DSLAMBOIFile.CONTENT_TYPE, data);
+			String 	content		= getElementController().getElementAsString(CRONIOBOIFile.CONTENT, data);
+			int		contentType	= getElementController().getElementAsInt(CRONIOBOIFile.CONTENT_TYPE, data);
 
 			editor.setText(content);
 
-			if (DSLAMBOIProject.PROJECT_MACHINE_TYPE_DSLAM == contentType) {
+			if (CRONIOBOIProject.PROJECT_MACHINE_TYPE_DSLAM == contentType) {
 				editor.setMode(AceEditorMode.DSLAM);
 			} else {
 				editor.setMode(AceEditorMode.TEXT);
@@ -109,7 +109,7 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 
 	private void handleChanges(boolean now) {
 		if (handler != null) {
-			String originalContent 			= getElementController().getElementAsString(DSLAMBOIFile.CONTENT, fileData);
+			String originalContent 			= getElementController().getElementAsString(CRONIOBOIFile.CONTENT, fileData);
 			final String currentContent		= editor.getText();
 			if (!currentContent.equals(originalContent)) {
 				if (now) {
@@ -136,8 +136,8 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 	}
 
 	private void fireChangeEvent(String currentContent) {
-		fileData.addElement(DSLAMBOIFile.CONTENT, currentContent);
-		fileData.addElement(DSLAMBOIFile.SAVED_TIME, new Date());
+		fileData.addElement(CRONIOBOIFile.CONTENT, currentContent);
+		fileData.addElement(CRONIOBOIFile.SAVED_TIME, new Date());
 		handler.fireEvent(fileData);
 	}
 }

@@ -7,7 +7,7 @@ import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceFactoryPool;
 import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceModuleJPA;
 import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.bom.CRONIOBOIUser;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOUser;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
@@ -41,7 +41,7 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 	
 	@Override
 	public void addProjectToUser(long userId, Long projectId) {
-		DSLAMBOIProject project = getProjectPersistence().getProject(projectId);
+		CRONIOBOIProject project = getProjectPersistence().getProject(projectId);
 		CRONIOBOUser user = (CRONIOBOUser) getUserById(userId);
 		user.addProject(project);
 		getPersistenceModule().update(user);

@@ -18,8 +18,8 @@ import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
@@ -303,8 +303,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		sbKey.append(currentSectionId);
 		String finalSectionKey = sbKey.toString();
 
-		if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
-			getElementDataController().setElement(DSLAMBOIProject.INFO_IS_MODIFIED, finalSectionData, true);
+		if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
+			getElementDataController().setElement(CRONIOBOIProject.INFO_IS_MODIFIED, finalSectionData, true);
 		}
 
 		AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
@@ -469,7 +469,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 						sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
 						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-						sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+						sbKey.append(CRONIOBOIProcess.PROCESS_NODELIST_LIST);
 						String finalSectionKey = sbKey.toString();
 
 						AEMFTMetadataElementComposite listNodeListData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
@@ -493,7 +493,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 						CRONIOBusDesktopProjectEvent nodeListCreaTedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 						nodeListCreaTedEvt.setEventType(EVENT_TYPE.NODELIST_CREATED);
-						nodeListCreaTedEvt.addElementAsString(DSLAMBOIProject.PROJECT_ID, projectId);
+						nodeListCreaTedEvt.addElementAsString(CRONIOBOIProject.PROJECT_ID, projectId);
 						getLogicalEventHandlerManager().fireEvent(nodeListCreaTedEvt);
 					}
 				}
@@ -524,8 +524,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 	private void createProject(String projectName, int machinetTypeInt) {
 		AEMFTMetadataElementComposite newProjectData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		newProjectData.addElement(DSLAMBOIProject.PROJECT_NAME			, projectName);
-		newProjectData.addElement(DSLAMBOIProject.PROJECT_MACHINE_TYPE	, machinetTypeInt);
+		newProjectData.addElement(CRONIOBOIProject.PROJECT_NAME			, projectName);
+		newProjectData.addElement(CRONIOBOIProject.PROJECT_MACHINE_TYPE	, machinetTypeInt);
 
 		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
 		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
@@ -540,7 +540,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				if (dataResult != null) {
 					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
 					if (projectData != null) {
-						String projectId = getElementDataController().getElementAsString(DSLAMBOIProject.PROJECT_ID, projectData);
+						String projectId = getElementDataController().getElementAsString(CRONIOBOIProject.PROJECT_ID, projectData);
 						updateProjectClientData(projectId, projectData, false);
 
 						CRONIOBusDesktopProjectEvent projectCreatedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
@@ -576,7 +576,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				isLog = true;
 			} else {
 				sbKey.append(projectId);
-				if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
+				if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
 					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 					//Final Section Data
 					sbKey.append(projectFinalSectionId);
@@ -591,7 +591,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 			projectNamesbKey.append(projectId);
 			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-			projectNamesbKey.append(DSLAMBOIProject.PROJECT_NAME);
+			projectNamesbKey.append(CRONIOBOIProject.PROJECT_NAME);
 			String projectNameKey = projectNamesbKey.toString();
 			String projectName = getContextDataController().getElementAsString(projectNameKey);
 
@@ -617,12 +617,12 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				}
 			}
 			
-			boolean sectionIsModified = getElementDataController().getElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED, finalSectionData);
+			boolean sectionIsModified = getElementDataController().getElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED, finalSectionData);
 
 			//SHOW HEADER INFO
 			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-			showInfoEvent.addElementAsString(DSLAMBOIProject.PROJECT_NAME	, projectName);
-			showInfoEvent.addElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED	, sectionIsModified);
+			showInfoEvent.addElementAsString(CRONIOBOIProject.PROJECT_NAME	, projectName);
+			showInfoEvent.addElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED	, sectionIsModified);
 			showInfoEvent.setProjectId(projectId);
 			showInfoEvent.setFinalSectionId(projectFinalSectionId);
 			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
@@ -736,7 +736,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 
 	private void fireSectionModified(String projectId, String currentSectionId) {
-		if (!DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
+		if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(currentSectionId)) {
 			CRONIOBusDesktopProjectEvent sectionModifiedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 			sectionModifiedEvt.setEventType(EVENT_TYPE.SECTION_MODIFIED);
 			sectionModifiedEvt.setProjectId(projectId);

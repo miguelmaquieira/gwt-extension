@@ -2,10 +2,10 @@ package com.imotion.dslam.bom.data;
 
 import javax.persistence.Embeddable;
 
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 
 @Embeddable
-public class DSLAMBOVariable implements DSLAMBOIVariable {
+public class CRONIOBOVariable implements CRONIOBOIVariable {
 	
 	private static final long serialVersionUID = -4302199816482965056L;
 	
@@ -14,7 +14,7 @@ public class DSLAMBOVariable implements DSLAMBOIVariable {
 	private int 	variableScope;
 	private int	variableType;
 
-	public DSLAMBOVariable() {}
+	public CRONIOBOVariable() {}
 
 	@Override
 	public String getVariableName() {

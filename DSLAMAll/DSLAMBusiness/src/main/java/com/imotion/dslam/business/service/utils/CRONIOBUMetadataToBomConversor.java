@@ -11,19 +11,19 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.CRONIOBOPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
-import com.imotion.dslam.bom.data.DSLAMBOFile;
-import com.imotion.dslam.bom.data.DSLAMBOProcess;
-import com.imotion.dslam.bom.data.DSLAMBOProject;
-import com.imotion.dslam.bom.data.DSLAMBOVariable;
+import com.imotion.dslam.bom.data.CRONIOBOFile;
+import com.imotion.dslam.bom.data.CRONIOBOProcess;
+import com.imotion.dslam.bom.data.CRONIOBOProject;
+import com.imotion.dslam.bom.data.CRONIOBOVariable;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -35,18 +35,18 @@ public class CRONIOBUMetadataToBomConversor {
 
 	private static AEMFTIMetadataElementController elementController = null;
 
-	public static DSLAMBOIProject fromProjectData(AEMFTMetadataElementComposite projectData) {
-		DSLAMBOIProject	project = null;
+	public static CRONIOBOIProject fromProjectData(AEMFTMetadataElementComposite projectData) {
+		CRONIOBOIProject	project = null;
 		if (projectData != null) {
-			project = new DSLAMBOProject();
+			project = new CRONIOBOProject();
 
 			//project properties
-			String	projectIdStr	= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_ID					, projectData);
+			String	projectIdStr	= getElementController().getElementAsString(CRONIOBOIProject.PROJECT_ID					, projectData);
 			long	projectId		= AEMFTCommonUtils.getLongFromString(projectIdStr);
-			String	projectName		= getElementController().getElementAsString(DSLAMBOIProject.PROJECT_NAME				, projectData);
-			int 	machineType		= getElementController().getElementAsInt(DSLAMBOIProject.PROJECT_MACHINE_TYPE			, projectData);
-			Date	creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIProject.CREATION_TIME	, projectData);
-			Date	savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProject.SAVED_TIME		, projectData);
+			String	projectName		= getElementController().getElementAsString(CRONIOBOIProject.PROJECT_NAME				, projectData);
+			int 	machineType		= getElementController().getElementAsInt(CRONIOBOIProject.PROJECT_MACHINE_TYPE			, projectData);
+			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIProject.CREATION_TIME	, projectData);
+			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIProject.SAVED_TIME		, projectData);
 
 			project.setProjectId(projectId);
 			project.setProjectName(projectName);
@@ -55,35 +55,35 @@ public class CRONIOBUMetadataToBomConversor {
 			project.setSavedTime(savedTime);
 
 			//Main script
-			AEMFTMetadataElementComposite mainScriptData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_MAIN_SCRIPT, projectData);
-			DSLAMBOIFile mainScript = fromFileData(mainScriptData);
+			AEMFTMetadataElementComposite mainScriptData = getElementController().getElementAsComposite(CRONIOBOIProject.PROJECT_MAIN_SCRIPT, projectData);
+			CRONIOBOIFile mainScript = fromFileData(mainScriptData);
 			project.setMainScript(mainScript);
 
 			//Rollback script
-			AEMFTMetadataElementComposite rollbackScriptData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT, projectData);
-			DSLAMBOIFile rollbackScript = fromFileData(rollbackScriptData);
+			AEMFTMetadataElementComposite rollbackScriptData = getElementController().getElementAsComposite(CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT, projectData);
+			CRONIOBOIFile rollbackScript = fromFileData(rollbackScriptData);
 			project.setRollBackScript(rollbackScript);
 
 			//Process data
-			AEMFTMetadataElementComposite processData = getElementController().getElementAsComposite(DSLAMBOIProject.PROJECT_PROCESS, projectData);
-			DSLAMBOIProcess process = fromProcessData(processData);
+			AEMFTMetadataElementComposite processData = getElementController().getElementAsComposite(CRONIOBOIProject.PROJECT_PROCESS, projectData);
+			CRONIOBOIProcess process = fromProcessData(processData);
 			project.setProcess(process);
 		}
 		return project;
 	}
 
-	public static DSLAMBOIFile fromFileData(AEMFTMetadataElementComposite fileData) {
-		DSLAMBOIFile file = null;
+	public static CRONIOBOIFile fromFileData(AEMFTMetadataElementComposite fileData) {
+		CRONIOBOIFile file = null;
 		if (fileData != null) {
-			file = new DSLAMBOFile();
+			file = new CRONIOBOFile();
 
-			String 	fileIdStr 		= getElementController().getElementAsString(DSLAMBOIFile.FILE_ID	, fileData);
+			String 	fileIdStr 		= getElementController().getElementAsString(CRONIOBOIFile.FILE_ID	, fileData);
 			Long	fileId			= AEMFTCommonUtils.getLongFromString(fileIdStr);
-			String	fileName		= getElementController().getElementAsString(DSLAMBOIFile.FILE_NAME	, fileData);
-			int		contentType		= getElementController().getElementAsInt(DSLAMBOIFile.CONTENT_TYPE	, fileData);
-			String	content			= getElementController().getElementAsString(DSLAMBOIFile.CONTENT	, fileData);
-			Date	creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.CREATION_TIME	, fileData);
-			Date	savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIFile.SAVED_TIME	, fileData);
+			String	fileName		= getElementController().getElementAsString(CRONIOBOIFile.FILE_NAME	, fileData);
+			int		contentType		= getElementController().getElementAsInt(CRONIOBOIFile.CONTENT_TYPE	, fileData);
+			String	content			= getElementController().getElementAsString(CRONIOBOIFile.CONTENT	, fileData);
+			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIFile.CREATION_TIME	, fileData);
+			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIFile.SAVED_TIME	, fileData);
 
 			file.setFileId(fileId);
 			file.setFilename(fileName);
@@ -96,39 +96,39 @@ public class CRONIOBUMetadataToBomConversor {
 		return file;
 	}
 
-	public static DSLAMBOIProcess fromProcessData(AEMFTMetadataElementComposite processData) {
-		DSLAMBOIProcess process = null;
+	public static CRONIOBOIProcess fromProcessData(AEMFTMetadataElementComposite processData) {
+		CRONIOBOIProcess process = null;
 		if (processData != null) {
-			process = new DSLAMBOProcess();
+			process = new CRONIOBOProcess();
 
 			//process properties
-			String		processIdStr 	= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_ID					, processData);
+			String		processIdStr 	= getElementController().getElementAsString(CRONIOBOIProcess.PROCESS_ID					, processData);
 			long		processId		= AEMFTCommonUtils.getLongFromString(processIdStr);
-			String		processName		= getElementController().getElementAsString(DSLAMBOIProcess.PROCESS_NAME				, processData);
-			Date		creationTime	= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcess.CREATION_TIME	, processData);
-			Date		savedTime		= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcess.SAVED_TIME		, processData);
+			String		processName		= getElementController().getElementAsString(CRONIOBOIProcess.PROCESS_NAME				, processData);
+			Date		creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIProcess.CREATION_TIME	, processData);
+			Date		savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIProcess.SAVED_TIME		, processData);
 			process.setProcessId(processId);
 			process.setProcessName(processName);
 			process.setCreationTime(creationTime);
 			process.setSavedTime(savedTime);
 			
 			//extra options
-			AEMFTMetadataElementComposite extraOptions = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_EXTRA_OPTIONS, processData);
-			boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOProcess.PROCESS_SYNC_OPTION, extraOptions);
+			AEMFTMetadataElementComposite extraOptions = getElementController().getElementAsComposite(CRONIOBOProcess.PROCESS_EXTRA_OPTIONS, processData);
+			boolean synchronous = getElementController().getElementAsBoolean(CRONIOBOProcess.PROCESS_SYNC_OPTION, extraOptions);
 			process.setSynchronous(synchronous);
 			
 			//process variables
-			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_VARIABLE_LIST, processData);
-			List<DSLAMBOIVariable> variableList = fromVariableDataList(variablesData);
+			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(CRONIOBOProcess.PROCESS_VARIABLE_LIST, processData);
+			List<CRONIOBOIVariable> variableList = fromVariableDataList(variablesData);
 			process.setVariableList(variableList);
 
 			//process scheduleList
-			AEMFTMetadataElementComposite scheduleDataList = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_SCHEDULE_LIST, processData);
+			AEMFTMetadataElementComposite scheduleDataList = getElementController().getElementAsComposite(CRONIOBOProcess.PROCESS_SCHEDULE_LIST, processData);
 			List<Date> scheduleList = fromScheduleDataList(scheduleDataList);
 			process.setScheduleList(scheduleList);
 
 			//process listNodeList
-			AEMFTMetadataElementComposite nodeListDataList = getElementController().getElementAsComposite(DSLAMBOProcess.PROCESS_NODELIST_LIST, processData);
+			AEMFTMetadataElementComposite nodeListDataList = getElementController().getElementAsComposite(CRONIOBOProcess.PROCESS_NODELIST_LIST, processData);
 			List<CRONIOBOINodeList> listNodeList = fromNodeListDataList(nodeListDataList);
 			process.setListNodeList(listNodeList);
 
@@ -142,7 +142,7 @@ public class CRONIOBUMetadataToBomConversor {
 			nodeList =  new ArrayList<>();
 			List<AEMFTMetadataElement> nodeDataElementList = nodeDataList.getElementList();
 			for (AEMFTMetadataElement nodeDataElement: nodeDataElementList) {
-				if (!DSLAMBOIProject.INFO.equals(nodeDataElement.getKey())) {
+				if (!CRONIOBOIProject.INFO.equals(nodeDataElement.getKey())) {
 					CRONIOBOINode node = fromNodeData((AEMFTMetadataElementComposite) nodeDataElement);
 					nodeList.add(node);
 				}
@@ -171,7 +171,7 @@ public class CRONIOBUMetadataToBomConversor {
 			}
 
 			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(CRONIOBOINode.NODE_VARIABLE_LIST, nodeDataElement);
-			List<DSLAMBOIVariable> nodeVariables = fromVariableDataList(variablesData);
+			List<CRONIOBOIVariable> nodeVariables = fromVariableDataList(variablesData);
 			node.setVariableList(nodeVariables);
 		}
 		return node;
@@ -183,7 +183,7 @@ public class CRONIOBUMetadataToBomConversor {
 			listNodeList =  new ArrayList<>();
 			List<AEMFTMetadataElement> nodeListDataElementList = nodeListDataList.getElementList();
 			for (AEMFTMetadataElement nodeListDataElement: nodeListDataElementList) {
-				if (!DSLAMBOIProject.INFO.equals(nodeListDataElement.getKey())) {
+				if (!CRONIOBOIProject.INFO.equals(nodeListDataElement.getKey())) {
 					CRONIOBOINodeList nodeList = fromNodeListData((AEMFTMetadataElementComposite) nodeListDataElement);
 					listNodeList.add(nodeList);
 				}
@@ -233,15 +233,15 @@ public class CRONIOBUMetadataToBomConversor {
 		return scheduleList;
 	}
 
-	public static List<DSLAMBOIVariable> fromVariableDataList(AEMFTMetadataElementComposite variableDataList) {
-		List<DSLAMBOIVariable> variableList = null;
+	public static List<CRONIOBOIVariable> fromVariableDataList(AEMFTMetadataElementComposite variableDataList) {
+		List<CRONIOBOIVariable> variableList = null;
 		if (variableDataList != null) {
 			variableList = new ArrayList<>();
 			List<AEMFTMetadataElement> variableDataElementList = variableDataList.getElementList();
 			for (AEMFTMetadataElement variableDataelement : variableDataElementList) {
 				String dataKey = variableDataelement.getKey();
 				if (!CRONIOBOIProjectDataConstants.INFO.equals(dataKey)) {
-					DSLAMBOIVariable variable = fromVariableData((AEMFTMetadataElementComposite) variableDataelement);
+					CRONIOBOIVariable variable = fromVariableData((AEMFTMetadataElementComposite) variableDataelement);
 					variableList.add(variable);
 				}
 			}
@@ -249,15 +249,15 @@ public class CRONIOBUMetadataToBomConversor {
 		return variableList;
 	}
 
-	public static DSLAMBOIVariable fromVariableData(AEMFTMetadataElementComposite variableData) {
-		DSLAMBOIVariable variable = null;
+	public static CRONIOBOIVariable fromVariableData(AEMFTMetadataElementComposite variableData) {
+		CRONIOBOIVariable variable = null;
 		if (variableData != null) {
-			String 	variableName	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_NAME		, variableData);
-			String 	variableValue	= getElementController().getElementAsString(DSLAMBOIVariable.VARIABLE_VALUE		, variableData);
-			int		variableScope	= getElementController().getElementAsInt(DSLAMBOIVariable.VARIABLE_SCOPE		, variableData);
-			int		variableType	= getElementController().getElementAsInt(DSLAMBOIVariable.VARIABLE_TYPE			, variableData);
+			String 	variableName	= getElementController().getElementAsString(CRONIOBOIVariable.VARIABLE_NAME		, variableData);
+			String 	variableValue	= getElementController().getElementAsString(CRONIOBOIVariable.VARIABLE_VALUE		, variableData);
+			int		variableScope	= getElementController().getElementAsInt(CRONIOBOIVariable.VARIABLE_SCOPE		, variableData);
+			int		variableType	= getElementController().getElementAsInt(CRONIOBOIVariable.VARIABLE_TYPE			, variableData);
 
-			variable = new DSLAMBOVariable();
+			variable = new CRONIOBOVariable();
 			variable.setVariableName(variableName);
 			variable.setVariableValue(variableValue);
 			variable.setVariableScope(variableScope);
@@ -304,11 +304,11 @@ public class CRONIOBUMetadataToBomConversor {
 			machine = fromMachineConfigData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG));
 			machine.setMachineName(machineName);
 			machine.setMachinePropertiesId(machineId);
-			List<DSLAMBOIVariable> variableList = fromVariableDataList(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_VARIABLES));
+			List<CRONIOBOIVariable> variableList = fromVariableDataList(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_VARIABLES));
 			machine.setConnectionVariables(variableList);
-			DSLAMBOIFile initScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT));
+			CRONIOBOIFile initScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_CONNECTION_SCRIPT));
 			machine.setInitConnectionScript(initScript);
-			DSLAMBOIFile finishScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT));
+			CRONIOBOIFile finishScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT));
 			machine.setCloseConnectionScript(finishScript);
 			machine.setCreationTime(creationTime);
 		}

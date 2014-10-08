@@ -10,7 +10,7 @@ import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperDummy;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH1;
@@ -54,14 +54,14 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	@Override
 	public void openConnection() throws IOException {
 		connectionWrapper.connect(node);
-		DSLAMBOIFile 	connectionScript		= machineProperties.getInitConnectionScript();
+		CRONIOBOIFile 	connectionScript		= machineProperties.getInitConnectionScript();
 		String 			connectionScriptContent	= connectionScript.getCompiledContent();
 		runScript(connectionScriptContent);
 	}
 	
 	@Override
 	public void closeConnection() {
-		DSLAMBOIFile 	closeConnectionScript			= machineProperties.getCloseConnectionScript();
+		CRONIOBOIFile 	closeConnectionScript			= machineProperties.getCloseConnectionScript();
 		String 			closeConnectionScriptContent	= closeConnectionScript.getCompiledContent();
 		runScript(closeConnectionScriptContent);
 		connectionWrapper.disconnect();

@@ -10,8 +10,8 @@ import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.conn.CRONIOConnectionFactory;
 import com.imotion.dslam.conn.CRONIOIConnection;
@@ -22,10 +22,10 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	private CRONIOIExecutionLogger 		logger;
-	private DSLAMBOIProject				project;
+	private CRONIOBOIProject				project;
 	private HashMap<Long, Thread> 		threads;
 
-	public CRONIOExecutorImpl(DSLAMBOIProject project) throws Exception {
+	public CRONIOExecutorImpl(CRONIOBOIProject project) throws Exception {
 		this.project			= project;
 		this.logger				= new CRONIOExecutionLoggerImpl(project);
 	}
@@ -36,7 +36,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 	= CRONIOAntlrUtils.getVariablesFromProject(project);
 
-		DSLAMBOIProcess			process			= project.getProcess();
+		CRONIOBOIProcess			process			= project.getProcess();
 		List<CRONIOBOINodeList> listNodeList 	= process.getListNodeList();
 		CRONIOBOINodeList		currentNodeList = new CRONIOBONodeList(); 
 		for (CRONIOBOINodeList nodeList: listNodeList) {

@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIExecution;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 
 @Entity(name="Execution")
 public class CRONIOBOExecution implements CRONIOBOIExecution {
@@ -23,7 +23,7 @@ public class CRONIOBOExecution implements CRONIOBOIExecution {
 	private static final long serialVersionUID = -3324713164638338747L;
 	
 	private Long 				executionId;
-	private DSLAMBOIProject 	project;
+	private CRONIOBOIProject 	project;
 	private String				destinationLogs;
 	private Date 				creationTime;
 	private Long				version; 
@@ -43,15 +43,15 @@ public class CRONIOBOExecution implements CRONIOBOIExecution {
 		this.executionId = executionId;
 	}
 	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOProject.class)
-	@JoinColumn(name=DSLAMBOIProject.PROJECT_ID)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOProject.class)
+	@JoinColumn(name=CRONIOBOIProject.PROJECT_ID)
 	@Override
-	public DSLAMBOIProject getProject() {
+	public CRONIOBOIProject getProject() {
 		return project;
 	}
 
 	@Override
-	public void setProject(DSLAMBOIProject project) {
+	public void setProject(CRONIOBOIProject project) {
 		this.project = project;
 	}
 	

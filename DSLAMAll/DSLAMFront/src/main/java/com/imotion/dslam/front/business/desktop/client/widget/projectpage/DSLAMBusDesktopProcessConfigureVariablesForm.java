@@ -4,7 +4,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -39,8 +39,8 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 		
 		variableValueTextBox = new AEGWTBootstrapDropdownAndLabelTextBox(null, TEXTS.value());
 		root.add(variableValueTextBox);
-		variableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT)		, TEXTS.text_variable());
-		variableValueTextBox.addElement(String.valueOf(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_NUMERIC)	, TEXTS.numeric_variable());
+		variableValueTextBox.addElement(String.valueOf(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT)		, TEXTS.text_variable());
+		variableValueTextBox.addElement(String.valueOf(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_NUMERIC)	, TEXTS.numeric_variable());
 		
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
@@ -72,10 +72,10 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableIdTextBox.getText());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, variableIdTextBox.getSelectedId());
-					evt.addElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableValueTextBox.getSelectedId());
+					evt.addElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_NAME		, variableIdTextBox.getText());
+					evt.addElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE	, variableValueTextBox.getText());
+					evt.addElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE	, variableIdTextBox.getSelectedId());
+					evt.addElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE		, variableValueTextBox.getSelectedId());
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
 			} 
@@ -110,7 +110,7 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	}
 	
 	public void setEditMode(String mode) {
-		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
+		if(CRONIOBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
 			editMode = true;
 		} else {
 			editMode = false;
@@ -142,10 +142,10 @@ public class DSLAMBusDesktopProcessConfigureVariablesForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
 		if (variableData != null) {
-			String 	variableName 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
-			String 	variableValue 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
-			int 	variableScope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData);
-			int 	variableType 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableData);
+			String 	variableName 		= getElementController().getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_NAME	, variableData);
+			String 	variableValue 		= getElementController().getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE	, variableData);
+			int 	variableScope 		= getElementController().getElementAsInt(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData);
+			int 	variableType 		= getElementController().getElementAsInt(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE		, variableData);
 			String	variableScopeStr	= String.valueOf(variableScope);
 			String	variableTypeStr		= String.valueOf(variableType);
 			

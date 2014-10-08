@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -52,8 +52,8 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 
 			@Override
 			public void onClick(ClickEvent event) {
-				nodeVariablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
-				nodeVariablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
+				nodeVariablesForm.resetForm(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
+				nodeVariablesForm.setEditMode(CRONIOBOIVariablesDataConstants.SAVE_MODE);
 				nodeVariablesForm.center();	
 			}
 		});
@@ -110,18 +110,18 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (CRONIOBusDesktopProcessNodeVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String	id 					= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
-			String	value 				= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
-			String	variableTypeStr		= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
+			String	id 					= evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_NAME);
+			String	value 				= evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE);
+			String	variableTypeStr		= evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE);
 			int		variableType		= AEMFTCommonUtilsBase.getIntegerFromString(variableTypeStr);
-			String	variableScopeStr	= evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
+			String	variableScopeStr	= evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE);
 			int		variableScope		= AEMFTCommonUtilsBase.getIntegerFromString(variableScopeStr);
 
 			AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, data	, id);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, data	, variableScope);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, data	, variableType);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_NAME		, data	, id);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE		, data	, value);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE		, data	, variableScope);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE		, data	, variableType);
 
 			if (nodeVariablesForm.getEditMode()) {
 				addVariables(id, data);
@@ -143,7 +143,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 			AEMFTMetadataElementComposite variableData = getElementController().getElementAsComposite(variableKey, nodeData);
 
 			nodeVariablesForm.setData(variableData);
-			nodeVariablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
+			nodeVariablesForm.setEditMode(CRONIOBOIVariablesDataConstants.EDIT_MODE);
 			nodeVariablesForm.center();
 
 		} else if(CRONIOBusDesktopProcessNodesInfoVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
@@ -179,6 +179,6 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		getElementController().setElement(key, nodeData, data);
 		AEMFTMetadataElementComposite variablesNodeData = getElementController().getElementAsComposite(CRONIOBOINodeDataConstants.NODE_VARIABLE_LIST, nodeData);
 		nodeVariableList.setData(variablesNodeData);
-		nodeVariablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
+		nodeVariablesForm.resetForm(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE, CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
 	}
 }

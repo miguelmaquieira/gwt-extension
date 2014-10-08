@@ -1,7 +1,7 @@
 package com.imotion.dslam.bom;
 
 
-public interface DSLAMBOIProcessDataConstants {
+public interface CRONIOBOIProcessDataConstants {
 	
 	String PROCESS_ID 				= "processId";
 	String PROCESS_NAME				= "processName";	

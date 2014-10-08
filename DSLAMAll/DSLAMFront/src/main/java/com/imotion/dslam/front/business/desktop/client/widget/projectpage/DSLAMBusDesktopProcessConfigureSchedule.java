@@ -6,7 +6,7 @@ import java.util.List;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -46,7 +46,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			public void onClick(ClickEvent event) {
 				
 				getSchedulePopup().resetForm();
-				getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.SAVE_MODE);
+				getSchedulePopup().setEditMode(CRONIOBOIProcessDataConstants.SAVE_MODE);
 				getSchedulePopup().center();
 				if (addJS == false) {
 					scheduleForm.postDisplay();
@@ -101,8 +101,8 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (DSLAMBusDesktopProcessConfigureScheduleForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String newSchedule  	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE);
-			String originalSchedule	= evt.getElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE); 
+			String newSchedule  	= evt.getElementAsString(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE);
+			String originalSchedule	= evt.getElementAsString(CRONIOBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE); 
 			
 			boolean validSchedule = getSchedulePopup().getEditMode() || !schedulesData.contains(newSchedule);
 			if (validSchedule) {
@@ -113,15 +113,15 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			
 			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-			saveEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, schedulesData);
+			saveEvt.addElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, schedulesData);
 			getLogicalEventHandlerManager().fireEvent(saveEvt);
 		} else if(DSLAMBusDesktopScheduleList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			
 			AEMFTMetadataElementSingle scheduleDataSingle = (AEMFTMetadataElementSingle) schedulesData.getElement(evt.getSourceWidgetId());
 			AEMFTMetadataElementComposite scheduleDataComposite = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, scheduleDataComposite, scheduleDataSingle);
+			getElementController().setElement(CRONIOBOIProcessDataConstants.PROCESS_SCHEDULE_DATA, scheduleDataComposite, scheduleDataSingle);
 			getSchedulePopup().setData(scheduleDataComposite);
-			getSchedulePopup().setEditMode(DSLAMBOIProcessDataConstants.EDIT_MODE);
+			getSchedulePopup().setEditMode(CRONIOBOIProcessDataConstants.EDIT_MODE);
 			getSchedulePopup().center();
 			if (addJS == false) {
 				scheduleForm.postDisplay();
@@ -138,7 +138,7 @@ public class DSLAMBusDesktopProcessConfigureSchedule extends AEGWTCompositePanel
 			AEGWTLogicalEvent deleteEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 			deleteEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 			deleteEvt.setSourceWidget(getName());
-			deleteEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA, schedulesData);
+			deleteEvt.addElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_VARIABLES_DATA, schedulesData);
 			getLogicalEventHandlerManager().fireEvent(deleteEvt);
 		}	
 	}

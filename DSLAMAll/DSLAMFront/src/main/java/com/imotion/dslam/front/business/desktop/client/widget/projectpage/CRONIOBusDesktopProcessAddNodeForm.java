@@ -7,7 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -129,7 +129,7 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 	}
 	
 	public void setEditMode(String mode) {
-		if(DSLAMBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
+		if(CRONIOBOIVariablesDataConstants.EDIT_MODE.equals(mode)) {
 			editMode = true;
 		} else {
 			editMode = false;

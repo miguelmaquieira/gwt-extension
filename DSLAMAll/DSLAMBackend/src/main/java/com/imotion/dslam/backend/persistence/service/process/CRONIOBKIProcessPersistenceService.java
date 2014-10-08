@@ -4,22 +4,22 @@ import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
 
 
 
 public interface CRONIOBKIProcessPersistenceService {
 
-	DSLAMBOIProcess addProcess(DSLAMBOIProcess process);
+	CRONIOBOIProcess addProcess(CRONIOBOIProcess process);
 
-	List<DSLAMBOIProcess> getAllProcesses();
+	List<CRONIOBOIProcess> getAllProcesses();
 
 	void removeProcess(Long processIdAsLong);
 	
-	DSLAMBOIProcess getProcess(Long processIdAsLong);
+	CRONIOBOIProcess getProcess(Long processIdAsLong);
 
-	DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess processData, Long preferencesId, Date date);
+	CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, Date date);
 	
-	DSLAMBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList);
+	CRONIOBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList);
 
 }

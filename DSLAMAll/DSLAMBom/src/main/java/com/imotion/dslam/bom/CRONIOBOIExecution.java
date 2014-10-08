@@ -9,9 +9,9 @@ public interface CRONIOBOIExecution extends Serializable, CRONIOBOIExecutionData
 	
 	void setExecutionId(Long executionId);
 	
-	DSLAMBOIProject getProject();
+	CRONIOBOIProject getProject();
 	
-	void setProject(DSLAMBOIProject project);
+	void setProject(CRONIOBOIProject project);
 	
 	String getDestinationLogs();
 	

@@ -18,27 +18,27 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 
 @Entity(name="Process")
-public class DSLAMBOProcess implements DSLAMBOIProcess {
+public class CRONIOBOProcess implements CRONIOBOIProcess {
 
 	private static final long serialVersionUID = -1296222038272480787L;
 	
-	private Long 					processId;
-	private String 					processName;
-	private boolean 				synchronous;
-	private List<Date>				scheduleList;
-	private List<DSLAMBOIVariable> 	variableList;
-	private List<CRONIOBOINodeList>	listNodeList;
-	private Date 					savedTime;
-	private Date 					creationTime;
-	private DSLAMBOIProject			project;
-	private Long					version; 
+	private Long 						processId;
+	private String 						processName;
+	private boolean 					synchronous;
+	private List<Date>					scheduleList;
+	private List<CRONIOBOIVariable> 	variableList;
+	private List<CRONIOBOINodeList>		listNodeList;
+	private Date 						savedTime;
+	private Date 						creationTime;
+	private CRONIOBOIProject			project;
+	private Long						version; 
 
-	public DSLAMBOProcess() {}
+	public CRONIOBOProcess() {}
 
 	@Id
 	@SequenceGenerator(name = "ProcessIdGenerator", sequenceName = "ProcessSeq") //It only takes effect for databases providing identifier generators.
@@ -94,19 +94,19 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		scheduleList.add(schedule);
 	}
 
-	@ElementCollection(targetClass=DSLAMBOVariable.class)
+	@ElementCollection(targetClass=CRONIOBOVariable.class)
 	@Override
-	public List<DSLAMBOIVariable> getVariableList() {
+	public List<CRONIOBOIVariable> getVariableList() {
 		return variableList;
 	}
 
 	@Override
-	public void setVariableList(List<DSLAMBOIVariable> variableList) {
+	public void setVariableList(List<CRONIOBOIVariable> variableList) {
 		this.variableList = variableList;
 	}
 
 	@Override
-	public void addVariable(DSLAMBOIVariable variable) {
+	public void addVariable(CRONIOBOIVariable variable) {
 		if (variableList == null) {
 			variableList = new ArrayList<>();
 		}
@@ -170,14 +170,14 @@ public class DSLAMBOProcess implements DSLAMBOIProcess {
 		this.creationTime = creationTime;
 	}
 	
-	@OneToOne(mappedBy = DSLAMBOIProject.PROJECT_PROCESS , targetEntity = DSLAMBOProject.class)
+	@OneToOne(mappedBy = CRONIOBOIProject.PROJECT_PROCESS , targetEntity = CRONIOBOProject.class)
 	@Override
-	public DSLAMBOIProject getProject() {
+	public CRONIOBOIProject getProject() {
 		return project;
 	}
 
 	@Override
-	public void setProject(DSLAMBOIProject project) {
+	public void setProject(CRONIOBOIProject project) {
 		this.project = project;
 	}
 
