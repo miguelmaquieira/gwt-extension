@@ -3,8 +3,8 @@ package com.imotion.dslam.front.business.desktop.client.presenter.process;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
@@ -47,19 +47,19 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
@@ -70,7 +70,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 		} else if (CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
-				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA);
+				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_NODES_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
 		} 
@@ -87,7 +87,7 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		if (projectFinalSectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
+		if (projectFinalSectionId.contains(CRONIOBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			finalSectionData.addElement(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, getMachinesFromPreferences());
 		}
 		getView().openProcessSection(projectFinalSectionId, finalSectionData);

@@ -12,9 +12,9 @@ import com.imotion.antlr.ImoLangParser;
 import com.imotion.antlr.ImoLangParser.ProgramContext;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
@@ -80,25 +80,25 @@ public class CRONIOAntlrUtils {
 	}
 
 	public static Map<String, Object> getNodeVariables(CRONIOBOINode node) {
-		List<DSLAMBOIVariable> 	nodeVariables 		= node.getVariableList();
+		List<CRONIOBOIVariable> 	nodeVariables 		= node.getVariableList();
 		return getVariablesMapFromVariablesBomList(nodeVariables);
 	}
 
 	public static Map<String, Object> getMachineVariables(CRONIOBOIMachineProperties machineProperties) {
-		List<DSLAMBOIVariable> 	machineVariables = machineProperties.getConnectionVariables();
+		List<CRONIOBOIVariable> 	machineVariables = machineProperties.getConnectionVariables();
 		return getVariablesMapFromVariablesBomList(machineVariables);
 	}
 
-	public static Map<String, Object> getVariablesFromProject(DSLAMBOIProject project) {
-		DSLAMBOIProcess			process 		= project.getProcess();
-		List<DSLAMBOIVariable>	processVariableList 	= process.getVariableList();
+	public static Map<String, Object> getVariablesFromProject(CRONIOBOIProject project) {
+		CRONIOBOIProcess			process 		= project.getProcess();
+		List<CRONIOBOIVariable>	processVariableList 	= process.getVariableList();
 		return getVariablesMapFromVariablesBomList(processVariableList);
 	}
 
-	public static Map<String, Object> getVariablesMapFromVariablesBomList(List<DSLAMBOIVariable>	variableList) {
+	public static Map<String, Object> getVariablesMapFromVariablesBomList(List<CRONIOBOIVariable>	variableList) {
 		Map<String, Object> variablesMap 	= new HashMap<>();
 		if (!AEMFTCommonUtilsBase.isEmptyList(variableList)) {
-			for (DSLAMBOIVariable variable : variableList) {
+			for (CRONIOBOIVariable variable : variableList) {
 				addVariableToMap(variablesMap, variable);
 			}
 		}
@@ -109,7 +109,7 @@ public class CRONIOAntlrUtils {
 	 * PRIVATE 
 	 */
 
-	private static void addVariableToMap(Map<String, Object> variablesMap, DSLAMBOIVariable variable) {
+	private static void addVariableToMap(Map<String, Object> variablesMap, CRONIOBOIVariable variable) {
 		StringBuilder varNameSB = new StringBuilder();
 		varNameSB.append(VARIABLE_PREFFIX_PROCESS);
 		varNameSB.append(variable.getVariableName());
@@ -123,7 +123,7 @@ public class CRONIOAntlrUtils {
 	private static Object getVariableValue(int type, String variableValueStr) {
 		Object variableValue = null;
 		if (!AEMFTCommonUtilsBase.isEmptyString(variableValueStr)) {
-			if (DSLAMBOIVariable.VARIABLE_TYPE_TEXT == type) {
+			if (CRONIOBOIVariable.VARIABLE_TYPE_TEXT == type) {
 				variableValue = variableValueStr.replaceAll("\"", "");
 			} else {
 				variableValue = AEMFTCommonUtilsBase.getIntegerFromString(variableValueStr);

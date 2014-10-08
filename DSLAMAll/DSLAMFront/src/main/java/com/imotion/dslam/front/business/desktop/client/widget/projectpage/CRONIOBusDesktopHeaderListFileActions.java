@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.Hidden;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
@@ -76,7 +76,7 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 					AEGWTLogicalEvent openEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 					openEvt.setEventType(LOGICAL_TYPE.OPEN_EVENT);
 					openEvt.setSourceWidget(getName());
-					openEvt.addElementAsComposite(DSLAMBOIProcessDataConstants.PROCESS_NODES_DATA, nodeListData);
+					openEvt.addElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_NODES_DATA, nodeListData);
 					getLogicalEventHandlerManager().fireEvent(openEvt);
 				}
 			}

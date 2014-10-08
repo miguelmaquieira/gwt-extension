@@ -3,23 +3,23 @@ package com.imotion.dslam.backend.persistence.service.file;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 
 
 
 public interface CRONIOBKIFilePersistenceService {
 
-	DSLAMBOIFile addFile(DSLAMBOIFile file);
+	CRONIOBOIFile addFile(CRONIOBOIFile file);
 
-	DSLAMBOIFile updateFileContent(Long fileId, String content, Date date);
+	CRONIOBOIFile updateFileContent(Long fileId, String content, Date date);
 	
-	DSLAMBOIFile updateFileContent(Long fileId, String content, String compiledContent, Date date);
+	CRONIOBOIFile updateFileContent(Long fileId, String content, String compiledContent, Date date);
 	
-	DSLAMBOIFile updateFileName(Long fileId, String filename);
+	CRONIOBOIFile updateFileName(Long fileId, String filename);
 
-	List<DSLAMBOIFile> getAllFiles();
+	List<CRONIOBOIFile> getAllFiles();
 	
-	DSLAMBOIFile getFile(Long fileIdAsLong);
+	CRONIOBOIFile getFile(Long fileIdAsLong);
 
 	void removeFile(Long fileIdAsLong);
 

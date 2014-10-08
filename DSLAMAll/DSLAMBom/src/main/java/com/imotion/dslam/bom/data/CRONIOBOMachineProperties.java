@@ -16,8 +16,8 @@ import javax.persistence.Version;
 
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 
 @Entity(name="MachineProperties")
 public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
@@ -37,9 +37,9 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 	private String					promptRegEx;
 	private Date					saveTime;
 	private Date					creationTime;
-	private List<DSLAMBOIVariable>	connectionVariables;
-	private DSLAMBOIFile 			initConnectionScript;
-	private DSLAMBOIFile 			closeConnectionScript;
+	private List<CRONIOBOIVariable>	connectionVariables;
+	private CRONIOBOIFile 			initConnectionScript;
+	private CRONIOBOIFile 			closeConnectionScript;
 	private CRONIOBOIPreferences	preferences;
 	private Long					version;
 
@@ -178,27 +178,27 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 		return creationTime;
 	}
 	
-	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOFile.class)
 	@JoinColumn(name=INIT_CONNECTION_SCRIPT_ID)
 	@Override
-	public DSLAMBOIFile getInitConnectionScript() {
+	public CRONIOBOIFile getInitConnectionScript() {
 		return initConnectionScript;
 	}
 
 	@Override
-	public void setInitConnectionScript(DSLAMBOIFile initConnectionScript) {
+	public void setInitConnectionScript(CRONIOBOIFile initConnectionScript) {
 		this.initConnectionScript = initConnectionScript;
 	}
 
-	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=DSLAMBOFile.class)
+	@ManyToOne(cascade ={CascadeType.PERSIST, CascadeType.REMOVE}, targetEntity=CRONIOBOFile.class)
 	@JoinColumn(name=CLOSE_CONNECTION_SCRIPT_ID)
 	@Override
-	public DSLAMBOIFile getCloseConnectionScript() {
+	public CRONIOBOIFile getCloseConnectionScript() {
 		return closeConnectionScript;
 	}
 
 	@Override
-	public void setCloseConnectionScript(DSLAMBOIFile finishConnectionScript) {
+	public void setCloseConnectionScript(CRONIOBOIFile finishConnectionScript) {
 		this.closeConnectionScript = finishConnectionScript;
 	}
 
@@ -214,14 +214,14 @@ public class CRONIOBOMachineProperties implements CRONIOBOIMachineProperties {
 		this.preferences = preferences;
 	}
 	
-	@ElementCollection(targetClass=DSLAMBOVariable.class)
+	@ElementCollection(targetClass=CRONIOBOVariable.class)
 	@Override
-	public List<DSLAMBOIVariable> getConnectionVariables() {
+	public List<CRONIOBOIVariable> getConnectionVariables() {
 		return connectionVariables;
 	}
 
 	@Override
-	public void setConnectionVariables(List<DSLAMBOIVariable> connectionVariables) {
+	public void setConnectionVariables(List<CRONIOBOIVariable> connectionVariables) {
 		this.connectionVariables = connectionVariables;
 	}
 

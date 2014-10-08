@@ -14,7 +14,7 @@ import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPrefer
 import com.imotion.dslam.backend.persistence.service.process.CRONIOBKIProcessPersistenceService;
 import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
-import com.imotion.dslam.bom.DSLAMBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.business.CRONIOBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersisteceJPAConnectionUtil;
@@ -51,7 +51,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 	 *	PROTECTED 
 	 */
 
-	protected DSLAMBOIFile addCompiledCode(DSLAMBOIFile file, Date date) {
+	protected CRONIOBOIFile addCompiledCode(CRONIOBOIFile file, Date date) {
 		String content			= file.getContent();
 		String compiledContent	= CRONIOAntlrUtils.precompileCode(content, file.getContentType());
 		file.setCompiledContent(compiledContent);

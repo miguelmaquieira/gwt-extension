@@ -8,24 +8,24 @@ import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJ
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.data.DSLAMBOProcess;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.data.CRONIOBOProcess;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<DSLAMBOIProcess, DSLAMBOProcess, Long> implements CRONIOBKIProcessPersistenceService {
+public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOIProcess, CRONIOBOProcess, Long> implements CRONIOBKIProcessPersistenceService {
 
 	private static final long serialVersionUID = 4872791158147475333L;
 
 	@Override
-	public DSLAMBOIProcess addProcess(DSLAMBOIProcess process) {
-		DSLAMBOProcess processJPA = (DSLAMBOProcess) process;
+	public CRONIOBOIProcess addProcess(CRONIOBOIProcess process) {
+		CRONIOBOProcess processJPA = (CRONIOBOProcess) process;
 		processJPA = getPersistenceModule().create(processJPA);
 		return processJPA;
 	}
 	
 	@Override
-	public DSLAMBOIProcess updateProcess(Long processId, DSLAMBOIProcess processData, Long preferencesId, Date date) {
-		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
+	public CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, Date date) {
+		CRONIOBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 
 			originalProcess.setSynchronous(processData.isSynchronous());
@@ -70,8 +70,8 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	}
 	
 	@Override
-	public DSLAMBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList) {
-		DSLAMBOProcess originalProcess = getPersistenceModule().get(processId);
+	public CRONIOBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList) {
+		CRONIOBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 			originalProcess.addNodeList(nodeList);
 			Date date = new Date();
@@ -82,8 +82,8 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	}
 	
 	@Override
-	public List<DSLAMBOIProcess> getAllProcesses() {
-		List<DSLAMBOProcess> processListJpa = getPersistenceModule().findAll();
+	public List<CRONIOBOIProcess> getAllProcesses() {
+		List<CRONIOBOProcess> processListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(processListJpa);
 	}
 	
@@ -93,8 +93,8 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	}
 	
 	@Override
-	public DSLAMBOIProcess getProcess(Long processIdAsLong) {
-		DSLAMBOProcess processJpa = getPersistenceModule().get(processIdAsLong);
+	public CRONIOBOIProcess getProcess(Long processIdAsLong) {
+		CRONIOBOProcess processJpa = getPersistenceModule().get(processIdAsLong);
 		return processJpa;
 	}
 
@@ -102,8 +102,8 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	 * AEMFTIHasPersistenceModule
 	 */
 	@Override
-	public Class<DSLAMBOProcess> getPersistenceClass() {
-		return DSLAMBOProcess.class;
+	public Class<CRONIOBOProcess> getPersistenceClass() {
+		return CRONIOBOProcess.class;
 	}
 	
 	/**

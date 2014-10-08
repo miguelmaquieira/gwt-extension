@@ -4,8 +4,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -56,8 +56,8 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 				AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-				getElementController().setElement(DSLAMBOIProcess.PROCESS_SYNC_OPTION, data, (boolean) synchroCheckBox.getValue());
-				saveEvt.addElementAsComposite(DSLAMBOIProcess.PROCESS_EXTRA_OPTIONS, data);
+				getElementController().setElement(CRONIOBOIProcess.PROCESS_SYNC_OPTION, data, (boolean) synchroCheckBox.getValue());
+				saveEvt.addElementAsComposite(CRONIOBOIProcess.PROCESS_EXTRA_OPTIONS, data);
 				getLogicalEventHandlerManager().fireEvent(saveEvt);
 			}
 		});
@@ -74,14 +74,14 @@ public class DSLAMBusDesktopProcessConfigureExtraOptions extends AEGWTCompositeP
 	
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		boolean synchronous = getElementController().getElementAsBoolean(DSLAMBOIProcessDataConstants.PROCESS_SYNC_OPTION, data);
+		boolean synchronous = getElementController().getElementAsBoolean(CRONIOBOIProcessDataConstants.PROCESS_SYNC_OPTION, data);
 		synchroCheckBox.setValue(synchronous);
 	}
 	
 	public AEMFTMetadataElementComposite getData() {
 		AEMFTMetadataElementComposite data = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		boolean synchronous = synchroCheckBox.getValue();
-		data.addElement(DSLAMBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS, synchronous);
+		data.addElement(CRONIOBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS, synchronous);
 		return data;
 	}
 	

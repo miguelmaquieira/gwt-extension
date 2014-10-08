@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUser;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.selene.arch.base.bom.data.AEMFTLoginData;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -27,7 +27,7 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 	
 	private Long					userId;
 	private CRONIOBOIPreferences	preferences;
-	private List<DSLAMBOIProject>	projectList;
+	private List<CRONIOBOIProject>	projectList;
 
 	@Id
 	@SequenceGenerator(name = "UserIdGenerator", sequenceName = "UserSeq") //It only takes effect for databases providing identifier generators.
@@ -54,20 +54,20 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 		this.preferences = preferences;
 	}
 
-	@ManyToMany(cascade={CascadeType.PERSIST}, targetEntity=DSLAMBOProject.class)
-	@JoinTable(name=USER_PROJECTS, joinColumns = @JoinColumn(name = USER_ID), inverseJoinColumns = @JoinColumn(name = DSLAMBOIProject.PROJECT_ID))
+	@ManyToMany(cascade={CascadeType.PERSIST}, targetEntity=CRONIOBOProject.class)
+	@JoinTable(name=USER_PROJECTS, joinColumns = @JoinColumn(name = USER_ID), inverseJoinColumns = @JoinColumn(name = CRONIOBOIProject.PROJECT_ID))
 	@Override
-	public List<DSLAMBOIProject> getProjectList() {
+	public List<CRONIOBOIProject> getProjectList() {
 		return projectList;
 	}
 
 	@Override
-	public void setProjectList(List<DSLAMBOIProject> projectList) {
+	public void setProjectList(List<CRONIOBOIProject> projectList) {
 		this.projectList = projectList;
 	}
 	
 	@Override
-	public void addProject(DSLAMBOIProject project) {
+	public void addProject(CRONIOBOIProject project) {
 		if (AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			projectList = new ArrayList<>();
 		}
@@ -75,7 +75,7 @@ public class CRONIOBOUser extends AEMFTLoginData implements CRONIOBOIUser {
 	}
 	
 	@Override
-	public void removeProject(DSLAMBOIProject project) {
+	public void removeProject(CRONIOBOIProject project) {
 		projectList.remove(project);
 	}
 

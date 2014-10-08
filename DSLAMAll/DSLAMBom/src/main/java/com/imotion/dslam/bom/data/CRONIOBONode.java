@@ -19,7 +19,7 @@ import javax.persistence.Version;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 
 @Entity(name="Node")
 public class CRONIOBONode implements CRONIOBOINode {
@@ -30,7 +30,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 	private String 							nodeName;
 	private String 							nodeIp;
 	private String 							nodeType;
-	private List<DSLAMBOIVariable> 			variableList;
+	private List<CRONIOBOIVariable> 			variableList;
 	private CRONIOBOINodeList				nodeList;
 	private CRONIOBOIMachineProperties		machineProperties;
 	private Date 							savedTime;
@@ -82,14 +82,14 @@ public class CRONIOBONode implements CRONIOBOINode {
 		this.nodeType = nodeType;
 	}
 
-	@ElementCollection(targetClass=DSLAMBOVariable.class)
+	@ElementCollection(targetClass=CRONIOBOVariable.class)
 	@Override
-	public List<DSLAMBOIVariable> getVariableList() {
+	public List<CRONIOBOIVariable> getVariableList() {
 		return variableList;
 	}
 	
 	@Override
-	public void setVariableList(List<DSLAMBOIVariable> variableList) {
+	public void setVariableList(List<CRONIOBOIVariable> variableList) {
 		this.variableList = variableList;
 	}
 

@@ -3,7 +3,7 @@ package com.imotion.dslam.bom;
 import java.io.Serializable;
 import java.util.Date;
 
-public interface DSLAMBOIProject extends Serializable, CRONIOBOIProjectDataConstants {
+public interface CRONIOBOIProject extends Serializable, CRONIOBOIProjectDataConstants {
 
 	Long getProjectId();
 	
@@ -17,17 +17,17 @@ public interface DSLAMBOIProject extends Serializable, CRONIOBOIProjectDataConst
 
 	void setMachineType(int machineType);
 	
-	DSLAMBOIFile getMainScript();
+	CRONIOBOIFile getMainScript();
 	
-	void setMainScript(DSLAMBOIFile mainScript);
+	void setMainScript(CRONIOBOIFile mainScript);
 	
-	DSLAMBOIFile getRollBackScript();
+	CRONIOBOIFile getRollBackScript();
 
-	void setRollBackScript(DSLAMBOIFile rollBackScript);
+	void setRollBackScript(CRONIOBOIFile rollBackScript);
 	
-	DSLAMBOIProcess getProcess();
+	CRONIOBOIProcess getProcess();
 	
-	void setProcess(DSLAMBOIProcess process);
+	void setProcess(CRONIOBOIProcess process);
 	
 	Date getSavedTime();
 

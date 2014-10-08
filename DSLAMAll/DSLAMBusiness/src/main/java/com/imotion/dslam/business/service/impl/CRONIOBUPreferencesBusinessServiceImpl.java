@@ -9,10 +9,10 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
-import com.imotion.dslam.bom.data.DSLAMBOFile;
+import com.imotion.dslam.bom.data.CRONIOBOFile;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceTrace;
@@ -60,19 +60,19 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends CRONIOBUServiceBase 
 		long preferencesId   	= getElementDataController().getElementAsLong(CRONIOBOIPreferences.PREFERENCES_ID			, contextIn);
 
 		//InitScript
-		DSLAMBOIFile connectionScript = new DSLAMBOFile();
+		CRONIOBOIFile connectionScript = new CRONIOBOFile();
 		connectionScript.setSavedTime(creationTime);
 		connectionScript.setCreationTime(creationTime);
 		connectionScript.setFilename(CRONIOBOIMachineProperties.CONNECTION_SCRIPT_DEFAULT_NAME);
 
 		//disconnectionScript
-		DSLAMBOIFile disconnectionScript = new DSLAMBOFile();
+		CRONIOBOIFile disconnectionScript = new CRONIOBOFile();
 		disconnectionScript.setSavedTime(creationTime);
 		disconnectionScript.setCreationTime(creationTime);
 		disconnectionScript.setFilename(CRONIOBOIMachineProperties.DISCONNECTION_SCRIPT_DEFAULT_NAME);
 
 		//VariableList
-		List<DSLAMBOIVariable> variableList = new ArrayList<>();
+		List<CRONIOBOIVariable> variableList = new ArrayList<>();
 
 		//MachineProperties
 		CRONIOBOIMachineProperties machineProperties = new CRONIOBOMachineProperties();
@@ -137,10 +137,10 @@ public class CRONIOBUPreferencesBusinessServiceImpl extends CRONIOBUServiceBase 
 			machine.setPreferences(preferences);
 			
 			long machineId = machine.getMachinePropertiesId();
-			DSLAMBOIFile connectionScript 			= machine.getInitConnectionScript();
+			CRONIOBOIFile connectionScript 			= machine.getInitConnectionScript();
 			connectionScript = addCompiledCode(connectionScript, date);
 			
-			DSLAMBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
+			CRONIOBOIFile disconnectionScript 	= machine.getCloseConnectionScript();
 			disconnectionScript = addCompiledCode(disconnectionScript, date);
 			
 			machine	= getMachinePropertiesPersistence().updateMachineProperties(machineId, machine);

@@ -6,8 +6,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
@@ -58,11 +58,11 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.add(menuScript);
 
 		//MENU -> Project -> Script -> MainScript
-		mainScript 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_MAIN_SCRIPT		,TEXTS.main_script_label(), this);
+		mainScript 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, CRONIOBOIProject.PROJECT_MAIN_SCRIPT		,TEXTS.main_script_label(), this);
 		menuScript.add(mainScript);
 
 		//MENU -> Project -> Script -> RollbackScript
-		rollbackScript 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT	,TEXTS.rollback_script_label(),this);
+		rollbackScript 		= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_SCRIPT, CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT	,TEXTS.rollback_script_label(),this);
 		menuScript.add(rollbackScript);
 
 		//MENU -> Project  -> Process
@@ -71,15 +71,15 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.add(menuProcess.asWidget());
 
 		//MENU -> Project  -> Process -> Variables
-		variableProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
+		variableProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, CRONIOBOIProject.PROJECT_PROCESS_VARIABLE_LIST		,TEXTS.variables(), this);
 		menuProcess.add(variableProcess);
 
 		//MENU -> Project  -> Process -> Schedule
-		scheduleProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
+		scheduleProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, CRONIOBOIProject.PROJECT_PROCESS_SCHEDULE_LIST		,TEXTS.schedule(), this);
 		menuProcess.add(scheduleProcess);
 
 		//MENU -> Project  -> Process -> Properties
-		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
+		propertiesProcess 	= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_PROCESS, CRONIOBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS		,TEXTS.properties(), this);
 		menuProcess.add(propertiesProcess);
 
 		//MENU -> Project  -> Process -> Environments
@@ -95,7 +95,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 		menuProject.add(menuExecution);
 		
 		//MENU -> Project -> Execution -> Console
-		nodesConsole 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE			,TEXTS.console_label(), this);
+		nodesConsole 			= new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_EXECUTION, CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE			,TEXTS.console_label(), this);
 		menuExecution.add(nodesConsole);
 		
 		//MENU -> Project  -> Execution -> Logs
@@ -135,17 +135,17 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	
 	public void setProjectSectionSelected(String sectionId) {
 	
-		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+		if (CRONIOBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
 			mainScript.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
 			rollbackScript.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
 			variableProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
 			scheduleProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			propertiesProcess.setSelected(true);
-		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			nodesConsole.setSelected(true);
 		} else if (SECTION_TYPE_PROJECT.equals(sectionId)) {
 			menuProject.setSelected(true);
@@ -173,7 +173,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 				StringBuilder sbKey = new StringBuilder();
 				sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
 				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-				sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+				sbKey.append(CRONIOBOIProcess.PROCESS_NODELIST_LIST);
 				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 				sbKey.append(nodeList.getElementName());
 				String nodeListKey = sbKey.toString();
@@ -187,22 +187,22 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 
 	public void setProjectSectionModified(String sectionId) {
 		menuProject.setModified(true);
-		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+		if (CRONIOBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
 			menuScript.setModified(true);
 			mainScript.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
 			menuScript.setModified(true);
 			rollbackScript.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
 			menuProcess.setModified(true);
 			variableProcess.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
 			menuProcess.setModified(true);
 			scheduleProcess.setModified(true);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			menuProcess.setModified(true);
 			propertiesProcess.setModified(true);
-		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
+		} else if (sectionId.contains(CRONIOBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			menuProcess.setModified(true);
 			menuNodesProcess.setModified(true);
 			
@@ -212,7 +212,7 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 				StringBuilder sbKey = new StringBuilder();
 				sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
 				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
-				sbKey.append(DSLAMBOIProcess.PROCESS_NODELIST_LIST);
+				sbKey.append(CRONIOBOIProcess.PROCESS_NODELIST_LIST);
 				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
 				sbKey.append(nodeList.getElementName());
 				String nodeListKey = sbKey.toString();
@@ -249,12 +249,12 @@ public class DSLAMBusDesktopProjectNavigatorElement extends AEGWTCompositePanel 
 	}
 	
 	public void addExecution(String projectId, String executionDateStr) {
-		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, DSLAMBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
+		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, CRONIOBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
 		menuLogs.add(execution);
 	}
 	
 	public void addNodeList(String projectId, String nodeListName) {
-		CRONIOBusDesktopProjectNavigatorFinalItem nodeList = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_ENVIROMENTS, DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS	, nodeListName, this);
+		CRONIOBusDesktopProjectNavigatorFinalItem nodeList = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_ENVIROMENTS, CRONIOBOIProject.PROJECT_PROCESS_NODE_LISTS	, nodeListName, this);
 		menuNodesProcess.add(nodeList);
 	}
 	

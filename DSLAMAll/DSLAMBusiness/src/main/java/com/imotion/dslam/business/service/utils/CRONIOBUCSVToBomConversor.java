@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.DSLAMBOIVariable;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariable;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.bom.data.CRONIOBONode;
-import com.imotion.dslam.bom.data.DSLAMBOVariable;
+import com.imotion.dslam.bom.data.CRONIOBOVariable;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBUCSVToBomConversor {
@@ -39,7 +39,7 @@ public class CRONIOBUCSVToBomConversor {
 				}
 			}
 			
-			List<DSLAMBOIVariable>	variableList 	= new ArrayList<>();
+			List<CRONIOBOIVariable>	variableList 	= new ArrayList<>();
 			
 			
 			if (line == 0) {
@@ -58,19 +58,19 @@ public class CRONIOBUCSVToBomConversor {
 
 				if (hasVariableList) {
 					for (int i = 0; i < variableListString.length; i++) {
-						DSLAMBOIVariable variable = new DSLAMBOVariable();
+						CRONIOBOIVariable variable = new CRONIOBOVariable();
 						variable.setVariableName(variableNameList[i]);
-						variable.setVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
-						variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
+						variable.setVariableScope(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
+						variable.setVariableType(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 						variable.setVariableValue(variableListString[i]);
 						variableList.add(variable);
 					}
 				} else {
 					if (!AEMFTCommonUtils.isEmptyString(variableStr)) {
-						DSLAMBOIVariable variable = new DSLAMBOVariable();
+						CRONIOBOIVariable variable = new CRONIOBOVariable();
 						variable.setVariableName(variableName);
-						variable.setVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
-						variable.setVariableType(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
+						variable.setVariableScope(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE);
+						variable.setVariableType(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 						variable.setVariableValue(variableStr);
 						variableList.add(variable);
 					}	

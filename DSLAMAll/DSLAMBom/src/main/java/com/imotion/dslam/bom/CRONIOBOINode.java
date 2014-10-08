@@ -22,9 +22,9 @@ public interface CRONIOBOINode extends Serializable, CRONIOBOINodeDataConstants 
 
 	void setNodeType(String nodeType);
 
-	List<DSLAMBOIVariable> getVariableList();
+	List<CRONIOBOIVariable> getVariableList();
 
-	void setVariableList(List<DSLAMBOIVariable> variableList);
+	void setVariableList(List<CRONIOBOIVariable> variableList);
 
 	Date getSavedTime();
 

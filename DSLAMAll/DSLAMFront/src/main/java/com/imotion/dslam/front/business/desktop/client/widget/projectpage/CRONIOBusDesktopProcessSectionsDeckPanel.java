@@ -6,7 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -51,16 +51,16 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
 
-		if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+		if (CRONIOBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
 			rootDeckPanel.showWidget(0);
 			variablesProcessConfigure.setData(sectionData);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
 			rootDeckPanel.showWidget(1);
 			scheduleProcessConfigure.setData(sectionData);
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			rootDeckPanel.showWidget(2);
 			extraOptionsConfigure.setData(sectionData);
-		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
+		} else if (sectionId.contains(CRONIOBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			rootDeckPanel.showWidget(3);
 			AEMFTMetadataElementComposite nodeListData = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
 			nodeListData.addElement(CRONIOBOINodeList.NODELIST_DATA, sectionData);

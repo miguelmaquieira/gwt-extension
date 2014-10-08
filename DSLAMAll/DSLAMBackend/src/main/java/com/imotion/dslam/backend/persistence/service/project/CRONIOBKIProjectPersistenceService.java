@@ -2,19 +2,19 @@ package com.imotion.dslam.backend.persistence.service.project;
 
 import java.util.List;
 
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 
 public interface CRONIOBKIProjectPersistenceService {
 	
-	DSLAMBOIProject getProject(long projectId);
+	CRONIOBOIProject getProject(long projectId);
 	
-	DSLAMBOIProject addProject(DSLAMBOIProject project);
+	CRONIOBOIProject addProject(CRONIOBOIProject project);
 	
-	DSLAMBOIProject updateProject(Long projectId, DSLAMBOIProject updatedProject);
+	CRONIOBOIProject updateProject(Long projectId, CRONIOBOIProject updatedProject);
 
-	DSLAMBOIProject updateProjectName(Long projectId, String projectName);
+	CRONIOBOIProject updateProjectName(Long projectId, String projectName);
 	
-	List<DSLAMBOIProject> getAllProjects();
+	List<CRONIOBOIProject> getAllProjects();
 
 	void removeProject(Long projectIdAsLong);
 

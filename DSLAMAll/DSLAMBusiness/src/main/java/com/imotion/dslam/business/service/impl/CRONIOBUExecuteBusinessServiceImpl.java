@@ -8,7 +8,7 @@ import com.imotion.dslam.antlr.executor.CRONIOExecutorImpl;
 import com.imotion.dslam.antlr.executor.CRONIOIExecutor;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOExecution;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessService;
@@ -40,18 +40,18 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		long							executionId				= executionIdDataSingle.getValueAsLong();
 		String							nodeListName 			= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, contextIn);
 		
-		DSLAMBOIProject project = getProjectPersistence().getProject(projectId);
+		CRONIOBOIProject project = getProjectPersistence().getProject(projectId);
 		
 		if (project != null) {
 			//init-trace
-			traceItemRecoveredFromPersistence(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
+			traceItemRecoveredFromPersistence(METHOD_EXECUTE_PROJECT, CRONIOBOIProject.class, projectIdStr);
 			//end-trace
 
 			CRONIOIExecutor executor = getExecutor(project);
 			executor.execute(executionId, nodeListName);
 		} else {
 			//init-trace
-			traceItemNotFound(METHOD_EXECUTE_PROJECT, DSLAMBOIProject.class, projectIdStr);
+			traceItemNotFound(METHOD_EXECUTE_PROJECT, CRONIOBOIProject.class, projectIdStr);
 			//end-trace
 		}
 	}
@@ -64,7 +64,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		String 							nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME		, contextIn);
 		Date 							creationTime 	= new Date();
 		Long 							projectIdAsLong = Long.valueOf(projectId).longValue();
-		DSLAMBOIProject 				project 		= getProjectPersistence().getProject(projectIdAsLong);
+		CRONIOBOIProject 				project 		= getProjectPersistence().getProject(projectIdAsLong);
 		
 		CRONIOBOIExecution execution = new CRONIOBOExecution();
 		execution.setProject(project);
@@ -127,7 +127,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 	/**
 	 * PRIVATE 
 	 */
-	private CRONIOIExecutor getExecutor(DSLAMBOIProject project) {
+	private CRONIOIExecutor getExecutor(CRONIOBOIProject project) {
 		CRONIOIExecutor executor = null;
 		try {
 			executor = new CRONIOExecutorImpl(project);

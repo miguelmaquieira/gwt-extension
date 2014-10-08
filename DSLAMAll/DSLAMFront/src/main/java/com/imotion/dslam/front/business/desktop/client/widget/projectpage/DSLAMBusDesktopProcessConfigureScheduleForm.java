@@ -6,7 +6,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -69,9 +69,9 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 					AEGWTLogicalEvent evt = new AEGWTLogicalEvent(getWindowName(), getName());
 					evt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 					evt.setSourceWidgetId(getId());
-					evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleTextBox.getDateText());
+					evt.addElementAsString(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE			, scheduleTextBox.getDateText());
 					if (editMode) {
-						evt.addElementAsString(DSLAMBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE	, originalSchedule);
+						evt.addElementAsString(CRONIOBOIProcessDataConstants.SCHEDULE_ORIGINAL_VALUE	, originalSchedule);
 					}
 					getLogicalEventHandlerManager().fireEvent(evt);
 				} 
@@ -100,7 +100,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	@Override
 	public void setData(AEMFTMetadataElementComposite scheduleData) {
 		if (scheduleData != null) {
-			Date schedule			= (Date) getElementController().getElementAsSerializable(DSLAMBOIProcessDataConstants.PROCESS_SCHEDULE_DATA			, scheduleData);
+			Date schedule			= (Date) getElementController().getElementAsSerializable(CRONIOBOIProcessDataConstants.PROCESS_SCHEDULE_DATA			, scheduleData);
 			originalSchedule		= AEGWTBusinessUtils.getFormattedTimeMessage(schedule, DATE_FORMAT);
 			scheduleTextBox.setDateText(originalSchedule);
 		}
@@ -110,7 +110,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	public AEMFTMetadataElementComposite getData() {
 		AEMFTMetadataElementComposite formData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		
-		getElementController().setElement(DSLAMBOIProcessDataConstants.SCHEDULE_VALUE		, formData	, scheduleTextBox.getDateText());
+		getElementController().setElement(CRONIOBOIProcessDataConstants.SCHEDULE_VALUE		, formData	, scheduleTextBox.getDateText());
 		return formData;
 	}
 
@@ -130,7 +130,7 @@ public class DSLAMBusDesktopProcessConfigureScheduleForm extends AEGWTPopup {
 	}
 	
 	protected void setEditMode(String mode) {
-		if(DSLAMBOIProcessDataConstants.EDIT_MODE.equals(mode)) {
+		if(CRONIOBOIProcessDataConstants.EDIT_MODE.equals(mode)) {
 			editMode = true;
 		} else {
 			editMode = false;

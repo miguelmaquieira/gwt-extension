@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -42,34 +42,34 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 			for (AEMFTMetadataElement variable : variableList) {
 				String itemKey = variable.getKey();
 				if (!CRONIOBOIProjectDataConstants.INFO.equals(itemKey)) {
-					String 	name	 	= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, variable);
-					String 	value 		= getElementController().getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
-					int		scope 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variable);
-					int		type 		= getElementController().getElementAsInt(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variable);
+					String 	name	 	= getElementController().getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_NAME	, variable);
+					String 	value 		= getElementController().getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE	, variable);
+					int		scope 		= getElementController().getElementAsInt(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE		, variable);
+					int		type 		= getElementController().getElementAsInt(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE		, variable);
 					
 					String scopeStr = "";
-					if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS == scope) {
+					if (CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_PROCESS == scope) {
 						scopeStr = TEXTS.process_variable();
-					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE == scope) {
+					} else if (CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE == scope) {
 						scopeStr = TEXTS.node_variable();
-					} else if (DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION == scope) {
+					} else if (CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION == scope) {
 						scopeStr = TEXTS.connection_variable();
 					} else {
 						scopeStr = TEXTS.external_variable();
 					}
 					
 					String typeStr = "";
-					if (DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT == type) {
+					if (CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT == type) {
 						typeStr = TEXTS.text_variable();
 					} else {
 						typeStr = TEXTS.numeric_variable();
 					}
 
 					Map<String,String> variableRow = new HashMap<String, String>();
-					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, name);
-					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, scopeStr);
-					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, typeStr);
-					variableRow.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, value);
+					variableRow.put(CRONIOBOIVariablesDataConstants.VARIABLE_NAME	, name);
+					variableRow.put(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE	, scopeStr);
+					variableRow.put(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE	, typeStr);
+					variableRow.put(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE	, value);
 
 					addRowItem(variableRow, name, true, true,false);
 				}
@@ -83,15 +83,15 @@ public class DSLAMBusDesktopVariablesList extends AEGWTBootstrapTable {
 
 	@Override
 	protected void setupHeader() {
-		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
-		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
-		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
-		super.headerDataFields.add(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
+		super.headerDataFields.add(CRONIOBOIVariablesDataConstants.VARIABLE_NAME);
+		super.headerDataFields.add(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE);
+		super.headerDataFields.add(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE);
+		super.headerDataFields.add(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE);
 
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_NAME	, TEXTS.variable());
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE	, TEXTS.scope());
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE	, TEXTS.type());
-		super.headerMapFieldText.put(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
+		super.headerMapFieldText.put(CRONIOBOIVariablesDataConstants.VARIABLE_NAME	, TEXTS.variable());
+		super.headerMapFieldText.put(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE	, TEXTS.scope());
+		super.headerMapFieldText.put(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE	, TEXTS.type());
+		super.headerMapFieldText.put(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE	, TEXTS.value());
 
 	}
 

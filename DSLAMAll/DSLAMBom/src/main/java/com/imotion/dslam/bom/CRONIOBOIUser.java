@@ -10,12 +10,12 @@ public interface CRONIOBOIUser extends AEMFTILoginData, CRONIOBOIUserDataConstan
 	
 	void setPreferences(CRONIOBOIPreferences preferences);
 
-	List<DSLAMBOIProject> getProjectList();
+	List<CRONIOBOIProject> getProjectList();
 
-	void setProjectList(List<DSLAMBOIProject> projectList);
+	void setProjectList(List<CRONIOBOIProject> projectList);
 
-	void addProject(DSLAMBOIProject project);
+	void addProject(CRONIOBOIProject project);
 
-	void removeProject(DSLAMBOIProject project);
+	void removeProject(CRONIOBOIProject project);
 	
 }

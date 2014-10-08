@@ -6,7 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
@@ -44,7 +44,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 			@Override
 			public void onClick(ClickEvent event) {
 				variablesForm.resetForm();
-				variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.SAVE_MODE);
+				variablesForm.setEditMode(CRONIOBOIVariablesDataConstants.SAVE_MODE);
 				variablesForm.center();	
 			}
 		});
@@ -59,7 +59,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 	public void reset() {
 		variableList.reset();
 		variablesData.removeAll();
-		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
+		variablesForm.resetForm(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);
 	}
 	
 	/**
@@ -100,18 +100,18 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		if (CRONIOBusDesktopPreferencesMachineVariablesForm.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.SAVE_EVENT.equals(evt.getEventType())) {
-			String 	name		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_NAME);
-			String 	value 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE);
-			String 	scope 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE);
-			String 	type 		=  evt.getElementAsString(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE);
+			String 	name		=  evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_NAME);
+			String 	value 		=  evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE);
+			String 	scope 		=  evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE);
+			String 	type 		=  evt.getElementAsString(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE);
 			int 	scopeAsInt 	= AEMFTCommonUtilsBase.getIntegerFromString(scope);
 			int 	typeAsInt 	= AEMFTCommonUtilsBase.getIntegerFromString(type);			
 			
 			AEMFTMetadataElementComposite variableData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_NAME		, variableData	, name);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_VALUE		, variableData	, value);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData	, scopeAsInt);
-			getElementController().setElement(DSLAMBOIVariablesDataConstants.VARIABLE_TYPE		, variableData	, typeAsInt);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_NAME		, variableData	, name);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_VALUE		, variableData	, value);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE		, variableData	, scopeAsInt);
+			getElementController().setElement(CRONIOBOIVariablesDataConstants.VARIABLE_TYPE		, variableData	, typeAsInt);
 			if (variablesForm.getEditMode()) {
 				addVariables(name, variableData);
 			} else if (!variablesData.contains(name)) {
@@ -128,7 +128,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 		} else if(CRONIOBusDesktopPreferencesMachineVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			AEMFTMetadataElement variableData = variablesData.getElement(evt.getSourceWidgetId());
 			variablesForm.setData((AEMFTMetadataElementComposite) variableData);
-			variablesForm.setEditMode(DSLAMBOIVariablesDataConstants.EDIT_MODE);
+			variablesForm.setEditMode(CRONIOBOIVariablesDataConstants.EDIT_MODE);
 			variablesForm.center();
 			
 		} else if(CRONIOBusDesktopPreferencesMachineVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.DELETE_EVENT.equals(evt.getEventType())) {
@@ -164,6 +164,6 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 		variableList.clearList();
 		variablesData.addElement(id,data);
 		variableList.setData(variablesData);
-		variablesForm.resetForm(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, DSLAMBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
+		variablesForm.resetForm(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_CONNECTION, CRONIOBOIVariablesDataConstants.VARIABLE_TYPE_TEXT);	
 	}
 }

@@ -11,13 +11,13 @@ import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUser;
-import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIFile;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
-import com.imotion.dslam.bom.data.DSLAMBOFile;
-import com.imotion.dslam.bom.data.DSLAMBOProcess;
-import com.imotion.dslam.bom.data.DSLAMBOProject;
+import com.imotion.dslam.bom.data.CRONIOBOFile;
+import com.imotion.dslam.bom.data.CRONIOBOProcess;
+import com.imotion.dslam.bom.data.CRONIOBOProject;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessService;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
@@ -50,27 +50,27 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		long							userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
 		
 		//MainScript
-		DSLAMBOIFile mainScript = new DSLAMBOFile();
+		CRONIOBOIFile mainScript = new CRONIOBOFile();
 		mainScript.setContentType(machineType);
 		mainScript.setSavedTime(creationTime);
 		mainScript.setCreationTime(creationTime);
-		mainScript.setFilename(DSLAMBOIProject.PROJECT_MAIN_SCRIPT_DEFAULT_NAME);
+		mainScript.setFilename(CRONIOBOIProject.PROJECT_MAIN_SCRIPT_DEFAULT_NAME);
 		
 		//RollbackScript
-		DSLAMBOIFile rollBackScript = new DSLAMBOFile();
+		CRONIOBOIFile rollBackScript = new CRONIOBOFile();
 		rollBackScript.setContentType(machineType);
 		rollBackScript.setSavedTime(creationTime);
 		rollBackScript.setCreationTime(creationTime);
-		rollBackScript.setFilename(DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT_DEFAULT_NAME);
+		rollBackScript.setFilename(CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT_DEFAULT_NAME);
 		
 		//Process
-		DSLAMBOIProcess process = new DSLAMBOProcess();
-		process.setProcessName(DSLAMBOIProject.PROJECT_PROCESS_DEFAULT_NAME);
+		CRONIOBOIProcess process = new CRONIOBOProcess();
+		process.setProcessName(CRONIOBOIProject.PROJECT_PROCESS_DEFAULT_NAME);
 		process.setCreationTime(creationTime);
 		process.setSavedTime(creationTime);
 
 		//Project
-		DSLAMBOIProject project = new DSLAMBOProject();
+		CRONIOBOIProject project = new CRONIOBOProject();
 		project.setProjectName(projectName);
 		project.setMachineType(machineType);
 		project.setMainScript(mainScript);
@@ -83,7 +83,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		getUserPersistence().addProjectToUser(userId, project.getProjectId());
 
 		//init-trace
-		traceNewItemPersistent(METHOD_ADD_PROJECT, DSLAMBOIProject.class.getSimpleName(), String.valueOf(project.getProjectId()));
+		traceNewItemPersistent(METHOD_ADD_PROJECT, CRONIOBOIProject.class.getSimpleName(), String.valueOf(project.getProjectId()));
 		//end-trace
 
 		//ContextOut
@@ -133,7 +133,7 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		getProjectPersistence().removeProject(projectIdAsLong);
 
 		//init-trace
-		traceItemRemovedFromPersistence(METHOD_REMOVE_PROJECT, DSLAMBOIProject.class.getSimpleName(), projectId);
+		traceItemRemovedFromPersistence(METHOD_REMOVE_PROJECT, CRONIOBOIProject.class.getSimpleName(), projectId);
 		//end-trace
 
 		//ContextOut
@@ -152,14 +152,14 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		String 							userId 		= getElementDataController().getElementAsString(AEMFTILoginDataConstants.USER_ID, contextIn);
 		long 							userIdLong 	= Long.valueOf(userId);
 		CRONIOBOIUser 					user 		= getUserPersistence().getUserById(userIdLong);
-		List<DSLAMBOIProject> 			projectList = user.getProjectList();
+		List<CRONIOBOIProject> 			projectList = user.getProjectList();
 		
 		//trace-init
 		int resultsNumber = 0;
 		if (!AEMFTCommonUtilsBase.isEmptyList(projectList)) {
 			resultsNumber = projectList.size();
 		}
-		traceNumberOfResults(METHOD_GET_ALL_PROJECTS_BY_USER, DSLAMBOIProject.class.getSimpleName(), resultsNumber);
+		traceNumberOfResults(METHOD_GET_ALL_PROJECTS_BY_USER, CRONIOBOIProject.class.getSimpleName(), resultsNumber);
 		//end-trace
 
 		//ContextOut
@@ -200,8 +200,8 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		Date 							creationTime 		= new Date();
 		boolean							error				= false;
 		
-		DSLAMBOIProject project = getProjectPersistence().getProject(currentProjectId);
-		DSLAMBOIProcess process = project.getProcess();
+		CRONIOBOIProject project = getProjectPersistence().getProject(currentProjectId);
+		CRONIOBOIProcess process = project.getProcess();
 		
 		List<CRONIOBOINodeList> nodeLists = process.getListNodeList();
 		if (!AEMFTCommonUtilsBase.isEmptyList(nodeLists)) {
@@ -289,21 +289,21 @@ public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase imple
 		CRONIOBOIPreferences 	userPreferences = user.getPreferences();
 		long					preferencesId	= userPreferences.getPreferencesId();
 		
-		DSLAMBOIProject project = CRONIOBUMetadataToBomConversor.fromProjectData(projectData);
+		CRONIOBOIProject project = CRONIOBUMetadataToBomConversor.fromProjectData(projectData);
 		Date date = new Date();
 
 		//MainScript
-		DSLAMBOIFile mainScript 			= project.getMainScript();
+		CRONIOBOIFile mainScript 			= project.getMainScript();
 		mainScript = addCompiledCode(mainScript, date);
 		project.setMainScript(mainScript);
 
 		//RollbackScript
-		DSLAMBOIFile rollbackScript = project.getRollBackScript();
+		CRONIOBOIFile rollbackScript = project.getRollBackScript();
 		rollbackScript = addCompiledCode(rollbackScript, date);
 		project.setRollBackScript(rollbackScript);
 
 		//Process
-		DSLAMBOIProcess process = project.getProcess();
+		CRONIOBOIProcess process = project.getProcess();
 		process = getProcessPersistence().updateProcess(process.getProcessId(), process, preferencesId, date);
 		project.setProcess(process);
 		project.setSavedTime(date);

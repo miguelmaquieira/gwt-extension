@@ -1,7 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
-import com.imotion.dslam.bom.DSLAMBOIVariablesDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 
@@ -12,8 +12,8 @@ public class CRONIOBusDesktopProcessNodeVariablesForm extends DSLAMBusDesktopPro
 	
 	public CRONIOBusDesktopProcessNodeVariablesForm(AEGWTICompositePanel parent) {
 		super(parent);
-		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_NODE			, TEXTS.node_variable());
-		addVariableScope(DSLAMBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL		, TEXTS.external_variable());
+		addVariableScope(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_NODE			, TEXTS.node_variable());
+		addVariableScope(CRONIOBOIVariablesDataConstants.VARIABLE_SCOPE_EXTERNAL		, TEXTS.external_variable());
 	}	
 
 	/**

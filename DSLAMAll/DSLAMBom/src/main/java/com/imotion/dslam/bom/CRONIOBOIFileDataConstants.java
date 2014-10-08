@@ -1,7 +1,7 @@
 package com.imotion.dslam.bom;
 
 
-public interface DSLAMBOIFileDataConstants {
+public interface CRONIOBOIFileDataConstants {
 	
 	//PROPERTIES
 	String FILE_ID			= "fileId";

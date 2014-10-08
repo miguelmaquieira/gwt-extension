@@ -2,7 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -53,20 +53,20 @@ public class CRONIOBusDesktopProjectsLayoutItemHeader extends AEGWTCompositePane
 	public void setSectionNameFromId(String sectionId) {
 		String sectionNameValue = "";
 		String dateRegEx 		= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
-		if (DSLAMBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
+		if (CRONIOBOIProject.PROJECT_MAIN_SCRIPT.equals(sectionId)) {
 			sectionNameValue = TEXTS.main_script_label();
-		} else if (DSLAMBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_ROLLBACK_SCRIPT.equals(sectionId)) {
 			sectionNameValue = TEXTS.rollback_script_label();
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_VARIABLE_LIST.equals(sectionId)) {
 			sectionNameValue = TEXTS.variables();
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_SCHEDULE_LIST.equals(sectionId)) {
 			sectionNameValue = TEXTS.schedule();
-		} else if (DSLAMBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_PROCESS_EXTRA_OPTIONS.equals(sectionId)) {
 			sectionNameValue = TEXTS.properties();
-		} else if (sectionId.contains(DSLAMBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
+		} else if (sectionId.contains(CRONIOBOIProject.PROJECT_PROCESS_NODE_LISTS)) {
 			String[] sectionIdSplit = sectionId.split("\\.");
 			sectionNameValue = TEXTS.enviroment() + "(" + sectionIdSplit[2] +")";
-		} else if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
+		} else if (CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 			sectionNameValue = TEXTS.console_label();
 		} else if (sectionId.matches(dateRegEx)) {
 			sectionNameValue = TEXTS.log() + " " + sectionId;

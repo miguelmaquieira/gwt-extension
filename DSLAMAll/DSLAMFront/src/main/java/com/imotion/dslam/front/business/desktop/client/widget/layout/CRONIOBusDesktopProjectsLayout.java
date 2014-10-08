@@ -8,7 +8,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.DSLAMBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
@@ -134,8 +134,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 			String projectId	= evt.getProjectId();
 			String sectionId	= evt.getFinalSectionId();
 			if (EVENT_TYPE.SHOW_PROJECT_INFO.equals(type)) {
-				String		projectName			= evt.getElementAsString(DSLAMBOIProject.PROJECT_NAME);
-				boolean		sectionModified		= evt.getElementAsBoolean(DSLAMBOIProject.INFO_IS_MODIFIED);
+				String		projectName			= evt.getElementAsString(CRONIOBOIProject.PROJECT_NAME);
+				boolean		sectionModified		= evt.getElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED);
 				List<String> modifiedProjects	= getModifiedProjetIds();
 				boolean projectModified = modifiedProjects.contains(projectId);
 				
@@ -145,7 +145,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				sectionHeader.setModified(sectionModified);
 				setId(projectId);
 				toolbar.setId(projectId);
-				if (DSLAMBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
+				if (CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(sectionId)) {
 					toolbar.setExecuteEnabled(true);
 				} else {
 					toolbar.setExecuteEnabled(false);
@@ -166,7 +166,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				projectListNavigator.addElement(projectData);
 				toolbar.hideProjectForm();
 			} else if (EVENT_TYPE.NODELIST_CREATED.equals(type)) {
-				String nodeListProjectId =evt.getElementAsString(DSLAMBOIProject.PROJECT_ID);
+				String nodeListProjectId =evt.getElementAsString(CRONIOBOIProject.PROJECT_ID);
 				projectListNavigator.hideAddNodeListForm(nodeListProjectId);
 			} else if (EVENT_TYPE.SECTION_SELECTED.equals(type)) {
 				projectListNavigator.removeProjectSectionSelected();

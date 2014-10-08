@@ -4,30 +4,30 @@ import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
-import com.imotion.dslam.bom.DSLAMBOIProject;
-import com.imotion.dslam.bom.data.DSLAMBOProject;
+import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.data.CRONIOBOProject;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<DSLAMBOIProject, DSLAMBOProject, Long> implements CRONIOBKIProjectPersistenceService {
+public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOIProject, CRONIOBOProject, Long> implements CRONIOBKIProjectPersistenceService {
 
 	private static final long serialVersionUID = -1754757807591412638L;
 
 	@Override
-	public DSLAMBOIProject getProject(long projectId) {
-		DSLAMBOIProject project = getPersistenceModule().get(projectId);
+	public CRONIOBOIProject getProject(long projectId) {
+		CRONIOBOIProject project = getPersistenceModule().get(projectId);
 		return project;
 	}
 	
 	@Override
-	public DSLAMBOIProject addProject(DSLAMBOIProject project) {
-		DSLAMBOProject projectJPA = (DSLAMBOProject) project;
+	public CRONIOBOIProject addProject(CRONIOBOIProject project) {
+		CRONIOBOProject projectJPA = (CRONIOBOProject) project;
 		projectJPA = getPersistenceModule().create(projectJPA);
 		return projectJPA;
 	}
 	
 	@Override
-	public DSLAMBOIProject updateProject(Long projectId, DSLAMBOIProject updatedProject) {
-		DSLAMBOProject originalProject = getPersistenceModule().get(projectId);
+	public CRONIOBOIProject updateProject(Long projectId, CRONIOBOIProject updatedProject) {
+		CRONIOBOProject originalProject = getPersistenceModule().get(projectId);
 		if (originalProject != null) {
 			originalProject.setSavedTime(new Date());
 			getPersistenceModule().update(originalProject);
@@ -36,8 +36,8 @@ public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	}
 
 	@Override
-	public DSLAMBOIProject updateProjectName(Long projectId, String projectName) {
-		DSLAMBOProject project = getPersistenceModule().get(projectId);
+	public CRONIOBOIProject updateProjectName(Long projectId, String projectName) {
+		CRONIOBOProject project = getPersistenceModule().get(projectId);
 		project.setProjectName(projectName);
 		project.setSavedTime(new Date());
 		project = getPersistenceModule().update(project);
@@ -45,8 +45,8 @@ public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	}
 	
 	@Override
-	public List<DSLAMBOIProject> getAllProjects() {
-		List<DSLAMBOProject> projectListJpa = getPersistenceModule().findAll();
+	public List<CRONIOBOIProject> getAllProjects() {
+		List<CRONIOBOProject> projectListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(projectListJpa);
 	}
 	
@@ -59,8 +59,8 @@ public class CRONIOBKProjectPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	 * AEMFTIHasPersistenceModule
 	 */
 	@Override
-	public Class<DSLAMBOProject> getPersistenceClass() {
-		return DSLAMBOProject.class;
+	public Class<CRONIOBOProject> getPersistenceClass() {
+		return CRONIOBOProject.class;
 	}
 
 }

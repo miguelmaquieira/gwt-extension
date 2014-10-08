@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.DSLAMBOIProcess;
+import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
@@ -22,7 +22,7 @@ public class CRONIOBKNodeListPersistenceServiceJPA extends CRONIOBKPersistenceSe
 //			nodeList.setProcess(process);
 //		}
 		
-		DSLAMBOIProcess process = getProcessPersistence().getProcess(processId);
+		CRONIOBOIProcess process = getProcessPersistence().getProcess(processId);
 		nodeListJPA.setProcess(process);
 		nodeListJPA = getPersistenceModule().create(nodeListJPA);
 		return nodeListJPA;
