@@ -24,7 +24,7 @@ import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
 
 public class CRONIOBusNotLoggedScreenContainer extends AEGWTCompositePanel implements HasWidgets {
 
-	public static final String NAME = "CRONIOBusNotLoggedScreenContainer";
+	public static final String NAME = "BusNotLoggedScreenContainer";
 	
 	private static final AEGWTI18NControllerTexts 				CONTROLLER_TEXTS 			= GWT.create(AEGWTI18NControllerTexts.class);
 	private static final CRONIOI18NBusinessControllerTexts 		BUSINESS_CONTROLLER_TEXTS 	= GWT.create(CRONIOI18NBusinessControllerTexts.class);
