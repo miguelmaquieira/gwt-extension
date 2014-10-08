@@ -1,12 +1,12 @@
 package com.imotion.cronio.backend.persistence.service.node;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
-public class CRONIOBKNodePersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOINode, CRONIOBONode, Long> implements CRONIOBKINodePersistenceService {
+public class CRONIOBKNodePersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOINode, CRONIOBONode, Long> implements CRONIOBKINodePersistenceService {
 
 	private static final long serialVersionUID = 4679813620335280677L;
 

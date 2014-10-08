@@ -13,7 +13,6 @@ public class DSLAMBusDesktopAppEntryPoint extends SailorEntryPoint {
 	protected void go() {
 		RootLayoutPanel rootPanel = RootLayoutPanel.get();
 		DSLAMBusDesktopAppController controller = new DSLAMBusDesktopAppController();
-		controller.setPhoneGap(getPhoneGap());
 		controller.initController(rootPanel, WEB_VERSION.DESKTOP);
 	}
 	

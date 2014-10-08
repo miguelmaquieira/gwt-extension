@@ -49,6 +49,32 @@
 	
 	<!-- UNIT TESTING -->
 		<dependency>
+			<groupId>com.selene</groupId>
+			<artifactId>SeleneBase</artifactId>
+			<version>${selene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.selene</groupId>
+			<artifactId>Selene</artifactId>
+			<version>${selene.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.code.morphia</groupId>
+					<artifactId>morphia</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-api-1.0-sdk</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.googlecode.objectify</groupId>
+					<artifactId>objectify</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	
+	<!-- UNIT TESTING -->
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>

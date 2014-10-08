@@ -21,7 +21,7 @@ import com.imotion.dslam.bom.data.DSLAMBOProject;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessService;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceTrace;
-import com.imotion.dslam.business.service.base.DSLAMBUServiceBase;
+import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
 import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
 import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
@@ -34,7 +34,7 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.envi.io.AEMFTIIOConstant;
 
-public class DSLAMBUProjectBusinessServiceImpl extends DSLAMBUServiceBase implements DSLAMBUIProjectBusinessService, DSLAMBUIProjectBusinessServiceConstants, DSLAMBUIProjectBusinessServiceTrace {
+public class DSLAMBUProjectBusinessServiceImpl extends CRONIOBUServiceBase implements DSLAMBUIProjectBusinessService, DSLAMBUIProjectBusinessServiceConstants, DSLAMBUIProjectBusinessServiceTrace {
 
 	private static final long serialVersionUID = -3287573002047034251L;
 	

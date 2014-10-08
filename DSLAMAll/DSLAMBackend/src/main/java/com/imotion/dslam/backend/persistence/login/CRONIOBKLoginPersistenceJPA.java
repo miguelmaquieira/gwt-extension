@@ -2,10 +2,10 @@ package com.imotion.dslam.backend.persistence.login;
 
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.DSLAMBKIPersistenceFactory;
-import com.imotion.dslam.backend.persistence.DSLAMBKPersistenceFactoryPool;
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceModuleJPA;
-import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.CRONIOBKIPersistenceFactory;
+import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceFactoryPool;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceModuleJPA;
+import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.DSLAMBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOUser;
@@ -18,10 +18,10 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 
 	private static final long serialVersionUID = -488472600386070256L;
 	
-	private DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long> 	persistenceModule;
-	private DSLAMBKIProjectPersistenceService					projectPersistenceService;
+	private CRONIOBKPersistenceModuleJPA<CRONIOBOUser, Long> 	persistenceModule;
+	private CRONIOBKIProjectPersistenceService					projectPersistenceService;
 	
-	private static DSLAMBKIPersistenceFactory 					factoryPool;
+	private static CRONIOBKIPersistenceFactory 					factoryPool;
 
 	public CRONIOBKLoginPersistenceJPA() {}
 	
@@ -47,9 +47,9 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 		getPersistenceModule().update(user);
 	}
 	
-	public static DSLAMBKIPersistenceFactory getFactoryPersistence(AEMFTICoreProxyService coreProxy) {
+	public static CRONIOBKIPersistenceFactory getFactoryPersistence(AEMFTICoreProxyService coreProxy) {
 		if (factoryPool == null) {
-			factoryPool = new DSLAMBKPersistenceFactoryPool(coreProxy);
+			factoryPool = new CRONIOBKPersistenceFactoryPool(coreProxy);
 		}
 		return factoryPool;
 	}
@@ -77,9 +77,9 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 	 */
 	
 	@Override
-	public DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long> getPersistenceModule() {
+	public CRONIOBKPersistenceModuleJPA<CRONIOBOUser, Long> getPersistenceModule() {
 //		if (persistenceModule == null) {
-			persistenceModule = new DSLAMBKPersistenceModuleJPA<CRONIOBOUser, Long>();
+			persistenceModule = new CRONIOBKPersistenceModuleJPA<CRONIOBOUser, Long>();
 			persistenceModule.initialize(new Object[] { getPersistenceCoreService(), getPersistenceClass(),  getSessionId() });
 //		}
 
@@ -119,14 +119,14 @@ public class CRONIOBKLoginPersistenceJPA extends AEMFTLoginPersistenceBase<CRONI
 	 *                	   PRIVATE FUNCTIONS                      *
 	 **************************************************************/
 	
-	private DSLAMBKIProjectPersistenceService getProjectPersistence() {
+	private CRONIOBKIProjectPersistenceService getProjectPersistence() {
 		if (projectPersistenceService == null) {
-			projectPersistenceService = (DSLAMBKIProjectPersistenceService) getFactoryPersistence().newProjectPersistence(getSessionId());
+			projectPersistenceService = (CRONIOBKIProjectPersistenceService) getFactoryPersistence().newProjectPersistence(getSessionId());
 		}
 		return projectPersistenceService;
 	}
 	
-	private DSLAMBKIPersistenceFactory getFactoryPersistence() {
+	private CRONIOBKIPersistenceFactory getFactoryPersistence() {
 		return factoryPool;
 	}
 

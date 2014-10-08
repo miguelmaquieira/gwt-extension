@@ -3,14 +3,14 @@ package com.imotion.dslam.backend.persistence.service.userpreferences;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.back.persistence.AEMFTPersistenceParamsContainer;
 
-public class CRONIOBKUserPreferencesPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOIUserPreferences, CRONIOBOUserPreferences, Long> implements CRONIOBKIUserPreferencesPersistenceService {
+public class CRONIOBKUserPreferencesPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOIUserPreferences, CRONIOBOUserPreferences, Long> implements CRONIOBKIUserPreferencesPersistenceService {
 
 	private static final long serialVersionUID = 4255979832912378431L;
 

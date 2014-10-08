@@ -7,7 +7,7 @@ import com.imotion.dslam.bom.DSLAMBOIFile;
 
 
 
-public interface DSLAMBKIFilePersistenceService {
+public interface CRONIOBKIFilePersistenceService {
 
 	DSLAMBOIFile addFile(DSLAMBOIFile file);
 

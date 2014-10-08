@@ -11,9 +11,11 @@
 	<artifactId>DSLAMBusiness</artifactId>
 	<name>DSLAMBusiness</name>
 	<url>http://maven.apache.org</url>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.imotion</groupId>
@@ -25,15 +27,6 @@
 			<artifactId>DSLAMExecute</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>Selene</artifactId>
-			<version>${selene.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>SeleneBase</artifactId>
-			<version>${selene.version}</version>
-		</dependency>
 	</dependencies>
+	
 </project>

@@ -18,16 +18,6 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>Selene</artifactId>
-			<version>${selene.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.selene</groupId>
-			<artifactId>SeleneBase</artifactId>
-			<version>${selene.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.imotion</groupId>
 			<artifactId>DSLAMBom</artifactId>
 			<version>${project.version}</version>

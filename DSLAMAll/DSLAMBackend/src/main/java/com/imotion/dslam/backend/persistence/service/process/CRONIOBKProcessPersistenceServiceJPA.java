@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
@@ -12,7 +12,7 @@ import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.data.DSLAMBOProcess;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class DSLAMBKProcessPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<DSLAMBOIProcess, DSLAMBOProcess, Long> implements DSLAMBKIProcessPersistenceService {
+public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<DSLAMBOIProcess, DSLAMBOProcess, Long> implements CRONIOBKIProcessPersistenceService {
 
 	private static final long serialVersionUID = 4872791158147475333L;
 

@@ -2,11 +2,11 @@ package com.imotion.dslam.backend.persistence.service.preferences;
 
 import javax.persistence.EntityTransaction;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOPreferences;
 
-public class CRONIOBKPreferencesPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOIPreferences, CRONIOBOPreferences, Long> implements CRONIOBKIPreferencesPersistenceService {
+public class CRONIOBKPreferencesPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOIPreferences, CRONIOBOPreferences, Long> implements CRONIOBKIPreferencesPersistenceService {
 
 	private static final long serialVersionUID = 1004389033515052788L;
 

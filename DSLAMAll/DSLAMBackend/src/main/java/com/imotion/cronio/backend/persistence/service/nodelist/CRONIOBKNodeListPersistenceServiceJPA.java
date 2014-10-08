@@ -3,13 +3,13 @@ package com.imotion.cronio.backend.persistence.service.nodelist;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.imotion.dslam.backend.persistence.jpa.DSLAMBKPersistenceServiceBaseJPA;
+import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.DSLAMBOIProcess;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class CRONIOBKNodeListPersistenceServiceJPA extends DSLAMBKPersistenceServiceBaseJPA<CRONIOBOINodeList, CRONIOBONodeList, Long> implements CRONIOBKINodeListPersistenceService {
+public class CRONIOBKNodeListPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOINodeList, CRONIOBONodeList, Long> implements CRONIOBKINodeListPersistenceService {
 
 	private static final long serialVersionUID = 1891855848752705994L;
 

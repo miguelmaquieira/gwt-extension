@@ -8,28 +8,28 @@ import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
 import com.imotion.dslam.backend.persistence.login.CRONIOBKILoginPersistenceService;
 import com.imotion.dslam.backend.persistence.service.execution.CRONIOBKIExecutionPersistenceService;
-import com.imotion.dslam.backend.persistence.service.file.DSLAMBKIFilePersistenceService;
+import com.imotion.dslam.backend.persistence.service.file.CRONIOBKIFilePersistenceService;
 import com.imotion.dslam.backend.persistence.service.machineproperties.CRONIOBKIMachinePropertiesPersistenceService;
 import com.imotion.dslam.backend.persistence.service.preferences.CRONIOBKIPreferencesPersistenceService;
-import com.imotion.dslam.backend.persistence.service.process.DSLAMBKIProcessPersistenceService;
-import com.imotion.dslam.backend.persistence.service.project.DSLAMBKIProjectPersistenceService;
+import com.imotion.dslam.backend.persistence.service.process.CRONIOBKIProcessPersistenceService;
+import com.imotion.dslam.backend.persistence.service.project.CRONIOBKIProjectPersistenceService;
 import com.imotion.dslam.backend.persistence.service.userpreferences.CRONIOBKIUserPreferencesPersistenceService;
 import com.imotion.dslam.bom.DSLAMBOIFile;
-import com.imotion.dslam.business.DSLAMBUIWrapperPersistence;
+import com.imotion.dslam.business.CRONIOBUIWrapperPersistence;
 import com.selene.arch.exe.back.persistence.AEMFTIPersistenceService;
 import com.selene.arch.exe.back.persistence.module.jpa.AEMFTPersisteceJPAConnectionUtil;
 import com.selene.arch.exe.bus.service.impl.AEMFTBusinessServiceBaseImpl;
 import com.selene.arch.exe.bus.tagsearch.persistence.AEMFTTagIndexPersistence;
 
-public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DSLAMBUIWrapperPersistence> implements DSLAMBUIBusinessService {
+public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<CRONIOBUIWrapperPersistence> implements CRONIOBUIBusinessService {
 
 	private static final long serialVersionUID = -8777397730307974465L;
 
-	private DSLAMBKIFilePersistenceService					filePersistence;
-	private DSLAMBKIProcessPersistenceService				processPersistence;
-	private DSLAMBKIProjectPersistenceService				projectPersistence;
+	private CRONIOBKIFilePersistenceService					filePersistence;
+	private CRONIOBKIProcessPersistenceService				processPersistence;
+	private CRONIOBKIProjectPersistenceService				projectPersistence;
 	private CRONIOBKINodePersistenceService					nodePersistence;
-	private CRONIOBKINodeListPersistenceService					nodeListPersistence;
+	private CRONIOBKINodeListPersistenceService				nodeListPersistence;
 	private CRONIOBKIPreferencesPersistenceService			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService	machinePropertiesPersistence;
 	private CRONIOBKILoginPersistenceService 				userPersistence;
@@ -43,7 +43,7 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	}
 
 	@Override
-	protected DSLAMBUIWrapperPersistence createPersistenceWrapper() {
+	protected CRONIOBUIWrapperPersistence createPersistenceWrapper() {
 		return new DSLAMBUWrapperPersistence();
 	}
 
@@ -60,21 +60,21 @@ public abstract class DSLAMBUServiceBase extends AEMFTBusinessServiceBaseImpl<DS
 	}
 
 	//PERSISTENCE SERVICES
-	protected DSLAMBKIFilePersistenceService getFilePersistence() {
+	protected CRONIOBKIFilePersistenceService getFilePersistence() {
 		if (filePersistence == null) {
 			filePersistence =  getPersistence().getAppFactoryPersistence().newFilePersistence(getSessionId());
 		}
 		return filePersistence;
 	}
 
-	protected DSLAMBKIProcessPersistenceService getProcessPersistence() {
+	protected CRONIOBKIProcessPersistenceService getProcessPersistence() {
 		if (processPersistence == null) {
 			processPersistence =  getPersistence().getAppFactoryPersistence().newProcessPersistence(getSessionId());
 		}
 		return processPersistence;
 	}
 
-	protected DSLAMBKIProjectPersistenceService getProjectPersistence() {
+	protected CRONIOBKIProjectPersistenceService getProjectPersistence() {
 		if (projectPersistence == null) {
 			projectPersistence =  getPersistence().getAppFactoryPersistence().newProjectPersistence(getSessionId());
 		}
