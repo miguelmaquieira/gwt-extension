@@ -294,6 +294,9 @@
 					   			WEB-INF/lib/gwt-user-*.jar,
 					   			WEB-INF/lib/gwt-maps-*.jar,
 					   			WEB-INF/lib/gwtphonegap-*.jar,
+					   			WEB-INF/lib/drools*.jar,
+					   			WEB-INF/lib/mockito-*.jar,
+					   			WEB-INF/lib/junit-*.jar,
 					   			WEB-INF/deploy/**,
 					   			com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule/**
 					</packagingExcludes>
