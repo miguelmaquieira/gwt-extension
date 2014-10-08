@@ -7,8 +7,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -21,7 +21,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 
 	public static final String NAME = "CRONIOBusDesktopProcessAddNodeListForm";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private AEGWTBootstrapFormFieldTextBox  	nameNodeListTextBox;
 	private AEGWTButton 						saveButton;
@@ -34,7 +34,7 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.POPUP_NODE_LIST_FORM_CONTAINER);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.POPUP_NODE_LIST_FORM_CONTAINER);
 		
 		nameNodeListTextBox = new AEGWTBootstrapFormFieldTextBox(null, TEXTS.node_list_name());
 		root.add(nameNodeListTextBox);

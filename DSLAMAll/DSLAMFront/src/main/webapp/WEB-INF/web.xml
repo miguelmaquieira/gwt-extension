@@ -39,7 +39,7 @@
 		</init-param>
 		<init-param>
 			<param-name>apps</param-name>
-			<param-value>DSLAM</param-value>
+			<param-value>CRONIO</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -58,7 +58,7 @@
 
 	<servlet-mapping>
 		<servlet-name>serverConnectionRPC</servlet-name>
-		<url-pattern>/dslamBusDesktop/serverConnectionRPC</url-pattern>
+		<url-pattern>/cronioBusDesktop/serverConnectionRPC</url-pattern>
 	</servlet-mapping>
 	
 	<!-- FILE UPLOAD SERVLET -->
@@ -75,7 +75,7 @@
 
 	<servlet-mapping>
 		<servlet-name>fileUpload</servlet-name>
-		<url-pattern>/dslamBusDesktop/fileUpload</url-pattern>
+		<url-pattern>/cronioBusDesktop/fileUpload</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Atmosphere -->
@@ -96,12 +96,12 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AtmosphereServlet</servlet-name>
-		<url-pattern>/dslamBusDesktop/atmosphere/*</url-pattern>
+		<url-pattern>/cronioBusDesktop/atmosphere/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>DSLAMBusDesktopModule.jsp</welcome-file>
+		<welcome-file>CRONIOBusDesktopModule.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>

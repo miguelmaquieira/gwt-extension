@@ -9,9 +9,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.bus.AEMFTIBusinessConstant;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -25,7 +25,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 	public static final String NAME = "CRONIOBusDesktopProcessConfigureNodesInfo";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private FlowPanel 										root;
 	private FlowPanel 										nodeVariableListZone;
@@ -42,7 +42,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		root.add(nodeInfoPanel);
 
 		nodeVariableListZone = new FlowPanel();
-		nodeVariableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODE_VARIABLES_LIST);
+		nodeVariableListZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODE_VARIABLES_LIST);
 		root.add(nodeVariableListZone);
 
 		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(TEXTS.node_variable_list());
@@ -139,7 +139,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 
 		} else if(CRONIOBusDesktopProcessNodesInfoVariablesList.NAME.equals(evt.getSourceWidget()) && LOGICAL_TYPE.EDIT_EVENT.equals(evt.getEventType())) {
 			String variableId	= evt.getSourceWidgetId();
-			String variableKey	= CRONIOBOINode.NODE_VARIABLE_LIST + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + variableId; 
+			String variableKey	= CRONIOBOINode.NODE_VARIABLE_LIST + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + variableId; 
 			AEMFTMetadataElementComposite variableData = getElementController().getElementAsComposite(variableKey, nodeData);
 
 			nodeVariablesForm.setData(variableData);

@@ -247,9 +247,9 @@
 				<configuration>
 					<modules>
 						<!-- Marketplace gwt module inherits Core gwt module therefore both will be gwt:compiled -->
-						<module>com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule</module>
+						<module>com.imotion.dslam.front.business.desktop.CRONIOBusDesktopModule</module>
 					</modules>
-					<runTarget>DSLAMBusDesktopModule.jsp</runTarget>
+					<runTarget>CRONIOBusDesktopModule.jsp</runTarget>
 					<!-- <appEngineVersion>${appengine.target.version}</appEngineVersion> -->
 					<!-- TO AVOID : You will not be able to access files from your working 
 						directory on the production server. -->
@@ -396,10 +396,10 @@
 	
 	<profiles>
 		<profile>
-			<id>dslam</id>
+			<id>cronio</id>
 			<properties>
 <!-- 			    Hibernate -->
-				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_dslamdb</hibernate.connection.url>
+				<hibernate.connection.url>jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_croniodb</hibernate.connection.url>
 				<hibernate.connection.user>b3824f64a6f0d8</hibernate.connection.user>
 				<hibernate.connection.password>e5a71044</hibernate.connection.password>
 <!-- 				Mongo (TODO) -->

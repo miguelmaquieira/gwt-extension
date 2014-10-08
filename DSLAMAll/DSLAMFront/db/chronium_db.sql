@@ -53,31 +53,31 @@ INSERT INTO `Node` VALUES (921,NULL,'localhost','MIGUELTURRA','ISAM-FD','2014-09
 UNLOCK TABLES;
 
 --
--- Table structure for table `DSLAMBOProcess_variableList`
+-- Table structure for table `CRONIOBOProcess_variableList`
 --
 
-DROP TABLE IF EXISTS `DSLAMBOProcess_variableList`;
+DROP TABLE IF EXISTS `CRONIOBOProcess_variableList`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `DSLAMBOProcess_variableList` (
-  `DSLAMBOProcess_processId` bigint(20) NOT NULL,
+CREATE TABLE `CRONIOBOProcess_variableList` (
+  `CRONIOBOProcess_processId` bigint(20) NOT NULL,
   `variableName` varchar(255) DEFAULT NULL,
   `variableScope` int(11) NOT NULL,
   `variableType` int(11) NOT NULL,
   `variableValue` varchar(255) DEFAULT NULL,
-  KEY `FK94D986C09230AF52` (`DSLAMBOProcess_processId`),
-  CONSTRAINT `FK94D986C09230AF52` FOREIGN KEY (`DSLAMBOProcess_processId`) REFERENCES `Process` (`processId`)
+  KEY `FK94D986C09230AF52` (`CRONIOBOProcess_processId`),
+  CONSTRAINT `FK94D986C09230AF52` FOREIGN KEY (`CRONIOBOProcess_processId`) REFERENCES `Process` (`processId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DSLAMBOProcess_variableList`
+-- Dumping data for table `CRONIOBOProcess_variableList`
 --
 
-LOCK TABLES `DSLAMBOProcess_variableList` WRITE;
-/*!40000 ALTER TABLE `DSLAMBOProcess_variableList` DISABLE KEYS */;
-INSERT INTO `DSLAMBOProcess_variableList` VALUES (2,'limit',0,1,'4'),(1,'limit',0,1,'3');
-/*!40000 ALTER TABLE `DSLAMBOProcess_variableList` ENABLE KEYS */;
+LOCK TABLES `CRONIOBOProcess_variableList` WRITE;
+/*!40000 ALTER TABLE `CRONIOBOProcess_variableList` DISABLE KEYS */;
+INSERT INTO `CRONIOBOProcess_variableList` VALUES (2,'limit',0,1,'4'),(1,'limit',0,1,'3');
+/*!40000 ALTER TABLE `CRONIOBOProcess_variableList` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -248,28 +248,28 @@ INSERT INTO `CRONIOBOMachineProperties_connectionVariables` VALUES (2,'promptReg
 UNLOCK TABLES;
 
 --
--- Table structure for table `DSLAMBOProcess_scheduleList`
+-- Table structure for table `CRONIOBOProcess_scheduleList`
 --
 
-DROP TABLE IF EXISTS `DSLAMBOProcess_scheduleList`;
+DROP TABLE IF EXISTS `CRONIOBOProcess_scheduleList`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `DSLAMBOProcess_scheduleList` (
-  `DSLAMBOProcess_processId` bigint(20) NOT NULL,
+CREATE TABLE `CRONIOBOProcess_scheduleList` (
+  `CRONIOBOProcess_processId` bigint(20) NOT NULL,
   `scheduleList` datetime DEFAULT NULL,
-  KEY `FKF057C15B9230AF52` (`DSLAMBOProcess_processId`),
-  CONSTRAINT `FKF057C15B9230AF52` FOREIGN KEY (`DSLAMBOProcess_processId`) REFERENCES `Process` (`processId`)
+  KEY `FKF057C15B9230AF52` (`CRONIOBOProcess_processId`),
+  CONSTRAINT `FKF057C15B9230AF52` FOREIGN KEY (`CRONIOBOProcess_processId`) REFERENCES `Process` (`processId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DSLAMBOProcess_scheduleList`
+-- Dumping data for table `CRONIOBOProcess_scheduleList`
 --
 
-LOCK TABLES `DSLAMBOProcess_scheduleList` WRITE;
+LOCK TABLES `CRONIOBOProcess_scheduleList` WRITE;
 /*!40000 ALTER TABLE `DSLAMBOProcess_scheduleList` DISABLE KEYS */;
-INSERT INTO `DSLAMBOProcess_scheduleList` VALUES (1,'2014-07-30 13:00:00'),(1,'2014-08-12 13:00:00');
-/*!40000 ALTER TABLE `DSLAMBOProcess_scheduleList` ENABLE KEYS */;
+INSERT INTO `CRONIOBOProcess_scheduleList` VALUES (1,'2014-07-30 13:00:00'),(1,'2014-08-12 13:00:00');
+/*!40000 ALTER TABLE `CRONIOBOProcess_scheduleList` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

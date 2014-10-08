@@ -2,9 +2,9 @@ package com.imotion.dslam.front.business.desktop.client.view.preferences.connect
 
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesMachineSectionsDeckPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
@@ -12,7 +12,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopPreferencesConnectionDisplay, AEGWTHasLogicalEventHandlers {
+public class CRONIOBusDesktopPreferencesConnectionScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopPreferencesConnectionDisplay, AEGWTHasLogicalEventHandlers {
 
 	public	static final String NAME = "CRONIOBusDesktopPreferencesConnectionScreenView";
 
@@ -22,7 +22,7 @@ public class CRONIOBusDesktopPreferencesConnectionScreenView extends DSLAMBusDes
 	public CRONIOBusDesktopPreferencesConnectionScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_CONNECTION_VIEW);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_CONNECTION_VIEW);
 
 		machinesSectionsDeckPanel = new CRONIOBusDesktopPreferencesMachineSectionsDeckPanel();
 		root.add(machinesSectionsDeckPanel);

@@ -4,8 +4,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordionPanelContainer;
@@ -13,20 +13,20 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapAccordio
 public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePanel {
 
 	public static final String NAME = "CRONIOBusDesktopAccordionLoggerItemContent";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	AEGWTBootstrapAccordionPanelContainer accordionPanelContainer;
 	
 	public CRONIOBusDesktopAccordionLoggerItemContent(String response, String prompt, String request) {
 		FlowPanel contentZone = new FlowPanel();
 		initWidget(contentZone);
-		contentZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTENT_ZONE);
+		contentZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTENT_ZONE);
 		
 		Label requestLabel = new Label(TEXTS.request_label());
 		contentZone.add(requestLabel);
 		FlowPanel requestZone = new FlowPanel();
 		contentZone.add(requestZone);
-		requestZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_REQUEST_ZONE);
+		requestZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_REQUEST_ZONE);
 		HTMLPanel requestContent = new HTMLPanel(request);
 		requestZone.add(requestContent);
 		
@@ -35,7 +35,7 @@ public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePa
 		contentZone.add(responseLabel);
 		FlowPanel responseZone = new FlowPanel();
 		contentZone.add(responseZone);
-		responseZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_RESPONSE_ZONE);
+		responseZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_RESPONSE_ZONE);
 		HTMLPanel responseContent = new HTMLPanel(responseAsHtml);
 		responseZone.add(responseContent);
 		
@@ -43,7 +43,7 @@ public class CRONIOBusDesktopAccordionLoggerItemContent extends AEGWTCompositePa
 		contentZone.add(promptLabel);
 		FlowPanel promptZone = new FlowPanel();
 		contentZone.add(promptZone);
-		promptZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_PROMPT_ZONE);
+		promptZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_PROMPT_ZONE);
 		HTMLPanel promptContent = new HTMLPanel(prompt);
 		promptZone.add(promptContent);
 	}

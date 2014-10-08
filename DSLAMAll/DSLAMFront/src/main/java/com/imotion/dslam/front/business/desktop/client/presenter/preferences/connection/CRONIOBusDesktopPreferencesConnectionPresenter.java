@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.presenter.preferences.co
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasPreferencesEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
@@ -119,11 +119,11 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 		
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(machine);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(CRONIOBOIMachineProperties.MACHINE_CONNECTION_CONFIG);
 		String machineConfigureDataKey = sbKey.toString();
 		
@@ -133,7 +133,7 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 //				if (dataResult != null) {
-//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+//					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA);
 //					if (projectData != null) {
 //						//updateProjectClientData(currentProjectId, projectData, true);
 //					}

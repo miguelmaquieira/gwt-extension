@@ -7,8 +7,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.imotion.dslam.bom.CRONIOBOIUserDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
@@ -24,14 +24,14 @@ import com.selene.arch.exe.gwt.mvp.event.navigator.AEGWTNavigationEventTypes.NAV
 public  class CRONIOBusDesktopSignInForm extends CRONIOBusDesktopAuthenticationFormBase implements AEGWTHasAuthenticationEventHandlers {
 
 	public 	static final String	NAME	= "CRONIOBusDesktopSignInForm";
-	private static final DSLAMBusI18NTexts 	TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
+	private static final CRONIOBusI18NTexts 	TEXTS 	= GWT.create(CRONIOBusI18NTexts.class);
 
 	private AEGWTTextBox						userNameBox;
 	private CRONIOBusDesktopPasswordTextBox		passwordTextBox;
 	
 	public CRONIOBusDesktopSignInForm(String description) {
 		super(description);		
-		addStyleName(DSLAMBusDesktopIStyleConstants.SIGN_FORM);
+		addStyleName(CRONIOBusDesktopIStyleConstants.SIGN_FORM);
 
 		userNameBox = new AEGWTTextBox();
 		getFieldsZone().add(userNameBox);

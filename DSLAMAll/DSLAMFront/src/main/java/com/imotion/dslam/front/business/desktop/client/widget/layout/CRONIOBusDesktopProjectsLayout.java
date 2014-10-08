@@ -9,14 +9,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
-import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.DSLAMBusDesktopProjectNavigator;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbar;
+import com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.CRONIOBusDesktopProjectNavigator;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.CRONIOBusDesktopProjectsToolbar;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -27,20 +27,20 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
 	
-	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private FlowPanel 									root;
-	private DSLAMBusDesktopProjectsToolbar				toolbar;
-	private DSLAMBusDesktopProjectNavigator				projectListNavigator;
+	private CRONIOBusDesktopProjectsToolbar				toolbar;
+	private CRONIOBusDesktopProjectNavigator				projectListNavigator;
 	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
 	private FlowPanel									projectWorkZone;
 
 	public CRONIOBusDesktopProjectsLayout() {
 		root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT);
 
-		toolbar = new DSLAMBusDesktopProjectsToolbar();
+		toolbar = new CRONIOBusDesktopProjectsToolbar();
 		root.add(toolbar);
 		toolbar.setModified(false);
 		toolbar.setId(NO_PROJECT_ID);
@@ -48,29 +48,29 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		//Bottom Zone
 		FlowPanel bottomZone = new FlowPanel();
 		root.add(bottomZone);
-		bottomZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE);
+		bottomZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE);
 
 		//Bottom Zone - Projectlist zone
 		FlowPanel projectListZone = new FlowPanel();
 		bottomZone.add(projectListZone);
 		projectListZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_3);
-		projectListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_LIST_ZONE);
+		projectListZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT_LIST_ZONE);
 
-		projectListNavigator = new DSLAMBusDesktopProjectNavigator();
+		projectListNavigator = new CRONIOBusDesktopProjectNavigator();
 		projectListZone.add(projectListNavigator);
 
 		//Bottom Zone - Right
 		FlowPanel bottomRightZone = new FlowPanel();
 		bottomZone.add(bottomRightZone);
 		bottomRightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_9);
-		bottomRightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT);
+		bottomRightZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT_BOTTOM_ZONE_RIGHT);
 
 		sectionHeader = new CRONIOBusDesktopProjectsLayoutItemHeader();
 		bottomRightZone.add(sectionHeader);
 
 		projectWorkZone = new FlowPanel();
 		bottomRightZone.add(projectWorkZone);
-		projectWorkZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
+		projectWorkZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT_WORK_ZONE);
 	}
 
 	public List<String> getModifiedProjetIds() {

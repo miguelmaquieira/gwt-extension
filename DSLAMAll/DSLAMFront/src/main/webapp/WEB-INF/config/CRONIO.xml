@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Application Name="CRONIO">
+	<ServiceList>
+		<Service Name="CRONIO">
+			<Description>Application SeleneM2M</Description>
+			<Type>300171086790656</Type>
+			<Descriptor></Descriptor>
+			<ParametersMap>
+				<Parameter id="CFG.CRONIO.LOCALE">
+					<Param>
+						<value>es_ES;en_EN</value>
+						<type>STATIC</type>
+					</Param>
+				</Parameter>
+			</ParametersMap>
+		</Service>
+		<Service Name="SRV_LITERAL">
+			<Description>Literal service for app controller</Description>
+			<Type>300171053236224</Type>
+			<Descriptor></Descriptor>
+			<Async>true</Async>
+			<ParametersMap>
+				<Parameter id="LOCALE">
+					<Param>
+						<value>es_ES;en_EN</value>
+						<type>STATIC</type>
+					</Param>
+				</Parameter>
+				<Parameter id="FILE_LIST.0">
+					<Param>
+						<value>dummy_literal</value>
+						<type>STATIC</type>
+					</Param>
+				</Parameter>
+				<Parameter id="RESULT">
+					<Param>
+						<value>SRV_RESULT</value>
+						<type>OUT</type>
+					</Param>
+				</Parameter>
+			</ParametersMap>
+		</Service>
+		<Service Name="SRV_BRE_DEVICE_DETECTION">
+			<Description>Business Rule Engine Service</Description>
+			<Type>300171204231168</Type>
+			<Descriptor></Descriptor>
+			<ParametersMap>
+				<Parameter id="FILENAME">
+					<Param>
+						<value>device_detection.KnowledgeBase</value>
+						<type>STATIC</type>
+					</Param>
+				</Parameter>
+			</ParametersMap>
+		</Service>
+		<Service Name="SRV_BRE_PUBLIC_PRIVATE">
+			<Description>Business Rule Engine Service</Description>
+			<Type>300171204231168</Type>
+			<Descriptor></Descriptor>
+			<ParametersMap>
+				<Parameter id="FILENAME">
+					<Param>
+						<value>public_private.KnowledgeBase</value>
+						<type>STATIC</type>
+					</Param>
+				</Parameter>
+			</ParametersMap>
+		</Service>
+		<Service Name="ARCH_UTILS">
+			<Description>Utilities class for business common functions
+			</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.selene.arch.exe.bus.utils.AEMFTBusinessUtilsServiceImpl
+			</Descriptor>
+			<SubServiceList>
+				<SubService Name="GET_COMBO_DATA">
+					<Descriptor>getComboBoxData</Descriptor>
+					<ParametersMap>
+						<Parameter id="DATASOURCE_PATH">
+							<Param>
+								<value>res/</value>
+								<type>STATIC</type>
+							</Param>
+						</Parameter>
+						<Parameter id="DEFAULT_LOCALE">
+							<Param>
+								<value>es_ES</value>
+								<type>STATIC</type>
+							</Param>
+						</Parameter>
+					</ParametersMap>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_LOGIN">
+			<Description>Utilities class for business common functions
+			</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBULoginBusinessServiceImpl
+			</Descriptor>
+			<SubServiceList>
+				<SubService Name="IS_VALID_SESSION">
+					<Descriptor>isValidSession</Descriptor>
+				</SubService>
+				<SubService Name="PROCESS_NEW_USER">
+					<Descriptor>processNewUser</Descriptor>
+					<ParametersMap>
+						<Parameter id="EMAIL_FROM">
+							<Param>
+								<value>CFG.SRV_MAIL.FROM</value>
+								<type>CFG</type>
+							</Param>
+						</Parameter>
+					</ParametersMap>
+				</SubService>
+				<SubService Name="PROCESS_ACTIVATE_USER">
+					<Descriptor>processActivateUser</Descriptor>
+				</SubService>
+				<SubService Name="PROCESS_LOGIN">
+					<Descriptor>processLogin</Descriptor>
+				</SubService>
+				<SubService Name="PROCESS_LOGOUT">
+					<Descriptor>processLogout</Descriptor>
+				</SubService>
+				<SubService Name="CHANGE_PASSWORD">
+					<Descriptor>processChangePassword</Descriptor>
+				</SubService>
+				<SubService Name="PROCESS_FORGOT_PASSWORD">
+					<Descriptor>processForgotPassword</Descriptor>
+				</SubService>
+				<SubService Name="PROCESS_RESET_PASSWORD">
+					<Descriptor>processResetPassword</Descriptor>
+				</SubService>
+				<SubService Name="SENDNEW_SUBSCRIBER_MAIL">
+					<Descriptor>sendNewSubscriberEmail</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_USER_ACCOUNT">
+					<Descriptor>updateUserAccountDetails</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_PROJECT">
+			<Description>Project business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUProjectBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="ADD_PROJECT">
+					<Descriptor>addProject</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PROJECT">
+					<Descriptor>updateProject</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PROJECTS">
+					<Descriptor>updateProjects</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_PROJECTS_BY_USER">
+					<Descriptor>getAllProjectsByUser</Descriptor>
+				</SubService>
+				<SubService Name="REMOVE_PROJECT">
+					<Descriptor>removeProject</Descriptor>
+				</SubService>
+				<SubService Name="GET_CSV_NODES">
+					<Descriptor>getCsvNodes</Descriptor>
+				</SubService>
+				<SubService Name="ADD_NODELIST">
+					<Descriptor>addNodeList</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_NODELISTS_BY_PROJECT_ID">
+					<Descriptor>getAllNodeListsByProjectId</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_EXECUTE">
+			<Description>Execute business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUExecuteBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="EXECUTE_PROJECT">
+					<Descriptor>executeProject</Descriptor>
+					<Async>true</Async>
+				</SubService>
+				<SubService Name="ADD_EXECUTION">
+					<Descriptor>addExecution</Descriptor>
+				</SubService>
+				<SubService Name="GET_ALL_EXCUTIONS_BY_PROJECT_ID">
+					<Descriptor>getAllExecutionsByProjectId</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_PREFERENCES">
+			<Description>Preferences business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBUPreferencesBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="GET_PREFERENCES">
+					<Descriptor>getPreferences</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_PREFERENCES">
+					<Descriptor>updatePreferences</Descriptor>
+				</SubService>
+				<SubService Name="ADD_CONNECTION">
+					<Descriptor>addConnection</Descriptor>
+				</SubService>
+				<SubService Name="UPDATE_MACHINE_CONFIG">
+					<Descriptor>updateMachineConfig</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>
+		<Service Name="SRV_BUS_LOG">
+			<Description>Log business service</Description>
+			<Type>300171153899520</Type>
+			<Descriptor>com.imotion.dslam.business.service.impl.CRONIOBULogBusinessServiceImpl</Descriptor>
+			<SubServiceList>
+				<SubService Name="GET_FILTERED_LOGS">
+					<Descriptor>getFilteredLogs</Descriptor>
+				</SubService>
+				<SubService Name="GET_EXECUTION_LOGS">
+					<Descriptor>getExecutionLogs</Descriptor>
+				</SubService>
+			</SubServiceList>
+		</Service>		
+	</ServiceList>
+</Application>

@@ -9,7 +9,7 @@ import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasPreferencesEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
@@ -27,7 +27,7 @@ import com.selene.arch.exe.gwt.mvp.event.flow.AEGWTFlowEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEvent;
 import com.selene.arch.exe.gwt.mvp.event.localstorage.AEGWTLocalStorageEventTypes;
 
-public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPreferencesBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasPreferencesEventHandlers, CRONIOBusPreferencesBasePresenterConstants {
+public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPreferencesBaseDisplay> extends CRONIOBusBasePresenter<T> implements CRONIOBusDesktopHasPreferencesEventHandlers, CRONIOBusPreferencesBasePresenterConstants {
 
 	public static final String NAME = "CRONIOBusPreferencesBasePresenter";
 	
@@ -60,7 +60,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 				updateNavigationData(mainSectionId, finalSectionPath);
 				if (navigate) {
 					
-					String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
+					String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
 					AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
 					if (finalSectionData != null) {
 						finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
@@ -184,7 +184,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	}
 
 	private void openFinalSection(String finalSectionPath) {
-		String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
+		String							finalSectionDataKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + finalSectionPath;
 		AEMFTMetadataElementComposite	finalSectionData	= getContextDataController().getElementAsComposite(finalSectionDataKey);
 		if (finalSectionData != null) {
 			finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
@@ -204,7 +204,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	private void createConnection(String connectionName) {
 		AEMFTMetadataElementComposite newConnectionData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		
-		String preferecesIdkey = CRONIOBOIPreferencesDataConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferencesDataConstants.PREFERENCES_ID;
+		String preferecesIdkey = CRONIOBOIPreferencesDataConstants.PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferencesDataConstants.PREFERENCES_ID;
 		long preferencesId = getContextDataController().getElementAsLong(preferecesIdkey);
 		
 		newConnectionData.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connectionName);
@@ -238,9 +238,9 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 	private void updateConnectionClientData(String connectionName, AEMFTMetadataElementComposite connectionData, boolean connectionSaved) {
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(connectionName);
 		String connectionKey = sbKey.toString();
 
@@ -283,7 +283,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 					if (preferencesData != null) {
 						StringBuilder preferencesIdKey = new StringBuilder();
 						preferencesIdKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-						preferencesIdKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						preferencesIdKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 						preferencesIdKey.append(CRONIOBOIPreferences.PREFERENCES_ID);
 						String preferencesKey = preferencesIdKey.toString();
 						long preferencesId = getContextDataController().getElementAsLong(preferencesKey);
@@ -303,16 +303,16 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		String finalsectionDataKey = finalSectionData.getKey();
 		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 
-		String preferencesIdKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferences.PREFERENCES_ID;
+		String preferencesIdKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferences.PREFERENCES_ID;
 		long preferencesId = getContextDataController().getElementAsLong(preferencesIdKey);
 
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(machineConnection);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		if (CRONIOBusDesktopPreferencesMachineConfigureForm.NAME.equals(srcWidget)) {
 			sbKey.append(CRONIOBOMachineProperties.MACHINE_CONNECTION_CONFIG);
 		} else if (CRONIOBusDesktopPreferencesMachineVariables.NAME.equals(srcWidget)) {
@@ -341,15 +341,15 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		//String finalsectionDataKey = finalSectionData.getKey();
 		finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
 
-		String preferencesIdKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferences.PREFERENCES_ID;
+		String preferencesIdKey = CRONIODesktopIAppControllerConstants.PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + CRONIOBOIPreferences.PREFERENCES_ID;
 		long preferencesId = getContextDataController().getElementAsLong(preferencesIdKey);
 		
 		if (CRONIOBusDesktopPreferencesUserConfigureForm.NAME.equals(srcWidget)) {
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(CRONIOBOIPreferences.PREFERENCES_USER_PROPERTIES);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(CRONIOBOIPreferences.USER_CONFIG);
 			String sectionKey = sbKey.toString();
 			

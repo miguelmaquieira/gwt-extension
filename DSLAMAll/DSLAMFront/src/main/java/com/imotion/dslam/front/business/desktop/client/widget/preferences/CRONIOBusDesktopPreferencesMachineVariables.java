@@ -7,7 +7,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
@@ -34,7 +34,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 	public CRONIOBusDesktopPreferencesMachineVariables() {
 		root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_CONTENT_IN_BOX);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_CONTENT_IN_BOX);
 
 		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
 		root.add(header);
@@ -50,7 +50,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 		});
 		
 		variableListZone = new FlowPanel();
-		variableListZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_VARIABLES_LIST);
+		variableListZone.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_MACHINE_VARIABLES_LIST);
 		root.add(variableListZone);
 		variableList = new CRONIOBusDesktopPreferencesMachineVariablesList(header.getDeleteButton());
 		variableListZone.add(variableList);

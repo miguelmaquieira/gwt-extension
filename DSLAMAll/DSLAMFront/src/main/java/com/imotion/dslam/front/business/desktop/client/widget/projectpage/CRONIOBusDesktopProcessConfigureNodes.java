@@ -10,8 +10,8 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -23,7 +23,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers {
 	public static final String NAME = "CRONIOBusDesktopProcessConfigureNodes";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProcessNodeList				nodeList;
@@ -38,21 +38,21 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 		
 		FlowPanel leftZone 	= new FlowPanel();
 		root.add(leftZone);
-		leftZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LEFT_ZONE);
+		leftZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LEFT_ZONE);
 		leftZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
 		
 		FlowPanel rightZone = new FlowPanel();
 		root.add(rightZone);
-		rightZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_RIGHT_ZONE);
+		rightZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_RIGHT_ZONE);
 		rightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
 		
 		nodeList = new CRONIOBusDesktopProcessNodeList();
 		leftZone.add(nodeList);
-		nodeList.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
+		nodeList.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_LIST_ZONE);
 		
 		nodeInfoZone = new CRONIOBusDesktopProcessConfigureNodesInfo();
 		rightZone.add(nodeInfoZone);
-		nodeInfoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
+		nodeInfoZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODES_INFO_ZONE);
 		nodeInfoZone.setVisible(false);
 	}
 	

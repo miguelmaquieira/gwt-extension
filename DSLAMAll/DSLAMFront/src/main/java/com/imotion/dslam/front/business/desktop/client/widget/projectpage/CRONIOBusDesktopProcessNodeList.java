@@ -9,8 +9,8 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasComparator;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasSort;
@@ -24,7 +24,7 @@ import com.selene.arch.exe.gwt.mvp.event.sort.AEGWTSortEventTypes.SORT_TYPE;
 public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel implements AEGWTHasSort, AEGWTHasComparator {
 	
 	public static final String NAME = "CRONIOBusDesktopProcessNodeList";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FlowPanel 								elementListContainerZone;
 	private FlowPanel 								elementListContainer;
@@ -36,7 +36,7 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 	public CRONIOBusDesktopProcessNodeList() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST);
+		addStyleName(CRONIOBusDesktopIStyleConstants.NODE_LIST);
 		
 		header = new CRONIOBusDesktopHeaderListFileActions(TEXTS.node_list());
 		root.add(header);
@@ -44,11 +44,11 @@ public class CRONIOBusDesktopProcessNodeList extends AEGWTCompositePanel impleme
 		//Container
 		elementListContainerZone = new FlowPanel();
 		root.add(elementListContainerZone);
-		elementListContainerZone.addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST_CONTAINER_ZONE);
+		elementListContainerZone.addStyleName(CRONIOBusDesktopIStyleConstants.NODE_LIST_CONTAINER_ZONE);
 		
 		elementListContainer = new FlowPanel();
 		elementListContainerZone.add(elementListContainer);
-		elementListContainer.addStyleName(DSLAMBusDesktopIStyleConstants.NODE_LIST_CONTAINER);
+		elementListContainer.addStyleName(CRONIOBusDesktopIStyleConstants.NODE_LIST_CONTAINER);
 		
 		initComparators();
 	}

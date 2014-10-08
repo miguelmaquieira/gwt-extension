@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to="testDesktop">
 
-	<inherits name="com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule" />
+	<inherits name="com.imotion.dslam.front.business.desktop.CRONIOBusDesktopModule" />
 	
 	<replace-with class="com.imotion.dslam.front.business.desktop.test.client.TestDesktopAppEntryPoint">
-		<when-type-is class="com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppEntryPoint"/>
+		<when-type-is class="com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopAppEntryPoint"/>
 	</replace-with>
 	
 	<source path="client" />

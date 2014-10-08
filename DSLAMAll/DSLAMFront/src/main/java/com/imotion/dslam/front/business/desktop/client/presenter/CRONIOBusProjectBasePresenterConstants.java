@@ -1,13 +1,13 @@
 package com.imotion.dslam.front.business.desktop.client.presenter;
 
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 
 public interface CRONIOBusProjectBasePresenterConstants {
 	
 	public static final String PROJECT_PRESENTER  = "PROJECT_PRESENTER";
 	
 	String PROJECT_NAVIGATION_DATA							= "PROJECT_NAVIGATION_DATA";
-	String PROJECT_NAVIGATION_DATA_PREFFIX					= PROJECT_NAVIGATION_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR;
+	String PROJECT_NAVIGATION_DATA_PREFFIX					= PROJECT_NAVIGATION_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR;
 	
 	String CURRENT_PROJECT_ID								= "CURRENT_PROJECT_ID";
 	String CURRENT_MAIN_SECTION_ID							= "CURRENT_MAIN_SECTION_ID";

@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 
 public interface CRONIODesktopIAppControllerConstants {
 
@@ -14,7 +14,7 @@ public interface CRONIODesktopIAppControllerConstants {
 	String EXECUTIONS_DATA  = CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA;
 	String LIST_NODELIST_DATA  = CRONIOBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA;
 	
-	String PREFERENCES_DATA_PREFFIX = PREFERENCES_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR;
+	String PREFERENCES_DATA_PREFFIX = PREFERENCES_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR;
 	
 	int DEFAULT_DOWNTIME = 15;
 }

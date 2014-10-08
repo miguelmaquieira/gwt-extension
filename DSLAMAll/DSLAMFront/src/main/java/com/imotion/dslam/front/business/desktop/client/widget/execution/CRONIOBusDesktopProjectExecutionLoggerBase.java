@@ -10,8 +10,8 @@ import org.atmosphere.gwt20.client.AtmosphereResponse;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
@@ -29,7 +29,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollB
 public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCompositePanel {
 
 	public static final String NAME 			= "CRONIOBusDesktopProjectExecutionLogger";
-	private static DSLAMBusI18NTexts TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS 	= GWT.create(CRONIOBusI18NTexts.class);
 
 	private Atmosphere 			atmosphere;
 	private AtmosphereRequest 	rpcRequest;
@@ -47,11 +47,11 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER);
 		
 		loggerContainer = new FlowPanel();
 		root.add(loggerContainer);
-		loggerContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
+		loggerContainer.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_CONTAINER);
 		loggerContainer.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
 		filterPanel = new AEGWTBootstrapAccordionPanel(TEXTS.filtered(), false);
@@ -60,7 +60,7 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		filterPanel.addContentWidget(panelContent);
 		panelContent.addStyleName(AEGWTIBoostrapConstants.PANEL_BODY);
 
-		filterPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL);
+		filterPanel.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL);
 		loggerContainer.add(filterPanel);
 		
 		filterForm = new CRONIOBusDesktopProjectExecutionFilterForm();

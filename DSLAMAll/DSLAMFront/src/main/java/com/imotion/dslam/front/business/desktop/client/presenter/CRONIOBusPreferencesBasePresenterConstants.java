@@ -1,6 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.presenter;
 
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 
 
 public interface CRONIOBusPreferencesBasePresenterConstants {
@@ -9,7 +9,7 @@ public interface CRONIOBusPreferencesBasePresenterConstants {
 	
 	String PREFERENCES_NAVIGATION_DATA						= "PREFERENCES_NAVIGATION_DATA";
 	String SECTION_DATA										= "SECTION_DATA";
-	String PREFERENCES_NAVIGATION_DATA_PREFFIX				= PREFERENCES_NAVIGATION_DATA + DSLAMBusCommonConstants.ELEMENT_SEPARATOR;
+	String PREFERENCES_NAVIGATION_DATA_PREFFIX				= PREFERENCES_NAVIGATION_DATA + CRONIOBusCommonConstants.ELEMENT_SEPARATOR;
 //	
 //	String CURRENT_PROJECT_ID								= "CURRENT_PROJECT_ID";
 //	String CURRENT_MAIN_SECTION_ID							= "CURRENT_MAIN_SECTION_ID";

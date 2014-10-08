@@ -1,6 +1,6 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout.navigator.preferences;
 
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
@@ -14,7 +14,7 @@ public class CRONIOBusDesktopPreferencesMenuFinalItem extends AEGWTBootstrapTree
 
 	public CRONIOBusDesktopPreferencesMenuFinalItem(String parentPath, String finalSectionId, String text, AEGWTICompositePanel parentWidget) {
 		super(null, finalSectionId, text, parentWidget, true);
-		this.finalSectionPath	= parentPath + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + finalSectionId;
+		this.finalSectionPath	= parentPath + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + finalSectionId;
 		String[] mainSectionIdSplit = parentPath.split("\\.");
 		String mainSectionId 	= mainSectionIdSplit[0];
 		setContainerId(mainSectionId);

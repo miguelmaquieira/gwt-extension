@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <atmosphere-handlers>
-    <atmosphere-handler context-root="/dslamBusDesktop/atmosphere/rpc"
+    <atmosphere-handler context-root="/cronioBusDesktop/atmosphere/rpc"
                         class-name="com.imotion.dslam.logger.atmosphere.CRONIOLoggerAtmosphereHandler">
         <property name="heartbeat" value="20000"/>
         <applicationConfig>

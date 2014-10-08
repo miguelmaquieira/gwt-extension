@@ -1,9 +1,9 @@
 package com.imotion.dslam.front.business.desktop.client.view.preferences.user;
 
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.user.CRONIOBusDesktopPreferencesUserDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.preferences.CRONIOBusDesktopPreferencesUserConfigureForm;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
@@ -11,7 +11,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopPreferencesUserScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopPreferencesUserDisplay, AEGWTHasLogicalEventHandlers {
+public class CRONIOBusDesktopPreferencesUserScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopPreferencesUserDisplay, AEGWTHasLogicalEventHandlers {
 
 	public	static final String NAME = "CRONIOBusDesktopPreferencesUserScreenView";
 
@@ -22,7 +22,7 @@ public class CRONIOBusDesktopPreferencesUserScreenView extends DSLAMBusDesktopPa
 	public CRONIOBusDesktopPreferencesUserScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_USER_VIEW);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_USER_VIEW);
 		
 		form = new CRONIOBusDesktopPreferencesUserConfigureForm();
 		root.add(form);

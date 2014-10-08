@@ -8,8 +8,8 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -23,7 +23,7 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 
 	public static final String NAME = "CRONIOBusDesktopNewConnectionPopupForm";
-	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	public static final int MODE_NEW_CONNECTION		= 1;
 	public static final int MODE_RENAME_CONNECTION	= 2;
@@ -38,12 +38,12 @@ public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_CONNECTION_FORM);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.NEW_CONNECTION_FORM);
 
 		//CONNECTIONNAME
 		SimplePanel inputZone = new SimplePanel();
 		root.add(inputZone);
-		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_CONNECTION_FORM_INPUT_ZONE);
+		inputZone.addStyleName(CRONIOBusDesktopIStyleConstants.NEW_CONNECTION_FORM_INPUT_ZONE);
 
 		connectionNameField = new AEGWTBootstrapFormFieldTextBox("", TEXTS.connectionname_input_placeholder());
 		inputZone.add(connectionNameField);
@@ -51,7 +51,7 @@ public class CRONIOBusDesktopNewConnectionPopupForm extends AEGWTPopup {
 		//SAVE
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.NEW_CONNECTION_FORM_SAVE_ZONE);
+		saveButtonZone.addStyleName(CRONIOBusDesktopIStyleConstants.NEW_CONNECTION_FORM_SAVE_ZONE);
 
 		saveButton = new AEGWTButton(TEXTS.create());
 		saveButtonZone.add(saveButton);

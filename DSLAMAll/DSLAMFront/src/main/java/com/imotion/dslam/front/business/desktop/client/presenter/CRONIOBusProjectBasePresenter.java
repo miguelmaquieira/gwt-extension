@@ -24,8 +24,8 @@ import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstan
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
-import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.client.CRONIOBusCommonConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
@@ -34,7 +34,7 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeListForm;
-import com.imotion.dslam.front.business.desktop.client.widget.toolbar.DSLAMBusDesktopProjectsToolbarActions;
+import com.imotion.dslam.front.business.desktop.client.widget.toolbar.CRONIOBusDesktopProjectsToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -51,9 +51,9 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBaseDisplay> extends DSLAMBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, AEGWTHasLogicalEventHandlers, CRONIOBusProjectBasePresenterConstants {
+public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBaseDisplay> extends CRONIOBusBasePresenter<T> implements CRONIOBusDesktopHasProjectEventHandlers, AEGWTHasLogicalEventHandlers, CRONIOBusProjectBasePresenterConstants {
 
-	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private CRONIOBusDesktopProjectsLayout projectsLayout;
 
@@ -124,7 +124,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			evt.stopPropagation();
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIOBOIPreferencesDataConstants.PREFERENCES_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST);
 			String machineTypesKey = sbKey.toString();
 
@@ -143,15 +143,15 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			getMachineTypesEvt.setEventType(EVENT_TYPE.GET_MACHINE_TYPES);
 			getMachineTypesEvt.addElementAsSerializableDataValue((Serializable) machineList);
 			getLogicalEventHandlerManager().fireEvent(getMachineTypesEvt);
-		} else if (EVENT_TYPE.GET_PROCESS_NODELISTS.equals(evtTyp) && DSLAMBusDesktopProjectsToolbarActions.NAME.equals(srcWidget)) {
+		} else if (EVENT_TYPE.GET_PROCESS_NODELISTS.equals(evtTyp) && CRONIOBusDesktopProjectsToolbarActions.NAME.equals(srcWidget)) {
 			evt.stopPropagation();
 			String currentProjectId = getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(CRONIODesktopIAppControllerConstants.LIST_NODELIST_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(currentProjectId);
 			String nodeListsDataKey = sbKey.toString();
 
@@ -201,13 +201,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			if (AEGWTBootstrapDropdownGlyphIconButton.NAME.equals(sourceWidget)) {
 
-				if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_OPEN_PREFERENCES == Integer.valueOf(sourceWidgetId)) {
+				if(CRONIOBusDesktopProjectsToolbarActions.OPTION_TYPE_OPEN_PREFERENCES == Integer.valueOf(sourceWidgetId)) {
 					if (AEMFTCommonUtilsBase.isEmptyList(projectsLayout.getModifiedProjetIds()) || (Window.confirm(TEXTS.exit_without_save()))) {
 						AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusPreferencesBasePresenterConstants.PREFERENCES_PRESENTER, getName());
 						getFlowEventHandlerManager().fireEvent(flowEvent);
 					}
 
-				} else if(DSLAMBusDesktopProjectsToolbarActions.OPTION_TYPE_EXIT == Integer.valueOf(sourceWidgetId)) {
+				} else if(CRONIOBusDesktopProjectsToolbarActions.OPTION_TYPE_EXIT == Integer.valueOf(sourceWidgetId)) {
 					exit();
 				}
 			}			
@@ -297,9 +297,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentProjectId);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentSectionId);
 		String finalSectionKey = sbKey.toString();
 
@@ -394,9 +394,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 					StringBuilder sbKey = new StringBuilder();
 					sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+					sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 					sbKey.append(CRONIODesktopIAppControllerConstants.EXECUTIONS_DATA);
-					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+					sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 					sbKey.append(projectId);
 					String finalSectionKey = sbKey.toString();
 
@@ -464,11 +464,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 						StringBuilder sbKey = new StringBuilder();
 						sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 						sbKey.append(projectId);
-						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 						sbKey.append(CRONIOBOINodeList.NODELIST_PROCESS);
-						sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 						sbKey.append(CRONIOBOIProcess.PROCESS_NODELIST_LIST);
 						String finalSectionKey = sbKey.toString();
 
@@ -527,7 +527,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		newProjectData.addElement(CRONIOBOIProject.PROJECT_NAME			, projectName);
 		newProjectData.addElement(CRONIOBOIProject.PROJECT_MACHINE_TYPE	, machinetTypeInt);
 
-		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
+		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
 		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
 		String userIdStr = userIdData.getValueAsString();
 
@@ -565,19 +565,19 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		if (!AEGWTStringUtils.isEmptyString(projectId) && !AEGWTStringUtils.isEmptyString(projectFinalSectionId)) {
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 
 			String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
 
 			if (projectFinalSectionId.matches(dateRegEx)) {
 				sbKey.append(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA);
-				sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 				sbKey.append(projectId);
 				isLog = true;
 			} else {
 				sbKey.append(projectId);
 				if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
-					sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+					sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 					//Final Section Data
 					sbKey.append(projectFinalSectionId);
 				}
@@ -588,9 +588,9 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			//Project name
 			StringBuilder projectNamesbKey = new StringBuilder();
 			projectNamesbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			projectNamesbKey.append(projectId);
-			projectNamesbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			projectNamesbKey.append(CRONIOBOIProject.PROJECT_NAME);
 			String projectNameKey = projectNamesbKey.toString();
 			String projectName = getContextDataController().getElementAsString(projectNameKey);
@@ -639,11 +639,11 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentProjectId);
 		String projectDataKey = sbKey.toString();
 
-		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + DSLAMBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
+		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
 		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
 		String userIdStr = userIdData.getValueAsString();
 
@@ -673,7 +673,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	private void updateProjectClientData(String currentProjectId, AEMFTMetadataElementComposite projectData, boolean projectSaved) {
 		StringBuilder sbKey = new StringBuilder();
 		sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-		sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+		sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 		sbKey.append(currentProjectId);
 		String projectKey = sbKey.toString();
 
@@ -697,7 +697,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		for (String projectId : modifiedProjectIds) {
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-			sbKey.append(DSLAMBusCommonConstants.ELEMENT_SEPARATOR);
+			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 			sbKey.append(projectId);
 			String projectDataKey = sbKey.toString();
 

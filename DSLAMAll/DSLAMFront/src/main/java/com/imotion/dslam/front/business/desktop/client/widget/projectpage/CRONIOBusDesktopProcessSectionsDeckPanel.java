@@ -7,8 +7,8 @@ import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -20,24 +20,24 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 
 	public static final String NAME = "CRONIOBusDesktopProcessSectionsDeckPanel";
 
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private DeckPanel 										rootDeckPanel;
-	private DSLAMBusDesktopProcessConfigureVariables		variablesProcessConfigure;
-	private DSLAMBusDesktopProcessConfigureSchedule			scheduleProcessConfigure;
-	private DSLAMBusDesktopProcessConfigureExtraOptions		extraOptionsConfigure;
+	private CRONIOBusDesktopProcessConfigureVariables		variablesProcessConfigure;
+	private CRONIOBusDesktopProcessConfigureSchedule			scheduleProcessConfigure;
+	private CRONIOBusDesktopProcessConfigureExtraOptions		extraOptionsConfigure;
 	private CRONIOBusDesktopProcessConfigureNodes			nodesConfigure;
 
 	public CRONIOBusDesktopProcessSectionsDeckPanel() {
 
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
-		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_CONFIGURE_DECKPANEL);
+		rootDeckPanel.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_DECKPANEL);
 		rootDeckPanel.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 
-		variablesProcessConfigure 	= new DSLAMBusDesktopProcessConfigureVariables();
-		scheduleProcessConfigure 	= new DSLAMBusDesktopProcessConfigureSchedule();
-		extraOptionsConfigure 		= new DSLAMBusDesktopProcessConfigureExtraOptions();
+		variablesProcessConfigure 	= new CRONIOBusDesktopProcessConfigureVariables();
+		scheduleProcessConfigure 	= new CRONIOBusDesktopProcessConfigureSchedule();
+		extraOptionsConfigure 		= new CRONIOBusDesktopProcessConfigureExtraOptions();
 		nodesConfigure				= new CRONIOBusDesktopProcessConfigureNodes();
 
 		rootDeckPanel.add(variablesProcessConfigure);

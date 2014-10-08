@@ -6,8 +6,8 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIMachinePropertiesDataConstants;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.preferences.connection.CRONIOBusDesktopPreferencesConnectionPresenter;
@@ -29,7 +29,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootstrapForm {
 
 	public static final String NAME = "CRONIOBusDesktopPreferencesMachineConfigureForm";
-	private static DSLAMBusI18NTexts 							TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts 							TEXTS 				= GWT.create(CRONIOBusI18NTexts.class);
 	private static CRONIOBusI18NPreferencesConnectionTexts 	PREFERENCES_TEXTS 	= GWT.create(CRONIOBusI18NPreferencesConnectionTexts.class);
 
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			userNameTextBox;
@@ -50,7 +50,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 
 		FlowPanel textBoxesZone = new FlowPanel();
 		addWidget(textBoxesZone);
-		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
+		textBoxesZone.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_MACHINE_CONFIGURE_FORM);
 		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 		
 		FlowPanel textBoxesLeftZone = new FlowPanel();

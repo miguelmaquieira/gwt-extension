@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.preferences;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.widget.editor.CRONIOBusDesktopEditor;
@@ -26,7 +26,7 @@ public class CRONIOBusDesktopPreferencesMachineSectionsDeckPanel extends AEGWTCo
 	public CRONIOBusDesktopPreferencesMachineSectionsDeckPanel() {
 		rootDeckPanel = new DeckPanel();
 		initWidget(rootDeckPanel);
-		rootDeckPanel.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_MACHINE_DECKPANEL);
+		rootDeckPanel.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_MACHINE_DECKPANEL);
 		rootDeckPanel.addStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 
 		variablesPreferencesMachine 		= new CRONIOBusDesktopPreferencesMachineVariables();

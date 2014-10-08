@@ -7,9 +7,9 @@ import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureExtraOptions;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureSchedule;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.DSLAMBusDesktopProcessConfigureVariables;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureExtraOptions;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureSchedule;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureVariables;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -44,19 +44,19 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
  		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
 
-		if (DSLAMBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
+		if (CRONIOBusDesktopProcessConfigureVariables.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_VARIABLES_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
-		} else if (DSLAMBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
+		} else if (CRONIOBusDesktopProcessConfigureSchedule.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_SCHEDULE_DATA);
 				updateFinalSectionInContext(finalSectionData);
 			}	
-		} else if (DSLAMBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
+		} else if (CRONIOBusDesktopProcessConfigureExtraOptions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.SAVE_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite finalSectionData = evt.getElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_EXTRA_OPTIONS);

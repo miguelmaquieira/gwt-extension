@@ -1,14 +1,14 @@
 package com.imotion.dslam.front.business.desktop.test.client;
 
 import com.google.gwt.core.client.Callback;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopAppController;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopAppController;
 import com.imotion.dslam.front.business.desktop.test.client.presenter.test.TestPresenter;
 import com.imotion.dslam.front.business.desktop.test.client.view.test.TestDesktopScreenView;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.AEGWTIPresenter;
 import com.selene.arch.exe.gwt.mvp.context.ContextRetriever;
 
-public class TestDesktopAppController extends DSLAMBusDesktopAppController {
+public class TestDesktopAppController extends CRONIOBusDesktopAppController {
 
 	
 	@Override

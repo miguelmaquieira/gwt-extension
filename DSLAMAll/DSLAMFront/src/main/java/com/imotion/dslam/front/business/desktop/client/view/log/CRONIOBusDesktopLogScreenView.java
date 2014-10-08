@@ -3,19 +3,19 @@ package com.imotion.dslam.front.business.desktop.client.view.log;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.log.CRONIOBusDesktopLogDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay, CRONIOBusDesktopHasProjectEventHandlers {
+public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public static final String NAME = "CRONIOBusDesktopLogScreenView";
 	
@@ -25,7 +25,7 @@ public class CRONIOBusDesktopLogScreenView extends DSLAMBusDesktopPanelBaseView 
 	public CRONIOBusDesktopLogScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION);
 		setHeightToDecrease(78);
 	}
 

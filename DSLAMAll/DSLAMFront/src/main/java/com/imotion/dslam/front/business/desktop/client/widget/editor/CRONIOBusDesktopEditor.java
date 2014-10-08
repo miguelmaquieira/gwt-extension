@@ -8,7 +8,7 @@ import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.user.client.Timer;
 import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -37,7 +37,7 @@ public class CRONIOBusDesktopEditor extends AEGWTCompositePanel {
 		// create first AceEditor widget
 		editor = new AceEditor();
 		initWidget(editor);
-		editor.addStyleName(DSLAMBusDesktopIStyleConstants.SCRIPTS_EDITOR_AREA);
+		editor.addStyleName(CRONIOBusDesktopIStyleConstants.SCRIPTS_EDITOR_AREA);
 
 		// start the first editor and set its theme and mode
 		editor.startEditor(); // must be called before calling setTheme/setMode/etc.

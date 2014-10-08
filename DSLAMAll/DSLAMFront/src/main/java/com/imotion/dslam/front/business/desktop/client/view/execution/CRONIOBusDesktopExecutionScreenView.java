@@ -4,15 +4,15 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.execution.CRONIOBusDesktopExecutionDisplay;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopExecutionDisplay {
+public class CRONIOBusDesktopExecutionScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopExecutionDisplay {
 
 	public static final String NAME = "CRONIOBusDesktopExecutionScreenView";
 	
@@ -22,7 +22,7 @@ public class CRONIOBusDesktopExecutionScreenView extends DSLAMBusDesktopPanelBas
 	public CRONIOBusDesktopExecutionScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION);
 		setHeightToDecrease(78);
 	}
 

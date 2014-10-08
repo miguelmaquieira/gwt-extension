@@ -1,8 +1,8 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
 import com.google.gwt.core.shared.GWT;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
@@ -13,7 +13,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu
 public class CRONIOBusDesktopProcessAddNodeFinalItem extends AEGWTBootstrapTreeMenuFinalItem {
 	
 	public static final String 		NAME  	= "CRONIOBusDesktopProcessAddNodeFinalItem";
-	private static DSLAMBusI18NTexts 	TEXTS 	= GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts 	TEXTS 	= GWT.create(CRONIOBusI18NTexts.class);
 	
 	private AEGWTICompositePanel parentWidget;
 
@@ -42,7 +42,7 @@ public class CRONIOBusDesktopProcessAddNodeFinalItem extends AEGWTBootstrapTreeM
 	}
 	
 	private void setAnchorStyle() {
-		super.setAnchorStyle(DSLAMBusDesktopIStyleConstants.NODE_LIST_ADD_ELEMENT);
+		super.setAnchorStyle(CRONIOBusDesktopIStyleConstants.NODE_LIST_ADD_ELEMENT);
 	}
 	
 	@Override

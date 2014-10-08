@@ -5,24 +5,24 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessDisplay;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
-import com.imotion.dslam.front.business.desktop.client.view.DSLAMBusDesktopPanelBaseView;
+import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessSectionsDeckPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseView implements CRONIOBusDesktopProcessDisplay, AEGWTHasLogicalEventHandlers, CRONIOBusDesktopHasProjectEventHandlers {
+public class CRONIOBusDesktopProcessScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopProcessDisplay, AEGWTHasLogicalEventHandlers, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public		static final String				NAME = "CRONIOBusDesktopProcessScreenView";
-	private	 	static final DSLAMBusI18NTexts 	TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private	 	static final CRONIOBusI18NTexts 	TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProcessSectionsDeckPanel	processSectionsDeckPanel;
@@ -30,7 +30,7 @@ public class CRONIOBusDesktopProcessScreenView extends DSLAMBusDesktopPanelBaseV
 	public CRONIOBusDesktopProcessScreenView() {
 		root = new FlowPanel();
 		initContentPanel(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PROCESS_VIEW);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_VIEW);
 
 		processSectionsDeckPanel = new CRONIOBusDesktopProcessSectionsDeckPanel();
 		root.add(processSectionsDeckPanel);

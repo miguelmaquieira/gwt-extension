@@ -10,8 +10,8 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
@@ -27,7 +27,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapForm {
 
 
-	private static DSLAMBusI18NTexts 	TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts 	TEXTS 				= GWT.create(CRONIOBusI18NTexts.class);
 
 	public 	static final String 		NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
 	public 	static final String 		DATE_FORMAT_PICKER	= "d/m/Y H:i";
@@ -52,11 +52,11 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 		FlowPanel formZone = new FlowPanel();
 		addWidget(formZone);
-		formZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM);
+		formZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM);
 
 		FlowPanel severityZone = new FlowPanel();
 		formZone.add(severityZone);
-		severityZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE);
+		severityZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE);
 		severityZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
 		severityDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.filter_for_gravity());
@@ -95,7 +95,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 
 		safeBeforeDateTimePickerTextBox = new AEGWTBootstrapDateTimePickerTextBox(null);
 		safeBeforeDateTimePickerTextBox.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
-		safeBeforeDateTimePickerTextBox.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_DATETIME);
+		safeBeforeDateTimePickerTextBox.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_DATETIME);
 		beforeZone.add(safeBeforeDateTimePickerTextBox);
 
 		FlowPanel rowsZone = new FlowPanel();

@@ -2,7 +2,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.common;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTTextDisplayBase;
@@ -16,7 +16,7 @@ public class CRONIOBusDesktopBootstrapFormErrorWidget extends AEGWTCompositePane
 	public CRONIOBusDesktopBootstrapFormErrorWidget() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.FORM_ERROR);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.FORM_ERROR);
 		
 		errorLabel = new HTML();
 		root.add(errorLabel);

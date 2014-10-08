@@ -3,7 +3,7 @@ package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
@@ -13,7 +13,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTreeMenu
 public class CRONIOBusDesktopProcessAddNodeListElement extends AEGWTCompositePanel {
 	
 	public static final String NAME = "CRONIOBusDesktopProcessAddNodeListElement";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private AEGWTICompositePanel 	parentWidget;
 	private AEGWTBootstrapTreeMenu menu;

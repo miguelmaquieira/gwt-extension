@@ -10,7 +10,7 @@ import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -53,7 +53,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 
 		accordionPanelContainer = new AEGWTBootstrapAccordionPanelContainer();
 		getLoggerContainer().add(accordionPanelContainer);
-		accordionPanelContainer.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
+		accordionPanelContainer.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS_CONTAINER);
 		accordionPanelContainer.removeStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 	}
 
@@ -187,7 +187,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 
 		AEGWTBootstrapAccordionPanel accordionPanel = new AEGWTBootstrapAccordionPanel(header,true);
 		accordionPanelContainer.addWiget(accordionPanel);
-		accordionPanel.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
+		accordionPanel.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_TABS);
 
 		Label subElementHeader = new Label(nodeRequest);
 		subElementHeader.addStyleName("subElementHeader");

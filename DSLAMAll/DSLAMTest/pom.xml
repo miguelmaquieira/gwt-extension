@@ -31,7 +31,6 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- GWT-BASE -->
 		<dependency>
 			<groupId>com.google.gwt</groupId>

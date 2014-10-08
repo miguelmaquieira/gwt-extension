@@ -6,8 +6,8 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.view.preferences.user.CRONIOBusI18NPreferencesUserTexts;
@@ -23,7 +23,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 public class CRONIOBusDesktopPreferencesUserConfigureForm extends AEGWTBootstrapForm {
 
 	public static final String NAME = "CRONIOBusDesktopPreferencesUserConfigureForm";
-	private static DSLAMBusI18NTexts 							TEXTS 				= GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts 							TEXTS 				= GWT.create(CRONIOBusI18NTexts.class);
 	private static CRONIOBusI18NPreferencesUserTexts 	PREFERENCES_TEXTS 	= GWT.create(CRONIOBusI18NPreferencesUserTexts.class);
 
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			downTimeTextBox;
@@ -38,7 +38,7 @@ public class CRONIOBusDesktopPreferencesUserConfigureForm extends AEGWTBootstrap
 
 		FlowPanel textBoxesZone = new FlowPanel();
 		addWidget(textBoxesZone);
-		textBoxesZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_USER_CONFIGURE_FORM);
+		textBoxesZone.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_USER_CONFIGURE_FORM);
 		textBoxesZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
 
 		

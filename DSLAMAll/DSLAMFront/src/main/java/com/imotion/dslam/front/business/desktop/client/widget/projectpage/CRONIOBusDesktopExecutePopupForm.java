@@ -8,8 +8,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -23,7 +23,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 public class CRONIOBusDesktopExecutePopupForm extends AEGWTPopup {
 
 	public static final String NAME = "CRONIOBusDesktopExecutePopupForm";
-	private DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private AEGWTBootstrapFormFieldDropDownButtonLabelTop	nodeListDropDownButton;
 	private AEGWTButton										executeButton;
@@ -34,12 +34,12 @@ public class CRONIOBusDesktopExecutePopupForm extends AEGWTPopup {
 		super(true, parent);
 		FlowPanel root = new FlowPanel();
 		setWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTE_FORM);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTE_FORM);
 
 		//NodeList
 		SimplePanel inputZone = new SimplePanel();
 		root.add(inputZone);
-		inputZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTE_FORM_INPUT_ZONE);
+		inputZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTE_FORM_INPUT_ZONE);
 
 		nodeListDropDownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.enviroment());
 		inputZone.add(nodeListDropDownButton);
@@ -47,7 +47,7 @@ public class CRONIOBusDesktopExecutePopupForm extends AEGWTPopup {
 		//SAVE
 		FlowPanel saveButtonZone = new FlowPanel();
 		root.add(saveButtonZone);
-		saveButtonZone.addStyleName(DSLAMBusDesktopIStyleConstants.EXECUTE_FORM_SAVE_ZONE);
+		saveButtonZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTE_FORM_SAVE_ZONE);
 
 		executeButton = new AEGWTButton(TEXTS.execute());
 		saveButtonZone.add(executeButton);

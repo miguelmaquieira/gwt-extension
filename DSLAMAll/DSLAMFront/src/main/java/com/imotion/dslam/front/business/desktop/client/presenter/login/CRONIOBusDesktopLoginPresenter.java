@@ -4,7 +4,7 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOIUserDataConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
-import com.imotion.dslam.front.business.desktop.client.presenter.DSLAMBusBasePresenter;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.authentication.CRONIOBusDesktopSignInForm;
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopLayoutContainer;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
@@ -21,7 +21,7 @@ import com.selene.arch.exe.gwt.mvp.event.navigator.AEGWTHasNavigationEventHandle
 import com.selene.arch.exe.gwt.mvp.event.navigator.AEGWTNavigationEvent;
 import com.selene.arch.exe.gwt.mvp.event.navigator.AEGWTNavigationEventTypes.NAVIGATOR_TYPE;
 
-public class CRONIOBusDesktopLoginPresenter extends DSLAMBusBasePresenter<CRONIOBusDesktopLoginDisplay> implements AEGWTHasAuthenticationEventHandlers, AEGWTHasNavigationEventHandlers{
+public class CRONIOBusDesktopLoginPresenter extends CRONIOBusBasePresenter<CRONIOBusDesktopLoginDisplay> implements AEGWTHasAuthenticationEventHandlers, AEGWTHasNavigationEventHandlers{
 
 	public static final String NAME = "CRONIOBusDesktopLoginPresenter";
 	

@@ -14,8 +14,8 @@ import com.google.gwt.user.client.ui.Hidden;
 import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.client.DSLAMBusPresenterBaseConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.client.CRONIOBusPresenterBaseConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIGenericServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -26,7 +26,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TY
 
 public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeaderListActions {
 	public static final String NAME = "CRONIOBusDesktopHeaderListActions";
-	private static DSLAMBusI18NTexts TEXTS = GWT.create(DSLAMBusI18NTexts.class);
+	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FormPanel							form;
 	
@@ -51,12 +51,12 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 		Hidden hiddenFieldAppId = new Hidden();
 		formContaimer.add(hiddenFieldAppId);
 		hiddenFieldAppId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_APPLICATION_ID);
-		hiddenFieldAppId.setValue(DSLAMBusPresenterBaseConstants.APPLICATION_ID);
+		hiddenFieldAppId.setValue(CRONIOBusPresenterBaseConstants.APPLICATION_ID);
 		
 		Hidden hiddenFieldModuleId = new Hidden();
 		formContaimer.add(hiddenFieldModuleId);
 		hiddenFieldModuleId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_MODULE_ID);
-		hiddenFieldModuleId.setValue(DSLAMBusPresenterBaseConstants.MODULE_ID);
+		hiddenFieldModuleId.setValue(CRONIOBusPresenterBaseConstants.MODULE_ID);
 		
 		Hidden hiddenFieldServiceId = new Hidden();
 		formContaimer.add(hiddenFieldServiceId);

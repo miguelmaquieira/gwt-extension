@@ -4,8 +4,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.DSLAMBusDesktopIStyleConstants;
+import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
@@ -13,7 +13,7 @@ import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositePanel {
 	
 	public		static final String			 NAME	= "CRONIOBusDesktopPreferencesLayoutItemHeader";
-	private		static final DSLAMBusI18NTexts TEXTS	= GWT.create(DSLAMBusI18NTexts.class);
+	private		static final CRONIOBusI18NTexts TEXTS	= GWT.create(CRONIOBusI18NTexts.class);
 	
 	private AEGWTLabel		sectionName;
 	private AEGWTLabel 		finalSectionName;
@@ -22,28 +22,28 @@ public class CRONIOBusDesktopPreferencesLayoutItemHeader extends AEGWTCompositeP
 	public CRONIOBusDesktopPreferencesLayoutItemHeader() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
-		root.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER);
+		root.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER);
 		
 		//INFO
 		FlowPanel infoZone = new FlowPanel();
 		root.add(infoZone);
-		infoZone.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE);
+		infoZone.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE);
 		
 		modifiedIndicator = new AEGWTLabel("");
 		infoZone.add(modifiedIndicator);
-		modifiedIndicator.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR);
+		modifiedIndicator.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_MOD_INDICATOR);
 		
 		finalSectionName = new AEGWTLabel("FinalSection");
 		infoZone.add(finalSectionName);
-		finalSectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME);
+		finalSectionName.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SECTION_NAME);
 		
 		AEGWTLabel separator = new AEGWTLabel("-");
 		infoZone.add(separator);
-		separator.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR);
+		separator.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_SEPARATOR);
 		
 		sectionName = new AEGWTLabel("Section");
 		infoZone.add(sectionName);
-		sectionName.addStyleName(DSLAMBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME);	
+		sectionName.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_WORK_ZONE_HEADER_INFO_ZONE_PREFERENCES_NAME);	
 	}
 	
 	public void setSectionName(String sectionNameStr) {
