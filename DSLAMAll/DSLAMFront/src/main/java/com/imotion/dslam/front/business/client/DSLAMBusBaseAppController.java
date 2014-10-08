@@ -100,11 +100,6 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 	@Override
 	protected void redirectToWebVersion (WEB_VERSION webVersion) {
 		String url = "";
-//		if (WEB_VERSION.TOUCH.equals(webVersion)) {
-//			url = BusinessBaseAppControllerConstants.TOUCH_URI;
-//		} else {
-//			url = BusinessBaseAppControllerConstants.DESKTOP_URI;
-//		}
 		Location.assign(url);
 	}
 	
