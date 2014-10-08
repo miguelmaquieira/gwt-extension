@@ -9,9 +9,9 @@
  		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- Registered entities -->
-		<class>com.imotion.dslam.bom.data.DSLAMBOProject</class>
-		<class>com.imotion.dslam.bom.data.DSLAMBOFile</class>
-		<class>com.imotion.dslam.bom.data.DSLAMBOProcess</class>
+		<class>com.imotion.dslam.bom.data.CRONIOBOProject</class>
+		<class>com.imotion.dslam.bom.data.CRONIOBOFile</class>
+		<class>com.imotion.dslam.bom.data.CRONIOBOProcess</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBONode</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBONodeList</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBOMachineProperties</class>
