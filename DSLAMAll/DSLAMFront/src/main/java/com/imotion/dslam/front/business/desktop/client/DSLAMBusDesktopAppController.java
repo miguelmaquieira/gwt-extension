@@ -17,7 +17,7 @@ import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILoginBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppController;
 import com.imotion.dslam.front.business.client.DSLAMBusBaseAppControllerConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
@@ -88,7 +88,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 	public AEMFTMetadataElementComposite saveUserDataInClientStorage(AEMFTMetadataElementComposite result) {
 		super.saveUserDataInClientStorage(result);
 
-		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
+		AEMFTMetadataElementComposite projectsData = getElementDataController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, result);
 		getContextDataController().setElement(CRONIODesktopIAppControllerConstants.PROJECTS_DATA, projectsData);
 
 		AEMFTMetadataElementComposite preferencesData = getElementDataController().getElementAsComposite(CRONIOBUIPreferencesBusinessServiceConstants.PREFERENCES_DATA, result);
@@ -102,7 +102,7 @@ public class DSLAMBusDesktopAppController extends DSLAMBusBaseAppController {
 			projectsData.addElement(executionsData);
 		}
 		
-		AEMFTMetadataElementComposite nodeListsData = getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA, result);
+		AEMFTMetadataElementComposite nodeListsData = getElementDataController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.LIST_NODELIST_DATA, result);
 		if (nodeListsData != null) {
 			projectsData.addElement(nodeListsData);
 		}

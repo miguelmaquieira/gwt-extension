@@ -8,7 +8,7 @@ import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.business.service.CRONIOBUIPreferencesBusinessServiceConstants;
-import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasPreferencesEventHandlers;
@@ -210,7 +210,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 		newConnectionData.addElement(CRONIOBOIMachineProperties.MACHINE_NAME		, connectionName);
 		newConnectionData.addElement(CRONIOBOIPreferences.PREFERENCES_ID			, preferencesId);
 
-		getClientServerConnection().executeComm(newConnectionData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_ADD_CONNECTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(newConnectionData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PREFERENCES_ADD_CONNECTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
@@ -274,7 +274,7 @@ public abstract class CRONIOBusPreferencesBasePresenter<T extends CRONIOBusPrefe
 
 	private void saveCurrentPreferencesInDB() {
 		AEMFTMetadataElementComposite preferencesData = getContextDataController().getElementAsComposite(CRONIODesktopIAppControllerConstants.PREFERENCES_DATA);
-		getClientServerConnection().executeComm(preferencesData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PREFERENCES_UPDATE_PREFERENCES_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(preferencesData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PREFERENCES_UPDATE_PREFERENCES_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {

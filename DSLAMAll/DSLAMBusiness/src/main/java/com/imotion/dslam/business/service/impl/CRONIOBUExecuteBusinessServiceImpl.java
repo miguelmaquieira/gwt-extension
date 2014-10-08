@@ -11,11 +11,11 @@ import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.bom.data.CRONIOBOExecution;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessService;
-import com.imotion.dslam.business.service.DSLAMBUIExecuteBusinessServiceTrace;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessService;
+import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceTrace;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
-import com.imotion.dslam.business.service.utils.DSLAMBUBomToMetadataConversor;
+import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
@@ -23,7 +23,7 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.core.appli.metadata.element.factory.AEMFTMetadataElementReflectionBasedFactory;
 import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
-public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase implements DSLAMBUIExecuteBusinessService, CRONIOBUIExecuteBusinessServiceConstants, DSLAMBUIExecuteBusinessServiceTrace {
+public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase implements CRONIOBUIExecuteBusinessService, CRONIOBUIExecuteBusinessServiceConstants, CRONIOBUIExecuteBusinessServiceTrace {
 
 	private static final long serialVersionUID = 7761400309777540451L;
 	
@@ -91,7 +91,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 	public void getAllExecutionsByProjectId() {
 		//ContextIn
 		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
-		AEMFTMetadataElementComposite 	projectListdata = (AEMFTMetadataElementComposite) getElementDataController().getElementAsComposite(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, contextIn).cloneObject();
+		AEMFTMetadataElementComposite 	projectListdata = (AEMFTMetadataElementComposite) getElementDataController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, contextIn).cloneObject();
 		int 							resultsNumber 	= 0;
 		Long 							projectIdAsLong = null;
 		
@@ -110,7 +110,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 			List<CRONIOBOIExecution> executionProjectList = getExecutionPersistence().getAllExecutionsByProject(projectIdAsLong);
 			if (!AEMFTCommonUtilsBase.isEmptyList(executionProjectList)) {
 				resultsNumber = resultsNumber + executionProjectList.size();
-				AEMFTMetadataElementComposite executionProjectListData = DSLAMBUBomToMetadataConversor.fromExecutionsProjectList(executionProjectList);
+				AEMFTMetadataElementComposite executionProjectListData = CRONIOBUBomToMetadataConversor.fromExecutionsProjectList(executionProjectList);
 				executionsData.addElement(projectId, executionProjectListData);
 			}
 		}

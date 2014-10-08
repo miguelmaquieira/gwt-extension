@@ -5,7 +5,7 @@ import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceServiceBase;
 import com.imotion.dslam.business.CRONIOBUIWrapperPersistence;
 import com.selene.arch.exe.bus.service.AEMFTBusinessServiceWrapperPersistence;
 
-public class DSLAMBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersistence implements CRONIOBUIWrapperPersistence {
+public class CRONIOBUWrapperPersistence extends AEMFTBusinessServiceWrapperPersistence implements CRONIOBUIWrapperPersistence {
 
 	// serial number
 	private static final long serialVersionUID = -5343514754637590997L;

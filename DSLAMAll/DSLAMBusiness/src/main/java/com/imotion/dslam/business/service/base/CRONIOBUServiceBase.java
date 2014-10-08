@@ -44,7 +44,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 
 	@Override
 	protected CRONIOBUIWrapperPersistence createPersistenceWrapper() {
-		return new DSLAMBUWrapperPersistence();
+		return new CRONIOBUWrapperPersistence();
 	}
 
 	/**
@@ -206,7 +206,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[0] = getClass().getName();
 		params[1] = methodName;
 		params[2] = paramName;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_PARAMETER_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_PARAMETER_TRACE,
 				params);
 	}
 
@@ -220,7 +220,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = elementType;
 
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NULL_ELEMENT_TRACE,
 				params);
 	}
 
@@ -230,7 +230,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = numberOfDuplicates;
 		params[3] = duplicatedInfo;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_DUPLICATED_ITEM_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_DUPLICATED_ITEM_TRACE,
 				params);
 	}
 
@@ -240,7 +240,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = numberOfResults;
 		params[3] = resultType;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NUMBER_OF_RESULTS_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NUMBER_OF_RESULTS_TRACE,
 				params);
 	}
 
@@ -249,7 +249,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[0] = getClass().getName();
 		params[1] = methodName;
 		params[2] = resultType;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_PERSISTENCE_NO_RESULTS_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_PERSISTENCE_NO_RESULTS_TRACE,
 				params);
 	}
 
@@ -258,7 +258,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[0] = getClass().getName();
 		params[1] = methodName;
 		params[2] = paramsSearch;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NO_ITEMS_FOUND_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_NO_ITEMS_FOUND_TRACE,
 				params);
 	}
 
@@ -268,7 +268,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = type.getName();
 		params[3] = id;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_NOT_FOUND,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_NOT_FOUND,
 				params);
 	}
 
@@ -278,7 +278,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = typeFound;
 		params[3] = typeExpected;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_UNEXPECTED_ELEMENT_TYPE_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_UNEXPECTED_ELEMENT_TYPE_TRACE,
 				params);
 	}
 
@@ -288,7 +288,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = paramName;
 		params[3] = value;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_UNEXPECTED_PARAM_VALUE_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_UNEXPECTED_PARAM_VALUE_TRACE,
 				params);
 	}
 
@@ -298,7 +298,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = itemType;
 		params[3] = itemId;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_CREATED_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_CREATED_TRACE,
 				params);
 	}
 
@@ -308,7 +308,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = itemType;
 		params[3] = itemId;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_MODIFIED_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_MODIFIED_TRACE,
 				params);
 	}
 
@@ -318,7 +318,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = itemType;
 		params[3] = itemId;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_REMOVED_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_REMOVED_TRACE,
 				params);
 	}
 
@@ -329,7 +329,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = itemType.getName();
 		params[3] = itemId;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_RECOVERED_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_ITEM_RECOVERED_TRACE,
 				params);
 		// Trace-end
 	}
@@ -338,7 +338,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		Object[] params = new Object[2];
 		params[0] = getClass().getName();
 		params[1] = methodName;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_METHOD_START_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_METHOD_START_TRACE,
 				params);
 	}
 
@@ -346,7 +346,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		Object[] params = new Object[2];
 		params[0] = getClass().getName();
 		params[1] = methodName;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_METHOD_END_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_METHOD_END_TRACE,
 				params);
 	}
 
@@ -356,7 +356,7 @@ public abstract class CRONIOBUServiceBase extends AEMFTBusinessServiceBaseImpl<C
 		params[1] = methodName;
 		params[2] = itemType;
 		params[3] = data;
-		getTrace().trace(DSLAMBUICommonServiceTrace.CTE_BUSINESS_SERVICE_CURRENT_ITEM_TRACE,
+		getTrace().trace(CRONIOBUICommonServiceTrace.CTE_BUSINESS_SERVICE_CURRENT_ITEM_TRACE,
 				params);
 	}
 

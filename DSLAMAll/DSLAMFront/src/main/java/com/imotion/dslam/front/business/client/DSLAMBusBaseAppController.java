@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window.Location;
-import com.imotion.dslam.business.DSLAMBUIServiceConstant;
+import com.imotion.dslam.business.CRONIOBUIServiceConstant;
 import com.selene.arch.exe.gwt.client.common.AEGWTBaseAppContextMapper;
 import com.selene.arch.exe.gwt.client.common.AEGWTMessageWrapper;
 import com.selene.arch.exe.gwt.client.phonegap.AEGWTBasePhoneGapConstants;
@@ -68,7 +68,7 @@ public abstract class DSLAMBusBaseAppController extends AEGWTLoginAppController 
 	}
 	
 	public String getBusinessLoginService() {
-		return DSLAMBUIServiceConstant.CTE_SRV_BUSINESS_LOGIN_SERVICE_DEFAULT_IMPL;
+		return CRONIOBUIServiceConstant.CTE_SRV_BUSINESS_LOGIN_SERVICE_DEFAULT_IMPL;
 	}
 
 	@Override

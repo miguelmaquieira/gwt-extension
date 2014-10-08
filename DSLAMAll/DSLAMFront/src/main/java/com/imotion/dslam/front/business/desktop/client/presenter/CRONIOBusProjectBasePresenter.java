@@ -22,8 +22,8 @@ import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
-import com.imotion.dslam.business.service.DSLAMBUIProjectBusinessServiceConstants;
-import com.imotion.dslam.business.service.base.DSLAMBUIServiceIdConstant;
+import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
+import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.DSLAMBusCommonConstants;
 import com.imotion.dslam.front.business.client.DSLAMBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIODesktopIAppControllerConstants;
@@ -337,7 +337,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		logData.addElement(CRONIOBOILogDataConstants.OFFSET					, offset);
 		logData.addElement(CRONIOBOILogDataConstants.NUMBER_RESULTS			, numberResults);
 
-		getClientServerConnection().executeComm(logData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_EXECUTION_LOGS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(logData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_LOG_GET_EXECUTION_LOGS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
@@ -377,7 +377,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		newExecutionData.addElement(CRONIOBOIExecution.PROJECT_ID		, currentId);
 		newExecutionData.addElement(CRONIOBOINodeList.NODELIST_NAME		, nodeListName);
 
-		getClientServerConnection().executeComm(newExecutionData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_ADD_EXECUTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(newExecutionData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_EXECUTE_ADD_EXECUTION_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
@@ -441,19 +441,19 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		newNodeListData.addElement(CRONIOBOINodeListDataConstants.NODELIST_NAME	, nodeListName);
 		newNodeListData.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID		, currentProjectId);
 		
-		getClientServerConnection().executeComm(newNodeListData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_ADD_NODELIST_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(newNodeListData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_ADD_NODELIST_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite errorData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS);
+					AEMFTMetadataElementComposite errorData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.KEY_EXIST_ERRORS);
 					if (errorData != null) {
 						CRONIOBusDesktopProjectEvent errorDuplicateNodeListNameEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 						errorDuplicateNodeListNameEvt.setEventType(EVENT_TYPE.DUPLICATE_NODELIST_ERROR);
 						errorDuplicateNodeListNameEvt.addElementAsDataValue(errorData);
 						getLogicalEventHandlerManager().fireEvent(errorDuplicateNodeListNameEvt);
 					} else {
-						AEMFTMetadataElementComposite nodeListData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.NODELIST_DATA);
+						AEMFTMetadataElementComposite nodeListData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.NODELIST_DATA);
 						String projectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 						String nodeListName	= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME	, nodeListData);	
 						if (AEMFTCommonUtilsBase.isEmptyString(projectId)) {
@@ -533,12 +533,12 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		newProjectData.addElement(CRONIOBOIUser.USER_ID, userIdStr);
 
-		getClientServerConnection().executeComm(newProjectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_ADD_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(newProjectData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_ADD_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA);
 					if (projectData != null) {
 						String projectId = getElementDataController().getElementAsString(CRONIOBOIProject.PROJECT_ID, projectData);
 						updateProjectClientData(projectId, projectData, false);
@@ -650,12 +650,12 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		AEMFTMetadataElementComposite projectData = getContextDataController().getElementAsComposite(projectDataKey);
 		projectData.addElement(CRONIOBOIUser.USER_ID, userIdStr);
 
-		getClientServerConnection().executeComm(projectData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(projectData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECT_DATA);
+					AEMFTMetadataElementComposite projectData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA);
 					if (projectData != null) {
 						updateProjectClientData(currentProjectId, projectData, true);
 					}
@@ -706,13 +706,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		}
 
 		AEMFTMetadataElementComposite contextIn = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
-		contextIn.addElement(DSLAMBUIProjectBusinessServiceConstants.PROJECTS_DATA, projectsData);
-		getClientServerConnection().executeComm(contextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_PROJECT_UPDATE_PROJECTS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		contextIn.addElement(CRONIOBUIProjectBusinessServiceConstants.PROJECTS_DATA, projectsData);
+		getClientServerConnection().executeComm(contextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_UPDATE_PROJECTS_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
 				if (dataResult != null) {
-					AEMFTMetadataElementComposite projectsData = dataResult.getCompositeElement(DSLAMBUIProjectBusinessServiceConstants.PROJECTS_DATA);
+					AEMFTMetadataElementComposite projectsData = dataResult.getCompositeElement(CRONIOBUIProjectBusinessServiceConstants.PROJECTS_DATA);
 					List<AEMFTMetadataElement> projectsDataElements = projectsData.getElementList();
 					for (AEMFTMetadataElement projectDataElement :projectsDataElements) {
 						updateProjectClientData(projectDataElement.getKey(), (AEMFTMetadataElementComposite) projectDataElement, true);
@@ -766,7 +766,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		contextIn.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
 		contextIn.addElement(CRONIOBOIExecution.EXECUTION_ID, executionId);
 		contextIn.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
-		getClientServerConnection().executeComm(contextIn, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_EXECUTE_EXECUTE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(contextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_EXECUTE_EXECUTE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
@@ -796,7 +796,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	private void getFilteredLogs(AEMFTMetadataElementComposite filterData) {
 
 
-		getClientServerConnection().executeComm(filterData, DSLAMBUIServiceIdConstant.CTE_DSLAM_BU_SRV_LOG_GET_FILTERED_LOGS, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		getClientServerConnection().executeComm(filterData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_LOG_GET_FILTERED_LOGS, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {

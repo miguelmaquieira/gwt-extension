@@ -4,7 +4,7 @@ import com.imotion.dslam.business.service.base.CRONIOBUIBusinessService;
 
 
 
-public interface DSLAMBUIExecuteBusinessService extends CRONIOBUIBusinessService {
+public interface CRONIOBUIExecuteBusinessService extends CRONIOBUIBusinessService {
 
 	void executeProject();
 	
