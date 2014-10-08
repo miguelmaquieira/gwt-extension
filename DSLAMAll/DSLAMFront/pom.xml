@@ -288,15 +288,15 @@
 					<webappDirectory>${webappDirectory}</webappDirectory>
 					<dependentWarExcludes></dependentWarExcludes>
 
-<!-- 					<packagingExcludes>	 -->
-<!-- 					    		WEB-INF/lib/*-sources.jar,  -->
-<!-- 					    		WEB-INF/lib/gwt-dev-*.jar,  -->
-<!-- 					   			WEB-INF/lib/gwt-user-*.jar, -->
-<!-- 					   			WEB-INF/lib/gwt-maps-*.jar, -->
-<!-- 					   			WEB-INF/lib/gwtphonegap-*.jar -->
-<!-- 					</packagingExcludes> -->
-					<!-- <packagingExcludes>WEB-INF/deploy/**, WEB-INF/lib/gwt-dev-2.5.1.jar, 
-						com.imotion.saboreando.front.business.desktop.entrypoint.BusinessDesktopModule/**</packagingExcludes> -->
+					<packagingExcludes>	
+					    		WEB-INF/lib/*-sources.jar, 
+					    		WEB-INF/lib/gwt-dev-*.jar, 
+					   			WEB-INF/lib/gwt-user-*.jar,
+					   			WEB-INF/lib/gwt-maps-*.jar,
+					   			WEB-INF/lib/gwtphonegap-*.jar,
+					   			WEB-INF/deploy/**,
+					   			com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule/**
+					</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
