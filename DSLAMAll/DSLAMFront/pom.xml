@@ -287,7 +287,6 @@
 					<!-- the exploded war structure ends up in target/${webappDirectory} -->
 					<webappDirectory>${webappDirectory}</webappDirectory>
 					<dependentWarExcludes></dependentWarExcludes>
-
 					<packagingExcludes>	
 					    		WEB-INF/lib/*-sources.jar, 
 					    		WEB-INF/lib/gwt-dev-*.jar, 
@@ -297,8 +296,9 @@
 					   			WEB-INF/lib/drools*.jar,
 					   			WEB-INF/lib/mockito-*.jar,
 					   			WEB-INF/lib/junit-*.jar,
+					   			WEB-INF/lib/hamcrest-*.jar,					   			
 					   			WEB-INF/deploy/**,
-					   			com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule/**
+					   			com.imotion.dslam.front.business.desktop.CRONIOBusDesktopModule/**
 					</packagingExcludes>
 				</configuration>
 			</plugin>
