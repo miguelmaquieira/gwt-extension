@@ -28,7 +28,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.m2e.launchconfig.classpathProvider"/>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -war target/DSLAMFront -startupUrl DSLAMBusDesktopModule.jsp -logLevel INFO -codeServerPort 9997 -port 8080 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.imotion.dslam.front.business.desktop.DSLAMBusDesktopModule"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -war target/DSLAMFront -startupUrl CRONIOBusDesktopModule.jsp -logLevel INFO -codeServerPort 9997 -port 8080 -server com.google.appengine.tools.development.gwt.AppEngineLauncher com.imotion.dslam.front.business.desktop.CRONIOBusDesktopModule"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="DSLAMFront"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.m2e.launchconfig.sourcepathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dconfig.ConfigService.impl=config.ConfigServiceJEE -Xms500M -Xmx2500M &quot;-javaagent:${GAE_SDK}/lib/agent/appengine-agent.jar&quot; &quot;-Dappengine.sdk.root=${GAE_SDK}&quot; -Dappengine.user.timezone.impl=UTC -Dmail.log_mail_level=WARNING -Dmail.log_mail_body=true -Dgwt.codeserver.port=9876"/>
