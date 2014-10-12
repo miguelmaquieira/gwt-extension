@@ -144,7 +144,7 @@ color: #29c639;\
 color: #ff0000;\
 }\
 .ace-monokai .ace_log {\
-color: #ffff00;\
+color: #00DD00;\
 }\
 ";
 
