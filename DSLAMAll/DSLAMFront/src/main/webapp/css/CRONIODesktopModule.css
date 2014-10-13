@@ -115,7 +115,8 @@
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px #888888;
-	width: 380px;
+	width: 240px;
+	height: 200px;
 }
 
 .chronium_studio-projectsLayout-zoneHeader {
@@ -163,7 +164,20 @@
 
 .chronium_studio-list-container .tree-toogler:hover { 
     background-color: #EEEEEE;
-} 
+}
+
+.chronium_studio-executeForm-inputZone ul.scrollable-menu {
+    height: auto;
+    max-height: 115px;
+    width: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.chronium_studio-executeForm-inputZone button {
+	width: 200px;
+	text-align: left;
+}
 
 /**************************************
 *			LAYOUT PREFERENCES
@@ -378,6 +392,11 @@
 
 .chronium_studio-toolbar-actions-closeButton {
 	float: right;
+}
+
+.chronium_studio-executeForm-saveZone {
+	margin-left: 1px;
+	margin-top: 51px;
 }
 
 /********************************************

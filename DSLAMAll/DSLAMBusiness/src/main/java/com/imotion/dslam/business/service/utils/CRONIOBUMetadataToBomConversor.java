@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
-import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.CRONIOBOIVariable;
+import com.imotion.dslam.bom.data.CRONIOBOFile;
 import com.imotion.dslam.bom.data.CRONIOBOMachineProperties;
 import com.imotion.dslam.bom.data.CRONIOBONode;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.CRONIOBOPreferences;
-import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
-import com.imotion.dslam.bom.data.CRONIOBOFile;
 import com.imotion.dslam.bom.data.CRONIOBOProcess;
 import com.imotion.dslam.bom.data.CRONIOBOProject;
+import com.imotion.dslam.bom.data.CRONIOBOUserPreferences;
 import com.imotion.dslam.bom.data.CRONIOBOVariable;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTIMetadataElementController;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -161,7 +161,7 @@ public class CRONIOBUMetadataToBomConversor {
 			String	nodeIp			= getElementController().getElementAsString(CRONIOBOINode.NODE_IP						, nodeDataElement);
 			String	nodeType		= getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE				, nodeDataElement);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.CREATION_TIME	, nodeDataElement);
-
+			
 			node.setNodeName(nodeName);
 			node.setNodeIp(nodeIp);
 			node.setNodeType(nodeType);
@@ -200,7 +200,8 @@ public class CRONIOBUMetadataToBomConversor {
 
 			String	nodeListName	= nodeListDataElement.getKey();
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINodeList.CREATION_TIME	, nodeListDataElement);
-
+			String  nodeListIdStr	= getElementController().getElementAsString(CRONIOBOINodeList.NODELIST_ID, nodeListDataElement);
+			
 			nodeList.setNodeListName(nodeListName);
 			nodeList.setSavedTime(actualDate);
 			if (creationTime == null) {
@@ -208,6 +209,8 @@ public class CRONIOBUMetadataToBomConversor {
 			} else {
 				nodeList.setCreationTime(creationTime);
 			}
+			long nodeListId = Long.valueOf(nodeListIdStr);
+			nodeList.setNodeListId(nodeListId);
 
 			AEMFTMetadataElementComposite nodeListData = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, nodeListDataElement);
 			List<CRONIOBOINode> nodes = fromNodeDataList(nodeListData);

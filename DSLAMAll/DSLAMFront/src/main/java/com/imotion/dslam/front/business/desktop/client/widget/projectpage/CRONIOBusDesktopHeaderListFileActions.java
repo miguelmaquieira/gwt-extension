@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.Hidden;
-import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
+import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.base.CRONIOBUIServiceIdConstant;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
@@ -41,25 +41,25 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 		form.setEncoding(FormPanel.ENCODING_MULTIPART);
 		form.setMethod(FormPanel.METHOD_POST);
 		
-		FlowPanel formContaimer = new FlowPanel();
-		form.add(formContaimer);
+		FlowPanel formContainer = new FlowPanel();
+		form.add(formContainer);
 		
 		InputElement fileInput = Document.get().createFileInputElement();
 		fileInput.setName(AEMFTIFileUploadServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_FILE);
-		formContaimer.getElement().appendChild(fileInput);
+		formContainer.getElement().appendChild(fileInput);
 		
 		Hidden hiddenFieldAppId = new Hidden();
-		formContaimer.add(hiddenFieldAppId);
+		formContainer.add(hiddenFieldAppId);
 		hiddenFieldAppId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_APPLICATION_ID);
 		hiddenFieldAppId.setValue(CRONIOBusPresenterBaseConstants.APPLICATION_ID);
 		
 		Hidden hiddenFieldModuleId = new Hidden();
-		formContaimer.add(hiddenFieldModuleId);
+		formContainer.add(hiddenFieldModuleId);
 		hiddenFieldModuleId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_MODULE_ID);
 		hiddenFieldModuleId.setValue(CRONIOBusPresenterBaseConstants.MODULE_ID);
 		
 		Hidden hiddenFieldServiceId = new Hidden();
-		formContaimer.add(hiddenFieldServiceId);
+		formContainer.add(hiddenFieldServiceId);
 		hiddenFieldServiceId.setName(AEMFTIGenericServerCommConstants.CTE_MFT_AE_BUS_COMM_REQUEST_SERVICE_ID);
 		hiddenFieldServiceId.setValue(CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_GET_CSV_NODES_ID);
 		
@@ -73,10 +73,15 @@ public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeade
 					JSONObject jsonValue = (JSONObject) JSONParser.parseStrict(jsonResponseNoPreTag);
 					AEMFTMetadataElementComposite nodeListData = AEGWTJSONUtils.fromJSONToMetadataElement(jsonValue);
 					nodeListData = getElementController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.NODES_DATA_LIST, nodeListData);
+//					CRONIOBusDesktopProjectEvent getNodeListEvent = new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+//					getNodeListEvent.addElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_NODES_DATA, nodeListData);
+//					getNodeListEvent.setEventType(EVENT_TYPE.GET_NODELIST_ID);
+//					getLogicalEventHandlerManager().fireEvent(getNodeListEvent);
+					
 					AEGWTLogicalEvent openEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 					openEvt.setEventType(LOGICAL_TYPE.OPEN_EVENT);
 					openEvt.setSourceWidget(getName());
-					openEvt.addElementAsComposite(CRONIOBOIProcessDataConstants.PROCESS_NODES_DATA, nodeListData);
+					openEvt.addElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, nodeListData);
 					getLogicalEventHandlerManager().fireEvent(openEvt);
 				}
 			}

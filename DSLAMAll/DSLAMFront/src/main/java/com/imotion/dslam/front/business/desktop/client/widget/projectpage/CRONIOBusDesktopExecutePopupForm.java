@@ -16,7 +16,8 @@ import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.AEGWTICompositePanel;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldDropDownButtonLabelTop;
+import com.selene.arch.exe.gwt.client.ui.AEGWTIStylesConstants;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFieldDropDownButtonLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 import com.selene.arch.exe.gwt.client.ui.widget.popup.AEGWTPopup;
 
@@ -25,7 +26,7 @@ public class CRONIOBusDesktopExecutePopupForm extends AEGWTPopup {
 	public static final String NAME = "CRONIOBusDesktopExecutePopupForm";
 	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop	nodeListDropDownButton;
+	private AEGWTBootstrapFieldDropDownButtonLabelTop		nodeListDropDownButton;
 	private AEGWTButton										executeButton;
 	private AEGWTButton										cancelButton;
 
@@ -41,7 +42,8 @@ public class CRONIOBusDesktopExecutePopupForm extends AEGWTPopup {
 		root.add(inputZone);
 		inputZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTE_FORM_INPUT_ZONE);
 
-		nodeListDropDownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.enviroment());
+		nodeListDropDownButton = new AEGWTBootstrapFieldDropDownButtonLabelTop(TEXTS.enviroment());
+		nodeListDropDownButton.addClassNameToUlElement(AEGWTIStylesConstants.SCROLLABLE_MENU);
 		inputZone.add(nodeListDropDownButton);
 
 		//SAVE

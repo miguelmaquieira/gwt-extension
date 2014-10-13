@@ -1,6 +1,7 @@
 package com.imotion.cronio.backend.persistence.service.nodelist;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.imotion.dslam.backend.persistence.jpa.CRONIOBKPersistenceServiceBaseJPA;
@@ -8,6 +9,7 @@ import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
+import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 
 public class CRONIOBKNodeListPersistenceServiceJPA extends CRONIOBKPersistenceServiceBaseJPA<CRONIOBOINodeList, CRONIOBONodeList, Long> implements CRONIOBKINodeListPersistenceService {
 
@@ -17,12 +19,14 @@ public class CRONIOBKNodeListPersistenceServiceJPA extends CRONIOBKPersistenceSe
 	public CRONIOBOINodeList addNodeList(CRONIOBOINodeList nodeList, long processId) {
 		CRONIOBONodeList nodeListJPA = (CRONIOBONodeList) nodeList;
 		
-//		if (process != null && !AEMFTCommonUtils.isNullLong(process.getProcessId())) {
-//			process = getProcessPersistence().getProcess(process.getProcessId());
-//			nodeList.setProcess(process);
-//		}
+		CRONIOBOIProcess process = nodeList.getProcess();
 		
-		CRONIOBOIProcess process = getProcessPersistence().getProcess(processId);
+		if (process != null && !AEMFTCommonUtils.isNullLong(process.getProcessId())) {
+			process = getProcessPersistence().getProcess(process.getProcessId());
+			nodeList.setProcess(process);
+		}
+		
+		//CRONIOBOIProcess process = getProcessPersistence().getProcess(processId);
 		nodeListJPA.setProcess(process);
 		nodeListJPA = getPersistenceModule().create(nodeListJPA);
 		return nodeListJPA;
@@ -37,6 +41,29 @@ public class CRONIOBKNodeListPersistenceServiceJPA extends CRONIOBKPersistenceSe
 	public CRONIOBOINodeList getNodeList(Long nodeListIdAsLong) {
 		CRONIOBONodeList nodeListJpa = getPersistenceModule().get(nodeListIdAsLong);
 		return nodeListJpa;
+	}
+	
+	@Override
+	public CRONIOBOINodeList updateNodeList(Long nodeListId, CRONIOBOINodeList nodeList) {
+		CRONIOBONodeList nodeListFromDb = getPersistenceModule().get(nodeListId);
+		
+	
+		if (nodeListFromDb != null) {
+			CRONIOBOIProcess process = nodeList.getProcess();
+			
+			if (process != null && !AEMFTCommonUtils.isNullLong(process.getProcessId())) {
+				process = getProcessPersistence().getProcess(process.getProcessId());
+				nodeList.setProcess(process);
+			}
+			
+			nodeListFromDb.setProcess(nodeList.getProcess());
+			nodeListFromDb.setNodeListId(nodeList.getNodeListId());
+			nodeListFromDb.setNodeList(nodeList.getNodeList());
+			nodeListFromDb.setSavedTime(new Date());
+			nodeListFromDb = getPersistenceModule().update(nodeListFromDb);
+		}
+		
+		return nodeListFromDb;
 	}
 	
 	@Override

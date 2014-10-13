@@ -24,8 +24,8 @@ public class CRONIOBusDesktopProcessSectionsDeckPanel extends AEGWTCompositePane
 
 	private DeckPanel 										rootDeckPanel;
 	private CRONIOBusDesktopProcessConfigureVariables		variablesProcessConfigure;
-	private CRONIOBusDesktopProcessConfigureSchedule			scheduleProcessConfigure;
-	private CRONIOBusDesktopProcessConfigureExtraOptions		extraOptionsConfigure;
+	private CRONIOBusDesktopProcessConfigureSchedule		scheduleProcessConfigure;
+	private CRONIOBusDesktopProcessConfigureExtraOptions	extraOptionsConfigure;
 	private CRONIOBusDesktopProcessConfigureNodes			nodesConfigure;
 
 	public CRONIOBusDesktopProcessSectionsDeckPanel() {

@@ -28,32 +28,70 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 		CRONIOBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 
-			originalProcess.setSynchronous(processData.isSynchronous());
-			originalProcess.setScheduleList(processData.getScheduleList());
-			originalProcess.setVariableList(processData.getVariableList());
+		
 			List<CRONIOBOINodeList> originalListNodeList 	= originalProcess.getListNodeList();
-			List<CRONIOBOINodeList> nodeListsToRemove 		= new ArrayList<>(); 
-			if (!AEMFTCommonUtilsBase.isEmptyList(originalListNodeList)) {
-				for (CRONIOBOINodeList nodeList : originalListNodeList) {
-					nodeListsToRemove.add(nodeList);
+			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
+			List<List<CRONIOBOINode>> listNodesToRemove= new ArrayList<>();
+			for (CRONIOBOINodeList nodeList : originalListNodeList) {
+				List<CRONIOBOINode> nodesToRemove 		= new ArrayList<>(); 
+				List<CRONIOBOINode> nodes = nodeList.getNodeList();
+				if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
+					for (CRONIOBOINode node : nodes) {
+						nodesToRemove.add(node);
+					}
 				}
-			}
-			
-			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
-				originalProcess.removeNodeList(nodeList);
+				for (CRONIOBOINode node : nodesToRemove) {
+					nodeList.removeNode(node);
+				}
+				
+				if (!AEMFTCommonUtilsBase.isEmptyList(nodesToRemove)) {
+					listNodesToRemove.add(nodesToRemove);
+				}
+				
 			}
 			
 			List<CRONIOBOINodeList> newListNodeList			= processData.getListNodeList();
-			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
-			if (!AEMFTCommonUtilsBase.isEmptyList(newListNodeList)) {
-				for (CRONIOBOINodeList nodeList : newListNodeList) {
-					setMachinePropertiesToNodeList(preferencesId, nodeList);
-					nodeList = getNodeListPersistence().addNodeList(nodeList, processId);
-					persistedListNodeList.add(nodeList);
+			for (CRONIOBOINodeList newNodeList : newListNodeList) {
+				
+				List<CRONIOBOINode> nodes = newNodeList.getNodeList();
+				if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
+					for (CRONIOBOINode node : nodes) {
+						CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, node.getNodeType());
+						node.setMachineProperties(machineProperties);
+						node = getNodePersistence().addNode(node);
+					}
+				long newNodeListId = newNodeList.getNodeListId();
+				newNodeList = getNodeListPersistence().updateNodeList(newNodeListId, newNodeList);
 				}
+				persistedListNodeList.add(newNodeList);
 			}
 			originalProcess.setListNodeList(persistedListNodeList);
 			
+//			List<CRONIOBOINodeList> nodeListsToRemove 		= new ArrayList<>(); 
+//			if (!AEMFTCommonUtilsBase.isEmptyList(originalListNodeList)) {
+//				for (CRONIOBOINodeList nodeList : originalListNodeList) {
+//					nodeListsToRemove.add(nodeList);
+//				}
+//			}
+			
+//			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
+//				originalProcess.removeNodeList(nodeList);
+//			}
+			
+//			List<CRONIOBOINodeList> newListNodeList			= processData.getListNodeList();
+//			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
+//			if (!AEMFTCommonUtilsBase.isEmptyList(newListNodeList)) {
+//				for (CRONIOBOINodeList nodeList : newListNodeList) {
+//					setMachinePropertiesToNodeList(preferencesId, nodeList);
+//					nodeList = getNodeListPersistence().addNodeList(nodeList, processId);
+//					persistedListNodeList.add(nodeList);
+//				}
+//			}
+//			originalProcess.setListNodeList(persistedListNodeList);
+			
+			originalProcess.setSynchronous(processData.isSynchronous());
+			originalProcess.setScheduleList(processData.getScheduleList());
+			originalProcess.setVariableList(processData.getVariableList());
 			if (date == null) {
 				date = new Date();
 			}
@@ -62,8 +100,10 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 			getPersistenceModule().update(originalProcess);
 			
 			//orphan nodes
-			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
-				getNodeListPersistence().removeNodeList(nodeList.getNodeListId());
+			for (List<CRONIOBOINode> listNodes : listNodesToRemove) {
+				for (CRONIOBOINode node : listNodes) {
+					getNodePersistence().removeNode(node.getNodeId());
+				}
 			}
 		}
 		return originalProcess;
@@ -109,19 +149,5 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	/**
 	 * PRIVATE
 	 */
-
-	private CRONIOBOINodeList setMachinePropertiesToNodeList(Long preferencesId, CRONIOBOINodeList nodeList) {
-		List<CRONIOBOINode> nodesNodeList = nodeList.getNodeList();
-		
-		if (nodesNodeList != null) {
-			for (CRONIOBOINode node : nodesNodeList) {
-				String nodeType = node.getNodeType();
-				CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, nodeType);
-				node.setMachineProperties(machineProperties);
-			}
-		}
-		
-		return nodeList;
-	}
 	
 }

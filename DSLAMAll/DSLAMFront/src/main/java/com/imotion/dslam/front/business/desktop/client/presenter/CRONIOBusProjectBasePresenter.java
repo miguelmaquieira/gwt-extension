@@ -16,10 +16,10 @@ import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.business.service.CRONIOBUIExecuteBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
@@ -489,7 +489,22 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 						storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 						getLogicalEventHandlerManager().fireEvent(storageEvent);
 						
-						getContextDataController().setElement(finalSectionKey, listNodeListData.cloneObject());
+						StringBuilder sbKey2 = new StringBuilder();
+						sbKey2.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+						sbKey2.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey2.append(CRONIODesktopIAppControllerConstants.LIST_NODELIST_DATA);
+						sbKey2.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+						sbKey2.append(projectId);
+						String nodeListsFinalSectionKey = sbKey2.toString();
+						
+						AEGWTLocalStorageEvent storageEvent2 = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+						storageEvent2.setFullKey(nodeListsFinalSectionKey);
+						storageEvent2.addElementAsDataValue(listNodeListData);
+						storageEvent2.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+						getLogicalEventHandlerManager().fireEvent(storageEvent2);
+						
+						getContextDataController().setElement(finalSectionKey			, listNodeListData.cloneObject());
+						getContextDataController().setElement(nodeListsFinalSectionKey	, listNodeListData.cloneObject());
 
 						CRONIOBusDesktopProjectEvent nodeListCreaTedEvt = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
 						nodeListCreaTedEvt.setEventType(EVENT_TYPE.NODELIST_CREATED);

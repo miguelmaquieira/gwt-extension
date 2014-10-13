@@ -17,8 +17,8 @@ import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadat
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDateTimePickerTextBox;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFieldDropDownButtonLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldDropDownButtonLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBoxLabelTop;
 import com.selene.arch.exe.gwt.client.utils.AEGWTStringUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
@@ -32,11 +32,11 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	public 	static final String 		NAME 				= "CRONIOBusDesktopProjectExecutionFilterForm";
 	public 	static final String 		DATE_FORMAT_PICKER	= "d/m/Y H:i";
 
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	severityDropdownButton;
+	private AEGWTBootstrapFieldDropDownButtonLabelTop  		severityDropdownButton;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			filterTextBox;
 	private	AEGWTBootstrapDateTimePickerTextBox            	safeBeforeDateTimePickerTextBox;
 	private LabelElement									beforeLabel;	
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	numberRowsDropdownButton;
+	private AEGWTBootstrapFieldDropDownButtonLabelTop  		numberRowsDropdownButton;
 	private RadioButton beforeNow;
 	private RadioButton beforeDate;
 
@@ -59,7 +59,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		severityZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE);
 		severityZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
-		severityDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.filter_for_gravity());
+		severityDropdownButton = new AEGWTBootstrapFieldDropDownButtonLabelTop(TEXTS.filter_for_gravity());
 		severityZone.add(severityDropdownButton);
 		severityDropdownButton.addElement(TEXTS.all()		, TEXTS.all());
 		severityDropdownButton.addElement(TEXTS.debug()		, TEXTS.debug());
@@ -102,7 +102,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		formZone.add(rowsZone);
 		rowsZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
-		numberRowsDropdownButton = new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.rows_for_page());
+		numberRowsDropdownButton = new AEGWTBootstrapFieldDropDownButtonLabelTop(TEXTS.rows_for_page());
 		rowsZone.add(numberRowsDropdownButton);
 		numberRowsDropdownButton.addElement(TEXTS.number_10(), TEXTS.number_10());
 		numberRowsDropdownButton.addElement(TEXTS.number_20(), TEXTS.number_20());

@@ -17,4 +17,6 @@ public interface CRONIOBKINodeListPersistenceService {
 
 	List<CRONIOBOINodeList> getAllNodeListsByProject(long projectId);
 	
+	CRONIOBOINodeList updateNodeList(Long nodeListId, CRONIOBOINodeList nodeList);
+	
 }
