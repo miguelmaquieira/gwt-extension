@@ -187,7 +187,8 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				AEMFTMetadataElementComposite nodeData = evt.getElementAsComposite(evt.getSourceWidgetId());
 				AEMFTMetadataElementComposite cloneNodeData = (AEMFTMetadataElementComposite) nodeData.cloneObject();
 				nodesData.addElement(evt.getSourceWidgetId(), cloneNodeData);
-				nodesDataList.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST, nodesData);
+				AEMFTMetadataElementComposite cloneNodesData = (AEMFTMetadataElementComposite) nodesData.cloneObject();
+				nodesDataList.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST, cloneNodesData);
 				AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
 				saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
 				saveEvt.setSourceWidget(getName());
