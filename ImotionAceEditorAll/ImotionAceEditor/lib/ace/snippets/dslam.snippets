@@ -76,5 +76,19 @@ snippet tag
 	tag "${1}";
 	
 snippet log
-	log (level, message);
-			
+	log ("${1:level}", "${2:message}");	
+
+## Log4j Level
+
+snippet Level.DEBUG
+	${1:Level.DEBUG}
+snippet Level.ERROR
+	${1:Level.ERROR}
+snippet Level.FATAL
+	${1:Level.FATAL}
+snippet Level.INFO
+	${1:Level.INFO}
+snippet	Level.TRACE
+	${1:Level.TRACE}
+snippet Level.WARN
+	${1:Level.WARN}

@@ -113,28 +113,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	}
 
 	@Override
-	public CRONIOIExecutionData logMessage(String strCompositeLevel, String message) {
-		
-		String[] partsLevel = strCompositeLevel.split("\\.");
-		String strLevel		= partsLevel[1]; 
-		
-		Level logLevel = null;
-		if (Level.DEBUG.toString().equals(strLevel)) {
-		} else if (Level.ERROR.toString().equals(strLevel)) {
-			logLevel = Level.ERROR;
-		} else if (Level.FATAL.toString().equals(strLevel)) {
-			logLevel = Level.FATAL;
-		} else if (Level.INFO.toString().equals(strLevel)) {
-			logLevel = Level.INFO;
-		} else if (Level.TRACE.toString().equals(strLevel)) {
-			logLevel = Level.TRACE;
-		} else if (Level.WARN.toString().equals(strLevel)) {
-			logLevel = Level.WARN;
-		} else {
-			logLevel = Level.INFO;
-		}
-		
-
+	public CRONIOIExecutionData logMessage(Level logLevel, String message) {
 		CRONIOIExecutionData executionData	= null;
 		executionData = new CRONIOExecutionData(message, "", "");
 		if (getLogger() != null) {

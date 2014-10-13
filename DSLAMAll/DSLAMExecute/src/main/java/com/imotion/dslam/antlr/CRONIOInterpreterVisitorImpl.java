@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.apache.log4j.Level;
 
 import com.imotion.antlr.ImoLangBaseVisitor;
 import com.imotion.antlr.ImoLangParser;
@@ -107,10 +108,32 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 
 	@Override 
 	public CRONIOInterpreterVisitorValue visitLog(@NotNull ImoLangParser.LogContext ctx) { 
-		String level = this.visit(ctx.value(0)).asString();
+		String strCompositeLevel = this.visit(ctx.value(0)).asString();
 		String message = this.visit(ctx.value(1)).asString();
 		
-		CRONIOIExecutionData			response 		= connection.logMessage(level, message);
+		String[] partsLevel = strCompositeLevel.split("\\.");
+		String strLevel		= partsLevel[1]; 
+		
+		Level logLevel = null;
+		if (Level.DEBUG.toString().equals(strLevel)) {
+			logLevel = Level.DEBUG;
+		} else if (Level.ERROR.toString().equals(strLevel)) {
+			logLevel = Level.ERROR;
+		} else if (Level.FATAL.toString().equals(strLevel)) {
+			logLevel = Level.FATAL;
+		} else if (Level.INFO.toString().equals(strLevel)) {
+			logLevel = Level.INFO;
+		} else if (Level.TRACE.toString().equals(strLevel)) {
+			logLevel = Level.TRACE;
+		} else if (Level.WARN.toString().equals(strLevel)) {
+			logLevel = Level.WARN;
+		} else {
+			logLevel = Level.INFO;
+		}
+		
+		
+		
+		CRONIOIExecutionData			response 		= connection.logMessage(logLevel, message);
 		CRONIOInterpreterVisitorValue	responseValue 	= new CRONIOInterpreterVisitorValue(response);
 		
 		return responseValue;

@@ -79,9 +79,22 @@ snippet tag\n\
 	tag \"${1}\";\n\
 	\n\
 snippet log\n\
-	log (level, message);\n\
-			\n\
-";
+	log (\"${1:level}\", \"${2:message}\");	\n\
+\n\
+## Log4j Level\n\
+\n\
+snippet Level.DEBUG\n\
+	${1:Level.DEBUG}\n\
+snippet Level.ERROR\n\
+	${1:Level.ERROR}\n\
+snippet Level.FATAL\n\
+	${1:Level.FATAL}\n\
+snippet Level.INFO\n\
+	${1:Level.INFO}\n\
+snippet	Level.TRACE\n\
+	${1:Level.TRACE}\n\
+snippet Level.WARN\n\
+	${1:Level.WARN}";
 exports.scope = "dslam";
 
 });
