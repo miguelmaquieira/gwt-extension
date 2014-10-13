@@ -13,7 +13,6 @@ public class EXTGWTSTLVTHREE extends THREE {
 	}
 	
 	public static native final EXTGWTSTLVWebGLRenderer EXTGWTWebGLRenderer()/*-{
-//		if ( ! $wnd.Detector.webgl ) $wnd.Detector.addGetWebGLMessage();
 		return new $wnd.THREE.WebGLRenderer();
 	}-*/;
 	

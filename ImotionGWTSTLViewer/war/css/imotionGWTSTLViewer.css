@@ -1,34 +1,42 @@
-/** Add css rules here for your application. */
-
-
-/** Example rules used by the template application (remove for your app) */
-h1 {
-  font-size: 2em;
-  font-weight: bold;
-  color: #777777;
-  margin: 40px 0px 70px;
-  text-align: center;
+table {
+	border-color: none;
 }
 
-.sendButton {
-  display: block;
-  font-size: 16pt;
+.viewer-toolbar {
+	position: relative;
+	top: 40px;
+	left: 10px;
 }
 
-/** Most GWT widgets already have a style name defined */
-.gwt-DialogBox {
-  width: 400px;
+.viewer-toolbar .action {
+	width: 30px;
+	height: 30px;
+	background-size: 24px 24px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
 }
 
-.dialogVPanel {
-  margin: 5px;
+.viewer-toolbar .zoom_in_action{
+	background-image: url("../images/zoom_in.png");
 }
 
-.serverResponseLabelError {
-  color: red;
+.viewer-toolbar .zoom_out_action {
+	background-image: url("../images/zoom_out.png");
 }
 
-/** Set ids using widget.getElement().setId("idOfElement") */
-#closeButton {
-  margin: 15px 6px 6px;
+.viewer-toolbar .ground_visibility_on {
+	background-image: url("../images/ground_on.png");
+}
+
+.viewer-toolbar .ground_visibility_off {
+	background-image: url("../images/ground_off.png");
+}
+
+.viewer-toolbar .gyre_on {
+	background-image: url("../images/gyre_on.png");
+}
+
+.viewer-toolbar .gyre_off {
+	background-image: url("../images/gyre_off.png");
 }

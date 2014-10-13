@@ -18,7 +18,8 @@
     <!--                                           -->
     <title>Web Application Starter Project</title>
     
-    <script type="text/javascript"  src="js/three.min.js"></script>
+<!--     <script type="text/javascript"  src="js/three.min.js"></script> -->
+    <script type="text/javascript"  src="js/three.js"></script>
     <script type="text/javascript"  src="js/STLLoader.js"></script>
     <script type="text/javascript"	src="js/Detector.js"></script>
     

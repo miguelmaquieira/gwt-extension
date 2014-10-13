@@ -110,7 +110,6 @@ THREE.STLLoader.prototype.parseBinary = function (data) {
 	faceLength = 12 * 4 + 2;
 
 	for (face = 0; face < n_faces; face++) {
-
 		start = dataOffset + face * faceLength;
 		normal = new THREE.Vector3(
 			reader.getFloat32(start,true),
@@ -119,7 +118,6 @@ THREE.STLLoader.prototype.parseBinary = function (data) {
 		);
 
 		for (i = 1; i <= 3; i++) {
-
 			vertexstart = start + i * 12;
 			geometry.vertices.push(
 				new THREE.Vector3(
@@ -128,15 +126,13 @@ THREE.STLLoader.prototype.parseBinary = function (data) {
 					reader.getFloat32(vertexstart + 8,true)
 				)
 			);
-
 		}
 
 		length = geometry.vertices.length;
 		geometry.faces.push(new THREE.Face3(length - 3, length - 2, length - 1, normal));
-
 	}
 
-	geometry.computeCentroids();
+	//geometry.computeCentroids();
 	geometry.computeBoundingSphere();
 
 	return geometry;

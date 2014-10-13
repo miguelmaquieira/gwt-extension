@@ -2,10 +2,10 @@ package com.imotion.gwt.stlviewer.client.widget.threejs;
 
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
+import com.akjava.gwt.three.client.core.Color;
 import com.akjava.gwt.three.client.core.Geometry;
 import com.akjava.gwt.three.client.core.Vector3;
 import com.akjava.gwt.three.client.gwt.core.BoundingBox;
-import com.akjava.gwt.three.client.lights.AmbientLight;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.lights.Light;
 import com.akjava.gwt.three.client.materials.Material;
@@ -37,9 +37,11 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	private 	Camera 						camera;
 	private 	Mesh 						objectMesh;
 	private 	Mesh 						groundMesh;
-	private 	AmbientLight 				ambientLight;
+	private 	boolean						groundVisibility;
+	private 	Light						spotLight;
 	private 	DirectionalLight 			dirLight;
 	private 	EXTGWTSTLVMouseEventHandler	mouseHandler;
+	private 	EXTGWTSTLVToolbar			toolbar;
 
 	private		int							sceneWidth;
 	private		int							sceneHeight;
@@ -90,15 +92,22 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 
 		rootContainer = new HTMLPanel(""); 
 		initWidget(rootContainer);
+		
+		// Toolbar
+		toolbar = new EXTGWTSTLVToolbar(this);
+		rootContainer.add(toolbar);
 
 		//Scene
 		scene = EXTGWTSTLVTHREE.EXTGWTSTLVScene();
 
 		//GROUND
-		Geometry 		groundGeometry 	= THREE.PlaneGeometry( 10000, 10000);
-		Material 		groundMaterial 	= EXTGWTSTLVTHREE.MeshBasicMaterial().color(backgroundColorAsHex).build();
+		Geometry 		groundGeometry 	= THREE.PlaneGeometry(10000, 10000);
+		Material 		groundMaterial 	= EXTGWTSTLVTHREE.MeshBasicMaterial()
+																.color(backgroundColorAsHex)
+																.build();
 		groundMesh = EXTGWTSTLVTHREE.Mesh(groundGeometry, groundMaterial);
 		scene.add(groundMesh);
+		groundVisibility = true;
 		groundMesh.setRotation(- Math.PI / 2, 0, 0 );
 		groundMesh.setPosition(0, 0, 0);
 		groundMesh.setReceiveShadow(true);
@@ -212,7 +221,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		double scaleVariation 	= getScaleVariation();
 		double scale			= getScale();
 		if (objectMesh != null && scale > scaleVariation) {
-			scale -= scaleVariation;
+			scale += scaleVariation;
 			objectMesh.setScale(scale, scale, scale);
 		}
 	}
@@ -222,7 +231,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		double scaleVariation 	= getScaleVariation();
 		double scale			= getScale();
 		if (objectMesh != null) {
-			scale += scaleVariation;
+			scale -= scaleVariation;
 			objectMesh.setScale(scale, scale, scale);
 		}
 	}
@@ -250,6 +259,12 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	@Override
 	public void captureMouseEvents(boolean mouseInteraction) {
 		mouseHandler.captureMouseEvents(mouseInteraction);
+		groundVisibility(!mouseInteraction);
+	}
+	
+	@Override
+	public boolean isCaptureMouseEvents() {
+		return mouseHandler.isCaptureMouseEvents();
 	}
 
 	/**
@@ -264,10 +279,41 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		renderer.render(scene, camera);
 		AnimationScheduler.get().requestAnimationFrame(this);
 	}
+	
+	@Override
+	public void groundVisibility(boolean visibility) {
+		this.groundVisibility = visibility;
+		if (visibility) {
+			scene.add(groundMesh);
+		} else {
+			scene.remove(groundMesh);
+		}
+	}
+	
+	@Override
+	public boolean isGroundVisible() {
+		return groundVisibility;
+	}
+	
+	@Override
+	public void setGroundColor(Color color) {
+		Material groundMaterial = groundMesh.getMaterial();
+		if (groundMaterial != null) {
+			groundMesh.getMaterial().setColor(color);
+		}
+	}
+
+	@Override
+	public void setGroundOpacity(double opacity) {
+		Material groundMaterial = groundMesh.getMaterial();
+		if (groundMaterial != null) {
+			groundMaterial.setOpacity(opacity);
+		}
+	}
 
 	/***
 	 * PRIVATE
-	 */
+	 **/
 
 	private void setupSTLObject(Geometry geometry, boolean startAnimation, int objectColorAsHex) {
 		//Solve scene parameters
@@ -283,27 +329,22 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		boolean firstTime = objectMesh == null;
 		if (!firstTime) {
 			scene.remove(dirLight);
-			scene.remove(ambientLight);
+			scene.remove(spotLight);
 			scene.remove(objectMesh);
 		} 
 
 		//Light
-		if (firstTime) {
-			Light hemisphereLight = EXTGWTSTLVTHREE.HemisphereLight(0xffffff, 0xffffff, 0.2f);
-			hemisphereLight.setCastShadow(true);
-			scene.add(hemisphereLight);
-			hemisphereLight.setVisible(true);
-		}
-		dirLight = THREE.DirectionalLight( 0xffffff, 1 );
+		dirLight = THREE.DirectionalLight( 0xffffff, 1);
 		dirLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
 		dirLight.setCastShadow(true);
+		dirLight.setVisible(true);
 		scene.add(dirLight);
-
-		ambientLight = THREE.AmbientLight(0xffffff);
-		ambientLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
-		ambientLight.setCastShadow(true);
-		ambientLight.setVisible(true);
-		scene.add(ambientLight);
+		
+		spotLight = THREE.SpotLight(0xAAAAAA);
+		spotLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+		spotLight.setCastShadow(true);
+		spotLight.setVisible(true);
+		scene.add(spotLight);
 
 		//Build mesh
 		Material material = EXTGWTSTLVTHREE.MeshPhongMaterial().color(objectColorAsHex).ambient(0x030303).specular(0xFFFFFF).shininess(1).build();

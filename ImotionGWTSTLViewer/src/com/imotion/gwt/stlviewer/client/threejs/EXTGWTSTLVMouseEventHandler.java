@@ -39,7 +39,6 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 			}
 			event.preventDefault();
 		}
-		
 	}
 
 	@Override
@@ -71,17 +70,20 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 
 	@Override
 	public void onMouseDown(MouseDownEvent event) {
-		mouseDragAction = true;
-		mouseTransition.init(event.getX(), event.getY());
+		if (mouseInteraction) {
+			mouseDragAction = true;
+			mouseTransition.init(event.getX(), event.getY());
+		}
 	}
 
 	@Override
 	public void onMouseUp(MouseUpEvent event) {
-		mouseDragAction = false;
-		stlvDisplay.setGyreZSpeed(0.0);
-		stlvDisplay.setGyreXSpeed(0.0);
-		stlvDisplay.setGyreYSpeed(0.0);
-		
+		if (mouseInteraction) {
+			mouseDragAction = false;
+			stlvDisplay.setGyreZSpeed(0.0);
+			stlvDisplay.setGyreXSpeed(0.0);
+			stlvDisplay.setGyreYSpeed(0.0);
+		}
 	}
 	
 	public void captureMouseEvents(boolean mouseInteraction) {
@@ -92,6 +94,10 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 				mouseTransition = new EXTGWTSTLVTransition(0, 0);
 			}
 		}
+	}
+	
+	public boolean isCaptureMouseEvents() {
+		return this.mouseInteraction;
 	}
 
 }

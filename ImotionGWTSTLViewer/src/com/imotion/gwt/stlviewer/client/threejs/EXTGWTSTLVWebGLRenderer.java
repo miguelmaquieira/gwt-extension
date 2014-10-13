@@ -23,5 +23,4 @@ public class EXTGWTSTLVWebGLRenderer extends WebGLRenderer {
 	public final native void setGammaOutput (boolean bool)/*-{
 		this.gammaOutput = bool;
 	}-*/;
-
 }

@@ -1,7 +1,9 @@
 package test.com.imotion.gwt.stlviewer.client;
 
+import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVParameter;
 import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVSpinner;
 
+import com.akjava.gwt.three.client.THREE;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -13,7 +15,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
@@ -70,17 +71,21 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		FlowPanel parametersPanel = new FlowPanel();
 		formVP.add(parametersPanel);
 		
-		Label zoomLabel = new Label("Zoom (%)");
-		parametersPanel.add(zoomLabel);
+		HorizontalPanel hrParameterPanel1 = new HorizontalPanel();
+		parametersPanel.add(hrParameterPanel1);
+		hrParameterPanel1.setWidth("100%");
 		
-		final TextBox zoomValue = new TextBox();
-		zoomValue.setText("5");
-		parametersPanel.add(zoomValue);
+		/// Zoom
+		final TestExtGWTSTLVParameter zoomParam = new TestExtGWTSTLVParameter("Zoom (%)", "5", "60px", "60px");
+		hrParameterPanel1.add(zoomParam);
 		
-		// Load button
-		Button zoomButtom = new Button("SET");
-		parametersPanel.add(zoomButtom);
-		zoomButtom.setWidth("60px");
+		/// Color
+		final TestExtGWTSTLVParameter colorParam = new TestExtGWTSTLVParameter("Color (#Hex)", "0xF0F0F0", "80px", "60px");
+		hrParameterPanel1.add(colorParam);
+		
+		/// Opacity
+		final TestExtGWTSTLVParameter opacityParam = new TestExtGWTSTLVParameter("Opacity", "0.5", "60px", "60px");
+		hrParameterPanel1.add(opacityParam);
 		
 		// Button panel
 		FlowPanel butonPanel = new FlowPanel();
@@ -106,6 +111,11 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		butonPanel.add(mouseButton);
 		mouseButton.setWidth("120px");
 		
+		// Mouse interaction button
+		final Button lightButton = new Button("GROUND ON");
+		butonPanel.add(lightButton);
+		lightButton.setWidth("120px");
+		
 		//Model Selector
 		selectUrl = new ListBox();
 		formVP.add(selectUrl);
@@ -128,7 +138,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		});
 		
 		//Renderer
-		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(false, 0xA09595, 0xFFFFFF, 640, 480);
+		rendererWidget = new EXTGWTSTLVLoaderWidgetThreeJS(false, 0xA09595, 0xF0F0F0, 640, 480);
 		contentPanel.add(rendererWidget);
 		rendererWidget.setZoomPercentage(5);
 		
@@ -201,11 +211,56 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			}
 		});
 		
-		zoomButtom.addClickHandler(new ClickHandler() {
+		lightButton.addClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				String zoomText = zoomValue.getText();
+				String buttonText = lightButton.getText();
+				if (buttonText.equals("GROUND ON")) {
+					lightButton.setText("GROUND OFF");
+					rendererWidget.groundVisibility(false);
+				} else {
+					lightButton.setText("GROUND ON");
+					rendererWidget.groundVisibility(true);
+				}
+			}
+		});
+		
+		colorParam.addActionHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				int color = 16777215; // 0xFFFFFF;
+				try {
+					String colorHexValue = colorParam.getValue();
+					color = Integer.parseInt(colorHexValue);
+				} catch (NumberFormatException nfe) {
+					
+				}
+				rendererWidget.setGroundColor(THREE.Color(color));
+			}
+		});
+		
+		opacityParam.addActionHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				double opacity = 0.0;
+				try {
+					String opacityStrValue = opacityParam.getValue();
+					opacity = Double.parseDouble(opacityStrValue);
+				} catch (NumberFormatException nfe) {
+					
+				}
+				rendererWidget.setGroundOpacity(opacity);
+			}
+		});
+		
+		zoomParam.addActionHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				String zoomText = zoomParam.getValue();
 				float zoom = 10;
 				try {
 					zoom = Float.parseFloat(zoomText);
@@ -223,7 +278,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.zoomIn();
+				rendererWidget.zoomOut();
 			}
 		});
 		
@@ -231,7 +286,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.zoomOut();
+				rendererWidget.zoomIn();
 			}
 		});
 		

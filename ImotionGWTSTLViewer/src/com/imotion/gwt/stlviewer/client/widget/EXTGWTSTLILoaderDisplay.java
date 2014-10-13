@@ -1,5 +1,6 @@
 package com.imotion.gwt.stlviewer.client.widget;
 
+import com.akjava.gwt.three.client.core.Color;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
@@ -18,17 +19,22 @@ public interface EXTGWTSTLILoaderDisplay extends AnimationCallback, IsWidget {
 	double decreaseXGyreSpeed(double radiansPerIteration);
 	double increaseYGyreSpeed(double radiansPerIteration);
 	double decreaseYGyreSpeed(double radiansPerIteration);
-
-	void zoomIn();
-
-	void zoomOut();
-
-	void setZoomPercentage(double zoomPercentage);
-
+	
 	void setGyreZSpeed(double radiansPerIteration);
 	void setGyreXSpeed(double radiansPerIteration);
 	void setGyreYSpeed(double radiansPerIteration);
+
+	void zoomIn();
+	void zoomOut();
+	void setZoomPercentage(double zoomPercentage);
+	
+	void setGroundColor(Color color);
+	void setGroundOpacity(double opacity);
 	
 	void captureMouseEvents(boolean mouseInteraction);
+	boolean isCaptureMouseEvents();
+	
+	void groundVisibility(boolean visibility);
+	boolean isGroundVisible();
 
 }
