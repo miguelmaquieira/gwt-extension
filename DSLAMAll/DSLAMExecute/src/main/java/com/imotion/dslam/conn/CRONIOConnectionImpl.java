@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Level;
+
 import com.imotion.antlr.ImoLangParser.ProgramContext;
 import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionIWrapper;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperDummy;
 import com.imotion.dslam.conn.wrapper.CRONIOConnectionWrapperSSH1;
@@ -58,7 +60,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		String 			connectionScriptContent	= connectionScript.getCompiledContent();
 		runScript(connectionScriptContent);
 	}
-	
+
 	@Override
 	public void closeConnection() {
 		CRONIOBOIFile 	closeConnectionScript			= machineProperties.getCloseConnectionScript();
@@ -88,7 +90,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		}
 		return executionData;
 	}
-	
+
 	@Override
 	public CRONIOIExecutionData executeCommandWithoutRead(String command) throws CRONIOConnectionUncheckedException {
 		CRONIOIExecutionData executionData	= null;
@@ -108,6 +110,37 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 	public String readUntil(String regExp) throws CRONIOConnectionUncheckedException {
 		String read = connectionWrapper.readResponseUntil(regExp);
 		return read;
+	}
+
+	@Override
+	public CRONIOIExecutionData logMessage(String strCompositeLevel, String message) {
+		
+		String[] partsLevel = strCompositeLevel.split("\\.");
+		String strLevel		= partsLevel[1]; 
+		
+		Level logLevel = null;
+		if (Level.DEBUG.toString().equals(strLevel)) {
+		} else if (Level.ERROR.toString().equals(strLevel)) {
+			logLevel = Level.ERROR;
+		} else if (Level.FATAL.toString().equals(strLevel)) {
+			logLevel = Level.FATAL;
+		} else if (Level.INFO.toString().equals(strLevel)) {
+			logLevel = Level.INFO;
+		} else if (Level.TRACE.toString().equals(strLevel)) {
+			logLevel = Level.TRACE;
+		} else if (Level.WARN.toString().equals(strLevel)) {
+			logLevel = Level.WARN;
+		} else {
+			logLevel = Level.INFO;
+		}
+		
+
+		CRONIOIExecutionData executionData	= null;
+		executionData = new CRONIOExecutionData(message, "", "");
+		if (getLogger() != null) {
+			getLogger().log(getConnectionId(), getNode(), executionData, logLevel);
+		} 
+		return executionData;
 	}
 
 	/**
@@ -144,7 +177,7 @@ public class CRONIOConnectionImpl implements CRONIOIConnection {
 		}
 		return prompt;
 	}
-	
+
 	private void runScript(String content) {
 		if (!AEMFTCommonUtilsBase.isEmptyString(content)) {
 			ProgramContext 					tree	= CRONIOAntlrUtils.getTreeFromCode(content);

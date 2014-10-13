@@ -53,9 +53,13 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 
 	}
 
-
 	@Override
 	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data) {
+		log(connectionId, node, data, Level.INFO);
+	}
+	
+	@Override
+	public void log(String connectionId, CRONIOBOINode node, CRONIOIExecutionData data, Level level) {
 		String	nodeIp			= node.getNodeIp();
 		String	nodeName		= node.getNodeName();
 		String	request			= data.getSourceCommand();
@@ -77,10 +81,24 @@ public class CRONIOExecutionLoggerImpl implements CRONIOIExecutionLogger {
 		logValueSB.append("\n");
 		String logValueStr = logValueSB.toString();
 
-		//Log file
-		log4jLogger.debug(logValueStr);
-
-
+		//Log 		
+		if (Level.DEBUG.equals(level)) {
+			log4jLogger.debug(logValueStr);
+		} else if (Level.ERROR.equals(level)) {
+			log4jLogger.error(logValueStr);	
+		} else if (Level.FATAL.equals(level)) {
+			log4jLogger.fatal(logValueStr);
+		} else if (Level.INFO.equals(level)) {
+			log4jLogger.info(logValueStr);	
+		} else if (Level.TRACE.equals(level)) {
+			log4jLogger.trace(logValueStr);		
+		} else if (Level.WARN.equals(level)) {
+			log4jLogger.warn(logValueStr);
+		} else {
+			log4jLogger.info(logValueStr);
+		}
+		
+		
 		//ClientConsole
 		CRONIOLoggerEvent loggerEvent = new CRONIOLoggerEvent();
 		loggerEvent.setConnectionId(connectionId);
