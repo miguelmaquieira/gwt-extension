@@ -34,4 +34,6 @@ public interface CRONIOIConnection {
 	
 	void closeConnection();
 
+	CRONIOIExecutionData logMessage(String strCompositeLevel, String message);
+
 }

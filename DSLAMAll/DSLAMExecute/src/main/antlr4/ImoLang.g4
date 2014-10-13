@@ -16,7 +16,7 @@ statement   :	assignStatement
 			
 assignStatement: VARIABLE_SCRIPT '=' (( (expression | stringExpr | listExp | function) ';'));
 
-function : (execution | executionWithoutResponse | readUntil | match | rollback | tagBlockCode) ';';
+function : (execution | executionWithoutResponse | readUntil | match | rollback | tagBlockCode |log) ';';
 		 
 execution: 					'>' 	stringExpr ;
 executionWithoutResponse: 	'>>' 	stringExpr ; 
@@ -24,6 +24,7 @@ readUntil : 				'read'	stringExpr ;
 match:  					'match'	stringExpr ('>' value)?;
 rollback:					'rb'	stringExpr ;
 tagBlockCode:				'tag'	stringExpr ;
+log:						'log' '(' value ',' value ')';
 
 ifStatement: 		'if' condition '{' ifBlock '}' ( 'else' (ifStatement | ('{' elseBlock '}') ) )?;
 ifBlock: 			statement+;
