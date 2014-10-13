@@ -5,26 +5,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOINodeListDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIUser;
-import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
-import com.imotion.dslam.bom.data.CRONIOBONodeList;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.data.CRONIOBOFile;
+import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.bom.data.CRONIOBOProcess;
 import com.imotion.dslam.bom.data.CRONIOBOProject;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceTrace;
 import com.imotion.dslam.business.service.base.CRONIOBUServiceBase;
+import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.imotion.dslam.business.service.utils.CRONIOBUCSVToBomConversor;
 import com.imotion.dslam.business.service.utils.CRONIOBUMetadataToBomConversor;
-import com.imotion.dslam.business.service.utils.CRONIOBUBomToMetadataConversor;
 import com.selene.arch.base.bom.AEMFTILoginDataConstants;
 import com.selene.arch.base.exe.bus.comm.AEMFTIFileUploadServerCommConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
@@ -185,7 +185,8 @@ public class CRONIOBUProjectBusinessServiceImpl extends CRONIOBUServiceBase impl
 		//end-trace
 
 		//ContextOut
-		AEMFTMetadataElementComposite nodesData = CRONIOBUBomToMetadataConversor.fromNodeList(nodeList);
+		
+		AEMFTMetadataElementComposite nodesData = CRONIOBUBomToMetadataConversor.fromNodesCSVList(nodeList);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(NODES_DATA_LIST, nodesData);
 	}

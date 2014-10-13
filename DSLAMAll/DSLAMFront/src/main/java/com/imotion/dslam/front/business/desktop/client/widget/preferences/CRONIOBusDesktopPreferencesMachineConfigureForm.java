@@ -19,7 +19,7 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.validation.AEGWTIValidationChangeHandler;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapDropdownButton;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapForm;
-import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldDropDownButtonLabelTop;
+import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFieldDropDownButtonLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldPasswordBoxLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapFormFieldTextBoxLabelTop;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
@@ -39,7 +39,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 	private AEGWTBootstrapFormFieldTextBoxLabelTop 			userPromptTextBox; 
 	private AEGWTBootstrapFormFieldTextBoxLabelTop 			passwordPromptTextBox;
 	private AEGWTBootstrapFormFieldTextBoxLabelTop			rollbackConditionPromptTextBox;
-	private AEGWTBootstrapFormFieldDropDownButtonLabelTop  	protocolTypeDropdownButton;
+	private AEGWTBootstrapFieldDropDownButtonLabelTop  	protocolTypeDropdownButton;
 
 	public CRONIOBusDesktopPreferencesMachineConfigureForm() {
 		setButtonText(BUTTON_SUBMIT, TEXTS.save());
@@ -63,7 +63,7 @@ public class CRONIOBusDesktopPreferencesMachineConfigureForm extends AEGWTBootst
 
 		////LEFTZONE
 		//protocol
-		protocolTypeDropdownButton 	= new AEGWTBootstrapFormFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
+		protocolTypeDropdownButton 	= new AEGWTBootstrapFieldDropDownButtonLabelTop(TEXTS.protocol_placeholder());
 		textBoxesLeftZone.add(protocolTypeDropdownButton);
 		protocolTypeDropdownButton.setContainerId(NAME);
 		protocolTypeDropdownButton.addElement(String.valueOf(CRONIOBOIMachinePropertiesDataConstants.PROTOCOL_TYPE_SSH_1)	, TEXTS.ssh1());

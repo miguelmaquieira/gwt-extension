@@ -30,7 +30,7 @@ public class CRONIOBONode implements CRONIOBOINode {
 	private String 							nodeName;
 	private String 							nodeIp;
 	private String 							nodeType;
-	private List<CRONIOBOIVariable> 			variableList;
+	private List<CRONIOBOIVariable> 		variableList;
 	private CRONIOBOINodeList				nodeList;
 	private CRONIOBOIMachineProperties		machineProperties;
 	private Date 							savedTime;

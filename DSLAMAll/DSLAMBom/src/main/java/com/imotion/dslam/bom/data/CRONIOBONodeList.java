@@ -29,7 +29,7 @@ public class CRONIOBONodeList implements CRONIOBOINodeList {
 	private Long 					nodeListId;
 	private String 					nodeListName;
 	private List<CRONIOBOINode>		nodeList;
-	private CRONIOBOIProcess			process;
+	private CRONIOBOIProcess		process;
 	private Date 					savedTime;
 	private Date 					creationTime;
 	private Long					version; 

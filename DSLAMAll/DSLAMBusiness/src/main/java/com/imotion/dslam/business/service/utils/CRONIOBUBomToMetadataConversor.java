@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.Locale;
 
 import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
-import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIUserPreferences;
 import com.imotion.dslam.bom.CRONIOBOIVariable;
 import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.business.service.CRONIOBUIProjectBusinessServiceConstants;
@@ -229,6 +229,40 @@ public class CRONIOBUBomToMetadataConversor {
 			data.addElement(CRONIOBOINode.NODE_NAME				, node.getNodeName());
 			data.addElement(CRONIOBOINode.NODE_IP				, node.getNodeIp());
 			data.addElement(CRONIOBOINode.NODE_TYPE				, node.getNodeType());
+			data.addElement(CRONIOBOINode.NODE_NODELIST			, node.getNodeList().getNodeListId());
+			data.addElement(CRONIOBOIProcess.CREATION_TIME		, node.getCreationTime());
+			data.addElement(CRONIOBOIProcess.SAVED_TIME			, node.getSavedTime());
+			
+			AEMFTMetadataElementComposite variableListData	= fromVariableList(node.getVariableList());
+			data.addElement(CRONIOBOINode.NODE_VARIABLE_LIST	, variableListData);
+		}
+		return data;
+	}
+	
+	public  static AEMFTMetadataElementComposite fromNodesList(List<CRONIOBOINode> nodeList) {
+		AEMFTMetadataElementComposite dataNodeList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
+			for (CRONIOBOINode node : nodeList) {
+				dataNodeList.addElement(node.getNodeName(), fromNode(node));
+			}
+		}
+		return dataNodeList;
+	}
+	
+	
+	/**
+	 * NODECSV
+	 */
+	
+	public  static AEMFTMetadataElementComposite fromNodeCSV(CRONIOBOINode node) {
+		AEMFTMetadataElementComposite data = null;
+		if (node != null) {
+			data = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
+			
+			data.addElement(CRONIOBOINode.NODE_ID				, String.valueOf(node.getNodeId()));
+			data.addElement(CRONIOBOINode.NODE_NAME				, node.getNodeName());
+			data.addElement(CRONIOBOINode.NODE_IP				, node.getNodeIp());
+			data.addElement(CRONIOBOINode.NODE_TYPE				, node.getNodeType());
 			data.addElement(CRONIOBOIProcess.CREATION_TIME		, node.getCreationTime());
 			data.addElement(CRONIOBOIProcess.SAVED_TIME			, node.getSavedTime());
 			
@@ -238,11 +272,11 @@ public class CRONIOBUBomToMetadataConversor {
 		return data;
 	}
 
-	public  static AEMFTMetadataElementComposite fromNodeList(List<CRONIOBOINode> nodeList) {
+	public  static AEMFTMetadataElementComposite fromNodesCSVList(List<CRONIOBOINode> nodeList) {
 		AEMFTMetadataElementComposite dataNodeList = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		if (!AEMFTCommonUtilsBase.isEmptyList(nodeList)) {
 			for (CRONIOBOINode node : nodeList) {
-				dataNodeList.addElement(node.getNodeName(), fromNode(node));
+				dataNodeList.addElement(node.getNodeName(), fromNodeCSV(node));
 			}
 		}
 		return dataNodeList;
@@ -263,7 +297,7 @@ public class CRONIOBUBomToMetadataConversor {
 			data.addElement(CRONIOBOINodeList.CREATION_TIME		, nodeList.getCreationTime());
 			data.addElement(CRONIOBOINodeList.SAVED_TIME		, nodeList.getSavedTime());
 			
-			AEMFTMetadataElementComposite nodeListData	= fromNodeList(nodeList.getNodeList());
+			AEMFTMetadataElementComposite nodeListData	= fromNodesList(nodeList.getNodeList());
 			data.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST	, nodeListData);
 		}
 		return data;

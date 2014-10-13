@@ -26,7 +26,7 @@ public interface CRONIOBOIProcessDataConstants {
 	String PROCESS_PROPERTIES_DATA	= "propertiesData";
 	String PROCESS_VARIABLES_DATA	= "variablesData";
 	String PROCESS_SCHEDULE_DATA	= "scheduleData";
-	String PROCESS_NODES_DATA		= "nodesData";
+	String PROCESS_NODELIST_DATA	= "nodeListData";
 	String PROCESS_EXTRA_OPTIONS 	= "extraOptions";
 	
 	String DATE_FORMAT				= "d/MM/yyyy H:mm";
