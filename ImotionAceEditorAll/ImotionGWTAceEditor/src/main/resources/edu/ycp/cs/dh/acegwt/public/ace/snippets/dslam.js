@@ -79,7 +79,7 @@ snippet tag\n\
 	tag \"${1}\";\n\
 	\n\
 snippet log\n\
-	log (\"${1:level}\", \"${2:message}\");	\n\
+	log (\"${1:Level.INFO}\", \"${2:message}\");	\n\
 \n\
 ## Log4j Level\n\
 \n\
