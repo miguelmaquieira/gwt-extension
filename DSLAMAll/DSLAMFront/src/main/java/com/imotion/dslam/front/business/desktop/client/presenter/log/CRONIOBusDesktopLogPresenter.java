@@ -31,7 +31,7 @@ public class CRONIOBusDesktopLogPresenter extends CRONIOBusProjectBasePresenter<
 	
 	@Override
 	protected void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId, AEMFTMetadataElementComposite finalSectionData) {
-		getView().setData(finalSectionData);
+		getView().openLogSection(projectFinalSectionId, finalSectionData);
 		
 	}
 	

@@ -136,11 +136,13 @@ public interface CRONIOBusDesktopIStyleConstants {
 	
 	
 	//EXECUTION
+	String LOGS 											= APP_ID_PREFFIX			+ "logs";							//chronium_studio-logs
 	String EXECUTION 										= APP_ID_PREFFIX			+ "execution";							//chronium_studio-execution
 	String EXECUTION_LOGGER_TABS 							= EXECUTION					+ "-loggerTabs";						//chronium_studio-execution-loggerTabs
 	String EXECUTION_LOGGER_TABS_CONTAINER 					= EXECUTION					+ "-loggerTabsContainer";				//chronium_studio-execution-loggerTabsContainer
 	String EXECUTION_LOGGER 								= EXECUTION					+ "-logger";							//chronium_studio-execution-logger
 	String EXECUTION_LOGGER_CONTAINER 						= EXECUTION_LOGGER			+ "Container";							//chronium_studio-execution-loggerContainer
+	String EXECUTION_LOGGER_DECKPANEL 						= EXECUTION_LOGGER			+ "DeckPanel";							//chronium_studio-execution-loggerDeckPanel
 	String EXECUTION_LOGGER_FILTER_PANEL 					= EXECUTION					+ "-loggerFilterPanel";					//chronium_studio-execution-loggerFilterPanel
 	String EXECUTION_LOGGER_FILTER_PANEL_FORM 				= EXECUTION					+ "-loggerFilterPanelForm";				//chronium_studio-execution-loggerFilterPanelForm
 	String EXECUTION_LOGGER_FILTER_PANEL_FORM_SEVERITYZONE 	= EXECUTION					+ "-loggerFilterPanelFormSeverityZone";	//chronium_studio-execution-loggerFilterPanelFormSeverityZone
@@ -149,7 +151,13 @@ public interface CRONIOBusDesktopIStyleConstants {
 	String EXECUTION_LOGGER_TABS_RESPONSE_ZONE 				= EXECUTION					+ "-loggerTabsResponseZone";			//chronium_studio-execution-loggerTabsResponseZone
 	String EXECUTION_LOGGER_TABS_REQUEST_ZONE 				= EXECUTION					+ "-loggerTabsRequestZone";				//chronium_studio-execution-loggerTabsRequestZone
 	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 				= EXECUTION					+ "-loggerTabsPromptZone";				//chronium_studio-execution-loggerTabsPromptZone
-
+	String EXECUTION_LOGGER_NODES_LEFTZONE					= EXECUTION_LOGGER			+ "NodesLeftZone";						//chronium_studio-execution-loggerNodesLeftZone
+	String EXECUTION_LOGGER_NODES_RIGHTZONE					= EXECUTION_LOGGER			+ "NodesRightZone";						//chronium_studio-execution-loggerNodesRightZone
+	String EXECUTION_LOGGER_NODES_INFOZONE 					= EXECUTION_LOGGER			+ "NodesInfoZone";						//chronium_studio-execution-loggerNodesInfoZone
+	String EXECUTION_LOGGER_NODES_LISTZONE					= EXECUTION_LOGGER			+ "NodesListZone";						//chronium_studio-execution-loggerNodesListZone
+	String EXECUTION_LOGGER_NODES_CONTAINERZONE				= EXECUTION_LOGGER			+ "NodesContainerZone";					//chronium_studio-execution-loggerNodesContainerZone
+	String EXECUTION_LOGGER_NODES_CONTAINER					= EXECUTION_LOGGER			+ "NodesContainer";						//chronium_studio-execution-loggerNodesContainer
+	
 	//PREFERENCES
 	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";	//chronium_studio-preferencesView
 

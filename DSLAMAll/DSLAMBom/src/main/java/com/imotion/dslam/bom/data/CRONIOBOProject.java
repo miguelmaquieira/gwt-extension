@@ -14,10 +14,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 
 @Entity(name="Project")
 public class CRONIOBOProject implements CRONIOBOIProject {
@@ -29,7 +29,7 @@ public class CRONIOBOProject implements CRONIOBOIProject {
 	private int				machineType;
 	private CRONIOBOIFile 		mainScript;
 	private CRONIOBOIFile 		rollBackScript;
-	private CRONIOBOIProcess		process;
+	private CRONIOBOIProcess	process;
 	private Date 				savedTime;
 	private Date 				creationTime;
 	private Long				version; 

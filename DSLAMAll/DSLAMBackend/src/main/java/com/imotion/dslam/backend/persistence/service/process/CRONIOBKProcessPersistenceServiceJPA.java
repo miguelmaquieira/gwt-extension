@@ -66,29 +66,6 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 				persistedListNodeList.add(newNodeList);
 			}
 			originalProcess.setListNodeList(persistedListNodeList);
-			
-//			List<CRONIOBOINodeList> nodeListsToRemove 		= new ArrayList<>(); 
-//			if (!AEMFTCommonUtilsBase.isEmptyList(originalListNodeList)) {
-//				for (CRONIOBOINodeList nodeList : originalListNodeList) {
-//					nodeListsToRemove.add(nodeList);
-//				}
-//			}
-			
-//			for (CRONIOBOINodeList nodeList : nodeListsToRemove) {
-//				originalProcess.removeNodeList(nodeList);
-//			}
-			
-//			List<CRONIOBOINodeList> newListNodeList			= processData.getListNodeList();
-//			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
-//			if (!AEMFTCommonUtilsBase.isEmptyList(newListNodeList)) {
-//				for (CRONIOBOINodeList nodeList : newListNodeList) {
-//					setMachinePropertiesToNodeList(preferencesId, nodeList);
-//					nodeList = getNodeListPersistence().addNodeList(nodeList, processId);
-//					persistedListNodeList.add(nodeList);
-//				}
-//			}
-//			originalProcess.setListNodeList(persistedListNodeList);
-			
 			originalProcess.setSynchronous(processData.isSynchronous());
 			originalProcess.setScheduleList(processData.getScheduleList());
 			originalProcess.setVariableList(processData.getVariableList());

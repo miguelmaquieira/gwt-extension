@@ -159,7 +159,7 @@ public class CRONIOBUMetadataToBomConversor {
 
 			String	nodeName		= getElementController().getElementAsString(CRONIOBOINode.NODE_NAME						, nodeDataElement);
 			String	nodeIp			= getElementController().getElementAsString(CRONIOBOINode.NODE_IP						, nodeDataElement);
-			String	nodeType		= getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE				, nodeDataElement);
+			String	nodeType		= getElementController().getElementAsString(CRONIOBOINode.NODE_TYPE						, nodeDataElement);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOINode.CREATION_TIME	, nodeDataElement);
 			
 			node.setNodeName(nodeName);
@@ -168,6 +168,8 @@ public class CRONIOBUMetadataToBomConversor {
 			node.setSavedTime(actualDate);
 			if (creationTime == null) {
 				node.setCreationTime(actualDate);
+			} else {
+				node.setCreationTime(creationTime);
 			}
 
 			AEMFTMetadataElementComposite variablesData = getElementController().getElementAsComposite(CRONIOBOINode.NODE_VARIABLE_LIST, nodeDataElement);

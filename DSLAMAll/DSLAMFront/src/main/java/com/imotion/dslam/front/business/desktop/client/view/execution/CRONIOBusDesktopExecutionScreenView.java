@@ -17,7 +17,7 @@ public class CRONIOBusDesktopExecutionScreenView extends CRONIOBusDesktopPanelBa
 	public static final String NAME = "CRONIOBusDesktopExecutionScreenView";
 	
 	private FlowPanel	root;
-	private CRONIOBusDesktopAccordionLoggerContainer logger;
+	private CRONIOBusDesktopAccordionLoggerContainer 	logger;	
 	
 	public CRONIOBusDesktopExecutionScreenView() {
 		root = new FlowPanel();
