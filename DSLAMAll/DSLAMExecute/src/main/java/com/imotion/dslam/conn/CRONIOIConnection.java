@@ -2,6 +2,8 @@ package com.imotion.dslam.conn;
 
 import java.io.IOException;
 
+import org.apache.log4j.Level;
+
 public interface CRONIOIConnection {
 	
 	String CONNECTION_ID_SEP = ":";
@@ -34,6 +36,6 @@ public interface CRONIOIConnection {
 	
 	void closeConnection();
 
-	CRONIOIExecutionData logMessage(String strCompositeLevel, String message);
+	CRONIOIExecutionData logMessage(Level logLevel, String message);
 
 }
