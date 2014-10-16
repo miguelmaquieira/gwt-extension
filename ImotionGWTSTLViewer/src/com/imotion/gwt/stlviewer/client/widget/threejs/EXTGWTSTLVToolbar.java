@@ -15,6 +15,7 @@ public class EXTGWTSTLVToolbar extends Composite {
 	private Image zoom_out;
 	private Image ground;
 	private Image gyre;
+	private Image move;
 	
 	
 	public EXTGWTSTLVToolbar(EXTGWTSTLILoaderDisplay stlvDisplay) {
@@ -82,14 +83,35 @@ public class EXTGWTSTLVToolbar extends Composite {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isCaptureMouseEvents();
-				EXTGWTSTLVToolbar.this.stlvDisplay.captureMouseEvents(!captureEvents);
+				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isRotationMouseEvents();
+				EXTGWTSTLVToolbar.this.stlvDisplay.captureRotationMouseEvents(!captureEvents);
 				if (captureEvents) {
 					gyre.addStyleName("gyre_on");
 					gyre.removeStyleName("gyre_off");
 				} else {
 					gyre.addStyleName("gyre_off");
 					gyre.removeStyleName("gyre_on");
+				}
+			}
+		});
+		
+		// Move
+		move = new Image();
+		move.addStyleName("action");
+		move.addStyleName("move_on");
+		hrContentPanel.add(move);
+		move.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isMoveMouseEvents();
+				EXTGWTSTLVToolbar.this.stlvDisplay.captureMoveMouseEvents(!captureEvents);
+				if (captureEvents) {
+					move.addStyleName("move_on");
+					move.removeStyleName("move_off");
+				} else {
+					move.addStyleName("move_off");
+					move.removeStyleName("move_on");
 				}
 			}
 		});

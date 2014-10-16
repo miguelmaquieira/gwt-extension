@@ -3,7 +3,6 @@ package test.com.imotion.gwt.stlviewer.client;
 import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVParameter;
 import test.com.imotion.gwt.stlviewer.client.widget.TestExtGWTSTLVSpinner;
 
-import com.akjava.gwt.three.client.THREE;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -203,10 +202,10 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 				String buttonText = mouseButton.getText();
 				if (buttonText.equals("MOUSE ACT.")) {
 					mouseButton.setText("MOUSE DEACT.");
-					rendererWidget.captureMouseEvents(true);
+					rendererWidget.captureRotationMouseEvents(true);
 				} else {
 					mouseButton.setText("MOUSE ACT.");
-					rendererWidget.captureMouseEvents(false);
+					rendererWidget.captureRotationMouseEvents(false);
 				}
 			}
 		});
@@ -223,36 +222,6 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 					lightButton.setText("GROUND ON");
 					rendererWidget.groundVisibility(true);
 				}
-			}
-		});
-		
-		colorParam.addActionHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				int color = 16777215; // 0xFFFFFF;
-				try {
-					String colorHexValue = colorParam.getValue();
-					color = Integer.parseInt(colorHexValue);
-				} catch (NumberFormatException nfe) {
-					
-				}
-				rendererWidget.setGroundColor(THREE.Color(color));
-			}
-		});
-		
-		opacityParam.addActionHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				double opacity = 0.0;
-				try {
-					String opacityStrValue = opacityParam.getValue();
-					opacity = Double.parseDouble(opacityStrValue);
-				} catch (NumberFormatException nfe) {
-					
-				}
-				rendererWidget.setGroundOpacity(opacity);
 			}
 		});
 		

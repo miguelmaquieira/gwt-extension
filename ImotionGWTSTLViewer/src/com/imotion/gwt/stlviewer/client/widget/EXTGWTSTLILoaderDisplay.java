@@ -1,7 +1,7 @@
 package com.imotion.gwt.stlviewer.client.widget;
 
-import com.akjava.gwt.three.client.core.Color;
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 
@@ -28,11 +28,13 @@ public interface EXTGWTSTLILoaderDisplay extends AnimationCallback, IsWidget {
 	void zoomOut();
 	void setZoomPercentage(double zoomPercentage);
 	
-	void setGroundColor(Color color);
-	void setGroundOpacity(double opacity);
+	void captureRotationMouseEvents(boolean mouseRotationFlag);
+	boolean isRotationMouseEvents();
 	
-	void captureMouseEvents(boolean mouseInteraction);
-	boolean isCaptureMouseEvents();
+	void captureMoveMouseEvents(boolean mouseMoveFlag);
+	boolean isMoveMouseEvents();
+	
+	void moveObject(MouseMoveEvent mouseMoveEvent);
 	
 	void groundVisibility(boolean visibility);
 	boolean isGroundVisible();

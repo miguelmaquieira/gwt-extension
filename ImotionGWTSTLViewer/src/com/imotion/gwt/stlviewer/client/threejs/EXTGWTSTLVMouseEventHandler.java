@@ -15,7 +15,8 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 	private EXTGWTSTLILoaderDisplay stlvDisplay;
 	private EXTGWTSTLVTransition	mouseTransition;
 	
-	private boolean mouseInteraction; 	
+	private boolean mouseRotationInteraction;
+	private boolean mouseMoveInteraction;
 	private boolean mouseDragAction;
 	
 	private int sceneWidth;
@@ -24,14 +25,14 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 	
 	public EXTGWTSTLVMouseEventHandler(EXTGWTSTLILoaderDisplay renderer, boolean mouseInteraction, int sceneWidth, int sceneHeight) {
 		this.stlvDisplay = renderer;
-		this.mouseInteraction = mouseInteraction;
+		this.mouseRotationInteraction = mouseInteraction;
 		this.sceneWidth = sceneWidth;
 		this.sceneHeight = sceneHeight;
 	}
 
 	@Override
 	public void onMouseWheel(MouseWheelEvent event) {
-		if (mouseInteraction) {
+		if (mouseRotationInteraction) {
 			if (event.isNorth()) {
 				stlvDisplay.zoomIn();
 			} else if (event.isSouth()) {
@@ -43,7 +44,7 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 
 	@Override
 	public void onMouseMove(MouseMoveEvent event) {
-		if (mouseInteraction) {
+		if (mouseRotationInteraction) {
 			if (mouseDragAction) {
 				mouseTransition.update(event.getX(), event.getY());
 				int xTransition = mouseTransition.getXTransition();
@@ -65,12 +66,14 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 				System.out.println("Transition X: " + xTransition);
 				System.out.println("Transition Y: " + yTransition + "\n");
 			}
+		} else if (mouseMoveInteraction) {
+			stlvDisplay.moveObject(event);
 		}
 	}
 
 	@Override
 	public void onMouseDown(MouseDownEvent event) {
-		if (mouseInteraction) {
+		if (mouseRotationInteraction) {
 			mouseDragAction = true;
 			mouseTransition.init(event.getX(), event.getY());
 		}
@@ -78,7 +81,7 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 
 	@Override
 	public void onMouseUp(MouseUpEvent event) {
-		if (mouseInteraction) {
+		if (mouseRotationInteraction) {
 			mouseDragAction = false;
 			stlvDisplay.setGyreZSpeed(0.0);
 			stlvDisplay.setGyreXSpeed(0.0);
@@ -86,8 +89,8 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 		}
 	}
 	
-	public void captureMouseEvents(boolean mouseInteraction) {
-		this.mouseInteraction = mouseInteraction;
+	public void captureRotationMouseEvents(boolean mouseInteraction) {
+		this.mouseRotationInteraction = mouseInteraction;
 		if (mouseInteraction) {
 			stlvDisplay.setGyreZSpeed(0.0);
 			if (mouseTransition == null) {
@@ -96,8 +99,16 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 		}
 	}
 	
-	public boolean isCaptureMouseEvents() {
-		return this.mouseInteraction;
+	public void captureMoveMouseEvents(boolean mouseInteraction) {
+		this.mouseMoveInteraction = mouseInteraction;
+	}
+	
+	public boolean isRotationMouseEvents() {
+		return this.mouseRotationInteraction;
+	}
+	
+	public boolean isMoveMouseEvents() {
+		return this.mouseMoveInteraction;
 	}
 
 }

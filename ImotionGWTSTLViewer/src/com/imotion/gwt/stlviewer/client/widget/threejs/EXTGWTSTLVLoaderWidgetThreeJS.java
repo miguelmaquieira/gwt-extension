@@ -2,9 +2,10 @@ package com.imotion.gwt.stlviewer.client.widget.threejs;
 
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
-import com.akjava.gwt.three.client.core.Color;
 import com.akjava.gwt.three.client.core.Geometry;
+import com.akjava.gwt.three.client.core.Projector;
 import com.akjava.gwt.three.client.core.Vector3;
+import com.akjava.gwt.three.client.gwt.GWTDragObjectControler;
 import com.akjava.gwt.three.client.gwt.core.BoundingBox;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.lights.Light;
@@ -38,10 +39,14 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	private 	Mesh 						objectMesh;
 	private 	Mesh 						groundMesh;
 	private 	boolean						groundVisibility;
+	
 	private 	Light						spotLight;
 	private 	DirectionalLight 			dirLight;
+	
 	private 	EXTGWTSTLVMouseEventHandler	mouseHandler;
 	private 	EXTGWTSTLVToolbar			toolbar;
+	
+	private 	GWTDragObjectControler		dragController;
 
 	private		int							sceneWidth;
 	private		int							sceneHeight;
@@ -113,10 +118,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		groundMesh.setReceiveShadow(true);
 		groundMesh.setCastShadow(true);
 
-		//Model
-		loadModel(url, exceptionCallback);
-
-		//Renderer
+		// Renderer
 		if (canvas) {
 			renderer = EXTGWTSTLVTHREE.EXTGWTCanvasRenderer();
 		} else {
@@ -129,8 +131,9 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	
 		WebGLRenderer webGLRenderer = (WebGLRenderer) renderer;
 		webGLRenderer.setSize(width, height);
-		webGLRenderer.setClearColorHex(backgroundColorAsHex, 1d);
+		webGLRenderer.setClearColorHex(backgroundColorAsHex, 1.0f);
 		webGLRenderer.setShadowMapEnabled(true);
+		
 		rootContainer.getElement().appendChild(webGLRenderer.getDomElement());
 		
 		// handlers
@@ -140,6 +143,13 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		rootContainer.addDomHandler(mouseHandler, MouseUpEvent.getType());
 		rootContainer.addDomHandler(mouseHandler, MouseMoveEvent.getType());
 		rootContainer.addDomHandler(mouseHandler, MouseWheelEvent.getType());
+		
+		// Model
+		if (url != null && url.length() > 0) {
+			loadModel(url, exceptionCallback);
+		} else {
+			startScene();
+		}
 	}
 	
 	@Override
@@ -257,14 +267,24 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	}
 	
 	@Override
-	public void captureMouseEvents(boolean mouseInteraction) {
-		mouseHandler.captureMouseEvents(mouseInteraction);
-		groundVisibility(!mouseInteraction);
+	public void captureRotationMouseEvents(boolean mouseRotationFlag) {
+		mouseHandler.captureRotationMouseEvents(mouseRotationFlag);
+		groundVisibility(!mouseRotationFlag);
 	}
 	
 	@Override
-	public boolean isCaptureMouseEvents() {
-		return mouseHandler.isCaptureMouseEvents();
+	public boolean isRotationMouseEvents() {
+		return mouseHandler.isRotationMouseEvents();
+	}
+	
+	@Override
+	public void captureMoveMouseEvents(boolean mouseMoveFlag) {
+		mouseHandler.captureMoveMouseEvents(mouseMoveFlag);
+	}
+	
+	@Override
+	public boolean isMoveMouseEvents() {
+		return mouseHandler.isMoveMouseEvents();
 	}
 
 	/**
@@ -273,9 +293,11 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 
 	@Override
 	public void execute(double timestamp) {
-		objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + gyreZSpeed);
-		objectMesh.getRotation().setX(objectMesh.getRotation().getX() + gyreXSpeed);
-		objectMesh.getRotation().setY(objectMesh.getRotation().getY() + gyreYSpeed);
+		if (objectMesh != null) {
+			objectMesh.getRotation().setZ(objectMesh.getRotation().getZ() + gyreZSpeed);
+			objectMesh.getRotation().setX(objectMesh.getRotation().getX() + gyreXSpeed);
+			objectMesh.getRotation().setY(objectMesh.getRotation().getY() + gyreYSpeed);
+		}
 		renderer.render(scene, camera);
 		AnimationScheduler.get().requestAnimationFrame(this);
 	}
@@ -294,29 +316,46 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	public boolean isGroundVisible() {
 		return groundVisibility;
 	}
+
+	@Override
+	public void moveObject(MouseMoveEvent mouseMoveEvent) {
+		dragController.moveSelectionPosition(mouseMoveEvent.getX(), mouseMoveEvent.getY(), sceneWidth, sceneHeight, camera);		
+	}
 	
-	@Override
-	public void setGroundColor(Color color) {
-		Material groundMaterial = groundMesh.getMaterial();
-		if (groundMaterial != null) {
-			groundMesh.getMaterial().setColor(color);
-		}
-	}
-
-	@Override
-	public void setGroundOpacity(double opacity) {
-		Material groundMaterial = groundMesh.getMaterial();
-		if (groundMaterial != null) {
-			groundMaterial.setOpacity(opacity);
-		}
-	}
-
 	/***
 	 * PRIVATE
 	 **/
+	
+	private void startScene() {
+		// Solve scene parameters
+		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(sceneHeight, sceneWidth);
+
+		//Light
+		dirLight = THREE.DirectionalLight( 0xffffff, 1);
+		dirLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+		dirLight.setCastShadow(true);
+		dirLight.setVisible(true);
+		scene.add(dirLight);
+		
+		spotLight = THREE.SpotLight(0xAAAAAA);
+		spotLight.setPosition(sceneParameters.getLightPositionX(), sceneParameters.getLightPositionY(), sceneParameters.getLightPositionZ());
+		spotLight.setCastShadow(true);
+		spotLight.setVisible(true);
+		scene.add(spotLight);
+
+		//Camera
+		float ratio = sceneWidth / sceneHeight;
+		double cameraLookAtY = sceneParameters.getCameraLookAtYAddition();
+		camera = EXTGWTSTLVTHREE.PerspectiveCamera(ratio, 1f, 1000f);
+		camera.setPosition(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
+		camera.lookAt(0, cameraLookAtY, 0);
+		
+		AnimationScheduler.get().requestAnimationFrame(this);
+
+	}
 
 	private void setupSTLObject(Geometry geometry, boolean startAnimation, int objectColorAsHex) {
-		//Solve scene parameters
+		// Solve scene parameters
 		geometry.computeBoundingBox();
 		BoundingBox boundingBox = geometry.getBoundingBox();
 		Vector3 	maxVector3 	= boundingBox.getMax();
@@ -326,12 +365,10 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		double width		= Math.abs(maxVector3.getZ() - minVector3.getZ());
 		EXTGWTSTLVSceneParameters sceneParameters = new EXTGWTSTLVSceneParameters(height, width);
 
-		boolean firstTime = objectMesh == null;
-		if (!firstTime) {
-			scene.remove(dirLight);
-			scene.remove(spotLight);
-			scene.remove(objectMesh);
-		} 
+		// Clean scene
+		scene.remove(dirLight);
+		scene.remove(spotLight);
+		scene.remove(objectMesh); 
 
 		//Light
 		dirLight = THREE.DirectionalLight( 0xffffff, 1);
@@ -362,12 +399,13 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		camera.setPosition(sceneParameters.getCameraPositionX(), sceneParameters.getCameraPositionY(), sceneParameters.getCameraPositionZ());
 		camera.lookAt(objectMesh.getPosition().getX(), cameraLookAtY, objectMesh.getPosition().getZ());
 
-		if (firstTime) {
-			AnimationScheduler.get().requestAnimationFrame(EXTGWTSTLVLoaderWidgetThreeJS.this);
-			if (!startAnimation) {
-				gyreZSpeed = 0.0f; 
-			}
+		if (!startAnimation) {
+			gyreZSpeed = 0.0f; 
 		}
+		
+		// Drag controller
+		Projector projector = THREE.Projector();
+		dragController = new GWTDragObjectControler(scene, projector);
 	}
 
 	private double getScaleVariation() {
