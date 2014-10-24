@@ -16,6 +16,7 @@ public interface CRONIOBOILogDataConstants {
 	
 	// Data Keys
 	String ISFILTER 			= "isFilter";
+	String NODE_NAME 			= "nodeName";
 	String OFFSET 				= "offset";
 	String NUMBER_RESULTS 		= "numberResults";
 	String TOTAL_EXECUTION_LOGS = "totalExecutionLogs";

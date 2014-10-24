@@ -1,5 +1,6 @@
 package com.imotion.dslam.backend.persistence;
 
+import com.imotion.cronio.backend.persistence.service.lognode.CRONIOBKILogNodePersistenceService;
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKINodeListPersistenceService;
 import com.imotion.dslam.backend.persistence.log.CRONIOBKILogPersistenceService;
@@ -24,6 +25,8 @@ public interface CRONIOBKIPersistenceFactory extends AEMFTIPersistenceFactory {
 	public	CRONIOBKINodePersistenceService newNodePersistence(String sessionId);
 	
 	public	CRONIOBKINodeListPersistenceService newNodeListPersistence(String sessionId);
+	
+	public	CRONIOBKILogNodePersistenceService newLogNodePersistence(String sessionId);
 	
 	public CRONIOBKIPreferencesPersistenceService newPreferencesPersistence(String sessionId);
 

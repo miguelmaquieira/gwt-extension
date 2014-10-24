@@ -1,5 +1,6 @@
 package com.imotion.dslam.backend.persistence;
 
+import com.imotion.cronio.backend.persistence.service.lognode.CRONIOBKLogNodePersistenceServiceJPA;
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKNodePersistenceServiceJPA;
 import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKNodeListPersistenceServiceJPA;
 import com.imotion.dslam.backend.CRONIOBKIConstants;
@@ -43,6 +44,10 @@ public interface CRONIOBKIPersistenceConstants {
 	//NODE
 	public static final String CFG_CRONIO_PERSISTENCE_NODE_PERSISTENCE_IMPL				= "BACKEND.NODE_PERSISTENCE_IMPL";
 	public static final String CTE_CRONIO_PERSISTENCE_NODE_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKNodePersistenceServiceJPA.class.getName();
+	
+	//NODE
+	public static final String CFG_CRONIO_PERSISTENCE_LOGNODE_PERSISTENCE_IMPL				= "BACKEND.LOGNODE_PERSISTENCE_IMPL";
+	public static final String CTE_CRONIO_PERSISTENCE_LOGNODE_PERSISTENCE_DEFAULT_IMPL		= CRONIOBKLogNodePersistenceServiceJPA.class.getName();
 	
 	//NODE_LIST
 	public static final String CFG_CRONIO_PERSISTENCE_NODELIST_PERSISTENCE_IMPL				= "BACKEND.NODELIST_PERSISTENCE_IMPL";

@@ -9,6 +9,7 @@ import com.imotion.dslam.bom.CRONIOBOIExecutionDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILog;
 import com.imotion.dslam.bom.CRONIOBOILogDataConstants;
 import com.imotion.dslam.bom.CRONIOBOILogFilterDataConstants;
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
@@ -86,15 +87,23 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		if (data != null) {
-			accordionPanelContainer.clear();
+		
+		accordionPanelContainer.clear();
 			
-			if (CRONIOBOIExecutionDataConstants.CONSOLE.equals(data.getKey())) {
-				List<AEMFTMetadataElement> logList = data.getSortedElementList();
-				
-				for (AEMFTMetadataElement log : logList) {
-					AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
-					addLogItem(logData, true);
+		if (CRONIOBOIExecutionDataConstants.CONSOLE.equals(data.getKey())) {
+			List<AEMFTMetadataElement> logList = data.getSortedElementList();
+					
+			for (AEMFTMetadataElement log : logList) {
+				AEMFTMetadataElementComposite logData = (AEMFTMetadataElementComposite) log;
+				addLogItem(logData, true);
+			}
+		} else {
+			AEMFTMetadataElementSingle nodeNameData = (AEMFTMetadataElementSingle) data.getElement(CRONIOBOINode.NODE_NAME);
+			if (nodeNameData != null){
+				nodeName = nodeNameData.getValueAsString();
+				if (nodeName != null) {
+					accordionPanelContainer.clear();
+					getFilterForm().setData(data);
 				}
 			} else {
 				AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
@@ -147,11 +156,11 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					} else {
 						pager.buttonNextDisable(false);
 					}
-				}
+				}	
 			}
 		}
-
 	}
+
 	/**
 	 * CRONIOBusDesktopProjectExecutionLogger
 	 */
@@ -255,6 +264,7 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 					getLogsEvt.addElementAsBoolean(CRONIOBOILog.ISFILTER, isFilter);
 					getLogsEvt.addElementAsInt(CRONIOBOILog.OFFSET, offset);
 					getLogsEvt.addElementAsInt(CRONIOBOILog.NUMBER_RESULTS, numberResults);
+					getLogsEvt.addElementAsString(CRONIOBOINode.NODE_NAME, nodeName);
 					getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
 					getLogicalEventHandlerManager().fireEvent(getLogsEvt);
 

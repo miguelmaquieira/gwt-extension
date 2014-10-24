@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.imotion.dslam.bom.CRONIOBOIExecution;
 import com.imotion.dslam.bom.CRONIOBOILog;
+import com.imotion.dslam.bom.CRONIOBOILogFilter;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessService;
 import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
@@ -21,7 +22,6 @@ public class CRONIOBULogBusinessServiceImpl extends CRONIOBUServiceBase implemen
 	public CRONIOBULogBusinessServiceImpl() {
 		super();
 	}
-	
 	
 	@Override
 	public void getFilteredLogs() { 
@@ -64,9 +64,11 @@ public class CRONIOBULogBusinessServiceImpl extends CRONIOBUServiceBase implemen
 		AEMFTMetadataElementSingle		numberResultsData	= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILog.NUMBER_RESULTS);
 		int								offset 				= offsetData.getValueAsInt();
 		int								numberResults 		= numberResultsData.getValueAsInt();
+		AEMFTMetadataElementSingle 		nodeNameData 		= (AEMFTMetadataElementSingle) contextIn.getElement(CRONIOBOILogFilter.FILTER_TEXT);
+		String							nodeName			= nodeNameData.getValueAsString();
 		
-		int totalExecutionLogs	= getLogPersistence().getTotalExecutionLogs(executionId);
-		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId,  offset, numberResults);
+		int totalExecutionLogs	= getLogPersistence().getTotalExecutionLogs(executionId, nodeName);
+		List<CRONIOBOILog> logs = getLogPersistence().getExecutionLogs(executionId, nodeName, offset, numberResults);
 		
 		int resultsNumber;
 		if (logs != null) {

@@ -10,7 +10,7 @@ import com.imotion.dslam.bom.CRONIOBOIVariablesDataConstants;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopPreferencesEventTypes.EVENT_TYPE;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderListActions;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderOpcionalListActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
@@ -36,7 +36,7 @@ public class CRONIOBusDesktopPreferencesMachineVariables extends AEGWTCompositeP
 		initWidget(root);
 		root.addStyleName(CRONIOBusDesktopIStyleConstants.PREFERENCES_LAYOUT_CONTENT_IN_BOX);
 
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
+		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(null, true);
 		root.add(header);
 		
 		header.addClickHandler(new ClickHandler() {

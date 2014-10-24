@@ -2,6 +2,7 @@ package com.imotion.dslam.backend.persistence.jpa;
 
 import java.io.Serializable;
 
+import com.imotion.cronio.backend.persistence.service.lognode.CRONIOBKILogNodePersistenceService;
 import com.imotion.cronio.backend.persistence.service.node.CRONIOBKINodePersistenceService;
 import com.imotion.cronio.backend.persistence.service.nodelist.CRONIOBKINodeListPersistenceService;
 import com.imotion.dslam.backend.persistence.CRONIOBKPersistenceServiceBase;
@@ -26,6 +27,7 @@ public abstract class CRONIOBKPersistenceServiceBaseJPA<T, Q extends T, Id exten
 	private CRONIOBKIFilePersistenceService 					filePersistence;
 	private CRONIOBKIProcessPersistenceService 					processPersistence;
 	private CRONIOBKINodePersistenceService						nodePersistence;
+	private CRONIOBKILogNodePersistenceService					logNodePersistence;
 	private CRONIOBKINodeListPersistenceService					nodeListPersistence;
 	private CRONIOBKIPreferencesPersistenceService	 			preferencesPersistence;
 	private CRONIOBKIMachinePropertiesPersistenceService		machinePropertiesPersistence;
@@ -84,6 +86,10 @@ public abstract class CRONIOBKPersistenceServiceBaseJPA<T, Q extends T, Id exten
 		if (nodePersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodePersistence);
 			nodePersistence = null;
+		}
+		if (logNodePersistence != null) {
+			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) logNodePersistence);
+			logNodePersistence = null;
 		}
 		if (nodeListPersistence != null) {
 			getFactoryPersistence().release((AEMFTIPersistenceService<?, ?, ?>) nodeListPersistence);
@@ -148,6 +154,13 @@ public abstract class CRONIOBKPersistenceServiceBaseJPA<T, Q extends T, Id exten
 			nodePersistence = (CRONIOBKINodePersistenceService) getFactoryPersistence().newNodePersistence(getSessionId());
 		}
 		return nodePersistence;
+	}
+	
+	protected CRONIOBKILogNodePersistenceService getLogNodePersistence() {
+		if (logNodePersistence == null) {
+			logNodePersistence = (CRONIOBKILogNodePersistenceService) getFactoryPersistence().newLogNodePersistence(getSessionId());
+		}
+		return logNodePersistence;
 	}
 	
 	protected CRONIOBKINodeListPersistenceService getNodeListPersistence() {

@@ -37,7 +37,7 @@ public class CRONIOBusDesktopProcessConfigureSchedule extends AEGWTCompositePane
 		
 		addJS = false;
 
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
+		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(null, true);
 		root.add(header);
 		
 		header.addClickHandler(new ClickHandler() {

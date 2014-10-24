@@ -9,6 +9,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.data.CRONIOBOLogFilter;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
@@ -135,8 +136,9 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 	}
 
 	@Override
-	public void setData(AEMFTMetadataElementComposite connectionConfigureData) {
-
+	public void setData(AEMFTMetadataElementComposite filterFormData) {
+		String nodeName = getElementController().getElementAsString(CRONIOBOINode.NODE_NAME, filterFormData);
+		filterTextBox.setText(nodeName);
 	}
 
 	private boolean checkErrors() {

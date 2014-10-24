@@ -128,9 +128,7 @@ public class CRONIOBusDesktopProcessAddNodeListForm extends AEGWTPopup {
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite variableData) {
-		if (variableData != null) {
-
-		}
+		
 	}
 	
 	/**

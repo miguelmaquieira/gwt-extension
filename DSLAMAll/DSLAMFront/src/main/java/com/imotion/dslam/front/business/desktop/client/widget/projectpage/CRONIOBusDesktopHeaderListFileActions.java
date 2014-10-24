@@ -24,14 +24,14 @@ import com.selene.arch.exe.gwt.client.utils.AEGWTJSONUtils;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeaderListActions {
+public class CRONIOBusDesktopHeaderListFileActions extends CRONIOBusDesktopHeaderOpcionalListActions {
 	public static final String NAME = "CRONIOBusDesktopHeaderListActions";
 	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FormPanel							form;
 	
 	public CRONIOBusDesktopHeaderListFileActions(String text) {
-		super(text);
+		super(text, true);
 		setAddButtonVisible(false);
 		setDeleteButtonVisible(false);
 		form = new FormPanel();

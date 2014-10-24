@@ -15,8 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIUser;
 import com.selene.arch.base.bom.data.AEMFTLoginData;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 

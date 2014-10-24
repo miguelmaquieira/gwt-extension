@@ -13,6 +13,7 @@
 		<class>com.imotion.dslam.bom.data.CRONIOBOFile</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBOProcess</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBONode</class>
+		<class>com.imotion.dslam.bom.data.CRONIOBOLogNode</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBONodeList</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBOMachineProperties</class>
 		<class>com.imotion.dslam.bom.data.CRONIOBOUserPreferences</class>

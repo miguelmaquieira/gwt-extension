@@ -19,9 +19,10 @@ public class CRONIOBusDesktopLoggerNodeListElement extends AEGWTCompositePanel {
 	private AEGWTBootstrapTreeMenu menu;
 	private AEGWTBootstrapTreeMenuFinalItem menuItem;
 
-	public CRONIOBusDesktopLoggerNodeListElement(final String nodeId, String nodeName, AEGWTCompositePanel parentWidget, boolean machineExist) {
+	public CRONIOBusDesktopLoggerNodeListElement(String nodeName, AEGWTCompositePanel parentWidget, boolean machineExist) {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
+		setId(nodeName);
 		
 		menu = new AEGWTBootstrapTreeMenu();
 		root.add(menu);

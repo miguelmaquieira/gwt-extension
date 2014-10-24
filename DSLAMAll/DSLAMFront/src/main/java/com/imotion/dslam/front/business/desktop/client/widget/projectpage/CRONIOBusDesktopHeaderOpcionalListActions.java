@@ -14,8 +14,8 @@ import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapGlyphiconButton;
 import com.selene.arch.exe.gwt.client.ui.widget.label.AEGWTLabel;
 
-public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
-	public static final String NAME = "CRONIOBusDesktopHeaderListActions";
+public class CRONIOBusDesktopHeaderOpcionalListActions extends AEGWTCompositePanel {
+	public static final String NAME = "CRONIOBusDesktopHeaderOpcionalListActions";
 	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 	
 	private FlowPanel											headerZone;
@@ -23,7 +23,7 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 	private AEGWTBootstrapGlyphiconButton 						addButton;
 	private AEGWTBootstrapGlyphiconButton 						deleteButton;
 	
-	public CRONIOBusDesktopHeaderListActions(String text) {
+	public CRONIOBusDesktopHeaderOpcionalListActions(String text, boolean enableActions) {
 		headerZone = new FlowPanel();
 		initWidget(headerZone);
 		headerZone.addStyleName(CRONIOBusDesktopIStyleConstants.HEADER_ACTIONS);
@@ -33,32 +33,38 @@ public class CRONIOBusDesktopHeaderListActions extends AEGWTCompositePanel {
 			headerLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 			headerZone.add(headerLabel);
 			
-			actionsZone = new FlowPanel();
-			headerZone.add(actionsZone);
+			if (enableActions) {
+				actionsZone = new FlowPanel();
+				headerZone.add(actionsZone);
+				
+				deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
+				deleteButton.addStyleName(CRONIOBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
+				deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+				deleteButton.setVisible(false);
+				actionsZone.add(deleteButton);
+				
+				addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
+				addButton.addStyleName(CRONIOBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
+				addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+				actionsZone.add(addButton);
+			}
 			
-			deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
-			deleteButton.addStyleName(CRONIOBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
-			deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			deleteButton.setVisible(false);
-			actionsZone.add(deleteButton);
-			
-			addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-			addButton.addStyleName(CRONIOBusDesktopIStyleConstants.HEADER_ACTIONS_WITH_LABEL_BUTTON);
-			addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			actionsZone.add(addButton);
 			
 		} else {
-			actionsZone = new FlowPanel();
-			headerZone.add(actionsZone);
+			if (enableActions) {
+				actionsZone = new FlowPanel();
+				headerZone.add(actionsZone);
+				
+				addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
+				addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+				actionsZone.add(addButton);
+				
+				deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
+				deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
+				deleteButton.setVisible(false);
+				actionsZone.add(deleteButton);
+			}
 			
-			addButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_PLUS, null, TEXTS.add());
-			addButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			actionsZone.add(addButton);
-			
-			deleteButton = new AEGWTBootstrapGlyphiconButton(AEGWTIBoostrapConstants.GLYPHICON_TRASH, null, TEXTS.delete());
-			deleteButton.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
-			deleteButton.setVisible(false);
-			actionsZone.add(deleteButton);
 		}
 	}
 	

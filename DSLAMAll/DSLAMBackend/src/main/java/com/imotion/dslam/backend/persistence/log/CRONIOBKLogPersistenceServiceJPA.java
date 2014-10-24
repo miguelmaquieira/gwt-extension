@@ -58,10 +58,16 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 	}
 	
 	@Override
-	public List<CRONIOBOILog> getExecutionLogs(String executionId, int offset, int numberResults) {
+	public List<CRONIOBOILog> getExecutionLogs(String executionId, String nodeName, int offset, int numberResults) {
 
+		String node = "";
+		if (!AEMFTCommonUtilsBase.isEmptyString(nodeName)) {
+			node = nodeName;
+		}
+		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
-							+ "WHERE o.message LIKE '"+ executionId +":%'";
+							+ "WHERE o.message LIKE '"+ executionId +":%'"
+							+ "AND o.message LIKE '%"+ node +"%' ";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery, offset, numberResults);
 		//Temporal solution(bug:eclipselink query methods setMaxRows and setFirstResult don't work together)		
 		List<CRONIOBOLog> subLogList = getSublist(logsListJpa, numberResults); 
@@ -71,10 +77,15 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 	
 	
 	@Override
-	public int getTotalExecutionLogs(String executionId) {
-
+	public int getTotalExecutionLogs(String executionId, String nodeName) {
+		
+		String node = "";
+		if (!AEMFTCommonUtilsBase.isEmptyString(nodeName)) {
+			node = nodeName;
+		}
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
-							+ "WHERE o.message LIKE '"+ executionId +":%'";
+							+ "WHERE o.message LIKE '"+ executionId +":%'"
+							+ "AND o.message LIKE '%"+ node +"%' ";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
 		
 		return logsListJpa.size();

@@ -7,11 +7,9 @@ import java.util.List;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.bom.CRONIOBOINode;
-import com.imotion.dslam.bom.CRONIOBOINodeDataConstants;
-import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessNodeListElement;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderOpcionalListActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasComparator;
 import com.selene.arch.exe.gwt.client.sort.AEGWTHasSort;
@@ -29,13 +27,19 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 	
 	private FlowPanel 								elementListContainerZone;
 	private FlowPanel 								elementListContainer;
-
+	private CRONIOBusDesktopHeaderOpcionalListActions		header;
+	
 	private AEGWTComparator 						nameComparatorAsc;
 	
 	public CRONIOBusDesktopLoggerNodeList() {
 		FlowPanel root = new FlowPanel();
 		initWidget(root);
 		addStyleName(CRONIOBusDesktopIStyleConstants.NODE_LIST);
+		
+		header = new CRONIOBusDesktopHeaderOpcionalListActions(TEXTS.node_list(), false);
+		root.add(header);
+		header.setAddButtonVisible(false);
+		header.setDeleteButtonVisible(false);
 		
 		//Container
 		elementListContainerZone = new FlowPanel();
@@ -49,14 +53,8 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 		initComparators();
 	}
 	
-	public void addElement(AEMFTMetadataElementComposite elementData) {
-		String		nodeId			= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_ID	, elementData);
-		String		nodeName		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_NAME, elementData);
-		String		machineType		= getElementController().getElementAsString(CRONIOBOINodeDataConstants.NODE_TYPE, elementData);
-		AEMFTMetadataElementComposite machineTypesDataList = getElementController().getElementAsComposite(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, elementData);
-		boolean		machineExists	= getElementController().contains(machineType, machineTypesDataList);
-		
-		CRONIOBusDesktopLoggerNodeListElement element = createElement(nodeId, nodeName, machineExists);
+	public void addElement(String nodeName) {
+		CRONIOBusDesktopLoggerNodeListElement element = createElement(nodeName, true);
 		elementListContainer.add(element);
 		AEGWTJQueryPerfectScrollBar.updateScroll(NAME);
 	}
@@ -65,14 +63,14 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 		if (elementData != null) {
 			
 			String nodeId = getElementController().getElementAsString(CRONIOBOINode.NODE_ID, elementData);
-			CRONIOBusDesktopProcessNodeListElement elementWidget = getElementById(String.valueOf(nodeId));
+			CRONIOBusDesktopLoggerNodeListElement elementWidget = getElementById(String.valueOf(nodeId));
 			elementWidget.setData(elementData);
 			sort(null, false);
 		}
 	}
 	
 	public void removeElement(String nodeId) {
-		CRONIOBusDesktopProcessNodeListElement element = getElementById(nodeId);
+		CRONIOBusDesktopLoggerNodeListElement element = getElementById(nodeId);
 		elementListContainer.remove(element);
 	}
 	
@@ -85,8 +83,8 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 	}
 	
 	public void setElementSeleted(String srcWidget) {
-		List<CRONIOBusDesktopProcessNodeListElement> nodeList = getElementWidgetList();
-		for (CRONIOBusDesktopProcessNodeListElement nodeElement : nodeList) {
+		List<CRONIOBusDesktopLoggerNodeListElement> nodeList = getElementWidgetList();
+		for (CRONIOBusDesktopLoggerNodeListElement nodeElement : nodeList) {
 			if (srcWidget.equals(nodeElement.getElementName())){
 				nodeElement.setSelected(true);
 			} else {
@@ -132,11 +130,11 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 
 	@Override
 	public void sort(String comparatorKey, boolean ascendent) {
-		List<CRONIOBusDesktopProcessNodeListElement> widgetList = getElementWidgetList();
+		List<CRONIOBusDesktopLoggerNodeListElement> widgetList = getElementWidgetList();
 		if (widgetList != null && widgetList.size() > 0) {
 			Collections.sort(widgetList, getComparator(null, false));
 			elementListContainer.clear();
-			for (CRONIOBusDesktopProcessNodeListElement item : widgetList) {
+			for (CRONIOBusDesktopLoggerNodeListElement item : widgetList) {
 				elementListContainer.add(item);
 			}
 		}
@@ -156,8 +154,8 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 
 			@Override
 			public int compare(AEGWTICompositePanel o1, AEGWTICompositePanel o2) {
-				CRONIOBusDesktopProcessNodeListElement o1Element = (CRONIOBusDesktopProcessNodeListElement) o1;
-				CRONIOBusDesktopProcessNodeListElement o2Element = (CRONIOBusDesktopProcessNodeListElement) o2;
+				CRONIOBusDesktopLoggerNodeListElement o1Element = (CRONIOBusDesktopLoggerNodeListElement) o1;
+				CRONIOBusDesktopLoggerNodeListElement o2Element = (CRONIOBusDesktopLoggerNodeListElement) o2;
 				return o1Element.getElementName().compareTo(o2Element.getElementName());
 			}
 		};
@@ -167,27 +165,27 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTCompositePanel implemen
 	 * PROTECTED
 	 */
 	
-	protected CRONIOBusDesktopLoggerNodeListElement createElement(String nodeId, String nodeName, boolean machineExist) {
-		return new CRONIOBusDesktopLoggerNodeListElement(nodeId, nodeName, this, machineExist);
+	protected CRONIOBusDesktopLoggerNodeListElement createElement(String nodeName, boolean machineExist) {
+		return new CRONIOBusDesktopLoggerNodeListElement(nodeName, this, machineExist);
 	}
 		 
 	/**
 	 * PRIVATE
 	 */
-	private List<CRONIOBusDesktopProcessNodeListElement> getElementWidgetList() {
-		List<CRONIOBusDesktopProcessNodeListElement> widgetList = new ArrayList<>();
+	private List<CRONIOBusDesktopLoggerNodeListElement> getElementWidgetList() {
+		List<CRONIOBusDesktopLoggerNodeListElement> widgetList = new ArrayList<>();
 		for (int i = 0; i < elementListContainer.getWidgetCount() - 1; i++) {
-			CRONIOBusDesktopProcessNodeListElement elementWidget = (CRONIOBusDesktopProcessNodeListElement) elementListContainer.getWidget(i);
+			CRONIOBusDesktopLoggerNodeListElement elementWidget = (CRONIOBusDesktopLoggerNodeListElement) elementListContainer.getWidget(i);
 			widgetList.add(elementWidget);
 		}
 		return widgetList;
 	}
 	
-	private CRONIOBusDesktopProcessNodeListElement getElementById(String elementId) {
-		CRONIOBusDesktopProcessNodeListElement elementWidget = null;
+	private CRONIOBusDesktopLoggerNodeListElement getElementById(String elementId) {
+		CRONIOBusDesktopLoggerNodeListElement elementWidget = null;
 		int itemCount = elementListContainer.getWidgetCount();
 		for (int i = 0; i < itemCount; i++) {
-			CRONIOBusDesktopProcessNodeListElement currentElementWidget = (CRONIOBusDesktopProcessNodeListElement) elementListContainer.getWidget(i);
+			CRONIOBusDesktopLoggerNodeListElement currentElementWidget = (CRONIOBusDesktopLoggerNodeListElement) elementListContainer.getWidget(i);
 			if (elementId.equals(currentElementWidget.getId())) {
 				elementWidget = currentElementWidget;
 				break;

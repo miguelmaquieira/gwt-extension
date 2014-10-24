@@ -144,7 +144,7 @@
 	border: medium none;
 	width: 13%;
 	margin-top: -3px;
-	background-color: #EEEEEE;
+	background-color: #FFFFFF;
 }
 
 .aegwt-bootstrap-tree-menu-item-button-invisible {
@@ -164,6 +164,14 @@
 
 .chronium_studio-list-container .tree-toogler:hover { 
     background-color: #EEEEEE;
+}
+
+.aegwt-bootstrap-tree-menu-item-div-with-button:hover {
+	background-color: #EEEEEE;
+}
+
+.aegwt-bootstrap-tree-menu-item-div-with-button:hover > button {
+	background-color: #EEEEEE;
 }
 
 .chronium_studio-executeForm-inputZone ul.scrollable-menu {
@@ -449,13 +457,35 @@
 	margin: 10px;
 }
 
-.chronium_studio-processConfigureNodesInfoZone>.panel {
-	border-radius: 3px;
-	box-shadow: 0px 0px 3px rgb(184, 184, 184);
-	margin: 10px;
-}
+/* .chronium_studio-execution-loggerNodesLeftZone { */
+/*     padding-left: 0px; */
+/*     padding-right: 0px; */
+/* } */
 
-.chronium_studio-processConfigureNodesVariableList {
+/* .chronium_studio-execution-loggerNodesListZone { */
+/* 	padding-left: 0px; */
+/* 	padding-right: 0px; */
+/* 	border-radius: 3px; */
+/* 	box-shadow: 0px 0px 3px rgb(184, 184, 184); */
+/* 	margin: 10px; */
+/* } */
+
+/* .chronium_studio-execution-loggerNodesContainer .nav > li > a { */
+/*     padding: 0px; */
+/* } */
+
+/* .chronium_studio-execution-loggerNodesContainer .nav-list { */
+/*     padding-left: 5px; */
+/*     padding-right: 5px; */
+/* } */
+
+/* .chronium_studio-execution-loggerNodesContainer .nav .nav-divider { */
+/*     margin: 5px 0px; */
+/* } */
+
+
+
+.chronium_studio-processConfigureNodesInfoZone>.panel {
 	border-radius: 3px;
 	box-shadow: 0px 0px 3px rgb(184, 184, 184);
 	margin: 10px;
@@ -481,6 +511,12 @@
 	text-overflow: ellipsis;
 	visibility: visible;
 	white-space: nowrap;
+}
+
+.chronium_studio-processConfigureNodesVariableList {
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px rgb(184, 184, 184);
+	margin: 10px;
 }
 
 .chronium_studio-processConfigureNodesRightZone {
@@ -514,6 +550,7 @@
 	padding-left: 0px;
 	font-weight: bold;
 }
+
 .chronium_studio-projectProcess-nodeInfo-contentLabel {
 	float: left;
 }
@@ -1040,6 +1077,61 @@
 	margin-top: 20px;
 
 }
+
+/*****************************************
+*			LOGGER
+******************************************/
+.chronium_studio-execution-loggerInfoZone >.panel {
+	border-radius: 3px;
+	box-shadow: 0px 0px 3px rgb(184, 184, 184);
+	margin: 10px;
+}
+
+.chronium_studio-execution-loggerInfoZone >.panel-default>.panel-heading
+	{
+	height: 35px;
+	background-color: rgb(242, 241, 240);
+	border-bottom: 1px solid rgb(204, 204, 204);
+	padding: 5px;
+	font-weight: bold;
+}
+
+.chronium_studio-execution-loggerInfoOnlyContentLabel {
+	padding-left: 0px;
+}
+
+.chronium_studio-execution-loggerInfoZone >.panel-default>.panel-heading>.panel-title
+	{
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	text-overflow: ellipsis;
+	visibility: visible;
+	white-space: nowrap;
+}
+
+.chronium_studio-execution-loggerInfoLabel {
+	float: left;
+	padding-left: 0px;
+	font-weight: bold;
+}
+
+.chronium_studio-execution-loggerInfoLabelZone {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.chronium_studio-execution-loggerNodesListZone {
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px rgb(184, 184, 184);
+    margin: 10px;
+    width: auto !important;
+    height: auto !important;
+}
+
 
 /*****************************************
 *			COMMON

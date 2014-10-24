@@ -2,12 +2,17 @@ package com.imotion.dslam.front.business.desktop.client.widget.execution;
 
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
+import com.imotion.dslam.bom.CRONIOBOIExecution;
+import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.view.log.CRONIOBusI18NLogTexts;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopHeaderOpcionalListActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
@@ -15,45 +20,42 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
 public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements AEGWTHasLogicalEventHandlers, CRONIOBusDesktopHasProjectEventHandlers {
-	public static final String NAME = "CRONIOBusDesktopProcessConfigureNodes";
-	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
+	public static final String NAME = "CRONIOBusDesktopLoggerNodes";
+	private static CRONIOBusI18NLogTexts TEXTS = GWT.create(CRONIOBusI18NLogTexts.class);
 	
 	private FlowPanel 									root;
-	private CRONIOBusDesktopLoggerNodeList				loggerNodeList;
-	private CRONIOBusDesktopLoggerNodesInfo				loggerNodeInfoZone;
+	private CRONIOBusDesktopLoggerNodesList				loggerNodeList;
+	private CRONIOBusDesktopLoggerExecutionInfo			loggerExecutionInfoZone;
 	
-	private	 AEMFTMetadataElementComposite				loggerNodesData;
-	private	 AEMFTMetadataElementComposite				nodesDataList;
-	private AEMFTMetadataElementComposite				machineListData;
+	private long 	executionId;
+	private String projectId;
 	
 	public CRONIOBusDesktopLoggerNodes() {
 		root = new FlowPanel();
 		initWidget(root);
 		
-		FlowPanel leftZone 	= new FlowPanel();
-		root.add(leftZone);
-		leftZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_LEFTZONE);
-		leftZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_4);
+		loggerExecutionInfoZone = new CRONIOBusDesktopLoggerExecutionInfo();
+		root.add(loggerExecutionInfoZone);
+		loggerExecutionInfoZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_INFOZONE);
+		loggerExecutionInfoZone.setVisible(false);
 		
-		FlowPanel rightZone = new FlowPanel();
-		root.add(rightZone);
-		rightZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_RIGHTZONE);
-		rightZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_8);
+		FlowPanel loggerNodeListZone = new FlowPanel();
+		loggerNodeListZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_LISTZONE);
+		root.add(loggerNodeListZone);
 		
-		loggerNodeList = new CRONIOBusDesktopLoggerNodeList();
-		leftZone.add(loggerNodeList);
-		loggerNodeList.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_LISTZONE);
+		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(TEXTS.logger_node_list(), false);
+		loggerNodeListZone.add(header);
 		
-		loggerNodeInfoZone = new CRONIOBusDesktopLoggerNodesInfo();
-		rightZone.add(loggerNodeInfoZone);
-		loggerNodeInfoZone.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_INFOZONE);
-		loggerNodeInfoZone.setVisible(false);
+		loggerNodeList = new CRONIOBusDesktopLoggerNodesList(null);
+		loggerNodeListZone.add(loggerNodeList);
+		loggerNodeList.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_LIST);
+		
 	}
 	
 	public void reset() {
 		loggerNodeList.reset();
-		loggerNodeInfoZone.reset();
-		loggerNodeInfoZone.setVisible(false);
+		loggerExecutionInfoZone.reset();
+		loggerExecutionInfoZone.setVisible(false);
 	}
 	
 	/**
@@ -67,67 +69,26 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		reset();
-//		AEMFTMetadataElementComposite nodesNodeList = null;
-//		AEMFTMetadataElementComposite nodesListData = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, data);
-//		if (nodesListData != null) {
-//			nodesNodeList = getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, nodesListData);
-//			AEMFTMetadataElementComposite machineList 	= getElementController().getElementAsComposite(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, nodesListData);
-//			if (machineList != null) {
-//				machineListData = machineList;
-//				nodesListData.removeElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST);
-//			}
-//			if (nodesListData != null) {
-//				nodesDataList = nodesListData;
-//			}
-//		}
-//		
-//		AEMFTMetadataElementComposite nodes 		= getElementController().getElementAsComposite(CRONIOBOINodeList.NODELIST_NODE_LIST, data);
-//		
-//		if (nodes != null) {
-//			nodesData = nodes;
-//			
-//			List<AEMFTMetadataElement> elementDataList = nodes.getSortedElementList();
-//			for (AEMFTMetadataElement elementData : elementDataList) {
-//				AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
-//				elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineListData.cloneObject());
-//
-//				if (!CRONIOBOIProject.INFO.equals(elementData.getKey())) {
-//					nodeList.addElement(elementDataComposite);
-//				}
-//			}
-//			nodesDataList.addElement(CRONIOBOINodeList.NODELIST_NODE_LIST, nodes);
-//		} else {
-//			nodesData = nodesNodeList;
-//			if (nodesData != null) {
-//				List<AEMFTMetadataElement> elementDataList = nodesData.getSortedElementList();
-//				for (AEMFTMetadataElement elementData : elementDataList) {
-//					AEMFTMetadataElementComposite elementDataComposite = (AEMFTMetadataElementComposite) elementData;
-//					elementDataComposite.addElement(CRONIOBOIPreferences.PREFERENCES_MACHINE_PROPERTIES_LIST, machineListData.cloneObject());
-//
-//					if (!CRONIOBOIProject.INFO.equals(elementData.getKey())) {
-//						nodeList.addElement(elementDataComposite);
-//					}
-//				}
-//			}
-//		}
-//		nodeList.addAddNodeElement();
-//		
-//		if (nodes != null) {
-//			AEGWTLogicalEvent updateContextEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-//			updateContextEvt.setEventType(LOGICAL_TYPE.UPDATE_EVENT);
-//			updateContextEvt.setSourceWidget(getName());
-//			updateContextEvt.addElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, nodesDataList);
-//			getLogicalEventHandlerManager().fireEvent(updateContextEvt);
-//		}
-//		
+		if (data != null) {
+			AEMFTMetadataElementComposite logNodesData = data.getCompositeElement(CRONIOBOIExecution.LOGNODES);
+			AEMFTMetadataElementSingle executionIdData 	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIExecution.EXECUTION_ID);
+			executionId = executionIdData.getValueAsLong();
+			AEMFTMetadataElementSingle projectIdData 	= (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIProject.PROJECT_ID);
+			projectId = projectIdData.getValueAsString();
+			loggerNodeList.setData(logNodesData);
+			loggerExecutionInfoZone.setData(data);
+			loggerNodeList.setVisible(true);
+			loggerExecutionInfoZone.setVisible(true);
+			//loggerNodeList.sort(null, false);
+		}
+	
 	}
 	
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
-//		getLogicalEventHandlerManager().addLogicalEventHandler(this);
-//		nodeList.postDisplay();
-//		nodeInfoZone.postDisplay();
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+
 	}
 	
 	/**
@@ -136,6 +97,28 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	
 	@Override
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE evtTyp = evt.getEventType();
+		String sourceWidget = evt.getSourceWidget();
+		if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp) && CRONIOBusDesktopLoggerNodesList.NAME.equals(sourceWidget)) {
+			String nodeName = evt.getElementAsString(AEGWTIBoostrapConstants.TR_ID);
+			AEGWTLogicalEvent getLogsEvt = new  AEGWTLogicalEvent(getWindowName(), getName(), null);
+			getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
+			getLogsEvt.addElementAsString(CRONIOBOINode.NODE_NAME	, nodeName);
+			getLogsEvt.addElementAsString(CRONIOBOIExecution.EXECUTION_ID	, String.valueOf(executionId));
+			getLogsEvt.addElementAsString(CRONIOBOIProject.PROJECT_ID, projectId);
+			getLogicalEventHandlerManager().fireEvent(getLogsEvt);
+		} 	
+	} 
+
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.GET_EVENT.equals(type);
+
+	}
+	
+//	@Override
+//	public void dispatchEvent(AEGWTLogicalEvent evt) {
 //		String			srcWidget		= evt.getSourceWidget();
 //		LOGICAL_TYPE	type			= evt.getEventType();
 //		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
@@ -205,12 +188,12 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 //			getLogicalEventHandlerManager().fireEvent(saveEvt);
 //			
 //		}	
-	}
-
-	@Override
-	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.OPEN_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
-	}
+//	}
+//
+//	@Override
+//	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+//		return LOGICAL_TYPE.OPEN_EVENT.equals(type) || LOGICAL_TYPE.SAVE_EVENT.equals(type);
+//	}
 	
 	/**
 	 * CRONIOBusDesktopHasProjectEventHandlers
@@ -218,8 +201,7 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
@@ -231,5 +213,4 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	/**
 	 * PRIVATE
 	 */
-
 }

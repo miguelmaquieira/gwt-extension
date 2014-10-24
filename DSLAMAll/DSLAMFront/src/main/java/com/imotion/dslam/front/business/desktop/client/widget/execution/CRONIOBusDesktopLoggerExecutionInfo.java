@@ -3,28 +3,27 @@ package com.imotion.dslam.front.business.desktop.client.widget.execution;
 import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopNodeInfoPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 
-public class CRONIOBusDesktopLoggerNodesInfo extends AEGWTCompositePanel {
-	public static final String NAME = "CRONIOBusDesktopLoggerNodeInfo";
+public class CRONIOBusDesktopLoggerExecutionInfo extends AEGWTCompositePanel {
+	public static final String NAME = "CRONIOBusDesktopLoggerExecutionInfo";
 	private static CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private FlowPanel 										root;
-	private CRONIOBusDesktopNodeInfoPanel					loggerNodeInfoPanel;
-	private	 AEMFTMetadataElementComposite					loggerNodeData;
+	private CRONIOBusDesktopLoggerExecutionInfoPanel				loggerExecutionInfoPanel;
+	private	 AEMFTMetadataElementComposite					loggerExecutionData;
 
-	public CRONIOBusDesktopLoggerNodesInfo() {
+	public CRONIOBusDesktopLoggerExecutionInfo() {
 		root = new FlowPanel();
 		initWidget(root);
 
-		loggerNodeInfoPanel 		= new CRONIOBusDesktopNodeInfoPanel(TEXTS.node_information());
-		root.add(loggerNodeInfoPanel);
+		loggerExecutionInfoPanel 		= new CRONIOBusDesktopLoggerExecutionInfoPanel(TEXTS.execution_information());
+		root.add(loggerExecutionInfoPanel);
 	}
 
 	public void reset() {
-		loggerNodeInfoPanel.reset();
+		loggerExecutionInfoPanel.reset();
 	}
 
 	/**
@@ -42,12 +41,12 @@ public class CRONIOBusDesktopLoggerNodesInfo extends AEGWTCompositePanel {
 	}
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
-		loggerNodeData = data;
-		loggerNodeInfoPanel.setData(data);
+		loggerExecutionData = data;
+		loggerExecutionInfoPanel.setData(data);
 	}
 
 	public AEMFTMetadataElementComposite getData() {
-		return loggerNodeData;
+		return loggerExecutionData;
 	}
 
 	/**

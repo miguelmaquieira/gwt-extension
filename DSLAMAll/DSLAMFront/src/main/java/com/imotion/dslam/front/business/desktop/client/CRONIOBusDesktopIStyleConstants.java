@@ -153,10 +153,15 @@ public interface CRONIOBusDesktopIStyleConstants {
 	String EXECUTION_LOGGER_TABS_PROMPT_ZONE 				= EXECUTION					+ "-loggerTabsPromptZone";				//chronium_studio-execution-loggerTabsPromptZone
 	String EXECUTION_LOGGER_NODES_LEFTZONE					= EXECUTION_LOGGER			+ "NodesLeftZone";						//chronium_studio-execution-loggerNodesLeftZone
 	String EXECUTION_LOGGER_NODES_RIGHTZONE					= EXECUTION_LOGGER			+ "NodesRightZone";						//chronium_studio-execution-loggerNodesRightZone
-	String EXECUTION_LOGGER_NODES_INFOZONE 					= EXECUTION_LOGGER			+ "NodesInfoZone";						//chronium_studio-execution-loggerNodesInfoZone
+	String EXECUTION_LOGGER_INFOZONE 						= EXECUTION_LOGGER			+ "InfoZone";							//chronium_studio-execution-loggerInfoZone
 	String EXECUTION_LOGGER_NODES_LISTZONE					= EXECUTION_LOGGER			+ "NodesListZone";						//chronium_studio-execution-loggerNodesListZone
+	String EXECUTION_LOGGER_NODES_LIST						= EXECUTION_LOGGER			+ "NodesList";							//chronium_studio-execution-loggerNodesList
 	String EXECUTION_LOGGER_NODES_CONTAINERZONE				= EXECUTION_LOGGER			+ "NodesContainerZone";					//chronium_studio-execution-loggerNodesContainerZone
 	String EXECUTION_LOGGER_NODES_CONTAINER					= EXECUTION_LOGGER			+ "NodesContainer";						//chronium_studio-execution-loggerNodesContainer
+	String EXECUTION_LOGGER_EXECUTION_INFO_LABEL_ZONE		= EXECUTION_LOGGER          + "InfoLabelZone";						//chronium_studio-execution-loggerInfoLabelZone
+	String EXECUTION_LOGGER_EXECUTION_INFO_LABEL			= EXECUTION_LOGGER          + "InfoLabel";							//chronium_studio-execution-loggerInfoLabel
+	String EXECUTION_LOGGER_EXECUTION_INFO_CONTENT_LABEL	= EXECUTION_LOGGER          + "InfoContentLabel";					//chronium_studio-execution-loggerInfoContentLabel
+	String EXECUTION_LOGGER_EXECUTION_INFO_ONLY_CONTENT_LABEL	= EXECUTION_LOGGER      + "InfoOnlyContentLabel";				//chronium_studio-execution-loggerInfoOnlyContentLabel
 	
 	//PREFERENCES
 	String PREFERENCES_VIEW 							= APP_ID_PREFFIX			+ "preferencesView";	//chronium_studio-preferencesView

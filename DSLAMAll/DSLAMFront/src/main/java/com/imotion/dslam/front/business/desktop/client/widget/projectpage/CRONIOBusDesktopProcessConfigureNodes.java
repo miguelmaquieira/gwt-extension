@@ -150,7 +150,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		if (CRONIOBusDesktopHeaderListActions.NAME.equals(srcWidget)) {
+		if (CRONIOBusDesktopHeaderOpcionalListActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(CRONIOBOINodeList.NODELIST_DATA);

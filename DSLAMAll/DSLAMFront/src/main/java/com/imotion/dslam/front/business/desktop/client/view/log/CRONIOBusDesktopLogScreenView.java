@@ -2,27 +2,27 @@ package com.imotion.dslam.front.business.desktop.client.view.log;
 
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.imotion.dslam.bom.CRONIOBOIExecution;
-import com.imotion.dslam.business.service.CRONIOBUILogBusinessServiceConstants;
+import com.imotion.dslam.bom.CRONIOBOINode;
+import com.imotion.dslam.bom.CRONIOBOIProject;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.front.business.desktop.client.presenter.log.CRONIOBusDesktopLogDisplay;
 import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
-import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopAccordionLoggerContainer;
+import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopLoggerNodes;
 import com.imotion.dslam.front.business.desktop.client.widget.execution.CRONIOBusDesktopLoggerSectionsDeckPanel;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
-import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
+import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay, CRONIOBusDesktopHasProjectEventHandlers {
+public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView implements CRONIOBusDesktopLogDisplay, CRONIOBusDesktopHasProjectEventHandlers, AEGWTHasLogicalEventHandlers  {
 
 	public static final String NAME = "CRONIOBusDesktopLogScreenView";
-	
+
 	private FlowPanel	root;
-	private CRONIOBusDesktopAccordionLoggerContainer 	logger;
 	private CRONIOBusDesktopLoggerSectionsDeckPanel		loggerSectionsDeckPanel;
 	
 	public CRONIOBusDesktopLogScreenView() {
@@ -30,12 +30,12 @@ public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView
 		initContentPanel(root);
 		root.addStyleName(CRONIOBusDesktopIStyleConstants.LOGS);
 		setHeightToDecrease(78);
-		
+
 		loggerSectionsDeckPanel = new CRONIOBusDesktopLoggerSectionsDeckPanel();
 		root.add(loggerSectionsDeckPanel);
 		loggerSectionsDeckPanel.setVisibility(Visibility.HIDDEN);	
 	}
-	
+
 	@Override
 	public void openLogSection(String sectionId ,AEMFTMetadataElementComposite logData) {
 		loggerSectionsDeckPanel.showSection(sectionId, logData);
@@ -52,44 +52,26 @@ public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView
 	@Override
 	public void postDisplay() {
 		super.postDisplay();
+		loggerSectionsDeckPanel.postDisplay();
 		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
+		getLogicalEventHandlerManager().addLogicalEventHandler(this);
 	}
 
 	@Override
 	public void setData(AEMFTMetadataElementComposite data) {
 		if (data != null) {
-			AEMFTMetadataElementComposite executionLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.EXECUTION_LOGS_DATA);
-			AEMFTMetadataElementComposite filteredLogsData = (AEMFTMetadataElementComposite) data.getElement(CRONIOBUILogBusinessServiceConstants.FILTERED_LOGS_DATA);
-			
-			if (executionLogsData == null && filteredLogsData == null) {
-				root.clear();
-				
-				AEMFTMetadataElementSingle projectIdData = (AEMFTMetadataElementSingle) data.getElement(CRONIOBOIExecution.PROJECT_ID);
-				String projectId = projectIdData.getValueAsString();
-					
-				logger = new CRONIOBusDesktopAccordionLoggerContainer(projectId);
-				root.add(logger);
-				logger.postDisplay();
-				logger.setSize("100%", "100%");
-				
-				AEGWTLogicalEvent getLogEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-				getLogEvt.addElement(CRONIOBOIExecution.EXECUTION_DATA, data);
-				getLogEvt.setEventType(LOGICAL_TYPE.GET_EVENT);
-				getLogicalEventHandlerManager().fireEvent(getLogEvt);
-			} else {
-				logger.setData(data);
-			}	
+			loggerSectionsDeckPanel.setData(data);	
 		}
 	}
 
 	/**
 	 * CRONIOBusProjectBaseDisplay
 	 */
-	
+
 	@Override
 	public void beforeExitSection() {
 	}
-	
+
 	/**
 	 * CRONIOBusDesktopHasProjectEventHandlers
 	 */
@@ -101,14 +83,39 @@ public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView
 			AEMFTMetadataElementComposite executionLogsData = evt.getEventData();
 			setData(executionLogsData);
 		}
-		
+
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		
+
 		return EVENT_TYPE.ADD_EXECUTION_LOGS.equals(type)
 				||
 				EVENT_TYPE.ADD_FILTERED_LOGS.equals(type);
+	}
+
+	/**
+	 * AEGWTHasLogicalEventHandlers
+	 */
+
+	@Override
+	public void dispatchEvent(AEGWTLogicalEvent evt) {
+		LOGICAL_TYPE evtTyp = evt.getEventType();
+		String sourceWidget = evt.getSourceWidget();
+		if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp) && CRONIOBusDesktopLoggerNodes.NAME.equals(sourceWidget)) {
+			String nodeName 	= evt.getElementAsString(CRONIOBOINode.NODE_NAME);
+			String projectId	= evt.getElementAsString(CRONIOBOIProject.PROJECT_ID);
+			AEMFTMetadataElementComposite filterNode = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
+			filterNode.addElement(CRONIOBOIProject.PROJECT_ID		, projectId);
+			filterNode.addElement(CRONIOBOINode.NODE_NAME			, nodeName);
+			
+			loggerSectionsDeckPanel.showSection("LOG." + nodeName, filterNode);
+		} 	
+	} 
+
+	@Override
+	public boolean isDispatchEventType(LOGICAL_TYPE type) {
+		return LOGICAL_TYPE.GET_EVENT.equals(type);
+
 	}
 }

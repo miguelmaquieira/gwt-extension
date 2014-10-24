@@ -36,7 +36,7 @@ public class CRONIOBusDesktopProcessConfigureVariables extends AEGWTCompositePan
 		initWidget(root);
 		root.addStyleName(CRONIOBusDesktopIStyleConstants.PROJECTS_LAYOUT_CONTENT_IN_BOX);
 
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(null);
+		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(null, true);
 		root.add(header);
 		
 		header.addClickHandler(new ClickHandler() {

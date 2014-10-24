@@ -45,7 +45,7 @@ public class CRONIOBusDesktopProcessConfigureNodesInfo extends AEGWTCompositePan
 		nodeVariableListZone.addStyleName(CRONIOBusDesktopIStyleConstants.PROCESS_CONFIGURE_NODE_VARIABLES_LIST);
 		root.add(nodeVariableListZone);
 
-		CRONIOBusDesktopHeaderListActions header = new CRONIOBusDesktopHeaderListActions(TEXTS.node_variable_list());
+		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(TEXTS.node_variable_list(), true);
 		nodeVariableListZone.add(header);
 
 		header.addClickHandler(new ClickHandler() {

@@ -110,7 +110,10 @@ public class CRONIOBusDesktopAppController extends CRONIOBusBaseAppController {
 		AEMFTMetadataElementComposite layoutsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PROJECT_ID, projectsData.cloneObject());
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_PREFERENCES_ID, preferencesData.cloneObject());
-		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_EXECUTIONS_ID, executionsData.cloneObject());
+		if (executionsData != null){
+			layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_EXECUTIONS_ID, executionsData.cloneObject());
+		}
+		
 		layoutsData.addElement(CRONIOBusDesktopLayoutContainer.LAYOUT_NODELISTS_ID, nodeListsData.cloneObject());
 
 		StringBuilder sbKey = new StringBuilder();
