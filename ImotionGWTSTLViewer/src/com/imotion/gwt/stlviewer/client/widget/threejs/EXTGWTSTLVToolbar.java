@@ -15,7 +15,6 @@ public class EXTGWTSTLVToolbar extends Composite {
 	private Image zoom_out;
 	private Image ground;
 	private Image gyre;
-	private Image move;
 	
 	
 	public EXTGWTSTLVToolbar(EXTGWTSTLILoaderDisplay stlvDisplay) {
@@ -87,26 +86,6 @@ public class EXTGWTSTLVToolbar extends Composite {
 				groundDisplayStyle(!captureEvents);
 			}
 		});
-		
-		// Move
-		move = new Image();
-		move.addStyleName("action");
-		move.addStyleName("move_on");
-		hrContentPanel.add(move);
-		move.addClickHandler(new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isMoveMouseEvents();
-				captureEvents = !captureEvents;
-				EXTGWTSTLVToolbar.this.stlvDisplay.captureMoveMouseEvents(captureEvents);
-				moveDisplayStyle(captureEvents);
-				
-				// Ground display
-				EXTGWTSTLVToolbar.this.stlvDisplay.groundVisibility(!captureEvents);
-				groundDisplayStyle(!captureEvents);
-			}
-		});
 	}
 	
 	private void groundDisplayStyle(boolean groundVisible) {
@@ -116,16 +95,6 @@ public class EXTGWTSTLVToolbar extends Composite {
 		} else {
 			ground.addStyleName("ground_visibility_on");
 			ground.removeStyleName("ground_visibility_off");
-		}
-	}
-	
-	private void moveDisplayStyle(boolean moveAction) {
-		if (moveAction) {
-			move.addStyleName("move_off");
-			move.removeStyleName("move_on");			
-		} else {
-			move.addStyleName("move_on");
-			move.removeStyleName("move_off");
 		}
 	}
 	

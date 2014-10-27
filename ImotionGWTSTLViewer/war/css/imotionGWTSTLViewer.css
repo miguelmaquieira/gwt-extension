@@ -9,8 +9,6 @@ table {
 }
 
 .viewer-barContainer {
-/* 	position: relative; */
-/* 	top: 40px; */
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -51,14 +49,6 @@ table {
 
 .viewer-toolbar .gyre_off {
 	background-image: url("../images/gyre_off.png");
-}
-
-.viewer-toolbar .move_on {
-	background-image: url("../images/move_on.png");
-}
-
-.viewer-toolbar .move_off {
-	background-image: url("../images/move_off.png");
 }
 
 .viewer-leftBarContainer {
