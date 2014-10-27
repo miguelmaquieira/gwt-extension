@@ -2,10 +2,21 @@ table {
 	border-color: none;
 }
 
-.viewer-toolbar {
+.viewer-canvas {
+	top: -100px;
 	position: relative;
-	top: 40px;
-	left: 10px;
+	z-index: -1;
+}
+
+.viewer-barContainer {
+/* 	position: relative; */
+/* 	top: 40px; */
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.viewer-toolbar {
+	padding-top: 10px;
 }
 
 .viewer-toolbar .action {
@@ -15,6 +26,7 @@ table {
 	background-repeat: no-repeat;
 	background-position: center center;
 	cursor: pointer;
+	display: block;
 }
 
 .viewer-toolbar .zoom_in_action{
@@ -47,4 +59,90 @@ table {
 
 .viewer-toolbar .move_off {
 	background-image: url("../images/move_off.png");
+}
+
+.viewer-leftBarContainer {
+	height: 95px;
+}
+
+.viewer-progressbar {
+
+}
+
+.progressbar-text {
+	font-size: 12px;
+	padding-left: 5px;
+	color: #3F3F3F;
+ }
+ 
+.progressbar-remaining {
+	font-size: 12px;
+	font-style: italic;
+}
+
+.progressbar-outer {
+	
+}
+
+.progressbar-inner {
+	border: 1px solid #C0C0C0;
+	margin: 1px;
+}
+
+.progressbar-bar {
+	width: 5px;
+	height: 15px;
+	margin: 1px;
+}
+
+.progressbar-fullbar {
+	background: #95B4FF;
+}
+
+.progressbar-blankbar {
+	background: #868686;
+}
+
+
+.viewer-toolbarMove {
+	
+}
+
+.viewer-toolbarMoveHP {
+	width: 70px;
+	position: relative;
+	top: 25px;
+}
+
+.viewer-toolbarMoveVP {
+	height: 70px;
+	position: relative;
+	top: -22px;
+	right: 23px;
+}
+
+.viewer-toolbarMove .arrow {
+	width: 24px;
+	height: 24px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+	display: block;
+}
+
+.viewer-toolbarMove .arrow-left {
+	background-image: url("../images/arrow_left.png");
+}
+
+.viewer-toolbarMove .arrow-right {
+	background-image: url("../images/arrow_right.png");
+}
+
+.viewer-toolbarMove .arrow-down {
+	background-image: url("../images/arrow_down.png");
+}
+
+.viewer-toolbarMove .arrow-up {
+	background-image: url("../images/arrow_up.png");
 }

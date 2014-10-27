@@ -75,15 +75,15 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		hrParameterPanel1.setWidth("100%");
 		
 		/// Zoom
-		final TestExtGWTSTLVParameter zoomParam = new TestExtGWTSTLVParameter("Zoom (%)", "5", "60px", "60px");
+		final TestExtGWTSTLVParameter zoomParam = new TestExtGWTSTLVParameter("Zoom %(0-100)", "5", "60px", "60px");
 		hrParameterPanel1.add(zoomParam);
 		
-		/// Color
-		final TestExtGWTSTLVParameter colorParam = new TestExtGWTSTLVParameter("Color (#Hex)", "0xF0F0F0", "80px", "60px");
-		hrParameterPanel1.add(colorParam);
+		/// Progress bar
+		final TestExtGWTSTLVParameter progressbar = new TestExtGWTSTLVParameter("Progress bar %(0-100)", "0", "80px", "60px");
+		hrParameterPanel1.add(progressbar);
 		
 		/// Opacity
-		final TestExtGWTSTLVParameter opacityParam = new TestExtGWTSTLVParameter("Opacity", "0.5", "60px", "60px");
+		final TestExtGWTSTLVParameter opacityParam = new TestExtGWTSTLVParameter("Opacity (0.0-1.0)", "0.5", "60px", "60px");
 		hrParameterPanel1.add(opacityParam);
 		
 		// Button panel
@@ -126,6 +126,10 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		selectUrl.addItem("[1,5 MB] skewer.stl"								, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/skewer.stl");
 		selectUrl.addItem("[880 KB] squirrel.stl"							, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/squirrel.stl");
 		selectUrl.addItem("[6,7 MB] waving_gnome_single.stl"				, "https://dl.dropboxusercontent.com/u/62612071/imotion/stl/waving_gnome_single.stl");
+		selectUrl.addItem("[6,2MB] MagFishRoundBody.stl"					, "https://dl.dropboxusercontent.com/u/26873847/MagFishRound_body_disc.STL");
+		selectUrl.addItem("[21,4MB] England_minion_with_world_cup.stl"		, "https://dl.dropboxusercontent.com/u/26873847/England_minion_with_world_cup.stl");
+		selectUrl.addItem("[26,5MB] Anne_Bonny.stl"							, "https://dl.dropboxusercontent.com/u/26873847/Anne_Bonny.stl");
+		selectUrl.addItem("[33,0MB] Tank-SU-85.stl"							, "https://dl.dropboxusercontent.com/u/26873847/Tank-SU-85.STL");
 		
 		selectUrl.addChangeHandler(new ChangeHandler() {
 			
@@ -161,6 +165,23 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 		TestExtGWTSTLVSpinner speedZSpinner = new TestExtGWTSTLVSpinner("SPEED Z");
 		controlsPanel.add(speedZSpinner);
 		controlsPanel.setCellHorizontalAlignment(speedZSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		//Controls movel Panel
+		HorizontalPanel controlsMovePanel = new HorizontalPanel();
+		contentPanel.add(controlsMovePanel);
+		controlsMovePanel.setWidth("100%");
+		
+		TestExtGWTSTLVSpinner moveXSpinner = new TestExtGWTSTLVSpinner("MOVE X");
+		controlsMovePanel.add(moveXSpinner);
+		controlsMovePanel.setCellHorizontalAlignment(moveXSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		TestExtGWTSTLVSpinner moveYSpinner = new TestExtGWTSTLVSpinner("MOVE Y");
+		controlsMovePanel.add(moveYSpinner);
+		controlsMovePanel.setCellHorizontalAlignment(moveYSpinner, HasHorizontalAlignment.ALIGN_CENTER);
+		
+		TestExtGWTSTLVSpinner moveZSpinner = new TestExtGWTSTLVSpinner("MOVE Z");
+		controlsMovePanel.add(moveZSpinner);
+		controlsMovePanel.setCellHorizontalAlignment(moveZSpinner, HasHorizontalAlignment.ALIGN_CENTER);
 		
 		//Handlers
 		okButton.addClickHandler(new ClickHandler() {
@@ -225,6 +246,21 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			}
 		});
 		
+		progressbar.addActionHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				String progressValue = progressbar.getValue();
+				int progress = 0;
+				try {
+					progress = Integer.parseInt(progressValue);
+				} catch (NumberFormatException nfe) {
+					
+				}
+				rendererWidget.setProgress(progress);
+			}
+		});
+		
 		zoomParam.addActionHandler(new ClickHandler() {
 			
 			@Override
@@ -263,7 +299,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.decreaseZGyreSpeed(DEFAULT_Z_SPEED_VARIATION);
+				rendererWidget.zGyreSpeed(-DEFAULT_Z_SPEED_VARIATION);
 			}
 		});
 		
@@ -271,7 +307,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.increaseZGyreSpeed(DEFAULT_Z_SPEED_VARIATION);
+				rendererWidget.zGyreSpeed(DEFAULT_Z_SPEED_VARIATION);
 			}
 		});
 		
@@ -279,7 +315,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.decreaseXGyreSpeed(DEFAULT_X_SPEED_VARIATION);
+				rendererWidget.xGyreSpeed(-DEFAULT_X_SPEED_VARIATION);
 			}
 		});
 		
@@ -287,7 +323,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.increaseXGyreSpeed(DEFAULT_X_SPEED_VARIATION);
+				rendererWidget.xGyreSpeed(DEFAULT_X_SPEED_VARIATION);
 			}
 		});
 		
@@ -295,7 +331,7 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.decreaseYGyreSpeed(DEFAULT_Y_SPEED_VARIATION);
+				rendererWidget.yGyreSpeed(-DEFAULT_Y_SPEED_VARIATION);
 			}
 		});
 		
@@ -303,9 +339,56 @@ public class TestExtGWTSTLVEntryPoint implements EntryPoint {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				rendererWidget.increaseYGyreSpeed(DEFAULT_Y_SPEED_VARIATION);
+				rendererWidget.yGyreSpeed(DEFAULT_Y_SPEED_VARIATION);
 			}
 		});
 		
+		moveXSpinner.addIncreaseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(1, 0, 0);
+			}
+		});
+		
+		moveXSpinner.addDecraseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(-1, 0, 0);
+			}
+		});
+		
+		moveYSpinner.addIncreaseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(0, 1, 0);
+			}
+		});
+		
+		moveYSpinner.addDecraseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(0, -1, 0);
+			}
+		});
+		
+		moveZSpinner.addIncreaseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(0, 0, 1);
+			}
+		});
+		
+		moveZSpinner.addDecraseClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				rendererWidget.moveObject(0, 0, -1);
+			}
+		});
 	}
 }

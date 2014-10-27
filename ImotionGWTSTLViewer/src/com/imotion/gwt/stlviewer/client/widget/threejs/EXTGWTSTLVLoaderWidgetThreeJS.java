@@ -3,9 +3,7 @@ package com.imotion.gwt.stlviewer.client.widget.threejs;
 import com.akjava.gwt.three.client.THREE;
 import com.akjava.gwt.three.client.cameras.Camera;
 import com.akjava.gwt.three.client.core.Geometry;
-import com.akjava.gwt.three.client.core.Projector;
 import com.akjava.gwt.three.client.core.Vector3;
-import com.akjava.gwt.three.client.gwt.GWTDragObjectControler;
 import com.akjava.gwt.three.client.gwt.core.BoundingBox;
 import com.akjava.gwt.three.client.lights.DirectionalLight;
 import com.akjava.gwt.three.client.lights.Light;
@@ -13,13 +11,18 @@ import com.akjava.gwt.three.client.materials.Material;
 import com.akjava.gwt.three.client.objects.Mesh;
 import com.akjava.gwt.three.client.renderers.WebGLRenderer;
 import com.google.gwt.animation.client.AnimationScheduler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.MouseDownEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseWheelEvent;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLException;
 import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 import com.imotion.gwt.stlviewer.client.threejs.EXTGWTSTLVLoader;
@@ -43,10 +46,12 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	private 	Light						spotLight;
 	private 	DirectionalLight 			dirLight;
 	
+	private 	EXTGWTSTLVLoader			loader;
 	private 	EXTGWTSTLVMouseEventHandler	mouseHandler;
 	private 	EXTGWTSTLVToolbar			toolbar;
-	
-	private 	GWTDragObjectControler		dragController;
+	private 	DeckPanel					deckleftToolbar;
+	private 	EXTGWTSTLVToolbarMove		toolbarMove;
+	private 	EXTGWTSTLVProgressBar		progressBar;
 
 	private		int							sceneWidth;
 	private		int							sceneHeight;
@@ -98,9 +103,32 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		rootContainer = new HTMLPanel(""); 
 		initWidget(rootContainer);
 		
+		HorizontalPanel barContainer = new HorizontalPanel();
+		rootContainer.add(barContainer);
+		barContainer.addStyleName("viewer-barContainer");
+		barContainer.setWidth(width + "px");
+		
 		// Toolbar
 		toolbar = new EXTGWTSTLVToolbar(this);
-		rootContainer.add(toolbar);
+		barContainer.add(toolbar);
+		barContainer.setCellHorizontalAlignment(toolbar, HasHorizontalAlignment.ALIGN_LEFT);
+		barContainer.setCellVerticalAlignment(toolbar, HasVerticalAlignment.ALIGN_TOP);
+		
+		// Left toolbar
+		deckleftToolbar =  new DeckPanel();
+		deckleftToolbar.addStyleName("viewer-leftBarContainer");
+		barContainer.add(deckleftToolbar);
+		barContainer.setCellHorizontalAlignment(deckleftToolbar, HasHorizontalAlignment.ALIGN_RIGHT);
+		
+		// Progress bar
+		progressBar = new EXTGWTSTLVProgressBar(20);
+		deckleftToolbar.add(progressBar);
+		
+		// Move toolbar
+		toolbarMove = new EXTGWTSTLVToolbarMove(this);
+		deckleftToolbar.add(toolbarMove);
+		
+		deckleftToolbar.showWidget(1);
 
 		//Scene
 		scene = EXTGWTSTLVTHREE.EXTGWTSTLVScene();
@@ -134,7 +162,9 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		webGLRenderer.setClearColorHex(backgroundColorAsHex, 1.0f);
 		webGLRenderer.setShadowMapEnabled(true);
 		
-		rootContainer.getElement().appendChild(webGLRenderer.getDomElement());
+		Element canvasElement = webGLRenderer.getDomElement();
+		canvasElement.addClassName("viewer-canvas");
+		rootContainer.getElement().appendChild(canvasElement);
 		
 		// handlers
 		mouseHandler = new EXTGWTSTLVMouseEventHandler(this, mouseInteraction, sceneWidth, sceneHeight);
@@ -149,17 +179,23 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 			loadModel(url, exceptionCallback);
 		} else {
 			startScene();
-		}
+		} 
 	}
 	
 	@Override
 	public void loadModel(String url, final boolean startAnimation, final EXTGWTSTLExceptionCallback exceptionCallback) {
 		if (url != null && url.length() > 0) {
-			EXTGWTSTLVLoader.load(url, new AsyncCallback<Geometry>() {
+			setProgress(0);
+			deckleftToolbar.showWidget(0);
+			progressBar.setText("Loading...");
+			getLoader().load(url, new AsyncCallback<Geometry>() {
 
 				@Override
 				public void onSuccess(Geometry geometry) {
+					progressBar.setText("Rendering...");
 					setupSTLObject(geometry, startAnimation, objectColorAsHex);
+					deckleftToolbar.showWidget(1);
+					progressBar.setText("");
 				}
 
 				@Override
@@ -168,6 +204,7 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 						EXTGWTSTLException exception = new EXTGWTSTLException(caught);
 						exceptionCallback.onFailure(exception);
 					}
+					deckleftToolbar.showWidget(1);
 				}
 			});
 		}
@@ -179,51 +216,18 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	}
 
 	@Override
-	public double increaseZGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0) {
-			gyreZSpeed += radiansPerIteration;
-		}
-		return gyreZSpeed;
-	}
-
-	@Override
-	public double decreaseZGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0 ) {
-			gyreZSpeed -= radiansPerIteration;
-		}
-		return gyreZSpeed;
+	public double zGyreSpeed(double radiansPerIteration) {
+		return gyreZSpeed += radiansPerIteration;
 	}
 	
 	@Override
-	public double increaseXGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0 ) {
-			gyreXSpeed += radiansPerIteration;
-		}
-		return gyreXSpeed;
-	}
-
-	@Override
-	public double decreaseXGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0 ) {
-			gyreXSpeed -= radiansPerIteration;
-		}
-		return gyreXSpeed;
+	public double xGyreSpeed(double radiansPerIteration) {
+		return gyreXSpeed += radiansPerIteration;
 	}
 	
 	@Override
-	public double increaseYGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0 ) {
-			gyreYSpeed += radiansPerIteration;
-		}
-		return gyreYSpeed;
-	}
-
-	@Override
-	public double decreaseYGyreSpeed(double radiansPerIteration) {
-		if (radiansPerIteration > 0 ) {
-			gyreYSpeed -= radiansPerIteration;
-		}
-		return gyreYSpeed;
+	public double yGyreSpeed(double radiansPerIteration) {
+		return gyreYSpeed += radiansPerIteration;
 	}
 
 	@Override
@@ -318,8 +322,37 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 	}
 
 	@Override
-	public void moveObject(MouseMoveEvent mouseMoveEvent) {
-		dragController.moveSelectionPosition(mouseMoveEvent.getX(), mouseMoveEvent.getY(), sceneWidth, sceneHeight, camera);		
+	public void moveObject(double xTransition, double yTransition, double zTransition) {
+		if (objectMesh != null) {
+			// Current positions
+			double xPosition = objectMesh.getPosition().getX();
+			double yPosition = objectMesh.getPosition().getY();
+			double zPosition = objectMesh.getPosition().getZ();
+			
+			// Suit to 3 dimension geometry
+			double adjustValue = 1 / (Math.sqrt(2));
+			xTransition = xTransition * adjustValue;
+			yTransition = yTransition * adjustValue;
+			zTransition = zTransition * adjustValue;
+			
+			yPosition = yPosition + yTransition;
+			if ((xTransition != 0 && zTransition == 0) || (xTransition == 0 && zTransition != 0)) {
+				xPosition = xPosition + xTransition;
+				zPosition = zPosition + zTransition;
+			} else {
+				xPosition = xPosition + xTransition;
+				zPosition = zPosition - zTransition;
+			}
+			objectMesh.setPosition(xPosition , yPosition, zPosition);
+		}
+	}
+	
+	@Override
+	public void setProgress(int percentage) {
+		if (deckleftToolbar.getVisibleWidget() != 0) {
+			deckleftToolbar.showWidget(0);
+		}
+		progressBar.setProgress(percentage);
 	}
 	
 	/***
@@ -402,10 +435,6 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 		if (!startAnimation) {
 			gyreZSpeed = 0.0f; 
 		}
-		
-		// Drag controller
-		Projector projector = THREE.Projector();
-		dragController = new GWTDragObjectControler(scene, projector);
 	}
 
 	private double getScaleVariation() {
@@ -423,5 +452,12 @@ public class EXTGWTSTLVLoaderWidgetThreeJS extends Composite implements EXTGWTST
 			scale 	= objectMesh.getScale().getX();
 		}
 		return scale;
+	}
+	
+	private EXTGWTSTLVLoader getLoader() {
+		if (loader == null) {
+			loader = new EXTGWTSTLVLoader(this);
+		}
+		return loader;
 	}
 }

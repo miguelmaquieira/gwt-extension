@@ -28,6 +28,7 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 		this.mouseRotationInteraction = mouseInteraction;
 		this.sceneWidth = sceneWidth;
 		this.sceneHeight = sceneHeight;
+		mouseTransition = new EXTGWTSTLVTransition(0, 0);
 	}
 
 	@Override
@@ -49,31 +50,31 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 				mouseTransition.update(event.getX(), event.getY());
 				int xTransition = mouseTransition.getXTransition();
 				int yTransition = mouseTransition.getYTransition();
-				if (xTransition > 0) {
-					stlvDisplay.increaseZGyreSpeed((float)xTransition / (sceneWidth * 10));
-				} else {
-					stlvDisplay.decreaseZGyreSpeed((float)(-xTransition) / (sceneWidth * 10)) ;
-				}
 				
-				if (yTransition > 0) {
-					stlvDisplay.increaseXGyreSpeed((float)yTransition / (sceneHeight * 10));
-					stlvDisplay.increaseYGyreSpeed((float)yTransition / (sceneHeight * 10));
-				} else {
-					stlvDisplay.decreaseXGyreSpeed((float)(-yTransition) / (sceneHeight * 10)) ;
-					stlvDisplay.decreaseYGyreSpeed((float)(-yTransition) / (sceneHeight * 10)) ;
-				}
+				// zGyre
+				stlvDisplay.zGyreSpeed((float)xTransition / (sceneWidth * 10));
+				
+				// x,y, Gyre
+				stlvDisplay.xGyreSpeed((float)yTransition / (sceneHeight * 10));
+				stlvDisplay.yGyreSpeed((float)yTransition / (sceneHeight * 10));
+				
 				System.out.println(mouseTransition.toString());
 				System.out.println("Transition X: " + xTransition);
 				System.out.println("Transition Y: " + yTransition + "\n");
 			}
 		} else if (mouseMoveInteraction) {
-			stlvDisplay.moveObject(event);
+			if (mouseDragAction) {
+				mouseTransition.update(event.getX(), event.getY());
+				int xTransition = mouseTransition.getXTransition();
+				int yTransition = mouseTransition.getYTransition();
+				stlvDisplay.moveObject(xTransition, -yTransition, xTransition);
+			}
 		}
 	}
 
 	@Override
 	public void onMouseDown(MouseDownEvent event) {
-		if (mouseRotationInteraction) {
+		if (mouseRotationInteraction || mouseMoveInteraction) {
 			mouseDragAction = true;
 			mouseTransition.init(event.getX(), event.getY());
 		}
@@ -81,18 +82,16 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 
 	@Override
 	public void onMouseUp(MouseUpEvent event) {
-		if (mouseRotationInteraction) {
+		if (mouseRotationInteraction || mouseMoveInteraction) {
 			mouseDragAction = false;
-			stlvDisplay.setGyreZSpeed(0.0);
-			stlvDisplay.setGyreXSpeed(0.0);
-			stlvDisplay.setGyreYSpeed(0.0);
+			initGyreSpeed();
 		}
 	}
 	
 	public void captureRotationMouseEvents(boolean mouseInteraction) {
 		this.mouseRotationInteraction = mouseInteraction;
 		if (mouseInteraction) {
-			stlvDisplay.setGyreZSpeed(0.0);
+			initGyreSpeed();
 			if (mouseTransition == null) {
 				mouseTransition = new EXTGWTSTLVTransition(0, 0);
 			}
@@ -101,6 +100,11 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 	
 	public void captureMoveMouseEvents(boolean mouseInteraction) {
 		this.mouseMoveInteraction = mouseInteraction;
+		if (mouseInteraction) {
+			if (mouseTransition == null) {
+				mouseTransition = new EXTGWTSTLVTransition(0, 0);
+			}
+		}
 	}
 	
 	public boolean isRotationMouseEvents() {
@@ -109,6 +113,13 @@ public class EXTGWTSTLVMouseEventHandler implements MouseWheelHandler, MouseUpHa
 	
 	public boolean isMoveMouseEvents() {
 		return this.mouseMoveInteraction;
+	}
+	
+	
+	private void initGyreSpeed() {
+		stlvDisplay.setGyreZSpeed(0.0);
+		stlvDisplay.setGyreXSpeed(0.0);
+		stlvDisplay.setGyreYSpeed(0.0);
 	}
 
 }

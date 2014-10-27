@@ -170,7 +170,7 @@ THREE.STLLoader.prototype.parseASCII = function (data) {
 
 	}
 
-	geometry.computeCentroids();
+	//geometry.computeCentroids();
 	geometry.computeBoundingBox();
 	geometry.computeBoundingSphere();
 

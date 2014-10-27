@@ -56,7 +56,7 @@ public class EXTGWTSTLVToolbar extends Composite {
 		// Ground visibility
 		ground = new Image();
 		ground.addStyleName("action");
-		ground.addStyleName("ground_visibility_on");
+		ground.addStyleName("ground_visibility_off");
 		hrContentPanel.add(ground);
 		ground.addClickHandler(new ClickHandler() {
 			
@@ -64,13 +64,7 @@ public class EXTGWTSTLVToolbar extends Composite {
 			public void onClick(ClickEvent event) {
 				boolean groundVisible = EXTGWTSTLVToolbar.this.stlvDisplay.isGroundVisible();
 				EXTGWTSTLVToolbar.this.stlvDisplay.groundVisibility(!groundVisible);
-				if (groundVisible) {
-					ground.addStyleName("ground_visibility_off");
-					ground.removeStyleName("ground_visibility_on");
-				} else {
-					ground.addStyleName("ground_visibility_on");
-					ground.removeStyleName("ground_visibility_off");
-				}
+				groundDisplayStyle(!groundVisible);
 			}
 		});
 		
@@ -84,14 +78,13 @@ public class EXTGWTSTLVToolbar extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isRotationMouseEvents();
-				EXTGWTSTLVToolbar.this.stlvDisplay.captureRotationMouseEvents(!captureEvents);
-				if (captureEvents) {
-					gyre.addStyleName("gyre_on");
-					gyre.removeStyleName("gyre_off");
-				} else {
-					gyre.addStyleName("gyre_off");
-					gyre.removeStyleName("gyre_on");
-				}
+				captureEvents = !captureEvents;
+				EXTGWTSTLVToolbar.this.stlvDisplay.captureRotationMouseEvents(captureEvents);
+				gyreDisplayStyle(captureEvents);
+				
+				// Ground display
+				EXTGWTSTLVToolbar.this.stlvDisplay.groundVisibility(!captureEvents);
+				groundDisplayStyle(!captureEvents);
 			}
 		});
 		
@@ -105,15 +98,44 @@ public class EXTGWTSTLVToolbar extends Composite {
 			@Override
 			public void onClick(ClickEvent event) {
 				boolean captureEvents = EXTGWTSTLVToolbar.this.stlvDisplay.isMoveMouseEvents();
-				EXTGWTSTLVToolbar.this.stlvDisplay.captureMoveMouseEvents(!captureEvents);
-				if (captureEvents) {
-					move.addStyleName("move_on");
-					move.removeStyleName("move_off");
-				} else {
-					move.addStyleName("move_off");
-					move.removeStyleName("move_on");
-				}
+				captureEvents = !captureEvents;
+				EXTGWTSTLVToolbar.this.stlvDisplay.captureMoveMouseEvents(captureEvents);
+				moveDisplayStyle(captureEvents);
+				
+				// Ground display
+				EXTGWTSTLVToolbar.this.stlvDisplay.groundVisibility(!captureEvents);
+				groundDisplayStyle(!captureEvents);
 			}
 		});
+	}
+	
+	private void groundDisplayStyle(boolean groundVisible) {
+		if (groundVisible) {
+			ground.addStyleName("ground_visibility_off");
+			ground.removeStyleName("ground_visibility_on");			
+		} else {
+			ground.addStyleName("ground_visibility_on");
+			ground.removeStyleName("ground_visibility_off");
+		}
+	}
+	
+	private void moveDisplayStyle(boolean moveAction) {
+		if (moveAction) {
+			move.addStyleName("move_off");
+			move.removeStyleName("move_on");			
+		} else {
+			move.addStyleName("move_on");
+			move.removeStyleName("move_off");
+		}
+	}
+	
+	private void gyreDisplayStyle(boolean gyreAction) {
+		if (gyreAction) {
+			gyre.addStyleName("gyre_off");
+			gyre.removeStyleName("gyre_on");
+		} else {
+			gyre.addStyleName("gyre_on");
+			gyre.removeStyleName("gyre_off");
+		}
 	}
 }

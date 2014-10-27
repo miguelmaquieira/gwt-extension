@@ -1,7 +1,6 @@
 package com.imotion.gwt.stlviewer.client.widget;
 
 import com.google.gwt.animation.client.AnimationScheduler.AnimationCallback;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.imotion.gwt.stlviewer.client.exception.EXTGWTSTLExceptionCallback;
 
@@ -13,12 +12,9 @@ public interface EXTGWTSTLILoaderDisplay extends AnimationCallback, IsWidget {
 	void loadModel(String url, EXTGWTSTLExceptionCallback exceptionCallback);
 	void loadModel(String url, boolean startAnimation, EXTGWTSTLExceptionCallback exceptionCallback);
 
-	double increaseZGyreSpeed(double radiansPerIteration);
-	double decreaseZGyreSpeed(double radiansPerIteration);
-	double increaseXGyreSpeed(double radiansPerIteration);
-	double decreaseXGyreSpeed(double radiansPerIteration);
-	double increaseYGyreSpeed(double radiansPerIteration);
-	double decreaseYGyreSpeed(double radiansPerIteration);
+	double zGyreSpeed(double radiansPerIteration);
+	double xGyreSpeed(double radiansPerIteration);
+	double yGyreSpeed(double radiansPerIteration);
 	
 	void setGyreZSpeed(double radiansPerIteration);
 	void setGyreXSpeed(double radiansPerIteration);
@@ -34,9 +30,11 @@ public interface EXTGWTSTLILoaderDisplay extends AnimationCallback, IsWidget {
 	void captureMoveMouseEvents(boolean mouseMoveFlag);
 	boolean isMoveMouseEvents();
 	
-	void moveObject(MouseMoveEvent mouseMoveEvent);
+	void moveObject(double xTransition, double yTransition, double zTransicion);
 	
 	void groundVisibility(boolean visibility);
 	boolean isGroundVisible();
+	
+	void setProgress(int percentage);
 
 }
