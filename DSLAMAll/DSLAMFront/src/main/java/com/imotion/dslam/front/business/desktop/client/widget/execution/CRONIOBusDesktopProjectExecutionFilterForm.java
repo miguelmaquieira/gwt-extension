@@ -73,7 +73,7 @@ public class CRONIOBusDesktopProjectExecutionFilterForm extends AEGWTBootstrapFo
 		formZone.add(filterZone);
 		filterZone.addStyleName(AEGWTIBoostrapConstants.COL_XS_6);
 
-		filterTextBox 	= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.filter_text_label(), TEXTS.search_placeholder());
+		filterTextBox 	= new AEGWTBootstrapFormFieldTextBoxLabelTop(TEXTS.filter_text_label_and_example(), TEXTS.search_placeholder());
 		filterZone.add(filterTextBox);
 
 		FlowPanel beforeZone = new FlowPanel();

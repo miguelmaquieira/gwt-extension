@@ -82,11 +82,17 @@ public interface CRONIOBusI18NTexts extends AEGWTI18NCommonTexts {
 	@DefaultStringValue("Buscar...")
 	String search_placeholder();
 	
+	@DefaultStringValue("Ej: Nodo1, ifconfig")
+	String example_form_filter();
+	
 	@DefaultStringValue("Filtrar:")
 	String filter_label();
 	
 	@DefaultStringValue("Filtro de texto:")
 	String filter_text_label();
+	
+	@DefaultStringValue("Filtro de texto: (Ej: nodo1, ifconfig)")
+	String filter_text_label_and_example();
 	
 	@DefaultStringValue("Contraseña")
 	String password_placeholder();

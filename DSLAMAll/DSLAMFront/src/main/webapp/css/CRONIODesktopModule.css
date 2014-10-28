@@ -1132,6 +1132,9 @@
     height: auto !important;
 }
 
+.table-hover tr {
+	cursor: pointer;
+}
 
 /*****************************************
 *			COMMON

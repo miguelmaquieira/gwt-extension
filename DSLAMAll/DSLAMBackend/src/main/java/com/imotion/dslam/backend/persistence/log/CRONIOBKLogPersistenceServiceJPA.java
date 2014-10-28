@@ -23,12 +23,19 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 		Date   	beforeDate		= filterData.getMaxTimestamp();
 		String 	level			= filterData.getLevel();
 		int 	offset			= filterData.getOffset();
-		int 	size			= filterData.getSize();	
+		int 	size			= filterData.getSize();
 		
+		String 		textDeleteSpaces 	= text.replace(" ", "");
+		String[] 	textSplit 			= textDeleteSpaces.split("\\,");
+	
+		String 		textQuery 	= "";
+		for (int i = 0; i < textSplit.length; i++) {
+			textQuery = textQuery + "AND o.message LIKE '%"+ textSplit[i] +"%' ";
+		}
 		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
 							+ "WHERE (o.message LIKE '"+ executionID +":%' "
-							+ "AND o.message LIKE '%"+ text +"%' "
+							+ textQuery
 							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
 		
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate, offset, size);		
@@ -47,9 +54,17 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 		Date   	beforeDate		= filterData.getMaxTimestamp();
 		String 	level			= filterData.getLevel();
 		
+		String 		textDeleteSpaces 	= text.replace(" ", "");
+		String[] 	textSplit 			= textDeleteSpaces.split("\\,");
+	
+		String 		textQuery 	= "";
+		for (int i = 0; i < textSplit.length; i++) {
+			textQuery = textQuery + "AND o.message LIKE '%"+ textSplit[i] +"%' ";
+		}
+		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
 							+ "WHERE (o.message LIKE '"+ executionID +":%' "
-							+ "AND o.message LIKE '%"+ text +"%' "
+							+ textQuery
 							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
 		
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate);

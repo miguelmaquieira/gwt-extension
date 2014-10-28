@@ -22,7 +22,7 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	private CRONIOIExecutionLogger 		logger;
-	private CRONIOBOIProject				project;
+	private CRONIOBOIProject			project;
 	private HashMap<Long, Thread> 		threads;
 
 	public CRONIOExecutorImpl(CRONIOBOIProject project) throws Exception {
@@ -34,11 +34,11 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	public void execute(Long executionId, String nodeListName) {
 		String 				scriptCode			= project.getMainScript().getCompiledContent();
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
-		Map<String, Object> variables 	= CRONIOAntlrUtils.getVariablesFromProject(project);
+		Map<String, Object> variables 			= CRONIOAntlrUtils.getVariablesFromProject(project);
 
 		CRONIOBOIProcess			process			= project.getProcess();
-		List<CRONIOBOINodeList> listNodeList 	= process.getListNodeList();
-		CRONIOBOINodeList		currentNodeList = new CRONIOBONodeList(); 
+		List<CRONIOBOINodeList> 	listNodeList 	= process.getListNodeList();
+		CRONIOBOINodeList			currentNodeList = new CRONIOBONodeList(); 
 		for (CRONIOBOINodeList nodeList: listNodeList) {
 			if (nodeListName.equals(nodeList.getNodeListName())) {
 				currentNodeList = nodeList;
@@ -124,6 +124,10 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	private CRONIOIExecutionLogger getLogger() {
 		return logger;
+	}
+	
+	private CRONIOBOIProject getProject() {
+		return project;
 	}
 
 }

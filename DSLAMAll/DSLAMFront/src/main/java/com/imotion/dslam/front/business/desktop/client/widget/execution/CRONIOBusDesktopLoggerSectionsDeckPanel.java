@@ -12,7 +12,6 @@ import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.client.ui.widget.jquery.AEGWTJQueryPerfectScrollBar;
 
-
 public class CRONIOBusDesktopLoggerSectionsDeckPanel extends AEGWTCompositePanel  {
 
 	public static final String NAME = "CRONIOBusDesktopLoggerSectionsDeckPanel";
@@ -23,8 +22,6 @@ public class CRONIOBusDesktopLoggerSectionsDeckPanel extends AEGWTCompositePanel
 	private CRONIOBusDesktopAccordionLoggerContainer 		loggerContainer;
 	private	 CRONIOBusDesktopLoggerNodes             		logger;
 	
-	
-
 	public CRONIOBusDesktopLoggerSectionsDeckPanel() {
 
 		rootDeckPanel = new DeckPanel();
@@ -38,7 +35,6 @@ public class CRONIOBusDesktopLoggerSectionsDeckPanel extends AEGWTCompositePanel
 		rootDeckPanel.add(logger);
 		//rootDeckPanel.add(loggerContainer);
 	}
-
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
 		String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
@@ -72,7 +68,7 @@ public class CRONIOBusDesktopLoggerSectionsDeckPanel extends AEGWTCompositePanel
 		super.postDisplay();
 		logger.postDisplay();
 		//loggerContainer.postDisplay();
-		setHeightToDecrease(78);
+		//setHeightToDecrease(78);
 		AEGWTJQueryPerfectScrollBar.addScrollToWidget(getName(), this, getCurrentHeight(), true);
 	}
 

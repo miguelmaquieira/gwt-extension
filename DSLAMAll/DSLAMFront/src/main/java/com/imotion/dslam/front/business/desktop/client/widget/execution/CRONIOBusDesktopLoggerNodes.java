@@ -24,7 +24,7 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	private static CRONIOBusI18NLogTexts TEXTS = GWT.create(CRONIOBusI18NLogTexts.class);
 	
 	private FlowPanel 									root;
-	private CRONIOBusDesktopLoggerNodesList				loggerNodeList;
+	private CRONIOBusDesktopLoggerNodeList				loggerNodeList;
 	private CRONIOBusDesktopLoggerExecutionInfo			loggerExecutionInfoZone;
 	
 	private long 	executionId;
@@ -46,7 +46,7 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 		CRONIOBusDesktopHeaderOpcionalListActions header = new CRONIOBusDesktopHeaderOpcionalListActions(TEXTS.logger_node_list(), false);
 		loggerNodeListZone.add(header);
 		
-		loggerNodeList = new CRONIOBusDesktopLoggerNodesList(null);
+		loggerNodeList = new CRONIOBusDesktopLoggerNodeList(null);
 		loggerNodeListZone.add(loggerNodeList);
 		loggerNodeList.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_NODES_LIST);
 		
@@ -99,7 +99,7 @@ public class CRONIOBusDesktopLoggerNodes extends AEGWTCompositePanel implements 
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		LOGICAL_TYPE evtTyp = evt.getEventType();
 		String sourceWidget = evt.getSourceWidget();
-		if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp) && CRONIOBusDesktopLoggerNodesList.NAME.equals(sourceWidget)) {
+		if (LOGICAL_TYPE.GET_EVENT.equals(evtTyp) && CRONIOBusDesktopLoggerNodeList.NAME.equals(sourceWidget)) {
 			String nodeName = evt.getElementAsString(AEGWTIBoostrapConstants.TR_ID);
 			AEGWTLogicalEvent getLogsEvt = new  AEGWTLogicalEvent(getWindowName(), getName(), null);
 			getLogsEvt.setEventType(LOGICAL_TYPE.GET_EVENT);

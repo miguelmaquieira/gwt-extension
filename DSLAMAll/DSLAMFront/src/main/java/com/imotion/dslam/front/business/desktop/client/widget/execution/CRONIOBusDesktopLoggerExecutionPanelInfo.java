@@ -52,7 +52,7 @@ public class CRONIOBusDesktopLoggerExecutionPanelInfo extends AEGWTCompositePane
 		initExecutionTimeLabel.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_EXECUTION_INFO_LABEL);
 		initExecutionTimeLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		initExecutionTimeZone.add(initExecutionTimeLabel);
-		Label initExecutionTimeContent 	= new Label(initExecutionTimeSplit[1]);
+		Label initExecutionTimeContent 	= new Label(initExecutionTimeSplit[1] + " " + initExecutionTimeSplit[2]);
 		initExecutionTimeContent.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_EXECUTION_INFO_CONTENT_LABEL);
 		initExecutionTimeZone.add(initExecutionTimeContent);
 		
@@ -65,10 +65,10 @@ public class CRONIOBusDesktopLoggerExecutionPanelInfo extends AEGWTCompositePane
 		finishExecutionTimeLabel.addStyleName(AEGWTIBoostrapConstants.COL_XS_2);
 		finishExecutionTimeZone.add(finishExecutionTimeLabel);
 		
-		if (finishExecutionTimeSplit.length == 2) {
-			Label finishExecutionTimeContent 	= new Label(finishExecutionTimeSplit[1]);
+		if (finishExecutionTimeSplit.length == 3) {
+			Label finishExecutionTimeContent 	= new Label(finishExecutionTimeSplit[1] + " " + finishExecutionTimeSplit[2]);
 			finishExecutionTimeContent.addStyleName(CRONIOBusDesktopIStyleConstants.EXECUTION_LOGGER_EXECUTION_INFO_CONTENT_LABEL);
-			finishExecutionTimeZone.add(initExecutionTimeContent);
+			finishExecutionTimeZone.add(finishExecutionTimeContent);
 		}
 		
 		FlowPanel isSynchronousZone 	=  new FlowPanel();

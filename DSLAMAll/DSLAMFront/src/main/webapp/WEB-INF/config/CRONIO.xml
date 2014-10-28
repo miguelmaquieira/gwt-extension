@@ -179,6 +179,9 @@
 					<Descriptor>executeProject</Descriptor>
 					<Async>true</Async>
 				</SubService>
+				<SubService Name="UPDATE_FINISH_EXECUTION">
+					<Descriptor>updateFinishExecution</Descriptor>
+				</SubService>
 				<SubService Name="ADD_EXECUTION">
 					<Descriptor>addExecution</Descriptor>
 				</SubService>

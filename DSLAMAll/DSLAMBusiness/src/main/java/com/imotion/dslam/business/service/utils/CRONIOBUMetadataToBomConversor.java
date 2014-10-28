@@ -77,18 +77,20 @@ public class CRONIOBUMetadataToBomConversor {
 		if (fileData != null) {
 			file = new CRONIOBOFile();
 
-			String 	fileIdStr 		= getElementController().getElementAsString(CRONIOBOIFile.FILE_ID	, fileData);
+			String 	fileIdStr 		= getElementController().getElementAsString(CRONIOBOIFile.FILE_ID						, fileData);
 			Long	fileId			= AEMFTCommonUtils.getLongFromString(fileIdStr);
-			String	fileName		= getElementController().getElementAsString(CRONIOBOIFile.FILE_NAME	, fileData);
-			int		contentType		= getElementController().getElementAsInt(CRONIOBOIFile.CONTENT_TYPE	, fileData);
-			String	content			= getElementController().getElementAsString(CRONIOBOIFile.CONTENT	, fileData);
+			String	fileName		= getElementController().getElementAsString(CRONIOBOIFile.FILE_NAME						, fileData);
+			int		contentType		= getElementController().getElementAsInt(CRONIOBOIFile.CONTENT_TYPE						, fileData);
+			String	content			= getElementController().getElementAsString(CRONIOBOIFile.CONTENT						, fileData);
+			String	compiledContent	= getElementController().getElementAsString(CRONIOBOIFile.COMPILED_CONTENT				, fileData);
 			Date	creationTime	= (Date) getElementController().getElementAsSerializable(CRONIOBOIFile.CREATION_TIME	, fileData);
-			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIFile.SAVED_TIME	, fileData);
+			Date	savedTime		= (Date) getElementController().getElementAsSerializable(CRONIOBOIFile.SAVED_TIME		, fileData);
 
 			file.setFileId(fileId);
 			file.setFilename(fileName);
 			file.setContentType(contentType);
 			file.setContent(content);
+			file.setCompiledContent(compiledContent);
 			file.setCreationTime(creationTime);
 			file.setSavedTime(savedTime);
 
@@ -315,6 +317,7 @@ public class CRONIOBUMetadataToBomConversor {
 			machine.setInitConnectionScript(initScript);
 			CRONIOBOIFile finishScript = fromFileData(machinePropertiesData.getCompositeElement(CRONIOBOIMachineProperties.MACHINE_DISCONNECTION_SCRIPT));
 			machine.setCloseConnectionScript(finishScript);
+			machine.setCreationTime(creationTime);
 			machine.setCreationTime(creationTime);
 		}
 		

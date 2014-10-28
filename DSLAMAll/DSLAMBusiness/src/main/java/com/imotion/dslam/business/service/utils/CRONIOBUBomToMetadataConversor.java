@@ -115,8 +115,9 @@ public class CRONIOBUBomToMetadataConversor {
 			data.addElement(CRONIOBOIFile.FILE_NAME				, file.getFilename());
 			data.addElement(CRONIOBOIFile.CONTENT_TYPE			, file.getContentType());
 			data.addElement(CRONIOBOIFile.CONTENT				, file.getContent());
+			data.addElement(CRONIOBOIFile.COMPILED_CONTENT		, file.getCompiledContent());
 			data.addElement(CRONIOBOIFile.CREATION_TIME			, file.getCreationTime());
-			data.addElement(CRONIOBOIFile.SAVED_TIME				, file.getSavedTime());
+			data.addElement(CRONIOBOIFile.SAVED_TIME			, file.getSavedTime());
 		}
 		return data;
 	}
