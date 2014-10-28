@@ -26,6 +26,7 @@ public class EXTGWTSTLVToolbar extends Composite {
 		
 		// Zoom in
 		zoom_in = new Image();
+		zoom_in.setUrl("images/empty_background.png");
 		zoom_in.addStyleName("action");
 		zoom_in.addStyleName("zoom_in_action");
 		hrContentPanel.add(zoom_in);
@@ -40,6 +41,7 @@ public class EXTGWTSTLVToolbar extends Composite {
 		
 		// Zoom out
 		zoom_out = new Image();
+		zoom_out.setUrl("images/empty_background.png");
 		zoom_out.addStyleName("action");
 		zoom_out.addStyleName("zoom_out_action");
 		hrContentPanel.add(zoom_out);
@@ -54,7 +56,8 @@ public class EXTGWTSTLVToolbar extends Composite {
 		
 		// Ground visibility
 		ground = new Image();
-		ground.addStyleName("action");
+		ground.setUrl("images/empty_background.png");
+		ground.addStyleName("action");		
 		ground.addStyleName("ground_visibility_off");
 		hrContentPanel.add(ground);
 		ground.addClickHandler(new ClickHandler() {
@@ -66,9 +69,10 @@ public class EXTGWTSTLVToolbar extends Composite {
 				groundDisplayStyle(!groundVisible);
 			}
 		});
-		
+	
 		// Gyre
 		gyre = new Image();
+		gyre.setUrl("images/empty_background.png");
 		gyre.addStyleName("action");
 		gyre.addStyleName("gyre_on");
 		hrContentPanel.add(gyre);

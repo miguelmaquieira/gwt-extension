@@ -18,13 +18,14 @@ table {
 }
 
 .viewer-toolbar .action {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	background-size: 24px 24px;
 	background-repeat: no-repeat;
 	background-position: center center;
 	cursor: pointer;
 	display: block;
+	margin-right: 4px;
 }
 
 .viewer-toolbar .zoom_in_action{
@@ -99,22 +100,23 @@ table {
 }
 
 .viewer-toolbarMoveHP {
-	width: 70px;
+	width: 60px;
 	position: relative;
 	top: 25px;
+	left: -5px;
 }
 
 .viewer-toolbarMoveVP {
-	height: 70px;
+	height: 60px;
 	position: relative;
-	top: -22px;
+	top: -17px;
 	right: 23px;
 }
 
 .viewer-toolbarMove .arrow {
 	width: 24px;
 	height: 24px;
-	background-size: 20px 20px;
+	background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center center;
 	cursor: pointer;
@@ -122,17 +124,17 @@ table {
 }
 
 .viewer-toolbarMove .arrow-left {
-	background-image: url("../images/arrow_left.png");
+	background-image: url("../images/arrow_fill_left.png");
 }
 
 .viewer-toolbarMove .arrow-right {
-	background-image: url("../images/arrow_right.png");
+	background-image: url("../images/arrow_fill_right.png");
 }
 
 .viewer-toolbarMove .arrow-down {
-	background-image: url("../images/arrow_down.png");
+	background-image: url("../images/arrow_fill_down.png");
 }
 
 .viewer-toolbarMove .arrow-up {
-	background-image: url("../images/arrow_up.png");
+	background-image: url("../images/arrow_fill_up.png");
 }

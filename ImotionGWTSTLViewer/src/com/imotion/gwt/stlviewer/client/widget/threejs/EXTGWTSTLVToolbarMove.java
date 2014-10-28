@@ -35,9 +35,11 @@ public class EXTGWTSTLVToolbarMove extends Composite {
 		contentPanel.add(toolbarHPanel);
 		toolbarHPanel.addStyleName("viewer-toolbarMoveHP");
 		Image imageLeft = spinnerHorizontal.getDecrementArrow();
+		imageLeft.setUrl("images/empty_background.png");
 		imageLeft.addStyleName("arrow");
 		imageLeft.addStyleName("arrow-left");
 		Image imageRight = spinnerHorizontal.getIncrementArrow();
+		imageRight.setUrl("images/empty_background.png");
 		imageRight.addStyleName("arrow");
 		imageRight.addStyleName("arrow-right");
 		toolbarHPanel.add(imageLeft);
@@ -58,9 +60,11 @@ public class EXTGWTSTLVToolbarMove extends Composite {
 		contentPanel.add(toolbarVPanel);
 		toolbarVPanel.addStyleName("viewer-toolbarMoveVP");
 		Image imageDown = spinnerVertical.getDecrementArrow();
+		imageDown.setUrl("images/empty_background.png");
 		imageDown.addStyleName("arrow");
 		imageDown.addStyleName("arrow-down");
 		Image imageUp = spinnerVertical.getIncrementArrow();
+		imageUp.setUrl("images/empty_background.png");
 		imageUp.addStyleName("arrow");
 		imageUp.addStyleName("arrow-up");
 		toolbarVPanel.add(imageUp);
