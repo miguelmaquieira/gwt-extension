@@ -51,9 +51,7 @@ public class CRONIOBusDesktopPreferencesConnectionPresenter extends CRONIOBusPre
 
 	@Override
 	public boolean isDispatchEventType(LOGICAL_TYPE type) {
-		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type)
-				||
-				LOGICAL_TYPE.SAVE_EVENT.equals(type);
+		return LOGICAL_TYPE.SUBMIT_EVENT.equals(type);
 	}
 	
 	/**

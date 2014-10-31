@@ -22,50 +22,51 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 		processJPA = getPersistenceModule().create(processJPA);
 		return processJPA;
 	}
-	
+
 	@Override
-	public CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, Date date) {
+	public CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, List<String> modifyNodeLists, Date date) {
 		CRONIOBOProcess originalProcess = getPersistenceModule().get(processId);
 		if (originalProcess != null) {
 
-		
 			List<CRONIOBOINodeList> originalListNodeList 	= originalProcess.getListNodeList();
 			List<CRONIOBOINodeList> persistedListNodeList	= new ArrayList<>();
 			List<List<CRONIOBOINode>> listNodesToRemove= new ArrayList<>();
 			for (CRONIOBOINodeList nodeList : originalListNodeList) {
-				List<CRONIOBOINode> nodesToRemove 		= new ArrayList<>(); 
-				List<CRONIOBOINode> nodes = nodeList.getNodeList();
-				if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
-					for (CRONIOBOINode node : nodes) {
-						nodesToRemove.add(node);
+				if (modifyNodeLists.contains(String.valueOf(nodeList.getNodeListId()))) {
+					List<CRONIOBOINode> nodesToRemove 		= new ArrayList<>(); 
+					List<CRONIOBOINode> nodes = nodeList.getNodeList();
+					if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
+						for (CRONIOBOINode node : nodes) {
+							nodesToRemove.add(node);
+						}
+					}
+					for (CRONIOBOINode node : nodesToRemove) {
+						nodeList.removeNode(node);
+					}
+
+					if (!AEMFTCommonUtilsBase.isEmptyList(nodesToRemove)) {
+						listNodesToRemove.add(nodesToRemove);
 					}
 				}
-				for (CRONIOBOINode node : nodesToRemove) {
-					nodeList.removeNode(node);
-				}
-				
-				if (!AEMFTCommonUtilsBase.isEmptyList(nodesToRemove)) {
-					listNodesToRemove.add(nodesToRemove);
-				}
-				
 			}
-			
+
 			List<CRONIOBOINodeList> newListNodeList			= processData.getListNodeList();
 			for (CRONIOBOINodeList newNodeList : newListNodeList) {
-				
-				List<CRONIOBOINode> nodes = newNodeList.getNodeList();
-				if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
-					for (CRONIOBOINode node : nodes) {
-						CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, node.getNodeType());
-						node.setMachineProperties(machineProperties);
-						node = getNodePersistence().addNode(node);
+				if (modifyNodeLists.contains(String.valueOf(newNodeList.getNodeListId()))) {
+					List<CRONIOBOINode> nodes = newNodeList.getNodeList();
+					if (!AEMFTCommonUtilsBase.isEmptyList(nodes)) {
+						for (CRONIOBOINode node : nodes) {
+							CRONIOBOIMachineProperties machineProperties = getMachinePropertiesPersistence().getMachineProperties(preferencesId, node.getNodeType());
+							node.setMachineProperties(machineProperties);
+							node = getNodePersistence().addNode(node);
+						}
+						long newNodeListId = newNodeList.getNodeListId();
+						newNodeList = getNodeListPersistence().updateNodeList(newNodeListId, newNodeList);
 					}
-				long newNodeListId = newNodeList.getNodeListId();
-				newNodeList = getNodeListPersistence().updateNodeList(newNodeListId, newNodeList);
 				}
 				persistedListNodeList.add(newNodeList);
 			}
-			originalProcess.setListNodeList(persistedListNodeList);
+
 			originalProcess.setSynchronous(processData.isSynchronous());
 			originalProcess.setScheduleList(processData.getScheduleList());
 			originalProcess.setVariableList(processData.getVariableList());
@@ -75,7 +76,7 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 			originalProcess.setSavedTime(date);
 
 			getPersistenceModule().update(originalProcess);
-			
+
 			//orphan nodes
 			for (List<CRONIOBOINode> listNodes : listNodesToRemove) {
 				for (CRONIOBOINode node : listNodes) {
@@ -85,7 +86,7 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 		}
 		return originalProcess;
 	}
-	
+
 	@Override
 	public CRONIOBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList) {
 		CRONIOBOProcess originalProcess = getPersistenceModule().get(processId);
@@ -97,18 +98,18 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 		}
 		return originalProcess;
 	}
-	
+
 	@Override
 	public List<CRONIOBOIProcess> getAllProcesses() {
 		List<CRONIOBOProcess> processListJpa = getPersistenceModule().findAll();
 		return AEMFTCommonUtilsBase.castList(processListJpa);
 	}
-	
+
 	@Override
 	public void removeProcess(Long processIdAsLong) {
 		getPersistenceModule().remove(processIdAsLong);
 	}
-	
+
 	@Override
 	public CRONIOBOIProcess getProcess(Long processIdAsLong) {
 		CRONIOBOProcess processJpa = getPersistenceModule().get(processIdAsLong);
@@ -122,9 +123,9 @@ public class CRONIOBKProcessPersistenceServiceJPA extends CRONIOBKPersistenceSer
 	public Class<CRONIOBOProcess> getPersistenceClass() {
 		return CRONIOBOProcess.class;
 	}
-	
+
 	/**
 	 * PRIVATE
 	 */
-	
+
 }

@@ -15,6 +15,7 @@ public interface CRONIOBOINodeListDataConstants {
 	
 	//CONTEXT
 	String NODELIST_DATA			= "nodeListData";
+	String MODIFY_NODELISTS			= "modifyNodeLists";
 	String DATE_FORMAT				= "d/MM/yyyy H:mm";
 
 }

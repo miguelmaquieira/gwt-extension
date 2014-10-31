@@ -21,9 +21,9 @@ public interface CRONIOBOILogNode extends Serializable, CRONIOBOILogNodeDataCons
 
 	void setNodeType(String nodeType);
 	
-	boolean getState();
+	int getState();
 
-	void setState(boolean state);
+	void setState(int state);
 
 	Date getCreationTime();
 

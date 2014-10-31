@@ -32,11 +32,11 @@ public class CRONIOBusDesktopProjectPageScreenView extends CRONIOBusDesktopPanel
 	public void setData(AEMFTMetadataElementComposite data) {
 	}
 
-	/**
-	 * CRONIOBusProjectBaseDisplay
-	 */
-	
-	@Override
-	public void beforeExitSection() {
-	}
+//	/**
+//	 * CRONIOBusProjectBaseDisplay
+//	 */
+//	
+//	@Override
+//	public void beforeExitSection() {
+//	}
 }

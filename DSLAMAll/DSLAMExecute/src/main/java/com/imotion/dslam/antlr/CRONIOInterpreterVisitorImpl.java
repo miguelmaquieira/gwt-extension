@@ -80,6 +80,11 @@ public class CRONIOInterpreterVisitorImpl extends ImoLangBaseVisitor<CRONIOInter
 	public void continueExecution() {
 		stopExecution = false;
 	}
+	
+	@Override
+	public boolean getStopExecution() {
+		return stopExecution;
+	}
 
 	/**
 	 * Visitor methods

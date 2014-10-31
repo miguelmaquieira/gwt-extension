@@ -58,9 +58,9 @@ public class CRONIOBusDesktopAccordionLoggerContainer extends CRONIOBusDesktopPr
 		accordionPanelContainer.removeStyleName(AEGWTIBoostrapConstants.COL_XS_12);
 	}
 
-	public void beforeExitSection() {
-		super.beforeExitSection();
-	}
+//	public void beforeExitSection() {
+//		super.beforeExitSection();
+//	}
 
 	public void setFilterVisible (boolean visible) {
 		super.setFilterVisible(visible);

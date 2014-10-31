@@ -5,6 +5,7 @@ import com.imotion.dslam.bom.CRONIOBOIPreferences;
 import com.imotion.dslam.bom.CRONIOBOIPreferencesDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProcessDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenter;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureExtraOptions;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
@@ -15,7 +16,7 @@ import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEvent;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTLogicalEventTypes.LOGICAL_TYPE;
 
-public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresenter<CRONIOBusDesktopProcessDisplay> implements AEGWTHasLogicalEventHandlers {
+public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresenter<CRONIOBusDesktopProcessDisplay> implements AEGWTHasLogicalEventHandlers, CRONIOBusDesktopHasProjectEventHandlers {
 
 	public static final String NAME = "CRONIOBusDesktopProcessPresenter";
 
@@ -25,7 +26,8 @@ public class CRONIOBusDesktopProcessPresenter extends CRONIOBusProjectBasePresen
 
 	@Override
 	public void bind() {
-//		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		//getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		
 	}
 
 	@Override

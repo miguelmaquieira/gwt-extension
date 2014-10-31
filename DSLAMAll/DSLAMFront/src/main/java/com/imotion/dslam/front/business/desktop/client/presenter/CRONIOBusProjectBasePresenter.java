@@ -39,6 +39,7 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeListForm;
+import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.CRONIOBusDesktopProjectsToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -93,7 +94,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 				}
 				boolean	 projectChange	= !projectId.equals(currentProjectId);
 
-				getView().beforeExitSection();
+				//getView().beforeExitSection();
 				updateNavigationData(projectId, mainSectionId, finalSectionId);
 				if (navigate) {
 					AEGWTFlowEvent flowEvent = new AEGWTFlowEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
@@ -107,8 +108,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT.equals(evtTyp)) {
 			AEMFTMetadataElementComposite finalSectionData = (AEMFTMetadataElementComposite) evt.getElementAsDataValue();
 			updateFinalSectionInContext(finalSectionData);
-		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp)) {
-			saveCurrentProjectInDB();
+		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp) && CRONIOBusDesktopProjectsToolbarActions.NAME.equals(srcWidget)) {
+			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+			getModifyNodelistsEvt.setEventType(EVENT_TYPE.GET_MODIFY_NODELISTS_ID);
+			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
+		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp) && CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
+			List<String> modifyNodeLists = (List<String>) evt.getElementAsSerializableDataValue();
+			saveCurrentProjectInDB(modifyNodeLists);	
 		} else if (EVENT_TYPE.SAVE_ALL_PROJECTS.equals(evtTyp)) {
 			saveModifiedProjectsInDB();
 		} else if (EVENT_TYPE.NEW_PROJECT.equals(evtTyp)) {
@@ -121,7 +127,6 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			Long 	executionId 	= evt.getElementAsLong(CRONIOBOIExecution.EXECUTION_ID);
 			String 	nodeListName 	= evt.getElementAsString(CRONIOBOINodeList.NODELIST_NAME);
 			executeProject(projectId, executionId, nodeListName);
-			updateFinishExecution(projectId, executionId);
 		} else if (EVENT_TYPE.ADD_EXECUTION.equals(evtTyp)) {
 			String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 			String nodeListName		= evt.getElementAsString(CRONIOBOINodeList.NODELIST_NAME);
@@ -152,7 +157,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 		} else if (EVENT_TYPE.GET_PROCESS_NODELISTS.equals(evtTyp) && CRONIOBusDesktopProjectsToolbarActions.NAME.equals(srcWidget)) {
 			evt.stopPropagation();
 			String currentProjectId = getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
-			
+
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
@@ -383,7 +388,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 
 	private void addExecutionToDB(String currentId, String nodeListName) {
-		
+
 		String userIdKey = AEGWTILoginAppControllerConstants.SESSION + CRONIOBusCommonConstants.ELEMENT_SEPARATOR + AEGWTILoginAppControllerConstants.USER_ID;
 		AEMFTMetadataElementSingle userIdData = (AEMFTMetadataElementSingle) getContextDataController().getElement(userIdKey);
 		String userIdStr = userIdData.getValueAsString();
@@ -404,14 +409,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 					AEMFTMetadataElementComposite executionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
 					String dateExecutionStr = getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME, executionData);
 					dateExecutionStr = dateExecutionStr.replace("/", "-");
-					
+
 					String[] 					dateExecutionStr1 		= dateExecutionStr.split(" ");
 					String[] 					dateExecutionStr2 		= dateExecutionStr1[0].split("\\-");
 					String 						dateExecutionStr1Format	= dateExecutionStr2[2] + "-" + dateExecutionStr2[1] + "-" + dateExecutionStr2[0] + " " + dateExecutionStr1[1];
 					String 	projectId 		= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
 					Long 	executionId 	= getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
 					String 	executionIdStr	= String.valueOf(executionId);	
-					projectsLayout.addExecution(projectId, dateExecutionStr1Format);
+					projectsLayout.addExecution(projectId, executionId, dateExecutionStr1Format);
 
 					StringBuilder sbKey = new StringBuilder();
 					sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
@@ -454,14 +459,14 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			}
 		});
 	}
-	
+
 	private void addNodeListToDB(String nodeListName, String currentProjectId) {
 
 		AEMFTMetadataElementComposite newNodeListData  = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite();
 
 		newNodeListData.addElement(CRONIOBOINodeListDataConstants.NODELIST_NAME	, nodeListName);
 		newNodeListData.addElement(CRONIOBOIProjectDataConstants.PROJECT_ID		, currentProjectId);
-		
+
 		getClientServerConnection().executeComm(newNodeListData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_ADD_NODELIST_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
@@ -509,7 +514,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 						storageEvent.addElementAsDataValue(listNodeListData);
 						storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 						getLogicalEventHandlerManager().fireEvent(storageEvent);
-						
+
 						StringBuilder sbKey2 = new StringBuilder();
 						sbKey2.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 						sbKey2.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
@@ -517,13 +522,13 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 						sbKey2.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
 						sbKey2.append(projectId);
 						String nodeListsFinalSectionKey = sbKey2.toString();
-						
+
 						AEGWTLocalStorageEvent storageEvent2 = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
 						storageEvent2.setFullKey(nodeListsFinalSectionKey);
 						storageEvent2.addElementAsDataValue(listNodeListData);
 						storageEvent2.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
 						getLogicalEventHandlerManager().fireEvent(storageEvent2);
-						
+
 						getContextDataController().setElement(finalSectionKey			, listNodeListData.cloneObject());
 						getContextDataController().setElement(nodeListsFinalSectionKey	, listNodeListData.cloneObject());
 
@@ -596,83 +601,56 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 	}
 
 	private void openFinalSection(boolean projectChange, String projectId, String projectFinalSectionId) {
-		boolean isLog = false;
+		boolean isLog 				= false;
+		boolean sectionIsModified 	= false;
+		String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2}).*";
+		isLog = projectFinalSectionId.matches(dateRegEx);
 
-		if (!AEGWTStringUtils.isEmptyString(projectId) && !AEGWTStringUtils.isEmptyString(projectFinalSectionId)) {
+		if (isLog) {
+			getExecution(Long.parseLong(projectId), projectFinalSectionId);
+		} else if (!AEGWTStringUtils.isEmptyString(projectId) && !AEGWTStringUtils.isEmptyString(projectFinalSectionId)) {
 			StringBuilder sbKey = new StringBuilder();
 			sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
 			sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-
-			String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
-
-			if (projectFinalSectionId.matches(dateRegEx)) {
-				sbKey.append(CRONIOBUIExecuteBusinessServiceConstants.EXECUTIONS_DATA);
+			sbKey.append(projectId);
+			if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
 				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-				sbKey.append(projectId);
-				isLog = true;
-			} else {
-				sbKey.append(projectId);
-				if (!CRONIOBOIProject.PROJECT_EXECUTION_CONSOLE.equals(projectFinalSectionId)) {
-					sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-					//Final Section Data
-					sbKey.append(projectFinalSectionId);
-				}
+				//Final Section Data
+				sbKey.append(projectFinalSectionId);
 			}
-
 			String finalSectionKey = sbKey.toString();
-
-			//Project name
-			StringBuilder projectNamesbKey = new StringBuilder();
-			projectNamesbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-			projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-			projectNamesbKey.append(projectId);
-			projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-			projectNamesbKey.append(CRONIOBOIProject.PROJECT_NAME);
-			String projectNameKey = projectNamesbKey.toString();
-			String projectName = getContextDataController().getElementAsString(projectNameKey);
-
+			
 			AEMFTMetadataElementComposite finalSectionData = getContextDataController().getElementAsComposite(finalSectionKey);
 			if (finalSectionData != null) {
 				finalSectionData = (AEMFTMetadataElementComposite) finalSectionData.cloneObject();
-				if (isLog) {
-					List<AEMFTMetadataElement> executionList = finalSectionData.getSortedElementList();
-					for (AEMFTMetadataElement execution : executionList) {
-						AEMFTMetadataElementComposite executionData = (AEMFTMetadataElementComposite) execution;
-						AEMFTMetadataElementSingle creationTime = (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.CREATION_TIME);
-						String creationTimeStr = creationTime.getValueAsSerializable().toString();
-						creationTimeStr = creationTimeStr.replace("/", "-");
-						String[] creationTimeStrSplit 	= creationTimeStr.split("\\.");
-						String[] creationTimeStrSplit1 	= creationTimeStrSplit[0].split("\\-");
-						String[] creationTimeStrSplit2 	= creationTimeStrSplit1[2].split(" ");
-						String creationTimeStrFormat 	= creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
-						if(creationTimeStrFormat.equals(projectFinalSectionId) || creationTimeStr.equals(projectFinalSectionId)) {
-							if (creationTimeStr.equals(projectFinalSectionId)) {
-								executionData.addElement(CRONIOBOIExecution.CREATION_TIME, creationTimeStr);
-							}
-							finalSectionData = executionData;
-						}
-					}
-
-				}
 			}
-			
-			boolean sectionIsModified = getElementDataController().getElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED, finalSectionData);
-
-			//SHOW HEADER INFO
-			CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
-			showInfoEvent.addElementAsString(CRONIOBOIProject.PROJECT_NAME	, projectName);
-			showInfoEvent.addElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED	, sectionIsModified);
-			showInfoEvent.setProjectId(projectId);
-			showInfoEvent.setFinalSectionId(projectFinalSectionId);
-			showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
-			getLogicalEventHandlerManager().fireEvent(showInfoEvent);
-
+			sectionIsModified = getElementDataController().getElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED, finalSectionData);
 			//SHOW CONTENT
 			openFinalSection(projectChange, projectId, projectFinalSectionId, finalSectionData);
-		}
+		}	
+
+		//Project name
+		StringBuilder projectNamesbKey = new StringBuilder();
+		projectNamesbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+		projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+		projectNamesbKey.append(projectId);
+		projectNamesbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+		projectNamesbKey.append(CRONIOBOIProject.PROJECT_NAME);
+		String projectNameKey = projectNamesbKey.toString();
+		String projectName = getContextDataController().getElementAsString(projectNameKey);
+
+		//SHOW HEADER INFO
+		CRONIOBusDesktopProjectEvent showInfoEvent = new CRONIOBusDesktopProjectEvent(PROJECT_PRESENTER, getName());
+		showInfoEvent.addElementAsString(CRONIOBOIProject.PROJECT_NAME	, projectName);
+		showInfoEvent.addElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED	, sectionIsModified);
+		showInfoEvent.setProjectId(projectId);
+		showInfoEvent.setFinalSectionId(projectFinalSectionId);
+		showInfoEvent.setEventType(EVENT_TYPE.SHOW_PROJECT_INFO);
+		getLogicalEventHandlerManager().fireEvent(showInfoEvent);
+
 	}
 
-	private void saveCurrentProjectInDB() {
+	private void saveCurrentProjectInDB(List<String> modifyNodeLists) {
 
 		final String currentProjectId	= getContextDataController().getElementAsString(PROJECT_NAVIGATION_DATA_CURRENT_PROJECT_ID);
 
@@ -688,6 +666,7 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		AEMFTMetadataElementComposite projectData = getContextDataController().getElementAsComposite(projectDataKey);
 		projectData.addElement(CRONIOBOIUser.USER_ID, userIdStr);
+		projectData.addElement(CRONIOBOINodeList.MODIFY_NODELISTS,(Serializable) modifyNodeLists);
 
 		getClientServerConnection().executeComm(projectData, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_PROJECT_UPDATE_PROJECT_ID, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
@@ -809,7 +788,36 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-
+				//				AEMFTMetadataElementComposite executionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
+				//				String 	projectId 		= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
+				//				Long 	executionId 	= getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
+				//				String 	executionIdStr	= String.valueOf(executionId);	
+				//				
+				//				StringBuilder sbKey = new StringBuilder();
+				//				sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
+				//				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+				//				sbKey.append(CRONIODesktopIAppControllerConstants.EXECUTIONS_DATA);
+				//				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
+				//				sbKey.append(projectId);
+				//				String finalSectionKey = sbKey.toString();
+				//
+				//				AEMFTMetadataElementComposite executionsData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
+				//
+				//				if (executionsData != null) {
+				//					executionsData = (AEMFTMetadataElementComposite) executionsData.cloneObject();
+				//
+				//				} else {
+				//					executionsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+				//				}
+				//
+				//				executionData.setKey(executionIdStr);
+				//				executionsData.addElement(executionData);
+				//
+				//				AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
+				//				storageEvent.setFullKey(finalSectionKey);
+				//				storageEvent.addElementAsDataValue(executionsData);
+				//				storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
+				//				getLogicalEventHandlerManager().fireEvent(storageEvent);
 			}
 
 			@Override
@@ -819,52 +827,41 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 
 		});
 	}
-	
-	private void updateFinishExecution(String projectId, Long executionId) {
+
+	private void getExecution(long projectId, String executionCreateTimeAndId) {
+		
+		String[] 	executionCreateTimeAndIdSplit 	= executionCreateTimeAndId.split(" ");
+		String 		creationTime					= executionCreateTimeAndIdSplit[0] + " " + executionCreateTimeAndIdSplit[1];
+		String 		executionId 					= executionCreateTimeAndIdSplit[2];
+		
 		AEMFTMetadataElementComposite contextIn = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
-		contextIn.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
-		contextIn.addElement(CRONIOBOIExecution.EXECUTION_ID, executionId);
-		getClientServerConnection().executeComm(contextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_EXECUTE_UPDATE_FINISH_EXECUTE, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
+		contextIn.addElement(CRONIOBOIExecution.EXECUTION_ID	, executionId);
+		contextIn.addElement(CRONIOBOIExecution.CREATION_TIME	, creationTime);
+		contextIn.addElement(CRONIOBOIExecution.PROJECT_ID		,projectId);
+		
+		getClientServerConnection().executeComm(contextIn, CRONIOBUIServiceIdConstant.CTE_CRONIO_BU_SRV_EXECUTE_GET_EXECUTION, new AEGWTCommClientAsynchCallbackRequest<AEMFTMetadataElementComposite>(this) {
 
 			@Override
 			public void onResult(AEMFTMetadataElementComposite dataResult) {
-				AEMFTMetadataElementComposite executionData = dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
-				String 	projectId 		= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, executionData);
-				Long 	executionId 	= getElementDataController().getElementAsLong(CRONIOBOIExecution.EXECUTION_ID, executionData);
-				String 	executionIdStr	= String.valueOf(executionId);	
-				
-				StringBuilder sbKey = new StringBuilder();
-				sbKey.append(CRONIODesktopIAppControllerConstants.PROJECTS_DATA);
-				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-				sbKey.append(CRONIODesktopIAppControllerConstants.EXECUTIONS_DATA);
-				sbKey.append(CRONIOBusCommonConstants.ELEMENT_SEPARATOR);
-				sbKey.append(projectId);
-				String finalSectionKey = sbKey.toString();
-
-				AEMFTMetadataElementComposite executionsData = (AEMFTMetadataElementComposite) getContextDataController().getElement(finalSectionKey);
-
-				if (executionsData != null) {
-					executionsData = (AEMFTMetadataElementComposite) executionsData.cloneObject();
-
-				} else {
-					executionsData = AEMFTMetadataElementConstructorBasedFactory.getMonoInstance().getComposite(); 
+				if (dataResult != null) {
+					AEMFTMetadataElementComposite 	 	executionData			= dataResult.getCompositeElement(CRONIOBUIExecuteBusinessServiceConstants.EXECUTION_DATA);
+					AEMFTMetadataElementSingle 			projectIdData 			= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOIExecution.PROJECT_ID);
+					long 								projectId 				= projectIdData.getValueAsLong();
+					String 								projectIdStr 			= String.valueOf(projectId);
+					AEMFTMetadataElementSingle 			creationTimeData 		= (AEMFTMetadataElementSingle) dataResult.getElement(CRONIOBOIExecution.CREATION_TIME);
+					String								creationTime			= creationTimeData.getValueAsString();
+					AEMFTMetadataElementSingle 			executionIdData 		= (AEMFTMetadataElementSingle) executionData.getElement(CRONIOBOIExecution.EXECUTION_ID);
+					long								executionId 			= executionIdData.getValueAsLong();
+					String								executionIdStr      	= String.valueOf(executionId);
+					String								projectFinalSectionId 	= creationTime + " " + executionIdStr;
+					openFinalSection(true, projectIdStr, projectFinalSectionId, executionData);
 				}
-
-				executionData.setKey(executionIdStr);
-				executionsData.addElement(executionData);
-
-				AEGWTLocalStorageEvent storageEvent = new AEGWTLocalStorageEvent(PROJECT_PRESENTER, getName());
-				storageEvent.setFullKey(finalSectionKey);
-				storageEvent.addElementAsDataValue(executionsData);
-				storageEvent.setEventType(AEGWTLocalStorageEventTypes.LOCAL_STORAGE_TYPE.CHANGE_DATA_CONTEXT_EVENT);
-				getLogicalEventHandlerManager().fireEvent(storageEvent);
 			}
 
 			@Override
 			public void onError(Throwable th) {
 				// TODO Auto-generated method stub
 			}
-
 		});
 	}
 

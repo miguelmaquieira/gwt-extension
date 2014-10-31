@@ -53,13 +53,13 @@ public class CRONIOBusDesktopScriptsManagerScreenView extends CRONIOBusDesktopPa
 		editor.setData(data);
 	}
 	
-	/**
-	 * CRONIOBusProjectBaseDisplay
-	 */
-	
-	@Override
-	public void beforeExitSection() {
-	}
+//	/**
+//	 * CRONIOBusProjectBaseDisplay
+//	 */
+//	
+//	@Override
+//	public void beforeExitSection() {
+//	}
 
 	/************************************************************************
 	 *                        PROTECTED FUNCTIONS

@@ -129,11 +129,11 @@ public class CRONIOBusDesktopProjectNavigator extends AEGWTCompositePanel implem
 		
 	}
 	
-	public void addExecution(String projectId, String executionDateStr) {
+	public void addExecution(String projectId, long executionId, String executionDateStr) {
 		List<CRONIOBusDesktopProjectNavigatorElement> projectNavigatorElementList = getElementWidgetList();
 		for (CRONIOBusDesktopProjectNavigatorElement ProjectNavigatorElement : projectNavigatorElementList) {
 			if (ProjectNavigatorElement.getId().equals(projectId)) {
-				ProjectNavigatorElement.addExecution(projectId, executionDateStr);
+				ProjectNavigatorElement.addExecution(projectId, executionId, executionDateStr);
 			}
 		}
 	}
@@ -203,7 +203,9 @@ public class CRONIOBusDesktopProjectNavigator extends AEGWTCompositePanel implem
 								String[] creationTimeStrSplit2 = creationTimeStrSplit1[2].split(" ");
 								
 								String 		creationTimeStrFormat	= creationTimeStrSplit2[0] + "-" + creationTimeStrSplit1[1] + "-" + creationTimeStrSplit1[0] + " " + creationTimeStrSplit2[1];
-								addExecution(projectId, creationTimeStrFormat);
+								AEMFTMetadataElementSingle executionIdData = (AEMFTMetadataElementSingle) executionDataComposite.getElement(CRONIOBOIExecution.EXECUTION_ID);
+								long executionId = executionIdData.getValueAsLong();
+								addExecution(projectId, executionId, creationTimeStrFormat);
 							}
 						}
 					} else {

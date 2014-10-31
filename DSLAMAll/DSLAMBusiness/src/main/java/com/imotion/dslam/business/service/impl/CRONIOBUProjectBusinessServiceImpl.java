@@ -285,6 +285,7 @@ public class CRONIOBUProjectBusinessServiceImpl extends CRONIOBUServiceBase impl
 
 	private AEMFTMetadataElementComposite updateProject(AEMFTMetadataElementComposite projectData) {
 		String					userIdStr		= getElementDataController().getElementAsString(CRONIOBOIUser.USER_ID			, projectData);
+		List<String>			modifyNodeLists	= (List<String>) getElementDataController().getElementAsSerializable(CRONIOBOINodeList.MODIFY_NODELISTS		, projectData);
 		long					userId			= AEMFTCommonUtilsBase.getLongFromString(userIdStr);
 		CRONIOBOIUser 			user 			= getUserPersistence().getUserById(userId);
 		CRONIOBOIPreferences 	userPreferences = user.getPreferences();
@@ -305,7 +306,7 @@ public class CRONIOBUProjectBusinessServiceImpl extends CRONIOBUServiceBase impl
 
 		//Process
 		CRONIOBOIProcess process = project.getProcess();
-		process = getProcessPersistence().updateProcess(process.getProcessId(), process, preferencesId, date);
+		process = getProcessPersistence().updateProcess(process.getProcessId(), process, preferencesId, modifyNodeLists, date);
 		project.setProcess(process);
 		project.setSavedTime(date);
 

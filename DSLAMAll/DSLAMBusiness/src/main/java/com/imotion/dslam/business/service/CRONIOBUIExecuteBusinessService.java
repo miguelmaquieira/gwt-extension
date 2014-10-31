@@ -8,9 +8,9 @@ public interface CRONIOBUIExecuteBusinessService extends CRONIOBUIBusinessServic
 
 	void executeProject();
 	
-	void updateFinishExecution();
-	
 	void addExecution();
+	
+	void getExecution();
 
 	void getAllExecutionsByProjectId();
 

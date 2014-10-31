@@ -248,8 +248,11 @@ public class CRONIOBusDesktopProjectNavigatorElement extends AEGWTCompositePanel
 		}
 	}
 	
-	public void addExecution(String projectId, String executionDateStr) {
-		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, CRONIOBOIProject.PROJECT_EXECUTION_LOG			, executionDateStr, this);
+	public void addExecution(String projectId,long executionId, String executionDateStr) {
+		
+		String executionText = executionDateStr + " " + String.valueOf(executionId);
+		
+		CRONIOBusDesktopProjectNavigatorFinalItem execution = new CRONIOBusDesktopProjectNavigatorFinalItem(projectId, SECTION_TYPE_LOG, CRONIOBOIProject.PROJECT_EXECUTION_LOG			, executionText, this);
 		menuLogs.add(execution);
 	}
 	

@@ -12,8 +12,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
-import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
-import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOIClientLoggerConstants;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEvent;
 import com.imotion.dslam.logger.atmosphere.base.CRONIOLoggerEventCollection;
@@ -200,13 +198,13 @@ public abstract class CRONIOBusDesktopProjectExecutionLoggerBase extends AEGWTCo
 		return filterForm;
 	}
 	
-	public void beforeExitSection() {
-		atmosphere.unsubscribe();
-		CRONIOBusDesktopProjectEvent saveContextEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
-		saveContextEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
-		saveContextEvt.addElementAsDataValue(logDataList);
-		getLogicalEventHandlerManager().fireEvent(saveContextEvt);
-	}
+//	public void beforeExitSection() {
+//		atmosphere.unsubscribe();
+//		CRONIOBusDesktopProjectEvent saveContextEvt = new CRONIOBusDesktopProjectEvent(getWindowName(), getName());
+//		saveContextEvt.setEventType(EVENT_TYPE.SAVE_SECTION_TEMPORARILY_EVENT);
+//		saveContextEvt.addElementAsDataValue(logDataList);
+//		getLogicalEventHandlerManager().fireEvent(saveContextEvt);
+//	}
 	
 	public void setFilterVisible(boolean visible) {
 		filterPanel.setVisible(visible);

@@ -10,6 +10,7 @@ import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.front.business.desktop.client.view.log.CRONIOBusI18NLogTexts;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
+import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.bootstrap.AEGWTBootstrapTable;
 import com.selene.arch.exe.gwt.client.ui.widget.button.AEGWTButton;
 
@@ -48,8 +49,15 @@ public class CRONIOBusDesktopLoggerNodeList extends AEGWTBootstrapTable {
 					String 		name	 	= getElementController().getElementAsString(CRONIOBOILogNode.NODE_NAME	, node);
 					String 		ip 			= getElementController().getElementAsString(CRONIOBOILogNode.NODE_IP	, node);
 					String		type 		= getElementController().getElementAsString(CRONIOBOILogNode.NODE_TYPE	, node);
-					boolean		state 		= getElementController().getElementAsBoolean(CRONIOBOILogNode.STATE		, node);
+					int			state 		= getElementController().getElementAsInt(CRONIOBOILogNode.STATE			, node);
 					String 		stateStr 	= "";
+					if (state == CRONIOBOILogNode.STATE_OK) {
+						stateStr = AEGWTIBoostrapConstants.GLYPHICON_OK_SIGN;
+					} else if (state == CRONIOBOILogNode.STATE_ROLLBACK) {
+						stateStr = AEGWTIBoostrapConstants.GLYPHICON_REMOVE_SIGN;
+					} else if (state == CRONIOBOILogNode.STATE_NULL) {
+						stateStr = AEGWTIBoostrapConstants.GLYPHICON_QUESTION_SIGN;
+					}
 					
 					Map<String,String> nodeRow = new HashMap<String, String>();
 					nodeRow.put(CRONIOBOILogNode.NODE_NAME	, name);

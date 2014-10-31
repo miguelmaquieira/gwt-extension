@@ -37,7 +37,7 @@ public class CRONIOBusDesktopLoggerSectionsDeckPanel extends AEGWTCompositePanel
 	}
 
 	public void showSection(String sectionId, AEMFTMetadataElementComposite sectionData) {
-		String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2})";
+		String dateRegEx 	= "[0-9]{2}\\-[0-9]{2}\\-[0-9]{4}\\s([0-9]{2})\\:([0-9]{2})\\:([0-9]{2}).*";
 		if (sectionId.matches(dateRegEx)) {
 			rootDeckPanel.showWidget(0);
 			logger.setData(sectionData);

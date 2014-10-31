@@ -22,7 +22,7 @@ public class CRONIOBOLogNode implements CRONIOBOILogNode {
 	private String 							nodeName;
 	private String 							nodeIp;
 	private String 							nodeType;
-	private boolean 						state;
+	private Integer 						state;
 	private Date 							creationTime;
 	private Long							version;
 
@@ -72,12 +72,12 @@ public class CRONIOBOLogNode implements CRONIOBOILogNode {
 	}
 	
 	@Override
-	public boolean getState() {
+	public int getState() {
 		return state;
 	}
 
 	@Override
-	public void setState(boolean state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 

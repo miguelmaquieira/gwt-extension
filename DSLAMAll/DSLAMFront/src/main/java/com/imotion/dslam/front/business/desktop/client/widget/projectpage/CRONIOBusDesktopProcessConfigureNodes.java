@@ -1,5 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.projectpage;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
@@ -14,9 +16,11 @@ import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleCon
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
+import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
 import com.selene.arch.base.exe.core.appli.metadata.element.factory.AEMFTMetadataElementConstructorBasedFactory;
+import com.selene.arch.base.exe.core.appli.metadata.element.single.AEMFTMetadataElementSingle;
 import com.selene.arch.exe.gwt.client.AEGWTIBoostrapConstants;
 import com.selene.arch.exe.gwt.client.ui.widget.AEGWTCompositePanel;
 import com.selene.arch.exe.gwt.mvp.event.logic.AEGWTHasLogicalEventHandlers;
@@ -30,6 +34,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProcessNodeList				nodeList;
 	private CRONIOBusDesktopProcessConfigureNodesInfo	nodeInfoZone;
+	private List<String>								modifyNodeLists;
 	private	 AEMFTMetadataElementComposite				nodesData;
 	private	 AEMFTMetadataElementComposite				nodesDataList;
 	private AEMFTMetadataElementComposite				machineListData;
@@ -138,8 +143,10 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	public void postDisplay() {
 		super.postDisplay();
 		getLogicalEventHandlerManager().addLogicalEventHandler(this);
+		getLogicalEventHandlerManager().addEventHandler(CRONIOBusDesktopHasProjectEventHandlers.TYPE, this);
 		nodeList.postDisplay();
 		nodeInfoZone.postDisplay();
+		modifyNodeLists = new ArrayList<>();
 	}
 	
 	/**
@@ -150,13 +157,16 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	public void dispatchEvent(AEGWTLogicalEvent evt) {
 		String			srcWidget		= evt.getSourceWidget();
 		LOGICAL_TYPE	type			= evt.getEventType();
-		if (CRONIOBusDesktopHeaderOpcionalListActions.NAME.equals(srcWidget)) {
+		if (CRONIOBusDesktopHeaderListFileActions.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
 				evt.stopPropagation();
 				AEMFTMetadataElementComposite nodesData = evt.getElementAsComposite(CRONIOBOINodeList.NODELIST_DATA);
 				AEMFTMetadataElement nodeListIdData = nodesDataList.getElement(CRONIOBOINodeList.NODELIST_ID);
 				String nodeListId = nodeListIdData.toString();
 				String nodeListIdFormat = nodeListId.replace("nodeListId: ", "");
+				if (!modifyNodeLists.contains(nodeListIdFormat)) {
+					modifyNodeLists.add(nodeListIdFormat);
+				}
 				List<AEMFTMetadataElement> nodes = nodesData.getSortedElementList();
 				AEMFTMetadataElementComposite nodeComposite = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
 				for (AEMFTMetadataElement node : nodes) {
@@ -207,14 +217,19 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 
 			if (!nodesData.contains(name)) {
 				addNode(name, data);
+				AEMFTMetadataElementSingle nodeListIdData = (AEMFTMetadataElementSingle) nodesDataList.getElement(CRONIOBOINodeList.NODELIST_ID);
+				String nodeListId = nodeListIdData.getValueAsString();
+				if (!modifyNodeLists.contains(nodeListId)) {
+					modifyNodeLists.add(nodeListId);
+				}
 			} else {
 				nodeList.setErrorNodeExist();
 			}
-			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
-			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
-			saveEvt.setSourceWidget(getName());
-			saveEvt.addElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, nodesData);
-			getLogicalEventHandlerManager().fireEvent(saveEvt);
+//			AEGWTLogicalEvent saveEvt = new AEGWTLogicalEvent(getWindowName(), getName());
+//			saveEvt.setEventType(LOGICAL_TYPE.SAVE_EVENT);
+//			saveEvt.setSourceWidget(getName());
+//			saveEvt.addElementAsComposite(CRONIOBOINodeList.NODELIST_DATA, nodesData);
+//			getLogicalEventHandlerManager().fireEvent(saveEvt);
 			
 		}	
 	}
@@ -230,14 +245,20 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		// TODO Auto-generated method stub
+		if (EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
+			evt.stopPropagation();
+			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+			getModifyNodelistsEvt.setEventType(EVENT_TYPE.SAVE_PROJECT);
+			getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
+			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
+		}
 		
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(type);
 	}
 	
 	/**

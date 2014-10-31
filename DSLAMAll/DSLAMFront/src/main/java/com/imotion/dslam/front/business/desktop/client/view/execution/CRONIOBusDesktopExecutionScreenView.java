@@ -70,14 +70,14 @@ public class CRONIOBusDesktopExecutionScreenView extends CRONIOBusDesktopPanelBa
 		}
 	}
 
-	/**
-	 * CRONIOBusProjectBaseDisplay
-	 */
-
-	@Override
-	public void beforeExitSection() {
-		if (logger != null) {
-			logger.beforeExitSection();	
-		}
-	}
+//	/**
+//	 * CRONIOBusProjectBaseDisplay
+//	 */
+//
+//	@Override
+//	public void beforeExitSection() {
+//		if (logger != null) {
+//			logger.beforeExitSection();	
+//		}
+//	}
 }

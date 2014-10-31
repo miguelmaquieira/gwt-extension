@@ -15,4 +15,8 @@ public interface CRONIOBOILogNodeDataConstants {
 	String NODE_TYPE			= "nodeType";
 	String MACHINE_EXISTS		= "MACHINE_EXISTS";
 	
+	int STATE_NULL				= 0;
+	int STATE_OK				= 1;
+	int STATE_ROLLBACK			= 2;
+	
 }

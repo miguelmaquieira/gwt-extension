@@ -179,11 +179,11 @@
 					<Descriptor>executeProject</Descriptor>
 					<Async>true</Async>
 				</SubService>
-				<SubService Name="UPDATE_FINISH_EXECUTION">
-					<Descriptor>updateFinishExecution</Descriptor>
-				</SubService>
 				<SubService Name="ADD_EXECUTION">
 					<Descriptor>addExecution</Descriptor>
+				</SubService>
+				<SubService Name="GET_EXECUTION">
+					<Descriptor>getExecution</Descriptor>
 				</SubService>
 				<SubService Name="GET_ALL_EXCUTIONS_BY_PROJECT_ID">
 					<Descriptor>getAllExecutionsByProjectId</Descriptor>

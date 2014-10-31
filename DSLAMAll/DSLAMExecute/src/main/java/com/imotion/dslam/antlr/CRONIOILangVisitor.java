@@ -10,4 +10,6 @@ public interface CRONIOILangVisitor {
 	
 	public void continueExecution();
 	
+	public boolean getStopExecution();
+	
 }

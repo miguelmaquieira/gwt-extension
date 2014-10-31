@@ -51,42 +51,26 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 			//end-trace
 
 			CRONIOIExecutor executor = getExecutor(project);
-			executor.execute(executionId, nodeListName);
-	
+			List<CRONIOBOILogNode> stateLogNodes = executor.execute(executionId, nodeListName);
+			CRONIOBOIExecution execution = getExecutionPersistence().getExecution(executionId);
+			List<CRONIOBOILogNode> logNodes = execution.getLogNodes();
+			for (CRONIOBOILogNode logNode : logNodes) {
+				for (CRONIOBOILogNode stateLogNode :stateLogNodes) {
+					if (logNode.getNodeName().equals(stateLogNode.getNodeName())) {
+						logNode.setState(stateLogNode.getState());
+						getLogNodePersistence().addLogNode(logNode);
+					}
+				}
+			}
+			execution.setLogNodes(logNodes);
+			execution.setFinishExecutionTime(new Date());
+			getExecutionPersistence().addExecution(execution);
+
 		} else {
 			//init-trace
 			traceItemNotFound(METHOD_EXECUTE_PROJECT, CRONIOBOIProject.class, projectId);
 			//end-trace
 		}
-	}
-	
-	@Override
-	public void updateFinishExecution() {
-		AEMFTMetadataElementComposite 	contextIn = getContext().getContextDataIN();
-		AEMFTMetadataElementSingle		executionIdDataSingle	= (AEMFTMetadataElementSingle) getElementDataController().getElement(CRONIOBOIExecution.EXECUTION_ID, contextIn);
-		long							executionId				= executionIdDataSingle.getValueAsLong();
-		String							executionIdStr			= String.valueOf(executionId);
-		String							projectId				= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, contextIn);
-		
-		CRONIOBOIExecution execution = getExecutionPersistence().getExecution(executionId);
-		execution.setFinishExecutionTime(new Date());
-		getExecutionPersistence().addExecution(execution);
-		
-		if (execution != null) {
-			//init-trace
-			traceItemRecoveredFromPersistence(METHOD_UPDATE_FINISH_EXECUTE, CRONIOBOIExecution.class, executionIdStr);
-			//end-trace
-		} else {
-			//init-trace
-			traceItemNotFound(METHOD_UPDATE_FINISH_EXECUTE, CRONIOBOIExecution.class, executionIdStr);
-			//end-trace
-		}
-		
-		AEMFTMetadataElementComposite executionData = CRONIOBUBomToMetadataConversor.fromExecution(execution);
-		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
-		contextOut.addElement(EXECUTION_DATA, executionData);
-		contextOut.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
-		
 	}
 	
 	@Override
@@ -115,6 +99,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 					newLogNode.setNodeIp(node.getNodeIp());
 					newLogNode.setNodeType(node.getNodeType());
 					newLogNode.setCreationTime(new Date());
+					newLogNode.setState(CRONIOBOILogNode.STATE_NULL);
 					newLogNode= getLogNodePersistence().addLogNode(newLogNode);
 					logNodes.add(newLogNode);	
 				}
@@ -154,6 +139,31 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(EXECUTION_DATA, dateExecutionData);
 		contextOut.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
+	}
+	
+	@Override
+	public void getExecution() {
+		//ContextIn
+		AEMFTMetadataElementComposite 	contextIn 		= getContext().getContextDataIN();
+		String							executionIdStr	= getElementDataController().getElementAsString(CRONIOBOIExecution.EXECUTION_ID		, contextIn);
+		long							executionId		= Long.parseLong(executionIdStr);
+		long							projectId		= getElementDataController().getElementAsLong(CRONIOBOIExecution.PROJECT_ID			, contextIn);
+		String							creationTime	= getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME	, contextIn);
+		
+		CRONIOBOIExecution execution = getExecutionPersistence().getExecution(executionId);
+
+		if (execution == null) {
+			//init-trace
+			traceItemNotFound(METHOD_GET_EXECUTION, CRONIOBOIExecution.class, executionIdStr);
+			//end-trace
+		}
+	
+		AEMFTMetadataElementComposite executionData = CRONIOBUBomToMetadataConversor.fromExecution(execution);
+		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
+		contextOut.addElement(EXECUTION_DATA, executionData);
+		contextOut.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
+		contextOut.addElement(CRONIOBOIExecution.CREATION_TIME, creationTime);
+	
 	}
 
 	@Override

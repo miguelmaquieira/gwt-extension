@@ -7,8 +7,8 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
-import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.CRONIOBOIProjectDataConstants;
 import com.imotion.dslam.front.business.client.CRONIOBusI18NTexts;
 import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleConstants;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
@@ -31,7 +31,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	private FlowPanel 									root;
 	private CRONIOBusDesktopProjectsToolbar				toolbar;
-	private CRONIOBusDesktopProjectNavigator				projectListNavigator;
+	private CRONIOBusDesktopProjectNavigator			projectListNavigator;
 	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
 	private FlowPanel									projectWorkZone;
 
@@ -77,8 +77,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		return projectListNavigator.getModifiedProjectIds();
 	}
 	
-	public void addExecution(String projectId, String executionDateStr) {
-		projectListNavigator.addExecution(projectId, executionDateStr);
+	public void addExecution(String projectId, long executionId, String executionDateStr) {
+		projectListNavigator.addExecution(projectId, executionId, executionDateStr);
 	}
 	
 	public void addNodeList(String projectId, String nodeListName) {
@@ -186,7 +186,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 					String nodeListName = getElementController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, errorData);
 					projectListNavigator.showDuplicateNodeListNameError(currentProjectId, nodeListName);
 				}
-			}
+			} 
 		}
 	}
 

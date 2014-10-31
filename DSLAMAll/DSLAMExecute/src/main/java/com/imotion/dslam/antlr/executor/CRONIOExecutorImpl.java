@@ -1,5 +1,6 @@
 package com.imotion.dslam.antlr.executor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,11 +8,13 @@ import java.util.Map;
 import com.imotion.antlr.ImoLangParser.ProgramContext;
 import com.imotion.dslam.antlr.CRONIOAntlrUtils;
 import com.imotion.dslam.antlr.CRONIOInterpreterVisitorImpl;
+import com.imotion.dslam.bom.CRONIOBOILogNode;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOINode;
 import com.imotion.dslam.bom.CRONIOBOINodeList;
 import com.imotion.dslam.bom.CRONIOBOIProcess;
 import com.imotion.dslam.bom.CRONIOBOIProject;
+import com.imotion.dslam.bom.data.CRONIOBOLogNode;
 import com.imotion.dslam.bom.data.CRONIOBONodeList;
 import com.imotion.dslam.conn.CRONIOConnectionFactory;
 import com.imotion.dslam.conn.CRONIOIConnection;
@@ -31,7 +34,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	}
 
 	@Override
-	public void execute(Long executionId, String nodeListName) {
+	public  List<CRONIOBOILogNode> execute(Long executionId, String nodeListName) {
 		String 				scriptCode			= project.getMainScript().getCompiledContent();
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 			= CRONIOAntlrUtils.getVariablesFromProject(project);
@@ -49,14 +52,15 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		boolean					sync		= process.isSynchronous();
 		long					processId	= process.getProcessId();
 
-		executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodes, sync);
+		return executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodes, sync);
+		
 	}
 
 	/**
 	 * PRIVATE
 	 */
 
-	private void executeInNode(long processId, long executionId, CRONIOBOINode node, String scriptCode, String rollbackScriptCode, Map<String, Object> allVariables) {
+	private CRONIOBOILogNode executeInNode(long processId, long executionId, CRONIOBOINode node, String scriptCode, String rollbackScriptCode, Map<String, Object> allVariables) {
 		//RollbackScript
 		ProgramContext 	rollbackTree 				= null;
 		String			defaultRollbackCondition 	= null;
@@ -81,22 +85,35 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 		//Close connection
 		CRONIOConnectionFactory.releaseConnection(connection);
+		CRONIOBOILogNode logNode = new CRONIOBOLogNode();
+		logNode.setNodeName(node.getNodeName());
+		if (mainVisitor.getStopExecution()) {
+			logNode.setState(CRONIOBOILogNode.STATE_ROLLBACK);
+		} else {
+			logNode.setState(CRONIOBOILogNode.STATE_OK);
+		}
+		return logNode;
 	}
 
-	private void executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
+	private List<CRONIOBOILogNode>  executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
 		threads = new HashMap<>();
+		List<CRONIOBOILogNode> logNodes = new ArrayList<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = CRONIOAntlrUtils.getNodeVariables(node);
 			Map<String, Object> allVariables = new HashMap<>();
 			allVariables.putAll(nodeVariables);
 			allVariables.putAll(processVariables);
+			CRONIOBOILogNode logNode = new CRONIOBOLogNode();
 			if (sync) {
-				executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
+				logNode = executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
+			
 			} else {
 				Thread thread = executeInNodeAsync(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
 				threads.put(node.getNodeId(), thread);
 			}
+			logNodes.add(logNode);
 		}
+		return logNodes;
 	}
 
 	private Thread executeInNodeAsync(final long processId,final long executionId,final CRONIOBOINode node, final String scriptCode, final String rollbackScriptCode, final Map<String, Object> allVariables) {

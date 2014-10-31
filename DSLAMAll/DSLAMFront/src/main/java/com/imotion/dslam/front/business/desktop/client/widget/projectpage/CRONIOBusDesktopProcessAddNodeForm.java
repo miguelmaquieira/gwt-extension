@@ -65,12 +65,12 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 				
 				if (nameTextBox.getTextBox().getValue() == null || nameTextBox.getTextBox().getValue() == "") {
 					errors = true;
-					nameTextBox.setErrorLabelText(TEXTS.empty_textbox());
+					nameTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 				}
 				
 				if (ipTextBox.getTextBox().getValue() == null || ipTextBox.getTextBox().getValue() == "") {
 					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.empty_textbox());
+					ipTextBox.setErrorLabelTextAndShow(TEXTS.empty_textbox());
 				}
 				
 				String 		numberpRegEx 	= "25[0-5]|2[0-4][0-9]|[0-9]|[1-9][0-9]|1[0-9][0-9]";
@@ -80,17 +80,17 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 				
 				if (ipSplitSize == 1 && !TEXTS.localhost().equalsIgnoreCase(ip)) {
 					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
+					ipTextBox.setErrorLabelTextAndShow(TEXTS.ip_error_textbox());
 				}
 				
 				if (ipSplitSize != 4 && ipSplitSize > 1) {
 					errors = true;
-					ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
+					ipTextBox.setErrorLabelTextAndShow(TEXTS.ip_error_textbox());
 				} else if (ipSplitSize == 4){
 					for (int i = 0;i < 4;i++) {
 						if(!(ipSplit[i].matches(numberpRegEx))) {
 							errors = true;
-							ipTextBox.setErrorLabelText(TEXTS.ip_error_textbox());
+							ipTextBox.setErrorLabelTextAndShow(TEXTS.ip_error_textbox());
 						}
 					}
 				}
@@ -117,6 +117,7 @@ public class CRONIOBusDesktopProcessAddNodeForm extends AEGWTPopup {
 			@Override
 			public void onClick(ClickEvent event) {
 				hide();
+				resetForm();
 			}
 		});
 	}

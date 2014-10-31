@@ -18,7 +18,7 @@ public interface CRONIOBKIProcessPersistenceService {
 	
 	CRONIOBOIProcess getProcess(Long processIdAsLong);
 
-	CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, Date date);
+	CRONIOBOIProcess updateProcess(Long processId, CRONIOBOIProcess processData, Long preferencesId, List<String> modifyNodeLists, Date date);
 	
 	CRONIOBOIProcess addNodeListUpdateProcess(Long processId, CRONIOBOINodeList nodeList);
 

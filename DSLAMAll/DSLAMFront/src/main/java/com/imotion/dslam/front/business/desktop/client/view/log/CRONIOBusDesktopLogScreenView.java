@@ -64,13 +64,13 @@ public class CRONIOBusDesktopLogScreenView extends CRONIOBusDesktopPanelBaseView
 		}
 	}
 
-	/**
-	 * CRONIOBusProjectBaseDisplay
-	 */
-
-	@Override
-	public void beforeExitSection() {
-	}
+//	/**
+//	 * CRONIOBusProjectBaseDisplay
+//	 */
+//
+//	@Override
+//	public void beforeExitSection() {
+//	}
 
 	/**
 	 * CRONIOBusDesktopHasProjectEventHandlers
