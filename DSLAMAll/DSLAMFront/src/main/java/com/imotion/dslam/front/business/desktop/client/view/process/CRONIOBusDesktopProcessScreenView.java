@@ -10,7 +10,6 @@ import com.imotion.dslam.front.business.desktop.client.CRONIOBusDesktopIStyleCon
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopHasProjectEventHandlers;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEvent;
 import com.imotion.dslam.front.business.desktop.client.event.CRONIOBusDesktopProjectEventTypes.EVENT_TYPE;
-import com.imotion.dslam.front.business.desktop.client.presenter.CRONIOBusProjectBasePresenterConstants;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessDisplay;
 import com.imotion.dslam.front.business.desktop.client.presenter.process.CRONIOBusDesktopProcessPresenter;
 import com.imotion.dslam.front.business.desktop.client.view.CRONIOBusDesktopPanelBaseView;
@@ -97,20 +96,12 @@ public class CRONIOBusDesktopProcessScreenView extends CRONIOBusDesktopPanelBase
 			List<String> machineList = (List<String>) evt.getElementAsSerializableDataValue();
 			processSectionsDeckPanel.setMachineTypes(machineList);
 		}
-		
-		if (EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
-			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
-			getModifyNodelistsEvt.setEventType(EVENT_TYPE.GET_MODIFY_NODELISTS_ID);
-			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
-		}
-		
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		
-		return EVENT_TYPE.GET_MACHINE_TYPES.equals(type)
-				|| EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(type);
+		return EVENT_TYPE.GET_MACHINE_TYPES.equals(type);
 	}
 //	
 //	/**

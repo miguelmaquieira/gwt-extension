@@ -39,7 +39,6 @@ import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDe
 import com.imotion.dslam.front.business.desktop.client.widget.layout.CRONIOBusDesktopProjectsLayout;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeFinalItem;
 import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessAddNodeListForm;
-import com.imotion.dslam.front.business.desktop.client.widget.projectpage.CRONIOBusDesktopProcessConfigureNodes;
 import com.imotion.dslam.front.business.desktop.client.widget.toolbar.CRONIOBusDesktopProjectsToolbarActions;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElement;
 import com.selene.arch.base.exe.core.appli.metadata.element.AEMFTMetadataElementComposite;
@@ -112,7 +111,8 @@ public abstract class CRONIOBusProjectBasePresenter<T extends CRONIOBusProjectBa
 			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
 			getModifyNodelistsEvt.setEventType(EVENT_TYPE.GET_MODIFY_NODELISTS_ID);
 			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
-		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp) && CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)) {
+		} else if (EVENT_TYPE.SAVE_PROJECT.equals(evtTyp) && CRONIOBusDesktopProjectsLayout.NAME.equals(srcWidget)) { //CRONIOBusDesktopProcessConfigureNodes.NAME.equals(srcWidget)
+			evt.stopPropagation();
 			List<String> modifyNodeLists = (List<String>) evt.getElementAsSerializableDataValue();
 			saveCurrentProjectInDB(modifyNodeLists);	
 		} else if (EVENT_TYPE.SAVE_ALL_PROJECTS.equals(evtTyp)) {

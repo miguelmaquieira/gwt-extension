@@ -166,6 +166,11 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				String nodeListIdFormat = nodeListId.replace("nodeListId: ", "");
 				if (!modifyNodeLists.contains(nodeListIdFormat)) {
 					modifyNodeLists.add(nodeListIdFormat);
+					
+					CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+					getModifyNodelistsEvt.setEventType(EVENT_TYPE.ADD_MODIFY_NODELISTS_ID);
+					getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
+					getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
 				}
 				List<AEMFTMetadataElement> nodes = nodesData.getSortedElementList();
 				AEMFTMetadataElementComposite nodeComposite = AEMFTMetadataElementConstructorBasedFactory.getInstance().getComposite();
@@ -179,6 +184,7 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				getElementController().setElement(CRONIOBOINodeList.NODELIST_NODE_LIST, cloneNodesFormatData, cloneNodesData);
 				//cloneNodesFormatData.addElement(CRONIOBOIPreferencesDataConstants.PREFERENCES_MACHINE_PROPERTIES_LIST, getMachinesFromPreferences());
 				setData(cloneNodesFormatData);
+				
 			}	
 		} else if (CRONIOBusDesktopProcessNodeFinalItem.NAME.equals(srcWidget)) {
 			if (LOGICAL_TYPE.OPEN_EVENT.equals(type)) {
@@ -221,6 +227,11 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 				String nodeListId = nodeListIdData.getValueAsString();
 				if (!modifyNodeLists.contains(nodeListId)) {
 					modifyNodeLists.add(nodeListId);
+					
+					CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+					getModifyNodelistsEvt.setEventType(EVENT_TYPE.ADD_MODIFY_NODELISTS_ID);
+					getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
+					getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
 				}
 			} else {
 				nodeList.setErrorNodeExist();
@@ -245,20 +256,21 @@ public class CRONIOBusDesktopProcessConfigureNodes extends AEGWTCompositePanel i
 	
 	@Override
 	public void dispatchEvent(CRONIOBusDesktopProjectEvent evt) {
-		if (EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
-			evt.stopPropagation();
-			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
-			getModifyNodelistsEvt.setEventType(EVENT_TYPE.SAVE_PROJECT);
-			getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
-			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
-		}
-		
+//		if (EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
+//			evt.stopPropagation();
+//			CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+//			getModifyNodelistsEvt.setEventType(EVENT_TYPE.SAVE_PROJECT);
+//			getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
+//			getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
+//		}
+//		
 	}
 
 	@Override
 	public boolean isDispatchEventType(EVENT_TYPE type) {
 		
-		return EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(type);
+		return false;
+//				EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(type);
 	}
 	
 	/**

@@ -24,9 +24,11 @@ import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
 public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
-	private CRONIOIExecutionLogger 		logger;
-	private CRONIOBOIProject			project;
-	private HashMap<Long, Thread> 		threads;
+	private CRONIOIExecutionLogger 				logger;
+	private CRONIOBOIProject					project;
+	private HashMap<Long, Thread> 				threads;
+	private List<CRONIOBOILogNode>				logNodes;
+	private Thread								notifyThread;
 
 	public CRONIOExecutorImpl(CRONIOBOIProject project) throws Exception {
 		this.project			= project;
@@ -38,6 +40,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		String 				scriptCode			= project.getMainScript().getCompiledContent();
 		String				rollbackScriptCode	= project.getRollBackScript().getCompiledContent();
 		Map<String, Object> variables 			= CRONIOAntlrUtils.getVariablesFromProject(project);
+		logNodes = new ArrayList<>();
 
 		CRONIOBOIProcess			process			= project.getProcess();
 		List<CRONIOBOINodeList> 	listNodeList 	= process.getListNodeList();
@@ -97,7 +100,6 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 	private List<CRONIOBOILogNode>  executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
 		threads = new HashMap<>();
-		List<CRONIOBOILogNode> logNodes = new ArrayList<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = CRONIOAntlrUtils.getNodeVariables(node);
 			Map<String, Object> allVariables = new HashMap<>();
@@ -106,14 +108,25 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 			CRONIOBOILogNode logNode = new CRONIOBOLogNode();
 			if (sync) {
 				logNode = executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
-			
+				logNodes.add(logNode);
 			} else {
 				Thread thread = executeInNodeAsync(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
 				threads.put(node.getNodeId(), thread);
-			}
-			logNodes.add(logNode);
+			}	
 		}
-		return logNodes;
+		
+		if (!sync) {
+			
+			synchronized (this) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	return logNodes;
 	}
 
 	private Thread executeInNodeAsync(final long processId,final long executionId,final CRONIOBOINode node, final String scriptCode, final String rollbackScriptCode, final Map<String, Object> allVariables) {
@@ -121,8 +134,9 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 			@Override
 			public void run() {
-				executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
-				checkEnd(node.getNodeId());
+				CRONIOBOILogNode logNode = executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
+				logNodes.add(logNode);
+				checkEnd(node.getNodeId(), logNode);
 			}
 		};
 
@@ -131,12 +145,14 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 
 		return thread;
 	}
-
-	private synchronized void checkEnd(long nodeId) {
+		
+	private synchronized void checkEnd(long nodeId,CRONIOBOILogNode logNode) {
 		threads.remove(nodeId);
+		logNodes.add(logNode);
 		if (threads.isEmpty()) {
 			getLogger().flush();
-		}
+			notify();
+		} 
 	}
 
 	private CRONIOIExecutionLogger getLogger() {
@@ -146,5 +162,4 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 	private CRONIOBOIProject getProject() {
 		return project;
 	}
-
 }

@@ -1,6 +1,7 @@
 package com.imotion.dslam.front.business.desktop.client.widget.layout;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.shared.GWT;
@@ -26,7 +27,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 
 	public 		final static String 	NAME 			= "CRONIOBusDesktopProjectsLayout";
 	public	 	final static String	NO_PROJECT_ID 	= "NO_PROJECT_ID";
-	
+
 	private CRONIOBusI18NTexts TEXTS = GWT.create(CRONIOBusI18NTexts.class);
 
 	private FlowPanel 									root;
@@ -34,6 +35,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	private CRONIOBusDesktopProjectNavigator			projectListNavigator;
 	private CRONIOBusDesktopProjectsLayoutItemHeader	sectionHeader;
 	private FlowPanel									projectWorkZone;
+
+	private List<String>								modifyNodeLists;
 
 	public CRONIOBusDesktopProjectsLayout() {
 		root = new FlowPanel();
@@ -76,11 +79,11 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 	public List<String> getModifiedProjetIds() {
 		return projectListNavigator.getModifiedProjectIds();
 	}
-	
+
 	public void addExecution(String projectId, long executionId, String executionDateStr) {
 		projectListNavigator.addExecution(projectId, executionId, executionDateStr);
 	}
-	
+
 	public void addNodeList(String projectId, String nodeListName) {
 		projectListNavigator.addNodeList(projectId, nodeListName);
 	}
@@ -94,7 +97,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		projectWorkZone.clear();
 		projectWorkZone.add(content);
 	}
-	
+
 	@Override
 	public void setvisibleLayoutItemHeader(boolean visible) {
 		sectionHeader.setVisible(visible);
@@ -121,6 +124,9 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 		super.postDisplay();
 		setHeightToDecrease(75);
 		projectListNavigator.postDisplay();
+		if (modifyNodeLists == null) {
+			modifyNodeLists = new ArrayList<>();
+		}
 	}
 
 	/**
@@ -138,7 +144,7 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				boolean		sectionModified		= evt.getElementAsBoolean(CRONIOBOIProject.INFO_IS_MODIFIED);
 				List<String> modifiedProjects	= getModifiedProjetIds();
 				boolean projectModified = modifiedProjects.contains(projectId);
-				
+
 				toolbar.setSaveProjectEnabled(projectModified);
 				sectionHeader.setProyectName(projectName);
 				sectionHeader.setSectionNameFromId(sectionId);
@@ -186,8 +192,17 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 					String nodeListName = getElementController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, errorData);
 					projectListNavigator.showDuplicateNodeListNameError(currentProjectId, nodeListName);
 				}
-			} 
-		}
+			} else if (EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
+				evt.stopPropagation();
+				CRONIOBusDesktopProjectEvent 	getModifyNodelistsEvt 	= new CRONIOBusDesktopProjectEvent(CRONIOBusProjectBasePresenterConstants.PROJECT_PRESENTER, getName());
+				getModifyNodelistsEvt.setEventType(EVENT_TYPE.SAVE_PROJECT);
+				getModifyNodelistsEvt.addElementAsSerializableDataValue((Serializable) modifyNodeLists);
+				getLogicalEventHandlerManager().fireEvent(getModifyNodelistsEvt);
+			} else if (EVENT_TYPE.ADD_MODIFY_NODELISTS_ID.equals(evt.getEventType())) {
+				List<String> modifyNodeLists = (List<String>) evt.getElementAsSerializableDataValue();
+				this.modifyNodeLists = modifyNodeLists;
+			}			
+		} 
 	}
 
 	@Override
@@ -199,6 +214,8 @@ public class CRONIOBusDesktopProjectsLayout extends AEGWTCompositePanel implemen
 				EVENT_TYPE.PROJECT_CREATED.equals(type)||
 				EVENT_TYPE.NODELIST_CREATED.equals(type)||
 				EVENT_TYPE.GET_PROCESS_NODELISTS.equals(type)||
-				EVENT_TYPE.DUPLICATE_NODELIST_ERROR.equals(type);
+				EVENT_TYPE.DUPLICATE_NODELIST_ERROR.equals(type)||
+				EVENT_TYPE.GET_MODIFY_NODELISTS_ID.equals(type)||
+				EVENT_TYPE.ADD_MODIFY_NODELISTS_ID.equals(type);
 	}
 }
