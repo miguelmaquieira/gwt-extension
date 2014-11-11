@@ -11,6 +11,4 @@ public interface CRONIOBKILogPersistenceService {
 	public int getTotalLogsByfilter(CRONIOBOLogFilter filterData);
 	public List<CRONIOBOILog> getExecutionLogs(String executionId, String nodeName, int offset, int numberResults);
 	public int getTotalExecutionLogs(String executionId, String nodeName);
-
-
 }

@@ -14,9 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
+import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIMachineProperties;
 import com.imotion.dslam.bom.CRONIOBOIPreferences;
-import com.imotion.dslam.bom.CRONIOBOIFile;
 import com.imotion.dslam.bom.CRONIOBOIVariable;
 
 @Entity(name="MachineProperties")

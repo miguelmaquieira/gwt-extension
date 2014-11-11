@@ -22,13 +22,13 @@ import com.imotion.dslam.logger.CRONIOExecutionLoggerImpl;
 import com.imotion.dslam.logger.CRONIOIExecutionLogger;
 import com.selene.arch.base.exe.core.common.AEMFTCommonUtilsBase;
 
-public class CRONIOExecutorImpl implements CRONIOIExecutor {
+public class CRONIOExecutorImpl extends Thread implements CRONIOIExecutor  {
 
 	private CRONIOIExecutionLogger 				logger;
 	private CRONIOBOIProject					project;
 	private HashMap<Long, Thread> 				threads;
 	private List<CRONIOBOILogNode>				logNodes;
-	private Thread								notifyThread;
+
 
 	public CRONIOExecutorImpl(CRONIOBOIProject project) throws Exception {
 		this.project			= project;
@@ -50,14 +50,26 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 				currentNodeList = nodeList;
 			}
 		}
-		
+
 		List<CRONIOBOINode> 	nodes 		= currentNodeList.getNodeList();
 		boolean					sync		= process.isSynchronous();
 		long					processId	= process.getProcessId();
 
-		return executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodes, sync);
+		executeInNodes(processId, executionId, scriptCode, rollbackScriptCode, variables, nodes, sync);
 		
+//		synchronized (this) {
+//			try {
+//				wait();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}	
+//		}
+		
+
+		return logNodes;
 	}
+
 
 	/**
 	 * PRIVATE
@@ -77,7 +89,8 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		ProgramContext mainTree		= CRONIOAntlrUtils.getTreeFromCode(scriptCode);
 
 		//Open Connection
-		CRONIOIConnection connection = CRONIOConnectionFactory.getConnection(processId, executionId, node, getLogger());
+
+		CRONIOIConnection	connection = CRONIOConnectionFactory.getConnection(processId, executionId, node, getLogger());
 
 		//RollbackVisitor
 		CRONIOInterpreterVisitorImpl 	rollbackVisitor	= new CRONIOInterpreterVisitorImpl(connection, allVariables, null, null, null);
@@ -98,7 +111,7 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 		return logNode;
 	}
 
-	private List<CRONIOBOILogNode>  executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
+	private void executeInNodes(long processId, long executionId, String scriptCode, String rollbackScriptCode, Map<String, Object> processVariables, List<CRONIOBOINode> nodeList, boolean sync) {
 		threads = new HashMap<>();
 		for (CRONIOBOINode node : nodeList) {
 			Map<String, Object> nodeVariables = CRONIOAntlrUtils.getNodeVariables(node);
@@ -111,22 +124,9 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 				logNodes.add(logNode);
 			} else {
 				Thread thread = executeInNodeAsync(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
-				threads.put(node.getNodeId(), thread);
 			}	
 		}
-		
-		if (!sync) {
-			
-			synchronized (this) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-	return logNodes;
+
 	}
 
 	private Thread executeInNodeAsync(final long processId,final long executionId,final CRONIOBOINode node, final String scriptCode, final String rollbackScriptCode, final Map<String, Object> allVariables) {
@@ -135,30 +135,31 @@ public class CRONIOExecutorImpl implements CRONIOIExecutor {
 			@Override
 			public void run() {
 				CRONIOBOILogNode logNode = executeInNode(processId, executionId, node, scriptCode, rollbackScriptCode, allVariables);
-				logNodes.add(logNode);
 				checkEnd(node.getNodeId(), logNode);
 			}
 		};
 
 		Thread thread = new Thread(task);
 		thread.start();
+		threads.put(node.getNodeId(), thread);
 
 		return thread;
 	}
-		
-	private synchronized void checkEnd(long nodeId,CRONIOBOILogNode logNode) {
+
+	private synchronized void checkEnd(long nodeId, CRONIOBOILogNode logNode) {
 		threads.remove(nodeId);
 		logNodes.add(logNode);
 		if (threads.isEmpty()) {
 			getLogger().flush();
-			notify();
+		//	notifyAll();
 		} 
 	}
+
 
 	private CRONIOIExecutionLogger getLogger() {
 		return logger;
 	}
-	
+
 	private CRONIOBOIProject getProject() {
 		return project;
 	}

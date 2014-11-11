@@ -50,7 +50,7 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 	public int getTotalLogsByfilter(CRONIOBOLogFilter filterData) {
 	
 		String 	text			= filterData.getFilterText();
-		String 	executionID		= filterData.getExecutionID();
+		String 	executionId		= filterData.getExecutionID();
 		Date   	beforeDate		= filterData.getMaxTimestamp();
 		String 	level			= filterData.getLevel();
 		
@@ -63,13 +63,26 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 		}
 		
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
-							+ "WHERE (o.message LIKE '"+ executionID +":%' "
+							+ "WHERE (o.message LIKE '"+ executionId +":%' "
 							+ textQuery
 							+ "AND o.timestamp < :"+ CRONIOBOLog.TIMESTAMP +")";
 		
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().queryDate(customQuery, CRONIOBOLog.TIMESTAMP, beforeDate);
 
 		return logsListJpa.size();
+		
+//	List<AEMFTPersistenceQueryParam<?>> queryParams = new ArrayList<AEMFTPersistenceQueryParam<?>>();
+//		
+//		AEMFTPersistenceQueryParam<String> queryParam = new AEMFTPersistenceQueryParam<String>("message", AEMFTIPersistenceQueryConstants.LIKE, "'" + executionId + ":%'");
+//		//AEMFTPersistenceQueryParam<String> queryParam2 = new AEMFTPersistenceQueryParam<String>("message", AEMFTIPersistenceQueryConstants.LESS_THAN, "'%"+ node +"%'");
+//		for (int i = 0; i < textSplit.length; i++) {
+//			AEMFTPersistenceQueryParam<String> queryParam3 = new AEMFTPersistenceQueryParam<String>("message", AEMFTIPersistenceQueryConstants.LIKE, "'%"+ textSplit[i] +"%'");
+//			queryParams.add(queryParam3);
+//		}
+//		queryParams.add(queryParam);
+//		//queryParams.add(queryParam2);
+//		
+//		return (int) getPersistenceModule().count(queryParams.iterator());
 	}
 	
 	@Override
@@ -100,14 +113,18 @@ public class CRONIOBKLogPersistenceServiceJPA extends CRONIOBKPersistenceService
 		}
 		String customQuery	= "SELECT o FROM CRONIOBOLog o "
 							+ "WHERE o.message LIKE '"+ executionId +":%'"
-							+ "AND o.message LIKE '%"+ node +"%' ";
+							+ "AND o.message LIKE '%"+ node +"%'";
 		List<CRONIOBOLog> logsListJpa = getPersistenceModule().query(customQuery);
-		
+//		List<AEMFTPersistenceQueryParam<?>> queryParams = new ArrayList<AEMFTPersistenceQueryParam<?>>();
+//		
+//		AEMFTPersistenceQueryParam<String> queryParam = new AEMFTPersistenceQueryParam<String>("message", AEMFTIPersistenceQueryConstants.LIKE, "'" + executionId + ":%'");
+//		AEMFTPersistenceQueryParam<String> queryParam2 = new AEMFTPersistenceQueryParam<String>("message", AEMFTIPersistenceQueryConstants.LIKE, "'%"+ node +"%'");
+//		queryParams.add(queryParam);
+//		queryParams.add(queryParam2);
+//		
+//		return (int) getPersistenceModule().count(queryParams.iterator());
 		return logsListJpa.size();
 	}
-	
-	
-	
 	
 	/**
 	 * AEMFTIHasPersistenceModule

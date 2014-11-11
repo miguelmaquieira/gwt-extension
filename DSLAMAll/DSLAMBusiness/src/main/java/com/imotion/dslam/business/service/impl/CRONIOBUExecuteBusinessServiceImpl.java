@@ -30,7 +30,7 @@ import com.selene.arch.exe.core.common.AEMFTCommonUtils;
 public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase implements CRONIOBUIExecuteBusinessService, CRONIOBUIExecuteBusinessServiceConstants, CRONIOBUIExecuteBusinessServiceTrace {
 
 	private static final long serialVersionUID = 7761400309777540451L;
-	
+
 	public CRONIOBUExecuteBusinessServiceImpl() {
 		super();
 	}
@@ -42,17 +42,20 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		long							executionId				= executionIdDataSingle.getValueAsLong();
 		String							nodeListName 			= getElementDataController().getElementAsString(CRONIOBOINodeList.NODELIST_NAME, contextIn);
 		String							projectId				= getElementDataController().getElementAsString(CRONIOBOIExecution.PROJECT_ID, contextIn);
-		
+
 		CRONIOBOIProject project = getProjectPersistence().getProject(Long.parseLong(projectId));
-		
+
 		if (project != null) {
 			//init-trace
 			traceItemRecoveredFromPersistence(METHOD_EXECUTE_PROJECT, CRONIOBOIProject.class, projectId);
 			//end-trace
 
 			CRONIOIExecutor executor = getExecutor(project);
-			List<CRONIOBOILogNode> stateLogNodes = executor.execute(executionId, nodeListName);
 			CRONIOBOIExecution execution = getExecutionPersistence().getExecution(executionId);
+			List<CRONIOBOILogNode> stateLogNodes = executor.execute(executionId, nodeListName);
+
+		//wait
+
 			List<CRONIOBOILogNode> logNodes = execution.getLogNodes();
 			for (CRONIOBOILogNode logNode : logNodes) {
 				for (CRONIOBOILogNode stateLogNode :stateLogNodes) {
@@ -72,7 +75,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 			//end-trace
 		}
 	}
-	
+
 	@Override
 	public void addExecution() {
 		//ContextIn
@@ -84,12 +87,12 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		CRONIOBOIProject 				project 		= getProjectPersistence().getProject(projectIdAsLong);
 		String 							userIdStrId		= getElementDataController().getElementAsString(CRONIOBOIUser.USER_ID				, contextIn);
 		long                           	userId			= Long.parseLong(userIdStrId);
-		
+
 		List<CRONIOBOINodeList> nodeLists = getNodeListPersistence().getAllNodeListsByProject(projectIdAsLong);
 		List<CRONIOBOINode> 	nodes;
 		List<CRONIOBOILogNode> 	logNodes = new ArrayList<>();
 		String environmentName = "";
-		
+
 		for (CRONIOBOINodeList nodeList : nodeLists) {
 			if(nodeListName.equals(nodeList.getNodeListName())) {
 				nodes = nodeList.getNodeList();
@@ -106,11 +109,11 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 				environmentName = nodeList.getNodeListName();
 			}
 		}
-		
+
 		CRONIOBOIUser user = getUserPersistence().getUserById(userId);
-		
+
 		project.getProcess().isSynchronous();
-		
+
 		CRONIOBOIExecution execution = new CRONIOBOExecution();
 		execution.setProject(project);
 		execution.setCreationTime(creationTime);
@@ -125,7 +128,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		//end-trace
 
 		//ContextOut
-		
+
 		AEMFTMetadataElementComposite dateExecutionData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
 		String formatDate = "yyyy-MM-dd HH:mm:ss";
 		String creationDateStr = AEMFTCommonUtils.formatDate(creationTime, formatDate, getSession().getCurrentLocale());
@@ -140,7 +143,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		contextOut.addElement(EXECUTION_DATA, dateExecutionData);
 		contextOut.addElement(CRONIOBOINodeList.NODELIST_NAME, nodeListName);
 	}
-	
+
 	@Override
 	public void getExecution() {
 		//ContextIn
@@ -149,7 +152,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		long							executionId		= Long.parseLong(executionIdStr);
 		long							projectId		= getElementDataController().getElementAsLong(CRONIOBOIExecution.PROJECT_ID			, contextIn);
 		String							creationTime	= getElementDataController().getElementAsString(CRONIOBOIExecution.CREATION_TIME	, contextIn);
-		
+
 		CRONIOBOIExecution execution = getExecutionPersistence().getExecution(executionId);
 
 		if (execution == null) {
@@ -157,13 +160,13 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 			traceItemNotFound(METHOD_GET_EXECUTION, CRONIOBOIExecution.class, executionIdStr);
 			//end-trace
 		}
-	
+
 		AEMFTMetadataElementComposite executionData = CRONIOBUBomToMetadataConversor.fromExecution(execution);
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(EXECUTION_DATA, executionData);
 		contextOut.addElement(CRONIOBOIExecution.PROJECT_ID, projectId);
 		contextOut.addElement(CRONIOBOIExecution.CREATION_TIME, creationTime);
-	
+
 	}
 
 	@Override
@@ -173,17 +176,17 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		AEMFTMetadataElementComposite 	projectListdata = (AEMFTMetadataElementComposite) getElementDataController().getElementAsComposite(CRONIOBUIProjectBusinessServiceConstants.PROJECT_DATA_LIST, contextIn).cloneObject();
 		int 							resultsNumber 	= 0;
 		Long 							projectIdAsLong = null;
-		
-		
+
+
 		List<AEMFTMetadataElement> projectList = projectListdata.getElementList();
 		List<String> projectIdList = new ArrayList<>();
 		for (AEMFTMetadataElement project : projectList) {
 			String projectId = project.getKey();
 			projectIdList.add(projectId);
 		}
-		
+
 		AEMFTMetadataElementComposite executionsData = AEMFTMetadataElementReflectionBasedFactory.getMonoInstance().getComposite();
-		
+
 		for (String projectId : projectIdList) {
 			projectIdAsLong = Long.valueOf(projectId).longValue();
 			List<CRONIOBOIExecution> executionProjectList = getExecutionPersistence().getAllExecutionsByProject(projectIdAsLong);
@@ -193,7 +196,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 				executionsData.addElement(projectId, executionProjectListData);
 			}
 		}
-		
+
 		//init-trace
 		traceNumberOfResults(METHOD_GET_ALL_EXECUTIONS_BY_PROJECT_ID, CRONIOBOIExecution.class.getSimpleName(), resultsNumber);
 		//end-trace
@@ -202,7 +205,7 @@ public class CRONIOBUExecuteBusinessServiceImpl extends CRONIOBUServiceBase impl
 		AEMFTMetadataElementComposite contextOut = getContext().getContextOUT();
 		contextOut.addElement(EXECUTIONS_DATA, executionsData);
 	}
-	
+
 	/**
 	 * PRIVATE 
 	 */
