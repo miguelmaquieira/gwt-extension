@@ -433,6 +433,23 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 		</profile>
+		
+		<profile>
+			<id>heroku-prueba</id>
+			<properties>
+<!-- 				Hibernate -->
+				<hibernate.connection.url>jdbc:mysql://us-iron-auto-dca-01-a.cleardb.net:3306/heroku_0be519df2bc5bf3</hibernate.connection.url>
+				<hibernate.connection.user>b9744e33987bd2</hibernate.connection.user>
+				<hibernate.connection.password>63c7f5a91df291d</hibernate.connection.password>
+<!-- 				Mongo (TODO)  -->
+				<mongo.db>chronium-logs-db</mongo.db>
+				<mongo.port>27017</mongo.port>
+				<mongo.host>localhost</mongo.host>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+		</profile>
 	</profiles>
 	
 </project>
